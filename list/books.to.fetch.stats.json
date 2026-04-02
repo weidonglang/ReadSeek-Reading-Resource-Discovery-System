@@ -1,0 +1,126 @@
+{
+  "targetTotal": 3000,
+  "actualTotal": 317,
+  "generatedAt": "2026-04-02T11:29:43.374Z",
+  "stats": [
+    {
+      "q": "subject:fiction",
+      "categoryName": "Fiction",
+      "target": 250,
+      "added": 19,
+      "error": ""
+    },
+    {
+      "q": "subject:science fiction",
+      "categoryName": "Science Fiction",
+      "target": 250,
+      "added": 14,
+      "error": ""
+    },
+    {
+      "q": "subject:fantasy",
+      "categoryName": "Fantasy",
+      "target": 250,
+      "added": 18,
+      "error": ""
+    },
+    {
+      "q": "subject:history",
+      "categoryName": "History",
+      "target": 220,
+      "added": 20,
+      "error": ""
+    },
+    {
+      "q": "subject:psychology",
+      "categoryName": "Psychology",
+      "target": 180,
+      "added": 20,
+      "error": ""
+    },
+    {
+      "q": "subject:computer science",
+      "categoryName": "Computer Science",
+      "target": 180,
+      "added": 18,
+      "error": ""
+    },
+    {
+      "q": "subject:mathematics",
+      "categoryName": "Mathematics",
+      "target": 180,
+      "added": 20,
+      "error": ""
+    },
+    {
+      "q": "subject:philosophy",
+      "categoryName": "Philosophy",
+      "target": 180,
+      "added": 19,
+      "error": ""
+    },
+    {
+      "q": "subject:business",
+      "categoryName": "Business",
+      "target": 180,
+      "added": 19,
+      "error": ""
+    },
+    {
+      "q": "subject:economics",
+      "categoryName": "Economics",
+      "target": 180,
+      "added": 19,
+      "error": ""
+    },
+    {
+      "q": "subject:biography",
+      "categoryName": "Biography",
+      "target": 180,
+      "added": 20,
+      "error": ""
+    },
+    {
+      "q": "subject:mystery",
+      "categoryName": "Mystery",
+      "target": 180,
+      "added": 19,
+      "error": ""
+    },
+    {
+      "q": "subject:romance",
+      "categoryName": "Romance",
+      "target": 180,
+      "added": 20,
+      "error": ""
+    },
+    {
+      "q": "subject:horror",
+      "categoryName": "Horror",
+      "target": 140,
+      "added": 20,
+      "error": ""
+    },
+    {
+      "q": "subject:adventure",
+      "categoryName": "Adventure",
+      "target": 160,
+      "added": 15,
+      "error": ""
+    },
+    {
+      "q": "subject:art",
+      "categoryName": "Art",
+      "target": 160,
+      "added": 18,
+      "error": ""
+    },
+    {
+      "q": "subject:self-help",
+      "categoryName": "Self-Help",
+      "target": 140,
+      "added": 19,
+      "error": ""
+    }
+  ]
+}

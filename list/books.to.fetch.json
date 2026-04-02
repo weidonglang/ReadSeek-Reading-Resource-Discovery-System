@@ -1,0 +1,1587 @@
+[
+  {
+    "title": "追空",
+    "authorName": "倪匡",
+    "categoryName": "Adventure"
+  },
+  {
+    "title": "Ark Angel",
+    "authorName": "Anthony Horowitz",
+    "categoryName": "Adventure"
+  },
+  {
+    "title": "Around the World in 80 Days [eBook - NC Digital Library]",
+    "authorName": "Jules Verne",
+    "categoryName": "Adventure"
+  },
+  {
+    "title": "Emil and the Detectives",
+    "authorName": "Cyrus Harry Brooks",
+    "categoryName": "Adventure"
+  },
+  {
+    "title": "Fantastic Mr. Fox",
+    "authorName": "Roald Dahl",
+    "categoryName": "Adventure"
+  },
+  {
+    "title": "Harry Potter and the Chamber of Secrets",
+    "authorName": "J. K. Rowling",
+    "categoryName": "Adventure"
+  },
+  {
+    "title": "Life of Pi",
+    "authorName": "Yann Martel",
+    "categoryName": "Adventure"
+  },
+  {
+    "title": "River Boy",
+    "authorName": "Tim Bowler",
+    "categoryName": "Adventure"
+  },
+  {
+    "title": "The Adventures of Tom Sawyer",
+    "authorName": "Mark Twain",
+    "categoryName": "Adventure"
+  },
+  {
+    "title": "The Boy in the Striped Pyjamas",
+    "authorName": "John Boyne",
+    "categoryName": "Adventure"
+  },
+  {
+    "title": "The Boy Who Sailed with Blake",
+    "authorName": "William Henry Giles Kingston",
+    "categoryName": "Adventure"
+  },
+  {
+    "title": "The Long Patrol",
+    "authorName": "Brian Jacques",
+    "categoryName": "Adventure"
+  },
+  {
+    "title": "Tintin in America",
+    "authorName": "Hergé",
+    "categoryName": "Adventure"
+  },
+  {
+    "title": "Treasure Island",
+    "authorName": "Robert Louis Stevenson",
+    "categoryName": "Adventure"
+  },
+  {
+    "title": "White Fang",
+    "authorName": "Jack London",
+    "categoryName": "Adventure"
+  },
+  {
+    "title": "三國志演義 : Romance of the three kingdoms",
+    "authorName": "Guanzhong Luo",
+    "categoryName": "Art"
+  },
+  {
+    "title": "Art Under Control in North Korea",
+    "authorName": "Jane Portal",
+    "categoryName": "Art"
+  },
+  {
+    "title": "Dead Souls",
+    "authorName": "Gogol Google Translate",
+    "categoryName": "Art"
+  },
+  {
+    "title": "Divine Heiress",
+    "authorName": "Vasiliki Limberis",
+    "categoryName": "Art"
+  },
+  {
+    "title": "Giorgio Vasari",
+    "authorName": "Thomas Sherrer Ross Boase",
+    "categoryName": "Art"
+  },
+  {
+    "title": "Jerusalem Architecture",
+    "authorName": "David Kroyanker",
+    "categoryName": "Art"
+  },
+  {
+    "title": "Leonardo Da Vinci",
+    "authorName": "Leonardo (da Vinci)",
+    "categoryName": "Art"
+  },
+  {
+    "title": "Lost in Transition",
+    "authorName": "Yiu-Wai Chu",
+    "categoryName": "Art"
+  },
+  {
+    "title": "Man and Superman",
+    "authorName": "George Bernard Shaw",
+    "categoryName": "Art"
+  },
+  {
+    "title": "Metalwork in Medieval Islamic Art",
+    "authorName": "Eva Baer",
+    "categoryName": "Art"
+  },
+  {
+    "title": "Seduction and Power",
+    "authorName": "Silke Knippschild",
+    "categoryName": "Art"
+  },
+  {
+    "title": "Sex, Art and American Culture",
+    "authorName": "Camille Paglia",
+    "categoryName": "Art"
+  },
+  {
+    "title": "Thais",
+    "authorName": "Anatole France",
+    "categoryName": "Art"
+  },
+  {
+    "title": "The Decay of Lying",
+    "authorName": "Oscar Wilde",
+    "categoryName": "Art"
+  },
+  {
+    "title": "The History of Ancient Art",
+    "authorName": "Johann Joachim Winckelmann",
+    "categoryName": "Art"
+  },
+  {
+    "title": "The Ideals of the East",
+    "authorName": "Kakuzō Okakura",
+    "categoryName": "Art"
+  },
+  {
+    "title": "The Man who Planted Trees",
+    "authorName": "Jean Giono",
+    "categoryName": "Art"
+  },
+  {
+    "title": "The Society of the Spectacle",
+    "authorName": "Guy Debord",
+    "categoryName": "Art"
+  },
+  {
+    "title": "A Classical Dictionary of Greek and Roman Biography, Mythology and Geography",
+    "authorName": "William Smith",
+    "categoryName": "Biography"
+  },
+  {
+    "title": "A Short Life of Napoleon Bonaparte",
+    "authorName": "Ida Minerva Tarbell",
+    "categoryName": "Biography"
+  },
+  {
+    "title": "Biography",
+    "authorName": "Charles Knight",
+    "categoryName": "Biography"
+  },
+  {
+    "title": "Caesar",
+    "authorName": "Adrian Keith Goldsworthy",
+    "categoryName": "Biography"
+  },
+  {
+    "title": "Dictionary of Greek and Roman Biography and Mythology: Earinus-Nyx",
+    "authorName": "William Smith",
+    "categoryName": "Biography"
+  },
+  {
+    "title": "Eat, Pray, Love",
+    "authorName": "Elizabeth Gilbert",
+    "categoryName": "Biography"
+  },
+  {
+    "title": "Einstein",
+    "authorName": "Walter Isaacson",
+    "categoryName": "Biography"
+  },
+  {
+    "title": "Freedom in Exile",
+    "authorName": "Dalai Lama XIV Bstan-ʼdzin-rgya-mtsho",
+    "categoryName": "Biography"
+  },
+  {
+    "title": "General Biography",
+    "authorName": "John Aikin",
+    "categoryName": "Biography"
+  },
+  {
+    "title": "I'm Glad My Mom Died",
+    "authorName": "Jennette McCurdy",
+    "categoryName": "Biography"
+  },
+  {
+    "title": "Lives of the Eminent Philosophers",
+    "authorName": "Diogenes Laertius",
+    "categoryName": "Biography"
+  },
+  {
+    "title": "Plutarch's Lives",
+    "authorName": "Plutarch",
+    "categoryName": "Biography"
+  },
+  {
+    "title": "Plutarch's Lives Translated from the Original Greek",
+    "authorName": "Plutarch",
+    "categoryName": "Biography"
+  },
+  {
+    "title": "Plutarch's Lives, tr. by J. and W. Langhorne",
+    "authorName": "Plutarch",
+    "categoryName": "Biography"
+  },
+  {
+    "title": "Red Roulette",
+    "authorName": "Desmond Shum",
+    "categoryName": "Biography"
+  },
+  {
+    "title": "The Lives of the Noble Grecians and Romaines,",
+    "authorName": "Plutarch",
+    "categoryName": "Biography"
+  },
+  {
+    "title": "The Lives of the Noble Grecians and Romanes",
+    "authorName": "Plutarch",
+    "categoryName": "Biography"
+  },
+  {
+    "title": "What is a Gospel?",
+    "authorName": "Charles H. Talbert",
+    "categoryName": "Biography"
+  },
+  {
+    "title": "Who's Who in the New Testament",
+    "authorName": "Canon Ronald Brownrigg",
+    "categoryName": "Biography"
+  },
+  {
+    "title": "Who's Who in the New Testament",
+    "authorName": "Ronald Brownrigg",
+    "categoryName": "Biography"
+  },
+  {
+    "title": "Accounting for Sustainability",
+    "authorName": "Anthony G. Hopwood",
+    "categoryName": "Business"
+  },
+  {
+    "title": "Business and Management Education in Transitioning and Developing Countries",
+    "authorName": "John R. McIntyre",
+    "categoryName": "Business"
+  },
+  {
+    "title": "Business Research Methods",
+    "authorName": "William G. Zikmund",
+    "categoryName": "Business"
+  },
+  {
+    "title": "Dangerous Decisions",
+    "authorName": "E. Mumford",
+    "categoryName": "Business"
+  },
+  {
+    "title": "Doing Business with Lithuania",
+    "authorName": "Marat Terterov",
+    "categoryName": "Business"
+  },
+  {
+    "title": "Environmental Planning and Management",
+    "authorName": "Christian N. Madu",
+    "categoryName": "Business"
+  },
+  {
+    "title": "Iran",
+    "authorName": "United States. Bureau of International Commerce",
+    "categoryName": "Business"
+  },
+  {
+    "title": "Markets and Hierarchies, Analysis and Antitrust Implications",
+    "authorName": "Oliver E. Williamson",
+    "categoryName": "Business"
+  },
+  {
+    "title": "Microsoft Outlook Programming",
+    "authorName": "Sue Mosher",
+    "categoryName": "Business"
+  },
+  {
+    "title": "Research Methods for Business Students",
+    "authorName": "Mark Saunders",
+    "categoryName": "Business"
+  },
+  {
+    "title": "Search Methodologies",
+    "authorName": "Edmund K. Burke",
+    "categoryName": "Business"
+  },
+  {
+    "title": "Silk and Insight",
+    "authorName": "Yukio Mishima",
+    "categoryName": "Business"
+  },
+  {
+    "title": "Supply Chain and Transportation Dictionary",
+    "authorName": "Joseph L. Cavinato",
+    "categoryName": "Business"
+  },
+  {
+    "title": "The Economics of Science and Technology",
+    "authorName": "M.P. Feldman",
+    "categoryName": "Business"
+  },
+  {
+    "title": "The Goal",
+    "authorName": "Eliyahu M. Goldratt",
+    "categoryName": "Business"
+  },
+  {
+    "title": "The Origins of Entrepreneurship in Meiji Japan",
+    "authorName": "Johannes Hirschmeier",
+    "categoryName": "Business"
+  },
+  {
+    "title": "The Physical Foundation of Economics",
+    "authorName": "Jing Chen",
+    "categoryName": "Business"
+  },
+  {
+    "title": "The Real Wealth of Nations",
+    "authorName": "Riane Eisler",
+    "categoryName": "Business"
+  },
+  {
+    "title": "The Theory of Business Enterprise",
+    "authorName": "Thorstein Veblen",
+    "categoryName": "Business"
+  },
+  {
+    "title": "Academic Research Equipment in Computer Science, Central Computer Facilities, and Engineering, 1989",
+    "authorName": "Bradford Chaney",
+    "categoryName": "Computer Science"
+  },
+  {
+    "title": "Advances in Statistical Analysis and Statistical Computing",
+    "authorName": "Roberto S. Mariano",
+    "categoryName": "Computer Science"
+  },
+  {
+    "title": "Amongst Friends in Computer and Law:A Bundle of Essays in Remembrance of Guy Vandenberghe",
+    "authorName": "Guy P. V. Vandenberghe",
+    "categoryName": "Computer Science"
+  },
+  {
+    "title": "C Programming in a UNIX Environment",
+    "authorName": "Judy Kay",
+    "categoryName": "Computer Science"
+  },
+  {
+    "title": "Computer Applications in Applied Polymer Science II",
+    "authorName": "Theodore Provder",
+    "categoryName": "Computer Science"
+  },
+  {
+    "title": "Computers in Your Future 2003",
+    "authorName": "Bryan Pfaffenberger",
+    "categoryName": "Computer Science"
+  },
+  {
+    "title": "Education and Informatics Worldwide",
+    "authorName": "Jacques Hebenstreit",
+    "categoryName": "Computer Science"
+  },
+  {
+    "title": "Intelligence Science",
+    "authorName": "Zhongzhi Shi",
+    "categoryName": "Computer Science"
+  },
+  {
+    "title": "International Computer-based Conference on Biotechnology",
+    "authorName": "David Balson",
+    "categoryName": "Computer Science"
+  },
+  {
+    "title": "Law Relating to Computers, Internet, & E-commerce",
+    "authorName": "Nandan Kamath",
+    "categoryName": "Computer Science"
+  },
+  {
+    "title": "MicroStation Bible",
+    "authorName": "Ross Cowden",
+    "categoryName": "Computer Science"
+  },
+  {
+    "title": "Modeling with Technology",
+    "authorName": "David H. Jonassen",
+    "categoryName": "Computer Science"
+  },
+  {
+    "title": "Portable C and UNIX System Programming",
+    "authorName": "J. E. Lapin",
+    "categoryName": "Computer Science"
+  },
+  {
+    "title": "Proceedings of the 1977 International Conference on Parallel Processing",
+    "authorName": "Jean-Loup Baer",
+    "categoryName": "Computer Science"
+  },
+  {
+    "title": "The Art of Computer Programming: Semi-numerical algorithms",
+    "authorName": "Donald Ervin Knuth",
+    "categoryName": "Computer Science"
+  },
+  {
+    "title": "The Playful World",
+    "authorName": "Mark Pesce",
+    "categoryName": "Computer Science"
+  },
+  {
+    "title": "The Simon & Schuster Question & Answer Book, Computers",
+    "authorName": "Daniel Cohen",
+    "categoryName": "Computer Science"
+  },
+  {
+    "title": "Zukünfte des Computers",
+    "authorName": "Claus Pias",
+    "categoryName": "Computer Science"
+  },
+  {
+    "title": "\"Unto this Last\"",
+    "authorName": "John Ruskin",
+    "categoryName": "Economics"
+  },
+  {
+    "title": "A Contribution to the Critique of Political Economy",
+    "authorName": "Karl Marx",
+    "categoryName": "Economics"
+  },
+  {
+    "title": "A Treatise on Political Economy",
+    "authorName": "Jean Baptiste Say",
+    "categoryName": "Economics"
+  },
+  {
+    "title": "After Adam Smith",
+    "authorName": "Murray Milgate",
+    "categoryName": "Economics"
+  },
+  {
+    "title": "An Inquiry Into the Nature and Causes of the Wealth of Nations",
+    "authorName": "Adam Smith",
+    "categoryName": "Economics"
+  },
+  {
+    "title": "Capital: The process of capitalist production as a whole, ed. by Frederick Engels. Tr. from the 1st German ed. by Ernest Untermann",
+    "authorName": "Karl Marx",
+    "categoryName": "Economics"
+  },
+  {
+    "title": "Essentials of Econometrics",
+    "authorName": "Damodar N. Gujarati",
+    "categoryName": "Economics"
+  },
+  {
+    "title": "History of Economic Analysis",
+    "authorName": "Joseph A. Schumpeter",
+    "categoryName": "Economics"
+  },
+  {
+    "title": "Inequality Reexamined",
+    "authorName": "Amartya Sen",
+    "categoryName": "Economics"
+  },
+  {
+    "title": "Islam and the Economic Challenge",
+    "authorName": "Muhammad Umer Chapra",
+    "categoryName": "Economics"
+  },
+  {
+    "title": "Living in the End Times",
+    "authorName": "Slavoj Žižek",
+    "categoryName": "Economics"
+  },
+  {
+    "title": "Principles of economics",
+    "authorName": "Alfred Marshall",
+    "categoryName": "Economics"
+  },
+  {
+    "title": "Small is Beautiful",
+    "authorName": "Ernst Friedrich Schumacher",
+    "categoryName": "Economics"
+  },
+  {
+    "title": "The Cambridge Companion to Adam Smith",
+    "authorName": "Knud Haakonssen",
+    "categoryName": "Economics"
+  },
+  {
+    "title": "The Poverty of Philosophy",
+    "authorName": "Karl Marx",
+    "categoryName": "Economics"
+  },
+  {
+    "title": "The Principles of Political Economy and Taxation",
+    "authorName": "David Ricardo",
+    "categoryName": "Economics"
+  },
+  {
+    "title": "The Road to Serfdom",
+    "authorName": "Friedrich August Hayek",
+    "categoryName": "Economics"
+  },
+  {
+    "title": "The Winner's Curse",
+    "authorName": "Richard H. Thaler",
+    "categoryName": "Economics"
+  },
+  {
+    "title": "Value, price & profit",
+    "authorName": "Karl Marx",
+    "categoryName": "Economics"
+  },
+  {
+    "title": "A Wizard of Earthsea",
+    "authorName": "Ursula K. Le Guin",
+    "categoryName": "Fantasy"
+  },
+  {
+    "title": "Gifts",
+    "authorName": "Ursula K. Le Guin",
+    "categoryName": "Fantasy"
+  },
+  {
+    "title": "Harry Potter y la piedra filosofal",
+    "authorName": "J. K. Rowling",
+    "categoryName": "Fantasy"
+  },
+  {
+    "title": "Peter and Wendy",
+    "authorName": "James Matthew Barrie",
+    "categoryName": "Fantasy"
+  },
+  {
+    "title": "Peter Pan",
+    "authorName": "James Matthew Barrie",
+    "categoryName": "Fantasy"
+  },
+  {
+    "title": "Prince Caspian",
+    "authorName": "Clive Staples Lewis",
+    "categoryName": "Fantasy"
+  },
+  {
+    "title": "Prince Caspian Movie Tie-in Edition (rack)",
+    "authorName": "C. S. Lewis",
+    "categoryName": "Fantasy"
+  },
+  {
+    "title": "Tales from Earthsea",
+    "authorName": "Ursula K. Le Guin",
+    "categoryName": "Fantasy"
+  },
+  {
+    "title": "The Brothers Lionheart",
+    "authorName": "Astrid Lindgren",
+    "categoryName": "Fantasy"
+  },
+  {
+    "title": "The Fellowship of the Ring",
+    "authorName": "John Ronald Reuel Tolkien",
+    "categoryName": "Fantasy"
+  },
+  {
+    "title": "The Hobbit, Or, There and Back Again",
+    "authorName": "John Ronald Reuel Tolkien",
+    "categoryName": "Fantasy"
+  },
+  {
+    "title": "The Lion, the Witch and the Wardrobe",
+    "authorName": "Clive Staples Lewis",
+    "categoryName": "Fantasy"
+  },
+  {
+    "title": "The Lord of the Rings",
+    "authorName": "j.r.r. tolkien",
+    "categoryName": "Fantasy"
+  },
+  {
+    "title": "The Plague of Fantasies",
+    "authorName": "Slavoj Žižek",
+    "categoryName": "Fantasy"
+  },
+  {
+    "title": "The Silver Chair",
+    "authorName": "Clive Staples Lewis",
+    "categoryName": "Fantasy"
+  },
+  {
+    "title": "The Water Babies",
+    "authorName": "Charles Kingsley",
+    "categoryName": "Fantasy"
+  },
+  {
+    "title": "The Wind in the Willows",
+    "authorName": "Kenneth Grahame",
+    "categoryName": "Fantasy"
+  },
+  {
+    "title": "The Wonderful Wizard of Oz",
+    "authorName": "Lyman Frank Baum",
+    "categoryName": "Fantasy"
+  },
+  {
+    "title": "A Portrait of the Artist as a Young Man",
+    "authorName": "James Joyce",
+    "categoryName": "Fiction"
+  },
+  {
+    "title": "How I Found Livingstone",
+    "authorName": "Henry M. Stanley",
+    "categoryName": "Fiction"
+  },
+  {
+    "title": "Journey to the Center of the Earth",
+    "authorName": "Jules Verne",
+    "categoryName": "Fiction"
+  },
+  {
+    "title": "Kokoro",
+    "authorName": "Lafcadio Hearn",
+    "categoryName": "Fiction"
+  },
+  {
+    "title": "Mrs. Dalloway",
+    "authorName": "Virginia Woolf",
+    "categoryName": "Fiction"
+  },
+  {
+    "title": "Mysteries",
+    "authorName": "Knut Hamsun",
+    "categoryName": "Fiction"
+  },
+  {
+    "title": "Oliver Twist",
+    "authorName": "Charles Dickens",
+    "categoryName": "Fiction"
+  },
+  {
+    "title": "On The Road",
+    "authorName": "Jack Kerouac",
+    "categoryName": "Fiction"
+  },
+  {
+    "title": "Peter Camenzind",
+    "authorName": "Hermann Hesse",
+    "categoryName": "Fiction"
+  },
+  {
+    "title": "Robinson Crusoe",
+    "authorName": "Daniel Defoe",
+    "categoryName": "Fiction"
+  },
+  {
+    "title": "Sense and Sensibility - Illustrated Edition",
+    "authorName": "Jane Austen",
+    "categoryName": "Fiction"
+  },
+  {
+    "title": "Tess of the D'Urbervilles",
+    "authorName": "Thomas Hardy",
+    "categoryName": "Fiction"
+  },
+  {
+    "title": "That Hideous Strength",
+    "authorName": "Clive Staples Lewis",
+    "categoryName": "Fiction"
+  },
+  {
+    "title": "The Final Problem",
+    "authorName": "Arthur Conan Doyle",
+    "categoryName": "Fiction"
+  },
+  {
+    "title": "The Picture of Dorian Gray",
+    "authorName": "Oscar Wilde",
+    "categoryName": "Fiction"
+  },
+  {
+    "title": "The Plague",
+    "authorName": "Albert Camus",
+    "categoryName": "Fiction"
+  },
+  {
+    "title": "The Street of Crocodiles",
+    "authorName": "Bruno Schulz",
+    "categoryName": "Fiction"
+  },
+  {
+    "title": "The Visitor",
+    "authorName": "Lee Child",
+    "categoryName": "Fiction"
+  },
+  {
+    "title": "Wundersmith",
+    "authorName": "Jessica Townsend",
+    "categoryName": "Fiction"
+  },
+  {
+    "title": "A Concise History of Greece",
+    "authorName": "Richard Clogg",
+    "categoryName": "History"
+  },
+  {
+    "title": "Alberuni's India",
+    "authorName": "Muḥammad ibn Aḥmad Bīrūnī",
+    "categoryName": "History"
+  },
+  {
+    "title": "Damascus",
+    "authorName": "Ross Burns",
+    "categoryName": "History"
+  },
+  {
+    "title": "Delusion and Dream: An Interpretation in the Light of Psychoanalysis of Gradiva",
+    "authorName": "Sigmund Freud",
+    "categoryName": "History"
+  },
+  {
+    "title": "Homer's Iliad, Books XX., XXI. and XXII., with Engl. Notes and a Literal Translation",
+    "authorName": "Homerus",
+    "categoryName": "History"
+  },
+  {
+    "title": "Images of Nebuchadnezzar",
+    "authorName": "Ronald Herbert Sack",
+    "categoryName": "History"
+  },
+  {
+    "title": "Jane Austen's Letters",
+    "authorName": "Jane Austen",
+    "categoryName": "History"
+  },
+  {
+    "title": "METEOROLOGY",
+    "authorName": "Aristotle",
+    "categoryName": "History"
+  },
+  {
+    "title": "Oscar Wilde",
+    "authorName": "Karl Beckson",
+    "categoryName": "History"
+  },
+  {
+    "title": "Russia and the Russians",
+    "authorName": "Geoffrey A. Hosking",
+    "categoryName": "History"
+  },
+  {
+    "title": "Screened Out",
+    "authorName": "Jean Baudrillard",
+    "categoryName": "History"
+  },
+  {
+    "title": "The Cambridge History of Turkey",
+    "authorName": "Kate Fleet",
+    "categoryName": "History"
+  },
+  {
+    "title": "The Dragon in the Land of Snows",
+    "authorName": "Tsering Shakya",
+    "categoryName": "History"
+  },
+  {
+    "title": "The Goddess and the Nation",
+    "authorName": "Sumathi Ramaswamy",
+    "categoryName": "History"
+  },
+  {
+    "title": "The Government of the Ottoman Empire in the Time of Suleiman the Magnificent",
+    "authorName": "Albert Howe Lybyer",
+    "categoryName": "History"
+  },
+  {
+    "title": "The Mandaeans",
+    "authorName": "Jorunn Jacobsen Buckley",
+    "categoryName": "History"
+  },
+  {
+    "title": "The Palestinian Diaspora",
+    "authorName": "Helena Lindholm Schulz",
+    "categoryName": "History"
+  },
+  {
+    "title": "The White Woman's Other Burden",
+    "authorName": "Kumari Jayawardena",
+    "categoryName": "History"
+  },
+  {
+    "title": "Transforming Tradition",
+    "authorName": "Siyuan Liu",
+    "categoryName": "History"
+  },
+  {
+    "title": "Wheel of Fortune",
+    "authorName": "Thane Gustafson",
+    "categoryName": "History"
+  },
+  {
+    "title": "Christine",
+    "authorName": "Stephen King",
+    "categoryName": "Horror"
+  },
+  {
+    "title": "Danse Macabre",
+    "authorName": "Stephen King",
+    "categoryName": "Horror"
+  },
+  {
+    "title": "Dr. Jekyll and Mr. Hyde & Other Stories",
+    "authorName": "Robert Louis Stevenson",
+    "categoryName": "Horror"
+  },
+  {
+    "title": "Dracula",
+    "authorName": "Bram Stoker",
+    "categoryName": "Horror"
+  },
+  {
+    "title": "Four Past Midnight",
+    "authorName": "Stephen King",
+    "categoryName": "Horror"
+  },
+  {
+    "title": "Frankenstein",
+    "authorName": "Mary Shelley",
+    "categoryName": "Horror"
+  },
+  {
+    "title": "Frankenstein",
+    "authorName": "Mary Wollstonecraft Shelley",
+    "categoryName": "Horror"
+  },
+  {
+    "title": "On Fire",
+    "authorName": "Nancy Holder",
+    "categoryName": "Horror"
+  },
+  {
+    "title": "Tales from the Shadowhunter Academy",
+    "authorName": "Cassandra Clare",
+    "categoryName": "Horror"
+  },
+  {
+    "title": "The Dream-quest of Unknown Kadath",
+    "authorName": "Howard Phillips Lovecraft",
+    "categoryName": "Horror"
+  },
+  {
+    "title": "The Empty House",
+    "authorName": "Algernon Blackwood",
+    "categoryName": "Horror"
+  },
+  {
+    "title": "The Green Mile",
+    "authorName": "Stephen King",
+    "categoryName": "Horror"
+  },
+  {
+    "title": "The Howling Ghost",
+    "authorName": "Christopher Pike",
+    "categoryName": "Horror"
+  },
+  {
+    "title": "The Loch",
+    "authorName": "Steve Alten",
+    "categoryName": "Horror"
+  },
+  {
+    "title": "The Phantom of the Opera",
+    "authorName": "Gaston Leroux",
+    "categoryName": "Horror"
+  },
+  {
+    "title": "The Secret Path",
+    "authorName": "Christopher Pike",
+    "categoryName": "Horror"
+  },
+  {
+    "title": "The Shining",
+    "authorName": "Stephen King",
+    "categoryName": "Horror"
+  },
+  {
+    "title": "The Thief of Always",
+    "authorName": "Clive Barker",
+    "categoryName": "Horror"
+  },
+  {
+    "title": "The Tommyknockers",
+    "authorName": "Stephen King",
+    "categoryName": "Horror"
+  },
+  {
+    "title": "Thinner",
+    "authorName": "Stephen King",
+    "categoryName": "Horror"
+  },
+  {
+    "title": "A History of Mathematics",
+    "authorName": "Florian Cajori",
+    "categoryName": "Mathematics"
+  },
+  {
+    "title": "An Introduction to Linear Algebra",
+    "authorName": "L. Mirsky",
+    "categoryName": "Mathematics"
+  },
+  {
+    "title": "Flatland",
+    "authorName": "Edwin A. Abbott",
+    "categoryName": "Mathematics"
+  },
+  {
+    "title": "Fundamentals of Differential Geometry",
+    "authorName": "Serge Lang",
+    "categoryName": "Mathematics"
+  },
+  {
+    "title": "Georg Cantor",
+    "authorName": "Joseph Warren Dauben",
+    "categoryName": "Mathematics"
+  },
+  {
+    "title": "Lectures on Classical Differential Geometry",
+    "authorName": "Dirk J. Struik",
+    "categoryName": "Mathematics"
+  },
+  {
+    "title": "Matrix Computations",
+    "authorName": "Gene H. Golub",
+    "categoryName": "Mathematics"
+  },
+  {
+    "title": "Metalogic",
+    "authorName": "Geoffrey Hunter",
+    "categoryName": "Mathematics"
+  },
+  {
+    "title": "Multi-Objective Optimization using Evolutionary Algorithms",
+    "authorName": "Kalyanmoy Deb",
+    "categoryName": "Mathematics"
+  },
+  {
+    "title": "Numerical Heat Transfer and Fluid Flow",
+    "authorName": "Suhas Patankar",
+    "categoryName": "Mathematics"
+  },
+  {
+    "title": "Probability: A Graduate Course",
+    "authorName": "Allan Gut",
+    "categoryName": "Mathematics"
+  },
+  {
+    "title": "Repeated Measures Design for Empirical Researchers",
+    "authorName": "J. P. Verma",
+    "categoryName": "Mathematics"
+  },
+  {
+    "title": "Representation Theory",
+    "authorName": "William Fulton",
+    "categoryName": "Mathematics"
+  },
+  {
+    "title": "Stellar Evolution",
+    "authorName": "Amos Harpaz",
+    "categoryName": "Mathematics"
+  },
+  {
+    "title": "Stochastic Analysis and Mathematical Physics",
+    "authorName": "A.B. Cruzeiro",
+    "categoryName": "Mathematics"
+  },
+  {
+    "title": "The Music of the Primes",
+    "authorName": "Marcus du Sautoy",
+    "categoryName": "Mathematics"
+  },
+  {
+    "title": "The SAGE Handbook of Qualitative Research",
+    "authorName": "Norman K. Denzin",
+    "categoryName": "Mathematics"
+  },
+  {
+    "title": "The Tower of Hanoi – Myths and Maths",
+    "authorName": "Andreas M. Hinz",
+    "categoryName": "Mathematics"
+  },
+  {
+    "title": "Thermodynamics",
+    "authorName": "Arthur Shavit",
+    "categoryName": "Mathematics"
+  },
+  {
+    "title": "TOOMER:PTOLEMY'S ALMAGEST, (DUCKWORTH)",
+    "authorName": "Ptolemy",
+    "categoryName": "Mathematics"
+  },
+  {
+    "title": "\"A\" is for Alibi",
+    "authorName": "Sue Grafton",
+    "categoryName": "Mystery"
+  },
+  {
+    "title": "Cards on the Table",
+    "authorName": "Agatha Christie",
+    "categoryName": "Mystery"
+  },
+  {
+    "title": "Crime and Punishment",
+    "authorName": "Fyodor Dostoyevsky",
+    "categoryName": "Mystery"
+  },
+  {
+    "title": "Emil and the Detectives",
+    "authorName": "Erich Kästner",
+    "categoryName": "Mystery"
+  },
+  {
+    "title": "From Doon with Death",
+    "authorName": "Ruth Rendell",
+    "categoryName": "Mystery"
+  },
+  {
+    "title": "My Name is Red",
+    "authorName": "Orhan Pamuk",
+    "categoryName": "Mystery"
+  },
+  {
+    "title": "QBD Murder on the Orient Express",
+    "authorName": "Agatha Christie",
+    "categoryName": "Mystery"
+  },
+  {
+    "title": "Seeking Whom He May Devour",
+    "authorName": "Fred Vargas",
+    "categoryName": "Mystery"
+  },
+  {
+    "title": "The Black Tower",
+    "authorName": "P.D. James",
+    "categoryName": "Mystery"
+  },
+  {
+    "title": "The Curious Incident of the Dog in the Night-time",
+    "authorName": "Mark Haddon",
+    "categoryName": "Mystery"
+  },
+  {
+    "title": "The Da Vinci Code",
+    "authorName": "Dan Brown",
+    "categoryName": "Mystery"
+  },
+  {
+    "title": "The Daughter of Time",
+    "authorName": "Josephine Tey",
+    "categoryName": "Mystery"
+  },
+  {
+    "title": "The Golden Ball and Other Stories",
+    "authorName": "Agatha Christie",
+    "categoryName": "Mystery"
+  },
+  {
+    "title": "The House at Riverton",
+    "authorName": "Kate Morton",
+    "categoryName": "Mystery"
+  },
+  {
+    "title": "The Invisible Man",
+    "authorName": "Len Jenkin",
+    "categoryName": "Mystery"
+  },
+  {
+    "title": "The Narrows",
+    "authorName": "Michael Connelly",
+    "categoryName": "Mystery"
+  },
+  {
+    "title": "The No. 1 Ladies' Detective Agency",
+    "authorName": "Alexander McCall Smith",
+    "categoryName": "Mystery"
+  },
+  {
+    "title": "The Road to Gandolfo",
+    "authorName": "Robert Ludlum",
+    "categoryName": "Mystery"
+  },
+  {
+    "title": "The Runaway Jury",
+    "authorName": "John Grisham",
+    "categoryName": "Mystery"
+  },
+  {
+    "title": "A Treatise of Human Nature",
+    "authorName": "David Hume",
+    "categoryName": "Philosophy"
+  },
+  {
+    "title": "After Virtue",
+    "authorName": "Alasdair MacIntyre",
+    "categoryName": "Philosophy"
+  },
+  {
+    "title": "Art as Experience",
+    "authorName": "John Dewey",
+    "categoryName": "Philosophy"
+  },
+  {
+    "title": "Letters from a Stoic",
+    "authorName": "Lucius Annaeus Seneca",
+    "categoryName": "Philosophy"
+  },
+  {
+    "title": "Madness and Civilization",
+    "authorName": "Michel Foucault",
+    "categoryName": "Philosophy"
+  },
+  {
+    "title": "On Free Choice of the Will",
+    "authorName": "Augustine",
+    "categoryName": "Philosophy"
+  },
+  {
+    "title": "Phaedrus",
+    "authorName": "Plato",
+    "categoryName": "Philosophy"
+  },
+  {
+    "title": "Phenomenology of Spirit",
+    "authorName": "Georg Wilhelm Friedrich Hegel",
+    "categoryName": "Philosophy"
+  },
+  {
+    "title": "Philosophy in a Time of Terror",
+    "authorName": "Jürgen Habermas",
+    "categoryName": "Philosophy"
+  },
+  {
+    "title": "The Birth of Tragedy",
+    "authorName": "Friedrich Nietzsche",
+    "categoryName": "Philosophy"
+  },
+  {
+    "title": "The Cambridge Companion to the Stoics",
+    "authorName": "Brad Inwood",
+    "categoryName": "Philosophy"
+  },
+  {
+    "title": "The Categories",
+    "authorName": "Aristotle",
+    "categoryName": "Philosophy"
+  },
+  {
+    "title": "The Concept of the Political",
+    "authorName": "Carl Schmitt",
+    "categoryName": "Philosophy"
+  },
+  {
+    "title": "The Nature of Love",
+    "authorName": "Irving Singer",
+    "categoryName": "Philosophy"
+  },
+  {
+    "title": "The Oxford Handbook of World Philosophy",
+    "authorName": "Jay L. Garfield",
+    "categoryName": "Philosophy"
+  },
+  {
+    "title": "The Theory of Moral Sentiments",
+    "authorName": "Adam Smith",
+    "categoryName": "Philosophy"
+  },
+  {
+    "title": "Thus Spake Zarathustra",
+    "authorName": "Friedrich Nietzsche",
+    "categoryName": "Philosophy"
+  },
+  {
+    "title": "Thus Spoke Zarathustra",
+    "authorName": "Friedrich Wilhelm Nietzsche",
+    "categoryName": "Philosophy"
+  },
+  {
+    "title": "Tractatus Logico-Philosophicus",
+    "authorName": "Ludwig Wittgenstein",
+    "categoryName": "Philosophy"
+  },
+  {
+    "title": "Cybernetics Or Control and Communication in the Animal and the Machine",
+    "authorName": "Norbert Wiener",
+    "categoryName": "Psychology"
+  },
+  {
+    "title": "Explaining Creativity",
+    "authorName": "R. Keith Sawyer",
+    "categoryName": "Psychology"
+  },
+  {
+    "title": "International Handbook of Suicide Prevention",
+    "authorName": "Rory C. O'Connor",
+    "categoryName": "Psychology"
+  },
+  {
+    "title": "Medios narrativos para fines terapéuticos",
+    "authorName": "Michael White",
+    "categoryName": "Psychology"
+  },
+  {
+    "title": "Nudge",
+    "authorName": "Richard H. Thaler",
+    "categoryName": "Psychology"
+  },
+  {
+    "title": "On Human Nature",
+    "authorName": "Edward O. Wilson",
+    "categoryName": "Psychology"
+  },
+  {
+    "title": "Oxford Handbook of Psychiatry",
+    "authorName": "David Semple",
+    "categoryName": "Psychology"
+  },
+  {
+    "title": "Philosophical Explanations",
+    "authorName": "Robert Nozick",
+    "categoryName": "Psychology"
+  },
+  {
+    "title": "Raising An Emotionally Intelligent Child",
+    "authorName": "John Gottman",
+    "categoryName": "Psychology"
+  },
+  {
+    "title": "Reflections on War and Death",
+    "authorName": "Sigmund Freud",
+    "categoryName": "Psychology"
+  },
+  {
+    "title": "Situated Learning",
+    "authorName": "Jean Lave",
+    "categoryName": "Psychology"
+  },
+  {
+    "title": "Status Anxiety",
+    "authorName": "Alain De Botton",
+    "categoryName": "Psychology"
+  },
+  {
+    "title": "The Authoritarian Personality",
+    "authorName": "Theodor Adorno",
+    "categoryName": "Psychology"
+  },
+  {
+    "title": "The Expression of the Emotions in Man and Animals",
+    "authorName": "Charles Darwin",
+    "categoryName": "Psychology"
+  },
+  {
+    "title": "The Interpretation Of Dreams",
+    "authorName": "Sigmund Freud",
+    "categoryName": "Psychology"
+  },
+  {
+    "title": "The Power of Habit",
+    "authorName": "Charles Duhigg",
+    "categoryName": "Psychology"
+  },
+  {
+    "title": "The Principles of Psychology",
+    "authorName": "William James",
+    "categoryName": "Psychology"
+  },
+  {
+    "title": "The Principles of Psychology (Vol. 1&2)",
+    "authorName": "William James",
+    "categoryName": "Psychology"
+  },
+  {
+    "title": "The Science of Getting Rich",
+    "authorName": "Wallace D. Wattles",
+    "categoryName": "Psychology"
+  },
+  {
+    "title": "What Is Intelligence?",
+    "authorName": "James R. Flynn",
+    "categoryName": "Psychology"
+  },
+  {
+    "title": "A Loving Scoundrel",
+    "authorName": "Johanna Lindsey",
+    "categoryName": "Romance"
+  },
+  {
+    "title": "A Man to Call My Own",
+    "authorName": "Johanna Lindsey",
+    "categoryName": "Romance"
+  },
+  {
+    "title": "Esio Trot",
+    "authorName": "Roald Dahl",
+    "categoryName": "Romance"
+  },
+  {
+    "title": "Jane Eyre",
+    "authorName": "Charlotte Brontë",
+    "categoryName": "Romance"
+  },
+  {
+    "title": "Last Voyage of the Valentina",
+    "authorName": "Santa Montefiore",
+    "categoryName": "Romance"
+  },
+  {
+    "title": "Mansfield Park",
+    "authorName": "Jane Austen",
+    "categoryName": "Romance"
+  },
+  {
+    "title": "Marriage Most Scandalous",
+    "authorName": "Johanna Lindsey",
+    "categoryName": "Romance"
+  },
+  {
+    "title": "Me Before You (Movie Tie-In)",
+    "authorName": "Jojo Moyes",
+    "categoryName": "Romance"
+  },
+  {
+    "title": "Northanger Abbey",
+    "authorName": "Jane Austen",
+    "categoryName": "Romance"
+  },
+  {
+    "title": "Northern Lights",
+    "authorName": "Nora Roberts",
+    "categoryName": "Romance"
+  },
+  {
+    "title": "Pride and Prejudice",
+    "authorName": "Jane Austen",
+    "categoryName": "Romance"
+  },
+  {
+    "title": "Second Chance",
+    "authorName": "Danielle Steel",
+    "categoryName": "Romance"
+  },
+  {
+    "title": "Sense and Sensibility",
+    "authorName": "Jane Austen",
+    "categoryName": "Romance"
+  },
+  {
+    "title": "Simple Gifts",
+    "authorName": "Judith McNaught",
+    "categoryName": "Romance"
+  },
+  {
+    "title": "Sons and Lovers",
+    "authorName": "David Herbert Lawrence",
+    "categoryName": "Romance"
+  },
+  {
+    "title": "Special Delivery",
+    "authorName": "Danielle Steel",
+    "categoryName": "Romance"
+  },
+  {
+    "title": "Sunset in St. Tropez",
+    "authorName": "Danielle Steel",
+    "categoryName": "Romance"
+  },
+  {
+    "title": "The Japanese Lover",
+    "authorName": "Isabel Allende",
+    "categoryName": "Romance"
+  },
+  {
+    "title": "Toxic Bachelors",
+    "authorName": "Danielle Steel",
+    "categoryName": "Romance"
+  },
+  {
+    "title": "Wuthering Heights",
+    "authorName": "Emily Bront?e",
+    "categoryName": "Romance"
+  },
+  {
+    "title": "Cloning",
+    "authorName": "Stephen D. Fairbanks",
+    "categoryName": "Science Fiction"
+  },
+  {
+    "title": "Déliberations Et Mémoires de la Société Royale Du Canada",
+    "authorName": "Royal Society of Canada",
+    "categoryName": "Science Fiction"
+  },
+  {
+    "title": "Experimental Approaches to Pragmatics",
+    "authorName": "Valentina Cuccio",
+    "categoryName": "Science Fiction"
+  },
+  {
+    "title": "Fiction in American Magazines Before 1800",
+    "authorName": "Edward W. R. Pitcher",
+    "categoryName": "Science Fiction"
+  },
+  {
+    "title": "Men of Science and Industry",
+    "authorName": "Carnegie Library of Pittsburgh",
+    "categoryName": "Science Fiction"
+  },
+  {
+    "title": "Modelling Nature: An Opinionated Introduction to Scientific Representation",
+    "authorName": "Roman Frigg",
+    "categoryName": "Science Fiction"
+  },
+  {
+    "title": "Models and Idealizations in Science",
+    "authorName": "Alejandro Cassini",
+    "categoryName": "Science Fiction"
+  },
+  {
+    "title": "Notices of the Proceedings",
+    "authorName": "Royal Institution of Great Britain",
+    "categoryName": "Science Fiction"
+  },
+  {
+    "title": "Science Fact and Science Fiction",
+    "authorName": "Brian M. Stableford",
+    "categoryName": "Science Fiction"
+  },
+  {
+    "title": "Science Fiction and Space Futures",
+    "authorName": "Eugene Morlock Emme",
+    "categoryName": "Science Fiction"
+  },
+  {
+    "title": "The Monist",
+    "authorName": "Paul Carus",
+    "categoryName": "Science Fiction"
+  },
+  {
+    "title": "The Sage Encyclopedia of Qualitative Research Methods: A-L ; Vol. 2, M-Z Index",
+    "authorName": "Lisa M. Given",
+    "categoryName": "Science Fiction"
+  },
+  {
+    "title": "Walford's Guide to Reference Material: Generalia, language and literature, the arts",
+    "authorName": "Albert John Walford",
+    "categoryName": "Science Fiction"
+  },
+  {
+    "title": "Why We Read Fiction",
+    "authorName": "Lisa Zunshine",
+    "categoryName": "Science Fiction"
+  },
+  {
+    "title": "A Study of the Relationship of the Self-concept to Adjustment in a Selected Group of College Women",
+    "authorName": "Frances Helen DeLisle",
+    "categoryName": "Self-Help"
+  },
+  {
+    "title": "Act Thin, Stay Thin",
+    "authorName": "Richard B. Stuart",
+    "categoryName": "Self-Help"
+  },
+  {
+    "title": "Breadth of Perspective, Culture Contact, and Self",
+    "authorName": "Leon Harold Warshay",
+    "categoryName": "Self-Help"
+  },
+  {
+    "title": "Constellations of Life Satisfaction in Three Cohorts of Women",
+    "authorName": "Rosanne du Bois Brouwer",
+    "categoryName": "Self-Help"
+  },
+  {
+    "title": "Ego Analysis in the Helping Professions",
+    "authorName": "Frances Upham",
+    "categoryName": "Self-Help"
+  },
+  {
+    "title": "Empowerment of Women Through Self Help Groups",
+    "authorName": "G. Sreeramulu",
+    "categoryName": "Self-Help"
+  },
+  {
+    "title": "Hidden Paths",
+    "authorName": "Chiara Thumiger",
+    "categoryName": "Self-Help"
+  },
+  {
+    "title": "In an African Direction",
+    "authorName": "Hendrikus Laan",
+    "categoryName": "Self-Help"
+  },
+  {
+    "title": "Inquiring about Myself",
+    "authorName": "Frances M. Epps",
+    "categoryName": "Self-Help"
+  },
+  {
+    "title": "Measuring Ego Development",
+    "authorName": "Jane Loevinger",
+    "categoryName": "Self-Help"
+  },
+  {
+    "title": "Midlife Mothers in Transition",
+    "authorName": "Elizabeth Irene Price",
+    "categoryName": "Self-Help"
+  },
+  {
+    "title": "Motherself",
+    "authorName": "Kathryn Allen Rabuzzi",
+    "categoryName": "Self-Help"
+  },
+  {
+    "title": "On Willing Selves",
+    "authorName": "Sabine Maasen",
+    "categoryName": "Self-Help"
+  },
+  {
+    "title": "Psychological Perspectives on the Self",
+    "authorName": "Jerry M. Suls",
+    "categoryName": "Self-Help"
+  },
+  {
+    "title": "Self and Family",
+    "authorName": "Jane Cary Peck",
+    "categoryName": "Self-Help"
+  },
+  {
+    "title": "The Development of the Ego",
+    "authorName": "Stanley I. Greenspan",
+    "categoryName": "Self-Help"
+  },
+  {
+    "title": "The Magic Within",
+    "authorName": "Mary Lee Zawadski",
+    "categoryName": "Self-Help"
+  },
+  {
+    "title": "The Paradoxical Self",
+    "authorName": "Kirk J. Schneider",
+    "categoryName": "Self-Help"
+  },
+  {
+    "title": "The Promotion of Ego Development Through Role Play in a Ten Year Old Boy",
+    "authorName": "Karma Schauer Castleberry",
+    "categoryName": "Self-Help"
+  }
+]

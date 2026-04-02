@@ -1,0 +1,104 @@
+[
+  {
+    "title": "Around the World in 80 Days [eBook - NC Digital Library]",
+    "authorName": "Jules Verne",
+    "categoryName": "Adventure",
+    "error": "Google Books 没找到: Around the World in 80 Days [eBook - NC Digital Library]"
+  },
+  {
+    "title": "Emil and the Detectives",
+    "authorName": "Cyrus Harry Brooks",
+    "categoryName": "Adventure",
+    "error": "Google Books 没找到: Emil and the Detectives"
+  },
+  {
+    "title": "Academic Research Equipment in Computer Science, Central Computer Facilities, and Engineering, 1989",
+    "authorName": "Bradford Chaney",
+    "categoryName": "Computer Science",
+    "error": "Google Books 没找到: Academic Research Equipment in Computer Science, Central Computer Facilities, and Engineering, 1989"
+  },
+  {
+    "title": "Amongst Friends in Computer and Law:A Bundle of Essays in Remembrance of Guy Vandenberghe",
+    "authorName": "Guy P. V. Vandenberghe",
+    "categoryName": "Computer Science",
+    "error": "Google Books 没找到: Amongst Friends in Computer and Law:A Bundle of Essays in Remembrance of Guy Vandenberghe"
+  },
+  {
+    "title": "MicroStation Bible",
+    "authorName": "Ross Cowden",
+    "categoryName": "Computer Science",
+    "error": "请求失败 429: https://www.googleapis.com/books/v1/volumes?q=intitle%3A%22MicroStation%20Bible%22%20inauthor%3A%22Ross%20Cowden%22&maxResults=10&printType=books\n{\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"Quota exceeded for quota metric 'Queries' and limit 'Queries per minute per user' of service 'books.googleapis.com' for consumer 'project_number:624717413613'.\",\n    \"errors\": [\n      {\n        \"message\": \"Quota exceeded for quota metric 'Queries' and limit 'Queries per minute per user' of service 'books.googleapis.com' for consumer 'project_number:624717413613'.\",\n        \"domain\": \"global\",\n        \"reason\": \"rateLimitExceeded\"\n      }\n    ],\n    \"status\": \"RESOURCE_EXHAUSTED\",\n    \"details\": [\n      {\n        \"@type\": \"type.googleapis.com/google.rpc.ErrorInfo\",\n        \"reason\": \"RATE_LIMIT_EXCEEDED\",\n        \"domain\": \"googleapis.com\",\n        \"metadata\": {\n          \"quota_unit\": \"1/min/{project}/{user}\",\n          \"quota_location\": \"global\",\n          \"consumer\": \"projects/624717413613\",\n          \"quota_metric\": \"books.googleapis.com/default\",\n          \"quota_limit\": \"defaultPerMinutePerUser\",\n          \"quota_limit_value\": \"100\",\n          \"service\": \"books.googleapis.com\"\n        }\n      },\n      {\n        \"@type\": \"type.googleapis.com/google.rpc.Help\",\n        \"links\": [\n          {\n            \"description\": \"Request a higher quota limit.\",\n            \"url\": \"https://cloud.google.com/docs/quotas/help/request_increase\"\n          }\n        ]\n      }\n    ]\n  }\n}"
+  },
+  {
+    "title": "Capital: The process of capitalist production as a whole, ed. by Frederick Engels. Tr. from the 1st German ed. by Ernest Untermann",
+    "authorName": "Karl Marx",
+    "categoryName": "Economics",
+    "error": "请求失败 429: https://www.googleapis.com/books/v1/volumes?q=intitle%3A%22Capital%3A%20The%20process%20of%20capitalist%20production%20as%20a%20whole%2C%20ed.%20by%20Frederick%20Engels.%20Tr.%20from%20the%201st%20German%20ed.%20by%20Ernest%20Untermann%22%20inauthor%3A%22Karl%20Marx%22&maxResults=10&printType=books\n{\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"Quota exceeded for quota metric 'Queries' and limit 'Queries per minute per user' of service 'books.googleapis.com' for consumer 'project_number:624717413613'.\",\n    \"errors\": [\n      {\n        \"message\": \"Quota exceeded for quota metric 'Queries' and limit 'Queries per minute per user' of service 'books.googleapis.com' for consumer 'project_number:624717413613'.\",\n        \"domain\": \"global\",\n        \"reason\": \"rateLimitExceeded\"\n      }\n    ],\n    \"status\": \"RESOURCE_EXHAUSTED\",\n    \"details\": [\n      {\n        \"@type\": \"type.googleapis.com/google.rpc.ErrorInfo\",\n        \"reason\": \"RATE_LIMIT_EXCEEDED\",\n        \"domain\": \"googleapis.com\",\n        \"metadata\": {\n          \"service\": \"books.googleapis.com\",\n          \"quota_location\": \"global\",\n          \"consumer\": \"projects/624717413613\",\n          \"quota_limit\": \"defaultPerMinutePerUser\",\n          \"quota_limit_value\": \"100\",\n          \"quota_unit\": \"1/min/{project}/{user}\",\n          \"quota_metric\": \"books.googleapis.com/default\"\n        }\n      },\n      {\n        \"@type\": \"type.googleapis.com/google.rpc.Help\",\n        \"links\": [\n          {\n            \"description\": \"Request a higher quota limit.\",\n            \"url\": \"https://cloud.google.com/docs/quotas/help/request_increase\"\n          }\n        ]\n      }\n    ]\n  }\n}"
+  },
+  {
+    "title": "Prince Caspian Movie Tie-in Edition (rack)",
+    "authorName": "C. S. Lewis",
+    "categoryName": "Fantasy",
+    "error": "Google Books 没找到: Prince Caspian Movie Tie-in Edition (rack)"
+  },
+  {
+    "title": "Homer's Iliad, Books XX., XXI. and XXII., with Engl. Notes and a Literal Translation",
+    "authorName": "Homerus",
+    "categoryName": "History",
+    "error": "请求失败 429: https://www.googleapis.com/books/v1/volumes?q=intitle%3A%22Homer's%20Iliad%2C%20Books%20XX.%2C%20XXI.%20and%20XXII.%2C%20with%20Engl.%20Notes%20and%20a%20Literal%20Translation%22%20inauthor%3A%22Homerus%22&maxResults=10&printType=books\n{\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"Quota exceeded for quota metric 'Queries' and limit 'Queries per minute per user' of service 'books.googleapis.com' for consumer 'project_number:624717413613'.\",\n    \"errors\": [\n      {\n        \"message\": \"Quota exceeded for quota metric 'Queries' and limit 'Queries per minute per user' of service 'books.googleapis.com' for consumer 'project_number:624717413613'.\",\n        \"domain\": \"global\",\n        \"reason\": \"rateLimitExceeded\"\n      }\n    ],\n    \"status\": \"RESOURCE_EXHAUSTED\",\n    \"details\": [\n      {\n        \"@type\": \"type.googleapis.com/google.rpc.ErrorInfo\",\n        \"reason\": \"RATE_LIMIT_EXCEEDED\",\n        \"domain\": \"googleapis.com\",\n        \"metadata\": {\n          \"quota_location\": \"global\",\n          \"quota_limit_value\": \"100\",\n          \"service\": \"books.googleapis.com\",\n          \"consumer\": \"projects/624717413613\",\n          \"quota_metric\": \"books.googleapis.com/default\",\n          \"quota_unit\": \"1/min/{project}/{user}\",\n          \"quota_limit\": \"defaultPerMinutePerUser\"\n        }\n      },\n      {\n        \"@type\": \"type.googleapis.com/google.rpc.Help\",\n        \"links\": [\n          {\n            \"description\": \"Request a higher quota limit.\",\n            \"url\": \"https://cloud.google.com/docs/quotas/help/request_increase\"\n          }\n        ]\n      }\n    ]\n  }\n}"
+  },
+  {
+    "title": "Stochastic Analysis and Mathematical Physics",
+    "authorName": "A.B. Cruzeiro",
+    "categoryName": "Mathematics",
+    "error": "请求失败 429: https://www.googleapis.com/books/v1/volumes?q=intitle%3A%22Stochastic%20Analysis%20and%20Mathematical%20Physics%22%20inauthor%3A%22A.B.%20Cruzeiro%22&maxResults=10&printType=books\n{\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"Quota exceeded for quota metric 'Queries' and limit 'Queries per minute per user' of service 'books.googleapis.com' for consumer 'project_number:624717413613'.\",\n    \"errors\": [\n      {\n        \"message\": \"Quota exceeded for quota metric 'Queries' and limit 'Queries per minute per user' of service 'books.googleapis.com' for consumer 'project_number:624717413613'.\",\n        \"domain\": \"global\",\n        \"reason\": \"rateLimitExceeded\"\n      }\n    ],\n    \"status\": \"RESOURCE_EXHAUSTED\",\n    \"details\": [\n      {\n        \"@type\": \"type.googleapis.com/google.rpc.ErrorInfo\",\n        \"reason\": \"RATE_LIMIT_EXCEEDED\",\n        \"domain\": \"googleapis.com\",\n        \"metadata\": {\n          \"quota_unit\": \"1/min/{project}/{user}\",\n          \"quota_location\": \"global\",\n          \"quota_limit_value\": \"100\",\n          \"quota_limit\": \"defaultPerMinutePerUser\",\n          \"service\": \"books.googleapis.com\",\n          \"consumer\": \"projects/624717413613\",\n          \"quota_metric\": \"books.googleapis.com/default\"\n        }\n      },\n      {\n        \"@type\": \"type.googleapis.com/google.rpc.Help\",\n        \"links\": [\n          {\n            \"description\": \"Request a higher quota limit.\",\n            \"url\": \"https://cloud.google.com/docs/quotas/help/request_increase\"\n          }\n        ]\n      }\n    ]\n  }\n}"
+  },
+  {
+    "title": "The Oxford Handbook of World Philosophy",
+    "authorName": "Jay L. Garfield",
+    "categoryName": "Philosophy",
+    "error": "Google Books 没找到: The Oxford Handbook of World Philosophy"
+  },
+  {
+    "title": "Fiction in American Magazines Before 1800",
+    "authorName": "Edward W. R. Pitcher",
+    "categoryName": "Science Fiction",
+    "error": "请求失败 429: https://www.googleapis.com/books/v1/volumes?q=intitle%3A%22Fiction%20in%20American%20Magazines%20Before%201800%22%20inauthor%3A%22Edward%20W.%20R.%20Pitcher%22&maxResults=10&printType=books\n{\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"Quota exceeded for quota metric 'Queries' and limit 'Queries per minute per user' of service 'books.googleapis.com' for consumer 'project_number:624717413613'.\",\n    \"errors\": [\n      {\n        \"message\": \"Quota exceeded for quota metric 'Queries' and limit 'Queries per minute per user' of service 'books.googleapis.com' for consumer 'project_number:624717413613'.\",\n        \"domain\": \"global\",\n        \"reason\": \"rateLimitExceeded\"\n      }\n    ],\n    \"status\": \"RESOURCE_EXHAUSTED\",\n    \"details\": [\n      {\n        \"@type\": \"type.googleapis.com/google.rpc.ErrorInfo\",\n        \"reason\": \"RATE_LIMIT_EXCEEDED\",\n        \"domain\": \"googleapis.com\",\n        \"metadata\": {\n          \"quota_limit_value\": \"100\",\n          \"quota_unit\": \"1/min/{project}/{user}\",\n          \"quota_location\": \"global\",\n          \"quota_metric\": \"books.googleapis.com/default\",\n          \"quota_limit\": \"defaultPerMinutePerUser\",\n          \"consumer\": \"projects/624717413613\",\n          \"service\": \"books.googleapis.com\"\n        }\n      },\n      {\n        \"@type\": \"type.googleapis.com/google.rpc.Help\",\n        \"links\": [\n          {\n            \"description\": \"Request a higher quota limit.\",\n            \"url\": \"https://cloud.google.com/docs/quotas/help/request_increase\"\n          }\n        ]\n      }\n    ]\n  }\n}"
+  },
+  {
+    "title": "The Sage Encyclopedia of Qualitative Research Methods: A-L ; Vol. 2, M-Z Index",
+    "authorName": "Lisa M. Given",
+    "categoryName": "Science Fiction",
+    "error": "Google Books 没找到: The Sage Encyclopedia of Qualitative Research Methods: A-L ; Vol. 2, M-Z Index"
+  },
+  {
+    "title": "A Study of the Relationship of the Self-concept to Adjustment in a Selected Group of College Women",
+    "authorName": "Frances Helen DeLisle",
+    "categoryName": "Self-Help",
+    "error": "Google Books 没找到: A Study of the Relationship of the Self-concept to Adjustment in a Selected Group of College Women"
+  },
+  {
+    "title": "Locus of Control, Body Articulation and Sexual Differentiation in Women as Modified by Self-help and Sex Education Programs",
+    "authorName": "Patricia Eileen Thompson",
+    "categoryName": "Self-Help",
+    "error": "Google Books 没找到: Locus of Control, Body Articulation and Sexual Differentiation in Women as Modified by Self-help and Sex Education Programs"
+  },
+  {
+    "title": "On Willing Selves",
+    "authorName": "Sabine Maasen",
+    "categoryName": "Self-Help",
+    "error": "Google Books 没找到: On Willing Selves"
+  },
+  {
+    "title": "Psychological Perspectives on the Self",
+    "authorName": "Jerry M. Suls",
+    "categoryName": "Self-Help",
+    "error": "Google Books 没找到: Psychological Perspectives on the Self"
+  },
+  {
+    "title": "The Promotion of Ego Development Through Role Play in a Ten Year Old Boy",
+    "authorName": "Karma Schauer Castleberry",
+    "categoryName": "Self-Help",
+    "error": "Google Books 没找到: The Promotion of Ego Development Through Role Play in a Ten Year Old Boy"
+  }
+]
