@@ -105,6 +105,10 @@ document.addEventListener('DOMContentLoaded', async () => {
   const publisherSearchInput = document.getElementById('book-publisher-search');
   const tagSearchInput = document.getElementById('book-tag-search');
   const tagSummary = document.getElementById('book-tag-summary');
+  const bookListSearchInput = document.getElementById('book-list-search');
+  const authorListSearchInput = document.getElementById('author-list-search');
+  const publisherListSearchInput = document.getElementById('publisher-list-search');
+  const tagListSearchInput = document.getElementById('tag-list-search');
 
   function syncAvailableCopiesPreview() {
     const totalCopies = Math.max(1, Number(totalCopiesInput.value || 1));
@@ -291,8 +295,20 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   function renderBookList() {
-    bookList.innerHTML = books.length
-      ? books.map(book => {
+    const query = String(bookListSearchInput.value || '').trim().toLowerCase();
+    const filteredBooks = books.filter(book => {
+      if (!query) return true;
+      const haystack = [
+        book.name,
+        book.author?.name,
+        book.category?.name,
+        book.publisher?.name
+      ].filter(Boolean).join(' ').toLowerCase();
+      return haystack.includes(query);
+    });
+
+    bookList.innerHTML = filteredBooks.length
+      ? filteredBooks.map(book => {
         const publisherLabel = book.publisher?.name || 'No publisher';
         const tagLabels = (book.tags || []).map(tag => `<span class="tag">${escapeHtml(tag.name)}</span>`).join('');
         return `
@@ -318,7 +334,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             <div class="muted">${escapeHtml(truncateText(book.description, 180))}</div>
           </article>`;
       }).join('')
-      : '<div class="muted">No books found.</div>';
+      : '<div class="muted">No books matched the current search.</div>';
 
     bookList.querySelectorAll('[data-edit-book]').forEach(button => {
       button.addEventListener('click', () => editBook(button.dataset.editBook));
@@ -336,8 +352,19 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   function renderAuthorList() {
-    authorList.innerHTML = authors.length
-      ? authors.map(author => `
+    const query = String(authorListSearchInput.value || '').trim().toLowerCase();
+    const filteredAuthors = authors.filter(author => {
+      if (!query) return true;
+      const haystack = [
+        author.name,
+        author.country,
+        author.description
+      ].filter(Boolean).join(' ').toLowerCase();
+      return haystack.includes(query);
+    });
+
+    authorList.innerHTML = filteredAuthors.length
+      ? filteredAuthors.map(author => `
         <article class="admin-item">
           <div class="admin-item-head">
             <div>
@@ -351,7 +378,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           </div>
           <div class="muted">${escapeHtml(truncateText(author.description))}</div>
         </article>`).join('')
-      : '<div class="muted">No authors found.</div>';
+      : '<div class="muted">No authors matched the current search.</div>';
 
     authorList.querySelectorAll('[data-edit-author]').forEach(button => {
       button.addEventListener('click', () => editAuthor(button.dataset.editAuthor));
@@ -372,8 +399,20 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   function renderPublisherList() {
-    publisherList.innerHTML = publishers.length
-      ? publishers.map(publisher => `
+    const query = String(publisherListSearchInput.value || '').trim().toLowerCase();
+    const filteredPublishers = publishers.filter(publisher => {
+      if (!query) return true;
+      const haystack = [
+        publisher.name,
+        publisher.country,
+        publisher.description,
+        publisher.websiteUrl
+      ].filter(Boolean).join(' ').toLowerCase();
+      return haystack.includes(query);
+    });
+
+    publisherList.innerHTML = filteredPublishers.length
+      ? filteredPublishers.map(publisher => `
         <article class="admin-item">
           <div class="admin-item-head">
             <div>
@@ -387,7 +426,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           </div>
           <div class="muted">${escapeHtml(truncateText(publisher.description || publisher.websiteUrl || 'No description.'))}</div>
         </article>`).join('')
-      : '<div class="muted">No publishers found.</div>';
+      : '<div class="muted">No publishers matched the current search.</div>';
 
     publisherList.querySelectorAll('[data-edit-publisher]').forEach(button => {
       button.addEventListener('click', () => editPublisher(button.dataset.editPublisher));
@@ -408,8 +447,18 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   function renderTagList() {
-    tagList.innerHTML = tags.length
-      ? tags.map(tag => `
+    const query = String(tagListSearchInput.value || '').trim().toLowerCase();
+    const filteredTags = tags.filter(tag => {
+      if (!query) return true;
+      const haystack = [
+        tag.name,
+        tag.description
+      ].filter(Boolean).join(' ').toLowerCase();
+      return haystack.includes(query);
+    });
+
+    tagList.innerHTML = filteredTags.length
+      ? filteredTags.map(tag => `
         <article class="admin-item">
           <div class="admin-item-head">
             <div>
@@ -423,7 +472,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           </div>
           <div class="muted">${escapeHtml(truncateText(tag.description || 'No description.'))}</div>
         </article>`).join('')
-      : '<div class="muted">No tags found.</div>';
+      : '<div class="muted">No tags matched the current search.</div>';
 
     tagList.querySelectorAll('[data-edit-tag]').forEach(button => {
       button.addEventListener('click', () => editTag(button.dataset.editTag));
@@ -601,6 +650,10 @@ document.addEventListener('DOMContentLoaded', async () => {
   publisherSearchInput.addEventListener('input', renderPublisherOptions);
   tagSearchInput.addEventListener('input', renderTagOptions);
   tagSelect.addEventListener('change', renderTagOptions);
+  bookListSearchInput.addEventListener('input', renderBookList);
+  authorListSearchInput.addEventListener('input', renderAuthorList);
+  publisherListSearchInput.addEventListener('input', renderPublisherList);
+  tagListSearchInput.addEventListener('input', renderTagList);
   document.getElementById('reset-author-form').addEventListener('click', resetAuthorForm);
   document.getElementById('reset-publisher-form').addEventListener('click', resetPublisherForm);
   document.getElementById('reset-tag-form').addEventListener('click', resetTagForm);
