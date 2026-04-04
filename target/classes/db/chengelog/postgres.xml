@@ -16,5 +16,6 @@
     <include file="db/chengelog/postgres/20260402_create_book_loan_table.sql"/>
     <include file="db/chengelog/postgres/20260402_add_inventory_and_reservation.sql"/>
     <include file="db/chengelog/postgres/20260401_fix_invalid_seed_book_images.sql"/>
+    <include file="db/chengelog/postgres/20260404_add_book_isbn.sql"/>
 
 </databaseChangeLog>

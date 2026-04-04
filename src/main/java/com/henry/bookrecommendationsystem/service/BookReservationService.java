@@ -23,4 +23,8 @@ public interface BookReservationService extends BaseService<BookReservation, Boo
     List<BookReservationDto> findCurrentUserReservationHistory();
 
     BookReservationSummaryDto findBookReservationSummary(Long bookId);
+
+    List<BookReservationDto> findAllActiveReservations();
+
+    List<BookReservationDto> findAllReservationHistory();
 }

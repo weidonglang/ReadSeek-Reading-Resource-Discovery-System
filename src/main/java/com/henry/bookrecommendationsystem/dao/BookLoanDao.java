@@ -23,4 +23,8 @@ public interface BookLoanDao extends BaseDao<BookLoan, BookLoanRepository> {
     List<BookLoan> findCurrentUserActiveLoans(Long userId);
 
     List<BookLoan> findCurrentUserLoanHistory(Long userId);
+
+    List<BookLoan> findAllActiveLoans();
+
+    List<BookLoan> findAllLoanHistory();
 }

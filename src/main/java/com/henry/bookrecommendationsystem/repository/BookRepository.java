@@ -25,6 +25,8 @@ public interface BookRepository extends JpaRepository<Book, Long> {
 
     Boolean existsByTagsIdAndMarkedAsDeletedFalse(Long tagId);
 
+    Boolean existsByCategoryIdAndMarkedAsDeletedFalse(Long categoryId);
+
     @Query("SELECT b FROM Book b WHERE b.markedAsDeleted = :deletedRecords ")
     Page<Book> findAll(Pageable pageable, Boolean deletedRecords);
 
@@ -32,7 +34,7 @@ public interface BookRepository extends JpaRepository<Book, Long> {
 
     @Query(
             value = "SELECT DISTINCT b FROM Book b LEFT JOIN b.tags t WHERE b.markedAsDeleted = :deletedRecords " +
-                    "AND ((:name) IS NULL OR lower(b.name) like %:name% OR lower(b.author.name) like %:name% " +
+                    "AND ((:name) IS NULL OR lower(b.name) like %:name% OR lower(coalesce(b.isbn, '')) like %:name% OR lower(b.author.name) like %:name% " +
                     "OR lower(b.category.name) like %:name% OR lower(coalesce(b.publisher.name, '')) like %:name% " +
                     "OR lower(coalesce(t.name, '')) like %:name%) " +
                     "AND ((:fromPrice) IS NULL OR b.price >= :fromPrice) " +
@@ -46,7 +48,7 @@ public interface BookRepository extends JpaRepository<Book, Long> {
                     "AND ((:publishers) IS NULL OR b.publisher.id IN (:publishers)) " +
                     "AND ((:tags) IS NULL OR t.id IN (:tags)) ",
             countQuery = "SELECT COUNT(DISTINCT b.id) FROM Book b LEFT JOIN b.tags t WHERE b.markedAsDeleted = :deletedRecords " +
-                    "AND ((:name) IS NULL OR lower(b.name) like %:name% OR lower(b.author.name) like %:name% " +
+                    "AND ((:name) IS NULL OR lower(b.name) like %:name% OR lower(coalesce(b.isbn, '')) like %:name% OR lower(b.author.name) like %:name% " +
                     "OR lower(b.category.name) like %:name% OR lower(coalesce(b.publisher.name, '')) like %:name% " +
                     "OR lower(coalesce(t.name, '')) like %:name%) " +
                     "AND ((:fromPrice) IS NULL OR b.price >= :fromPrice) " +

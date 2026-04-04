@@ -34,6 +34,9 @@ public class Book extends BaseEntity {
     @Column(name = "name", nullable = false)
     private String name;
 
+    @Column(name = "isbn")
+    private String isbn;
+
     @ManyToOne
     @JoinColumn(name = "category_id", nullable = false)
     private BookCategory category;

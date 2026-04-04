@@ -38,6 +38,22 @@ public class BookLoanController {
                 "Current user loan history fetched successfully.", bookLoanService.findCurrentUserLoanHistory());
     }
 
+    @GetMapping("/admin/active")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ApiResponse findAllActiveLoans() {
+        log.info("BookLoanController: findAllActiveLoans() called");
+        return new ApiResponse(true, LocalDateTime.now().toString(),
+                "All active loans fetched successfully.", bookLoanService.findAllActiveLoans());
+    }
+
+    @GetMapping("/admin/history")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ApiResponse findAllLoanHistory() {
+        log.info("BookLoanController: findAllLoanHistory() called");
+        return new ApiResponse(true, LocalDateTime.now().toString(),
+                "All loan history fetched successfully.", bookLoanService.findAllLoanHistory());
+    }
+
     @PostMapping("/borrow")
     @PreAuthorize("isAuthenticated()")
     public ApiResponse borrowBook(@RequestBody BorrowBookRequestDto requestDto) {

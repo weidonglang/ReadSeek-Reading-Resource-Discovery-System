@@ -1,26 +1,39 @@
-document.addEventListener('DOMContentLoaded', async () => {
+document.addEventListener('DOMContentLoaded', () => {
   if (BookUi.redirectIfLoggedIn()) return;
   BookUi.injectLayout();
+
   const genderSelect = document.getElementById('gender');
   const maritalSelect = document.getElementById('maritalStatus');
-  ['MALE', 'FEMALE', 'OTHERS'].forEach(v => genderSelect.insertAdjacentHTML('beforeend', `<option value="${v}">${v}</option>`));
-  ['SINGLE', 'MARRIED', 'IN_RELATIONSHIP'].forEach(v => maritalSelect.insertAdjacentHTML('beforeend', `<option value="${v}">${v}</option>`));
+  ['MALE', 'FEMALE', 'OTHERS'].forEach(value => {
+    genderSelect.insertAdjacentHTML('beforeend', `<option value="${value}">${value}</option>`);
+  });
+  ['SINGLE', 'MARRIED', 'IN_RELATIONSHIP'].forEach(value => {
+    maritalSelect.insertAdjacentHTML('beforeend', `<option value="${value}">${value}</option>`);
+  });
 
-  document.getElementById('email').addEventListener('blur', async (e) => {
-    const email = e.target.value.trim();
+  document.getElementById('email').addEventListener('blur', async event => {
+    const email = event.target.value.trim();
     if (!email) return;
+
     try {
-      const res = await BookApi.apiRequest(`/api/user/find-is-email-exists/${encodeURIComponent(email)}`, { auth: false });
+      const res = await BookApi.apiRequest(`/api/user/find-is-email-exists/${encodeURIComponent(email)}`, {
+        auth: false
+      });
       const exists = Boolean(res?.body);
-      BookUi.showMessage('register-message', exists ? 'warning' : 'info', exists ? '该邮箱似乎已经存在。' : '该邮箱目前可用。');
+      BookUi.showMessage(
+        'register-message',
+        exists ? 'warning' : 'info',
+        exists ? '该邮箱已经被注册。' : '该邮箱当前可以使用。'
+      );
     } catch (error) {
       BookUi.showMessage('register-message', 'warning', `邮箱校验失败：${error.message}`);
     }
   });
 
-  document.getElementById('register-form').addEventListener('submit', async (event) => {
+  document.getElementById('register-form').addEventListener('submit', async event => {
     event.preventDefault();
     BookUi.hideMessage('register-message');
+
     const payload = {
       firstName: document.getElementById('firstName').value.trim(),
       lastName: document.getElementById('lastName').value.trim(),
@@ -42,8 +55,9 @@ document.addEventListener('DOMContentLoaded', async () => {
         body: payload
       });
       BookUi.showMessage('register-message', 'success', '注册成功，正在跳转到登录页。');
-      const email = encodeURIComponent(payload.email);
-      setTimeout(() => { window.location.href = `login.html?email=${email}`; }, 800);
+      setTimeout(() => {
+        window.location.href = `login.html?email=${encodeURIComponent(payload.email)}`;
+      }, 800);
     } catch (error) {
       BookUi.showMessage('register-message', 'error', error.message);
     }

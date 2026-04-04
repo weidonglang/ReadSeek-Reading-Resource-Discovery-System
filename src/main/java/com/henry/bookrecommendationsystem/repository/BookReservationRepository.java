@@ -26,5 +26,9 @@ public interface BookReservationRepository extends JpaRepository<BookReservation
 
     List<BookReservation> findAllByUserIdAndStatusInAndMarkedAsDeletedFalseOrderByRequestedAtDesc(Long userId, List<BookReservationStatus> statuses);
 
+    List<BookReservation> findAllByStatusAndMarkedAsDeletedFalseOrderByRequestedAtAsc(BookReservationStatus status);
+
+    List<BookReservation> findAllByStatusInAndMarkedAsDeletedFalseOrderByRequestedAtDesc(List<BookReservationStatus> statuses);
+
     Long countByBookIdAndStatusAndMarkedAsDeletedFalse(Long bookId, BookReservationStatus status);
 }

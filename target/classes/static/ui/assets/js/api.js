@@ -108,13 +108,13 @@
   }
 
   function toDisplayDate(value) {
-    if (!value) return '—';
+    if (!value) return '-';
     const date = new Date(value);
     if (Number.isNaN(date.getTime())) return String(value);
     return date.toLocaleDateString('zh-CN');
   }
 
-  function safeText(value, fallback = '—') {
+  function safeText(value, fallback = '-') {
     if (value === null || value === undefined || value === '') return fallback;
     return String(value);
   }

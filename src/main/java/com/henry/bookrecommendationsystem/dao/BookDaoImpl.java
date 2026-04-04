@@ -142,6 +142,7 @@ public class BookDaoImpl implements BookDao {
             String keyword = "%" + criteria.getName() + "%";
             predicates.add(cb.or(
                     cb.like(cb.lower(root.get("name").as(String.class)), keyword),
+                    cb.like(cb.lower(cb.coalesce(root.get("isbn").as(String.class), "")), keyword),
                     cb.like(cb.lower(authorJoin.get("name").as(String.class)), keyword),
                     cb.like(cb.lower(categoryJoin.get("name").as(String.class)), keyword),
                     cb.like(cb.lower(cb.coalesce(publisherJoin.get("name").as(String.class), "")), keyword),

@@ -46,6 +46,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     document.getElementById('detail-meta').innerHTML = [
       renderInfoItem('Author', escapeHtml(book.author?.name || 'Unknown Author')),
+      renderInfoItem('ISBN', escapeHtml(book.isbn || 'No ISBN')),
       renderInfoItem('Category', escapeHtml(book.category?.name || 'Uncategorized')),
       renderInfoItem('Publisher', escapeHtml(book.publisher?.name || 'No publisher')),
       renderInfoItem('Tags', escapeHtml(tagNames.length ? tagNames.join(', ') : 'No tags')),

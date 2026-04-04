@@ -26,6 +26,7 @@ import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Optional;
+import javax.persistence.EntityManager;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -37,11 +38,15 @@ import static org.mockito.Mockito.*;
 @Slf4j
 class BookControllerTest {
 
+    private BookDaoImpl createBookDao(BookRepository bookRepository) {
+        return new BookDaoImpl(bookRepository, mock(EntityManager.class));
+    }
+
     @Test
     void testGetService() {
         log.info("BookControllerTest: testGetService() called");
         BookTransformer bookTransformer = new BookTransformer(new BookMapperImpl());
-        BookDaoImpl bookDao = new BookDaoImpl(mock(BookRepository.class));
+        BookDaoImpl bookDao = createBookDao(mock(BookRepository.class));
         AuthorTransformer authorTransformer = new AuthorTransformer(new AuthorMapperImpl());
         AuthorServiceImpl authorService = new AuthorServiceImpl(authorTransformer,
                 new AuthorDaoImpl(mock(AuthorRepository.class)));
@@ -70,7 +75,7 @@ class BookControllerTest {
                 new Argon2PasswordEncoder());
 
         BookTransformer bookTransformer1 = new BookTransformer(new BookMapperImpl());
-        BookDaoImpl bookDao1 = new BookDaoImpl(mock(BookRepository.class));
+        BookDaoImpl bookDao1 = createBookDao(mock(BookRepository.class));
         AuthorServiceImpl authorService1 = new AuthorServiceImpl(null, null);
 
         assertSame(bookServiceImpl,
@@ -136,7 +141,7 @@ class BookControllerTest {
         book.setUsersRateCount(3L);
         BookRepository bookRepository = mock(BookRepository.class);
         when(bookRepository.findById((Long) any())).thenReturn(Optional.of(book));
-        BookDaoImpl bookDao = new BookDaoImpl(bookRepository);
+        BookDaoImpl bookDao = createBookDao(bookRepository);
         BookTransformer bookTransformer = new BookTransformer(new BookMapperImpl());
         AuthorTransformer authorTransformer = new AuthorTransformer(new AuthorMapperImpl());
         AuthorServiceImpl authorService = new AuthorServiceImpl(authorTransformer,
@@ -166,7 +171,7 @@ class BookControllerTest {
                 new Argon2PasswordEncoder());
 
         BookTransformer bookTransformer1 = new BookTransformer(new BookMapperImpl());
-        BookDaoImpl bookDao1 = new BookDaoImpl(mock(BookRepository.class));
+        BookDaoImpl bookDao1 = createBookDao(mock(BookRepository.class));
         AuthorServiceImpl authorService1 = new AuthorServiceImpl(null, null);
 
         ApiResponse actualFindBookByBookIdResult = (new BookController(bookService, bookCategoryService,
@@ -214,7 +219,7 @@ class BookControllerTest {
     void testFindAllRecommendBooks() {
         log.info("BookControllerTest: testFindAllRecommendBooks() ended");
         BookTransformer bookTransformer = new BookTransformer(new BookMapperImpl());
-        BookDaoImpl bookDao = new BookDaoImpl(mock(BookRepository.class));
+        BookDaoImpl bookDao = createBookDao(mock(BookRepository.class));
         AuthorTransformer authorTransformer = new AuthorTransformer(new AuthorMapperImpl());
         AuthorServiceImpl authorService = new AuthorServiceImpl(authorTransformer,
                 new AuthorDaoImpl(mock(AuthorRepository.class)));
@@ -242,7 +247,7 @@ class BookControllerTest {
         new UserServiceImpl(userTransformer, userDao, jwtAuthenticationManager,
                 new Argon2PasswordEncoder());
         new BookTransformer(new BookMapperImpl());
-        new BookDaoImpl(mock(BookRepository.class));
+        createBookDao(mock(BookRepository.class));
         new AuthorServiceImpl(null, null);
         log.info("BookControllerTest: testFindAllRecommendBooks() ended");
     }
@@ -253,7 +258,7 @@ class BookControllerTest {
         BookRepository bookRepository = mock(BookRepository.class);
         ArrayList<Book> bookList = new ArrayList<>();
         when(bookRepository.findAllByAuthorIdAndMarkedAsDeletedFalse((Long) any())).thenReturn(bookList);
-        BookDaoImpl bookDao = new BookDaoImpl(bookRepository);
+        BookDaoImpl bookDao = createBookDao(bookRepository);
         BookTransformer bookTransformer = new BookTransformer(new BookMapperImpl());
         AuthorTransformer authorTransformer = new AuthorTransformer(new AuthorMapperImpl());
         AuthorServiceImpl authorService = new AuthorServiceImpl(authorTransformer,
@@ -283,7 +288,7 @@ class BookControllerTest {
                 new Argon2PasswordEncoder());
 
         BookTransformer bookTransformer1 = new BookTransformer(new BookMapperImpl());
-        BookDaoImpl bookDao1 = new BookDaoImpl(mock(BookRepository.class));
+        BookDaoImpl bookDao1 = createBookDao(mock(BookRepository.class));
         AuthorServiceImpl authorService1 = new AuthorServiceImpl(null, null);
 
         ApiResponse actualFindAllBooksByAuthorIdResult = (new BookController(bookService, bookCategoryService,
@@ -307,7 +312,7 @@ class BookControllerTest {
                 new BookCategoryTransformer(new BookCategoryMapperImpl()));
 
         BookTransformer bookTransformer = new BookTransformer(new BookMapperImpl());
-        BookDaoImpl bookDao = new BookDaoImpl(mock(BookRepository.class));
+        BookDaoImpl bookDao = createBookDao(mock(BookRepository.class));
         AuthorTransformer authorTransformer = new AuthorTransformer(new AuthorMapperImpl());
         AuthorServiceImpl authorService = new AuthorServiceImpl(authorTransformer,
                 new AuthorDaoImpl(mock(AuthorRepository.class)));
@@ -332,7 +337,7 @@ class BookControllerTest {
                 new Argon2PasswordEncoder());
 
         BookTransformer bookTransformer1 = new BookTransformer(new BookMapperImpl());
-        BookDaoImpl bookDao1 = new BookDaoImpl(mock(BookRepository.class));
+        BookDaoImpl bookDao1 = createBookDao(mock(BookRepository.class));
         AuthorServiceImpl authorService1 = new AuthorServiceImpl(null, null);
 
         ApiResponse actualBookCategories = (new BookController(bookService, bookCategoryService,
@@ -350,7 +355,7 @@ class BookControllerTest {
     void testFindAllBooksPaginatedAndFiltered() {
         log.info("BookControllerTest: testFindAllBooksPaginatedAndFiltered() called");
         BookTransformer bookTransformer = new BookTransformer(new BookMapperImpl());
-        BookDaoImpl bookDao = new BookDaoImpl(mock(BookRepository.class));
+        BookDaoImpl bookDao = createBookDao(mock(BookRepository.class));
         AuthorTransformer authorTransformer = new AuthorTransformer(new AuthorMapperImpl());
         AuthorServiceImpl authorService = new AuthorServiceImpl(authorTransformer,
                 new AuthorDaoImpl(mock(AuthorRepository.class)));
@@ -379,7 +384,7 @@ class BookControllerTest {
                 new Argon2PasswordEncoder());
 
         BookTransformer bookTransformer1 = new BookTransformer(new BookMapperImpl());
-        BookDaoImpl bookDao1 = new BookDaoImpl(mock(BookRepository.class));
+        BookDaoImpl bookDao1 = createBookDao(mock(BookRepository.class));
         AuthorServiceImpl authorService1 = new AuthorServiceImpl(null, null);
 
         new BookController(bookService, bookCategoryService,
@@ -392,7 +397,7 @@ class BookControllerTest {
     void testCreateBook() {
         log.info("BookControllerTest: testCreateBook() called");
         BookTransformer bookTransformer = new BookTransformer(new BookMapperImpl());
-        BookDaoImpl bookDao = new BookDaoImpl(mock(BookRepository.class));
+        BookDaoImpl bookDao = createBookDao(mock(BookRepository.class));
         AuthorTransformer authorTransformer = new AuthorTransformer(new AuthorMapperImpl());
         AuthorServiceImpl authorService = new AuthorServiceImpl(authorTransformer,
                 new AuthorDaoImpl(mock(AuthorRepository.class)));
@@ -421,7 +426,7 @@ class BookControllerTest {
                 new Argon2PasswordEncoder());
 
         BookTransformer bookTransformer1 = new BookTransformer(new BookMapperImpl());
-        BookDaoImpl bookDao1 = new BookDaoImpl(mock(BookRepository.class));
+        BookDaoImpl bookDao1 = createBookDao(mock(BookRepository.class));
         AuthorServiceImpl authorService1 = new AuthorServiceImpl(null, null);
 
         new BookController(bookService, bookCategoryService,
@@ -434,7 +439,7 @@ class BookControllerTest {
     void testCreateBooks() {
         log.info("BookControllerTest: testCreateBooks() called");
         BookTransformer bookTransformer = new BookTransformer(new BookMapperImpl());
-        BookDaoImpl bookDao = new BookDaoImpl(mock(BookRepository.class));
+        BookDaoImpl bookDao = createBookDao(mock(BookRepository.class));
         AuthorTransformer authorTransformer = new AuthorTransformer(new AuthorMapperImpl());
         AuthorServiceImpl authorService = new AuthorServiceImpl(authorTransformer,
                 new AuthorDaoImpl(mock(AuthorRepository.class)));
@@ -463,7 +468,7 @@ class BookControllerTest {
                 new Argon2PasswordEncoder());
 
         BookTransformer bookTransformer1 = new BookTransformer(new BookMapperImpl());
-        BookDaoImpl bookDao1 = new BookDaoImpl(mock(BookRepository.class));
+        BookDaoImpl bookDao1 = createBookDao(mock(BookRepository.class));
         AuthorServiceImpl authorService1 = new AuthorServiceImpl(null, null);
 
         BookController bookController = new BookController(bookService, bookCategoryService,
@@ -484,7 +489,7 @@ class BookControllerTest {
         UserBookRateDto userBookRateDto = new UserBookRateDto();
         when(userBookRateServiceImpl.rateBook(any())).thenReturn(userBookRateDto);
         BookTransformer bookTransformer = new BookTransformer(new BookMapperImpl());
-        BookDaoImpl bookDao = new BookDaoImpl(mock(BookRepository.class));
+        BookDaoImpl bookDao = createBookDao(mock(BookRepository.class));
         AuthorTransformer authorTransformer = new AuthorTransformer(new AuthorMapperImpl());
         AuthorServiceImpl authorService = new AuthorServiceImpl(authorTransformer,
                 new AuthorDaoImpl(mock(AuthorRepository.class)));
@@ -574,7 +579,7 @@ class BookControllerTest {
         book.setUsersRateCount(3L);
         BookRepository bookRepository = mock(BookRepository.class);
         when(bookRepository.findById(any())).thenReturn(Optional.of(book));
-        new BookDaoImpl(bookRepository);
+        createBookDao(bookRepository);
         BookService bookService = mock(BookService.class);
         BookDto bookDto = new BookDto();
         when(bookService.update(any(), any())).thenReturn(bookDto);
@@ -593,7 +598,7 @@ class BookControllerTest {
                 new Argon2PasswordEncoder());
 
         BookTransformer bookTransformer = new BookTransformer(new BookMapperImpl());
-        BookDaoImpl bookDao = new BookDaoImpl(mock(BookRepository.class));
+        BookDaoImpl bookDao = createBookDao(mock(BookRepository.class));
         AuthorServiceImpl authorService = new AuthorServiceImpl(null, null);
 
         BookController bookController = new BookController(bookService, bookCategoryService,

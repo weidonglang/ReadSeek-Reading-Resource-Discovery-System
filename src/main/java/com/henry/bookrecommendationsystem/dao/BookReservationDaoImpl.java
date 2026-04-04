@@ -61,4 +61,15 @@ public class BookReservationDaoImpl implements BookReservationDao {
     public Long countActiveReservationsByBookId(Long bookId) {
         return getRepository().countByBookIdAndStatusAndMarkedAsDeletedFalse(bookId, BookReservationStatus.ACTIVE);
     }
+
+    @Override
+    public List<BookReservation> findAllActiveReservations() {
+        return getRepository().findAllByStatusAndMarkedAsDeletedFalseOrderByRequestedAtAsc(BookReservationStatus.ACTIVE);
+    }
+
+    @Override
+    public List<BookReservation> findAllReservationHistory() {
+        return getRepository().findAllByStatusInAndMarkedAsDeletedFalseOrderByRequestedAtDesc(
+                Arrays.asList(BookReservationStatus.FULFILLED, BookReservationStatus.CANCELLED));
+    }
 }

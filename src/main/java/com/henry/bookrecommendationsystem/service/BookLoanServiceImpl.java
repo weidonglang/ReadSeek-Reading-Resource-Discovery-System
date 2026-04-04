@@ -160,6 +160,18 @@ public class BookLoanServiceImpl implements BookLoanService {
         return getTransformer().transformEntityToDto(getDao().findCurrentUserLoanHistory(userService.getCurrentUser().getId()));
     }
 
+    @Override
+    public List<BookLoanDto> findAllActiveLoans() {
+        log.info("BookLoanService: findAllActiveLoans() called");
+        return getTransformer().transformEntityToDto(getDao().findAllActiveLoans());
+    }
+
+    @Override
+    public List<BookLoanDto> findAllLoanHistory() {
+        log.info("BookLoanService: findAllLoanHistory() called");
+        return getTransformer().transformEntityToDto(getDao().findAllLoanHistory());
+    }
+
     private BookLoan findCurrentUserLoanEntity(Long loanId) {
         Optional<BookLoan> loan = getDao().findByIdAndUserId(loanId, userService.getCurrentUser().getId());
         if (loan.isEmpty()) {

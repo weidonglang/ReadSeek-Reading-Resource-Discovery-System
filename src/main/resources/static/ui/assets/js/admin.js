@@ -59,6 +59,75 @@ function filterItemsByQuery(items, query, selectedIds = []) {
   return items.filter(item => selected.has(String(item.id)) || String(item.name || '').toLowerCase().includes(normalizedQuery));
 }
 
+function formatDateTime(value) {
+  if (!value) return '-';
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return String(value);
+  return date.toLocaleString('zh-CN');
+}
+
+function formatUserName(user) {
+  const fullName = `${user?.firstName || ''} ${user?.lastName || ''}`.trim();
+  return fullName || user?.email || 'Unknown User';
+}
+
+function renderAdminLoanItem(loan) {
+  const book = loan.book || {};
+  const userName = formatUserName(loan.user);
+  const statusClass = loan.status === 'RETURNED' ? 'returned' : 'active';
+  const statusLabel = loan.status === 'RETURNED' ? 'Returned' : 'Borrowed';
+  return `
+    <article class="loan-card">
+      <div class="loan-cover">${BookUi.renderBookImage(book)}</div>
+      <div class="loan-body">
+        <div class="loan-head">
+          <div>
+            <h3>${escapeHtml(book.name || 'Untitled Book')}</h3>
+            <div class="muted">${escapeHtml(book.author?.name || 'Unknown Author')} | ${escapeHtml(userName)}</div>
+          </div>
+          <span class="loan-status ${statusClass}">${statusLabel}</span>
+        </div>
+        <div class="loan-meta">
+          <span class="tag">Loan #${escapeHtml(loan.id ?? '-')}</span>
+          <span class="tag">User #${escapeHtml(loan.user?.id ?? '-')}</span>
+          <span class="tag">Borrowed: ${escapeHtml(formatDateTime(loan.borrowedAt))}</span>
+          <span class="tag">Due: ${escapeHtml(formatDateTime(loan.dueDate))}</span>
+          <span class="tag">Renew Count: ${escapeHtml(loan.renewCount ?? 0)}</span>
+        </div>
+        ${loan.returnedAt ? `<div class="muted">Returned at ${escapeHtml(formatDateTime(loan.returnedAt))}</div>` : ''}
+      </div>
+    </article>`;
+}
+
+function renderAdminReservationItem(reservation) {
+  const book = reservation.book || {};
+  const userName = formatUserName(reservation.user);
+  const statusClass = reservation.status === 'FULFILLED'
+    ? 'returned'
+    : (reservation.status === 'CANCELLED' ? 'overdue' : 'pending');
+  return `
+    <article class="loan-card">
+      <div class="loan-cover">${BookUi.renderBookImage(book)}</div>
+      <div class="loan-body">
+        <div class="loan-head">
+          <div>
+            <h3>${escapeHtml(book.name || 'Untitled Book')}</h3>
+            <div class="muted">${escapeHtml(book.author?.name || 'Unknown Author')} | ${escapeHtml(userName)}</div>
+          </div>
+          <span class="loan-status ${statusClass}">${escapeHtml(reservation.status || 'ACTIVE')}</span>
+        </div>
+        <div class="loan-meta">
+          <span class="tag">Reservation #${escapeHtml(reservation.id ?? '-')}</span>
+          <span class="tag">User #${escapeHtml(reservation.user?.id ?? '-')}</span>
+          <span class="tag">Requested: ${escapeHtml(formatDateTime(reservation.requestedAt))}</span>
+          <span class="tag">Available: ${escapeHtml(`${book.availableCopies ?? 0}/${book.totalCopies ?? 0}`)}</span>
+        </div>
+        ${reservation.fulfilledAt ? `<div class="muted">Fulfilled at ${escapeHtml(formatDateTime(reservation.fulfilledAt))}</div>` : ''}
+        ${reservation.cancelledAt ? `<div class="muted">Cancelled at ${escapeHtml(formatDateTime(reservation.cancelledAt))}</div>` : ''}
+      </div>
+    </article>`;
+}
+
 document.addEventListener('DOMContentLoaded', async () => {
   if (!BookUi.requireLogin()) return;
   BookUi.injectLayout();
@@ -87,13 +156,19 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   const bookForm = document.getElementById('book-form');
   const authorForm = document.getElementById('author-form');
+  const categoryForm = document.getElementById('category-form');
   const publisherForm = document.getElementById('publisher-form');
   const tagForm = document.getElementById('tag-form');
 
   const bookList = document.getElementById('book-admin-list');
   const authorList = document.getElementById('author-admin-list');
+  const categoryList = document.getElementById('category-admin-list');
   const publisherList = document.getElementById('publisher-admin-list');
   const tagList = document.getElementById('tag-admin-list');
+  const adminActiveLoans = document.getElementById('admin-active-loans');
+  const adminLoanHistory = document.getElementById('admin-loan-history');
+  const adminActiveReservations = document.getElementById('admin-active-reservations');
+  const adminReservationHistory = document.getElementById('admin-reservation-history');
   const totalCopiesInput = document.getElementById('book-total-copies');
   const availableCopiesInput = document.getElementById('book-available-copies');
   const authorSelect = document.getElementById('book-author');
@@ -107,6 +182,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const tagSummary = document.getElementById('book-tag-summary');
   const bookListSearchInput = document.getElementById('book-list-search');
   const authorListSearchInput = document.getElementById('author-list-search');
+  const categoryListSearchInput = document.getElementById('category-list-search');
   const publisherListSearchInput = document.getElementById('publisher-list-search');
   const tagListSearchInput = document.getElementById('tag-list-search');
 
@@ -193,6 +269,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.getElementById('author-gender').value = 'MALE';
   }
 
+  function resetCategoryForm() {
+    categoryForm.reset();
+    document.getElementById('category-id').value = '';
+  }
+
   function resetPublisherForm() {
     publisherForm.reset();
     document.getElementById('publisher-id').value = '';
@@ -208,6 +289,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (!book) return;
     document.getElementById('book-id').value = book.id;
     document.getElementById('book-name').value = book.name || '';
+    document.getElementById('book-isbn').value = book.isbn || '';
     authorSearchInput.value = '';
     categorySearchInput.value = '';
     publisherSearchInput.value = '';
@@ -250,6 +332,15 @@ document.addEventListener('DOMContentLoaded', async () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
+  function editCategory(id) {
+    const category = categories.find(item => String(item.id) === String(id));
+    if (!category) return;
+    document.getElementById('category-id').value = category.id;
+    document.getElementById('category-name').value = category.name || '';
+    document.getElementById('category-description').value = category.description || '';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
   function editPublisher(id) {
     const publisher = publishers.find(item => String(item.id) === String(id));
     if (!publisher) return;
@@ -280,6 +371,12 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (!window.confirm(`Soft delete author #${id}?`)) return;
     await BookApi.apiRequest(`/api/author/${id}`, { method: 'DELETE' });
     await loadAuthors();
+  }
+
+  async function removeCategory(id) {
+    if (!window.confirm(`Soft delete category #${id}?`)) return;
+    await BookApi.apiRequest(`/api/category/${id}`, { method: 'DELETE' });
+    await loadCategories();
   }
 
   async function removePublisher(id) {
@@ -324,6 +421,7 @@ document.addEventListener('DOMContentLoaded', async () => {
               </div>
             </div>
             <div class="admin-meta">
+              <span class="tag">ISBN: ${escapeHtml(book.isbn || 'No ISBN')}</span>
               <span class="tag">Publisher: ${escapeHtml(publisherLabel)}</span>
               <span class="tag">Price: ${escapeHtml(book.price ?? '-')}</span>
               <span class="tag">Rate: ${escapeHtml(book.rate ?? '-')}</span>
@@ -391,6 +489,52 @@ document.addEventListener('DOMContentLoaded', async () => {
           resetAuthorForm();
           resetBookForm();
           BookUi.showMessage('admin-message', 'success', 'Author deleted.');
+        } catch (error) {
+          BookUi.showMessage('admin-message', 'error', error.message);
+        }
+      });
+    });
+  }
+
+  function renderCategoryList() {
+    const query = String(categoryListSearchInput.value || '').trim().toLowerCase();
+    const filteredCategories = categories.filter(category => {
+      if (!query) return true;
+      const haystack = [
+        category.name,
+        category.description
+      ].filter(Boolean).join(' ').toLowerCase();
+      return haystack.includes(query);
+    });
+
+    categoryList.innerHTML = filteredCategories.length
+      ? filteredCategories.map(category => `
+        <article class="admin-item">
+          <div class="admin-item-head">
+            <div>
+              <h3>${escapeHtml(category.name)}</h3>
+              <div class="muted">#${category.id}</div>
+            </div>
+            <div class="admin-actions">
+              <button type="button" data-edit-category="${category.id}">Edit</button>
+              <button type="button" class="danger" data-delete-category="${category.id}">Delete</button>
+            </div>
+          </div>
+          <div class="muted">${escapeHtml(truncateText(category.description || 'No description.'))}</div>
+        </article>`).join('')
+      : '<div class="muted">No categories matched the current search.</div>';
+
+    categoryList.querySelectorAll('[data-edit-category]').forEach(button => {
+      button.addEventListener('click', () => editCategory(button.dataset.editCategory));
+    });
+    categoryList.querySelectorAll('[data-delete-category]').forEach(button => {
+      button.addEventListener('click', async () => {
+        try {
+          await removeCategory(button.dataset.deleteCategory);
+          renderCategoryOptions();
+          resetCategoryForm();
+          resetBookForm();
+          BookUi.showMessage('admin-message', 'success', 'Category deleted.');
         } catch (error) {
           BookUi.showMessage('admin-message', 'error', error.message);
         }
@@ -493,9 +637,10 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   async function loadCategories() {
-    const response = await BookApi.apiRequest('/api/book/find-all-categories');
+    const response = await BookApi.apiRequest('/api/category');
     categories = Array.isArray(response?.body) ? response.body : [];
     renderCategoryOptions();
+    renderCategoryList();
   }
 
   async function loadAuthors() {
@@ -531,6 +676,38 @@ document.addEventListener('DOMContentLoaded', async () => {
     renderTagList();
   }
 
+  async function loadCirculation() {
+    adminActiveLoans.innerHTML = '<div class="muted">Loading active loans...</div>';
+    adminLoanHistory.innerHTML = '<div class="muted">Loading loan history...</div>';
+    adminActiveReservations.innerHTML = '<div class="muted">Loading active reservations...</div>';
+    adminReservationHistory.innerHTML = '<div class="muted">Loading reservation history...</div>';
+
+    const [activeLoanRes, loanHistoryRes, activeReservationRes, reservationHistoryRes] = await Promise.all([
+      BookApi.apiRequest('/api/loan/admin/active'),
+      BookApi.apiRequest('/api/loan/admin/history'),
+      BookApi.apiRequest('/api/reservation/admin/active'),
+      BookApi.apiRequest('/api/reservation/admin/history')
+    ]);
+
+    const activeLoans = Array.isArray(activeLoanRes?.body) ? activeLoanRes.body : [];
+    const loanHistory = Array.isArray(loanHistoryRes?.body) ? loanHistoryRes.body : [];
+    const activeReservations = Array.isArray(activeReservationRes?.body) ? activeReservationRes.body : [];
+    const reservationHistory = Array.isArray(reservationHistoryRes?.body) ? reservationHistoryRes.body : [];
+
+    adminActiveLoans.innerHTML = activeLoans.length
+      ? activeLoans.map(loan => renderAdminLoanItem(loan)).join('')
+      : '<div class="muted">No active loans.</div>';
+    adminLoanHistory.innerHTML = loanHistory.length
+      ? loanHistory.map(loan => renderAdminLoanItem(loan)).join('')
+      : '<div class="muted">No returned loans yet.</div>';
+    adminActiveReservations.innerHTML = activeReservations.length
+      ? activeReservations.map(reservation => renderAdminReservationItem(reservation)).join('')
+      : '<div class="muted">No active reservations.</div>';
+    adminReservationHistory.innerHTML = reservationHistory.length
+      ? reservationHistory.map(reservation => renderAdminReservationItem(reservation)).join('')
+      : '<div class="muted">No reservation history yet.</div>';
+  }
+
   bookForm.addEventListener('submit', async event => {
     event.preventDefault();
     const bookId = document.getElementById('book-id').value;
@@ -538,6 +715,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const payload = {
       id: bookId ? Number(bookId) : null,
       name: document.getElementById('book-name').value.trim(),
+      isbn: document.getElementById('book-isbn').value.trim() || null,
       author: { id: Number(authorSelect.value) },
       category: { id: Number(categorySelect.value) },
       publisher: publisherId ? { id: Number(publisherId) } : null,
@@ -562,6 +740,28 @@ document.addEventListener('DOMContentLoaded', async () => {
       BookUi.showMessage('admin-message', 'success', bookId ? 'Book updated.' : 'Book created.');
       resetBookForm();
       await loadBooks();
+    } catch (error) {
+      BookUi.showMessage('admin-message', 'error', error.message);
+    }
+  });
+
+  categoryForm.addEventListener('submit', async event => {
+    event.preventDefault();
+    const categoryId = document.getElementById('category-id').value;
+    const payload = {
+      id: categoryId ? Number(categoryId) : null,
+      name: document.getElementById('category-name').value.trim(),
+      description: document.getElementById('category-description').value.trim() || null
+    };
+
+    try {
+      await BookApi.apiRequest('/api/category', {
+        method: categoryId ? 'PUT' : 'POST',
+        body: payload
+      });
+      BookUi.showMessage('admin-message', 'success', categoryId ? 'Category updated.' : 'Category created.');
+      resetCategoryForm();
+      await loadCategories();
     } catch (error) {
       BookUi.showMessage('admin-message', 'error', error.message);
     }
@@ -652,21 +852,26 @@ document.addEventListener('DOMContentLoaded', async () => {
   tagSelect.addEventListener('change', renderTagOptions);
   bookListSearchInput.addEventListener('input', renderBookList);
   authorListSearchInput.addEventListener('input', renderAuthorList);
+  categoryListSearchInput.addEventListener('input', renderCategoryList);
   publisherListSearchInput.addEventListener('input', renderPublisherList);
   tagListSearchInput.addEventListener('input', renderTagList);
   document.getElementById('reset-author-form').addEventListener('click', resetAuthorForm);
+  document.getElementById('reset-category-form').addEventListener('click', resetCategoryForm);
   document.getElementById('reset-publisher-form').addEventListener('click', resetPublisherForm);
   document.getElementById('reset-tag-form').addEventListener('click', resetTagForm);
 
   document.getElementById('reload-books').addEventListener('click', () => loadBooks().catch(error => BookUi.showMessage('admin-message', 'error', error.message)));
   document.getElementById('reload-authors').addEventListener('click', () => loadAuthors().catch(error => BookUi.showMessage('admin-message', 'error', error.message)));
+  document.getElementById('reload-categories').addEventListener('click', () => loadCategories().catch(error => BookUi.showMessage('admin-message', 'error', error.message)));
   document.getElementById('reload-publishers').addEventListener('click', () => loadPublishers().catch(error => BookUi.showMessage('admin-message', 'error', error.message)));
   document.getElementById('reload-tags').addEventListener('click', () => loadTags().catch(error => BookUi.showMessage('admin-message', 'error', error.message)));
+  document.getElementById('reload-circulation').addEventListener('click', () => loadCirculation().catch(error => BookUi.showMessage('admin-message', 'error', error.message)));
 
   try {
-    await Promise.all([loadCategories(), loadAuthors(), loadBooks(), loadPublishers(), loadTags()]);
+    await Promise.all([loadCategories(), loadAuthors(), loadBooks(), loadPublishers(), loadTags(), loadCirculation()]);
     resetBookForm();
     resetAuthorForm();
+    resetCategoryForm();
     resetPublisherForm();
     resetTagForm();
   } catch (error) {

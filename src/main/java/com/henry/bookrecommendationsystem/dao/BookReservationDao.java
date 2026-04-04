@@ -25,4 +25,8 @@ public interface BookReservationDao extends BaseDao<BookReservation, BookReserva
     List<BookReservation> findCurrentUserReservationHistory(Long userId);
 
     Long countActiveReservationsByBookId(Long bookId);
+
+    List<BookReservation> findAllActiveReservations();
+
+    List<BookReservation> findAllReservationHistory();
 }

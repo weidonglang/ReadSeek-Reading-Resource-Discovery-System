@@ -38,6 +38,22 @@ public class BookReservationController {
                 "Current user reservation history fetched successfully.", bookReservationService.findCurrentUserReservationHistory());
     }
 
+    @GetMapping("/admin/active")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ApiResponse findAllActiveReservations() {
+        log.info("BookReservationController: findAllActiveReservations() called");
+        return new ApiResponse(true, LocalDateTime.now().toString(),
+                "All active reservations fetched successfully.", bookReservationService.findAllActiveReservations());
+    }
+
+    @GetMapping("/admin/history")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ApiResponse findAllReservationHistory() {
+        log.info("BookReservationController: findAllReservationHistory() called");
+        return new ApiResponse(true, LocalDateTime.now().toString(),
+                "All reservation history fetched successfully.", bookReservationService.findAllReservationHistory());
+    }
+
     @GetMapping("/book/{bookId}/summary")
     @PreAuthorize("isAuthenticated()")
     public ApiResponse findBookReservationSummary(@PathVariable Long bookId) {

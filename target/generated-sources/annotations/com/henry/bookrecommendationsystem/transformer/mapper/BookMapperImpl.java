@@ -17,8 +17,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2026-04-02T15:46:11+0800",
-    comments = "version: 1.5.3.Final, compiler: javac, environment: Java 11.0.18 (Oracle Corporation)"
+    date = "2026-04-04T21:54:48+0800",
+    comments = "version: 1.5.3.Final, compiler: javac, environment: Java 11.0.16 (JetBrains s.r.o.)"
 )
 @Component
 public class BookMapperImpl implements BookMapper {
@@ -35,6 +35,7 @@ public class BookMapperImpl implements BookMapper {
         book.setId( dto.getId() );
         book.setAuthor( authorDtoToAuthor( dto.getAuthor() ) );
         book.setName( dto.getName() );
+        book.setIsbn( dto.getIsbn() );
         book.setCategory( bookCategoryDtoToBookCategory( dto.getCategory() ) );
         book.setPublisher( publisherDtoToPublisher( dto.getPublisher() ) );
         book.setRate( dto.getRate() );
@@ -66,6 +67,7 @@ public class BookMapperImpl implements BookMapper {
         bookDto.setId( entity.getId() );
         bookDto.setAuthor( authorToAuthorDto( entity.getAuthor() ) );
         bookDto.setName( entity.getName() );
+        bookDto.setIsbn( entity.getIsbn() );
         bookDto.setRate( entity.getRate() );
         bookDto.setUsersRateCount( entity.getUsersRateCount() );
         bookDto.setCategory( bookCategoryToBookCategoryDto( entity.getCategory() ) );
@@ -101,6 +103,7 @@ public class BookMapperImpl implements BookMapper {
             entity.setAuthor( null );
         }
         entity.setName( dto.getName() );
+        entity.setIsbn( dto.getIsbn() );
         if ( dto.getCategory() != null ) {
             if ( entity.getCategory() == null ) {
                 entity.setCategory( new BookCategory() );

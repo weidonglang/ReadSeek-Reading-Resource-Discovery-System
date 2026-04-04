@@ -54,4 +54,14 @@ public class BookLoanDaoImpl implements BookLoanDao {
     public List<BookLoan> findCurrentUserLoanHistory(Long userId) {
         return getRepository().findCurrentUserLoanHistory(userId, BookLoanStatus.RETURNED);
     }
+
+    @Override
+    public List<BookLoan> findAllActiveLoans() {
+        return getRepository().findAllLoansByStatusOrderByDueDateAsc(BookLoanStatus.BORROWED);
+    }
+
+    @Override
+    public List<BookLoan> findAllLoanHistory() {
+        return getRepository().findAllLoanHistoryByStatusOrderByReturnedAtDesc(BookLoanStatus.RETURNED);
+    }
 }

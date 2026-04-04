@@ -125,6 +125,7 @@
     const id = book?.id ?? '';
     const authorId = book?.author?.id ?? '';
     const categoryName = book?.category?.name || 'Unknown';
+    const isbnLabel = book?.isbn ? `<span class="tag">ISBN: ${escapeHtml(book.isbn)}</span>` : '';
     const rate = book?.rate ?? '-';
     const totalCopies = book?.totalCopies ?? '-';
     const availableCopies = book?.availableCopies ?? '-';
@@ -139,6 +140,7 @@
           <div class="book-meta">Author: ${book?.author?.name || 'Unknown'}</div>
         </div>
         <div class="tags">
+          ${isbnLabel}
           <span class="tag">Category: ${categoryName}</span>
           <span class="tag">Rate: ${rate}</span>
           <span class="tag">Pages: ${book?.pagesNumber ?? '-'}</span>

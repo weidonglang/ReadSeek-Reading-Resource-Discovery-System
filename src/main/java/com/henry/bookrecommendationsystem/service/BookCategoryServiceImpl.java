@@ -1,9 +1,15 @@
 package com.henry.bookrecommendationsystem.service;
 
 import com.henry.bookrecommendationsystem.dao.BookCategoryDao;
+import com.henry.bookrecommendationsystem.entity.BookCategory;
+import com.henry.bookrecommendationsystem.repository.BookRepository;
 import com.henry.bookrecommendationsystem.transformer.BookCategoryTransformer;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.persistence.EntityExistsException;
+import java.util.Optional;
 
 /**
  * @author Henry Azer
@@ -14,10 +20,20 @@ import org.springframework.stereotype.Service;
 public class BookCategoryServiceImpl implements BookCategoryService {
     private final BookCategoryDao bookCategoryDao;
     private final BookCategoryTransformer bookCategoryTransformer;
+    private final BookRepository bookRepository;
 
-    public BookCategoryServiceImpl(BookCategoryDao bookCategoryDao, BookCategoryTransformer bookCategoryTransformer) {
+    @Autowired
+    public BookCategoryServiceImpl(BookCategoryDao bookCategoryDao,
+                                   BookCategoryTransformer bookCategoryTransformer,
+                                   BookRepository bookRepository) {
         this.bookCategoryDao = bookCategoryDao;
         this.bookCategoryTransformer = bookCategoryTransformer;
+        this.bookRepository = bookRepository;
+    }
+
+    public BookCategoryServiceImpl(BookCategoryDao bookCategoryDao,
+                                   BookCategoryTransformer bookCategoryTransformer) {
+        this(bookCategoryDao, bookCategoryTransformer, null);
     }
 
     @Override
@@ -28,5 +44,21 @@ public class BookCategoryServiceImpl implements BookCategoryService {
     @Override
     public BookCategoryTransformer getTransformer() {
         return bookCategoryTransformer;
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        log.info("BookCategoryService: deleteById() called");
+        Optional<BookCategory> optionalCategory = getDao().findById(id);
+        if (optionalCategory.isEmpty()) {
+            throw new EntityExistsException("Book category not found for id: " + id);
+        }
+        if (bookRepository != null && Boolean.TRUE.equals(bookRepository.existsByCategoryIdAndMarkedAsDeletedFalse(id))) {
+            throw new EntityExistsException("Book category has active books and cannot be deleted");
+        }
+
+        BookCategory bookCategory = optionalCategory.get();
+        bookCategory.setMarkedAsDeleted(true);
+        getDao().update(bookCategory);
     }
 }

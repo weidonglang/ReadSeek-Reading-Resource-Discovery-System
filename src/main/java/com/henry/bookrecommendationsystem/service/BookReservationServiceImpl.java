@@ -136,6 +136,18 @@ public class BookReservationServiceImpl implements BookReservationService {
         );
     }
 
+    @Override
+    public List<BookReservationDto> findAllActiveReservations() {
+        log.info("BookReservationService: findAllActiveReservations() called");
+        return getTransformer().transformEntityToDto(getDao().findAllActiveReservations());
+    }
+
+    @Override
+    public List<BookReservationDto> findAllReservationHistory() {
+        log.info("BookReservationService: findAllReservationHistory() called");
+        return getTransformer().transformEntityToDto(getDao().findAllReservationHistory());
+    }
+
     private Book findBookEntity(Long bookId) {
         return bookDao.findById(bookId).orElseThrow(() -> new EntityNotFoundException("Book not found for id: " + bookId));
     }

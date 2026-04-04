@@ -142,6 +142,7 @@ com\henry\bookrecommendationsystem\entity\Author.class
 com\henry\bookrecommendationsystem\dto\base\pagination\Page.class
 com\henry\bookrecommendationsystem\security\jwt\JWTRequestFilter.class
 com\henry\bookrecommendationsystem\transformer\mapper\UserMapperImpl.class
+com\henry\bookrecommendationsystem\controller\BookCategoryController.class
 com\henry\bookrecommendationsystem\entity\UserBookCategory.class
 com\henry\bookrecommendationsystem\dao\PublisherDao.class
 com\henry\bookrecommendationsystem\security\MethodSecurityConfigurations.class

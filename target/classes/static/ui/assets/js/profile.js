@@ -8,8 +8,8 @@ document.addEventListener('DOMContentLoaded', async () => {
       BookApi.apiRequest('/api/user/find-reading-info').catch(() => ({ body: null }))
     ]);
 
-    document.getElementById('profile-id').textContent = user?.id ?? '—';
-    document.getElementById('profile-email-view').textContent = user?.email ?? '—';
+    document.getElementById('profile-id').textContent = user?.id ?? '-';
+    document.getElementById('profile-email-view').textContent = user?.email ?? '-';
 
     document.getElementById('profile-id-input').value = user?.id ?? '';
     document.getElementById('firstName').value = user?.firstName ?? '';
@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   }
 
-  document.getElementById('profile-form').addEventListener('submit', async (event) => {
+  document.getElementById('profile-form').addEventListener('submit', async event => {
     event.preventDefault();
     const payload = {
       id: Number(document.getElementById('profile-id-input').value),
@@ -56,28 +56,35 @@ document.addEventListener('DOMContentLoaded', async () => {
       maritalStatus: document.getElementById('maritalStatus').value || null,
       imageUrl: document.getElementById('imageUrl').value.trim()
     };
+
     try {
       await BookApi.apiRequest('/api/user', { method: 'PUT', body: payload });
       await BookApi.fetchCurrentUser();
       BookUi.showMessage('profile-message', 'success', '个人资料更新成功。');
     } catch (error) {
       if (/anonymousUser|401|403|not exists/i.test(error.message)) {
-      BookApi.clearSession();
-      BookUi.showMessage('profile-message', 'error', '登录状态已失效，请重新登录。');
-      setTimeout(() => BookUi.requireLogin(), 600);
-    } else {
-      BookUi.showMessage('profile-message', 'error', error.message);
-    }
+        BookApi.clearSession();
+        BookUi.showMessage('profile-message', 'error', '登录状态已失效，请重新登录。');
+        setTimeout(() => BookUi.requireLogin(), 600);
+      } else {
+        BookUi.showMessage('profile-message', 'error', error.message);
+      }
     }
   });
 
-  document.getElementById('reading-form').addEventListener('submit', async (event) => {
+  document.getElementById('reading-form').addEventListener('submit', async event => {
     event.preventDefault();
-    const ids = document.getElementById('categoryIds').value.split(',').map(v => v.trim()).filter(Boolean).map(Number);
+    const ids = document.getElementById('categoryIds').value
+      .split(',')
+      .map(value => value.trim())
+      .filter(Boolean)
+      .map(Number)
+      .filter(value => Number.isFinite(value) && value > 0);
     const payload = {
       readingLevel: document.getElementById('readingLevel').value,
       userBookCategories: ids.map(id => ({ category: { id } }))
     };
+
     try {
       await BookApi.apiRequest('/api/user/reading-info', { method: 'POST', body: payload });
       BookUi.showMessage('reading-message', 'success', '阅读偏好保存成功。');

@@ -13,7 +13,7 @@
       <section class="page-header">
         <div>
           <h1 class="page-title">Admin Console</h1>
-          <p class="page-subtitle">Manage books, authors, publishers, and tags with admin-only actions.</p>
+          <p class="page-subtitle">Manage books, authors, categories, publishers, tags, loans, and reservations with admin-only actions.</p>
         </div>
       </section>
 
@@ -31,6 +31,10 @@
             <div class="field">
               <label class="label" for="book-name">Name</label>
               <input id="book-name" required />
+            </div>
+            <div class="field">
+              <label class="label" for="book-isbn">ISBN</label>
+              <input id="book-isbn" placeholder="Optional ISBN-10 / ISBN-13" />
             </div>
             <div class="field">
               <label class="label" for="book-author">Author</label>
@@ -169,6 +173,30 @@
         <article class="card">
           <div class="section-head">
             <div>
+              <h2>Category Editor</h2>
+              <p class="muted">Maintain book categories used by catalog and search pages.</p>
+            </div>
+            <button id="reset-category-form" type="button">New Category</button>
+          </div>
+          <form id="category-form" class="form-grid">
+            <input id="category-id" type="hidden" />
+            <div class="field">
+              <label class="label" for="category-name">Name</label>
+              <input id="category-name" required />
+            </div>
+            <div class="field full">
+              <label class="label" for="category-description">Description</label>
+              <textarea id="category-description"></textarea>
+            </div>
+            <div class="form-actions field full">
+              <button class="primary" type="submit">Save Category</button>
+            </div>
+          </form>
+        </article>
+
+        <article class="card">
+          <div class="section-head">
+            <div>
               <h2>Publisher Editor</h2>
               <p class="muted">Maintain the publisher catalog.</p>
             </div>
@@ -259,6 +287,21 @@
         <article class="card">
           <div class="section-head">
             <div>
+              <h2>Categories</h2>
+              <p class="muted">Delete is blocked while active books still reference a category.</p>
+            </div>
+            <button id="reload-categories" type="button">Reload</button>
+          </div>
+          <div class="field" style="margin-bottom:12px;">
+            <label class="label" for="category-list-search">Find Category To Edit</label>
+            <input id="category-list-search" type="search" placeholder="Search by category name or description" />
+          </div>
+          <div id="category-admin-list" class="admin-list"></div>
+        </article>
+
+        <article class="card">
+          <div class="section-head">
+            <div>
               <h2>Publishers</h2>
               <p class="muted">Delete is blocked while active books still reference a publisher.</p>
             </div>
@@ -284,6 +327,51 @@
             <input id="tag-list-search" type="search" placeholder="Search by tag name or description" />
           </div>
           <div id="tag-admin-list" class="admin-list"></div>
+        </article>
+      </section>
+
+      <section class="admin-grid">
+        <article class="card">
+          <div class="section-head">
+            <div>
+              <h2>Active Loans</h2>
+              <p class="muted">All currently borrowed books, ordered by due date.</p>
+            </div>
+            <button id="reload-circulation" type="button">Reload Circulation</button>
+          </div>
+          <div id="admin-active-loans" class="loan-list"></div>
+        </article>
+
+        <article class="card">
+          <div class="section-head">
+            <div>
+              <h2>Loan History</h2>
+              <p class="muted">Returned loans across all users.</p>
+            </div>
+          </div>
+          <div id="admin-loan-history" class="loan-list"></div>
+        </article>
+      </section>
+
+      <section class="admin-grid">
+        <article class="card">
+          <div class="section-head">
+            <div>
+              <h2>Active Reservations</h2>
+              <p class="muted">All active reservation requests ordered by queue time.</p>
+            </div>
+          </div>
+          <div id="admin-active-reservations" class="loan-list"></div>
+        </article>
+
+        <article class="card">
+          <div class="section-head">
+            <div>
+              <h2>Reservation History</h2>
+              <p class="muted">Fulfilled and cancelled reservations across all users.</p>
+            </div>
+          </div>
+          <div id="admin-reservation-history" class="loan-list"></div>
         </article>
       </section>
     </main>

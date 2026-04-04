@@ -22,4 +22,8 @@ public interface BookLoanService extends BaseService<BookLoan, BookLoanDto, Book
     List<BookLoanDto> findCurrentUserActiveLoans();
 
     List<BookLoanDto> findCurrentUserLoanHistory();
+
+    List<BookLoanDto> findAllActiveLoans();
+
+    List<BookLoanDto> findAllLoanHistory();
 }

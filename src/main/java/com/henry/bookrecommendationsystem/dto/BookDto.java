@@ -21,6 +21,7 @@ public class BookDto extends BaseDto {
     private Long id;
     private AuthorDto author;
     private String name;
+    private String isbn;
     private Double rate;
     private Long usersRateCount;
     private BookCategoryDto category;

@@ -21,8 +21,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2026-04-02T15:46:11+0800",
-    comments = "version: 1.5.3.Final, compiler: javac, environment: Java 11.0.18 (Oracle Corporation)"
+    date = "2026-04-04T21:54:48+0800",
+    comments = "version: 1.5.3.Final, compiler: javac, environment: Java 11.0.16 (JetBrains s.r.o.)"
 )
 @Component
 public class UserBookRateMapperImpl implements UserBookRateMapper {
@@ -212,6 +212,7 @@ public class UserBookRateMapperImpl implements UserBookRateMapper {
         book.setId( bookDto.getId() );
         book.setAuthor( authorDtoToAuthor( bookDto.getAuthor() ) );
         book.setName( bookDto.getName() );
+        book.setIsbn( bookDto.getIsbn() );
         book.setCategory( bookCategoryDtoToBookCategory( bookDto.getCategory() ) );
         book.setPublisher( publisherDtoToPublisher( bookDto.getPublisher() ) );
         book.setRate( bookDto.getRate() );
@@ -346,6 +347,7 @@ public class UserBookRateMapperImpl implements UserBookRateMapper {
         bookDto.setId( book.getId() );
         bookDto.setAuthor( authorToAuthorDto( book.getAuthor() ) );
         bookDto.setName( book.getName() );
+        bookDto.setIsbn( book.getIsbn() );
         bookDto.setRate( book.getRate() );
         bookDto.setUsersRateCount( book.getUsersRateCount() );
         bookDto.setCategory( bookCategoryToBookCategoryDto( book.getCategory() ) );
@@ -442,6 +444,7 @@ public class UserBookRateMapperImpl implements UserBookRateMapper {
             mappingTarget.setAuthor( null );
         }
         mappingTarget.setName( bookDto.getName() );
+        mappingTarget.setIsbn( bookDto.getIsbn() );
         if ( bookDto.getCategory() != null ) {
             if ( mappingTarget.getCategory() == null ) {
                 mappingTarget.setCategory( new BookCategory() );

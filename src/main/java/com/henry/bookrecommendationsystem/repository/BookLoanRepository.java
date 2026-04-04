@@ -29,4 +29,10 @@ public interface BookLoanRepository extends JpaRepository<BookLoan, Long> {
 
     @Query("SELECT bl FROM BookLoan bl WHERE bl.user.id = :userId AND bl.status = :status AND bl.markedAsDeleted = false ORDER BY bl.returnedAt DESC, bl.borrowedAt DESC")
     List<BookLoan> findCurrentUserLoanHistory(@Param("userId") Long userId, @Param("status") BookLoanStatus status);
+
+    @Query("SELECT bl FROM BookLoan bl WHERE bl.status = :status AND bl.markedAsDeleted = false ORDER BY bl.dueDate ASC, bl.borrowedAt DESC")
+    List<BookLoan> findAllLoansByStatusOrderByDueDateAsc(@Param("status") BookLoanStatus status);
+
+    @Query("SELECT bl FROM BookLoan bl WHERE bl.status = :status AND bl.markedAsDeleted = false ORDER BY bl.returnedAt DESC, bl.borrowedAt DESC")
+    List<BookLoan> findAllLoanHistoryByStatusOrderByReturnedAtDesc(@Param("status") BookLoanStatus status);
 }
