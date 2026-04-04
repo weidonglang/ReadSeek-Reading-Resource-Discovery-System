@@ -8,11 +8,6 @@ import com.henry.bookrecommendationsystem.service.base.BaseService;
 import com.henry.bookrecommendationsystem.transformer.BookReservationTransformer;
 
 import java.util.List;
-
-/**
- * @author Codex
- * @since 02/04/2026
- */
 public interface BookReservationService extends BaseService<BookReservation, BookReservationDto, BookReservationDao, BookReservationTransformer> {
     BookReservationDto reserveBook(Long bookId);
 

@@ -8,11 +8,6 @@ import javax.persistence.*;
 import java.util.List;
 
 import static javax.persistence.CascadeType.*;
-
-/**
- * @author Henry Azer
- * @since 10/11/2022
- */
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter

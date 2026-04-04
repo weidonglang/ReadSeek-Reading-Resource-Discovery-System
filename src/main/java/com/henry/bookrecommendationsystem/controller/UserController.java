@@ -12,11 +12,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
-
-/**
- * @author Henry Azer
- * @since 05/11/2022
- */
 @Slf4j
 @CrossOrigin
 @RestController

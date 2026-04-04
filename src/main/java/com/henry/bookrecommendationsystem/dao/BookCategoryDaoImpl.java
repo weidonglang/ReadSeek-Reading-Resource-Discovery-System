@@ -5,11 +5,6 @@ import com.henry.bookrecommendationsystem.repository.BookCategoryRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-
-/**
- * @author Henry Azer
- * @since 10/11/2022
- */
 @Component
 public class BookCategoryDaoImpl implements BookCategoryDao {
     private final BookCategoryRepository bookCategoryRepository;

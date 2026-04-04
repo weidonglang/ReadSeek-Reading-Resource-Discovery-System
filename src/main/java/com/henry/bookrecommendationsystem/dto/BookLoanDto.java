@@ -8,11 +8,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
-
-/**
- * @author Codex
- * @since 02/04/2026
- */
 @Getter
 @Setter
 @NoArgsConstructor

@@ -319,6 +319,25 @@ textarea { min-height: 120px; resize: vertical; }
   flex-wrap: wrap;
   margin-top: auto;
 }
+.book-hit-meta {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: #f8fafc;
+  border: 1px dashed #cbd5e1;
+}
+.source-chip {
+  background: #dbeafe;
+  border-color: #bfdbfe;
+  color: #1d4ed8;
+}
+.reason-chip {
+  background: #ecfdf5;
+  border-color: #a7f3d0;
+  color: #047857;
+}
 .section-head {
   display: flex;
   align-items: flex-start;

@@ -8,6 +8,9 @@ function escapeHtml(value) {
 }
 
 let allAuthors = [];
+let allCategories = [];
+let allPublishers = [];
+let allTags = [];
 
 function getCheckedValues(name) {
   return Array.from(document.querySelectorAll(`input[name="${name}"]:checked`))
@@ -43,7 +46,7 @@ function buildBookFilterPayload(pageNumber = 1) {
       {
         fieldName: sortField,
         direction: document.getElementById('sortDirection').value || 'ASC',
-        isNumber: ['price', 'pagesNumber', 'readingDuration', 'rate', 'id', 'availableCopies'].includes(sortField)
+        isNumber: ['price', 'pagesNumber', 'readingDuration', 'rate', 'id', 'availableCopies', 'usersRateCount'].includes(sortField)
       }
     ],
     criteria: hasCriteria ? criteria : null,
@@ -62,7 +65,7 @@ function renderCheckboxList(targetId, name, items) {
   target.innerHTML = items.map(item => `
     <label class="filter-option">
       <input type="checkbox" name="${name}" value="${item.id}">
-      <span>${escapeHtml(item.name)}</span>
+      <span>${escapeHtml(name === 'category' ? BookUi.localizeCategoryName(item.name) : item.name)}</span>
     </label>`).join('');
 }
 
@@ -86,12 +89,12 @@ function renderAuthorPicker() {
         <input type="checkbox" name="author" value="${author.id}" ${selectedIds.has(String(author.id)) ? 'checked' : ''}>
         <span>${escapeHtml(author.name)}</span>
       </label>`).join('')
-    : '<div class="muted">No authors matched the current search.</div>';
+    : '<div class="muted">当前搜索条件下没有匹配作者。</div>';
 
   const selectedAuthors = allAuthors.filter(author => selectedIds.has(String(author.id)));
   summary.innerHTML = selectedAuthors.length
     ? selectedAuthors.map(author => `<span class="tag">${escapeHtml(author.name)}</span>`).join('')
-    : '<span class="muted">No authors selected.</span>';
+    : '<span class="muted">暂未选择作者。</span>';
 }
 
 function setAuthorSelection(authorIds) {
@@ -115,32 +118,96 @@ function applyQueryDefaults(authors) {
     const availableIds = new Set(authors.map(author => String(author.id)));
     if (availableIds.has(String(authorId))) {
       setAuthorSelection([authorId]);
-      BookUi.showMessage('books-message', 'info', 'Author filter was preselected from the previous page.');
+      BookUi.showMessage('books-message', 'info', '已根据上一页操作自动选中作者筛选条件。');
     }
   }
 }
 
+function includesIgnoreCase(value, keyword) {
+  return String(value || '').toLowerCase().includes(String(keyword || '').toLowerCase());
+}
+
+function buildSearchHitReason(book, payload) {
+  const criteria = payload.criteria || {};
+  const reasons = [];
+  const keyword = String(criteria.name || '').trim();
+
+  if (keyword) {
+    if (includesIgnoreCase(book.name, keyword)) {
+      reasons.push(`书名命中关键词“${keyword}”`);
+    } else if (includesIgnoreCase(book.isbn, keyword)) {
+      reasons.push(`ISBN 命中关键词“${keyword}”`);
+    } else if (includesIgnoreCase(book.author?.name, keyword)) {
+      reasons.push(`作者命中关键词“${keyword}”`);
+    } else if (includesIgnoreCase(book.category?.name, keyword)) {
+      reasons.push(`分类命中关键词“${keyword}”`);
+    } else if (includesIgnoreCase(book.publisher?.name, keyword)) {
+      reasons.push(`出版社命中关键词“${keyword}”`);
+    } else if ((book.tags || []).some(tag => includesIgnoreCase(tag?.name, keyword))) {
+      reasons.push(`标签命中关键词“${keyword}”`);
+    }
+  }
+
+  if (criteria.categories && book.category?.id && criteria.categories.includes(book.category.id)) {
+    reasons.push(`符合分类筛选：${BookUi.localizeCategoryName(book.category.name) || book.category.id}`);
+  }
+  if (criteria.authors && book.author?.id && criteria.authors.includes(book.author.id)) {
+    reasons.push(`符合作者筛选：${book.author.name || book.author.id}`);
+  }
+  if (criteria.publishers && book.publisher?.id && criteria.publishers.includes(book.publisher.id)) {
+    reasons.push(`符合出版社筛选：${book.publisher.name || book.publisher.id}`);
+  }
+  if (criteria.tags && Array.isArray(book.tags)) {
+    const matchedTagNames = book.tags
+      .filter(tag => tag?.id && criteria.tags.includes(tag.id))
+      .map(tag => tag.name)
+      .filter(Boolean);
+    if (matchedTagNames.length) {
+      reasons.push(`符合标签筛选：${matchedTagNames.join(', ')}`);
+    }
+  }
+
+  const sortField = payload.sortingByList?.[0]?.fieldName || 'id';
+  if (sortField === 'usersRateCount') {
+    reasons.push(`当前按热度排序，评分人数 ${book.usersRateCount ?? 0}`);
+  } else if (sortField === 'publishDate') {
+    reasons.push(`当前按出版时间排序，出版日期 ${BookApi.toDisplayDate(book.publishDate)}`);
+  } else if (sortField === 'rate') {
+    reasons.push(`当前按评分排序，平均分 ${book.rate ?? '-'}`);
+  }
+
+  return reasons.length ? reasons.join('；') : '来自基础数据库检索结果，可点击进入详情页。';
+}
+
 async function loadBooks(pageNumber = 1) {
   const target = document.getElementById('book-results');
-  target.innerHTML = '<div class="card muted">Loading books...</div>';
+  target.innerHTML = '<div class="card muted">正在加载图书...</div>';
+  const payload = buildBookFilterPayload(pageNumber);
 
   try {
     const response = await BookApi.apiRequest('/api/book/find-all-paginated-filtered', {
       method: 'POST',
-      body: buildBookFilterPayload(pageNumber)
+      body: payload
     });
     const pagination = BookApi.parsePaginationResult(response);
     const currentPage = Math.max(1, Number(pagination.pageNumber || pageNumber));
+    const searchKeyword = payload.criteria?.name || '';
 
     target.innerHTML = pagination.list.length
-      ? pagination.list.map(book => BookUi.renderBookCard(book)).join('')
-      : '<div class="card muted">No books matched the current filters.</div>';
+      ? pagination.list.map(book => BookUi.renderBookCard(book, {
+        source: 'search:books-page',
+        sourceLabel: 'PostgreSQL 模糊检索',
+        reason: buildSearchHitReason(book, payload),
+        actionType: 'BOOK_DETAIL_CLICK',
+        searchKeyword
+      })).join('')
+      : '<div class="card muted">当前筛选条件下没有匹配图书。</div>';
 
     document.getElementById('page-summary').textContent =
-      `Page ${currentPage} / ${pagination.totalNumberOfPages || 1}, total ${pagination.totalNumberOfElements} books`;
+      `第 ${currentPage} / ${pagination.totalNumberOfPages || 1} 页，共 ${pagination.totalNumberOfElements} 本图书`;
     document.getElementById('currentPage').value = String(currentPage);
   } catch (error) {
-    target.innerHTML = `<div class="card">Failed to load books: ${escapeHtml(error.message)}</div>`;
+    target.innerHTML = `<div class="card">图书加载失败：${escapeHtml(error.message)}</div>`;
   }
 }
 
@@ -182,18 +249,18 @@ document.addEventListener('DOMContentLoaded', async () => {
       })
     ]);
 
-    const categories = Array.isArray(categoryRes?.body) ? categoryRes.body : [];
-    const tags = Array.isArray(tagRes?.body) ? tagRes.body : [];
-    const publishers = Array.isArray(publisherRes?.body) ? publisherRes.body : [];
+    allCategories = Array.isArray(categoryRes?.body) ? categoryRes.body : [];
+    allTags = Array.isArray(tagRes?.body) ? tagRes.body : [];
+    allPublishers = Array.isArray(publisherRes?.body) ? publisherRes.body : [];
     allAuthors = BookApi.parsePaginationResult(authorRes).list;
 
-    renderCheckboxList('category-filters', 'category', categories);
-    renderCheckboxList('tag-filters', 'tag', tags);
-    renderSelectOptions('publisher-filter', publishers, 'No publishers available');
+    renderCheckboxList('category-filters', 'category', allCategories);
+    renderCheckboxList('tag-filters', 'tag', allTags);
+    renderSelectOptions('publisher-filter', allPublishers, '暂无可选出版社');
     renderAuthorPicker();
     applyQueryDefaults(allAuthors);
   } catch (error) {
-    BookUi.showMessage('books-message', 'warning', `Failed to load search filters: ${error.message}`);
+    BookUi.showMessage('books-message', 'warning', `筛选条件加载失败：${error.message}`);
   }
 
   document.getElementById('author-search').addEventListener('input', () => {

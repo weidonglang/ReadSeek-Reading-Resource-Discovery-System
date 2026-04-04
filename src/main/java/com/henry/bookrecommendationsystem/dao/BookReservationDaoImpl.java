@@ -8,11 +8,6 @@ import org.springframework.stereotype.Component;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-
-/**
- * @author Codex
- * @since 02/04/2026
- */
 @Component
 public class BookReservationDaoImpl implements BookReservationDao {
     private final BookReservationRepository bookReservationRepository;

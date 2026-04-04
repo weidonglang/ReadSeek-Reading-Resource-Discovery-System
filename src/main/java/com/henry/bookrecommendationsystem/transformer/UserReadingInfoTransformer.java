@@ -6,11 +6,6 @@ import com.henry.bookrecommendationsystem.transformer.base.BaseTransformer;
 import com.henry.bookrecommendationsystem.transformer.mapper.UserReadingInfoMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
-
-/**
- * @author Henry Azer
- * @since 10/11/2022
- */
 @Component
 @AllArgsConstructor
 public class UserReadingInfoTransformer implements BaseTransformer<UserReadingInfo, UserReadingInfoDto, UserReadingInfoMapper> {

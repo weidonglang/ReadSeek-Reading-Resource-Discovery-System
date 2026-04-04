@@ -6,11 +6,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
-
-/**
- * @author Codex
- * @since 02/04/2026
- */
 @Getter
 @Setter
 @NoArgsConstructor

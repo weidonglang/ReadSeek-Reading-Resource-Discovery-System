@@ -10,11 +10,6 @@ import org.springframework.stereotype.Component;
 
 import java.util.Calendar;
 import java.util.Date;
-
-/**
- * @author Henry Azer
- * @since 04/11/2022
- */
 @Component
 public class JWTAuthenticationUtil {
 

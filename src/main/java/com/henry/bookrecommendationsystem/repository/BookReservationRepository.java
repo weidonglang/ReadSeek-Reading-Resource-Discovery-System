@@ -7,11 +7,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
-
-/**
- * @author Codex
- * @since 02/04/2026
- */
 @Repository
 public interface BookReservationRepository extends JpaRepository<BookReservation, Long> {
     Optional<BookReservation> findByIdAndUserIdAndMarkedAsDeletedFalse(Long id, Long userId);

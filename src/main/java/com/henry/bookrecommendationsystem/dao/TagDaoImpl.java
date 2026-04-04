@@ -5,11 +5,6 @@ import com.henry.bookrecommendationsystem.repository.TagRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-
-/**
- * @author Codex
- * @since 01/04/2026
- */
 @Component
 public class TagDaoImpl implements TagDao {
     private final TagRepository tagRepository;

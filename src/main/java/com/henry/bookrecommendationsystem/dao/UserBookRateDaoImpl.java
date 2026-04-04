@@ -6,11 +6,6 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
-
-/**
- * @author Henry Azer
- * @since 08/11/2022
- */
 @Component
 public class UserBookRateDaoImpl implements UserBookRateDao {
     private final UserBookRatingRepository userBookRatingRepository;

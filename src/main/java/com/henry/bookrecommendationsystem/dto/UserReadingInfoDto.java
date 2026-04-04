@@ -8,11 +8,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
-
-/**
- * @author Henry Azer
- * @since 10/11/2022
- */
 @Getter
 @Setter
 @NoArgsConstructor

@@ -19,11 +19,6 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
-
-/**
- * @author Henry Azer
- * @since 11/11/2022
- */
 @Slf4j
 class UserControllerTest {
 

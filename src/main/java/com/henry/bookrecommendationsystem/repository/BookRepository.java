@@ -10,11 +10,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Set;
-
-/**
- * @author Henry Azer
- * @since 07/11/2022
- */
 @Repository
 public interface BookRepository extends JpaRepository<Book, Long> {
     List<Book> findAllByAuthorIdAndMarkedAsDeletedFalse(Long authorId);

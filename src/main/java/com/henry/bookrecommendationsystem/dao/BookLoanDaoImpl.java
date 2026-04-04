@@ -7,11 +7,6 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
-
-/**
- * @author Codex
- * @since 02/04/2026
- */
 @Component
 public class BookLoanDaoImpl implements BookLoanDao {
     private final BookLoanRepository bookLoanRepository;

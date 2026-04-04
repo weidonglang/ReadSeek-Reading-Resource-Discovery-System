@@ -18,11 +18,6 @@ import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
-
-/**
- * @author Codex
- * @since 02/04/2026
- */
 @Slf4j
 @Service
 public class BookReservationServiceImpl implements BookReservationService {

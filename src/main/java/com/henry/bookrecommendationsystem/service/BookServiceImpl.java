@@ -13,6 +13,7 @@ import com.henry.bookrecommendationsystem.dto.base.response.PaginationResponse;
 import com.henry.bookrecommendationsystem.entity.Book;
 import com.henry.bookrecommendationsystem.entity.BookLoan;
 import com.henry.bookrecommendationsystem.entity.UserBookRate;
+import com.henry.bookrecommendationsystem.recommender.CollaborativeFilteringRecommender;
 import com.henry.bookrecommendationsystem.transformer.BookTransformer;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,12 +31,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.Function;
 import java.util.stream.Collectors;
-
-/**
- * @author Henry Azer
- * @since 07/11/2022
- */
 @Slf4j
 @Service
 
@@ -43,6 +40,16 @@ public class BookServiceImpl implements BookService {
     private static final int MIN_OF_RECOMMENDED_BOOKS = 14;
     private static final int DEFAULT_RECOMMENDATION_LIMIT = 8;
     private static final int DETAIL_RECOMMENDATION_LIMIT = 6;
+    private static final Map<String, String> CATEGORY_NAME_MAP = Map.of(
+            "Science Fiction", "科幻",
+            "Horror", "恐怖",
+            "Classic", "经典",
+            "Action and Adventure", "动作冒险",
+            "Romantic", "爱情",
+            "Kids", "儿童",
+            "History", "历史",
+            "Sport", "体育"
+    );
     private final BookTransformer bookTransformer;
     private final BookDao bookDao;
     private final AuthorService authorService;
@@ -53,9 +60,20 @@ public class BookServiceImpl implements BookService {
     private final BookLoanDao bookLoanDao;
     private final UserService userService;
     private final UserBookRateDao userBookRateDao;
+    private final CollaborativeFilteringRecommender collaborativeFilteringRecommender;
 
     @Autowired
-    public BookServiceImpl(BookTransformer bookTransformer, BookDao bookDao, AuthorService authorService, BookCategoryService bookCategoryService, PublisherService publisherService, TagService tagService, UserReadingInfoService userReadingInfoService, BookLoanDao bookLoanDao, UserService userService, UserBookRateDao userBookRateDao) {
+    public BookServiceImpl(BookTransformer bookTransformer,
+                           BookDao bookDao,
+                           AuthorService authorService,
+                           BookCategoryService bookCategoryService,
+                           PublisherService publisherService,
+                           TagService tagService,
+                           UserReadingInfoService userReadingInfoService,
+                           BookLoanDao bookLoanDao,
+                           UserService userService,
+                           UserBookRateDao userBookRateDao,
+                           CollaborativeFilteringRecommender collaborativeFilteringRecommender) {
         this.bookTransformer = bookTransformer;
         this.bookDao = bookDao;
         this.bookCategoryService = bookCategoryService;
@@ -66,14 +84,29 @@ public class BookServiceImpl implements BookService {
         this.bookLoanDao = bookLoanDao;
         this.userService = userService;
         this.userBookRateDao = userBookRateDao;
+        this.collaborativeFilteringRecommender = collaborativeFilteringRecommender;
+    }
+
+    public BookServiceImpl(BookTransformer bookTransformer,
+                           BookDao bookDao,
+                           AuthorService authorService,
+                           BookCategoryService bookCategoryService,
+                           PublisherService publisherService,
+                           TagService tagService,
+                           UserReadingInfoService userReadingInfoService,
+                           BookLoanDao bookLoanDao,
+                           UserService userService,
+                           UserBookRateDao userBookRateDao) {
+        this(bookTransformer, bookDao, authorService, bookCategoryService, publisherService, tagService,
+                userReadingInfoService, bookLoanDao, userService, userBookRateDao, null);
     }
 
     public BookServiceImpl(BookTransformer bookTransformer, BookDao bookDao, AuthorService authorService, BookCategoryService bookCategoryService, PublisherService publisherService, TagService tagService, UserReadingInfoService userReadingInfoService, BookLoanDao bookLoanDao) {
-        this(bookTransformer, bookDao, authorService, bookCategoryService, publisherService, tagService, userReadingInfoService, bookLoanDao, null, null);
+        this(bookTransformer, bookDao, authorService, bookCategoryService, publisherService, tagService, userReadingInfoService, bookLoanDao, null, null, null);
     }
 
     public BookServiceImpl(BookTransformer bookTransformer, BookDao bookDao, AuthorService authorService, UserReadingInfoService userReadingInfoService) {
-        this(bookTransformer, bookDao, authorService, null, null, null, userReadingInfoService, null, null, null);
+        this(bookTransformer, bookDao, authorService, null, null, null, userReadingInfoService, null, null, null, null);
     }
 
     @Override
@@ -200,26 +233,48 @@ public class BookServiceImpl implements BookService {
 
         List<Book> popularBooks = findPopularBookEntities(DEFAULT_RECOMMENDATION_LIMIT, Collections.emptySet());
         if (!popularBooks.isEmpty()) {
-            shelves.add(buildShelf("popular", "Popular Right Now",
-                    "Simple popularity ranking using rating count, average score, and availability.",
-                    popularBooks));
+            shelves.add(buildShelf("popular", "近期热门",
+                    "综合评分人数、平均分和可借库存生成的热门图书榜单。",
+                    popularBooks,
+                    book -> String.format("近期热门：%d 位读者评分，平均分 %.1f，当前可借 %d/%d 本。",
+                            safeLong(book.getUsersRateCount()),
+                            safeDouble(book.getRate()),
+                            safeInt(book.getAvailableCopies()),
+                            safeInt(book.getTotalCopies()))));
         }
 
-        List<Book> preferenceBooks = recommendByPreferredCategories(activeBooks, Collections.emptySet(), DEFAULT_RECOMMENDATION_LIMIT);
+        Set<Long> usedBookIds = popularBooks.stream().map(Book::getId).collect(Collectors.toSet());
+        List<Book> collaborativeBooks = recommendByCollaborativeFiltering(usedBookIds, DEFAULT_RECOMMENDATION_LIMIT);
+        if (!collaborativeBooks.isEmpty()) {
+            shelves.add(buildShelf("collaborative", "同类读者也喜欢",
+                    "根据与你评分模式相近的用户生成的协同过滤推荐。",
+                    collaborativeBooks,
+                    book -> String.format("同类读者偏好：协同过滤认为你可能喜欢《%s》，当前评分 %.1f。",
+                            safeString(book.getName()),
+                            safeDouble(book.getRate()))));
+            usedBookIds.addAll(collaborativeBooks.stream().map(Book::getId).collect(Collectors.toSet()));
+        }
+
+        List<Book> preferenceBooks = recommendByPreferredCategories(activeBooks, usedBookIds, DEFAULT_RECOMMENDATION_LIMIT);
         if (!preferenceBooks.isEmpty()) {
-            shelves.add(buildShelf("preferences", "Because Of Your Reading Preferences",
-                    "Matches the categories you selected in your reading preferences.",
-                    preferenceBooks));
+            shelves.add(buildShelf("preferences", "符合你的阅读偏好",
+                    "匹配你在个人中心选择的偏好分类。",
+                    preferenceBooks,
+                    book -> String.format("与你偏好的“%s”分类一致。",
+                            localizeCategoryName(book.getCategory() == null ? null : book.getCategory().getName()))));
+            usedBookIds.addAll(preferenceBooks.stream().map(Book::getId).collect(Collectors.toSet()));
         }
 
-        List<Book> activityBooks = recommendByUserActivity(activeBooks, Collections.emptySet(), DEFAULT_RECOMMENDATION_LIMIT);
+        List<Book> activityBooks = recommendByUserActivity(activeBooks, usedBookIds, DEFAULT_RECOMMENDATION_LIMIT);
         if (!activityBooks.isEmpty()) {
-            shelves.add(buildShelf("activity", "Based On Your Ratings And Loans",
-                    "Derived from the categories and tags in books you rated or borrowed.",
-                    activityBooks));
+            shelves.add(buildShelf("activity", "基于你的评分和借阅行为",
+                    "根据你评分或借阅过图书的分类与标签生成推荐。",
+                    activityBooks,
+                    book -> String.format("与你高分或借阅过的图书在“%s”分类或相近标签上更接近。",
+                            localizeCategoryName(book.getCategory() == null ? null : book.getCategory().getName()))));
         }
 
-        return new BookRecommendationOverviewDto("Recommendations", shelves);
+        return new BookRecommendationOverviewDto("推荐书架", shelves);
     }
 
     @Override
@@ -246,9 +301,13 @@ public class BookServiceImpl implements BookService {
                 .limit(DETAIL_RECOMMENDATION_LIMIT)
                 .collect(Collectors.toList());
         if (!sameCategoryBooks.isEmpty()) {
-            shelves.add(buildShelf("same-category", "More In The Same Category",
-                    "Books from the same category, ranked by shared tags and popularity.",
-                    sameCategoryBooks));
+            shelves.add(buildShelf("same-category", "同分类推荐",
+                    "优先推荐同分类图书，并结合共享标签数量和热度排序。",
+                    sameCategoryBooks,
+                    book -> String.format("与《%s》同属“%s”分类，并共享 %d 个标签。",
+                            safeString(sourceBook.getName()),
+                            localizeCategoryName(book.getCategory() == null ? null : book.getCategory().getName()),
+                            sharedTagCount(sourceBook, book))));
             excludedIds.addAll(sameCategoryBooks.stream().map(Book::getId).collect(Collectors.toSet()));
         }
 
@@ -264,22 +323,27 @@ public class BookServiceImpl implements BookService {
                 .limit(DETAIL_RECOMMENDATION_LIMIT)
                 .collect(Collectors.toList());
         if (!tagSimilarBooks.isEmpty()) {
-            shelves.add(buildShelf("shared-tags", "Similar By Tags",
-                    "Books sharing one or more tags with the current title.",
-                    tagSimilarBooks));
+            shelves.add(buildShelf("shared-tags", "相似标签推荐",
+                    "推荐与当前图书共享一个或多个标签的相似图书。",
+                    tagSimilarBooks,
+                    book -> String.format("与《%s》共享 %d 个标签：%s。",
+                            safeString(sourceBook.getName()),
+                            sharedTagCount(sourceBook, book),
+                            describeSharedTags(sourceBook, book))));
             excludedIds.addAll(tagSimilarBooks.stream().map(Book::getId).collect(Collectors.toSet()));
         }
 
         if (shelves.isEmpty()) {
             List<Book> fallbackBooks = findPopularBookEntities(DETAIL_RECOMMENDATION_LIMIT, excludedIds);
             if (!fallbackBooks.isEmpty()) {
-                shelves.add(buildShelf("fallback", "Readers Also Explore",
-                        "Fallback recommendations when the current book has few matching neighbors.",
-                        fallbackBooks));
+                shelves.add(buildShelf("fallback", "读者还在看",
+                        "当当前图书相似邻居较少时，补充展示更热门的可浏览图书。",
+                        fallbackBooks,
+                        book -> String.format("当前书籍邻近样本较少，补充展示近期更热门的《%s》。", safeString(book.getName()))));
             }
         }
 
-        return new BookRecommendationOverviewDto("Related Books", shelves);
+        return new BookRecommendationOverviewDto("相关图书", shelves);
     }
 
     private List<Book> findActiveBooks() {
@@ -314,6 +378,25 @@ public class BookServiceImpl implements BookService {
                     .limit(limit)
                     .collect(Collectors.toList());
         } catch (Exception e) {
+            return Collections.emptyList();
+        }
+    }
+
+    private List<Book> recommendByCollaborativeFiltering(Set<Long> excludedIds, int limit) {
+        if (userService == null || collaborativeFilteringRecommender == null) {
+            return Collections.emptyList();
+        }
+
+        try {
+            Long userId = userService.getCurrentUser().getId();
+            return collaborativeFilteringRecommender.recommendedBooks(userId).stream()
+                    .filter(book -> book != null && book.getId() != null)
+                    .filter(book -> !Boolean.TRUE.equals(book.getMarkedAsDeleted()))
+                    .filter(book -> !excludedIds.contains(book.getId()))
+                    .limit(limit)
+                    .collect(Collectors.toList());
+        } catch (Exception e) {
+            log.warn("BookService: collaborative filtering unavailable, fallback to other shelves - {}", e.getMessage());
             return Collections.emptyList();
         }
     }
@@ -411,6 +494,20 @@ public class BookServiceImpl implements BookService {
         return count;
     }
 
+    private String describeSharedTags(Book sourceBook, Book candidateBook) {
+        Set<Long> sourceTagIds = extractTagIds(sourceBook);
+        if (sourceTagIds.isEmpty() || candidateBook == null || candidateBook.getTags() == null) {
+            return "暂无标签交集";
+        }
+        String sharedTags = candidateBook.getTags().stream()
+                .filter(tag -> tag != null && tag.getId() != null && sourceTagIds.contains(tag.getId()))
+                .map(tag -> safeString(tag.getName()))
+                .filter(name -> !name.isBlank())
+                .sorted()
+                .collect(Collectors.joining(", "));
+        return sharedTags.isBlank() ? "暂无标签交集" : sharedTags;
+    }
+
     private Comparator<Book> popularityComparator() {
         return Comparator
                 .comparingLong((Book book) -> safeLong(book.getUsersRateCount())).reversed()
@@ -435,6 +532,14 @@ public class BookServiceImpl implements BookService {
         return value == null ? "" : value;
     }
 
+    private String localizeCategoryName(String value) {
+        String normalizedValue = safeString(value).trim();
+        if (normalizedValue.isEmpty()) {
+            return "未分类";
+        }
+        return CATEGORY_NAME_MAP.getOrDefault(normalizedValue, normalizedValue);
+    }
+
     private int sanitizeLimit(Integer limit, int fallback) {
         if (limit == null || limit < 1) {
             return fallback;
@@ -443,7 +548,23 @@ public class BookServiceImpl implements BookService {
     }
 
     private BookRecommendationShelfDto buildShelf(String key, String title, String description, List<Book> books) {
-        return new BookRecommendationShelfDto(key, title, description, getTransformer().transformEntityToDto(books));
+        return buildShelf(key, title, description, books, book -> description);
+    }
+
+    private BookRecommendationShelfDto buildShelf(String key,
+                                                  String title,
+                                                  String description,
+                                                  List<Book> books,
+                                                  Function<Book, String> reasonBuilder) {
+        List<BookDto> bookDtos = getTransformer().transformEntityToDto(books);
+        for (BookDto bookDto : bookDtos) {
+            bookDto.setRecommendationSource(key);
+            books.stream()
+                    .filter(book -> book.getId() != null && book.getId().equals(bookDto.getId()))
+                    .findFirst()
+                    .ifPresent(book -> bookDto.setRecommendationReason(reasonBuilder.apply(book)));
+        }
+        return new BookRecommendationShelfDto(key, title, description, bookDtos);
     }
 
     // free hosting cause leak algo speed for fetching

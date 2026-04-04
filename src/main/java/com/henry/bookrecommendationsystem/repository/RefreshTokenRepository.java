@@ -7,11 +7,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
-
-/**
- * @author Henry Azer
- * @since 05/11/2022
- */
 @Repository
 public interface RefreshTokenRepository extends JpaRepository<RefreshToken, Long> {
     Optional<RefreshToken> findByEmailAndMarkedAsDeletedFalse(String email);

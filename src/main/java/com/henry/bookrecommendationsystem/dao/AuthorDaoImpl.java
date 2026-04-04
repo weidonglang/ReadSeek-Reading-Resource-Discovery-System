@@ -7,11 +7,6 @@ import com.henry.bookrecommendationsystem.repository.AuthorRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
-
-/**
- * @author Henry Azer
- * @since 07/11/2022
- */
 @Component
 public class AuthorDaoImpl implements AuthorDao {
     private final AuthorRepository authorRepository;

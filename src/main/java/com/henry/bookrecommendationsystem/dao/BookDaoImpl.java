@@ -22,11 +22,6 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.List;
-
-/**
- * @author Henry Azer
- * @since 07/11/2022
- */
 @Component
 public class BookDaoImpl implements BookDao {
     private final BookRepository bookRepository;

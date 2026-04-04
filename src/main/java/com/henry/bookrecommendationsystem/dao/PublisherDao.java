@@ -5,11 +5,6 @@ import com.henry.bookrecommendationsystem.entity.Publisher;
 import com.henry.bookrecommendationsystem.repository.PublisherRepository;
 
 import java.util.List;
-
-/**
- * @author Codex
- * @since 01/04/2026
- */
 public interface PublisherDao extends BaseDao<Publisher, PublisherRepository> {
     List<Publisher> findAllActive();
 }

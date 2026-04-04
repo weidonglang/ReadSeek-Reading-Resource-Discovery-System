@@ -10,11 +10,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-
-/**
- * @author Henry Azer
- * @since 11/11/2022
- */
 @Slf4j
 class AuthenticationControllerTest {
 

@@ -1,9 +1,4 @@
 package com.henry.bookrecommendationsystem.dto.base.pagination;
-
-/**
- * @author Henry Azer
- * @since 03/11/2022
- */
 public enum SortingDirection {
     ASC("ASC"),
     DESC("DESC");

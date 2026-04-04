@@ -7,11 +7,6 @@ import com.henry.bookrecommendationsystem.service.base.BaseService;
 import com.henry.bookrecommendationsystem.transformer.TagTransformer;
 
 import java.util.List;
-
-/**
- * @author Codex
- * @since 01/04/2026
- */
 public interface TagService extends BaseService<Tag, TagDto, TagDao, TagTransformer> {
     List<TagDto> findAllActive();
 }

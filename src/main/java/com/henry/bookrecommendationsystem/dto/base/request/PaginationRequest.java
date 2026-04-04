@@ -8,11 +8,6 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
-
-/**
- * @author Henry Azer
- * @since 03/11/2022
- */
 @NoArgsConstructor
 @AllArgsConstructor
 @Data

@@ -6,11 +6,6 @@ import com.henry.bookrecommendationsystem.repository.BookReservationRepository;
 
 import java.util.List;
 import java.util.Optional;
-
-/**
- * @author Codex
- * @since 02/04/2026
- */
 public interface BookReservationDao extends BaseDao<BookReservation, BookReservationRepository> {
     Optional<BookReservation> findByIdAndUserId(Long id, Long userId);
 

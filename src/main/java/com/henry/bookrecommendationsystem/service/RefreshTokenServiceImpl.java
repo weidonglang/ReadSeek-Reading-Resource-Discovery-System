@@ -11,11 +11,6 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.*;
-
-/**
- * @author Henry Azer
- * @since 05/11/2022
- */
 @Slf4j
 @Service
 @RequiredArgsConstructor

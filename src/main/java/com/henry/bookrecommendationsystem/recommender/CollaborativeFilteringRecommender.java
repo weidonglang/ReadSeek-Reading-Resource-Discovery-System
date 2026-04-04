@@ -9,11 +9,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
-
-/**
- * @author Henry Azer
- * @since 9/11/2022
- */
 @Slf4j
 @Component
 public class CollaborativeFilteringRecommender {
@@ -39,6 +34,8 @@ public class CollaborativeFilteringRecommender {
 
     public List<Book> recommendedBooks(Long userId) {
         log.info("CollaborativeFilteringRecommender: recommendedBooks() called - user id: " + userId);
+        setRatings(new HashMap<>());
+        setAverageRating(new HashMap<>());
         Map<Long, Double> averageRating = new HashMap<>();
         Map<Long, Map<Long, Integer>> myRatesMap = new TreeMap<>();
         Map<Long, Map<Long, Integer>> userWithRatesMap = new TreeMap<>();
@@ -74,6 +71,12 @@ public class CollaborativeFilteringRecommender {
             }
         });
 
+        Map<Long, Integer> currentUserRatings = myRatesMap.get(userId);
+        if (currentUserRatings == null || currentUserRatings.isEmpty()) {
+            log.info("CollaborativeFilteringRecommender: no current user ratings, skip CF - user id: " + userId);
+            return Collections.emptyList();
+        }
+
         for (Map.Entry<Long, Double> longDoubleEntry : averageRating.entrySet()) {
             if (ratings.containsKey(longDoubleEntry.getKey())) {
                 longDoubleEntry.setValue(longDoubleEntry.getValue() / (double) ratings.get(longDoubleEntry.getKey()).size());
@@ -84,8 +87,8 @@ public class CollaborativeFilteringRecommender {
         Map<Long, String> books = new HashMap<>();
         bookRepository.findAll().forEach(book -> books.put(book.getId(), book.getName()));
 
-        Map<Long, Double> neighbourhoods = getNeighbourhoods(myRatesMap.get(userId));
-        Map<Long, Double> recommendations = getRecommendations(myRatesMap.get(userId), neighbourhoods, books);
+        Map<Long, Double> neighbourhoods = getNeighbourhoods(currentUserRatings);
+        Map<Long, Double> recommendations = getRecommendations(currentUserRatings, neighbourhoods, books);
 
         ValueComparator valueComparator = new ValueComparator(recommendations);
         Map<Long, Double> sortedRecommendations = new TreeMap<>(valueComparator);
@@ -233,6 +236,9 @@ public class CollaborativeFilteringRecommender {
      * @return average or the ratings of a user
      */
     private double getAverage(Map<Long, Integer> userRatings) {
+        if (userRatings == null || userRatings.isEmpty()) {
+            return 0;
+        }
         double userAverage = 0;
         for (Map.Entry<Long, Integer> longIntegerEntry : userRatings.entrySet()) {
             userAverage += (int) ((Map.Entry<?, ?>) longIntegerEntry).getValue();

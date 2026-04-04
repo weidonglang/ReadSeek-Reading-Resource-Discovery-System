@@ -7,11 +7,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-
-/**
- * @author Henry Azer
- * @since 10/11/2022
- */
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter

@@ -12,11 +12,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.time.LocalDateTime;
-
-/**
- * @author Henry Azer
- * @since 04/11/2022
- */
 @Slf4j
 @CrossOrigin
 @RestController

@@ -9,11 +9,6 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-
-/**
- * @author Codex
- * @since 02/04/2026
- */
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter

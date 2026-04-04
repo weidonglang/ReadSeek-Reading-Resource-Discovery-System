@@ -7,11 +7,6 @@ import com.henry.bookrecommendationsystem.service.base.BaseService;
 import com.henry.bookrecommendationsystem.transformer.PublisherTransformer;
 
 import java.util.List;
-
-/**
- * @author Codex
- * @since 01/04/2026
- */
 public interface PublisherService extends BaseService<Publisher, PublisherDto, PublisherDao, PublisherTransformer> {
     List<PublisherDto> findAllActive();
 }

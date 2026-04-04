@@ -14,11 +14,6 @@ import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
-/**
- * @author Henry Azer
- * @since 10/11/2022
- */
 @Slf4j
 @Service
 public class UserReadingInfoServiceImpl implements UserReadingInfoService {

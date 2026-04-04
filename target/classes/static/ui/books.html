@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Books Search - Book Nook</title>
+  <title>图书检索 - 图书推荐系统</title>
   <link rel="stylesheet" href="assets/css/styles.css" />
 </head>
 <body data-page="books">
@@ -11,8 +11,8 @@
     <main class="page">
       <div class="page-header">
         <div>
-          <h1 class="page-title">Books Search</h1>
-          <p class="page-subtitle">Search by keyword, author, category, publisher, tags, and numeric ranges.</p>
+          <h1 class="page-title">图书检索</h1>
+          <p class="page-subtitle">支持按关键词、作者、分类、出版社、标签和数值区间筛选图书。</p>
         </div>
       </div>
 
@@ -21,88 +21,90 @@
       <section class="card">
         <form id="filter-form" class="form-grid">
           <div class="field full">
-            <label class="label" for="keyword">Keyword</label>
-            <input id="keyword" placeholder="Search by title, ISBN, author, category, publisher, or tag" />
+            <label class="label" for="keyword">关键词</label>
+            <input id="keyword" placeholder="按书名、ISBN、作者、分类、出版社或标签搜索" />
           </div>
 
           <div class="field">
-            <label class="label" for="author-search">Authors</label>
+            <label class="label" for="author-search">作者</label>
             <div class="filter-picker">
-              <input id="author-search" placeholder="Search author name" />
+              <input id="author-search" placeholder="搜索作者名称" />
               <div id="author-filter" class="filter-list"></div>
               <div id="author-selected" class="tags"></div>
             </div>
           </div>
 
           <div class="field">
-            <label class="label" for="publisher-filter">Publishers</label>
+            <label class="label" for="publisher-filter">出版社</label>
             <select id="publisher-filter" multiple size="6"></select>
           </div>
 
           <div class="field">
-            <label class="label">Price Range</label>
+            <label class="label">价格区间</label>
             <div class="grid two">
-              <input id="fromPrice" type="number" step="0.01" placeholder="Min price" />
-              <input id="toPrice" type="number" step="0.01" placeholder="Max price" />
+              <input id="fromPrice" type="number" step="0.01" placeholder="最低价格" />
+              <input id="toPrice" type="number" step="0.01" placeholder="最高价格" />
             </div>
           </div>
 
           <div class="field">
-            <label class="label">Pages Range</label>
+            <label class="label">页数区间</label>
             <div class="grid two">
-              <input id="fromPagesNumber" type="number" placeholder="Min pages" />
-              <input id="toPagesNumber" type="number" placeholder="Max pages" />
+              <input id="fromPagesNumber" type="number" placeholder="最少页数" />
+              <input id="toPagesNumber" type="number" placeholder="最多页数" />
             </div>
           </div>
 
           <div class="field">
-            <label class="label">Reading Duration Range</label>
+            <label class="label">阅读时长区间</label>
             <div class="grid two">
-              <input id="fromReadingDuration" type="number" placeholder="Min duration" />
-              <input id="toReadingDuration" type="number" placeholder="Max duration" />
+              <input id="fromReadingDuration" type="number" placeholder="最短时长" />
+              <input id="toReadingDuration" type="number" placeholder="最长时长" />
             </div>
           </div>
 
           <div class="field">
-            <label class="label" for="pageSize">Page Size</label>
+            <label class="label" for="pageSize">每页条数</label>
             <input id="pageSize" type="number" min="1" value="8" />
           </div>
 
           <div class="field">
-            <label class="label" for="sortField">Sort Field</label>
+            <label class="label" for="sortField">排序字段</label>
             <select id="sortField">
-              <option value="id">id</option>
-              <option value="name">name</option>
-              <option value="price">price</option>
-              <option value="pagesNumber">pagesNumber</option>
-              <option value="readingDuration">readingDuration</option>
-              <option value="rate">rate</option>
-              <option value="availableCopies">availableCopies</option>
+              <option value="id">图书编号</option>
+              <option value="name">书名</option>
+              <option value="price">价格</option>
+              <option value="pagesNumber">页数</option>
+              <option value="readingDuration">阅读时长</option>
+              <option value="rate">评分</option>
+              <option value="usersRateCount">热度</option>
+              <option value="publishDate">出版时间</option>
+              <option value="availableCopies">可借库存</option>
             </select>
           </div>
 
           <div class="field">
-            <label class="label" for="sortDirection">Sort Direction</label>
+            <label class="label" for="sortDirection">排序方向</label>
             <select id="sortDirection">
-              <option value="ASC">ASC</option>
-              <option value="DESC">DESC</option>
+              <option value="ASC">升序</option>
+              <option value="DESC">降序</option>
             </select>
           </div>
 
           <div class="field full">
-            <label class="label">Categories</label>
+            <label class="label">分类</label>
             <div id="category-filters" class="choice-grid"></div>
           </div>
 
           <div class="field full">
-            <label class="label">Tags</label>
+            <label class="label">标签</label>
             <div id="tag-filters" class="choice-grid"></div>
           </div>
 
           <div class="field full">
             <div class="form-actions">
-              <button class="primary" type="submit">Search</button>
-              <button id="reset-search" type="button">Reset</button>
+              <button class="primary" type="submit">搜索</button>
+              <button id="reset-search" type="button">重置</button>
             </div>
           </div>
         </form>
@@ -111,13 +113,13 @@
       <section>
         <div class="page-header">
           <div>
-            <h2 class="page-title" style="font-size:24px;">Results</h2>
-            <p id="page-summary" class="page-subtitle">No search executed yet.</p>
+            <h2 class="page-title" style="font-size:24px;">检索结果</h2>
+            <p id="page-summary" class="page-subtitle">尚未执行搜索。</p>
           </div>
           <div class="form-actions">
             <input id="currentPage" type="hidden" value="1" />
-            <button id="prev-page" type="button">Previous</button>
-            <button id="next-page" type="button">Next</button>
+            <button id="prev-page" type="button">上一页</button>
+            <button id="next-page" type="button">下一页</button>
           </div>
         </div>
         <div id="book-results" class="book-list"></div>

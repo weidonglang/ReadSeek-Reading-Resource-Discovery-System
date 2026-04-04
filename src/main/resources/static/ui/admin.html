@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Admin - Book Nook</title>
+  <title>后台管理 - 图书推荐系统</title>
   <link rel="stylesheet" href="assets/css/styles.css" />
 </head>
 <body data-page="admin">
@@ -12,8 +12,8 @@
       <div id="admin-message" class="alert hidden"></div>
       <section class="page-header">
         <div>
-          <h1 class="page-title">Admin Console</h1>
-          <p class="page-subtitle">Manage books, authors, categories, publishers, tags, loans, and reservations with admin-only actions.</p>
+          <h1 class="page-title">后台管理中心</h1>
+          <p class="page-subtitle">在后台维护图书、作者、分类、出版社、标签、借阅和预约数据。</p>
         </div>
       </section>
 
@@ -21,97 +21,97 @@
         <article class="card">
           <div class="section-head">
             <div>
-              <h2>Book Editor</h2>
-              <p class="muted">Create or update catalog records.</p>
+              <h2>图书编辑</h2>
+              <p class="muted">新增或更新图书目录数据。</p>
             </div>
-            <button id="reset-book-form" type="button">New Book</button>
+            <button id="reset-book-form" type="button">新增图书</button>
           </div>
           <form id="book-form" class="form-grid">
             <input id="book-id" type="hidden" />
             <div class="field">
-              <label class="label" for="book-name">Name</label>
+              <label class="label" for="book-name">书名</label>
               <input id="book-name" required />
             </div>
             <div class="field">
               <label class="label" for="book-isbn">ISBN</label>
-              <input id="book-isbn" placeholder="Optional ISBN-10 / ISBN-13" />
+              <input id="book-isbn" placeholder="可选，支持 ISBN-10 / ISBN-13" />
             </div>
             <div class="field">
-              <label class="label" for="book-author">Author</label>
+              <label class="label" for="book-author">作者</label>
               <div class="select-stack">
-                <input id="book-author-search" type="search" placeholder="Search author name" />
+                <input id="book-author-search" type="search" placeholder="搜索作者名称" />
                 <select id="book-author" size="7" required></select>
-                <div class="picker-help">Search by name, then select a single author.</div>
+                <div class="picker-help">可按名称搜索，然后选择一个作者。</div>
               </div>
             </div>
             <div class="field">
-              <label class="label" for="book-category">Category</label>
+              <label class="label" for="book-category">分类</label>
               <div class="select-stack">
-                <input id="book-category-search" type="search" placeholder="Search category name" />
+                <input id="book-category-search" type="search" placeholder="搜索分类名称" />
                 <select id="book-category" size="7" required></select>
-                <div class="picker-help">Useful when category candidates become large.</div>
+                <div class="picker-help">分类较多时可先搜索再选择。</div>
               </div>
             </div>
             <div class="field">
-              <label class="label" for="book-publisher">Publisher</label>
+              <label class="label" for="book-publisher">出版社</label>
               <div class="select-stack">
-                <input id="book-publisher-search" type="search" placeholder="Search publisher name" />
+                <input id="book-publisher-search" type="search" placeholder="搜索出版社名称" />
                 <select id="book-publisher" size="7">
-                  <option value="">No Publisher</option>
+                  <option value="">无出版社</option>
                 </select>
-                <div class="picker-help">Leave the selection on "No Publisher" when not needed.</div>
+                <div class="picker-help">如果暂时不维护出版社，可保留“无出版社”。</div>
               </div>
             </div>
             <div class="field full">
-              <label class="label" for="book-tags">Tags</label>
+              <label class="label" for="book-tags">标签</label>
               <div class="select-stack">
-                <input id="book-tag-search" type="search" placeholder="Search tag name" />
+                <input id="book-tag-search" type="search" placeholder="搜索标签名称" />
                 <select id="book-tags" multiple size="8"></select>
                 <div id="book-tag-summary" class="tags"></div>
               </div>
             </div>
             <div class="field">
-              <label class="label" for="book-price">Price</label>
+              <label class="label" for="book-price">价格</label>
               <input id="book-price" type="number" step="0.01" min="0" required />
             </div>
             <div class="field">
-              <label class="label" for="book-rate">Rate</label>
+              <label class="label" for="book-rate">评分</label>
               <input id="book-rate" type="number" step="0.1" min="0" max="5" required />
             </div>
             <div class="field">
-              <label class="label" for="book-users-rate-count">Users Rate Count</label>
+              <label class="label" for="book-users-rate-count">评分人数</label>
               <input id="book-users-rate-count" type="number" min="0" required />
             </div>
             <div class="field">
-              <label class="label" for="book-pages">Pages</label>
+              <label class="label" for="book-pages">页数</label>
               <input id="book-pages" type="number" min="1" required />
             </div>
             <div class="field">
-              <label class="label" for="book-duration">Reading Duration</label>
+              <label class="label" for="book-duration">阅读时长</label>
               <input id="book-duration" type="number" min="1" required />
             </div>
             <div class="field">
-              <label class="label" for="book-publish-date">Publish Date</label>
+              <label class="label" for="book-publish-date">出版日期</label>
               <input id="book-publish-date" type="date" required />
             </div>
             <div class="field">
-              <label class="label" for="book-image-url">Image URL</label>
+              <label class="label" for="book-image-url">封面图片地址</label>
               <input id="book-image-url" type="url" required />
             </div>
             <div class="field">
-              <label class="label" for="book-total-copies">Total Copies</label>
+              <label class="label" for="book-total-copies">总库存</label>
               <input id="book-total-copies" type="number" min="1" value="1" required />
             </div>
             <div class="field">
-              <label class="label" for="book-available-copies">Available Copies</label>
+              <label class="label" for="book-available-copies">可借库存</label>
               <input id="book-available-copies" type="number" min="0" value="1" readonly />
             </div>
             <div class="field full">
-              <label class="label" for="book-description">Description</label>
+              <label class="label" for="book-description">简介</label>
               <textarea id="book-description" required></textarea>
             </div>
             <div class="form-actions field full">
-              <button class="primary" type="submit">Save Book</button>
+              <button class="primary" type="submit">保存图书</button>
             </div>
           </form>
         </article>
@@ -119,51 +119,51 @@
         <article class="card">
           <div class="section-head">
             <div>
-              <h2>Author Editor</h2>
-              <p class="muted">Maintain the author catalog.</p>
+              <h2>作者编辑</h2>
+              <p class="muted">维护作者基础信息。</p>
             </div>
-            <button id="reset-author-form" type="button">New Author</button>
+            <button id="reset-author-form" type="button">新增作者</button>
           </div>
           <form id="author-form" class="form-grid">
             <input id="author-id" type="hidden" />
             <div class="field">
-              <label class="label" for="author-name">Name</label>
+              <label class="label" for="author-name">姓名</label>
               <input id="author-name" required />
             </div>
             <div class="field">
-              <label class="label" for="author-country">Country</label>
+              <label class="label" for="author-country">国家</label>
               <input id="author-country" required />
             </div>
             <div class="field">
-              <label class="label" for="author-birthdate">Birthdate</label>
+              <label class="label" for="author-birthdate">出生日期</label>
               <input id="author-birthdate" type="date" required />
             </div>
             <div class="field">
-              <label class="label" for="author-deathdate">Deathdate</label>
+              <label class="label" for="author-deathdate">去世日期</label>
               <input id="author-deathdate" type="date" />
             </div>
             <div class="field">
-              <label class="label" for="author-age">Age</label>
+              <label class="label" for="author-age">年龄</label>
               <input id="author-age" type="number" min="0" required />
             </div>
             <div class="field">
-              <label class="label" for="author-gender">Gender</label>
+              <label class="label" for="author-gender">性别</label>
               <select id="author-gender" required>
-                <option value="MALE">MALE</option>
-                <option value="FEMALE">FEMALE</option>
-                <option value="OTHERS">OTHERS</option>
+                <option value="MALE">男</option>
+                <option value="FEMALE">女</option>
+                <option value="OTHERS">其他</option>
               </select>
             </div>
             <div class="field full">
-              <label class="label" for="author-image-url">Image URL</label>
+              <label class="label" for="author-image-url">头像地址</label>
               <input id="author-image-url" type="url" required />
             </div>
             <div class="field full">
-              <label class="label" for="author-description">Description</label>
+              <label class="label" for="author-description">简介</label>
               <textarea id="author-description" required></textarea>
             </div>
             <div class="form-actions field full">
-              <button class="primary" type="submit">Save Author</button>
+              <button class="primary" type="submit">保存作者</button>
             </div>
           </form>
         </article>
@@ -173,23 +173,23 @@
         <article class="card">
           <div class="section-head">
             <div>
-              <h2>Category Editor</h2>
-              <p class="muted">Maintain book categories used by catalog and search pages.</p>
+              <h2>分类编辑</h2>
+              <p class="muted">维护图书目录和检索页面使用的分类数据。</p>
             </div>
-            <button id="reset-category-form" type="button">New Category</button>
+            <button id="reset-category-form" type="button">新增分类</button>
           </div>
           <form id="category-form" class="form-grid">
             <input id="category-id" type="hidden" />
             <div class="field">
-              <label class="label" for="category-name">Name</label>
+              <label class="label" for="category-name">分类名称</label>
               <input id="category-name" required />
             </div>
             <div class="field full">
-              <label class="label" for="category-description">Description</label>
+              <label class="label" for="category-description">分类说明</label>
               <textarea id="category-description"></textarea>
             </div>
             <div class="form-actions field full">
-              <button class="primary" type="submit">Save Category</button>
+              <button class="primary" type="submit">保存分类</button>
             </div>
           </form>
         </article>
@@ -197,31 +197,31 @@
         <article class="card">
           <div class="section-head">
             <div>
-              <h2>Publisher Editor</h2>
-              <p class="muted">Maintain the publisher catalog.</p>
+              <h2>出版社编辑</h2>
+              <p class="muted">维护出版社基础信息。</p>
             </div>
-            <button id="reset-publisher-form" type="button">New Publisher</button>
+            <button id="reset-publisher-form" type="button">新增出版社</button>
           </div>
           <form id="publisher-form" class="form-grid">
             <input id="publisher-id" type="hidden" />
             <div class="field">
-              <label class="label" for="publisher-name">Name</label>
+              <label class="label" for="publisher-name">名称</label>
               <input id="publisher-name" required />
             </div>
             <div class="field">
-              <label class="label" for="publisher-country">Country</label>
+              <label class="label" for="publisher-country">国家</label>
               <input id="publisher-country" />
             </div>
             <div class="field full">
-              <label class="label" for="publisher-website">Website</label>
+              <label class="label" for="publisher-website">官网地址</label>
               <input id="publisher-website" type="url" />
             </div>
             <div class="field full">
-              <label class="label" for="publisher-description">Description</label>
+              <label class="label" for="publisher-description">简介</label>
               <textarea id="publisher-description"></textarea>
             </div>
             <div class="form-actions field full">
-              <button class="primary" type="submit">Save Publisher</button>
+              <button class="primary" type="submit">保存出版社</button>
             </div>
           </form>
         </article>
@@ -229,23 +229,23 @@
         <article class="card">
           <div class="section-head">
             <div>
-              <h2>Tag Editor</h2>
-              <p class="muted">Maintain reusable book tags.</p>
+              <h2>标签编辑</h2>
+              <p class="muted">维护可复用的图书标签。</p>
             </div>
-            <button id="reset-tag-form" type="button">New Tag</button>
+            <button id="reset-tag-form" type="button">新增标签</button>
           </div>
           <form id="tag-form" class="form-grid">
             <input id="tag-id" type="hidden" />
             <div class="field">
-              <label class="label" for="tag-name">Name</label>
+              <label class="label" for="tag-name">标签名称</label>
               <input id="tag-name" required />
             </div>
             <div class="field full">
-              <label class="label" for="tag-description">Description</label>
+              <label class="label" for="tag-description">标签说明</label>
               <textarea id="tag-description"></textarea>
             </div>
             <div class="form-actions field full">
-              <button class="primary" type="submit">Save Tag</button>
+              <button class="primary" type="submit">保存标签</button>
             </div>
           </form>
         </article>
@@ -255,14 +255,14 @@
         <article class="card">
           <div class="section-head">
             <div>
-              <h2>Books</h2>
-              <p class="muted">Active books only. Delete performs a soft delete.</p>
+              <h2>图书列表</h2>
+              <p class="muted">仅展示未删除图书，删除操作为软删除。</p>
             </div>
-            <button id="reload-books" type="button">Reload</button>
+            <button id="reload-books" type="button">刷新</button>
           </div>
           <div class="field" style="margin-bottom:12px;">
-            <label class="label" for="book-list-search">Find Book To Edit</label>
-            <input id="book-list-search" type="search" placeholder="Search by book name, author, or category" />
+            <label class="label" for="book-list-search">查找要编辑的图书</label>
+            <input id="book-list-search" type="search" placeholder="按书名、作者或分类搜索" />
           </div>
           <div id="book-admin-list" class="admin-list"></div>
         </article>
@@ -270,14 +270,14 @@
         <article class="card">
           <div class="section-head">
             <div>
-              <h2>Authors</h2>
-              <p class="muted">Active authors only. Delete performs a soft delete.</p>
+              <h2>作者列表</h2>
+              <p class="muted">仅展示未删除作者，删除操作为软删除。</p>
             </div>
-            <button id="reload-authors" type="button">Reload</button>
+            <button id="reload-authors" type="button">刷新</button>
           </div>
           <div class="field" style="margin-bottom:12px;">
-            <label class="label" for="author-list-search">Find Author To Edit</label>
-            <input id="author-list-search" type="search" placeholder="Search by author name or country" />
+            <label class="label" for="author-list-search">查找要编辑的作者</label>
+            <input id="author-list-search" type="search" placeholder="按作者姓名或国家搜索" />
           </div>
           <div id="author-admin-list" class="admin-list"></div>
         </article>
@@ -287,14 +287,14 @@
         <article class="card">
           <div class="section-head">
             <div>
-              <h2>Categories</h2>
-              <p class="muted">Delete is blocked while active books still reference a category.</p>
+              <h2>分类列表</h2>
+              <p class="muted">如果仍有未删除图书引用该分类，则禁止删除。</p>
             </div>
-            <button id="reload-categories" type="button">Reload</button>
+            <button id="reload-categories" type="button">刷新</button>
           </div>
           <div class="field" style="margin-bottom:12px;">
-            <label class="label" for="category-list-search">Find Category To Edit</label>
-            <input id="category-list-search" type="search" placeholder="Search by category name or description" />
+            <label class="label" for="category-list-search">查找要编辑的分类</label>
+            <input id="category-list-search" type="search" placeholder="按分类名称或说明搜索" />
           </div>
           <div id="category-admin-list" class="admin-list"></div>
         </article>
@@ -302,14 +302,14 @@
         <article class="card">
           <div class="section-head">
             <div>
-              <h2>Publishers</h2>
-              <p class="muted">Delete is blocked while active books still reference a publisher.</p>
+              <h2>出版社列表</h2>
+              <p class="muted">如果仍有未删除图书引用该出版社，则禁止删除。</p>
             </div>
-            <button id="reload-publishers" type="button">Reload</button>
+            <button id="reload-publishers" type="button">刷新</button>
           </div>
           <div class="field" style="margin-bottom:12px;">
-            <label class="label" for="publisher-list-search">Find Publisher To Edit</label>
-            <input id="publisher-list-search" type="search" placeholder="Search by publisher name or country" />
+            <label class="label" for="publisher-list-search">查找要编辑的出版社</label>
+            <input id="publisher-list-search" type="search" placeholder="按出版社名称或国家搜索" />
           </div>
           <div id="publisher-admin-list" class="admin-list"></div>
         </article>
@@ -317,14 +317,14 @@
         <article class="card">
           <div class="section-head">
             <div>
-              <h2>Tags</h2>
-              <p class="muted">Delete is blocked while active books still reference a tag.</p>
+              <h2>标签列表</h2>
+              <p class="muted">如果仍有未删除图书引用该标签，则禁止删除。</p>
             </div>
-            <button id="reload-tags" type="button">Reload</button>
+            <button id="reload-tags" type="button">刷新</button>
           </div>
           <div class="field" style="margin-bottom:12px;">
-            <label class="label" for="tag-list-search">Find Tag To Edit</label>
-            <input id="tag-list-search" type="search" placeholder="Search by tag name or description" />
+            <label class="label" for="tag-list-search">查找要编辑的标签</label>
+            <input id="tag-list-search" type="search" placeholder="按标签名称或说明搜索" />
           </div>
           <div id="tag-admin-list" class="admin-list"></div>
         </article>
@@ -334,10 +334,10 @@
         <article class="card">
           <div class="section-head">
             <div>
-              <h2>Active Loans</h2>
-              <p class="muted">All currently borrowed books, ordered by due date.</p>
+              <h2>当前借阅</h2>
+              <p class="muted">展示所有未归还借阅记录，按应还日期排序。</p>
             </div>
-            <button id="reload-circulation" type="button">Reload Circulation</button>
+            <button id="reload-circulation" type="button">刷新流通数据</button>
           </div>
           <div id="admin-active-loans" class="loan-list"></div>
         </article>
@@ -345,8 +345,8 @@
         <article class="card">
           <div class="section-head">
             <div>
-              <h2>Loan History</h2>
-              <p class="muted">Returned loans across all users.</p>
+              <h2>借阅历史</h2>
+              <p class="muted">展示所有用户的已归还记录。</p>
             </div>
           </div>
           <div id="admin-loan-history" class="loan-list"></div>
@@ -357,8 +357,8 @@
         <article class="card">
           <div class="section-head">
             <div>
-              <h2>Active Reservations</h2>
-              <p class="muted">All active reservation requests ordered by queue time.</p>
+              <h2>当前预约</h2>
+              <p class="muted">展示所有生效中的预约请求，按排队时间排序。</p>
             </div>
           </div>
           <div id="admin-active-reservations" class="loan-list"></div>
@@ -367,8 +367,8 @@
         <article class="card">
           <div class="section-head">
             <div>
-              <h2>Reservation History</h2>
-              <p class="muted">Fulfilled and cancelled reservations across all users.</p>
+              <h2>预约历史</h2>
+              <p class="muted">展示所有用户已完成和已取消的预约记录。</p>
             </div>
           </div>
           <div id="admin-reservation-history" class="loan-list"></div>

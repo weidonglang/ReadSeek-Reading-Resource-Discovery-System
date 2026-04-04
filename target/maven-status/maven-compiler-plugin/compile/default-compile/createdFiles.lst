@@ -23,6 +23,7 @@ com\henry\bookrecommendationsystem\entity\User.class
 com\henry\bookrecommendationsystem\dto\base\request\RefreshTokenRequest.class
 com\henry\bookrecommendationsystem\enums\UserGender.class
 com\henry\bookrecommendationsystem\service\BookReservationService.class
+com\henry\bookrecommendationsystem\controller\UserBehaviorLogController.class
 com\henry\bookrecommendationsystem\repository\BookRepository.class
 com\henry\bookrecommendationsystem\dto\base\BaseDto.class
 com\henry\bookrecommendationsystem\dto\PublisherDto.class
@@ -35,6 +36,7 @@ com\henry\bookrecommendationsystem\transformer\BookCategoryTransformer.class
 com\henry\bookrecommendationsystem\transformer\base\BaseTransformer.class
 com\henry\bookrecommendationsystem\transformer\mapper\UserReadingInfoMapper.class
 com\henry\bookrecommendationsystem\service\UserBookCategoryService.class
+com\henry\bookrecommendationsystem\enums\UserBehaviorActionType.class
 com\henry\bookrecommendationsystem\dto\BookReservationDto.class
 com\henry\bookrecommendationsystem\repository\BookCategoryRepository.class
 com\henry\bookrecommendationsystem\controller\BookLoanController.class
@@ -84,6 +86,7 @@ com\henry\bookrecommendationsystem\service\UserBookRateServiceImpl.class
 com\henry\bookrecommendationsystem\entity\Publisher.class
 com\henry\bookrecommendationsystem\repository\PublisherRepository.class
 com\henry\bookrecommendationsystem\transformer\mapper\AuthorMapperImpl.class
+com\henry\bookrecommendationsystem\dto\UserBehaviorLogRequestDto.class
 com\henry\bookrecommendationsystem\transformer\mapper\PublisherMapperImpl.class
 com\henry\bookrecommendationsystem\repository\RefreshTokenRepository.class
 com\henry\bookrecommendationsystem\repository\BookReservationRepository.class
@@ -94,9 +97,11 @@ com\henry\bookrecommendationsystem\dao\UserBookRateDao.class
 com\henry\bookrecommendationsystem\transformer\mapper\BookReservationMapper.class
 com\henry\bookrecommendationsystem\entity\BookCategory.class
 com\henry\bookrecommendationsystem\enums\BookReservationStatus.class
+com\henry\bookrecommendationsystem\repository\SearchLogRepository.class
 com\henry\bookrecommendationsystem\security\SecurityConfigurations.class
 com\henry\bookrecommendationsystem\transformer\BookLoanTransformer.class
 com\henry\bookrecommendationsystem\dao\BookLoanDao.class
+com\henry\bookrecommendationsystem\service\UserBehaviorLogServiceImpl.class
 com\henry\bookrecommendationsystem\dto\ReserveBookRequestDto.class
 com\henry\bookrecommendationsystem\dao\UserBookCategoryDaoImpl.class
 com\henry\bookrecommendationsystem\security\jwt\JWTAuthenticationUtil.class
@@ -128,8 +133,10 @@ com\henry\bookrecommendationsystem\enums\UserRole.class
 com\henry\bookrecommendationsystem\entity\base\BaseEntity.class
 com\henry\bookrecommendationsystem\dao\UserDao.class
 com\henry\bookrecommendationsystem\dto\BookCategoryDto.class
+com\henry\bookrecommendationsystem\repository\UserBehaviorLogRepository.class
 com\henry\bookrecommendationsystem\service\BookServiceImpl.class
 com\henry\bookrecommendationsystem\entity\BookReservation.class
+com\henry\bookrecommendationsystem\entity\UserBehaviorLog.class
 com\henry\bookrecommendationsystem\entity\Tag.class
 com\henry\bookrecommendationsystem\repository\UserBookRatingRepository.class
 com\henry\bookrecommendationsystem\service\UserReadingInfoService.class
@@ -143,6 +150,7 @@ com\henry\bookrecommendationsystem\dto\base\pagination\Page.class
 com\henry\bookrecommendationsystem\security\jwt\JWTRequestFilter.class
 com\henry\bookrecommendationsystem\transformer\mapper\UserMapperImpl.class
 com\henry\bookrecommendationsystem\controller\BookCategoryController.class
+com\henry\bookrecommendationsystem\entity\SearchLog.class
 com\henry\bookrecommendationsystem\entity\UserBookCategory.class
 com\henry\bookrecommendationsystem\dao\PublisherDao.class
 com\henry\bookrecommendationsystem\security\MethodSecurityConfigurations.class
@@ -161,6 +169,7 @@ com\henry\bookrecommendationsystem\transformer\mapper\AuthorMapper.class
 com\henry\bookrecommendationsystem\BookRecommendationSystemApplication.class
 com\henry\bookrecommendationsystem\transformer\mapper\UserBookRateMapperImpl.class
 com\henry\bookrecommendationsystem\dto\base\request\AuthRequest.class
+com\henry\bookrecommendationsystem\service\UserBehaviorLogService.class
 com\henry\bookrecommendationsystem\transformer\TagTransformer.class
 com\henry\bookrecommendationsystem\dto\BookReservationSummaryDto.class
 com\henry\bookrecommendationsystem\entity\UserBookRate.class

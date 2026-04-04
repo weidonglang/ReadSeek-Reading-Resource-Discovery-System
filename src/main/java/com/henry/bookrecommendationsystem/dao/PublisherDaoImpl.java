@@ -5,11 +5,6 @@ import com.henry.bookrecommendationsystem.repository.PublisherRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-
-/**
- * @author Codex
- * @since 01/04/2026
- */
 @Component
 public class PublisherDaoImpl implements PublisherDao {
     private final PublisherRepository publisherRepository;

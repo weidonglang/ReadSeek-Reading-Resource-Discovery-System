@@ -18,11 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
-
-/**
- * @author Codex
- * @since 04/04/2026
- */
 @Slf4j
 @CrossOrigin
 @RestController

@@ -5,11 +5,6 @@ import com.henry.bookrecommendationsystem.dto.base.pagination.Page;
 import lombok.*;
 
 import java.util.List;
-
-/**
- * @author Henry Azer
- * @since 03/11/2022
- */
 @NoArgsConstructor
 @AllArgsConstructor
 @Data

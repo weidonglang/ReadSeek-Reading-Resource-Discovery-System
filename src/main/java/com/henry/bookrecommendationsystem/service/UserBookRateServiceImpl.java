@@ -6,16 +6,12 @@ import com.henry.bookrecommendationsystem.dto.UserBookRateDto;
 import com.henry.bookrecommendationsystem.entity.UserBookRate;
 import com.henry.bookrecommendationsystem.transformer.UserBookRateTransformer;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 import java.util.Optional;
-
-/**
- * @author Henry Azer
- * @since 09/11/2022
- */
 @Slf4j
 @Service
 public class UserBookRateServiceImpl implements UserBookRateService {
@@ -23,12 +19,23 @@ public class UserBookRateServiceImpl implements UserBookRateService {
     private final UserBookRateDao userBookRateDao;
     private final UserService userService;
     private final BookService bookService;
+    private final UserBehaviorLogService userBehaviorLogService;
 
     public UserBookRateServiceImpl(UserBookRateTransformer userBookRateTransformer, UserBookRateDao userBookRateDao, UserService userService, BookService bookService) {
+        this(userBookRateTransformer, userBookRateDao, userService, bookService, null);
+    }
+
+    @Autowired
+    public UserBookRateServiceImpl(UserBookRateTransformer userBookRateTransformer,
+                                   UserBookRateDao userBookRateDao,
+                                   UserService userService,
+                                   BookService bookService,
+                                   UserBehaviorLogService userBehaviorLogService) {
         this.userBookRateTransformer = userBookRateTransformer;
         this.userBookRateDao = userBookRateDao;
         this.userService = userService;
         this.bookService = bookService;
+        this.userBehaviorLogService = userBehaviorLogService;
     }
 
     @Override
@@ -69,11 +76,18 @@ public class UserBookRateServiceImpl implements UserBookRateService {
     public UserBookRateDto rateBook(UserBookRateDto userBookRateDto) {
         log.info("UserBookRateService: rateBook() called");
         Optional<UserBookRate> userBookRate = getDao().findUserBookRateByUserIdAndBookId(userService.getCurrentUser().getId(), userBookRateDto.getBook().getId());
+        UserBookRateDto result;
         if (userBookRate.isPresent()) {
             userBookRateDto.setId(userBookRate.get().getId());
-            return update(userBookRateDto, userBookRateDto.getId());
+            result = update(userBookRateDto, userBookRateDto.getId());
+        } else {
+            result = create(userBookRateDto);
         }
-        return create(userBookRateDto);
+        if (userBehaviorLogService != null) {
+            userBehaviorLogService.recordBookRate(userBookRateDto.getBook().getId(),
+                    "用户提交评分：" + userBookRateDto.getRate());
+        }
+        return result;
     }
 
     private BookDto updateBookRate(BookDto bookDto, UserBookRateDto userBookRateDto) {

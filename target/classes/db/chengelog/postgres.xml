@@ -17,5 +17,7 @@
     <include file="db/chengelog/postgres/20260402_add_inventory_and_reservation.sql"/>
     <include file="db/chengelog/postgres/20260401_fix_invalid_seed_book_images.sql"/>
     <include file="db/chengelog/postgres/20260404_add_book_isbn.sql"/>
+    <include file="db/chengelog/postgres/20260404_create_search_log.sql"/>
+    <include file="db/chengelog/postgres/20260404_create_user_behavior_log.sql"/>
 
 </databaseChangeLog>

@@ -1,3 +1,12 @@
+function escapeHtml(value) {
+  return String(value ?? '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
 document.addEventListener('DOMContentLoaded', async () => {
   if (!BookUi.requireLogin()) return;
   BookUi.injectLayout();
@@ -20,13 +29,13 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     const categories = Array.isArray(categoryRes?.body) ? categoryRes.body : [];
     categoryWrap.innerHTML = categories.length
-      ? categories.map(item => `<span class="tag">${item.name || item}</span>`).join('')
-      : '<div class="muted">No category data available.</div>';
+      ? categories.map(item => `<span class="tag">${escapeHtml(BookUi.localizeCategoryName(item.name || item))}</span>`).join('')
+      : '<div class="muted">暂无分类数据。</div>';
 
     recommendWrap.innerHTML = BookUi.renderRecommendationShelves(recommendRes?.body, {
-      emptyMessage: 'No recommendation data available.'
+      emptyMessage: '暂无推荐数据。'
     });
   } catch (error) {
-    BookUi.showMessage('home-message', 'warning', `Failed to load home data: ${error.message}`);
+    BookUi.showMessage('home-message', 'warning', `首页数据加载失败：${error.message}`);
   }
 });

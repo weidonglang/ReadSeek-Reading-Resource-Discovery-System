@@ -68,33 +68,46 @@ function formatDateTime(value) {
 
 function formatUserName(user) {
   const fullName = `${user?.firstName || ''} ${user?.lastName || ''}`.trim();
-  return fullName || user?.email || 'Unknown User';
+  return fullName || user?.email || '未知用户';
+}
+
+function formatGender(gender) {
+  if (gender === 'MALE') return '男';
+  if (gender === 'FEMALE') return '女';
+  if (gender === 'OTHERS') return '其他';
+  return '未知性别';
+}
+
+function formatReservationStatus(status) {
+  if (status === 'FULFILLED') return '已完成';
+  if (status === 'CANCELLED') return '已取消';
+  return '预约中';
 }
 
 function renderAdminLoanItem(loan) {
   const book = loan.book || {};
   const userName = formatUserName(loan.user);
   const statusClass = loan.status === 'RETURNED' ? 'returned' : 'active';
-  const statusLabel = loan.status === 'RETURNED' ? 'Returned' : 'Borrowed';
+  const statusLabel = loan.status === 'RETURNED' ? '已归还' : '借阅中';
   return `
     <article class="loan-card">
       <div class="loan-cover">${BookUi.renderBookImage(book)}</div>
       <div class="loan-body">
         <div class="loan-head">
           <div>
-            <h3>${escapeHtml(book.name || 'Untitled Book')}</h3>
-            <div class="muted">${escapeHtml(book.author?.name || 'Unknown Author')} | ${escapeHtml(userName)}</div>
+            <h3>${escapeHtml(book.name || '未命名图书')}</h3>
+            <div class="muted">${escapeHtml(book.author?.name || '未知作者')} | ${escapeHtml(userName)}</div>
           </div>
           <span class="loan-status ${statusClass}">${statusLabel}</span>
         </div>
         <div class="loan-meta">
-          <span class="tag">Loan #${escapeHtml(loan.id ?? '-')}</span>
-          <span class="tag">User #${escapeHtml(loan.user?.id ?? '-')}</span>
-          <span class="tag">Borrowed: ${escapeHtml(formatDateTime(loan.borrowedAt))}</span>
-          <span class="tag">Due: ${escapeHtml(formatDateTime(loan.dueDate))}</span>
-          <span class="tag">Renew Count: ${escapeHtml(loan.renewCount ?? 0)}</span>
+          <span class="tag">借阅编号 #${escapeHtml(loan.id ?? '-')}</span>
+          <span class="tag">用户编号 #${escapeHtml(loan.user?.id ?? '-')}</span>
+          <span class="tag">借出时间：${escapeHtml(formatDateTime(loan.borrowedAt))}</span>
+          <span class="tag">应还时间：${escapeHtml(formatDateTime(loan.dueDate))}</span>
+          <span class="tag">续借次数：${escapeHtml(loan.renewCount ?? 0)}</span>
         </div>
-        ${loan.returnedAt ? `<div class="muted">Returned at ${escapeHtml(formatDateTime(loan.returnedAt))}</div>` : ''}
+        ${loan.returnedAt ? `<div class="muted">归还时间：${escapeHtml(formatDateTime(loan.returnedAt))}</div>` : ''}
       </div>
     </article>`;
 }
@@ -111,19 +124,19 @@ function renderAdminReservationItem(reservation) {
       <div class="loan-body">
         <div class="loan-head">
           <div>
-            <h3>${escapeHtml(book.name || 'Untitled Book')}</h3>
-            <div class="muted">${escapeHtml(book.author?.name || 'Unknown Author')} | ${escapeHtml(userName)}</div>
+            <h3>${escapeHtml(book.name || '未命名图书')}</h3>
+            <div class="muted">${escapeHtml(book.author?.name || '未知作者')} | ${escapeHtml(userName)}</div>
           </div>
-          <span class="loan-status ${statusClass}">${escapeHtml(reservation.status || 'ACTIVE')}</span>
+          <span class="loan-status ${statusClass}">${escapeHtml(formatReservationStatus(reservation.status))}</span>
         </div>
         <div class="loan-meta">
-          <span class="tag">Reservation #${escapeHtml(reservation.id ?? '-')}</span>
-          <span class="tag">User #${escapeHtml(reservation.user?.id ?? '-')}</span>
-          <span class="tag">Requested: ${escapeHtml(formatDateTime(reservation.requestedAt))}</span>
-          <span class="tag">Available: ${escapeHtml(`${book.availableCopies ?? 0}/${book.totalCopies ?? 0}`)}</span>
+          <span class="tag">预约编号 #${escapeHtml(reservation.id ?? '-')}</span>
+          <span class="tag">用户编号 #${escapeHtml(reservation.user?.id ?? '-')}</span>
+          <span class="tag">预约时间：${escapeHtml(formatDateTime(reservation.requestedAt))}</span>
+          <span class="tag">可借库存：${escapeHtml(`${book.availableCopies ?? 0}/${book.totalCopies ?? 0}`)}</span>
         </div>
-        ${reservation.fulfilledAt ? `<div class="muted">Fulfilled at ${escapeHtml(formatDateTime(reservation.fulfilledAt))}</div>` : ''}
-        ${reservation.cancelledAt ? `<div class="muted">Cancelled at ${escapeHtml(formatDateTime(reservation.cancelledAt))}</div>` : ''}
+        ${reservation.fulfilledAt ? `<div class="muted">完成时间：${escapeHtml(formatDateTime(reservation.fulfilledAt))}</div>` : ''}
+        ${reservation.cancelledAt ? `<div class="muted">取消时间：${escapeHtml(formatDateTime(reservation.cancelledAt))}</div>` : ''}
       </div>
     </article>`;
 }
@@ -135,7 +148,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   try {
     const currentUser = await BookApi.fetchCurrentUser();
     if (!currentUser || currentUser.role !== 'ADMIN') {
-      BookUi.showMessage('admin-message', 'error', 'Admin access is required.');
+      BookUi.showMessage('admin-message', 'error', '只有管理员可以访问后台管理页面。');
       setTimeout(() => {
         window.location.href = 'index.html';
       }, 800);
@@ -209,7 +222,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const selectedId = categorySelect.value;
     const filteredCategories = filterItemsByQuery(categories, categorySearchInput.value, selectedId ? [selectedId] : []);
     categorySelect.innerHTML = filteredCategories.map(category => (
-      `<option value="${category.id}">${escapeHtml(category.name)}</option>`
+      `<option value="${category.id}">${escapeHtml(BookUi.localizeCategoryName(category.name))}</option>`
     )).join('');
     if (selectedId && filteredCategories.some(category => String(category.id) === String(selectedId))) {
       categorySelect.value = String(selectedId);
@@ -224,7 +237,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const options = filteredPublishers.map(publisher => (
       `<option value="${publisher.id}">${escapeHtml(publisher.name)}</option>`
     )).join('');
-    publisherSelect.innerHTML = `<option value="">No Publisher</option>${options}`;
+    publisherSelect.innerHTML = `<option value="">无出版社</option>${options}`;
     publisherSelect.value = selectedId || '';
   }
 
@@ -238,7 +251,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const selectedTags = tags.filter(tag => selectedIds.includes(tag.id));
     tagSummary.innerHTML = selectedTags.length
       ? selectedTags.map(tag => `<span class="tag">${escapeHtml(tag.name)}</span>`).join('')
-      : '<span class="muted">No tags selected.</span>';
+      : '<span class="muted">暂未选择标签。</span>';
   }
 
   function resetBookForm() {
@@ -362,31 +375,31 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   async function removeBook(id) {
-    if (!window.confirm(`Soft delete book #${id}?`)) return;
+    if (!window.confirm(`确认软删除图书 #${id} 吗？`)) return;
     await BookApi.apiRequest(`/api/book/${id}`, { method: 'DELETE' });
     await loadBooks();
   }
 
   async function removeAuthor(id) {
-    if (!window.confirm(`Soft delete author #${id}?`)) return;
+    if (!window.confirm(`确认软删除作者 #${id} 吗？`)) return;
     await BookApi.apiRequest(`/api/author/${id}`, { method: 'DELETE' });
     await loadAuthors();
   }
 
   async function removeCategory(id) {
-    if (!window.confirm(`Soft delete category #${id}?`)) return;
+    if (!window.confirm(`确认软删除分类 #${id} 吗？`)) return;
     await BookApi.apiRequest(`/api/category/${id}`, { method: 'DELETE' });
     await loadCategories();
   }
 
   async function removePublisher(id) {
-    if (!window.confirm(`Soft delete publisher #${id}?`)) return;
+    if (!window.confirm(`确认软删除出版社 #${id} 吗？`)) return;
     await BookApi.apiRequest(`/api/publisher/${id}`, { method: 'DELETE' });
     await loadPublishers();
   }
 
   async function removeTag(id) {
-    if (!window.confirm(`Soft delete tag #${id}?`)) return;
+    if (!window.confirm(`确认软删除标签 #${id} 吗？`)) return;
     await BookApi.apiRequest(`/api/tag/${id}`, { method: 'DELETE' });
     await loadTags();
   }
@@ -406,33 +419,33 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     bookList.innerHTML = filteredBooks.length
       ? filteredBooks.map(book => {
-        const publisherLabel = book.publisher?.name || 'No publisher';
+        const publisherLabel = book.publisher?.name || '无出版社';
         const tagLabels = (book.tags || []).map(tag => `<span class="tag">${escapeHtml(tag.name)}</span>`).join('');
         return `
           <article class="admin-item">
             <div class="admin-item-head">
               <div>
                 <h3>${escapeHtml(book.name)}</h3>
-                <div class="muted">#${book.id} | ${escapeHtml(book.author?.name || 'Unknown Author')} | ${escapeHtml(book.category?.name || 'Unknown Category')}</div>
+                <div class="muted">#${book.id} | ${escapeHtml(book.author?.name || '未知作者')} | ${escapeHtml(BookUi.localizeCategoryName(book.category?.name))}</div>
               </div>
               <div class="admin-actions">
-                <button type="button" data-edit-book="${book.id}">Edit</button>
-                <button type="button" class="danger" data-delete-book="${book.id}">Delete</button>
+                <button type="button" data-edit-book="${book.id}">编辑</button>
+                <button type="button" class="danger" data-delete-book="${book.id}">删除</button>
               </div>
             </div>
             <div class="admin-meta">
-              <span class="tag">ISBN: ${escapeHtml(book.isbn || 'No ISBN')}</span>
-              <span class="tag">Publisher: ${escapeHtml(publisherLabel)}</span>
-              <span class="tag">Price: ${escapeHtml(book.price ?? '-')}</span>
-              <span class="tag">Rate: ${escapeHtml(book.rate ?? '-')}</span>
-              <span class="tag">Pages: ${escapeHtml(book.pagesNumber ?? '-')}</span>
-              <span class="tag">Available: ${escapeHtml(book.availableCopies ?? '-')} / ${escapeHtml(book.totalCopies ?? '-')}</span>
+              <span class="tag">ISBN：${escapeHtml(book.isbn || '暂无 ISBN')}</span>
+              <span class="tag">出版社：${escapeHtml(publisherLabel)}</span>
+              <span class="tag">价格：${escapeHtml(book.price ?? '-')}</span>
+              <span class="tag">评分：${escapeHtml(book.rate ?? '-')}</span>
+              <span class="tag">页数：${escapeHtml(book.pagesNumber ?? '-')}</span>
+              <span class="tag">可借库存：${escapeHtml(book.availableCopies ?? '-')} / ${escapeHtml(book.totalCopies ?? '-')}</span>
             </div>
-            <div class="tags">${tagLabels || '<span class="muted">No tags assigned.</span>'}</div>
+            <div class="tags">${tagLabels || '<span class="muted">暂无标签。</span>'}</div>
             <div class="muted">${escapeHtml(truncateText(book.description, 180))}</div>
           </article>`;
       }).join('')
-      : '<div class="muted">No books matched the current search.</div>';
+      : '<div class="muted">当前搜索条件下没有匹配图书。</div>';
 
     bookList.querySelectorAll('[data-edit-book]').forEach(button => {
       button.addEventListener('click', () => editBook(button.dataset.editBook));
@@ -441,7 +454,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       button.addEventListener('click', async () => {
         try {
           await removeBook(button.dataset.deleteBook);
-          BookUi.showMessage('admin-message', 'success', 'Book deleted.');
+          BookUi.showMessage('admin-message', 'success', '图书删除成功。');
         } catch (error) {
           BookUi.showMessage('admin-message', 'error', error.message);
         }
@@ -467,16 +480,16 @@ document.addEventListener('DOMContentLoaded', async () => {
           <div class="admin-item-head">
             <div>
               <h3>${escapeHtml(author.name)}</h3>
-              <div class="muted">#${author.id} | ${escapeHtml(author.country || 'Unknown Country')} | ${escapeHtml(author.gender || 'Unknown Gender')}</div>
+              <div class="muted">#${author.id} | ${escapeHtml(author.country || '未知国家')} | ${escapeHtml(formatGender(author.gender))}</div>
             </div>
             <div class="admin-actions">
-              <button type="button" data-edit-author="${author.id}">Edit</button>
-              <button type="button" class="danger" data-delete-author="${author.id}">Delete</button>
+              <button type="button" data-edit-author="${author.id}">编辑</button>
+              <button type="button" class="danger" data-delete-author="${author.id}">删除</button>
             </div>
           </div>
           <div class="muted">${escapeHtml(truncateText(author.description))}</div>
         </article>`).join('')
-      : '<div class="muted">No authors matched the current search.</div>';
+      : '<div class="muted">当前搜索条件下没有匹配作者。</div>';
 
     authorList.querySelectorAll('[data-edit-author]').forEach(button => {
       button.addEventListener('click', () => editAuthor(button.dataset.editAuthor));
@@ -488,7 +501,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           renderAuthorOptions();
           resetAuthorForm();
           resetBookForm();
-          BookUi.showMessage('admin-message', 'success', 'Author deleted.');
+          BookUi.showMessage('admin-message', 'success', '作者删除成功。');
         } catch (error) {
           BookUi.showMessage('admin-message', 'error', error.message);
         }
@@ -512,17 +525,17 @@ document.addEventListener('DOMContentLoaded', async () => {
         <article class="admin-item">
           <div class="admin-item-head">
             <div>
-              <h3>${escapeHtml(category.name)}</h3>
+              <h3>${escapeHtml(BookUi.localizeCategoryName(category.name))}</h3>
               <div class="muted">#${category.id}</div>
             </div>
             <div class="admin-actions">
-              <button type="button" data-edit-category="${category.id}">Edit</button>
-              <button type="button" class="danger" data-delete-category="${category.id}">Delete</button>
+              <button type="button" data-edit-category="${category.id}">编辑</button>
+              <button type="button" class="danger" data-delete-category="${category.id}">删除</button>
             </div>
           </div>
-          <div class="muted">${escapeHtml(truncateText(category.description || 'No description.'))}</div>
+          <div class="muted">${escapeHtml(truncateText(category.description || '暂无说明。'))}</div>
         </article>`).join('')
-      : '<div class="muted">No categories matched the current search.</div>';
+      : '<div class="muted">当前搜索条件下没有匹配分类。</div>';
 
     categoryList.querySelectorAll('[data-edit-category]').forEach(button => {
       button.addEventListener('click', () => editCategory(button.dataset.editCategory));
@@ -534,7 +547,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           renderCategoryOptions();
           resetCategoryForm();
           resetBookForm();
-          BookUi.showMessage('admin-message', 'success', 'Category deleted.');
+          BookUi.showMessage('admin-message', 'success', '分类删除成功。');
         } catch (error) {
           BookUi.showMessage('admin-message', 'error', error.message);
         }
@@ -561,16 +574,16 @@ document.addEventListener('DOMContentLoaded', async () => {
           <div class="admin-item-head">
             <div>
               <h3>${escapeHtml(publisher.name)}</h3>
-              <div class="muted">#${publisher.id} | ${escapeHtml(publisher.country || 'Unknown Country')}</div>
+              <div class="muted">#${publisher.id} | ${escapeHtml(publisher.country || '未知国家')}</div>
             </div>
             <div class="admin-actions">
-              <button type="button" data-edit-publisher="${publisher.id}">Edit</button>
-              <button type="button" class="danger" data-delete-publisher="${publisher.id}">Delete</button>
+              <button type="button" data-edit-publisher="${publisher.id}">编辑</button>
+              <button type="button" class="danger" data-delete-publisher="${publisher.id}">删除</button>
             </div>
           </div>
-          <div class="muted">${escapeHtml(truncateText(publisher.description || publisher.websiteUrl || 'No description.'))}</div>
+          <div class="muted">${escapeHtml(truncateText(publisher.description || publisher.websiteUrl || '暂无说明。'))}</div>
         </article>`).join('')
-      : '<div class="muted">No publishers matched the current search.</div>';
+      : '<div class="muted">当前搜索条件下没有匹配出版社。</div>';
 
     publisherList.querySelectorAll('[data-edit-publisher]').forEach(button => {
       button.addEventListener('click', () => editPublisher(button.dataset.editPublisher));
@@ -582,7 +595,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           renderPublisherOptions();
           resetPublisherForm();
           resetBookForm();
-          BookUi.showMessage('admin-message', 'success', 'Publisher deleted.');
+          BookUi.showMessage('admin-message', 'success', '出版社删除成功。');
         } catch (error) {
           BookUi.showMessage('admin-message', 'error', error.message);
         }
@@ -610,13 +623,13 @@ document.addEventListener('DOMContentLoaded', async () => {
               <div class="muted">#${tag.id}</div>
             </div>
             <div class="admin-actions">
-              <button type="button" data-edit-tag="${tag.id}">Edit</button>
-              <button type="button" class="danger" data-delete-tag="${tag.id}">Delete</button>
+              <button type="button" data-edit-tag="${tag.id}">编辑</button>
+              <button type="button" class="danger" data-delete-tag="${tag.id}">删除</button>
             </div>
           </div>
-          <div class="muted">${escapeHtml(truncateText(tag.description || 'No description.'))}</div>
+          <div class="muted">${escapeHtml(truncateText(tag.description || '暂无说明。'))}</div>
         </article>`).join('')
-      : '<div class="muted">No tags matched the current search.</div>';
+      : '<div class="muted">当前搜索条件下没有匹配标签。</div>';
 
     tagList.querySelectorAll('[data-edit-tag]').forEach(button => {
       button.addEventListener('click', () => editTag(button.dataset.editTag));
@@ -628,7 +641,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           renderTagOptions();
           resetTagForm();
           resetBookForm();
-          BookUi.showMessage('admin-message', 'success', 'Tag deleted.');
+          BookUi.showMessage('admin-message', 'success', '标签删除成功。');
         } catch (error) {
           BookUi.showMessage('admin-message', 'error', error.message);
         }
@@ -677,10 +690,10 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   async function loadCirculation() {
-    adminActiveLoans.innerHTML = '<div class="muted">Loading active loans...</div>';
-    adminLoanHistory.innerHTML = '<div class="muted">Loading loan history...</div>';
-    adminActiveReservations.innerHTML = '<div class="muted">Loading active reservations...</div>';
-    adminReservationHistory.innerHTML = '<div class="muted">Loading reservation history...</div>';
+    adminActiveLoans.innerHTML = '<div class="muted">正在加载当前借阅...</div>';
+    adminLoanHistory.innerHTML = '<div class="muted">正在加载借阅历史...</div>';
+    adminActiveReservations.innerHTML = '<div class="muted">正在加载当前预约...</div>';
+    adminReservationHistory.innerHTML = '<div class="muted">正在加载预约历史...</div>';
 
     const [activeLoanRes, loanHistoryRes, activeReservationRes, reservationHistoryRes] = await Promise.all([
       BookApi.apiRequest('/api/loan/admin/active'),
@@ -696,16 +709,16 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     adminActiveLoans.innerHTML = activeLoans.length
       ? activeLoans.map(loan => renderAdminLoanItem(loan)).join('')
-      : '<div class="muted">No active loans.</div>';
+      : '<div class="muted">暂无当前借阅记录。</div>';
     adminLoanHistory.innerHTML = loanHistory.length
       ? loanHistory.map(loan => renderAdminLoanItem(loan)).join('')
-      : '<div class="muted">No returned loans yet.</div>';
+      : '<div class="muted">暂无已归还借阅记录。</div>';
     adminActiveReservations.innerHTML = activeReservations.length
       ? activeReservations.map(reservation => renderAdminReservationItem(reservation)).join('')
-      : '<div class="muted">No active reservations.</div>';
+      : '<div class="muted">暂无当前预约记录。</div>';
     adminReservationHistory.innerHTML = reservationHistory.length
       ? reservationHistory.map(reservation => renderAdminReservationItem(reservation)).join('')
-      : '<div class="muted">No reservation history yet.</div>';
+      : '<div class="muted">暂无预约历史记录。</div>';
   }
 
   bookForm.addEventListener('submit', async event => {
@@ -737,7 +750,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         method: bookId ? 'PUT' : 'POST',
         body: payload
       });
-      BookUi.showMessage('admin-message', 'success', bookId ? 'Book updated.' : 'Book created.');
+      BookUi.showMessage('admin-message', 'success', bookId ? '图书更新成功。' : '图书创建成功。');
       resetBookForm();
       await loadBooks();
     } catch (error) {
@@ -759,7 +772,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         method: categoryId ? 'PUT' : 'POST',
         body: payload
       });
-      BookUi.showMessage('admin-message', 'success', categoryId ? 'Category updated.' : 'Category created.');
+      BookUi.showMessage('admin-message', 'success', categoryId ? '分类更新成功。' : '分类创建成功。');
       resetCategoryForm();
       await loadCategories();
     } catch (error) {
@@ -789,7 +802,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         method: authorId ? 'PUT' : 'POST',
         body: payload
       });
-      BookUi.showMessage('admin-message', 'success', authorId ? 'Author updated.' : 'Author created.');
+      BookUi.showMessage('admin-message', 'success', authorId ? '作者更新成功。' : '作者创建成功。');
       resetAuthorForm();
       await loadAuthors();
     } catch (error) {
@@ -813,7 +826,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         method: publisherId ? 'PUT' : 'POST',
         body: payload
       });
-      BookUi.showMessage('admin-message', 'success', publisherId ? 'Publisher updated.' : 'Publisher created.');
+      BookUi.showMessage('admin-message', 'success', publisherId ? '出版社更新成功。' : '出版社创建成功。');
       resetPublisherForm();
       await loadPublishers();
     } catch (error) {
@@ -835,7 +848,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         method: tagId ? 'PUT' : 'POST',
         body: payload
       });
-      BookUi.showMessage('admin-message', 'success', tagId ? 'Tag updated.' : 'Tag created.');
+      BookUi.showMessage('admin-message', 'success', tagId ? '标签更新成功。' : '标签创建成功。');
       resetTagForm();
       await loadTags();
     } catch (error) {

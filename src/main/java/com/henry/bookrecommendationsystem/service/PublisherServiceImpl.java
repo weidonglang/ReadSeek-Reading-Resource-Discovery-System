@@ -11,11 +11,6 @@ import org.springframework.stereotype.Service;
 import javax.persistence.EntityExistsException;
 import java.util.List;
 import java.util.Optional;
-
-/**
- * @author Codex
- * @since 01/04/2026
- */
 @Slf4j
 @Service
 public class PublisherServiceImpl implements PublisherService {

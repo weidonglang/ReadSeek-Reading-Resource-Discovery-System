@@ -7,11 +7,6 @@ import com.henry.bookrecommendationsystem.service.base.BaseService;
 import com.henry.bookrecommendationsystem.transformer.BookLoanTransformer;
 
 import java.util.List;
-
-/**
- * @author Codex
- * @since 02/04/2026
- */
 public interface BookLoanService extends BaseService<BookLoan, BookLoanDto, BookLoanDao, BookLoanTransformer> {
     BookLoanDto borrowBook(Long bookId);
 

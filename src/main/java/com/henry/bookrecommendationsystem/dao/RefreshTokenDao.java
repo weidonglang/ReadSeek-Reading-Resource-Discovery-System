@@ -3,11 +3,6 @@ package com.henry.bookrecommendationsystem.dao;
 import com.henry.bookrecommendationsystem.entity.RefreshToken;
 
 import java.util.Optional;
-
-/**
- * @author Henry Azer
- * @since 05/11/2022
- */
 public interface RefreshTokenDao {
     Optional<RefreshToken> findRefreshTokenByEmail(String email);
 

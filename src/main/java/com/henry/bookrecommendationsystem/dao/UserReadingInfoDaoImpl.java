@@ -5,11 +5,6 @@ import com.henry.bookrecommendationsystem.repository.UserReadingInfoRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
-
-/**
- * @author Henry Azer
- * @since 10/11/2022
- */
 @Component
 public class UserReadingInfoDaoImpl implements UserReadingInfoDao {
     private final UserReadingInfoRepository userReadingInfoRepository;

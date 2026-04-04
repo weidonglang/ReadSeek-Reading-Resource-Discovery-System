@@ -19,11 +19,6 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 
 import java.util.Collections;
-
-/**
- * @author Henry Azer
- * @since 04/11/2022
- */
 @Configuration
 @EnableWebSecurity
 @AllArgsConstructor

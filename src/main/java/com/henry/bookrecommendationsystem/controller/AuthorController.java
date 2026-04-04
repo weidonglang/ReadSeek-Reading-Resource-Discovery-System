@@ -13,11 +13,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
-
-/**
- * @author Henry Azer
- * @since 07/11/2022
- */
 @Slf4j
 @CrossOrigin
 @RestController

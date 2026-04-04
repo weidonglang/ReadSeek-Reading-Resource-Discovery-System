@@ -14,11 +14,6 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityExistsException;
 import java.util.Optional;
-
-/**
- * @author Henry Azer
- * @since 07/11/2022
- */
 @Slf4j
 @Service
 public class AuthorServiceImpl implements AuthorService {

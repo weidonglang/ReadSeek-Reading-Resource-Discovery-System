@@ -13,10 +13,10 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     const res = await BookApi.apiRequest('/api/book/recommendations/overview');
     wrap.innerHTML = BookUi.renderRecommendationShelves(res?.body, {
-      emptyMessage: 'No recommendations available for the current account.'
+      emptyMessage: '当前账号暂无可展示推荐结果。'
     });
   } catch (error) {
-    wrap.innerHTML = `<div class="card">Failed to load recommendations: ${escapeHtml(error.message)}</div>`;
+    wrap.innerHTML = `<div class="card">推荐结果加载失败：${escapeHtml(error.message)}</div>`;
   }
 });
 

@@ -10,11 +10,6 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityExistsException;
 import java.util.Optional;
-
-/**
- * @author Henry Azer
- * @since 10/11/2022
- */
 @Slf4j
 @Service
 public class BookCategoryServiceImpl implements BookCategoryService {

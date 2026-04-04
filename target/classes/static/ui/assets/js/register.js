@@ -4,11 +4,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const genderSelect = document.getElementById('gender');
   const maritalSelect = document.getElementById('maritalStatus');
-  ['MALE', 'FEMALE', 'OTHERS'].forEach(value => {
-    genderSelect.insertAdjacentHTML('beforeend', `<option value="${value}">${value}</option>`);
+  [
+    { value: 'MALE', label: '男' },
+    { value: 'FEMALE', label: '女' },
+    { value: 'OTHERS', label: '其他' }
+  ].forEach(option => {
+    genderSelect.insertAdjacentHTML('beforeend', `<option value="${option.value}">${option.label}</option>`);
   });
-  ['SINGLE', 'MARRIED', 'IN_RELATIONSHIP'].forEach(value => {
-    maritalSelect.insertAdjacentHTML('beforeend', `<option value="${value}">${value}</option>`);
+  [
+    { value: 'SINGLE', label: '未婚' },
+    { value: 'MARRIED', label: '已婚' },
+    { value: 'IN_RELATIONSHIP', label: '恋爱中' }
+  ].forEach(option => {
+    maritalSelect.insertAdjacentHTML('beforeend', `<option value="${option.value}">${option.label}</option>`);
   });
 
   document.getElementById('email').addEventListener('blur', async event => {

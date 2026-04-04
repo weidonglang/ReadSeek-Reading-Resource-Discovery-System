@@ -11,11 +11,6 @@ import com.henry.bookrecommendationsystem.service.base.BaseService;
 import com.henry.bookrecommendationsystem.transformer.BookTransformer;
 
 import java.util.List;
-
-/**
- * @author Henry Azer
- * @since 07/11/2022
- */
 public interface BookService extends BaseService<Book, BookDto, BookDao, BookTransformer> {
     List<BookDto> findAllBooksByAuthorId(Long authorId);
 

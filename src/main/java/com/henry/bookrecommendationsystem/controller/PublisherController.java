@@ -10,11 +10,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
-
-/**
- * @author Codex
- * @since 01/04/2026
- */
 @Slf4j
 @CrossOrigin
 @RestController

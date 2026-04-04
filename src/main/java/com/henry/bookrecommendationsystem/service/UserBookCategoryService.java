@@ -8,11 +8,6 @@ import com.henry.bookrecommendationsystem.service.base.BaseService;
 import com.henry.bookrecommendationsystem.transformer.UserBookCategoryTransformer;
 
 import java.util.List;
-
-/**
- * @author Henry Azer
- * @since 10/11/2022
- */
 public interface UserBookCategoryService extends BaseService<UserBookCategory, UserBookCategoryDto, UserBookCategoryDao, UserBookCategoryTransformer> {
     List<UserBookCategoryDto> findAllUserBookCategories();
 

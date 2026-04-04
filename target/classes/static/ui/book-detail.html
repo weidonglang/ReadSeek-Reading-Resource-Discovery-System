@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Book Detail - Book Nook</title>
+  <title>图书详情 - 图书推荐系统</title>
   <link rel="stylesheet" href="assets/css/styles.css" />
 </head>
 <body data-page="books">
@@ -12,16 +12,16 @@
       <div id="detail-message" class="alert hidden"></div>
       <div class="page-header">
         <div>
-          <h1 class="page-title">Book Detail</h1>
-          <p class="page-subtitle">View the full record for a book, including publisher and tags.</p>
+          <h1 class="page-title">图书详情</h1>
+          <p class="page-subtitle">查看图书完整信息，包括出版社、标签、库存、借阅与预约状态。</p>
         </div>
         <div class="form-actions">
-          <button id="borrow-book-btn" type="button">Borrow Book</button>
-          <button id="reserve-book-btn" class="hidden" type="button">Reserve Book</button>
-          <button id="cancel-reservation-btn" class="hidden" type="button">Cancel Reservation</button>
-          <a id="go-rate" href="rate-book.html"><button class="primary" type="button">Rate This Book</button></a>
-          <a href="borrowings.html"><button type="button">My Loans</button></a>
-          <a href="books.html"><button type="button">Back to Books</button></a>
+          <button id="borrow-book-btn" type="button">借阅图书</button>
+          <button id="reserve-book-btn" class="hidden" type="button">预约图书</button>
+          <button id="cancel-reservation-btn" class="hidden" type="button">取消预约</button>
+          <a id="go-rate" href="rate-book.html"><button class="primary" type="button">去评分</button></a>
+          <a href="borrowings.html"><button type="button">我的借阅</button></a>
+          <a href="books.html"><button type="button">返回图书列表</button></a>
         </div>
       </div>
       <section class="detail-layout">
@@ -29,7 +29,7 @@
           <div id="detail-cover" class="detail-cover"></div>
         </article>
         <article class="card">
-          <h2 id="detail-title">Loading...</h2>
+          <h2 id="detail-title">加载中...</h2>
           <p id="detail-desc" class="hero-copy"></p>
           <div id="detail-meta" class="info-list"></div>
         </article>
@@ -37,8 +37,8 @@
       <section style="margin-top:20px;">
         <div class="page-header">
           <div>
-            <h2 class="page-title" style="font-size:24px;">Related Recommendations</h2>
-            <p class="page-subtitle">Same-category and shared-tag recommendations are generated for the current book.</p>
+            <h2 class="page-title" style="font-size:24px;">相关图书推荐</h2>
+            <p class="page-subtitle">基于当前图书的同分类和相似标签生成推荐结果。</p>
           </div>
         </div>
         <div id="similar-books" class="recommend-stack"></div>
@@ -46,8 +46,8 @@
       <section style="margin-top:20px;">
         <div class="page-header">
           <div>
-            <h2 class="page-title" style="font-size:24px;">More From This Author</h2>
-            <p class="page-subtitle">A direct author shelf is still useful as a simple browsing fallback.</p>
+            <h2 class="page-title" style="font-size:24px;">同作者更多作品</h2>
+            <p class="page-subtitle">补充展示同一作者的其他图书，方便继续浏览。</p>
           </div>
         </div>
         <div id="author-books" class="book-list"></div>

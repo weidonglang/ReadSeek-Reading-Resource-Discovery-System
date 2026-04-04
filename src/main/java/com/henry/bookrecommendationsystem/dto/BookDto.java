@@ -8,11 +8,6 @@ import lombok.Setter;
 
 import java.util.Date;
 import java.util.Set;
-
-/**
- * @author Henry Azer
- * @since 05/11/2022
- */
 @Getter
 @Setter
 @NoArgsConstructor
@@ -35,4 +30,6 @@ public class BookDto extends BaseDto {
     private Integer totalCopies;
     private Integer availableCopies;
     private Set<TagDto> tags;
+    private String recommendationSource;
+    private String recommendationReason;
 }

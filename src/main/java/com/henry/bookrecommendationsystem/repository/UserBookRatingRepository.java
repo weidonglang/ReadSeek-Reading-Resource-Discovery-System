@@ -6,12 +6,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
-
-
-/**
- * @author Henry Azer
- * @since 09/11/2022
- */
 @Repository
 public interface UserBookRatingRepository extends JpaRepository<UserBookRate, Long> {
     Optional<UserBookRate> findUserBookRateByUserIdAndBookId(Long userId, Long bookId);

@@ -43,6 +43,24 @@
     }
   }
 
+  function toChineseApiMessage(message) {
+    const text = String(message || '').trim();
+    if (!text) return '接口请求失败';
+    if (/Invalid email or password/i.test(text)) return '邮箱或密码错误。';
+    if (/User email already exists/i.test(text)) return '该邮箱已经被注册。';
+    if (/User not found/i.test(text) || /User not exists/i.test(text)) return '用户不存在或登录状态已失效。';
+    if (/Book not found/i.test(text)) return '未找到对应图书。';
+    if (/Author not found/i.test(text)) return '未找到对应作者。';
+    if (/Category not found/i.test(text)) return '未找到对应分类。';
+    if (/Publisher not found/i.test(text)) return '未找到对应出版社。';
+    if (/Tag not found/i.test(text)) return '未找到对应标签。';
+    if (/Total copies must be at least 1/i.test(text)) return '图书总库存至少为 1。';
+    if (/Total copies cannot be lower than active borrowed copies/i.test(text)) return '总库存不能小于当前借出数量。';
+    if (/You can only update your own profile/i.test(text)) return '普通用户只能修改自己的个人资料。';
+    if (/Reservation deleted successfully/i.test(text)) return '预约已删除。';
+    return text;
+  }
+
   async function apiRequest(path, options = {}) {
     const method = options.method || 'GET';
     const headers = { 'Content-Type': 'application/json', ...(options.headers || {}) };
@@ -66,7 +84,7 @@
     }
 
     if (!response.ok) {
-      const message = data?.message || data?.error || `请求失败：${response.status}`;
+      const message = toChineseApiMessage(data?.message || data?.error || `请求失败：${response.status}`);
       if (response.status === 401 || response.status === 403) {
         clearSession();
       }
@@ -74,7 +92,7 @@
     }
 
     if (data && data.success === false) {
-      throw new Error(data.message || '接口返回失败');
+      throw new Error(toChineseApiMessage(data.message || '接口返回失败'));
     }
 
     return data;
@@ -104,6 +122,21 @@
       console.warn('logout api failed:', e.message);
     } finally {
       clearSession();
+    }
+  }
+
+  async function logBehavior(payload) {
+    if (!payload || !payload.actionType) {
+      return null;
+    }
+    try {
+      return await apiRequest('/api/behavior-log', {
+        method: 'POST',
+        body: payload
+      });
+    } catch (error) {
+      console.warn('behavior log failed:', error.message);
+      return null;
     }
   }
 
@@ -146,6 +179,7 @@
     saveCurrentUser,
     getCurrentUserCache,
     clearSession,
+    logBehavior,
     toDisplayDate,
     safeText,
     parsePaginationResult

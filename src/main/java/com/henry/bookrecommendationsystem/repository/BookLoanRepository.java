@@ -9,11 +9,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
-
-/**
- * @author Codex
- * @since 02/04/2026
- */
 @Repository
 public interface BookLoanRepository extends JpaRepository<BookLoan, Long> {
     Optional<BookLoan> findByIdAndUserIdAndMarkedAsDeletedFalse(Long id, Long userId);

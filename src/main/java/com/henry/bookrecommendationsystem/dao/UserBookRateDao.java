@@ -6,11 +6,6 @@ import com.henry.bookrecommendationsystem.repository.UserBookRatingRepository;
 
 import java.util.List;
 import java.util.Optional;
-
-/**
- * @author Henry Azer
- * @since 08/11/2022
- */
 public interface UserBookRateDao extends BaseDao<UserBookRate, UserBookRatingRepository> {
     Optional<UserBookRate> findUserBookRateByUserIdAndBookId(Long userId, Long bookId);
 

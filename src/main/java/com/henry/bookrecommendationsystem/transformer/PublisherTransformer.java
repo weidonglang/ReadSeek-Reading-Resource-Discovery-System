@@ -6,11 +6,6 @@ import com.henry.bookrecommendationsystem.transformer.base.BaseTransformer;
 import com.henry.bookrecommendationsystem.transformer.mapper.PublisherMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
-
-/**
- * @author Codex
- * @since 01/04/2026
- */
 @Component
 @AllArgsConstructor
 public class PublisherTransformer implements BaseTransformer<Publisher, PublisherDto, PublisherMapper> {

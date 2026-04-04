@@ -19,11 +19,6 @@ import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.Optional;
-
-/**
- * @author Henry Azer
- * @since 04/11/2022
- */
 @Slf4j
 @Service
 public class UserServiceImpl implements UserService {

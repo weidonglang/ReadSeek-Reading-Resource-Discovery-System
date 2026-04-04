@@ -13,6 +13,7 @@ import com.henry.bookrecommendationsystem.enums.BookLoanStatus;
 import com.henry.bookrecommendationsystem.enums.BookReservationStatus;
 import com.henry.bookrecommendationsystem.transformer.BookLoanTransformer;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityExistsException;
@@ -21,11 +22,6 @@ import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
-
-/**
- * @author Codex
- * @since 02/04/2026
- */
 @Slf4j
 @Service
 public class BookLoanServiceImpl implements BookLoanService {
@@ -40,14 +36,27 @@ public class BookLoanServiceImpl implements BookLoanService {
     private final BookService bookService;
     private final BookDao bookDao;
     private final BookReservationDao bookReservationDao;
+    private final UserBehaviorLogService userBehaviorLogService;
 
     public BookLoanServiceImpl(BookLoanDao bookLoanDao, BookLoanTransformer bookLoanTransformer, UserService userService, BookService bookService, BookDao bookDao, BookReservationDao bookReservationDao) {
+        this(bookLoanDao, bookLoanTransformer, userService, bookService, bookDao, bookReservationDao, null);
+    }
+
+    @Autowired
+    public BookLoanServiceImpl(BookLoanDao bookLoanDao,
+                               BookLoanTransformer bookLoanTransformer,
+                               UserService userService,
+                               BookService bookService,
+                               BookDao bookDao,
+                               BookReservationDao bookReservationDao,
+                               UserBehaviorLogService userBehaviorLogService) {
         this.bookLoanDao = bookLoanDao;
         this.bookLoanTransformer = bookLoanTransformer;
         this.userService = userService;
         this.bookService = bookService;
         this.bookDao = bookDao;
         this.bookReservationDao = bookReservationDao;
+        this.userBehaviorLogService = userBehaviorLogService;
     }
 
     @Override
@@ -111,7 +120,11 @@ public class BookLoanServiceImpl implements BookLoanService {
         loanDto.setRenewCount(0);
         loanDto.setStatus(BookLoanStatus.BORROWED);
 
-        return getTransformer().transformEntityToDto(getDao().create(getTransformer().transformDtoToEntity(loanDto)));
+        BookLoanDto createdLoan = getTransformer().transformEntityToDto(getDao().create(getTransformer().transformDtoToEntity(loanDto)));
+        if (userBehaviorLogService != null) {
+            userBehaviorLogService.recordBookBorrow(bookId, "用户成功借阅图书");
+        }
+        return createdLoan;
     }
 
     @Override

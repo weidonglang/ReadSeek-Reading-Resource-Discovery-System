@@ -13,11 +13,6 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-
-/**
- * @author Henry Azer
- * @since 04/11/2022
- */
 @Component
 public class JWTAuthenticationEntryPoint implements AuthenticationEntryPoint, Serializable {
 

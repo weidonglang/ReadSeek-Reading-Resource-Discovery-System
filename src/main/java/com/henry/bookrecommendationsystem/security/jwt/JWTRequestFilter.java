@@ -17,11 +17,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.time.LocalDateTime;
-
-/**
- * @author Henry Azer
- * @since 04/11/2022
- */
 @Component
 @AllArgsConstructor
 public class JWTRequestFilter extends OncePerRequestFilter {

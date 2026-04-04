@@ -8,11 +8,6 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-
-/**
- * @author Henry Azer
- * @since 10/11/2022
- */
 @Repository
 public interface UserBookCategoryRepository extends JpaRepository<UserBookCategory, Long> {
     List<UserBookCategory> findAllByUserIdAndMarkedAsDeletedFalse(Long userId);

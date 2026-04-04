@@ -13,11 +13,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
-
-/**
- * @author Henry Azer
- * @since 04/11/2022
- */
 @Slf4j
 @Component
 public class JWTAuthenticationManagerImpl implements JWTAuthenticationManager {

@@ -5,11 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-/**
- * @author Henry Azer
- * @since 10/11/2022
- */
 @Getter
 @Setter
 @NoArgsConstructor

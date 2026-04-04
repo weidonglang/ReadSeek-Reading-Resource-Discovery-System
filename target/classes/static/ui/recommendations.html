@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Recommendations - Book Nook</title>
+  <title>我的推荐 - 图书推荐系统</title>
   <link rel="stylesheet" href="assets/css/styles.css" />
 </head>
 <body data-page="recommendations">
@@ -11,14 +11,14 @@
     <main class="page">
       <div class="page-header">
         <div>
-          <h1 class="page-title">Recommendations</h1>
-          <p class="page-subtitle">This page keeps the logic intentionally simple and inspectable: popularity, reading preferences, and user-activity signals.</p>
+          <h1 class="page-title">我的推荐</h1>
+          <p class="page-subtitle">推荐结果按热门度、阅读偏好、协同过滤和用户行为信号分组展示，便于解释和演示。</p>
         </div>
       </div>
       <section class="card">
-        <h2>Recommendation Notes</h2>
-        <p class="muted">Current user: <span id="recommend-user">Loading...</span></p>
-        <p class="muted">No collaborative filtering or complex model is used here. These shelves are based on explicit rules so they are easy to explain and debug.</p>
+        <h2>推荐说明</h2>
+        <p class="muted">当前用户：<span id="recommend-user">加载中...</span></p>
+        <p class="muted">当前页面将不同推荐来源拆成多个书架展示，并为每本书补充推荐理由，方便答辩时说明逻辑。</p>
       </section>
       <section style="margin-top:20px;">
         <div id="recommend-result" class="recommend-stack"></div>

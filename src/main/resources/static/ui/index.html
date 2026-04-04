@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Home - Book Nook</title>
+  <title>首页 - 图书推荐系统</title>
   <link rel="stylesheet" href="assets/css/styles.css" />
 </head>
 <body data-page="home">
@@ -12,34 +12,34 @@
       <div id="home-message" class="alert hidden"></div>
       <section class="hero">
         <article class="card">
-          <h1 class="hero-title">Discover Books With Simple Signals</h1>
-          <p class="hero-copy">This home page now separates category browsing from recommendation shelves. It keeps the recommendation logic simple: popularity, reading preferences, and activity-driven suggestions.</p>
+          <h1 class="hero-title">发现适合你的图书</h1>
+          <p class="hero-copy">首页将分类浏览和推荐书架分开展示，推荐逻辑以热门度、阅读偏好和用户行为为主，便于演示和解释。</p>
           <form id="quick-search-form" class="inline-search">
-            <input id="quick-keyword" placeholder="Search by title, ISBN, author, category, publisher, or tag" />
-            <button class="primary" type="submit">Search Books</button>
+            <input id="quick-keyword" placeholder="按书名、ISBN、作者、分类、出版社或标签搜索" />
+            <button class="primary" type="submit">搜索图书</button>
           </form>
         </article>
         <article class="card">
-          <h2>Current Coverage</h2>
+          <h2>当前功能覆盖</h2>
           <div class="stats">
-            <div class="stat"><div class="stat-label">Authentication</div><div class="stat-value">Ready</div></div>
-            <div class="stat"><div class="stat-label">Borrowing</div><div class="stat-value">Ready</div></div>
-            <div class="stat"><div class="stat-label">Inventory</div><div class="stat-value">Ready</div></div>
-            <div class="stat"><div class="stat-label">Recommendations</div><div class="stat-value">Basic</div></div>
+            <div class="stat"><div class="stat-label">登录鉴权</div><div class="stat-value">已完成</div></div>
+            <div class="stat"><div class="stat-label">借阅预约</div><div class="stat-value">已完成</div></div>
+            <div class="stat"><div class="stat-label">库存管理</div><div class="stat-value">已完成</div></div>
+            <div class="stat"><div class="stat-label">图书推荐</div><div class="stat-value">基础版</div></div>
           </div>
         </article>
       </section>
       <section class="card">
-        <h2>Categories</h2>
+        <h2>图书分类</h2>
         <div id="category-list" class="tags"></div>
       </section>
       <section style="margin-top:20px;">
         <div class="page-header">
           <div>
-            <h2 class="page-title" style="font-size:24px;">Recommendation Preview</h2>
-            <p class="page-subtitle">Popular books, reading-preference matches, and activity-based suggestions are shown as separate shelves.</p>
+            <h2 class="page-title" style="font-size:24px;">推荐预览</h2>
+            <p class="page-subtitle">热门图书、阅读偏好匹配和行为推荐会以不同书架形式展示。</p>
           </div>
-          <a href="recommendations.html"><button type="button">Open Full Recommendation Page</button></a>
+          <a href="recommendations.html"><button type="button">打开完整推荐页</button></a>
         </div>
         <div id="recommend-list" class="recommend-stack"></div>
       </section>

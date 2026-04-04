@@ -32,11 +32,6 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
-
-/**
- * @author Henry Azer
- * @since 11/11/2022
- */
 @Slf4j
 class AuthorControllerTest {
 

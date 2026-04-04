@@ -6,11 +6,6 @@ import com.henry.bookrecommendationsystem.transformer.base.BaseTransformer;
 import com.henry.bookrecommendationsystem.transformer.mapper.UserBookCategoryMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
-
-/**
- * @author Henry Azer
- * @since 10/11/2022
- */
 @Component
 @AllArgsConstructor
 public class UserBookCategoryTransformer implements BaseTransformer<UserBookCategory, UserBookCategoryDto, UserBookCategoryMapper> {

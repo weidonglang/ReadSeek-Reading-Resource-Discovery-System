@@ -7,11 +7,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-
-/**
- * @author Henry Azer
- * @since 10/11/2022
- */
 @Slf4j
 @Service
 public class UserBookCategoryServiceImpl implements UserBookCategoryService {
