@@ -43,7 +43,7 @@
     return `
       <header class="topbar">
         <div class="topbar-inner">
-          <a class="brand" href="${user ? 'index.html' : 'login.html'}">图书推荐系统</a>
+          <a class="brand" href="${user ? 'index.html' : 'login.html'}">新书推荐系统</a>
           <nav class="nav-links">${protectedLinks}${guestLinks}</nav>
           <div class="user-meta">
             <span class="muted">${userLabel}</span>
@@ -54,7 +54,7 @@
   }
 
   function footerTemplate() {
-    return '<footer class="footer"><div class="footer-inner">图书推荐系统演示前端，基于当前 Spring Boot 接口运行。</div></footer>';
+    return '<footer class="footer"><div class="footer-inner">新书推荐系统演示前端，适合用于毕业设计展示与功能讲解。</div></footer>';
   }
 
   function injectLayout() {

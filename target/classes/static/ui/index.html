@@ -3,45 +3,93 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>首页 - 图书推荐系统</title>
+  <title>首页 - 新书推荐系统</title>
   <link rel="stylesheet" href="assets/css/styles.css" />
 </head>
 <body data-page="home">
   <div class="app-shell">
     <main class="page">
       <div id="home-message" class="alert hidden"></div>
-      <section class="hero">
-        <article class="card">
-          <h1 class="hero-title">发现适合你的图书</h1>
-          <p class="hero-copy">首页将分类浏览和推荐书架分开展示，推荐逻辑以热门度、阅读偏好和用户行为为主，便于演示和解释。</p>
+
+      <section class="home-hero">
+        <article class="card home-splash">
+          <div class="hero-badge">个性化阅读发现</div>
+          <h1 class="hero-title">发现下一本值得阅读的书，从推荐、分类与检索开始</h1>
+          <p class="hero-copy">
+            这里汇集了热门图书、阅读偏好匹配和分类探索入口，
+            方便你快速进入感兴趣的内容，再继续查看图书详情、评分与借阅信息。
+          </p>
+
           <form id="quick-search-form" class="inline-search">
             <input id="quick-keyword" placeholder="按书名、ISBN、作者、分类、出版社或标签搜索" />
             <button class="primary" type="submit">搜索图书</button>
           </form>
-        </article>
-        <article class="card">
-          <h2>当前功能覆盖</h2>
-          <div class="stats">
-            <div class="stat"><div class="stat-label">登录鉴权</div><div class="stat-value">已完成</div></div>
-            <div class="stat"><div class="stat-label">借阅预约</div><div class="stat-value">已完成</div></div>
-            <div class="stat"><div class="stat-label">库存管理</div><div class="stat-value">已完成</div></div>
-            <div class="stat"><div class="stat-label">图书推荐</div><div class="stat-value">基础版</div></div>
+
+          <div class="hero-actions">
+            <a class="button-link primary" href="recommendations.html">查看完整推荐页</a>
+            <a class="button-link" href="books.html">进入图书检索</a>
           </div>
         </article>
-      </section>
-      <section class="card">
-        <h2>图书分类</h2>
-        <div id="category-list" class="tags"></div>
-      </section>
-      <section style="margin-top:20px;">
-        <div class="page-header">
-          <div>
-            <h2 class="page-title" style="font-size:24px;">推荐预览</h2>
-            <p class="page-subtitle">热门图书、阅读偏好匹配和行为推荐会以不同书架形式展示。</p>
-          </div>
-          <a href="recommendations.html"><button type="button">打开完整推荐页</button></a>
+
+        <div class="home-hero-side">
+          <article class="card home-overview-card">
+            <div class="panel-kicker">欢迎回来</div>
+            <h2 id="home-user-name">正在加载首页信息</h2>
+            <p id="home-user-copy" class="muted">
+              系统会根据你的评分、借阅和阅读偏好，自动整理推荐预览。
+            </p>
+            <div id="home-summary-stats" class="home-stat-grid"></div>
+          </article>
+
+          <article class="card demo-route-card">
+            <div class="panel-kicker">常用入口</div>
+            <div class="demo-route-list">
+              <a class="demo-route-item" href="recommendations.html">
+                <strong>推荐总览</strong>
+                <span>查看完整推荐书架，快速浏览热门、偏好匹配和相似图书。</span>
+              </a>
+              <a class="demo-route-item" href="books.html">
+                <strong>图书检索</strong>
+                <span>按关键词、作者、分类、出版社和标签继续筛选图书。</span>
+              </a>
+              <a class="demo-route-item" href="borrowings.html">
+                <strong>借阅与预约</strong>
+                <span>查看当前借阅、历史记录以及预约与续借信息。</span>
+              </a>
+            </div>
+          </article>
         </div>
-        <div id="recommend-list" class="recommend-stack"></div>
+      </section>
+
+      <section class="card home-category-section">
+        <div class="section-head home-section-head">
+          <div>
+            <h2>按分类探索图书</h2>
+            <div class="muted">从题材出发快速进入图书列表，继续查看筛选、详情与推荐结果。</div>
+          </div>
+          <a class="button-link" href="books.html">查看全部图书</a>
+        </div>
+        <div id="category-list" class="category-grid"></div>
+      </section>
+
+      <section class="home-preview-section">
+        <div class="page-header home-preview-header">
+          <div>
+            <h2 class="page-title home-preview-title">个性化推荐预览</h2>
+            <p class="page-subtitle">
+              先在首页查看重点推荐和代表性书架，再进入完整推荐页浏览更多内容。
+            </p>
+          </div>
+          <div class="hero-actions compact">
+            <a class="button-link primary" href="recommendations.html">打开完整推荐页</a>
+            <a class="button-link" href="profile.html">完善阅读偏好</a>
+          </div>
+        </div>
+
+        <div class="home-preview-layout">
+          <aside id="recommend-summary" class="card recommend-summary-card"></aside>
+          <div id="recommend-list" class="recommend-stack home-recommend-stack"></div>
+        </div>
       </section>
     </main>
   </div>

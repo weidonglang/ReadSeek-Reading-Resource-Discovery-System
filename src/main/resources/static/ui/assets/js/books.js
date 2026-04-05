@@ -89,7 +89,7 @@ function renderAuthorPicker() {
         <input type="checkbox" name="author" value="${author.id}" ${selectedIds.has(String(author.id)) ? 'checked' : ''}>
         <span>${escapeHtml(author.name)}</span>
       </label>`).join('')
-    : '<div class="muted">当前搜索条件下没有匹配作者。</div>';
+    : '<div class="muted">当前搜索条件下没有匹配的作者。</div>';
 
   const selectedAuthors = allAuthors.filter(author => selectedIds.has(String(author.id)));
   summary.innerHTML = selectedAuthors.length
@@ -105,10 +105,18 @@ function setAuthorSelection(authorIds) {
   renderAuthorPicker();
 }
 
-function applyQueryDefaults(authors) {
+function setCheckboxSelection(name, ids) {
+  const selectedSet = new Set((ids || []).map(String));
+  document.querySelectorAll(`input[name="${name}"]`).forEach(input => {
+    input.checked = selectedSet.has(input.value);
+  });
+}
+
+function applyQueryDefaults(authors, categories) {
   const params = new URLSearchParams(window.location.search);
   const keyword = params.get('keyword');
   const authorId = params.get('authorId');
+  const categoryId = params.get('categoryId');
 
   if (keyword) {
     document.getElementById('keyword').value = keyword;
@@ -118,7 +126,16 @@ function applyQueryDefaults(authors) {
     const availableIds = new Set(authors.map(author => String(author.id)));
     if (availableIds.has(String(authorId))) {
       setAuthorSelection([authorId]);
-      BookUi.showMessage('books-message', 'info', '已根据上一页操作自动选中作者筛选条件。');
+      BookUi.showMessage('books-message', 'info', '已根据来源页面自动选中对应作者。');
+    }
+  }
+
+  if (categoryId) {
+    const categoryMap = new Map((categories || []).map(category => [String(category.id), category]));
+    if (categoryMap.has(String(categoryId))) {
+      setCheckboxSelection('category', [categoryId]);
+      const category = categoryMap.get(String(categoryId));
+      BookUi.showMessage('books-message', 'info', `已为你自动选中分类：${BookUi.localizeCategoryName(category.name)}`);
     }
   }
 }
@@ -176,7 +193,7 @@ function buildSearchHitReason(book, payload) {
     reasons.push(`当前按评分排序，平均分 ${book.rate ?? '-'}`);
   }
 
-  return reasons.length ? reasons.join('；') : '来自基础数据库检索结果，可点击进入详情页。';
+  return reasons.length ? reasons.join('；') : '来自基础检索结果，可继续查看图书详情。';
 }
 
 async function loadBooks(pageNumber = 1) {
@@ -196,7 +213,7 @@ async function loadBooks(pageNumber = 1) {
     target.innerHTML = pagination.list.length
       ? pagination.list.map(book => BookUi.renderBookCard(book, {
         source: 'search:books-page',
-        sourceLabel: 'PostgreSQL 模糊检索',
+        sourceLabel: '图书检索',
         reason: buildSearchHitReason(book, payload),
         actionType: 'BOOK_DETAIL_CLICK',
         searchKeyword
@@ -258,7 +275,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     renderCheckboxList('tag-filters', 'tag', allTags);
     renderSelectOptions('publisher-filter', allPublishers, '暂无可选出版社');
     renderAuthorPicker();
-    applyQueryDefaults(allAuthors);
+    applyQueryDefaults(allAuthors, allCategories);
   } catch (error) {
     BookUi.showMessage('books-message', 'warning', `筛选条件加载失败：${error.message}`);
   }
