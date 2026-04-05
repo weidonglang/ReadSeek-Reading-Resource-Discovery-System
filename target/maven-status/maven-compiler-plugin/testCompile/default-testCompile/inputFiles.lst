@@ -1,5 +1,5 @@
-F:\code\java\new-book-recommendation-system\src\test\java\com\henry\bookrecommendationsystem\BookRecommendationSystemApplicationTests.java
-F:\code\java\new-book-recommendation-system\src\test\java\com\henry\bookrecommendationsystem\controller\AuthorControllerTest.java
-F:\code\java\new-book-recommendation-system\src\test\java\com\henry\bookrecommendationsystem\controller\BookControllerTest.java
-F:\code\java\new-book-recommendation-system\src\test\java\com\henry\bookrecommendationsystem\controller\UserControllerTest.java
-F:\code\java\new-book-recommendation-system\src\test\java\com\henry\bookrecommendationsystem\controller\AuthenticationControllerTest.java
+F:\code\java\new-book-recommendation-system\src\test\java\com\weidonglang\NewBookRecommendationSystem\controller\BookControllerTest.java
+F:\code\java\new-book-recommendation-system\src\test\java\com\weidonglang\NewBookRecommendationSystem\controller\AuthenticationControllerTest.java
+F:\code\java\new-book-recommendation-system\src\test\java\com\weidonglang\NewBookRecommendationSystem\controller\AuthorControllerTest.java
+F:\code\java\new-book-recommendation-system\src\test\java\com\weidonglang\NewBookRecommendationSystem\controller\UserControllerTest.java
+F:\code\java\new-book-recommendation-system\src\test\java\com\weidonglang\NewBookRecommendationSystem\BookRecommendationSystemApplicationTests.java

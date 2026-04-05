@@ -1,0 +1,11 @@
+package com.weidonglang.NewBookRecommendationSystem.transformer.mapper;
+
+import com.weidonglang.NewBookRecommendationSystem.dto.BookLoanDto;
+import com.weidonglang.NewBookRecommendationSystem.entity.BookLoan;
+import com.weidonglang.NewBookRecommendationSystem.transformer.mapper.base.BaseMapper;
+import com.weidonglang.NewBookRecommendationSystem.transformer.mapper.base.GenericMapperConfiguration;
+import org.mapstruct.InjectionStrategy;
+import org.mapstruct.Mapper;
+@Mapper(componentModel = "spring", injectionStrategy = InjectionStrategy.CONSTRUCTOR, config = GenericMapperConfiguration.class)
+public interface BookLoanMapper extends BaseMapper<BookLoan, BookLoanDto> {
+}

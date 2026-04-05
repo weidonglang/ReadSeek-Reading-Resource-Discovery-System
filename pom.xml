@@ -9,7 +9,7 @@
         <relativePath/>
     </parent>
 
-    <groupId>com.henry</groupId>
+    <groupId>com.weidonglang</groupId>
     <artifactId>book-recommendation-system</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>book-recommendation-system</name>
