@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Recommendations - 图书推荐系统</title>
+  <title>我的推荐 - 图书推荐系统</title>
   <link rel="stylesheet" href="assets/css/common.css" />
   <link rel="stylesheet" href="assets/css/recommendations.css" />
 </head>
@@ -12,24 +12,14 @@
     <main class="page">
       <div class="page-header">
         <div>
-          <h1 class="page-title">My Recommendations</h1>
-          <p class="page-subtitle">Review recommendation shelves grouped by popularity, reading preferences, collaborative signals, and personal activity.</p>
+          <h1 class="page-title">我的推荐</h1>
+          <p class="page-subtitle">推荐结果按热门度、阅读偏好、协同过滤和用户行为信号分组展示，便于解释和演示。</p>
         </div>
       </div>
       <section class="card">
-        <h2>Recommendation Notes</h2>
-        <p class="muted">Current user: <span id="recommend-user">Loading...</span></p>
-        <p id="recommend-window-copy" class="muted">Popular shelves use a behavior-driven window so you can compare how short-term and medium-term activity change the results.</p>
-        <div class="form-actions">
-          <label class="field" for="recommend-window">
-            <span class="label">Popular Window</span>
-            <select id="recommend-window">
-              <option value="7">Last 7 days</option>
-              <option value="30" selected>Last 30 days</option>
-              <option value="90">Last 90 days</option>
-            </select>
-          </label>
-        </div>
+        <h2>推荐说明</h2>
+        <p class="muted">当前用户：<span id="recommend-user">加载中...</span></p>
+        <p class="muted">当前页面将不同推荐来源拆成多个书架展示，并为每本书补充推荐理由，方便答辩时说明逻辑。</p>
       </section>
       <section class="recommendations-section">
         <div id="recommend-result" class="recommend-stack"></div>

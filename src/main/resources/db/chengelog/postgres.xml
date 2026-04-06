@@ -19,6 +19,5 @@
     <include file="db/chengelog/postgres/20260404_add_book_isbn.sql"/>
     <include file="db/chengelog/postgres/20260404_create_search_log.sql"/>
     <include file="db/chengelog/postgres/20260404_create_user_behavior_log.sql"/>
-    <include file="db/chengelog/postgres/20260406_enhance_search_log_structure.sql"/>
 
 </databaseChangeLog>

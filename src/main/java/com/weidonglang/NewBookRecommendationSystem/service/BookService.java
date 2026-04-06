@@ -18,17 +18,9 @@ public interface BookService extends BaseService<Book, BookDto, BookDao, BookTra
 
     List<BookDto> findAllRecommendedBooks();
 
-    default List<BookDto> findPopularBooks(Integer limit) {
-        return findPopularBooks(limit, 30);
-    }
+    List<BookDto> findPopularBooks(Integer limit);
 
-    List<BookDto> findPopularBooks(Integer limit, Integer recentDays);
-
-    default BookRecommendationOverviewDto findRecommendationOverview() {
-        return findRecommendationOverview(30);
-    }
-
-    BookRecommendationOverviewDto findRecommendationOverview(Integer recentDays);
+    BookRecommendationOverviewDto findRecommendationOverview();
 
     BookRecommendationOverviewDto findBookSimilarityRecommendations(Long bookId);
 }

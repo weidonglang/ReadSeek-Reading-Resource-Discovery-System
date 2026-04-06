@@ -5,7 +5,6 @@ import com.weidonglang.NewBookRecommendationSystem.dto.BookDto;
 import com.weidonglang.NewBookRecommendationSystem.dto.BookFilterPaginationRequest;
 import com.weidonglang.NewBookRecommendationSystem.dto.BookRecommendationOverviewDto;
 import com.weidonglang.NewBookRecommendationSystem.dto.BookRecommendationShelfDto;
-import com.weidonglang.NewBookRecommendationSystem.dto.SearchLogRecordDto;
 import com.weidonglang.NewBookRecommendationSystem.dto.UserBookRateDto;
 import com.weidonglang.NewBookRecommendationSystem.dto.base.pagination.FilterPaginationRequest;
 import com.weidonglang.NewBookRecommendationSystem.dto.base.pagination.SortingBy;
@@ -110,27 +109,27 @@ class BookControllerTest {
     @Test
     void testFindPopularBooks() {
         List<BookDto> books = List.of(new BookDto());
-        when(bookService.findPopularBooks(6, null)).thenReturn(books);
+        when(bookService.findPopularBooks(6)).thenReturn(books);
 
-        ApiResponse response = controller.findPopularBooks(6, null);
+        ApiResponse response = controller.findPopularBooks(6);
 
         assertTrue(response.getSuccess());
         assertEquals("Popular books fetched successfully.", response.getMessage());
         assertSame(books, response.getBody());
-        verify(bookService).findPopularBooks(6, null);
+        verify(bookService).findPopularBooks(6);
     }
 
     @Test
     void testFindRecommendationOverview() {
         BookRecommendationOverviewDto overview = new BookRecommendationOverviewDto("推荐书架", List.of(new BookRecommendationShelfDto()));
-        when(bookService.findRecommendationOverview(null)).thenReturn(overview);
+        when(bookService.findRecommendationOverview()).thenReturn(overview);
 
-        ApiResponse response = controller.findRecommendationOverview(null);
+        ApiResponse response = controller.findRecommendationOverview();
 
         assertTrue(response.getSuccess());
         assertEquals("Recommendation overview fetched successfully.", response.getMessage());
         assertSame(overview, response.getBody());
-        verify(bookService).findRecommendationOverview(null);
+        verify(bookService).findRecommendationOverview();
     }
 
     @Test
@@ -200,14 +199,13 @@ class BookControllerTest {
         assertSame(paginationResponse, response.getBody());
         verify(bookService).findAllBooksPaginatedAndFiltered(request);
 
-        ArgumentCaptor<SearchLogRecordDto> searchLogCaptor = ArgumentCaptor.forClass(SearchLogRecordDto.class);
-        verify(userBehaviorLogService).recordSearch(searchLogCaptor.capture());
-        SearchLogRecordDto searchLogRecordDto = searchLogCaptor.getValue();
-        assertEquals("harry potter", searchLogRecordDto.getKeyword());
-        assertEquals("book-search", searchLogRecordDto.getSource());
-        assertTrue("1,2".equals(searchLogRecordDto.getCategoryIds()) || "2,1".equals(searchLogRecordDto.getCategoryIds()));
-        assertEquals(1L, searchLogRecordDto.getResultCount());
-        assertEquals("SortingBy(fieldName=name, direction=ASC, isNumber=false)", searchLogRecordDto.getSortBy());
+        ArgumentCaptor<String> keywordCaptor = ArgumentCaptor.forClass(String.class);
+        ArgumentCaptor<String> sourceCaptor = ArgumentCaptor.forClass(String.class);
+        ArgumentCaptor<String> reasonCaptor = ArgumentCaptor.forClass(String.class);
+        verify(userBehaviorLogService).recordSearch(keywordCaptor.capture(), sourceCaptor.capture(), reasonCaptor.capture());
+        assertEquals("harry potter", keywordCaptor.getValue());
+        assertEquals("book-search", sourceCaptor.getValue());
+        assertTrue(reasonCaptor.getValue().contains("categories=[1, 2]") || reasonCaptor.getValue().contains("categories=[2, 1]"));
     }
 
     @Test

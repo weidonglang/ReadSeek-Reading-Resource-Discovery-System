@@ -29,7 +29,6 @@ import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.Function;
@@ -41,7 +40,6 @@ public class BookServiceImpl implements BookService {
     private static final int MIN_OF_RECOMMENDED_BOOKS = 14;
     private static final int DEFAULT_RECOMMENDATION_LIMIT = 8;
     private static final int DETAIL_RECOMMENDATION_LIMIT = 6;
-    private static final int DEFAULT_POPULAR_RECENT_DAYS = 30;
     private static final Map<String, String> CATEGORY_NAME_MAP = Map.of(
             "Science Fiction", "科幻",
             "Horror", "恐怖",
@@ -63,7 +61,6 @@ public class BookServiceImpl implements BookService {
     private final UserService userService;
     private final UserBookRateDao userBookRateDao;
     private final CollaborativeFilteringRecommender collaborativeFilteringRecommender;
-    private final BehaviorAnalyticsService behaviorAnalyticsService;
 
     @Autowired
     public BookServiceImpl(BookTransformer bookTransformer,
@@ -76,8 +73,7 @@ public class BookServiceImpl implements BookService {
                            BookLoanDao bookLoanDao,
                            UserService userService,
                            UserBookRateDao userBookRateDao,
-                           CollaborativeFilteringRecommender collaborativeFilteringRecommender,
-                           BehaviorAnalyticsService behaviorAnalyticsService) {
+                           CollaborativeFilteringRecommender collaborativeFilteringRecommender) {
         this.bookTransformer = bookTransformer;
         this.bookDao = bookDao;
         this.bookCategoryService = bookCategoryService;
@@ -89,7 +85,6 @@ public class BookServiceImpl implements BookService {
         this.userService = userService;
         this.userBookRateDao = userBookRateDao;
         this.collaborativeFilteringRecommender = collaborativeFilteringRecommender;
-        this.behaviorAnalyticsService = behaviorAnalyticsService;
     }
 
     public BookServiceImpl(BookTransformer bookTransformer,
@@ -103,15 +98,15 @@ public class BookServiceImpl implements BookService {
                            UserService userService,
                            UserBookRateDao userBookRateDao) {
         this(bookTransformer, bookDao, authorService, bookCategoryService, publisherService, tagService,
-                userReadingInfoService, bookLoanDao, userService, userBookRateDao, null, null);
+                userReadingInfoService, bookLoanDao, userService, userBookRateDao, null);
     }
 
     public BookServiceImpl(BookTransformer bookTransformer, BookDao bookDao, AuthorService authorService, BookCategoryService bookCategoryService, PublisherService publisherService, TagService tagService, UserReadingInfoService userReadingInfoService, BookLoanDao bookLoanDao) {
-        this(bookTransformer, bookDao, authorService, bookCategoryService, publisherService, tagService, userReadingInfoService, bookLoanDao, null, null, null, null);
+        this(bookTransformer, bookDao, authorService, bookCategoryService, publisherService, tagService, userReadingInfoService, bookLoanDao, null, null, null);
     }
 
     public BookServiceImpl(BookTransformer bookTransformer, BookDao bookDao, AuthorService authorService, UserReadingInfoService userReadingInfoService) {
-        this(bookTransformer, bookDao, authorService, null, null, null, userReadingInfoService, null, null, null, null, null);
+        this(bookTransformer, bookDao, authorService, null, null, null, userReadingInfoService, null, null, null, null);
     }
 
     @Override
@@ -226,48 +221,20 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public List<BookDto> findPopularBooks(Integer limit) {
-        return findPopularBooks(limit, DEFAULT_POPULAR_RECENT_DAYS);
-    }
-
-    @Override
-    public List<BookDto> findPopularBooks(Integer limit, Integer recentDays) {
         log.info("BookService: findPopularBooks() called");
-        int normalizedLimit = sanitizeLimit(limit, DEFAULT_RECOMMENDATION_LIMIT);
-        int normalizedRecentDays = recentDays == null || recentDays < 1 ? DEFAULT_POPULAR_RECENT_DAYS : recentDays;
-        if (behaviorAnalyticsService != null) {
-            List<BookDto> popularBooks = behaviorAnalyticsService.findPopularBooks(normalizedLimit, normalizedRecentDays);
-            if (!popularBooks.isEmpty()) {
-                return popularBooks;
-            }
-        }
-        return getTransformer().transformEntityToDto(findPopularBookEntities(normalizedLimit, Collections.emptySet()));
+        return getTransformer().transformEntityToDto(findPopularBookEntities(sanitizeLimit(limit, DEFAULT_RECOMMENDATION_LIMIT), Collections.emptySet()));
     }
 
     @Override
     public BookRecommendationOverviewDto findRecommendationOverview() {
-        return findRecommendationOverview(DEFAULT_POPULAR_RECENT_DAYS);
-    }
-
-    @Override
-    public BookRecommendationOverviewDto findRecommendationOverview(Integer recentDays) {
         log.info("BookService: findRecommendationOverview() called");
-        int normalizedRecentDays = recentDays == null || recentDays < 1 ? DEFAULT_POPULAR_RECENT_DAYS : recentDays;
         List<Book> activeBooks = findActiveBooks();
         List<BookRecommendationShelfDto> shelves = new ArrayList<>();
 
         List<Book> popularBooks = findPopularBookEntities(DEFAULT_RECOMMENDATION_LIMIT, Collections.emptySet());
-        if (behaviorAnalyticsService != null) {
-            List<BookDto> behaviorPopularBooks = behaviorAnalyticsService.findPopularBooks(DEFAULT_RECOMMENDATION_LIMIT, normalizedRecentDays);
-            if (!behaviorPopularBooks.isEmpty()) {
-                popularBooks = behaviorPopularBooks.stream()
-                        .map(bookDto -> getDao().findById(bookDto.getId()).orElse(null))
-                        .filter(Objects::nonNull)
-                        .collect(Collectors.toList());
-            }
-        }
         if (!popularBooks.isEmpty()) {
             shelves.add(buildShelf("popular", "近期热门",
-                    String.format("综合近 %d 天的借阅、详情点击和评分人数信号生成的热门图书榜单。权重策略：借阅 x5，点击 x3，评分人数 x2。", normalizedRecentDays),
+                    "综合评分人数、平均分和可借库存生成的热门图书榜单。",
                     popularBooks,
                     book -> String.format("近期热门：%d 位读者评分，平均分 %.1f，当前可借 %d/%d 本。",
                             safeLong(book.getUsersRateCount()),
@@ -307,7 +274,7 @@ public class BookServiceImpl implements BookService {
                             localizeCategoryName(book.getCategory() == null ? null : book.getCategory().getName()))));
         }
 
-        return new BookRecommendationOverviewDto(String.format("推荐书架（热门窗口 %d 天）", normalizedRecentDays), shelves);
+        return new BookRecommendationOverviewDto("推荐书架", shelves);
     }
 
     @Override
@@ -370,7 +337,7 @@ public class BookServiceImpl implements BookService {
             List<Book> fallbackBooks = findPopularBookEntities(DETAIL_RECOMMENDATION_LIMIT, excludedIds);
             if (!fallbackBooks.isEmpty()) {
                 shelves.add(buildShelf("fallback", "读者还在看",
-                        "当前图书相似邻居较少时，补充展示更热门的可浏览图书。",
+                        "当当前图书相似邻居较少时，补充展示更热门的可浏览图书。",
                         fallbackBooks,
                         book -> String.format("当前书籍邻近样本较少，补充展示近期更热门的《%s》。", safeString(book.getName()))));
             }

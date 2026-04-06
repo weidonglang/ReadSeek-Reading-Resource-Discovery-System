@@ -70,9 +70,6 @@ public interface BookRepository extends JpaRepository<Book, Long> {
                                                 @Param("toReadingDuration") Integer toReadingDuration,
                                                 @Param("deletedRecords") Boolean deletedRecords,
                                                 Pageable pageable);
-
-    @Query("SELECT b.id, COALESCE(b.usersRateCount, 0) FROM Book b WHERE b.markedAsDeleted = false ORDER BY COALESCE(b.usersRateCount, 0) DESC, COALESCE(b.rate, 0) DESC")
-    List<Object[]> aggregateRatedBooks(Pageable pageable);
 }
 /*
 weidonglang

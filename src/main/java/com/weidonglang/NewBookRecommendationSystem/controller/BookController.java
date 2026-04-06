@@ -4,11 +4,9 @@ import com.weidonglang.NewBookRecommendationSystem.controller.base.BaseControlle
 import com.weidonglang.NewBookRecommendationSystem.dto.BookDto;
 import com.weidonglang.NewBookRecommendationSystem.dto.BookFilterPaginationRequest;
 import com.weidonglang.NewBookRecommendationSystem.dto.BookRecommendationOverviewDto;
-import com.weidonglang.NewBookRecommendationSystem.dto.SearchLogRecordDto;
 import com.weidonglang.NewBookRecommendationSystem.dto.UserBookRateDto;
 import com.weidonglang.NewBookRecommendationSystem.dto.base.pagination.FilterPaginationRequest;
 import com.weidonglang.NewBookRecommendationSystem.dto.base.response.ApiResponse;
-import com.weidonglang.NewBookRecommendationSystem.dto.base.response.PaginationResponse;
 import com.weidonglang.NewBookRecommendationSystem.service.BookCategoryService;
 import com.weidonglang.NewBookRecommendationSystem.service.BookService;
 import com.weidonglang.NewBookRecommendationSystem.service.UserBehaviorLogService;
@@ -77,17 +75,16 @@ public class BookController implements BaseController<BookService> {
     }
 
     @GetMapping("/recommendations/popular")
-    public ApiResponse findPopularBooks(@RequestParam(defaultValue = "8") Integer limit,
-                                        @RequestParam(required = false) Integer recentDays) {
+    public ApiResponse findPopularBooks(@RequestParam(defaultValue = "8") Integer limit) {
         log.info("BookController: findPopularBooks() called");
         return new ApiResponse(true, LocalDateTime.now().toString(),
-                "Popular books fetched successfully.", getService().findPopularBooks(limit, recentDays));
+                "Popular books fetched successfully.", getService().findPopularBooks(limit));
     }
 
     @GetMapping("/recommendations/overview")
-    public ApiResponse findRecommendationOverview(@RequestParam(required = false) Integer recentDays) {
+    public ApiResponse findRecommendationOverview() {
         log.info("BookController: findRecommendationOverview() called");
-        BookRecommendationOverviewDto overview = getService().findRecommendationOverview(recentDays);
+        BookRecommendationOverviewDto overview = getService().findRecommendationOverview();
         return new ApiResponse(true, LocalDateTime.now().toString(),
                 "Recommendation overview fetched successfully.", overview);
     }
@@ -117,10 +114,9 @@ public class BookController implements BaseController<BookService> {
     @PostMapping("/find-all-paginated-filtered")
     public ApiResponse findAllBooksPaginatedAndFiltered(@RequestBody FilterPaginationRequest<BookFilterPaginationRequest> bookFilterPaginationRequest) {
         log.info("BookController: findAllBooksPaginatedAndFiltered() called");
-        PaginationResponse<BookDto> paginationResponse = getService().findAllBooksPaginatedAndFiltered(bookFilterPaginationRequest);
-        recordSearchBehavior(bookFilterPaginationRequest, paginationResponse);
+        recordSearchBehavior(bookFilterPaginationRequest);
         return new ApiResponse(true, LocalDateTime.now().toString(),
-                "Books paginated filtered fetched successfully.", paginationResponse);
+                "Books paginated filtered fetched successfully.", getService().findAllBooksPaginatedAndFiltered(bookFilterPaginationRequest));
     }
 
     @PostMapping
@@ -143,9 +139,8 @@ public class BookController implements BaseController<BookService> {
     @PreAuthorize("isAuthenticated()")
     public ApiResponse rateBook(@RequestBody UserBookRateDto userBookRateDto) {
         log.info("BookController: rateBook() called");
-        UserBookRateDto ratedBook = userBookRateService.rateBook(userBookRateDto);
         return new ApiResponse(true, LocalDateTime.now().toString(),
-                "Book rated successfully.", ratedBook);
+                "Book rated successfully.", userBookRateService.rateBook(userBookRateDto));
     }
 
     @PutMapping
@@ -165,33 +160,20 @@ public class BookController implements BaseController<BookService> {
                 "Book deleted successfully.", true);
     }
 
-    private void recordSearchBehavior(FilterPaginationRequest<BookFilterPaginationRequest> request,
-                                      PaginationResponse<BookDto> paginationResponse) {
+    private void recordSearchBehavior(FilterPaginationRequest<BookFilterPaginationRequest> request) {
         if (userBehaviorLogService == null || request == null) {
             return;
         }
 
         BookFilterPaginationRequest criteria = request.getCriteria();
-        userBehaviorLogService.recordSearch(new SearchLogRecordDto(
-                buildSearchKeyword(criteria),
-                "book-search",
-                buildSearchReason(request, paginationResponse),
-                joinCriteriaValues(criteria == null ? null : criteria.getCategories()),
-                joinCriteriaValues(criteria == null ? null : criteria.getAuthors()),
-                joinCriteriaValues(criteria == null ? null : criteria.getPublishers()),
-                joinCriteriaValues(criteria == null ? null : criteria.getTags()),
-                criteria == null ? null : criteria.getFromPrice(),
-                criteria == null ? null : criteria.getToPrice(),
-                criteria == null ? null : criteria.getFromPagesNumber(),
-                criteria == null ? null : criteria.getToPagesNumber(),
-                criteria == null ? null : criteria.getFromReadingDuration(),
-                criteria == null ? null : criteria.getToReadingDuration(),
-                stringifySorts(request),
-                request.getPageNumber(),
-                request.getPageSize(),
-                request.getDeletedRecords(),
-                paginationResponse == null ? null : paginationResponse.getTotalNumberOfElements()
-        ));
+        String keyword = buildSearchKeyword(criteria);
+        String reason = String.format("filters categories=%s authors=%s publishers=%s tags=%s sort=%s",
+                criteria == null ? null : criteria.getCategories(),
+                criteria == null ? null : criteria.getAuthors(),
+                criteria == null ? null : criteria.getPublishers(),
+                criteria == null ? null : criteria.getTags(),
+                request.getSortingByList());
+        userBehaviorLogService.recordSearch(keyword, "book-search", reason);
     }
 
     private String buildSearchKeyword(BookFilterPaginationRequest criteria) {
@@ -204,74 +186,28 @@ public class BookController implements BaseController<BookService> {
         }
 
         if (criteria.getAuthors() != null && !criteria.getAuthors().isEmpty()) {
-            return buildFilterKeyword("author", criteria.getAuthors());
+            return joinCriteriaValues(criteria.getAuthors());
         }
 
         if (criteria.getCategories() != null && !criteria.getCategories().isEmpty()) {
-            return buildFilterKeyword("category", criteria.getCategories());
+            return joinCriteriaValues(criteria.getCategories());
         }
 
         if (criteria.getTags() != null && !criteria.getTags().isEmpty()) {
-            return buildFilterKeyword("tag", criteria.getTags());
+            return joinCriteriaValues(criteria.getTags());
         }
 
         if (criteria.getPublishers() != null && !criteria.getPublishers().isEmpty()) {
-            return buildFilterKeyword("publisher", criteria.getPublishers());
-        }
-
-        if (criteria.getFromPrice() != null || criteria.getToPrice() != null
-                || criteria.getFromPagesNumber() != null || criteria.getToPagesNumber() != null
-                || criteria.getFromReadingDuration() != null || criteria.getToReadingDuration() != null) {
-            return "filtered-search";
+            return joinCriteriaValues(criteria.getPublishers());
         }
 
         return "browse-books";
     }
 
     private String joinCriteriaValues(Collection<?> values) {
-        if (values == null || values.isEmpty()) {
-            return null;
-        }
         return values.stream()
                 .map(String::valueOf)
                 .collect(Collectors.joining(","));
-    }
-
-    private String buildFilterKeyword(String prefix, Collection<?> values) {
-        String joinedValues = joinCriteriaValues(values);
-        if (joinedValues == null || joinedValues.isBlank()) {
-            return "filtered-search";
-        }
-        return prefix + ":" + joinedValues;
-    }
-
-    private String stringifySorts(FilterPaginationRequest<BookFilterPaginationRequest> request) {
-        if (request == null || request.getSortingByList() == null || request.getSortingByList().isEmpty()) {
-            return null;
-        }
-        return request.getSortingByList().stream()
-                .map(String::valueOf)
-                .collect(Collectors.joining(" | "));
-    }
-
-    private String buildSearchReason(FilterPaginationRequest<BookFilterPaginationRequest> request,
-                                     PaginationResponse<BookDto> paginationResponse) {
-        BookFilterPaginationRequest criteria = request == null ? null : request.getCriteria();
-        return String.format(
-                "filters categories=%s authors=%s publishers=%s tags=%s ranges price=%s-%s pages=%s-%s duration=%s-%s sort=%s results=%s",
-                criteria == null ? null : criteria.getCategories(),
-                criteria == null ? null : criteria.getAuthors(),
-                criteria == null ? null : criteria.getPublishers(),
-                criteria == null ? null : criteria.getTags(),
-                criteria == null ? null : criteria.getFromPrice(),
-                criteria == null ? null : criteria.getToPrice(),
-                criteria == null ? null : criteria.getFromPagesNumber(),
-                criteria == null ? null : criteria.getToPagesNumber(),
-                criteria == null ? null : criteria.getFromReadingDuration(),
-                criteria == null ? null : criteria.getToReadingDuration(),
-                stringifySorts(request),
-                paginationResponse == null ? null : paginationResponse.getTotalNumberOfElements()
-        );
     }
 
     private void recordBookClickBehavior(Long bookId, String source, String reason) {

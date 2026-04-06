@@ -1,6 +1,5 @@
 package com.weidonglang.NewBookRecommendationSystem.service;
 
-import com.weidonglang.NewBookRecommendationSystem.dto.SearchLogRecordDto;
 import com.weidonglang.NewBookRecommendationSystem.entity.Book;
 import com.weidonglang.NewBookRecommendationSystem.entity.SearchLog;
 import com.weidonglang.NewBookRecommendationSystem.entity.User;
@@ -54,55 +53,18 @@ public class UserBehaviorLogServiceImpl implements UserBehaviorLogService {
             }
 
             userBehaviorLogRepository.save(behaviorLog);
+            if (actionType == UserBehaviorActionType.SEARCH) {
+                SearchLog searchLog = new SearchLog();
+                optionalUser.ifPresent(searchLog::setUser);
+                searchLog.setKeyword(behaviorLog.getKeyword());
+                searchLog.setSource(behaviorLog.getSource());
+                searchLog.setReason(behaviorLog.getReason());
+                searchLog.setMarkedAsDeleted(false);
+                searchLogRepository.save(searchLog);
+            }
         } catch (Exception e) {
             log.warn("UserBehaviorLogService: skip behavior log action={} bookId={} source={} reason={} because {}",
                     actionType, bookId, source, reason, e.getMessage());
-        }
-    }
-
-    @Override
-    public void recordSearch(SearchLogRecordDto searchLogRecordDto) {
-        if (searchLogRecordDto == null) {
-            return;
-        }
-
-        try {
-            Optional<User> optionalUser = resolveCurrentUser();
-
-            UserBehaviorLog behaviorLog = new UserBehaviorLog();
-            behaviorLog.setActionType(UserBehaviorActionType.SEARCH);
-            behaviorLog.setKeyword(normalizeText(searchLogRecordDto.getKeyword(), 255));
-            behaviorLog.setSource(normalizeText(searchLogRecordDto.getSource(), 120));
-            behaviorLog.setReason(normalizeText(searchLogRecordDto.getReason(), 1000));
-            behaviorLog.setMarkedAsDeleted(false);
-            optionalUser.ifPresent(behaviorLog::setUser);
-            userBehaviorLogRepository.save(behaviorLog);
-
-            SearchLog searchLog = new SearchLog();
-            optionalUser.ifPresent(searchLog::setUser);
-            searchLog.setKeyword(behaviorLog.getKeyword());
-            searchLog.setSource(behaviorLog.getSource());
-            searchLog.setReason(behaviorLog.getReason());
-            searchLog.setCategoryIds(normalizeText(searchLogRecordDto.getCategoryIds(), 1000));
-            searchLog.setAuthorIds(normalizeText(searchLogRecordDto.getAuthorIds(), 1000));
-            searchLog.setPublisherIds(normalizeText(searchLogRecordDto.getPublisherIds(), 1000));
-            searchLog.setTagIds(normalizeText(searchLogRecordDto.getTagIds(), 1000));
-            searchLog.setFromPrice(searchLogRecordDto.getFromPrice());
-            searchLog.setToPrice(searchLogRecordDto.getToPrice());
-            searchLog.setFromPagesNumber(searchLogRecordDto.getFromPagesNumber());
-            searchLog.setToPagesNumber(searchLogRecordDto.getToPagesNumber());
-            searchLog.setFromReadingDuration(searchLogRecordDto.getFromReadingDuration());
-            searchLog.setToReadingDuration(searchLogRecordDto.getToReadingDuration());
-            searchLog.setSortBy(normalizeText(searchLogRecordDto.getSortBy(), 1000));
-            searchLog.setPageNumber(searchLogRecordDto.getPageNumber());
-            searchLog.setPageSize(searchLogRecordDto.getPageSize());
-            searchLog.setDeletedRecords(searchLogRecordDto.getDeletedRecords());
-            searchLog.setResultCount(searchLogRecordDto.getResultCount());
-            searchLog.setMarkedAsDeleted(false);
-            searchLogRepository.save(searchLog);
-        } catch (Exception e) {
-            log.warn("UserBehaviorLogService: skip structured search log source={} keyword={} because {}",
-                    searchLogRecordDto.getSource(), searchLogRecordDto.getKeyword(), e.getMessage());
         }
     }
 

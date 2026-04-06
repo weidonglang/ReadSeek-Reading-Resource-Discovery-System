@@ -19,8 +19,6 @@ public interface BookLoanRepository extends JpaRepository<BookLoan, Long> {
 
     Long countByBookIdAndStatusAndMarkedAsDeletedFalse(Long bookId, BookLoanStatus status);
 
-    Long countByMarkedAsDeletedFalse();
-
     @Query("SELECT bl FROM BookLoan bl WHERE bl.user.id = :userId AND bl.status = :status AND bl.markedAsDeleted = false ORDER BY bl.dueDate ASC, bl.borrowedAt DESC")
     List<BookLoan> findCurrentUserLoansByStatus(@Param("userId") Long userId, @Param("status") BookLoanStatus status);
 
@@ -32,21 +30,6 @@ public interface BookLoanRepository extends JpaRepository<BookLoan, Long> {
 
     @Query("SELECT bl FROM BookLoan bl WHERE bl.status = :status AND bl.markedAsDeleted = false ORDER BY bl.returnedAt DESC, bl.borrowedAt DESC")
     List<BookLoan> findAllLoanHistoryByStatusOrderByReturnedAtDesc(@Param("status") BookLoanStatus status);
-
-    @Query("SELECT bl.book.id, COUNT(bl.id) FROM BookLoan bl " +
-            "WHERE bl.markedAsDeleted = false " +
-            "GROUP BY bl.book.id ORDER BY COUNT(bl.id) DESC")
-    List<Object[]> aggregateBorrowedBooks(org.springframework.data.domain.Pageable pageable);
-
-    @Query("SELECT COUNT(bl.id) FROM BookLoan bl WHERE bl.markedAsDeleted = false AND bl.borrowedAt >= :fromDate")
-    Long countBorrowedBooksSince(@Param("fromDate") java.time.LocalDateTime fromDate);
-
-    @Query("SELECT bl.book.id, COUNT(bl.id) FROM BookLoan bl " +
-            "WHERE bl.markedAsDeleted = false " +
-            "AND bl.borrowedAt >= :fromDate " +
-            "GROUP BY bl.book.id ORDER BY COUNT(bl.id) DESC")
-    List<Object[]> aggregateBorrowedBooksSince(@Param("fromDate") java.time.LocalDateTime fromDate,
-                                               org.springframework.data.domain.Pageable pageable);
 }
 /*
 weidonglang
