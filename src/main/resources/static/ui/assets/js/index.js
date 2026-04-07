@@ -310,6 +310,167 @@ function setWeatherVisual(visual, temperature, copy) {
   copyEl.textContent = copy;
 }
 
+const WEATHER_COORDS_KEY = 'book_weather_coords_cache';
+
+function loadCachedWeatherCoords() {
+  try {
+    const raw = window.localStorage.getItem(WEATHER_COORDS_KEY);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw);
+    const latitude = Number(parsed?.latitude);
+    const longitude = Number(parsed?.longitude);
+    if (!Number.isFinite(latitude) || !Number.isFinite(longitude)) {
+      return null;
+    }
+    return {
+      latitude,
+      longitude,
+      source: parsed?.source || 'cache'
+    };
+  } catch (error) {
+    return null;
+  }
+}
+
+function saveWeatherCoords(latitude, longitude, source = 'browser') {
+  if (!Number.isFinite(latitude) || !Number.isFinite(longitude)) return;
+  try {
+    window.localStorage.setItem(WEATHER_COORDS_KEY, JSON.stringify({
+      latitude,
+      longitude,
+      source,
+      savedAt: Date.now()
+    }));
+  } catch (error) {
+    console.warn('weather coords cache failed:', error.message);
+  }
+}
+
+async function fetchWeatherByCoords(latitude, longitude, source = 'browser') {
+  const weatherProviders = [
+    async () => {
+      const response = await fetch(
+        `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,weather_code&timezone=auto`
+      );
+      if (!response.ok) {
+        throw new Error(`open-meteo ${response.status}`);
+      }
+      const data = await response.json();
+      const current = data?.current || {};
+      return {
+        visual: getWeatherVisual(current.weather_code),
+        temperature: current.temperature_2m
+      };
+    },
+    async () => {
+      const response = await fetch(`https://wttr.in/${latitude},${longitude}?format=j1`);
+      if (!response.ok) {
+        throw new Error(`wttr ${response.status}`);
+      }
+      const data = await response.json();
+      const current = Array.isArray(data?.current_condition) ? data.current_condition[0] : null;
+      const label = current?.weatherDesc?.[0]?.value || current?.weatherCode || null;
+      const temp = current?.temp_C;
+      if (!label || temp === undefined) {
+        throw new Error('wttr data missing');
+      }
+      const lower = String(label).toLowerCase();
+      let visual = { label, icon: '☁', className: 'weather-neutral' };
+      if (lower.includes('sun') || lower.includes('clear')) {
+        visual = { label: isChinese() ? '晴朗' : 'Sunny', icon: '☀', className: 'weather-sun' };
+      } else if (lower.includes('cloud')) {
+        visual = { label: isChinese() ? '多云' : 'Cloudy', icon: '⛅', className: 'weather-cloud' };
+      } else if (lower.includes('fog') || lower.includes('mist')) {
+        visual = { label: isChinese() ? '有雾' : 'Foggy', icon: '🌫', className: 'weather-fog' };
+      } else if (lower.includes('rain') || lower.includes('drizzle')) {
+        visual = { label: isChinese() ? '下雨' : 'Rainy', icon: '🌧', className: 'weather-rain' };
+      } else if (lower.includes('snow') || lower.includes('sleet')) {
+        visual = { label: isChinese() ? '降雪' : 'Snow', icon: '❄', className: 'weather-snow' };
+      } else if (lower.includes('thunder')) {
+        visual = { label: isChinese() ? '雷暴' : 'Thunderstorm', icon: '⛈', className: 'weather-storm' };
+      }
+      return {
+        visual,
+        temperature: temp
+      };
+    }
+  ];
+
+  let weatherResult = null;
+  let lastError = null;
+  for (const provider of weatherProviders) {
+    try {
+      weatherResult = await provider();
+      break;
+    } catch (error) {
+      lastError = error;
+      console.warn('weather provider failed:', error.message);
+    }
+  }
+  if (!weatherResult) {
+    throw lastError || new Error('weather request failed');
+  }
+  const copy = source === 'ip'
+    ? (isChinese()
+      ? '已根据当前网络位置近似获取天气，可能与精确定位有轻微偏差。'
+      : 'Weather is based on an approximate network location and may differ slightly from precise device location.')
+    : (isChinese()
+      ? '天气信息会根据你当前设备定位自动更新。'
+      : 'Weather updates automatically according to your device location.');
+  setWeatherVisual(weatherResult.visual, weatherResult.temperature, copy);
+  renderDailySuggestion(new Date(), weatherResult.visual.label);
+}
+
+async function fetchWeatherByIp() {
+  const geoProviders = [
+    async () => {
+      const response = await fetch('https://ipwho.is/');
+      if (!response.ok) {
+        throw new Error(`ipwhois ${response.status}`);
+      }
+      const data = await response.json();
+      if (!data?.success) {
+        throw new Error('ipwhois unsuccessful');
+      }
+      return {
+        latitude: Number(data.latitude),
+        longitude: Number(data.longitude)
+      };
+    },
+    async () => {
+      const response = await fetch('https://ipapi.co/json/');
+      if (!response.ok) {
+        throw new Error(`ipapi ${response.status}`);
+      }
+      const data = await response.json();
+      return {
+        latitude: Number(data?.latitude),
+        longitude: Number(data?.longitude)
+      };
+    }
+  ];
+
+  let coords = null;
+  let lastError = null;
+  for (const provider of geoProviders) {
+    try {
+      coords = await provider();
+      if (Number.isFinite(coords.latitude) && Number.isFinite(coords.longitude)) {
+        break;
+      }
+      coords = null;
+    } catch (error) {
+      lastError = error;
+      console.warn('ip geolocation provider failed:', error.message);
+    }
+  }
+  if (!coords) {
+    throw lastError || new Error('ip geolocation coordinates missing');
+  }
+  saveWeatherCoords(coords.latitude, coords.longitude, 'ip');
+  await fetchWeatherByCoords(coords.latitude, coords.longitude, 'ip');
+}
+
 function updateReadingTip(now = new Date()) {
   const titleEl = document.getElementById('home-reading-tip-title');
   const copyEl = document.getElementById('home-reading-tip-copy');
@@ -342,35 +503,95 @@ function updateReadingTip(now = new Date()) {
 async function loadWeatherWidget() {
   const textEl = document.getElementById('home-weather-text');
   const copyEl = document.getElementById('home-weather-copy');
-  if (!textEl || !copyEl || !navigator.geolocation) {
+  if (!textEl || !copyEl) {
     return;
   }
 
-  const setFallback = message => {
+  let settled = false;
+  let fallbackTimer = null;
+
+  const finishWithFallback = async message => {
+    if (settled) return;
+    const cachedCoords = loadCachedWeatherCoords();
+    if (cachedCoords) {
+      try {
+        await fetchWeatherByCoords(cachedCoords.latitude, cachedCoords.longitude, cachedCoords.source || 'cache');
+        settled = true;
+        if (fallbackTimer) {
+          window.clearTimeout(fallbackTimer);
+        }
+        return;
+      } catch (error) {
+        console.warn('cached weather lookup failed:', error.message);
+      }
+    }
+    try {
+      await fetchWeatherByIp();
+      settled = true;
+      if (fallbackTimer) {
+        window.clearTimeout(fallbackTimer);
+      }
+      return;
+    } catch (error) {
+      console.warn('ip weather fallback failed:', error.message);
+    }
+    settled = true;
+    if (fallbackTimer) {
+      window.clearTimeout(fallbackTimer);
+    }
     setWeatherVisual({ label: isChinese() ? '未获取' : 'Unavailable', icon: '☁', className: 'weather-neutral' }, null, message);
+    renderDailySuggestion(new Date());
   };
+
+  const geolocationUnavailableMessage = isChinese()
+    ? '当前环境不支持定位或不是安全上下文，无法获取当前位置天气。'
+    : 'Location is unavailable in this context, so local weather cannot be retrieved.';
+  const weatherTimeoutMessage = isChinese()
+    ? '定位请求超时，暂时无法获取当前位置天气。'
+    : 'The location request timed out, so local weather could not be retrieved.';
+
+  if (!('geolocation' in navigator)) {
+    finishWithFallback(geolocationUnavailableMessage);
+    return;
+  }
+
+  if (!window.isSecureContext && !['localhost', '127.0.0.1'].includes(window.location.hostname)) {
+    finishWithFallback(geolocationUnavailableMessage);
+    return;
+  }
+
+  if (navigator.permissions?.query) {
+    try {
+      const permission = await navigator.permissions.query({ name: 'geolocation' });
+      if (permission?.state === 'denied') {
+        finishWithFallback(isChinese() ? '未开启定位权限，无法显示当前位置天气。' : 'Location permission is disabled, so local weather cannot be shown.');
+        return;
+      }
+    } catch (error) {
+      console.warn('geolocation permission query failed:', error.message);
+    }
+  }
+
+  fallbackTimer = window.setTimeout(() => {
+    finishWithFallback(weatherTimeoutMessage);
+  }, 6500);
 
   navigator.geolocation.getCurrentPosition(async position => {
     try {
+      if (settled) return;
       const { latitude, longitude } = position.coords;
-      const response = await fetch(
-        `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,weather_code&timezone=auto`
-      );
-      if (!response.ok) {
-        throw new Error('weather request failed');
+      saveWeatherCoords(latitude, longitude, 'browser');
+      settled = true;
+      if (fallbackTimer) {
+        window.clearTimeout(fallbackTimer);
       }
-      const data = await response.json();
-      const current = data?.current || {};
-      const temperature = current.temperature_2m;
-      const weatherCode = current.weather_code;
-      const visual = getWeatherVisual(weatherCode);
-      setWeatherVisual(visual, temperature, isChinese() ? '天气信息会根据你当前设备定位自动更新。' : 'Weather updates automatically according to your device location.');
-      renderDailySuggestion(new Date(), visual.label);
+      await fetchWeatherByCoords(latitude, longitude, 'browser');
     } catch (error) {
-      setFallback(isChinese() ? '天气服务暂时不可用，你仍然可以正常浏览推荐内容。' : 'Weather service is temporarily unavailable. You can still browse recommendations normally.');
+      settled = false;
+      await finishWithFallback(isChinese() ? '天气服务暂时不可用，你仍然可以正常浏览推荐内容。' : 'Weather service is temporarily unavailable. You can still browse recommendations normally.');
     }
-  }, () => {
-    setFallback(isChinese() ? '未开启定位权限，无法显示当前位置天气。' : 'Location permission is disabled, so local weather cannot be shown.');
+  }, async () => {
+    await finishWithFallback(isChinese() ? '未开启定位权限，无法显示当前位置天气。' : 'Location permission is disabled, so local weather cannot be shown.');
   }, {
     enableHighAccuracy: false,
     timeout: 5000,

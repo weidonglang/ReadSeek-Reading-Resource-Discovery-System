@@ -54,7 +54,13 @@
     '推荐预览': { zh: '推荐预览', en: 'Recommendation preview' },
     'Recommendation preview': { zh: '推荐预览', en: 'Recommendation preview' },
     '精选推荐': { zh: '精选推荐', en: 'Featured picks' },
-    'Featured picks': { zh: '精选推荐', en: 'Featured picks' }
+    'Featured picks': { zh: '精选推荐', en: 'Featured picks' },
+    '同分类推荐': { zh: '同分类推荐', en: 'Same-category recommendations' },
+    'Same-category recommendations': { zh: '同分类推荐', en: 'Same-category recommendations' },
+    '同作者更多作品': { zh: '同作者更多作品', en: 'More from the same author' },
+    'More from the same author': { zh: '同作者更多作品', en: 'More from the same author' },
+    '同作者书架': { zh: '同作者书架', en: 'Author shelf' },
+    'Author shelf': { zh: '同作者书架', en: 'Author shelf' }
   };
 
   function localizeRecommendationTitle(title) {
@@ -118,6 +124,18 @@
     if (normalized === 'A prioritized selection of the most worthwhile items from the current recommendation result.') {
       return language === 'zh' ? '从当前推荐结果中优先整理出更值得先看的内容。' : normalized;
     }
+    if (normalized === '优先推荐同分类图书，并结合共享标签数量和热度排序。') {
+      return language === 'zh' ? normalized : 'Prioritizes books from the same category, then ranks them by shared tags and popularity.';
+    }
+    if (normalized === 'Prioritizes books from the same category, then ranks them by shared tags and popularity.') {
+      return language === 'zh' ? '优先推荐同分类图书，并结合共享标签数量和热度排序。' : normalized;
+    }
+    if (normalized === '补充展示同一作者的其他图书，方便继续浏览。') {
+      return language === 'zh' ? normalized : 'Shows more books by the same author so you can keep browsing.';
+    }
+    if (normalized === 'Shows more books by the same author so you can keep browsing.') {
+      return language === 'zh' ? '补充展示同一作者的其他图书，方便继续浏览。' : normalized;
+    }
     return normalized;
   }
 
@@ -161,6 +179,20 @@
     if (behaviorEnMatch) {
       return language === 'zh'
         ? `与你高分或借阅过的图书在“${localizeCategoryName(behaviorEnMatch[1])}”分类或相近标签上更接近。`
+        : normalized;
+    }
+    const sameCategoryZhMatch = normalized.match(/^与《(.+)》同属“(.+)”分类，并共享\s*(\d+)\s*个标签。$/);
+    if (sameCategoryZhMatch) {
+      const [, title, category, count] = sameCategoryZhMatch;
+      return language === 'zh'
+        ? normalized
+        : `Belongs to the same "${localizeCategoryName(category)}" category as "${title}" and shares ${count} tag(s).`;
+    }
+    const sameCategoryEnMatch = normalized.match(/^Belongs to the same "(.+)" category as "(.+)" and shares (\d+) tag\(s\)\.$/);
+    if (sameCategoryEnMatch) {
+      const [, category, title, count] = sameCategoryEnMatch;
+      return language === 'zh'
+        ? `与《${title}》同属“${localizeCategoryName(category)}”分类，并共享 ${count} 个标签。`
         : normalized;
     }
     return normalized;
