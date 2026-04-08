@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>后台管理 - 图书推荐系统</title>
+  <title>系统管理 - 图书推荐系统</title>
   <link rel="stylesheet" href="assets/css/common.css" />
   <link rel="stylesheet" href="assets/css/admin.css" />
 </head>
@@ -13,8 +13,8 @@
       <div id="admin-message" class="alert hidden"></div>
       <section class="page-header">
         <div>
-          <h1 class="page-title">后台管理中心</h1>
-          <p class="page-subtitle">在后台维护图书、作者、分类、出版社、标签、借阅和预约数据。</p>
+          <h1 class="page-title">系统管理</h1>
+          <p class="page-subtitle">维护馆藏内容、分类标签和流通数据，并查看近期推荐相关的行为趋势。</p>
         </div>
       </section>
 
@@ -22,78 +22,78 @@
         <article class="card admin-card admin-analytics-card">
           <div class="section-head">
             <div>
-              <h2>Behavior Analytics</h2>
-              <p class="muted">Review recent search, click, and borrowing signals that currently feed the simple recommendation logic.</p>
+              <h2>近期行为概览</h2>
+              <p class="muted">结合搜索、点击和借阅数据，快速了解近期热门内容与推荐信号变化。</p>
             </div>
             <div class="analytics-toolbar">
               <label class="analytics-inline" for="analytics-window">
-                <span>Window</span>
+                <span>统计范围</span>
                 <select id="analytics-window">
-                  <option value="7">Last 7 days</option>
-                  <option value="30" selected>Last 30 days</option>
-                  <option value="90">Last 90 days</option>
-                  <option value="">All time</option>
+                  <option value="7">最近 7 天</option>
+                  <option value="30" selected>最近 30 天</option>
+                  <option value="90">最近 90 天</option>
+                  <option value="">全部时间</option>
                 </select>
               </label>
-              <button id="reload-analytics" type="button">Reload Analytics</button>
+              <button id="reload-analytics" type="button">刷新数据</button>
             </div>
           </div>
           <div id="admin-analytics-summary" class="analytics-summary"></div>
           <div class="analytics-grid">
             <section class="full-span">
-              <h3>Popular Recommendation Model</h3>
+              <h3>热门推荐策略</h3>
               <div id="admin-recommendation-strategy" class="admin-list compact-list"></div>
             </section>
             <section>
-              <h3>Top Keywords</h3>
+              <h3>热门关键词</h3>
               <div class="hover-scroll-shell">
                 <div id="admin-top-keywords" class="admin-list compact-list hover-scroll-window scroll-size-sm"></div>
               </div>
             </section>
             <section>
-              <h3>Top Categories</h3>
+              <h3>热门分类</h3>
               <div class="hover-scroll-shell">
                 <div id="admin-top-categories" class="admin-list compact-list hover-scroll-window scroll-size-sm"></div>
               </div>
             </section>
             <section>
-              <h3>Top Authors</h3>
+              <h3>热门作者</h3>
               <div class="hover-scroll-shell">
                 <div id="admin-top-authors" class="admin-list compact-list hover-scroll-window scroll-size-sm"></div>
               </div>
             </section>
             <section>
-              <h3>Top Tags</h3>
+              <h3>热门标签</h3>
               <div class="hover-scroll-shell">
                 <div id="admin-top-tags" class="admin-list compact-list hover-scroll-window scroll-size-sm"></div>
               </div>
             </section>
             <section>
-              <h3>Top Publishers</h3>
+              <h3>热门出版社</h3>
               <div class="hover-scroll-shell">
                 <div id="admin-top-publishers" class="admin-list compact-list hover-scroll-window scroll-size-sm"></div>
               </div>
             </section>
             <section>
-              <h3>Top Clicked Books</h3>
+              <h3>热门点击图书</h3>
               <div class="hover-scroll-shell">
                 <div id="admin-top-clicked-books" class="admin-list compact-list hover-scroll-window scroll-size-sm"></div>
               </div>
             </section>
             <section>
-              <h3>Top Borrowed Books</h3>
+              <h3>热门借阅图书</h3>
               <div class="hover-scroll-shell">
                 <div id="admin-top-borrowed-books" class="admin-list compact-list hover-scroll-window scroll-size-sm"></div>
               </div>
             </section>
             <section>
-              <h3>Recent Searches</h3>
+              <h3>最近搜索</h3>
               <div class="hover-scroll-shell">
                 <div id="admin-recent-searches" class="admin-list compact-list hover-scroll-window scroll-size-md"></div>
               </div>
             </section>
             <section class="full-span">
-              <h3>Recent Behavior</h3>
+              <h3>最近行为</h3>
               <div class="hover-scroll-shell">
                 <div id="admin-recent-behavior" class="admin-list compact-list hover-scroll-window scroll-size-lg"></div>
               </div>
@@ -106,10 +106,10 @@
         <article class="card admin-card">
           <div class="section-head">
             <div>
-              <h2>图书编辑</h2>
-              <p class="muted">新增或更新图书目录数据。</p>
+              <h2>图书管理</h2>
+              <p class="muted">新增、修改或补充馆藏图书信息。</p>
             </div>
-            <button id="reset-book-form" type="button">新增图书</button>
+            <button id="reset-book-form" type="button">新建图书</button>
           </div>
           <div class="hover-scroll-shell">
           <form id="book-form" class="form-grid hover-scroll-window scroll-size-xl">
@@ -127,7 +127,7 @@
               <div class="select-stack">
                 <input id="book-author-search" type="search" placeholder="搜索作者名称" />
                 <select id="book-author" size="7" required></select>
-                <div class="picker-help">可按名称搜索，然后选择一个作者。</div>
+                <div class="picker-help">先搜索，再选择对应作者。</div>
               </div>
             </div>
             <div class="field">
@@ -135,7 +135,7 @@
               <div class="select-stack">
                 <input id="book-category-search" type="search" placeholder="搜索分类名称" />
                 <select id="book-category" size="7" required></select>
-                <div class="picker-help">分类较多时可先搜索再选择。</div>
+                <div class="picker-help">分类较多时，先搜索会更快。</div>
               </div>
             </div>
             <div class="field">
@@ -145,7 +145,7 @@
                 <select id="book-publisher" size="7">
                   <option value="">无出版社</option>
                 </select>
-                <div class="picker-help">如果暂时不维护出版社，可保留“无出版社”。</div>
+                <div class="picker-help">如果暂时不区分出版社，可以保留“无出版社”。</div>
               </div>
             </div>
             <div class="field full">
@@ -206,10 +206,10 @@
         <article class="card admin-card">
           <div class="section-head">
             <div>
-              <h2>作者编辑</h2>
-              <p class="muted">维护作者基础信息。</p>
+              <h2>作者管理</h2>
+              <p class="muted">补充和维护作者资料。</p>
             </div>
-            <button id="reset-author-form" type="button">新增作者</button>
+            <button id="reset-author-form" type="button">新建作者</button>
           </div>
           <div class="hover-scroll-shell">
           <form id="author-form" class="form-grid hover-scroll-window scroll-size-lg">
@@ -262,10 +262,10 @@
         <article class="card admin-card">
           <div class="section-head">
             <div>
-              <h2>分类编辑</h2>
-              <p class="muted">维护图书目录和检索页面使用的分类数据。</p>
+              <h2>分类管理</h2>
+              <p class="muted">整理读者检索和推荐会使用到的分类。</p>
             </div>
-            <button id="reset-category-form" type="button">新增分类</button>
+            <button id="reset-category-form" type="button">新建分类</button>
           </div>
           <form id="category-form" class="form-grid">
             <input id="category-id" type="hidden" />
@@ -286,10 +286,10 @@
         <article class="card admin-card">
           <div class="section-head">
             <div>
-              <h2>出版社编辑</h2>
-              <p class="muted">维护出版社基础信息。</p>
+              <h2>出版社管理</h2>
+              <p class="muted">维护出版社的基础资料。</p>
             </div>
-            <button id="reset-publisher-form" type="button">新增出版社</button>
+            <button id="reset-publisher-form" type="button">新建出版社</button>
           </div>
           <form id="publisher-form" class="form-grid">
             <input id="publisher-id" type="hidden" />
@@ -318,10 +318,10 @@
         <article class="card admin-card">
           <div class="section-head">
             <div>
-              <h2>标签编辑</h2>
-              <p class="muted">维护可复用的图书标签。</p>
+              <h2>标签管理</h2>
+              <p class="muted">维护图书标签，便于检索和推荐使用。</p>
             </div>
-            <button id="reset-tag-form" type="button">新增标签</button>
+            <button id="reset-tag-form" type="button">新建标签</button>
           </div>
           <form id="tag-form" class="form-grid">
             <input id="tag-id" type="hidden" />
@@ -345,12 +345,12 @@
           <div class="section-head">
             <div>
               <h2>图书列表</h2>
-              <p class="muted">仅展示未删除图书，删除操作为软删除。</p>
+              <p class="muted">仅显示当前有效图书，可在这里继续编辑或删除。</p>
             </div>
             <button id="reload-books" type="button">刷新</button>
           </div>
           <div class="field admin-search-field">
-            <label class="label" for="book-list-search">查找要编辑的图书</label>
+            <label class="label" for="book-list-search">查找图书</label>
             <input id="book-list-search" type="search" placeholder="按书名、作者或分类搜索" />
           </div>
           <div class="hover-scroll-shell">
@@ -362,12 +362,12 @@
           <div class="section-head">
             <div>
               <h2>作者列表</h2>
-              <p class="muted">仅展示未删除作者，删除操作为软删除。</p>
+              <p class="muted">仅显示当前有效作者，可在这里继续编辑或删除。</p>
             </div>
             <button id="reload-authors" type="button">刷新</button>
           </div>
           <div class="field admin-search-field">
-            <label class="label" for="author-list-search">查找要编辑的作者</label>
+            <label class="label" for="author-list-search">查找作者</label>
             <input id="author-list-search" type="search" placeholder="按作者姓名或国家搜索" />
           </div>
           <div class="hover-scroll-shell">
@@ -381,12 +381,12 @@
           <div class="section-head">
             <div>
               <h2>分类列表</h2>
-              <p class="muted">如果仍有未删除图书引用该分类，则禁止删除。</p>
+              <p class="muted">如果仍有有效图书引用该分类，则不能删除。</p>
             </div>
             <button id="reload-categories" type="button">刷新</button>
           </div>
           <div class="field admin-search-field">
-            <label class="label" for="category-list-search">查找要编辑的分类</label>
+            <label class="label" for="category-list-search">查找分类</label>
             <input id="category-list-search" type="search" placeholder="按分类名称或说明搜索" />
           </div>
           <div class="hover-scroll-shell">
@@ -398,12 +398,12 @@
           <div class="section-head">
             <div>
               <h2>出版社列表</h2>
-              <p class="muted">如果仍有未删除图书引用该出版社，则禁止删除。</p>
+              <p class="muted">如果仍有有效图书引用该出版社，则不能删除。</p>
             </div>
             <button id="reload-publishers" type="button">刷新</button>
           </div>
           <div class="field admin-search-field">
-            <label class="label" for="publisher-list-search">查找要编辑的出版社</label>
+            <label class="label" for="publisher-list-search">查找出版社</label>
             <input id="publisher-list-search" type="search" placeholder="按出版社名称或国家搜索" />
           </div>
           <div class="hover-scroll-shell">
@@ -415,12 +415,12 @@
           <div class="section-head">
             <div>
               <h2>标签列表</h2>
-              <p class="muted">如果仍有未删除图书引用该标签，则禁止删除。</p>
+              <p class="muted">如果仍有有效图书引用该标签，则不能删除。</p>
             </div>
             <button id="reload-tags" type="button">刷新</button>
           </div>
           <div class="field admin-search-field">
-            <label class="label" for="tag-list-search">查找要编辑的标签</label>
+            <label class="label" for="tag-list-search">查找标签</label>
             <input id="tag-list-search" type="search" placeholder="按标签名称或说明搜索" />
           </div>
           <div class="hover-scroll-shell">
@@ -434,7 +434,7 @@
           <div class="section-head">
             <div>
               <h2>当前借阅</h2>
-              <p class="muted">展示所有未归还借阅记录，按应还日期排序。</p>
+              <p class="muted">查看所有未归还借阅，并优先关注临近到期的记录。</p>
             </div>
             <button id="reload-circulation" type="button">刷新流通数据</button>
           </div>
@@ -447,7 +447,7 @@
           <div class="section-head">
             <div>
               <h2>借阅历史</h2>
-              <p class="muted">展示所有用户的已归还记录。</p>
+              <p class="muted">查看所有用户已经归还的历史记录。</p>
             </div>
           </div>
           <div class="hover-scroll-shell">
@@ -461,7 +461,7 @@
           <div class="section-head">
             <div>
               <h2>当前预约</h2>
-              <p class="muted">展示所有生效中的预约请求，按排队时间排序。</p>
+              <p class="muted">查看所有仍在排队中的预约请求。</p>
             </div>
           </div>
           <div class="hover-scroll-shell">
@@ -473,7 +473,7 @@
           <div class="section-head">
             <div>
               <h2>预约历史</h2>
-              <p class="muted">展示所有用户已完成和已取消的预约记录。</p>
+              <p class="muted">查看所有用户已完成和已取消的预约记录。</p>
             </div>
           </div>
           <div class="hover-scroll-shell">

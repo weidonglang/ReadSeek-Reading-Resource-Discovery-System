@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>推荐书架 - 图书推荐系统</title>
+  <title>为你推荐 - 图书推荐系统</title>
   <link rel="stylesheet" href="assets/css/common.css" />
   <link rel="stylesheet" href="assets/css/recommendations.css" />
 </head>
@@ -12,17 +12,17 @@
     <main class="page">
       <div class="page-header">
         <div>
-          <h1 class="page-title">推荐书架</h1>
-          <p class="page-subtitle">从热门趋势、阅读偏好、协同信号和个人行为出发，按书架方式浏览系统给出的推荐结果。</p>
+          <h1 class="page-title">为你推荐</h1>
+          <p class="page-subtitle">根据你的阅读偏好、借阅记录和近期热门，系统整理出几组值得先看的书架。</p>
         </div>
       </div>
       <section class="card recommend-intro-card">
-        <h2>推荐说明</h2>
-        <p id="recommend-user-copy" class="muted">当前用户：<span id="recommend-user">加载中...</span></p>
-        <p id="recommend-window-copy" class="muted">热门书架会根据近一段时间的借阅、点击和评分表现动态调整，让你对比短期与中期趋势。</p>
+        <h2>推荐依据</h2>
+        <p id="recommend-user-copy" class="muted">当前账号：<span id="recommend-user">加载中...</span></p>
+        <p id="recommend-window-copy" class="muted">你可以切换热门时间范围，对比短期热度和相对稳定的长期热度。</p>
         <div class="form-actions">
           <label class="field" for="recommend-window">
-            <span class="label">热门时间窗口</span>
+            <span class="label">热门范围</span>
             <select id="recommend-window">
               <option value="7">近 7 天</option>
               <option value="30" selected>近 30 天</option>

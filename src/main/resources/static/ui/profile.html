@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>个人中心 - 图书推荐系统</title>
+  <title>我的资料 - 图书推荐系统</title>
   <link rel="stylesheet" href="assets/css/common.css" />
   <link rel="stylesheet" href="assets/css/profile.css" />
 </head>
@@ -12,8 +12,8 @@
     <main class="page">
       <div class="page-header">
         <div>
-          <h1 class="page-title">个人中心</h1>
-          <p class="page-subtitle">维护个人资料和阅读偏好，推荐模块会优先使用这些偏好信息。</p>
+          <h1 class="page-title">我的资料</h1>
+          <p class="page-subtitle">在这里维护账号信息和阅读偏好，让推荐结果更贴近你的兴趣。</p>
         </div>
       </div>
 
@@ -21,7 +21,7 @@
 
       <section class="grid two">
         <article class="card">
-          <h2>当前账号概览</h2>
+          <h2>账号信息</h2>
           <div class="info-list">
             <div class="info-item"><div class="info-key">用户 ID</div><div id="profile-id" class="info-value">-</div></div>
             <div class="info-item"><div class="info-key">邮箱</div><div id="profile-email-view" class="info-value">-</div></div>
@@ -77,14 +77,14 @@
                 <option value="EXPERT">专家</option>
               </select>
             </div>
-            <div class="field full"><label class="label">偏好分类 ID 列表</label><input id="categoryIds" placeholder="例如：1,2,5" /></div>
+            <div class="field full"><label class="label">偏好分类</label><input id="categoryIds" placeholder="例如：1,2,5" /></div>
             <div class="field full">
               <div class="form-actions">
                 <button class="primary" type="submit">保存阅读偏好</button>
               </div>
             </div>
           </form>
-          <div class="alert info profile-reading-note">这里先用最简单的分类 ID 文本输入，后面可以继续升级成真正的分类多选组件。</div>
+          <div class="alert info profile-reading-note">可填写多个分类编号，并使用英文逗号分隔，例如 1,2,5。</div>
         </article>
       </section>
     </main>

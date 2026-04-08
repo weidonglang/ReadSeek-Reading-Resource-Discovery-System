@@ -12,15 +12,15 @@
     <main class="page books-page">
       <section class="books-hero">
         <article class="card books-splash">
-          <div class="books-kicker">检索工作台</div>
-          <h1 class="books-hero-title">从关键词、分类和偏好条件里，把想看的书精准筛出来</h1>
+          <div class="books-kicker">找书</div>
+          <h1 class="books-hero-title">按书名、作者、分类或标签，找到下一本想读的书</h1>
           <p class="books-hero-copy">
-            这一页保留了完整筛选能力，但视觉上会更接近首页的引导式布局。
-            你可以先快速搜索，再逐步加作者、标签、出版社、评分热度和库存等条件。
+            先用关键词快速定位，再按作者、分类、出版社、评分和库存继续缩小范围，
+            尽快找到真正适合你的结果。
           </p>
           <div class="books-hero-actions">
-            <a class="button-link primary" href="recommendations.html">先看推荐结果</a>
-            <a class="button-link" href="profile.html">完善阅读偏好</a>
+            <a class="button-link primary" href="recommendations.html">先看为你挑的</a>
+            <a class="button-link" href="profile.html">调整阅读偏好</a>
           </div>
         </article>
 
@@ -28,20 +28,20 @@
           <div class="books-kicker">筛选提示</div>
           <div class="books-overview-grid">
             <div class="books-overview-item">
-              <strong>组合检索</strong>
-              <span>关键词、作者、分类、标签可以叠加使用，适合逐步缩小范围。</span>
+              <strong>快速定位</strong>
+              <span>关键词、作者、分类和标签可以组合使用，帮你更快缩小搜索范围。</span>
             </div>
             <div class="books-overview-item">
-              <strong>结果排序</strong>
-              <span>支持按评分、热度、出版时间、页数和库存等字段排序。</span>
+              <strong>继续细筛</strong>
+              <span>支持按评分、热度、出版时间、页数和库存等条件进一步筛选。</span>
             </div>
             <div class="books-overview-item">
               <strong>可借优先</strong>
-              <span>搜索结果会直接展示可借库存，方便继续进入借阅或预约流程。</span>
+              <span>结果会直接显示可借库存，方便立刻决定是借阅、预约还是继续对比。</span>
             </div>
             <div class="books-overview-item">
-              <strong>适合演示</strong>
-              <span>整页信息结构更清楚，老师或答辩时也更容易讲解筛选逻辑。</span>
+              <strong>接着操作</strong>
+              <span>找到目标后，可以直接进入详情、评分、借阅或预约流程。</span>
             </div>
           </div>
         </article>
@@ -52,12 +52,12 @@
       <section class="card books-filter-card">
         <div class="section-head books-section-head">
           <div>
-            <h2>高级筛选</h2>
-            <p class="muted">先输入关键词，再按作者、分类、标签和区间条件逐步细化结果。</p>
+            <h2>筛选条件</h2>
+            <p class="muted">先输入你想找的内容，再逐步补充作者、分类、标签和范围条件。</p>
           </div>
           <div class="books-filter-tip">
             <span class="books-tip-dot"></span>
-            <span>筛选条件越具体，结果越容易接近首页推荐的精确感</span>
+            <span>条件越明确，结果越容易接近你真正想看的书</span>
           </div>
         </div>
 
@@ -146,7 +146,7 @@
 
           <div class="field full books-form-footer">
             <div class="form-actions books-form-actions">
-              <button class="primary" type="submit">开始检索</button>
+              <button class="primary" type="submit">开始找书</button>
               <button id="reset-search" type="button">重置条件</button>
             </div>
           </div>
@@ -171,9 +171,9 @@
         <div id="active-filter-summary" class="books-active-filters hidden"></div>
 
         <div class="books-results-pills">
-          <span class="books-result-pill">支持多条件组合检索</span>
-          <span class="books-result-pill">结果卡片保留推荐理由展示风格</span>
-          <span class="books-result-pill">可直接进入详情、评分与借阅流程</span>
+          <span class="books-result-pill">支持多条件组合筛选</span>
+          <span class="books-result-pill">每本书都会直接展示关键信息</span>
+          <span class="books-result-pill">可继续查看详情、评分、借阅或预约</span>
         </div>
 
         <div id="book-results" class="book-list books-results-grid"></div>

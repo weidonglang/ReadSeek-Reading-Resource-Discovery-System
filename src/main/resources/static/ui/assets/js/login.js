@@ -5,9 +5,32 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const form = document.getElementById('login-form');
   const apiBaseInput = document.getElementById('api-base-url');
+  const subtitle = document.querySelector('.page-subtitle');
   apiBaseInput.value = BookApi.getApiBaseUrl();
 
   const initialParams = new URLSearchParams(window.location.search);
+  const redirect = initialParams.get('redirect') || 'index.html';
+
+  function resolveRedirectLabel(target) {
+    const normalized = String(target || '').split('?')[0];
+    const redirectNameMap = {
+      'index.html': t('common.nav.home'),
+      'books.html': t('common.nav.books'),
+      'borrowings.html': t('common.nav.borrowings'),
+      'recommendations.html': t('common.nav.recommendations'),
+      'profile.html': t('common.nav.profile'),
+      'admin.html': t('common.nav.admin'),
+      'login.html': t('common.nav.login'),
+      'register.html': t('common.nav.register')
+    };
+    return redirectNameMap[normalized] || t('common.nav.home');
+  }
+
+  const redirectLabel = resolveRedirectLabel(redirect);
+  if (subtitle && initialParams.has('redirect')) {
+    subtitle.textContent = t('login.redirectSubtitle', { target: redirectLabel });
+  }
+
   if (initialParams.get('email')) {
     document.getElementById('email').value = initialParams.get('email');
   }
@@ -24,9 +47,10 @@ document.addEventListener('DOMContentLoaded', () => {
       await BookApi.login(email, password);
       await BookApi.fetchCurrentUser();
 
-      const params = new URLSearchParams(window.location.search);
-      const redirect = params.get('redirect') || 'index.html';
-      BookUi.showMessage('login-message', 'success', t('login.success'));
+      const successMessage = initialParams.has('redirect')
+        ? t('login.successRedirect', { target: redirectLabel })
+        : t('login.success');
+      BookUi.showMessage('login-message', 'success', successMessage);
       setTimeout(() => {
         window.location.href = redirect;
       }, 600);

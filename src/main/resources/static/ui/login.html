@@ -12,18 +12,14 @@
     <main class="page">
       <div class="page-header">
         <div>
-          <h1 class="page-title">1. 登录页</h1>
-          <p class="page-subtitle">对接 /api/auth/log-in，登录成功后会缓存访问令牌和刷新令牌，并拉取当前用户信息。</p>
+          <h1 class="page-title">登录后继续你的阅读</h1>
+          <p class="page-subtitle">登录后即可进入首页推荐、借阅提醒、收藏书单和个人阅读空间。</p>
         </div>
       </div>
       <div class="grid two login-layout">
         <section class="card">
           <div id="login-message" class="alert hidden"></div>
           <form id="login-form">
-            <div class="field">
-              <label class="label" for="api-base-url">API 基地址</label>
-              <input id="api-base-url" placeholder="http://localhost:8010/book-service" />
-            </div>
             <div class="field">
               <label class="label" for="email">邮箱</label>
               <input id="email" type="email" required placeholder="请输入邮箱" />
@@ -32,6 +28,14 @@
               <label class="label" for="password">密码</label>
               <input id="password" type="password" required placeholder="请输入密码" />
             </div>
+            <details class="login-advanced-settings">
+              <summary class="login-advanced-summary">连接设置（一般无需修改）</summary>
+              <div class="field">
+                <label class="label" for="api-base-url">服务地址</label>
+                <input id="api-base-url" placeholder="http://localhost:8010/book-service" />
+                <div class="muted login-advanced-copy">只有在服务地址与默认值不一致时，才需要在这里修改。</div>
+              </div>
+            </details>
             <div class="form-actions">
               <button class="primary" type="submit">登录</button>
               <a href="register.html"><button type="button">去注册</button></a>
@@ -39,12 +43,12 @@
           </form>
         </section>
         <section class="card">
-          <h2>接入说明</h2>
-          <div class="muted">这个仓库没有现成前端，所以这里直接给你一个最简单可跑的页面骨架。建议先放到 <code>src/main/resources/static/ui</code> 里，然后通过 Spring Boot 同源访问。</div>
+          <h2>登录说明</h2>
+          <div class="muted">使用已注册账号登录后，系统会自动保存登录状态，并同步当前用户信息。大多数情况下，你只需要输入邮箱和密码即可。</div>
           <ul>
-            <li>默认接口根路径：<code>http://localhost:8010/book-service</code></li>
-            <li>登录成功后跳转首页</li>
-            <li>顶部导航会显示当前缓存用户</li>
+            <li>默认服务地址：<code>http://localhost:8010/book-service</code></li>
+            <li>登录成功后会优先返回你刚才准备访问的页面</li>
+            <li>登录后顶部导航会显示当前账号，并开放推荐、借阅与个人中心入口</li>
           </ul>
         </section>
       </div>
