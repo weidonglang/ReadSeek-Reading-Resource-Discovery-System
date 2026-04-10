@@ -16,9 +16,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityExistsException;
-import javax.persistence.EntityNotFoundException;
-import javax.transaction.Transactional;
+import jakarta.persistence.EntityExistsException;
+import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -76,7 +76,7 @@ public class BookLoanServiceImpl implements BookLoanService {
         log.info("BookLoanService: borrowBook() called");
         UserDto currentUser = userService.getCurrentUser();
         BookDto book = bookService.findById(bookId);
-        Book bookEntity = bookDao.findById(bookId).orElseThrow(() -> new EntityNotFoundException("Book not found for id: " + bookId));
+        Book bookEntity = findBookEntityForUpdate(bookId);
         Optional<BookReservation> activeReservation = bookReservationDao.findActiveReservationByUserIdAndBookId(currentUser.getId(), bookId);
         Optional<BookReservation> firstReservation = bookReservationDao.findFirstActiveReservationByBookId(bookId);
 
@@ -123,7 +123,7 @@ public class BookLoanServiceImpl implements BookLoanService {
 
         BookLoanDto createdLoan = getTransformer().transformEntityToDto(getDao().create(getTransformer().transformDtoToEntity(loanDto)));
         if (userBehaviorLogService != null) {
-            userBehaviorLogService.recordBookBorrow(bookId, "用户成功借阅图书");
+            userBehaviorLogService.recordBookBorrow(bookId, "鐢ㄦ埛鎴愬姛鍊熼槄鍥句功");
         }
         return createdLoan;
     }
@@ -137,7 +137,7 @@ public class BookLoanServiceImpl implements BookLoanService {
             throw new EntityExistsException("This loan is already closed.");
         }
 
-        Book borrowedBook = loan.getBook();
+        Book borrowedBook = findBookEntityForUpdate(loan.getBook().getId());
         borrowedBook.setAvailableCopies(Math.min(borrowedBook.getTotalCopies(), borrowedBook.getAvailableCopies() + 1));
         bookDao.update(borrowedBook);
         loan.setStatus(BookLoanStatus.RETURNED);
@@ -192,5 +192,10 @@ public class BookLoanServiceImpl implements BookLoanService {
             throw new EntityNotFoundException("Loan not found for id: " + loanId);
         }
         return loan.get();
+    }
+
+    private Book findBookEntityForUpdate(Long bookId) {
+        return bookDao.findByIdForUpdate(bookId)
+                .orElseThrow(() -> new EntityNotFoundException("Book not found for id: " + bookId));
     }
 }

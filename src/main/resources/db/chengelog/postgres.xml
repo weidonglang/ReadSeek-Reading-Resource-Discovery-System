@@ -21,5 +21,6 @@
     <include file="db/chengelog/postgres/20260404_create_user_behavior_log.sql"/>
     <include file="db/chengelog/postgres/20260406_enhance_search_log_structure.sql"/>
     <include file="db/chengelog/postgres/20260406_fix_user_enum_string_values.sql"/>
+    <include file="db/chengelog/postgres/20260410_add_book_version_and_inventory_checks.sql"/>
 
 </databaseChangeLog>

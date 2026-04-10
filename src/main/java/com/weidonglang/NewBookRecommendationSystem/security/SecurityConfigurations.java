@@ -10,6 +10,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -17,8 +18,10 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.util.Collections;
+
 @Configuration
 @EnableWebSecurity
 @AllArgsConstructor
@@ -29,16 +32,19 @@ public class SecurityConfigurations {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
-                .csrf().disable().httpBasic().disable().cors()
-                .and().authorizeHttpRequests()
-                .antMatchers(HttpMethod.POST, "/api/user").permitAll()
-                .antMatchers(HttpMethod.GET, "/api/user/find-is-email-exists/**").permitAll()
-                .antMatchers(HttpMethod.POST, "/api/auth/log-in").permitAll()
-                .antMatchers(HttpMethod.POST, "/api/auth/refresh-token").permitAll()
-                .antMatchers("/api/**").authenticated()
-                .anyRequest().permitAll()
-                .and().exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint)
-                .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+                .csrf(AbstractHttpConfigurer::disable)
+                .httpBasic(AbstractHttpConfigurer::disable)
+                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
+                .authorizeHttpRequests(authorize -> authorize
+                        .requestMatchers(HttpMethod.POST, "/api/user").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/user/find-is-email-exists/**").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/auth/log-in").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/auth/refresh-token").permitAll()
+                        .requestMatchers("/api/**").authenticated()
+                        .anyRequest().permitAll()
+                )
+                .exceptionHandling(exceptions -> exceptions.authenticationEntryPoint(jwtAuthenticationEntryPoint))
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
         return httpSecurity.build();
     }
@@ -54,19 +60,19 @@ public class SecurityConfigurations {
     }
 
     @Bean
-    protected CorsConfigurationSource CorsConfigurationSource() {
-        return request -> {
-            CorsConfiguration corsConfig = new CorsConfiguration();
+    protected CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration corsConfig = new CorsConfiguration();
 
-            corsConfig.setAllowedOrigins(Collections.singletonList("http://localhost:3000"));
-            corsConfig.setExposedHeaders(Collections.singletonList("Authorization"));
-            corsConfig.setAllowedHeaders(Collections.singletonList("*"));
-            corsConfig.setAllowedMethods(Collections.singletonList("*"));
-            corsConfig.setAllowCredentials(true);
-            corsConfig.setMaxAge(3600L);
+        corsConfig.setAllowedOrigins(Collections.singletonList("http://localhost:3000"));
+        corsConfig.setExposedHeaders(Collections.singletonList("Authorization"));
+        corsConfig.setAllowedHeaders(Collections.singletonList("*"));
+        corsConfig.setAllowedMethods(Collections.singletonList("*"));
+        corsConfig.setAllowCredentials(true);
+        corsConfig.setMaxAge(3600L);
 
-            return corsConfig;
-        };
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", corsConfig);
+        return source;
     }
 }
 /*

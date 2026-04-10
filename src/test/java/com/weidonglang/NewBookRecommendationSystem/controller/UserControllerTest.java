@@ -5,6 +5,7 @@ import com.weidonglang.NewBookRecommendationSystem.dto.UserReadingInfoDto;
 import com.weidonglang.NewBookRecommendationSystem.dto.base.response.ApiResponse;
 import com.weidonglang.NewBookRecommendationSystem.enums.UserGender;
 import com.weidonglang.NewBookRecommendationSystem.enums.UserMartialStatus;
+import com.weidonglang.NewBookRecommendationSystem.service.HomeDashboardService;
 import com.weidonglang.NewBookRecommendationSystem.service.UserReadingInfoService;
 import com.weidonglang.NewBookRecommendationSystem.service.UserService;
 import org.junit.jupiter.api.BeforeEach;
@@ -31,11 +32,14 @@ class UserControllerTest {
     @Mock
     private UserReadingInfoService userReadingInfoService;
 
+    @Mock
+    private HomeDashboardService homeDashboardService;
+
     private UserController controller;
 
     @BeforeEach
     void setUp() {
-        controller = new UserController(userService, userReadingInfoService);
+        controller = new UserController(userService, userReadingInfoService, homeDashboardService);
     }
 
     @Test

@@ -3,6 +3,40 @@ document.addEventListener('DOMContentLoaded', async () => {
   BookUi.injectLayout();
   if (!BookUi.requireLogin()) return;
 
+  const birthdateInput = document.getElementById('birthdate');
+
+  function formatBirthdateForInput(value) {
+    if (!value) return '';
+    const normalized = String(value).trim();
+    const match = normalized.match(/^(\d{4})-(\d{2})-(\d{2})/);
+    if (match) {
+      return `${match[1]}/${match[2]}/${match[3]}`;
+    }
+    const slashMatch = normalized.match(/^(\d{4})\/(\d{1,2})\/(\d{1,2})$/);
+    if (slashMatch) {
+      return `${slashMatch[1]}/${slashMatch[2].padStart(2, '0')}/${slashMatch[3].padStart(2, '0')}`;
+    }
+    return normalized;
+  }
+
+  function normalizeBirthdateForApi(value) {
+    const normalized = String(value || '').trim();
+    if (!normalized) return null;
+    const slashMatch = normalized.match(/^(\d{4})\/(\d{1,2})\/(\d{1,2})$/);
+    if (slashMatch) {
+      return `${slashMatch[1]}-${slashMatch[2].padStart(2, '0')}-${slashMatch[3].padStart(2, '0')}`;
+    }
+    const dashMatch = normalized.match(/^(\d{4})-(\d{1,2})-(\d{1,2})$/);
+    if (dashMatch) {
+      return `${dashMatch[1]}-${dashMatch[2].padStart(2, '0')}-${dashMatch[3].padStart(2, '0')}`;
+    }
+    return normalized;
+  }
+
+  birthdateInput?.addEventListener('blur', () => {
+    birthdateInput.value = formatBirthdateForInput(birthdateInput.value);
+  });
+
   document.getElementById('gender').innerHTML = `
     <option value="">${t('common.noneSelected')}</option>
     <option value="MALE">${t('common.genderMale')}</option>
@@ -36,7 +70,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.getElementById('email').value = user?.email ?? '';
     document.getElementById('password').value = '';
     document.getElementById('phoneNumber').value = user?.phoneNumber ?? '';
-    document.getElementById('birthdate').value = user?.birthdate ? new Date(user.birthdate).toISOString().slice(0, 10) : '';
+    birthdateInput.value = user?.birthdate ? formatBirthdateForInput(user.birthdate) : '';
     document.getElementById('country').value = user?.country ?? '';
     document.getElementById('age').value = user?.age ?? '';
     document.getElementById('gender').value = user?.gender ?? '';
@@ -68,7 +102,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       email: document.getElementById('email').value.trim(),
       password: document.getElementById('password').value.trim() || null,
       phoneNumber: document.getElementById('phoneNumber').value.trim(),
-      birthdate: document.getElementById('birthdate').value || null,
+      birthdate: normalizeBirthdateForApi(birthdateInput.value),
       country: document.getElementById('country').value.trim(),
       age: document.getElementById('age').value ? Number(document.getElementById('age').value) : null,
       gender: document.getElementById('gender').value || null,

@@ -19,7 +19,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityExistsException;
+import jakarta.persistence.EntityExistsException;
 import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -43,14 +43,14 @@ public class BookServiceImpl implements BookService {
     private static final int DETAIL_RECOMMENDATION_LIMIT = 6;
     private static final int DEFAULT_POPULAR_RECENT_DAYS = 30;
     private static final Map<String, String> CATEGORY_NAME_MAP = Map.of(
-            "Science Fiction", "科幻",
-            "Horror", "恐怖",
-            "Classic", "经典",
-            "Action and Adventure", "动作冒险",
-            "Romantic", "爱情",
-            "Kids", "儿童",
-            "History", "历史",
-            "Sport", "体育"
+            "Science Fiction", "Sci-Fi",
+            "Horror", "Horror",
+            "Classic", "Classic",
+            "Action and Adventure", "Action & Adventure",
+            "Romantic", "Romance",
+            "Kids", "Children",
+            "History", "History",
+            "Sport", "Sports"
     );
     private final BookTransformer bookTransformer;
     private final BookDao bookDao;
@@ -266,10 +266,10 @@ public class BookServiceImpl implements BookService {
             }
         }
         if (!popularBooks.isEmpty()) {
-            shelves.add(buildShelf("popular", "近期热门",
-                    String.format("综合近 %d 天的借阅、详情点击和评分人数信号生成的热门图书榜单。权重策略：借阅 x5，点击 x3，评分人数 x2。", normalizedRecentDays),
+            shelves.add(buildShelf("popular", "Popular Books",
+                    String.format("Combined popularity over the last %d days using borrow, click, and rating signals.", normalizedRecentDays),
                     popularBooks,
-                    book -> String.format("近期热门：%d 位读者评分，平均分 %.1f，当前可借 %d/%d 本。",
+                    book -> String.format("Recently popular: %d ratings, average %.1f, available %d/%d copies.",
                             safeLong(book.getUsersRateCount()),
                             safeDouble(book.getRate()),
                             safeInt(book.getAvailableCopies()),
@@ -279,10 +279,10 @@ public class BookServiceImpl implements BookService {
         Set<Long> usedBookIds = popularBooks.stream().map(Book::getId).collect(Collectors.toSet());
         List<Book> collaborativeBooks = recommendByCollaborativeFiltering(usedBookIds, DEFAULT_RECOMMENDATION_LIMIT);
         if (!collaborativeBooks.isEmpty()) {
-            shelves.add(buildShelf("collaborative", "同类读者也喜欢",
-                    "根据与你评分模式相近的用户生成的协同过滤推荐。",
+            shelves.add(buildShelf("collaborative", "Readers Like You",
+                    "Recommendations inferred from users with similar rating patterns.",
                     collaborativeBooks,
-                    book -> String.format("同类读者偏好：协同过滤认为你可能喜欢《%s》，当前评分 %.1f。",
+                    book -> String.format("Users with similar tastes also liked %s. Current rating %.1f.",
                             safeString(book.getName()),
                             safeDouble(book.getRate()))));
             usedBookIds.addAll(collaborativeBooks.stream().map(Book::getId).collect(Collectors.toSet()));
@@ -290,24 +290,24 @@ public class BookServiceImpl implements BookService {
 
         List<Book> preferenceBooks = recommendByPreferredCategories(activeBooks, usedBookIds, DEFAULT_RECOMMENDATION_LIMIT);
         if (!preferenceBooks.isEmpty()) {
-            shelves.add(buildShelf("preferences", "符合你的阅读偏好",
-                    "匹配你在个人中心选择的偏好分类。",
+            shelves.add(buildShelf("preferences", "Preferred Categories",
+                    "Recommendations aligned with the categories selected in your profile.",
                     preferenceBooks,
-                    book -> String.format("与你偏好的“%s”分类一致。",
+                    book -> String.format("Matches your preferred category: %s.",
                             localizeCategoryName(book.getCategory() == null ? null : book.getCategory().getName()))));
             usedBookIds.addAll(preferenceBooks.stream().map(Book::getId).collect(Collectors.toSet()));
         }
 
         List<Book> activityBooks = recommendByUserActivity(activeBooks, usedBookIds, DEFAULT_RECOMMENDATION_LIMIT);
         if (!activityBooks.isEmpty()) {
-            shelves.add(buildShelf("activity", "基于你的评分和借阅行为",
-                    "根据你评分或借阅过图书的分类与标签生成推荐。",
+            shelves.add(buildShelf("activity", "Based On Your Activity",
+                    "Built from the categories and tags of books you rated or borrowed.",
                     activityBooks,
-                    book -> String.format("与你高分或借阅过的图书在“%s”分类或相近标签上更接近。",
+                    book -> String.format("Close to books you already engaged with in category %s.",
                             localizeCategoryName(book.getCategory() == null ? null : book.getCategory().getName()))));
         }
 
-        return new BookRecommendationOverviewDto(String.format("推荐书架（热门窗口 %d 天）", normalizedRecentDays), shelves);
+        return new BookRecommendationOverviewDto(String.format("Recommendation Shelves (%d-day window)", normalizedRecentDays), shelves);
     }
 
     @Override
@@ -334,10 +334,10 @@ public class BookServiceImpl implements BookService {
                 .limit(DETAIL_RECOMMENDATION_LIMIT)
                 .collect(Collectors.toList());
         if (!sameCategoryBooks.isEmpty()) {
-            shelves.add(buildShelf("same-category", "同分类推荐",
-                    "优先推荐同分类图书，并结合共享标签数量和热度排序。",
+            shelves.add(buildShelf("same-category", "Same Category",
+                    "Books from the same category, ranked by shared tags and popularity.",
                     sameCategoryBooks,
-                    book -> String.format("与《%s》同属“%s”分类，并共享 %d 个标签。",
+                    book -> String.format("%s is in the same category %s and shares %d tags.",
                             safeString(sourceBook.getName()),
                             localizeCategoryName(book.getCategory() == null ? null : book.getCategory().getName()),
                             sharedTagCount(sourceBook, book))));
@@ -356,10 +356,10 @@ public class BookServiceImpl implements BookService {
                 .limit(DETAIL_RECOMMENDATION_LIMIT)
                 .collect(Collectors.toList());
         if (!tagSimilarBooks.isEmpty()) {
-            shelves.add(buildShelf("shared-tags", "相似标签推荐",
-                    "推荐与当前图书共享一个或多个标签的相似图书。",
+            shelves.add(buildShelf("shared-tags", "Shared Tags",
+                    "Books that overlap with the current title on one or more tags.",
                     tagSimilarBooks,
-                    book -> String.format("与《%s》共享 %d 个标签：%s。",
+                    book -> String.format("%s shares %d tags: %s.",
                             safeString(sourceBook.getName()),
                             sharedTagCount(sourceBook, book),
                             describeSharedTags(sourceBook, book))));
@@ -369,14 +369,14 @@ public class BookServiceImpl implements BookService {
         if (shelves.isEmpty()) {
             List<Book> fallbackBooks = findPopularBookEntities(DETAIL_RECOMMENDATION_LIMIT, excludedIds);
             if (!fallbackBooks.isEmpty()) {
-                shelves.add(buildShelf("fallback", "读者还在看",
-                        "当前图书相似邻居较少时，补充展示更热门的可浏览图书。",
+                shelves.add(buildShelf("fallback", "Fallback Picks",
+                        "Used when the current book has too few close neighbors.",
                         fallbackBooks,
-                        book -> String.format("当前书籍邻近样本较少，补充展示近期更热门的《%s》。", safeString(book.getName()))));
+                        book -> String.format("Fallback popular recommendation: %s.", safeString(book.getName()))));
             }
         }
 
-        return new BookRecommendationOverviewDto("相关图书", shelves);
+        return new BookRecommendationOverviewDto("Similar Book Recommendations", shelves);
     }
 
     private List<Book> findActiveBooks() {
@@ -530,7 +530,7 @@ public class BookServiceImpl implements BookService {
     private String describeSharedTags(Book sourceBook, Book candidateBook) {
         Set<Long> sourceTagIds = extractTagIds(sourceBook);
         if (sourceTagIds.isEmpty() || candidateBook == null || candidateBook.getTags() == null) {
-            return "暂无标签交集";
+            return "No shared tags available";
         }
         String sharedTags = candidateBook.getTags().stream()
                 .filter(tag -> tag != null && tag.getId() != null && sourceTagIds.contains(tag.getId()))
@@ -538,7 +538,7 @@ public class BookServiceImpl implements BookService {
                 .filter(name -> !name.isBlank())
                 .sorted()
                 .collect(Collectors.joining(", "));
-        return sharedTags.isBlank() ? "暂无标签交集" : sharedTags;
+        return sharedTags.isBlank() ? "No shared tags" : sharedTags;
     }
 
     private Comparator<Book> popularityComparator() {
@@ -568,7 +568,7 @@ public class BookServiceImpl implements BookService {
     private String localizeCategoryName(String value) {
         String normalizedValue = safeString(value).trim();
         if (normalizedValue.isEmpty()) {
-            return "未分类";
+            return "Uncategorized";
         }
         return CATEGORY_NAME_MAP.getOrDefault(normalizedValue, normalizedValue);
     }

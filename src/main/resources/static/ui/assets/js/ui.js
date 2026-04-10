@@ -198,6 +198,235 @@
     return normalized;
   }
 
+  const RECOMMENDATION_TITLE_ENTRIES_V2 = [
+    { aliases: ['Popular Books', 'Recently popular', '热门图书', '近期热门'], zh: '热门图书', en: 'Popular Books' },
+    { aliases: ['Readers Like You', '相似读者推荐'], zh: '相似读者推荐', en: 'Readers Like You' },
+    { aliases: ['Preferred Categories', '偏好分类推荐'], zh: '偏好分类推荐', en: 'Preferred Categories' },
+    { aliases: ['Based On Your Activity', '基于你的行为'], zh: '基于你的行为', en: 'Based On Your Activity' },
+    { aliases: ['Recommendation preview', '推荐预览'], zh: '推荐预览', en: 'Recommendation preview' },
+    { aliases: ['Featured picks', '精选推荐'], zh: '精选推荐', en: 'Featured picks' },
+    { aliases: ['Same Category', '同分类推荐'], zh: '同分类推荐', en: 'Same Category' },
+    { aliases: ['Shared Tags', '共享标签推荐'], zh: '共享标签推荐', en: 'Shared Tags' },
+    { aliases: ['Fallback Picks', '补充推荐'], zh: '补充推荐', en: 'Fallback Picks' },
+    { aliases: ['Similar Book Recommendations', '相似图书推荐'], zh: '相似图书推荐', en: 'Similar Book Recommendations' },
+    { aliases: ['Author shelf', '同作者书架'], zh: '同作者书架', en: 'Author shelf' },
+    { aliases: ['More from the same author', '同作者更多作品'], zh: '同作者更多作品', en: 'More from the same author' }
+  ];
+
+  const RECOMMENDATION_DESCRIPTION_ENTRIES_V2 = [
+    {
+      aliases: ['Recommendations inferred from users with similar rating patterns.', '根据评分模式相近的读者生成的推荐。'],
+      zh: '根据评分模式相近的读者生成的推荐。',
+      en: 'Recommendations inferred from users with similar rating patterns.'
+    },
+    {
+      aliases: ['Recommendations aligned with the categories selected in your profile.', '与你在个人资料中选择的偏好分类一致的推荐。'],
+      zh: '与你在个人资料中选择的偏好分类一致的推荐。',
+      en: 'Recommendations aligned with the categories selected in your profile.'
+    },
+    {
+      aliases: ['Built from the categories and tags of books you rated or borrowed.', '根据你评分或借阅过的图书分类与标签生成的推荐。'],
+      zh: '根据你评分或借阅过的图书分类与标签生成的推荐。',
+      en: 'Built from the categories and tags of books you rated or borrowed.'
+    },
+    {
+      aliases: ['Books from the same category, ranked by shared tags and popularity.', '同一分类下的图书，并按共享标签和热度排序。'],
+      zh: '同一分类下的图书，并按共享标签和热度排序。',
+      en: 'Books from the same category, ranked by shared tags and popularity.'
+    },
+    {
+      aliases: ['Books that overlap with the current title on one or more tags.', '与当前图书共享一个或多个标签的图书。'],
+      zh: '与当前图书共享一个或多个标签的图书。',
+      en: 'Books that overlap with the current title on one or more tags.'
+    },
+    {
+      aliases: ['Used when the current book has too few close neighbors.', '当当前图书缺少足够相似项时的补充推荐。'],
+      zh: '当当前图书缺少足够相似项时的补充推荐。',
+      en: 'Used when the current book has too few close neighbors.'
+    }
+  ];
+
+  function translateCategoryLabelV2(name, targetLanguage) {
+    const normalizedName = String(name || '').trim();
+    if (!normalizedName) return normalizedName;
+    if (targetLanguage === 'zh') {
+      return CATEGORY_NAME_MAP[normalizedName] || normalizedName;
+    }
+    return CATEGORY_NAME_REVERSE_MAP[normalizedName] || normalizedName;
+  }
+
+  const RECOMMENDATION_SOURCE_KEY_ENTRIES_V2 = {
+    popular: { zh: '热门图书', en: 'Popular Books' },
+    collaborative: { zh: '相似读者推荐', en: 'Readers Like You' },
+    preferences: { zh: '偏好分类推荐', en: 'Preferred Categories' },
+    activity: { zh: '基于你的行为', en: 'Based On Your Activity' },
+    'same-category': { zh: '同分类推荐', en: 'Same Category' },
+    'shared-tags': { zh: '共享标签推荐', en: 'Shared Tags' },
+    fallback: { zh: '补充推荐', en: 'Fallback Picks' },
+    overview: { zh: '推荐书架', en: 'Recommendation shelf' },
+    'author-shelf': { zh: '同作者书架', en: 'Author shelf' },
+    'same-author': { zh: '同作者更多作品', en: 'More from the same author' }
+  };
+
+  function stripRecommendationPrefix(value) {
+    const normalized = String(value || '').trim();
+    return normalized.startsWith('recommendation:')
+      ? normalized.slice('recommendation:'.length)
+      : normalized;
+  }
+
+  function localizeRecommendationTitle(title) {
+    const normalized = stripRecommendationPrefix(title);
+    if (!normalized) return normalized;
+    const language = currentLanguage();
+
+    const keyMatched = RECOMMENDATION_SOURCE_KEY_ENTRIES_V2[normalized];
+    if (keyMatched) {
+      return keyMatched[language];
+    }
+
+    const overviewEnMatch = normalized.match(/^Recommendation Shelves \((\d+)-day window\)$/i);
+    if (overviewEnMatch) {
+      return language === 'zh' ? `推荐摘要（近 ${overviewEnMatch[1]} 天）` : `Recommendation Shelves (${overviewEnMatch[1]}-day window)`;
+    }
+    const overviewZhMatch = normalized.match(/^推荐摘要（近\s*(\d+)\s*天）$/);
+    if (overviewZhMatch) {
+      return language === 'zh' ? normalized : `Recommendation Shelves (${overviewZhMatch[1]}-day window)`;
+    }
+
+    const matched = RECOMMENDATION_TITLE_ENTRIES_V2.find(entry => entry.aliases.includes(normalized));
+    return matched ? matched[language] : normalized;
+  }
+
+  function localizeRecommendationDescription(description) {
+    const normalized = String(description || '').trim();
+    if (!normalized) return normalized;
+    const language = currentLanguage();
+
+    const popularEnMatch = normalized.match(/^Combined popularity over the last (\d+) days using borrow, click, and rating signals\.$/);
+    if (popularEnMatch) {
+      return language === 'zh'
+        ? `综合近 ${popularEnMatch[1]} 天的借阅、点击和评分信号生成的人气推荐。`
+        : normalized;
+    }
+    const popularZhMatch = normalized.match(/^综合近\s*(\d+)\s*天的借阅、点击和评分信号生成的人气推荐。$/);
+    if (popularZhMatch) {
+      return language === 'zh'
+        ? normalized
+        : `Combined popularity over the last ${popularZhMatch[1]} days using borrow, click, and rating signals.`;
+    }
+
+    const matched = RECOMMENDATION_DESCRIPTION_ENTRIES_V2.find(entry => entry.aliases.includes(normalized));
+    return matched ? matched[language] : normalized;
+  }
+
+  function localizeRecommendationReason(reason) {
+    const normalized = String(reason || '').trim();
+    if (!normalized) return normalized;
+    const language = currentLanguage();
+
+    const popularEnMatch = normalized.match(/^Recently popular: (\d+) ratings, average ([\d.]+), available (\d+)\/(\d+) copies\.$/);
+    if (popularEnMatch) {
+      const [, count, rate, available, total] = popularEnMatch;
+      return language === 'zh'
+        ? `近期热门：${count} 人评分，平均 ${rate} 分，可借库存 ${available}/${total}。`
+        : normalized;
+    }
+    const popularZhMatch = normalized.match(/^近期热门：(\d+)\s*人评分，平均\s*([\d.]+)\s*分，可借库存\s*(\d+)\/(\d+)。$/);
+    if (popularZhMatch) {
+      const [, count, rate, available, total] = popularZhMatch;
+      return language === 'zh'
+        ? normalized
+        : `Recently popular: ${count} ratings, average ${rate}, available ${available}/${total} copies.`;
+    }
+
+    const collaborativeEnMatch = normalized.match(/^Users with similar tastes also liked (.+)\. Current rating ([\d.]+)\.$/);
+    if (collaborativeEnMatch) {
+      const [, name, rate] = collaborativeEnMatch;
+      return language === 'zh'
+        ? `相似读者也喜欢《${name}》，当前评分 ${rate}。`
+        : normalized;
+    }
+    const collaborativeZhMatch = normalized.match(/^相似读者也喜欢《(.+)》，当前评分\s*([\d.]+)。$/);
+    if (collaborativeZhMatch) {
+      const [, name, rate] = collaborativeZhMatch;
+      return language === 'zh'
+        ? normalized
+        : `Users with similar tastes also liked ${name}. Current rating ${rate}.`;
+    }
+
+    const preferenceEnMatch = normalized.match(/^Matches your preferred category: (.+)\.$/);
+    if (preferenceEnMatch) {
+      return language === 'zh'
+        ? `匹配你的偏好分类：${translateCategoryLabelV2(preferenceEnMatch[1], 'zh')}。`
+        : normalized;
+    }
+    const preferenceZhMatch = normalized.match(/^匹配你的偏好分类：(.+)。$/);
+    if (preferenceZhMatch) {
+      return language === 'zh'
+        ? normalized
+        : `Matches your preferred category: ${translateCategoryLabelV2(preferenceZhMatch[1], 'en')}.`;
+    }
+
+    const activityEnMatch = normalized.match(/^Close to books you already engaged with in category (.+)\.$/);
+    if (activityEnMatch) {
+      return language === 'zh'
+        ? `与你已互动图书的分类更接近：${translateCategoryLabelV2(activityEnMatch[1], 'zh')}。`
+        : normalized;
+    }
+    const activityZhMatch = normalized.match(/^与你已互动图书的分类更接近：(.+)。$/);
+    if (activityZhMatch) {
+      return language === 'zh'
+        ? normalized
+        : `Close to books you already engaged with in category ${translateCategoryLabelV2(activityZhMatch[1], 'en')}.`;
+    }
+
+    const sameCategoryEnMatch = normalized.match(/^(.+) is in the same category (.+) and shares (\d+) tags\.$/);
+    if (sameCategoryEnMatch) {
+      const [, title, category, count] = sameCategoryEnMatch;
+      return language === 'zh'
+        ? `《${title}》与当前图书同属 ${translateCategoryLabelV2(category, 'zh')} 分类，并共享 ${count} 个标签。`
+        : normalized;
+    }
+    const sameCategoryZhMatch = normalized.match(/^《(.+)》与当前图书同属\s*(.+)\s*分类，并共享\s*(\d+)\s*个标签。$/);
+    if (sameCategoryZhMatch) {
+      const [, title, category, count] = sameCategoryZhMatch;
+      return language === 'zh'
+        ? normalized
+        : `${title} is in the same category ${translateCategoryLabelV2(category, 'en')} and shares ${count} tags.`;
+    }
+
+    const sharedTagsEnMatch = normalized.match(/^(.+) shares (\d+) tags: (.+)\.$/);
+    if (sharedTagsEnMatch) {
+      const [, title, count, tags] = sharedTagsEnMatch;
+      return language === 'zh'
+        ? `《${title}》共享 ${count} 个标签：${tags}。`
+        : normalized;
+    }
+    const sharedTagsZhMatch = normalized.match(/^《(.+)》共享\s*(\d+)\s*个标签：(.+)。$/);
+    if (sharedTagsZhMatch) {
+      const [, title, count, tags] = sharedTagsZhMatch;
+      return language === 'zh'
+        ? normalized
+        : `${title} shares ${count} tags: ${tags}.`;
+    }
+
+    const fallbackEnMatch = normalized.match(/^Fallback popular recommendation: (.+)\.$/);
+    if (fallbackEnMatch) {
+      return language === 'zh'
+        ? `补充热门推荐：《${fallbackEnMatch[1]}》。`
+        : normalized;
+    }
+    const fallbackZhMatch = normalized.match(/^补充热门推荐：《(.+)》。$/);
+    if (fallbackZhMatch) {
+      return language === 'zh'
+        ? normalized
+        : `Fallback popular recommendation: ${fallbackZhMatch[1]}.`;
+    }
+
+    return normalized;
+  }
+
   function parseStorageJson(key, fallback) {
     try {
       const raw = localStorage.getItem(key);

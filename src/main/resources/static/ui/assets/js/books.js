@@ -219,6 +219,23 @@ function formatRangeLabel(label, from, to, unit = '') {
   return `${label}${to}${unit} 以下`;
 }
 
+function toFiniteNumberOrNull(value) {
+  return Number.isFinite(value) ? value : null;
+}
+
+function formatRangeLabel(label, from, to, unit = '') {
+  const normalizedFrom = toFiniteNumberOrNull(from);
+  const normalizedTo = toFiniteNumberOrNull(to);
+  if (normalizedFrom === null && normalizedTo === null) return null;
+  if (normalizedFrom !== null && normalizedTo !== null) {
+    return `${label}${normalizedFrom}-${normalizedTo}${unit}`;
+  }
+  if (normalizedFrom !== null) {
+    return `${label}${normalizedFrom}${unit} 以上`;
+  }
+  return `${label}${normalizedTo}${unit} 以下`;
+}
+
 function renderActiveFilterSummary(payload, pagination) {
   const wrap = document.getElementById('active-filter-summary');
   if (!wrap) return;

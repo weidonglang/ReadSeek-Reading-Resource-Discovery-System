@@ -6,9 +6,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.*;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.*;
 import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor

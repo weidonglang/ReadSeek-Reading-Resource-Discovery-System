@@ -12,9 +12,9 @@ import com.weidonglang.NewBookRecommendationSystem.transformer.BookReservationTr
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityExistsException;
-import javax.persistence.EntityNotFoundException;
-import javax.transaction.Transactional;
+import jakarta.persistence.EntityExistsException;
+import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -50,7 +50,7 @@ public class BookReservationServiceImpl implements BookReservationService {
     public BookReservationDto reserveBook(Long bookId) {
         log.info("BookReservationService: reserveBook() called");
         Long currentUserId = userService.getCurrentUser().getId();
-        Book book = findBookEntity(bookId);
+        Book book = findBookEntityForUpdate(bookId);
 
         if (Boolean.TRUE.equals(book.getMarkedAsDeleted())) {
             throw new EntityExistsException("Book is not available for reservation.");
@@ -143,8 +143,8 @@ public class BookReservationServiceImpl implements BookReservationService {
         return getTransformer().transformEntityToDto(getDao().findAllReservationHistory());
     }
 
-    private Book findBookEntity(Long bookId) {
-        return bookDao.findById(bookId).orElseThrow(() -> new EntityNotFoundException("Book not found for id: " + bookId));
+    private Book findBookEntityForUpdate(Long bookId) {
+        return bookDao.findByIdForUpdate(bookId).orElseThrow(() -> new EntityNotFoundException("Book not found for id: " + bookId));
     }
 
     private BookReservation findCurrentUserReservationEntity(Long reservationId) {

@@ -304,24 +304,7 @@ mvnw-jdk11.cmd spring-boot:run
 - 借阅 / 归还 / 续借 / 预约
 - 查看推荐页与首页看板
 
-## 二次开发建议
-
-如果你准备基于本项目继续开发，建议优先从这些方向入手：
-
-- 把敏感配置移出 `application.properties`
-- 补充单元测试和集成测试
-- 优化异常码与统一响应结构
-- 增强 JWT、刷新令牌和登出策略
-- 为推荐服务增加更清晰的策略分层
-- 为前端页面加入更完整的国际化和状态反馈
-
 ## 贡献说明
-
-This project is developed based on / inspired by henry-azer/book-recommendation-system.
-On top of the original project, I extended the system with borrowing, returning, renewal, reservation queue, admin management, deployment scripts, and improved project documentation.
-
-本项目基于 henry-azer/book-recommendation-system 进行二次开发。
-在原有图书推荐能力基础上，新增/完善了借阅、归还、续借、预约排队、后台管理、部署脚本与文档说明等功能。
 
 欢迎任何形式的贡献，包括但不限于：
 

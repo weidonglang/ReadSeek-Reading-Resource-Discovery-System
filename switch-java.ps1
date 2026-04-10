@@ -1,10 +1,11 @@
 ﻿[CmdletBinding()]
 param(
     [ValidateSet('Process', 'User', 'Machine')]
-    [string]$Scope = '',
+    [string]$Scope = 'Machine',
     [string[]]$SearchRoots = @(),
     [switch]$NonInteractive,
-    [int]$Selection = 0
+    [int]$Selection = 0,
+    [string]$PreferredVersionPrefix = '17'
 )
 
 Set-StrictMode -Version Latest
@@ -90,6 +91,17 @@ function Get-JavaCandidate {
         JavaExe  = $javaExe
         JavacExe = $javacExe
     }
+}
+
+function Get-IsPreferredCandidate {
+    param(
+        [object]$Candidate,
+        [string]$PreferredVersionPrefix
+    )
+
+    if ($null -eq $Candidate) { return $false }
+    if ([string]::IsNullOrWhiteSpace($PreferredVersionPrefix)) { return $false }
+    return ($Candidate.Version -like "$PreferredVersionPrefix*")
 }
 
 function Test-IsJavaBinPath {
@@ -297,7 +309,11 @@ function Find-JavaCandidates {
     }
 
     return $found |
-        Sort-Object @{Expression = { if ($_.Type -eq 'JDK') { 0 } else { 1 } } }, @{Expression = { $_.Version } ; Descending = $true }, Name
+        Sort-Object `
+            @{Expression = { if (Get-IsPreferredCandidate -Candidate $_ -PreferredVersionPrefix $PreferredVersionPrefix) { 0 } else { 1 } } }, `
+            @{Expression = { if ($_.Type -eq 'JDK') { 0 } else { 1 } } }, `
+            @{Expression = { $_.Version } ; Descending = $true }, `
+            Name
 }
 
 Write-Title '本地 Java 环境检测'
@@ -310,7 +326,7 @@ if (-not $candidates -or $candidates.Count -eq 0) {
     exit 1
 }
 
-Write-Host '检测到以下 Java 环境：' -ForegroundColor Green
+Write-Host "检测到以下 Java 环境（优先版本前缀：$PreferredVersionPrefix）：" -ForegroundColor Green
 for ($i = 0; $i -lt $candidates.Count; $i++) {
     $item = $candidates[$i]
     $vendorText = if ([string]::IsNullOrWhiteSpace($item.Vendor)) { '' } else { " | $($item.Vendor)" }
@@ -319,7 +335,7 @@ for ($i = 0; $i -lt $candidates.Count; $i++) {
 
 if ([string]::IsNullOrWhiteSpace($Scope)) {
     if ($NonInteractive) {
-        $Scope = 'User'
+        $Scope = 'Machine'
     } else {
         $Scope = Get-ScopeInteractive
     }
@@ -390,7 +406,7 @@ catch {
 
 Write-Title '校验结果'
 try {
-    & $selected.JavaExe -version 2>&1 | ForEach-Object { Write-Host $_ }
+    cmd /c ('"{0}" -version' -f $selected.JavaExe) | ForEach-Object { Write-Host $_ }
 }
 catch {
     Write-Host 'java -version 执行失败。' -ForegroundColor Yellow
@@ -398,7 +414,7 @@ catch {
 
 if ($selected.Type -eq 'JDK' -and (Test-Path $selected.JavacExe)) {
     try {
-        & $selected.JavacExe -version 2>&1 | ForEach-Object { Write-Host $_ }
+        cmd /c ('"{0}" -version' -f $selected.JavacExe) | ForEach-Object { Write-Host $_ }
     }
     catch {
         Write-Host 'javac -version 执行失败。' -ForegroundColor Yellow

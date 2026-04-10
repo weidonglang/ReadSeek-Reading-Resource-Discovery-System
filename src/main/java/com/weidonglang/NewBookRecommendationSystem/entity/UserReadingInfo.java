@@ -4,10 +4,9 @@ import com.weidonglang.NewBookRecommendationSystem.entity.base.BaseEntity;
 import com.weidonglang.NewBookRecommendationSystem.enums.UserReadingLevel;
 import lombok.*;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.util.List;
 
-import static javax.persistence.CascadeType.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -31,7 +30,7 @@ public class UserReadingInfo extends BaseEntity {
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = {MERGE, PERSIST, DETACH, REFRESH})
+    @Transient
     private List<UserBookCategory> userBookCategories;
 }
 /*

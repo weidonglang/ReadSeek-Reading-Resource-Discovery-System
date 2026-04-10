@@ -9,8 +9,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityNotFoundException;
-import javax.transaction.Transactional;
+import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import java.util.Optional;
 
 @Slf4j
@@ -55,7 +55,7 @@ public class UserBookRateServiceImpl implements UserBookRateService {
         log.info("UserBookRateService: create() called");
         dto.setUser(userService.findById(userService.getCurrentUser().getId()));
         BookDto bookDto = bookService.findById(dto.getBook().getId());
-        BookDto updateBook = updateBookRate(bookDto, dto);
+        BookDto updateBook = updateBookRatingSummary(bookDto, dto.getRate(), null);
         dto.setBook(updateBook);
         return getTransformer().transformEntityToDto(getDao().create(getTransformer().transformDtoToEntity(dto)));
     }
@@ -66,9 +66,10 @@ public class UserBookRateServiceImpl implements UserBookRateService {
         log.info("UserBookRateService: update() called");
         Optional<UserBookRate> entity = getDao().findById(id);
         if (entity.isEmpty()) throw new EntityNotFoundException("User doesn't rate this book!");
+        Integer previousRate = entity.get().getRate();
         getTransformer().updateEntity(dto, entity.get());
         BookDto bookDto = bookService.findById(dto.getBook().getId());
-        BookDto updateBook = updateBookRate(bookDto, dto);
+        BookDto updateBook = updateBookRatingSummary(bookDto, dto.getRate(), previousRate);
         dto.setBook(updateBook);
         return getTransformer().transformEntityToDto(getDao().update(entity.get()));
     }
@@ -86,14 +87,42 @@ public class UserBookRateServiceImpl implements UserBookRateService {
         }
         if (userBehaviorLogService != null) {
             userBehaviorLogService.recordBookRate(userBookRateDto.getBook().getId(),
-                    "用户提交评分：" + userBookRateDto.getRate());
+                    "Book rating recorded: " + userBookRateDto.getRate());
         }
         return result;
     }
 
-    private BookDto updateBookRate(BookDto bookDto, UserBookRateDto userBookRateDto) {
-        bookDto.setUsersRateCount(bookDto.getUsersRateCount() + 1);
-        bookDto.setRate(bookDto.getRate() + userBookRateDto.getRate());
+    private BookDto updateBookRatingSummary(BookDto bookDto, Integer newRate, Integer previousRate) {
+        int normalizedNewRate = normalizeRate(newRate);
+        long currentCount = normalizeRatingCount(bookDto.getUsersRateCount());
+        double currentAverage = normalizeAverageRate(bookDto.getRate());
+
+        long updatedCount = previousRate == null ? currentCount + 1 : Math.max(currentCount, 1L);
+        double totalRating = currentAverage * currentCount;
+
+        if (previousRate == null) {
+            totalRating += normalizedNewRate;
+        } else {
+            totalRating = (currentAverage * updatedCount) - normalizeRate(previousRate) + normalizedNewRate;
+        }
+
+        bookDto.setUsersRateCount(updatedCount);
+        bookDto.setRate(updatedCount == 0 ? 0D : totalRating / updatedCount);
         return bookService.update(bookDto, bookDto.getId());
+    }
+
+    private long normalizeRatingCount(Long usersRateCount) {
+        return usersRateCount == null || usersRateCount < 0 ? 0L : usersRateCount;
+    }
+
+    private double normalizeAverageRate(Double averageRate) {
+        return averageRate == null || averageRate < 0 ? 0D : averageRate;
+    }
+
+    private int normalizeRate(Integer rate) {
+        if (rate == null) {
+            throw new IllegalArgumentException("Book rate is required");
+        }
+        return rate;
     }
 }

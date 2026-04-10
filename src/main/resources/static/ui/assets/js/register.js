@@ -5,6 +5,39 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const genderSelect = document.getElementById('gender');
   const maritalSelect = document.getElementById('maritalStatus');
+  const birthdateInput = document.getElementById('birthdate');
+
+  function formatBirthdateForInput(value) {
+    if (!value) return '';
+    const normalized = String(value).trim();
+    const match = normalized.match(/^(\d{4})-(\d{2})-(\d{2})/);
+    if (match) {
+      return `${match[1]}/${match[2]}/${match[3]}`;
+    }
+    const slashMatch = normalized.match(/^(\d{4})\/(\d{1,2})\/(\d{1,2})$/);
+    if (slashMatch) {
+      return `${slashMatch[1]}/${slashMatch[2].padStart(2, '0')}/${slashMatch[3].padStart(2, '0')}`;
+    }
+    return normalized;
+  }
+
+  function normalizeBirthdateForApi(value) {
+    const normalized = String(value || '').trim();
+    if (!normalized) return null;
+    const slashMatch = normalized.match(/^(\d{4})\/(\d{1,2})\/(\d{1,2})$/);
+    if (slashMatch) {
+      return `${slashMatch[1]}-${slashMatch[2].padStart(2, '0')}-${slashMatch[3].padStart(2, '0')}`;
+    }
+    const dashMatch = normalized.match(/^(\d{4})-(\d{1,2})-(\d{1,2})$/);
+    if (dashMatch) {
+      return `${dashMatch[1]}-${dashMatch[2].padStart(2, '0')}-${dashMatch[3].padStart(2, '0')}`;
+    }
+    return normalized;
+  }
+
+  birthdateInput?.addEventListener('blur', () => {
+    birthdateInput.value = formatBirthdateForInput(birthdateInput.value);
+  });
   [
     { value: 'MALE', label: t('common.genderMale') },
     { value: 'FEMALE', label: t('common.genderFemale') },
@@ -49,13 +82,17 @@ document.addEventListener('DOMContentLoaded', () => {
       email: document.getElementById('email').value.trim(),
       password: document.getElementById('password').value.trim(),
       phoneNumber: document.getElementById('phoneNumber').value.trim(),
-      birthdate: document.getElementById('birthdate').value || null,
+      birthdate: normalizeBirthdateForApi(birthdateInput?.value),
       country: document.getElementById('country').value.trim(),
       age: document.getElementById('age').value ? Number(document.getElementById('age').value) : null,
       gender: document.getElementById('gender').value || null,
       maritalStatus: document.getElementById('maritalStatus').value || null,
       imageUrl: document.getElementById('imageUrl').value.trim()
     };
+
+    if (birthdateInput) {
+      birthdateInput.value = formatBirthdateForInput(birthdateInput.value);
+    }
 
     try {
       await BookApi.apiRequest('/api/user', {

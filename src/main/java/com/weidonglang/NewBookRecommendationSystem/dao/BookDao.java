@@ -8,7 +8,10 @@ import com.weidonglang.NewBookRecommendationSystem.repository.BookRepository;
 import org.springframework.data.domain.Page;
 
 import java.util.List;
+import java.util.Optional;
 public interface BookDao extends BaseDao<Book, BookRepository> {
+    Optional<Book> findByIdForUpdate(Long id);
+
     List<Book> findAllBooksByAuthorId(Long authorId);
 
     List<Book> findAllBooksByCategoriesAndLimit(List<String> categories, Integer limit);
