@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import jakarta.persistence.EntityExistsException;
+import jakarta.persistence.EntityNotFoundException;
 import java.util.Optional;
 @Slf4j
 @Service
@@ -46,7 +47,7 @@ public class BookCategoryServiceImpl implements BookCategoryService {
         log.info("BookCategoryService: deleteById() called");
         Optional<BookCategory> optionalCategory = getDao().findById(id);
         if (optionalCategory.isEmpty()) {
-            throw new EntityExistsException("Book category not found for id: " + id);
+            throw new EntityNotFoundException("Book category not found for id: " + id);
         }
         if (bookRepository != null && Boolean.TRUE.equals(bookRepository.existsByCategoryIdAndMarkedAsDeletedFalse(id))) {
             throw new EntityExistsException("Book category has active books and cannot be deleted");

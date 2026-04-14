@@ -1,45 +1,51 @@
 # 图书推荐与借阅管理系统
 
-一个面向毕业设计、课程设计和功能演示场景的图书推荐系统，包含后端 API、权限认证、图书流通管理、推荐能力，以及可直接访问的前端页面。
+一个面向毕业设计、课程设计和功能演示场景的图书推荐系统，包含后端 API、权限认证、借阅流转、推荐能力，以及一套可直接访问的前端页面。
 
-本项目当前更适合作为**本科毕业设计 / 课程设计 / 作品集项目**来展示，重点在于：
+项目当前重点是：
+
 - 图书检索、详情、评分、推荐与行为记录
 - 图书借阅、归还、续借、预约与排队
 - 用户注册、登录、令牌刷新与权限控制
-- PostgreSQL 持久化与数据库版本管理
+- PostgreSQL 持久化与 Liquibase 数据库版本管理
 - 适合答辩演示的前后端一体化体验
 
----
+主包名：
 
-## 1. 项目简介
+```text
+com.weidonglang.NewBookRecommendationSystem
+```
 
-本系统围绕“图书推荐 + 图书流通管理”两条主线进行设计与实现，既包含常见的图书业务闭环，也包含推荐与行为记录能力，适合用于：
+## 项目定位
 
-- 毕业设计答辩展示
-- Java 后端项目练手与作品集沉淀
-- 图书推荐 / 图书借阅管理方向课程设计
-- 后续扩展为更完整的智能图书发现系统
+这个项目更适合作为：
 
-项目默认以**本地开发和演示环境**为主，当前配置更适合学习、开发、演示和阶段性汇报，不建议不经改造直接投入生产环境。
+- 本科毕业设计
+- 课程设计
+- 功能展示型作品集项目
+- 推荐系统与图书流通管理方向的教学演示项目
 
----
+它已经具备较完整的业务链路，但默认配置仍以本地开发和演示为主，不建议直接按当前配置投入生产环境。
 
-## 2. 当前已实现功能
+## 功能概览
 
-### 2.1 用户与认证
+### 用户与认证
+
 - 用户注册、登录、退出登录
 - Access Token / Refresh Token 认证流程
 - 基于 Spring Security 的权限控制
 - 默认管理员账号自动引导创建
 
-### 2.2 图书与检索
+### 图书与检索
+
 - 图书列表与多条件筛选
-- 作者、分类、标签、出版社等维度筛选
-- 图书详情查看
+- 作者、分类、标签、出版社维度筛选
+- 图书详情页
 - 图书评分
 - 用户行为记录与搜索日志
 
-### 2.3 推荐能力
+### 推荐能力
+
 - 热门图书推荐
 - 基于阅读偏好的推荐
 - 基于评分和借阅行为的推荐
@@ -47,7 +53,8 @@
 - 推荐总览书架
 - 首页阅读看板与推荐预览
 
-### 2.4 借阅流转
+### 借阅流转
+
 - 借阅
 - 归还
 - 续借
@@ -55,44 +62,33 @@
 - 预约排队与队首优先借阅
 - 借阅状态与到期提醒展示
 
-### 2.5 前端页面
-前端静态页面位于 `src/main/resources/static/ui`，包含但不限于：
+### 前端页面
+
+前端静态页面位于 `src/main/resources/static/ui`，当前包含：
+
 - 首页阅读看板
 - 图书检索工作台
 - 图书详情页
 - 推荐书架页
 - 登录、注册、个人中心、借阅记录等页面
 
----
+## 技术栈
 
-## 3. 技术栈
-
-### 后端
-- Java 17
-- Spring Boot 3.5.7
+- Java 11
+- Spring Boot 2.7.5
 - Spring Web
 - Spring Security
 - Spring Data JPA
-- Spring Validation
-
-### 数据与文档
+- Hibernate
 - PostgreSQL
-- JWT（`com.auth0:java-jwt`）
-- springdoc OpenAPI（Swagger UI）
+- Liquibase
+- JWT (`com.auth0:java-jwt`)
 - MapStruct
 - Lombok
+- springdoc-openapi-ui
+- 原生 HTML / CSS / JavaScript 前端页面
 
-### 测试与构建
-- Maven
-- H2（测试环境）
-- Spring Boot Test
-
-### 数据库变更管理
-- Liquibase Maven Plugin
-
----
-
-## 4. 项目结构
+## 目录结构
 
 ```text
 book-recommendation-system/
@@ -112,190 +108,237 @@ book-recommendation-system/
 │  ├─ transformer/     # DTO / Entity 转换
 │  └─ utils/           # 通用工具
 ├─ src/main/resources/
-│  ├─ application*.yml / properties
-│  ├─ db/
-│  ├─ static/ui/       # 前端静态页面
-│  └─ ...
-├─ scripts/            # 辅助脚本
+│  ├─ application.properties
+│  ├─ application-dev.properties
+│  ├─ db/              # Liquibase 脚本
+│  ├─ json/            # 初始化或导入数据
+│  └─ static/ui/       # 前端页面
+├─ scripts/            # 项目辅助脚本
 ├─ pom.xml
-└─ README.md
+├─ mvnw.cmd
+└─ mvnw-jdk11.cmd
 ```
 
----
-
-## 5. 运行环境要求
+## 运行环境
 
 建议环境：
 
-- JDK 17
-- Maven 3.9+
-- PostgreSQL 14+
-- IntelliJ IDEA / VS Code 均可
+- JDK 11
+- Maven Wrapper（项目已内置）
+- PostgreSQL 12+
+- Windows + IntelliJ IDEA 或任意支持 Maven 的 IDE
 
----
+## 默认配置
 
-## 6. 快速启动
+当前默认配置来自 `src/main/resources/application.properties`：
 
-### 6.1 克隆项目
-```bash
-git clone https://github.com/weidonglang/new-book-recommendation-system.git
-cd new-book-recommendation-system
+- 服务端口：`8010`
+- 上下文路径：`/book-service`
+- 数据库：`book_recommendation_system`
+- 默认数据库地址：`jdbc:postgresql://localhost:5043/book_recommendation_system`
+- Swagger UI：`/swagger-ui/index.html`
+
+默认管理员账号：
+
+- 邮箱：`admin@booknook.local`
+- 密码：`Admin123!`
+
+## 启动前说明
+
+项目配置里当前保留了本地开发用数据库连接与 JWT 密钥。若你准备对外发布、部署或多人协作，建议先做这些调整：
+
+- 修改数据库用户名和密码
+- 修改 JWT Secret
+- 使用环境变量或外部配置管理敏感信息
+- 不要继续把本地密码直接提交到公共仓库
+
+## 快速启动
+
+### 1. 创建数据库
+
+```sql
+CREATE DATABASE book_recommendation_system;
 ```
 
-### 6.2 配置数据库
-请在配置文件中修改你自己的数据库连接信息，包括：
-- 数据库地址
-- 数据库端口
-- 数据库名称
-- 用户名
-- 密码
+### 2. 修改数据库连接
 
-> 本 README 不展示你的私有数据库配置内容，你本地按实际环境填写即可。
+按你的本地环境修改 `src/main/resources/application.properties`：
 
-### 6.3 安装依赖并启动
-```bash
-./mvnw spring-boot:run
+```properties
+spring.datasource.url=jdbc:postgresql://localhost:5043/book_recommendation_system
+spring.datasource.username=postgres
+spring.datasource.password=your_password
 ```
 
-Windows：
-```bash
+### 3. 使用 JDK 11 编译
+
+如果你本机默认 Java 不是 11，优先使用项目脚本：
+
+```bat
+mvnw-jdk11.cmd -DskipTests compile
+```
+
+### 4. 启动项目
+
+```bat
+mvnw-jdk11.cmd spring-boot:run
+```
+
+如果你的环境已经正确切到 JDK 11，也可以直接用：
+
+```bat
 mvnw.cmd spring-boot:run
 ```
 
-### 6.4 打包运行
-```bash
-./mvnw clean package
-java -jar target/book-recommendation-system-0.0.1-SNAPSHOT.jar
+## 访问入口
+
+启动成功后可访问：
+
+- 后端根路径：`http://localhost:8010/book-service`
+- Swagger 文档：`http://localhost:8010/book-service/swagger-ui/index.html`
+- 前端登录页：`http://localhost:8010/book-service/ui/login.html`
+- 前端首页：`http://localhost:8010/book-service/ui/index.html`
+
+## 借阅与预约规则
+
+当前系统内置的业务规则包括：
+
+- 每位用户最多同时借阅 5 本书
+- 默认借期 14 天
+- 每笔借阅最多续借 1 次
+- 每次续借延长 7 天
+- 同一本未归还图书不能重复借阅
+- 图书无可借库存时可进入预约队列
+- 有预约队列时，通常由队首用户优先借阅
+
+## 推荐能力说明
+
+系统当前已经具备以下推荐能力：
+
+- 推荐总览书架
+- 热门推荐
+- 基于偏好的推荐
+- 基于评分和借阅行为的推荐
+- 相似图书推荐
+- 同作者延伸浏览
+- 首页阅读建议与推荐预览
+
+如果后续继续深化，可以进一步扩展：
+
+- 协同过滤排序权重优化
+- 混合推荐策略
+- 推荐理由解释能力增强
+- 用户画像可视化
+
+## 常用接口示例
+
+### 登录
+
+```http
+POST /book-service/api/auth/log-in
+Content-Type: application/json
 ```
 
----
-
-## 7. 接口文档
-
-项目集成了 springdoc OpenAPI，启动后可通过 Swagger UI 查看接口文档。
-
-常见访问方式通常类似：
-```text
-http://localhost:8010/swagger-ui/index.html
+```json
+{
+  "email": "admin@booknook.local",
+  "password": "Admin123!"
+}
 ```
 
-若你本地修改过端口、上下文路径或反向代理配置，请以你的实际运行为准。
+### 图书评分
 
----
+```http
+POST /book-service/api/book/rate
+Authorization: Bearer <access_token>
+Content-Type: application/json
+```
 
-## 8. 项目特点
+```json
+{
+  "book": { "id": 10 },
+  "rate": 5
+}
+```
 
-### 8.1 业务链路比较完整
-这个项目不是只做一个简单的“图书增删改查”，而是已经具备：
-- 认证
-- 图书管理与检索
-- 推荐
-- 借阅流转
-- 行为记录
-- 前端演示页面
+### 借阅图书
 
-因此它更适合作为一个可展示、可答辩、可继续扩展的综合项目。
+```http
+POST /book-service/api/loan/borrow
+Authorization: Bearer <access_token>
+Content-Type: application/json
+```
 
-### 8.2 适合继续升级
-这个系统后续可以继续往以下方向扩展：
-- 更强的推荐策略与离线评测
-- Elasticsearch 全文检索
-- 自然语言查询
-- RAG 问答
-- 推荐理由解释
-- Redis 缓存优化
-- Docker 部署
-- 管理后台统计看板
+```json
+{
+  "bookId": 10
+}
+```
 
-### 8.3 适合毕业设计主线升级
-如果后续你希望把这个项目进一步提升为更强的毕设题目，可以将论文主线逐步收敛到：
+## 测试与验证建议
 
-**面向自然语言图书发现的检索、问答与推荐系统**
+建议至少按下面顺序验证：
 
-也就是从“图书推荐与借阅管理系统”进一步升级为：
-- 混合检索
-- 证据驱动问答
-- 可解释推荐
+1. 编译项目
 
-这样能够让项目从“工程实现”走向“研究型毕设”。
+```bat
+mvnw-jdk11.cmd -DskipTests compile
+```
 
----
+2. 启动项目
 
-## 9. 当前阶段定位
+```bat
+mvnw-jdk11.cmd spring-boot:run
+```
 
-当前版本更适合定义为：
+3. 验证登录
 
-> 一个以图书推荐与借阅流转为核心、具备认证、检索、推荐、行为记录与前端演示能力的 Java Web 系统。
+- 使用默认管理员登录
+- 检查 Access Token / Refresh Token 是否正常工作
 
-它已经具备了不错的毕业设计基础，但如果目标是“更强的优秀毕设 / 更亮眼的简历项目”，还可以继续在以下方向做增强：
-- 检索能力升级
-- 推荐算法解释性增强
-- 系统性能优化
-- 可视化分析
-- 工程化部署
-- 实验评测体系建设
+4. 验证核心业务
 
----
+- 检索图书
+- 查看图书详情
+- 评分
+- 借阅 / 归还 / 续借 / 预约
+- 查看推荐页与首页看板
 
-## 10. 后续升级方向
+## 贡献说明
 
-建议按以下顺序推进：
+欢迎任何形式的贡献，包括但不限于：
 
-### 第一阶段：工程完善
-- 完善异常处理
-- 统一返回格式
-- 补齐接口注释
-- 完善日志体系
-- 优化参数校验
+- 提交 Issue
+- 修复 Bug
+- 补充文档
+- 优化样式或前端交互
+- 增强推荐算法
+- 增加测试
+- 提交 Pull Request
+- 基于此项目继续二次开发
 
-### 第二阶段：推荐能力增强
-- 推荐策略拆分与重构
-- 热门推荐 / 协同推荐 / 内容推荐进一步解耦
-- 推荐结果解释展示
-- 推荐效果离线评测
+如果你准备贡献代码，建议：
 
-### 第三阶段：检索能力增强
-- 引入 Elasticsearch
-- 支持全文检索
-- 支持更复杂的筛选与排序
-- 为自然语言搜书做铺垫
+- 保持提交粒度清晰
+- 尽量不要混入无关改动
+- 对配置、依赖和数据库脚本改动写清楚目的
 
-### 第四阶段：智能化能力增强
-- 自然语言查询
-- 检索增强问答（RAG）
-- 图书比较问答
-- 阅读路径建议
-- 推荐理由自然语言生成
+## 开源许可
 
-### 第五阶段：工程化与答辩交付
-- Docker / Docker Compose
-- 部署文档
-- 测试报告
-- 性能测试
-- 答辩 PPT
-- 演示视频
+本项目采用 MIT License。
 
----
+这意味着你基本可以自由地：
 
-## 11. 适用场景
+- 使用
+- 下载
+- 复制
+- 修改
+- 二次开发
+- 分发
+- 商用
+- 提交衍生工具
+- 贡献代码
 
-本项目适用于：
-- 本科毕业设计
-- Java Web 课程设计
-- 后端开发练手项目
-- 图书推荐系统方向学习
-- 简历项目展示
+唯一需要保留的是原始许可声明与版权声明，同时作者不对软件使用结果承担担保责任。
 
----
-
-## 12. 说明
-
-1. 项目中的数据库连接、账号密码等私有配置请使用你自己的本地环境配置。
-2. README 中的“后续升级方向”属于扩展规划，不代表这些能力已经全部完成。
-3. 若你当前仓库代码仍在持续更新，请以你自己最新分支中的实际实现为准。
-
----
-
-## 13. License
-
-本项目采用仓库当前声明的开源许可证，详情见 `LICENSE` 文件。
+完整许可见 [LICENSE](LICENSE)。

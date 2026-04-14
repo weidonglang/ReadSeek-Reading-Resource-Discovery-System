@@ -79,8 +79,45 @@ public interface BookRepository extends JpaRepository<Book, Long> {
                                                 @Param("deletedRecords") Boolean deletedRecords,
                                                 Pageable pageable);
 
-    @Query("SELECT b.id, COALESCE(b.usersRateCount, 0) FROM Book b WHERE b.markedAsDeleted = false ORDER BY COALESCE(b.usersRateCount, 0) DESC, COALESCE(b.rate, 0) DESC")
+    @Query("SELECT b.id, b.usersRateCount FROM Book b WHERE b.markedAsDeleted = false ORDER BY b.usersRateCount DESC, b.rate DESC")
     List<Object[]> aggregateRatedBooks(Pageable pageable);
+
+    @Query("SELECT b FROM Book b WHERE b.markedAsDeleted = false " +
+            "ORDER BY b.usersRateCount DESC, b.rate DESC, b.availableCopies DESC, b.name ASC")
+    List<Book> findPopularBooks(Pageable pageable);
+
+    @Query("SELECT b FROM Book b WHERE b.markedAsDeleted = false AND b.id NOT IN :excludedIds " +
+            "ORDER BY b.usersRateCount DESC, b.rate DESC, b.availableCopies DESC, b.name ASC")
+    List<Book> findPopularBooksExcluding(@Param("excludedIds") Set<Long> excludedIds, Pageable pageable);
+
+    @Query("SELECT b FROM Book b WHERE b.markedAsDeleted = false AND b.category.id IN :categoryIds " +
+            "ORDER BY b.usersRateCount DESC, b.rate DESC, b.availableCopies DESC, b.name ASC")
+    List<Book> findRecommendedByCategoryIds(@Param("categoryIds") Set<Long> categoryIds, Pageable pageable);
+
+    @Query("SELECT b FROM Book b WHERE b.markedAsDeleted = false AND b.category.id IN :categoryIds AND b.id NOT IN :excludedIds " +
+            "ORDER BY b.usersRateCount DESC, b.rate DESC, b.availableCopies DESC, b.name ASC")
+    List<Book> findRecommendedByCategoryIdsExcluding(@Param("categoryIds") Set<Long> categoryIds,
+                                                     @Param("excludedIds") Set<Long> excludedIds,
+                                                     Pageable pageable);
+
+    @Query("SELECT b FROM Book b WHERE b.markedAsDeleted = false AND b.id <> :bookId AND b.category.id = :categoryId " +
+            "ORDER BY b.usersRateCount DESC, b.rate DESC, b.availableCopies DESC, b.name ASC")
+    List<Book> findSimilarBooksByCategory(@Param("bookId") Long bookId,
+                                          @Param("categoryId") Long categoryId,
+                                          Pageable pageable);
+
+    @Query("SELECT DISTINCT b FROM Book b JOIN b.tags t WHERE b.markedAsDeleted = false AND t.id IN :tagIds " +
+            "ORDER BY b.usersRateCount DESC, b.rate DESC, b.availableCopies DESC, b.name ASC")
+    List<Book> findBooksByTagIds(@Param("tagIds") Set<Long> tagIds, Pageable pageable);
+
+    @Query("SELECT DISTINCT b FROM Book b JOIN b.tags t WHERE b.markedAsDeleted = false AND t.id IN :tagIds AND b.id NOT IN :excludedIds " +
+            "ORDER BY b.usersRateCount DESC, b.rate DESC, b.availableCopies DESC, b.name ASC")
+    List<Book> findBooksByTagIdsExcluding(@Param("tagIds") Set<Long> tagIds,
+                                          @Param("excludedIds") Set<Long> excludedIds,
+                                          Pageable pageable);
+
+    @Query("SELECT b.id, b.name FROM Book b WHERE b.markedAsDeleted = false")
+    List<Object[]> findActiveBookIdsAndNames();
 }
 /*
 weidonglang

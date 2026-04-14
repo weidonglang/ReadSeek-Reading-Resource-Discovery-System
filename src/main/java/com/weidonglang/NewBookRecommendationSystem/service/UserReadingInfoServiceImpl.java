@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import jakarta.persistence.EntityExistsException;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
@@ -80,7 +81,7 @@ public class UserReadingInfoServiceImpl implements UserReadingInfoService {
     public UserReadingInfoDto findUserReadingInfo() {
         log.info("UserReadingInfoService: findUserReadingInfo() called");
         Optional<UserReadingInfo> userReadingInfo = getDao().findByUserId(userService.getCurrentUser().getId());
-        if (userReadingInfo.isEmpty()) throw new EntityExistsException("User hasn't reading info");
+        if (userReadingInfo.isEmpty()) throw new EntityNotFoundException("User reading info not found.");
         UserReadingInfoDto userReadingInfoDto = getTransformer().transformEntityToDto(userReadingInfo.get());
         userReadingInfoDto.setUserBookCategories(userBookCategoryService.findAllUserBookCategories());
         return userReadingInfoDto;

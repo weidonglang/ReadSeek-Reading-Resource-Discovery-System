@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import jakarta.persistence.EntityExistsException;
+import jakarta.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
 @Slf4j
@@ -45,7 +46,7 @@ public class TagServiceImpl implements TagService {
         log.info("TagService: deleteById() called");
         Optional<Tag> optionalTag = getDao().findById(id);
         if (optionalTag.isEmpty())
-            throw new EntityExistsException("Tag not found for id: " + id);
+            throw new EntityNotFoundException("Tag not found for id: " + id);
         if (Boolean.TRUE.equals(bookRepository.existsByTagsIdAndMarkedAsDeletedFalse(id))) {
             throw new EntityExistsException("Tag is still used by active books and cannot be deleted");
         }

@@ -15,6 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import jakarta.persistence.EntityExistsException;
+import jakarta.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
@@ -62,7 +63,7 @@ public class UserServiceImpl implements UserService {
         log.info("UserService: update() called");
         Optional<User> optionalUser = getDao().findById(id);
         if (optionalUser.isEmpty())
-            throw new EntityExistsException("User not found for id: " + id);
+            throw new EntityNotFoundException("User not found for id: " + id);
 
         User existingUser = optionalUser.get();
         UserDto currentUser = getCurrentUser();
@@ -86,7 +87,7 @@ public class UserServiceImpl implements UserService {
         log.info("UserService: findUserByEmail() called");
         Optional<User> optionalUser = getDao().findUserByEmail(email);
         if (optionalUser.isEmpty())
-            throw new EntityExistsException("User not exists for email: " + email);
+            throw new EntityNotFoundException("User not found for email: " + email);
         return getTransformer().transformEntityToDto(optionalUser.get());
     }
 
