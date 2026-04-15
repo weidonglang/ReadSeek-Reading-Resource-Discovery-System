@@ -1,5 +1,5 @@
 # Book Discovery and Circulation Management System 
-# 图书发现与图书流通管理系统
+## 图书发现与图书流通管理系统
 
 An intelligent backend-oriented system for book discovery, recommendation, and circulation management, designed for graduation projects, coursework, and portfolio demonstrations. It includes backend APIs, authentication, book circulation workflows, recommendation capabilities, and directly accessible frontend pages.
 
