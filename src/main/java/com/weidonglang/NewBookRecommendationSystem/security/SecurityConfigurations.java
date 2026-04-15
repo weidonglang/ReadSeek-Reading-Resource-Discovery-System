@@ -1,5 +1,6 @@
 package com.weidonglang.NewBookRecommendationSystem.security;
 
+import com.weidonglang.NewBookRecommendationSystem.security.jwt.JWTAccessDeniedHandler;
 import com.weidonglang.NewBookRecommendationSystem.security.jwt.JWTAuthenticationEntryPoint;
 import com.weidonglang.NewBookRecommendationSystem.security.jwt.JWTRequestFilter;
 import lombok.AllArgsConstructor;
@@ -28,6 +29,7 @@ import java.util.Collections;
 public class SecurityConfigurations {
     private final JWTRequestFilter jwtRequestFilter;
     private final JWTAuthenticationEntryPoint jwtAuthenticationEntryPoint;
+    private final JWTAccessDeniedHandler jwtAccessDeniedHandler;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
@@ -43,7 +45,9 @@ public class SecurityConfigurations {
                         .requestMatchers("/api/**").authenticated()
                         .anyRequest().permitAll()
                 )
-                .exceptionHandling(exceptions -> exceptions.authenticationEntryPoint(jwtAuthenticationEntryPoint))
+                .exceptionHandling(exceptions -> exceptions
+                        .authenticationEntryPoint(jwtAuthenticationEntryPoint)
+                        .accessDeniedHandler(jwtAccessDeniedHandler))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
         return httpSecurity.build();

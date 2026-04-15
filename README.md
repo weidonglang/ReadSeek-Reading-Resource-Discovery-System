@@ -1,4 +1,4 @@
-# Book Discovery and Circulation Management System 
+# Book Discovery and Circulation Management System
 ## 图书发现与图书流通管理系统
 
 An intelligent backend-oriented system for book discovery, recommendation, and circulation management, designed for graduation projects, coursework, and portfolio demonstrations. It includes backend APIs, authentication, book circulation workflows, recommendation capabilities, and directly accessible frontend pages.
@@ -25,22 +25,22 @@ This project is currently better suited for **undergraduate graduation projects,
 ## Screenshots / 实际效果展示
 
 ### Home Dashboard / 首页阅读看板
-![Home Dashboard](home-dashboard.png)
+![Home Dashboard](docs/images/home-dashboard.png)
 
 ### Search Workspace / 图书检索工作台
-![Search Workspace](search-workspace.png)
+![Search Workspace](docs/images/search-workspace.png)
 
 ### Book Detail Page / 图书详情页
-![Book Detail](book-detail.png)
+![Book Detail](docs/images/book-detail.png)
 
 ### Recommendation Shelf / 推荐书架页
-![Recommendation Shelf](recommendation-shelf.png)
+![Recommendation Shelf](docs/images/recommendation-shelf.png)
 
 ### Borrowing Records / 借阅记录页
-![Borrowing Records](borrowing-records.png)
+![Borrowing Records](docs/images/borrowing-records.png)
 
 ### Swagger API Docs / Swagger 接口文档
-![Swagger UI](swagger-ui.png)
+![Swagger UI](docs/images/swagger-ui.png)
 
 ---
 

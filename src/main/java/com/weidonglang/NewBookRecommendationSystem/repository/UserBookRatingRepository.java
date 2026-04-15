@@ -13,6 +13,8 @@ import java.util.Optional;
 public interface UserBookRatingRepository extends JpaRepository<UserBookRate, Long> {
     Optional<UserBookRate> findUserBookRateByUserIdAndBookId(Long userId, Long bookId);
 
+    List<UserBookRate> findAllByMarkedAsDeletedFalse();
+
     List<UserBookRate> findAllByUserIdAndMarkedAsDeletedFalse(Long userID);
 
     @Query("SELECT COUNT(ubr.id) FROM UserBookRate ubr " +

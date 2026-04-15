@@ -63,7 +63,7 @@ public interface BaseDao<Entity extends BaseEntity, Repository extends JpaReposi
         }
         return Sort.by(sortingByList.stream().map(sortingBy -> {
             Field orderField = ReflectionUtils.findField(entityCls, sortingBy.getFieldName());
-            if (orderField == null) throw new NullPointerException("MALFORMED_JSON_REQUEST");
+            if (orderField == null) throw new IllegalArgumentException("Invalid sorting field: " + sortingBy.getFieldName());
             if (orderField.getType().equals(String.class))
                 return new Sort.Order(sortingBy.getDirection().equals(SortingDirection.ASC) ? Sort.Direction.ASC : Sort.Direction.DESC, sortingBy.getFieldName()).ignoreCase();
             return new Sort.Order(sortingBy.getDirection().equals(SortingDirection.ASC) ? Sort.Direction.ASC : Sort.Direction.DESC, sortingBy.getFieldName());

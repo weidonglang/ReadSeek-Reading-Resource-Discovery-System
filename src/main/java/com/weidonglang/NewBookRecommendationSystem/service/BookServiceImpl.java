@@ -17,19 +17,21 @@ import com.weidonglang.NewBookRecommendationSystem.recommender.CollaborativeFilt
 import com.weidonglang.NewBookRecommendationSystem.transformer.BookTransformer;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import jakarta.persistence.EntityExistsException;
+import jakarta.persistence.EntityNotFoundException;
 import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.Function;
@@ -42,6 +44,7 @@ public class BookServiceImpl implements BookService {
     private static final int DEFAULT_RECOMMENDATION_LIMIT = 8;
     private static final int DETAIL_RECOMMENDATION_LIMIT = 6;
     private static final int DEFAULT_POPULAR_RECENT_DAYS = 30;
+    private static final int CANDIDATE_POOL_MULTIPLIER = 6;
     private static final Map<String, String> CATEGORY_NAME_MAP = Map.of(
             "Science Fiction", "Sci-Fi",
             "Horror", "Horror",
@@ -137,7 +140,7 @@ public class BookServiceImpl implements BookService {
         log.info("BookService: update() called");
         Optional<Book> book = getDao().findById(id);
         if (book.isEmpty())
-            throw new EntityExistsException("Book not found for id: " + id);
+            throw new EntityNotFoundException("Book not found for id: " + id);
 
         normalizeBookRelations(dto);
         normalizeInventoryForUpdate(dto, book.get());
@@ -150,7 +153,7 @@ public class BookServiceImpl implements BookService {
         log.info("BookService: deleteById() called");
         Optional<Book> optionalBook = getDao().findById(id);
         if (optionalBook.isEmpty())
-            throw new EntityExistsException("Book not found for id: " + id);
+            throw new EntityNotFoundException("Book not found for id: " + id);
 
         Book book = optionalBook.get();
         book.setMarkedAsDeleted(true);
@@ -217,7 +220,7 @@ public class BookServiceImpl implements BookService {
     @Override
     public List<BookDto> findAllRecommendedBooks() {
         log.info("BookService: findAllRecommendedBooks() called");
-        List<Book> recommendedBooks = recommendByPreferredCategories(findActiveBooks(), Collections.emptySet(), MIN_OF_RECOMMENDED_BOOKS);
+        List<Book> recommendedBooks = recommendByPreferredCategories(Collections.emptySet(), MIN_OF_RECOMMENDED_BOOKS);
         if (recommendedBooks.isEmpty()) {
             recommendedBooks = findPopularBookEntities(MIN_OF_RECOMMENDED_BOOKS, Collections.emptySet());
         }
@@ -252,17 +255,15 @@ public class BookServiceImpl implements BookService {
     public BookRecommendationOverviewDto findRecommendationOverview(Integer recentDays) {
         log.info("BookService: findRecommendationOverview() called");
         int normalizedRecentDays = recentDays == null || recentDays < 1 ? DEFAULT_POPULAR_RECENT_DAYS : recentDays;
-        List<Book> activeBooks = findActiveBooks();
         List<BookRecommendationShelfDto> shelves = new ArrayList<>();
 
         List<Book> popularBooks = findPopularBookEntities(DEFAULT_RECOMMENDATION_LIMIT, Collections.emptySet());
         if (behaviorAnalyticsService != null) {
             List<BookDto> behaviorPopularBooks = behaviorAnalyticsService.findPopularBooks(DEFAULT_RECOMMENDATION_LIMIT, normalizedRecentDays);
             if (!behaviorPopularBooks.isEmpty()) {
-                popularBooks = behaviorPopularBooks.stream()
-                        .map(bookDto -> getDao().findById(bookDto.getId()).orElse(null))
-                        .filter(Objects::nonNull)
-                        .collect(Collectors.toList());
+                popularBooks = fetchBooksByIdsPreservingOrder(behaviorPopularBooks.stream()
+                        .map(BookDto::getId)
+                        .collect(Collectors.toList()));
             }
         }
         if (!popularBooks.isEmpty()) {
@@ -288,7 +289,7 @@ public class BookServiceImpl implements BookService {
             usedBookIds.addAll(collaborativeBooks.stream().map(Book::getId).collect(Collectors.toSet()));
         }
 
-        List<Book> preferenceBooks = recommendByPreferredCategories(activeBooks, usedBookIds, DEFAULT_RECOMMENDATION_LIMIT);
+        List<Book> preferenceBooks = recommendByPreferredCategories(usedBookIds, DEFAULT_RECOMMENDATION_LIMIT);
         if (!preferenceBooks.isEmpty()) {
             shelves.add(buildShelf("preferences", "Preferred Categories",
                     "Recommendations aligned with the categories selected in your profile.",
@@ -298,7 +299,7 @@ public class BookServiceImpl implements BookService {
             usedBookIds.addAll(preferenceBooks.stream().map(Book::getId).collect(Collectors.toSet()));
         }
 
-        List<Book> activityBooks = recommendByUserActivity(activeBooks, usedBookIds, DEFAULT_RECOMMENDATION_LIMIT);
+        List<Book> activityBooks = recommendByUserActivity(usedBookIds, DEFAULT_RECOMMENDATION_LIMIT);
         if (!activityBooks.isEmpty()) {
             shelves.add(buildShelf("activity", "Based On Your Activity",
                     "Built from the categories and tags of books you rated or borrowed.",
@@ -315,19 +316,19 @@ public class BookServiceImpl implements BookService {
         log.info("BookService: findBookSimilarityRecommendations() called");
         Book sourceBook = getDao().findById(bookId)
                 .filter(book -> !Boolean.TRUE.equals(book.getMarkedAsDeleted()))
-                .orElseThrow(() -> new EntityExistsException("Book not found for id: " + bookId));
+                .orElseThrow(() -> new EntityNotFoundException("Book not found for id: " + bookId));
 
-        List<Book> activeBooks = findActiveBooks().stream()
-                .filter(book -> !bookId.equals(book.getId()))
-                .collect(Collectors.toList());
         List<BookRecommendationShelfDto> shelves = new ArrayList<>();
         Set<Long> excludedIds = new HashSet<>();
         excludedIds.add(bookId);
 
-        List<Book> sameCategoryBooks = activeBooks.stream()
-                .filter(book -> book.getCategory() != null
-                        && sourceBook.getCategory() != null
-                        && sourceBook.getCategory().getId().equals(book.getCategory().getId()))
+        List<Book> sameCategoryBooks = sourceBook.getCategory() == null || sourceBook.getCategory().getId() == null
+                ? Collections.emptyList()
+                : getDao().getRepository().findSimilarBooksByCategory(
+                        bookId,
+                        sourceBook.getCategory().getId(),
+                        topNRequest(resolveCandidatePoolLimit(DETAIL_RECOMMENDATION_LIMIT))
+                ).stream()
                 .sorted(Comparator
                         .comparingInt((Book book) -> sharedTagCount(sourceBook, book)).reversed()
                         .thenComparing(popularityComparator()))
@@ -347,8 +348,11 @@ public class BookServiceImpl implements BookService {
         Set<Long> sourceTagIds = extractTagIds(sourceBook);
         List<Book> tagSimilarBooks = sourceTagIds.isEmpty()
                 ? Collections.emptyList()
-                : activeBooks.stream()
-                .filter(book -> !excludedIds.contains(book.getId()))
+                : getDao().getRepository().findBooksByTagIdsExcluding(
+                        sourceTagIds,
+                        excludedIds,
+                        topNRequest(resolveCandidatePoolLimit(DETAIL_RECOMMENDATION_LIMIT))
+                ).stream()
                 .filter(book -> sharedTagCount(sourceBook, book) > 0)
                 .sorted(Comparator
                         .comparingInt((Book book) -> sharedTagCount(sourceBook, book)).reversed()
@@ -379,21 +383,14 @@ public class BookServiceImpl implements BookService {
         return new BookRecommendationOverviewDto("Similar Book Recommendations", shelves);
     }
 
-    private List<Book> findActiveBooks() {
-        return getDao().findAll().stream()
-                .filter(book -> !Boolean.TRUE.equals(book.getMarkedAsDeleted()))
-                .collect(Collectors.toList());
-    }
-
     private List<Book> findPopularBookEntities(int limit, Set<Long> excludedIds) {
-        return findActiveBooks().stream()
-                .filter(book -> !excludedIds.contains(book.getId()))
-                .sorted(popularityComparator())
-                .limit(limit)
-                .collect(Collectors.toList());
+        if (excludedIds == null || excludedIds.isEmpty()) {
+            return getDao().getRepository().findPopularBooks(topNRequest(limit));
+        }
+        return getDao().getRepository().findPopularBooksExcluding(excludedIds, topNRequest(limit));
     }
 
-    private List<Book> recommendByPreferredCategories(List<Book> activeBooks, Set<Long> excludedIds, int limit) {
+    private List<Book> recommendByPreferredCategories(Set<Long> excludedIds, int limit) {
         try {
             Set<Long> preferredCategoryIds = userReadingInfoService.findUserReadingInfo().getUserBookCategories().stream()
                     .map(userBookCategoryDto -> userBookCategoryDto.getCategory())
@@ -404,12 +401,10 @@ public class BookServiceImpl implements BookService {
                 return Collections.emptyList();
             }
 
-            return activeBooks.stream()
-                    .filter(book -> !excludedIds.contains(book.getId()))
-                    .filter(book -> book.getCategory() != null && preferredCategoryIds.contains(book.getCategory().getId()))
-                    .sorted(popularityComparator())
-                    .limit(limit)
-                    .collect(Collectors.toList());
+            if (excludedIds == null || excludedIds.isEmpty()) {
+                return getDao().getRepository().findRecommendedByCategoryIds(preferredCategoryIds, topNRequest(limit));
+            }
+            return getDao().getRepository().findRecommendedByCategoryIdsExcluding(preferredCategoryIds, excludedIds, topNRequest(limit));
         } catch (Exception e) {
             return Collections.emptyList();
         }
@@ -434,7 +429,7 @@ public class BookServiceImpl implements BookService {
         }
     }
 
-    private List<Book> recommendByUserActivity(List<Book> activeBooks, Set<Long> excludedIds, int limit) {
+    private List<Book> recommendByUserActivity(Set<Long> excludedIds, int limit) {
         if (userService == null || userBookRateDao == null || bookLoanDao == null) {
             return Collections.emptyList();
         }
@@ -459,7 +454,8 @@ public class BookServiceImpl implements BookService {
                 return Collections.emptyList();
             }
 
-            return activeBooks.stream()
+            List<Book> candidateBooks = findActivityCandidateBooks(categoryWeights.keySet(), tagWeights.keySet(), interactedBookIds, limit);
+            return candidateBooks.stream()
                     .filter(book -> !interactedBookIds.contains(book.getId()))
                     .map(book -> new AbstractMap.SimpleEntry<>(book, calculateActivityScore(book, categoryWeights, tagWeights)))
                     .filter(entry -> entry.getValue() > 0)
@@ -475,6 +471,48 @@ public class BookServiceImpl implements BookService {
         } catch (Exception e) {
             return Collections.emptyList();
         }
+    }
+
+    private List<Book> findActivityCandidateBooks(Set<Long> categoryIds,
+                                                  Set<Long> tagIds,
+                                                  Set<Long> excludedIds,
+                                                  int limit) {
+        Map<Long, Book> candidateBooks = new LinkedHashMap<>();
+        int candidatePoolLimit = resolveCandidatePoolLimit(limit);
+
+        if (categoryIds != null && !categoryIds.isEmpty()) {
+            List<Book> categoryBooks = excludedIds == null || excludedIds.isEmpty()
+                    ? getDao().getRepository().findRecommendedByCategoryIds(categoryIds, topNRequest(candidatePoolLimit))
+                    : getDao().getRepository().findRecommendedByCategoryIdsExcluding(categoryIds, excludedIds, topNRequest(candidatePoolLimit));
+            categoryBooks.forEach(book -> candidateBooks.putIfAbsent(book.getId(), book));
+        }
+
+        if (tagIds != null && !tagIds.isEmpty()) {
+            List<Book> tagBooks = excludedIds == null || excludedIds.isEmpty()
+                    ? getDao().getRepository().findBooksByTagIds(tagIds, topNRequest(candidatePoolLimit))
+                    : getDao().getRepository().findBooksByTagIdsExcluding(tagIds, excludedIds, topNRequest(candidatePoolLimit));
+            tagBooks.forEach(book -> candidateBooks.putIfAbsent(book.getId(), book));
+        }
+
+        return new ArrayList<>(candidateBooks.values());
+    }
+
+    private List<Book> fetchBooksByIdsPreservingOrder(List<Long> bookIds) {
+        if (bookIds == null || bookIds.isEmpty()) {
+            return Collections.emptyList();
+        }
+        Map<Long, Book> booksById = getDao().getRepository().findAllById(bookIds).stream()
+                .filter(book -> !Boolean.TRUE.equals(book.getMarkedAsDeleted()))
+                .collect(Collectors.toMap(Book::getId, Function.identity()));
+
+        List<Book> orderedBooks = new ArrayList<>();
+        for (Long bookId : bookIds) {
+            Book book = booksById.get(bookId);
+            if (book != null) {
+                orderedBooks.add(book);
+            }
+        }
+        return orderedBooks;
     }
 
     private void collectInteractionWeights(Book book,
@@ -578,6 +616,14 @@ public class BookServiceImpl implements BookService {
             return fallback;
         }
         return Math.min(limit, 24);
+    }
+
+    private int resolveCandidatePoolLimit(int limit) {
+        return Math.min(Math.max(limit * CANDIDATE_POOL_MULTIPLIER, 24), 120);
+    }
+
+    private PageRequest topNRequest(int limit) {
+        return PageRequest.of(0, Math.max(limit, 1));
     }
 
     private BookRecommendationShelfDto buildShelf(String key, String title, String description, List<Book> books) {

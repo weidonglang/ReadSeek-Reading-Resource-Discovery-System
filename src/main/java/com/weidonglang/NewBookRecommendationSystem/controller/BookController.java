@@ -278,10 +278,12 @@ public class BookController implements BaseController<BookService> {
         if (userBehaviorLogService == null) {
             return;
         }
-        if (source != null && !source.isBlank()) {
+        String normalizedSource = source == null ? null : source.trim();
+        if (normalizedSource == null || normalizedSource.isBlank()) {
+            userBehaviorLogService.recordBookDetailClick(bookId, "direct", reason);
             return;
         }
-        userBehaviorLogService.recordBookDetailClick(bookId, source == null ? "direct" : source, reason);
+        userBehaviorLogService.recordRecommendationClick(bookId, normalizedSource, reason);
     }
 }
 /*

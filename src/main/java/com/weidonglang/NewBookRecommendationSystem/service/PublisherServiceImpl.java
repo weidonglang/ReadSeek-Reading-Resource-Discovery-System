@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import jakarta.persistence.EntityExistsException;
+import jakarta.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
 @Slf4j
@@ -45,7 +46,7 @@ public class PublisherServiceImpl implements PublisherService {
         log.info("PublisherService: deleteById() called");
         Optional<Publisher> optionalPublisher = getDao().findById(id);
         if (optionalPublisher.isEmpty())
-            throw new EntityExistsException("Publisher not found for id: " + id);
+            throw new EntityNotFoundException("Publisher not found for id: " + id);
         if (Boolean.TRUE.equals(bookRepository.existsByPublisherIdAndMarkedAsDeletedFalse(id))) {
             throw new EntityExistsException("Publisher has active books and cannot be deleted");
         }

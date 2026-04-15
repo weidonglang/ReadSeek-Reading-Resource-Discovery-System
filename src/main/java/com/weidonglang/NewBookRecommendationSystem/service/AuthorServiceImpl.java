@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import jakarta.persistence.EntityExistsException;
+import jakarta.persistence.EntityNotFoundException;
 import java.util.Optional;
 @Slf4j
 @Service
@@ -53,7 +54,7 @@ public class AuthorServiceImpl implements AuthorService {
         log.info("AuthorService: deleteById() called");
         Optional<Author> optionalAuthor = getDao().findById(id);
         if (optionalAuthor.isEmpty())
-            throw new EntityExistsException("Author not found for id: " + id);
+            throw new EntityNotFoundException("Author not found for id: " + id);
         if (bookRepository != null && Boolean.TRUE.equals(bookRepository.existsByAuthorIdAndMarkedAsDeletedFalse(id))) {
             throw new EntityExistsException("Author has active books and cannot be deleted");
         }

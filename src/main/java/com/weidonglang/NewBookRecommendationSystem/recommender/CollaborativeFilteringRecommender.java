@@ -37,55 +37,36 @@ public class CollaborativeFilteringRecommender {
         setRatings(new HashMap<>());
         setAverageRating(new HashMap<>());
         Map<Long, Double> averageRating = new HashMap<>();
-        Map<Long, Map<Long, Integer>> myRatesMap = new TreeMap<>();
-        Map<Long, Map<Long, Integer>> userWithRatesMap = new TreeMap<>();
+        Map<Long, Map<Long, Integer>> ratingsByUser = new TreeMap<>();
 
-        userRepository.findAll().forEach(userItem -> {
-            Long userID = userItem.getId();
-            Map<Long, Integer> userRatings = new HashMap<>();
-
-            userBookRatingRepository.findAllByUserIdAndMarkedAsDeletedFalse(userID).forEach(userBookRating -> {
-                        if (userBookRating.getUser().getId().compareTo(userID) == 0) {
-                            userRatings.put(userBookRating.getBook().getId(), userBookRating.getRate());
-                        }
-                    }
-            );
-
-            if (userId.compareTo(userID) == 0) {
-                myRatesMap.put(userID, userRatings);
-            } else {
-                userWithRatesMap.put(userID, userRatings);
-                setRatings(userWithRatesMap);
-                averageRating.put(userID, 0.0);
-                for (Map.Entry<Long, Integer> longIntegerEntry : userRatings.entrySet()) {
-                    if (ratings.containsKey(userID)) {
-                        ratings.get(userID).put(longIntegerEntry.getKey(), longIntegerEntry.getValue());
-                        averageRating.put(userID, averageRating.get(userID) + (double) longIntegerEntry.getValue());
-                    } else {
-                        Map<Long, Integer> bookRating = new HashMap<>();
-                        bookRating.put(longIntegerEntry.getKey(), longIntegerEntry.getValue());
-                        ratings.put(userID, bookRating);
-                        averageRating.put(userID, (double) longIntegerEntry.getValue());
-                    }
-                }
+        userBookRatingRepository.findAllByMarkedAsDeletedFalse().forEach(userBookRating -> {
+            if (userBookRating.getUser() == null || userBookRating.getUser().getId() == null
+                    || userBookRating.getBook() == null || userBookRating.getBook().getId() == null
+                    || userBookRating.getRate() == null) {
+                return;
             }
+            ratingsByUser
+                    .computeIfAbsent(userBookRating.getUser().getId(), key -> new HashMap<>())
+                    .put(userBookRating.getBook().getId(), userBookRating.getRate());
         });
 
-        Map<Long, Integer> currentUserRatings = myRatesMap.get(userId);
+        Map<Long, Integer> currentUserRatings = ratingsByUser.remove(userId);
         if (currentUserRatings == null || currentUserRatings.isEmpty()) {
             log.info("CollaborativeFilteringRecommender: no current user ratings, skip CF - user id: " + userId);
             return Collections.emptyList();
         }
 
-        for (Map.Entry<Long, Double> longDoubleEntry : averageRating.entrySet()) {
-            if (ratings.containsKey(longDoubleEntry.getKey())) {
-                longDoubleEntry.setValue(longDoubleEntry.getValue() / (double) ratings.get(longDoubleEntry.getKey()).size());
+        setRatings(ratingsByUser);
+        for (Map.Entry<Long, Map<Long, Integer>> entry : ratingsByUser.entrySet()) {
+            if (!entry.getValue().isEmpty()) {
+                double total = entry.getValue().values().stream().mapToInt(Integer::intValue).sum();
+                averageRating.put(entry.getKey(), total / entry.getValue().size());
             }
         }
 
         setAverageRating(averageRating);
         Map<Long, String> books = new HashMap<>();
-        bookRepository.findAll().forEach(book -> books.put(book.getId(), book.getName()));
+        bookRepository.findActiveBookIdsAndNames().forEach(row -> books.put((Long) row[0], String.valueOf(row[1])));
 
         Map<Long, Double> neighbourhoods = getNeighbourhoods(currentUserRatings);
         Map<Long, Double> recommendations = getRecommendations(currentUserRatings, neighbourhoods, books);
@@ -95,15 +76,23 @@ public class CollaborativeFilteringRecommender {
         sortedRecommendations.putAll(recommendations);
 
         Iterator<Map.Entry<Long, Double>> sortedREntries = sortedRecommendations.entrySet().iterator();
-        List<Book> recommendedBooks = new ArrayList<>();
+        List<Long> recommendedBookIds = new ArrayList<>();
 
         int i = 0;
         while (sortedREntries.hasNext() && i < NUM_RECOMMENDATIONS) {
             Map.Entry<Long, Double> entry = sortedREntries.next();
             if (entry.getValue() >= MIN_VALUE_RECOMMENDATION) {
-                Optional<Book> optionalBook = bookRepository.findById(entry.getKey());
-                optionalBook.ifPresent(recommendedBooks::add);
+                recommendedBookIds.add(entry.getKey());
                 i++;
+            }
+        }
+        Map<Long, Book> booksById = new HashMap<>();
+        bookRepository.findAllById(recommendedBookIds).forEach(book -> booksById.put(book.getId(), book));
+        List<Book> recommendedBooks = new ArrayList<>();
+        for (Long bookId : recommendedBookIds) {
+            Book book = booksById.get(bookId);
+            if (book != null && !Boolean.TRUE.equals(book.getMarkedAsDeleted())) {
+                recommendedBooks.add(book);
             }
         }
         log.info("CollaborativeFilteringRecommender: recommendedBooks() ended - user id: " + userId);

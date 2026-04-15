@@ -30,8 +30,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -80,7 +78,7 @@ class BookControllerTest {
     }
 
     @Test
-    void testFindBookByBookIdWithSourceDoesNotRecordDirectClick() {
+    void testFindBookByBookIdWithSourceRecordsRecommendationClick() {
         BookDto bookDto = new BookDto();
         bookDto.setId(7L);
         when(bookService.findById(7L)).thenReturn(bookDto);
@@ -91,7 +89,7 @@ class BookControllerTest {
         assertEquals("Book fetched successfully.", response.getMessage());
         assertSame(bookDto, response.getBody());
         verify(bookService).findById(7L);
-        verify(userBehaviorLogService, never()).recordBookDetailClick(eq(7L), eq("recommendation"), eq("homepage"));
+        verify(userBehaviorLogService).recordRecommendationClick(7L, "recommendation", "homepage");
     }
 
     @Test
