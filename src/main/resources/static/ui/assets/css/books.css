@@ -132,7 +132,7 @@
 
 .books-filter-scroll .hover-scroll-window {
   max-height: 660px;
-  padding-right: 12px;
+  padding: 12px 16px 14px 14px;
 }
 
 .books-filter-form > .field.full {
@@ -155,6 +155,27 @@
   background: linear-gradient(180deg, rgba(255, 254, 251, 0.98) 0%, rgba(245, 237, 227, 0.96) 100%);
   border-width: 1px;
   box-shadow: 0 12px 24px rgba(70, 46, 30, 0.06);
+}
+
+.books-search-hint {
+  margin-top: 10px;
+  padding: 10px 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(124, 75, 52, 0.14);
+  background: rgba(250, 244, 236, 0.88);
+  color: var(--muted-strong);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.books-search-hint[data-mode="search"] {
+  border-color: rgba(124, 75, 52, 0.24);
+  background: rgba(246, 235, 220, 0.96);
+}
+
+.books-search-hint[data-mode="filtered"] {
+  border-color: rgba(177, 135, 66, 0.24);
+  background: rgba(252, 247, 238, 0.98);
 }
 
 .books-field-card {
@@ -266,6 +287,12 @@
   min-width: 104px;
 }
 
+.books-results-actions button:disabled {
+  opacity: 0.48;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
 .books-results-pills {
   display: flex;
   gap: 10px;
@@ -339,6 +366,7 @@
 
   .books-filter-scroll .hover-scroll-window {
     max-height: 560px;
+    padding: 10px 14px 12px 12px;
   }
 }
 

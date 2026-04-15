@@ -118,6 +118,11 @@ public interface BookRepository extends JpaRepository<Book, Long> {
 
     @Query("SELECT b.id, b.name FROM Book b WHERE b.markedAsDeleted = false")
     List<Object[]> findActiveBookIdsAndNames();
+
+    @Query("SELECT DISTINCT b FROM Book b WHERE b.markedAsDeleted = false AND (" +
+            "lower(b.name) = lower(:query) OR lower(coalesce(b.isbn, '')) = lower(:query) OR lower(b.author.name) = lower(:query)" +
+            ") ORDER BY b.usersRateCount DESC, b.rate DESC, b.availableCopies DESC, b.name ASC")
+    List<Book> findExactMatches(@Param("query") String query, Pageable pageable);
 }
 /*
 weidonglang

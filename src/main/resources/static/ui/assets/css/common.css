@@ -1062,24 +1062,28 @@ body.modal-open {
   content: "";
   position: absolute;
   left: 0;
-  right: 12px;
-  height: 28px;
+  right: 8px;
+  height: 14px;
   pointer-events: none;
   z-index: 2;
   opacity: 0;
-  transition: opacity 0.2s ease;
+  transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
 .hover-scroll-shell::before {
   top: 0;
   border-radius: 18px 18px 0 0;
-  background: linear-gradient(180deg, rgba(243, 238, 230, 0.98) 0%, rgba(243, 238, 230, 0) 100%);
+  background:
+    linear-gradient(180deg, rgba(243, 238, 230, 0.52) 0%, rgba(243, 238, 230, 0.14) 55%, rgba(243, 238, 230, 0) 100%);
+  transform: translateY(-2px);
 }
 
 .hover-scroll-shell::after {
   bottom: 0;
   border-radius: 0 0 18px 18px;
-  background: linear-gradient(0deg, rgba(243, 238, 230, 0.98) 0%, rgba(243, 238, 230, 0) 100%);
+  background:
+    linear-gradient(0deg, rgba(243, 238, 230, 0.52) 0%, rgba(243, 238, 230, 0.14) 55%, rgba(243, 238, 230, 0) 100%);
+  transform: translateY(2px);
 }
 
 .hover-scroll-window {
@@ -1093,7 +1097,7 @@ body.modal-open {
 
 .hover-scroll-shell.can-scroll::before,
 .hover-scroll-shell.can-scroll::after {
-  opacity: 1;
+  opacity: 0.72;
 }
 
 .hover-scroll-window::-webkit-scrollbar {
@@ -1116,7 +1120,10 @@ body.modal-open {
 
 .hover-scroll-shell:hover .hover-scroll-window,
 .hover-scroll-shell:focus-within .hover-scroll-window {
-  box-shadow: inset 0 0 0 1px rgba(124, 75, 52, 0.16);
+  box-shadow:
+    inset 0 0 0 1px rgba(124, 75, 52, 0.12),
+    inset 0 8px 12px -12px rgba(124, 75, 52, 0.2),
+    inset 0 -8px 12px -12px rgba(124, 75, 52, 0.2);
 }
 
 .hover-scroll-shell:hover .hover-scroll-window::-webkit-scrollbar-track,
@@ -1131,19 +1138,19 @@ body.modal-open {
 }
 
 .scroll-size-sm {
-  max-height: 320px;
+  max-height: 360px;
 }
 
 .scroll-size-md {
-  max-height: 480px;
+  max-height: 540px;
 }
 
 .scroll-size-lg {
-  max-height: 620px;
+  max-height: 700px;
 }
 
 .scroll-size-xl {
-  max-height: 760px;
+  max-height: 840px;
 }
 
 .scroll-hint {

@@ -11,6 +11,55 @@ function t(key, variables = {}) {
   return window.BookI18n.t(key, variables);
 }
 
+function pageText(zh, en) {
+  return window.BookI18n.isChinese() ? zh : en;
+}
+
+function getBooksLabels() {
+  return {
+    keyword: pageText('关键词', 'Keyword'),
+    author: pageText('作者', 'Author'),
+    category: pageText('分类', 'Category'),
+    publisher: pageText('出版社', 'Publisher'),
+    tag: pageText('标签', 'Tag'),
+    range: pageText('范围', 'Range'),
+    pages: pageText('页数', 'Pages'),
+    duration: pageText('时长', 'Duration'),
+    mode: pageText('模式', 'Mode'),
+    intent: pageText('意图', 'Intent'),
+    strategy: pageText('策略', 'Strategy'),
+    results: pageText('结果', 'Results'),
+    sort: pageText('排序', 'Sort'),
+    fallback: pageText('回退', 'Fallback'),
+    query: pageText('查询', 'Query'),
+    browseMode: pageText('图书浏览', 'Catalog browse'),
+    filteredMode: pageText('高级筛选', 'Advanced filters'),
+    searchMode: pageText('智能搜索', 'Search API'),
+    relevanceSort: pageText('相关性优先', 'Relevance first'),
+    fallbackYes: pageText('已启用', 'Applied'),
+    fallbackNo: pageText('未启用', 'Not applied'),
+    noPaging: pageText('当前模式不分页，按限制条数返回', 'This mode is not paginated and returns up to the requested limit'),
+    filterSourceLabel: pageText('图书筛选', 'Filtered browse'),
+    searchSourceLabel: pageText('智能搜索', 'Hybrid search'),
+    browseHint: pageText('未输入关键词时按目录浏览，可配合下方筛选条件缩小范围。', 'Without a keyword, the page stays in catalog browse mode. Add filters below to narrow results.'),
+    searchHint: pageText('当前只输入了文本，将使用智能搜索接口，按相关性返回结果。', 'Text-only queries use the smart search API and return relevance-ranked results.'),
+    filterHint: pageText('当前启用了高级筛选，将切换为筛选分页模式。', 'Advanced filters are active, so the page switches to paginated filter mode.'),
+    waitingSearch: pageText('等待搜索', 'Waiting for search'),
+    hybridLimit: limit => pageText(`返回前 ${limit} 条相关结果`, `Returning up to ${limit} relevant hits`),
+    filteredSummary: (count, page, totalPages) => pageText(`第 ${page} / ${totalPages} 页，共 ${count} 本图书`, `Page ${page} / ${totalPages}, ${count} books total`),
+    searchSummary: count => pageText(`返回 ${count} 条相关结果`, `${count} relevant hits returned`),
+    filterLoadFailed: message => pageText(`图书加载失败：${message}`, `Failed to load books: ${message}`),
+    filterBootstrapFailed: message => pageText(`筛选条件加载失败：${message}`, `Failed to load filters: ${message}`),
+    exactIntent: pageText('精确查找', 'Exact lookup'),
+    keywordIntent: pageText('关键词检索', 'Keyword search'),
+    naturalLanguageIntent: pageText('自然语言检索', 'Natural-language search'),
+    unknownIntent: pageText('未识别', 'Unknown'),
+    exactMatch: pageText('精确匹配', 'Exact match'),
+    bm25Match: pageText('全文相关性命中', 'BM25 relevance hit'),
+    searchMatch: pageText('搜索命中', 'Search hit')
+  };
+}
+
 let allAuthors = [];
 let allCategories = [];
 let allPublishers = [];
@@ -19,6 +68,12 @@ let allTags = [];
 function getCheckedValues(name) {
   return Array.from(document.querySelectorAll(`input[name="${name}"]:checked`))
     .map(input => Number(input.value))
+    .filter(value => Number.isFinite(value));
+}
+
+function getSelectedValues(selectId) {
+  return Array.from(document.getElementById(selectId).selectedOptions)
+    .map(option => Number(option.value))
     .filter(value => Number.isFinite(value));
 }
 
@@ -58,10 +113,69 @@ function buildBookFilterPayload(pageNumber = 1) {
   };
 }
 
-function getSelectedValues(selectId) {
-  return Array.from(document.getElementById(selectId).selectedOptions)
-    .map(option => Number(option.value))
-    .filter(value => Number.isFinite(value));
+function hasKeyword(payload) {
+  return Boolean(String(payload.criteria?.name || '').trim());
+}
+
+function hasAdvancedFilters(payload) {
+  const criteria = payload.criteria || {};
+  return [
+    Array.isArray(criteria.categories) && criteria.categories.length,
+    Array.isArray(criteria.authors) && criteria.authors.length,
+    Array.isArray(criteria.publishers) && criteria.publishers.length,
+    Array.isArray(criteria.tags) && criteria.tags.length,
+    criteria.fromPrice !== null,
+    criteria.toPrice !== null,
+    criteria.fromPagesNumber !== null,
+    criteria.toPagesNumber !== null,
+    criteria.fromReadingDuration !== null,
+    criteria.toReadingDuration !== null
+  ].some(Boolean);
+}
+
+function shouldUseSearchApi(payload) {
+  return hasKeyword(payload) && !hasAdvancedFilters(payload);
+}
+
+function ensureSearchModeHint() {
+  let hint = document.getElementById('search-mode-hint');
+  if (hint) {
+    return hint;
+  }
+
+  const keywordInput = document.getElementById('keyword');
+  if (!keywordInput || !keywordInput.parentElement) {
+    return null;
+  }
+
+  hint = document.createElement('div');
+  hint.id = 'search-mode-hint';
+  hint.className = 'books-search-hint';
+  keywordInput.insertAdjacentElement('afterend', hint);
+  return hint;
+}
+
+function updateSearchModeHint() {
+  const hint = ensureSearchModeHint();
+  if (!hint) return;
+
+  const payload = buildBookFilterPayload(Number(document.getElementById('currentPage')?.value || 1));
+  const labels = getBooksLabels();
+
+  if (shouldUseSearchApi(payload)) {
+    hint.textContent = labels.searchHint;
+    hint.dataset.mode = 'search';
+    return;
+  }
+
+  if (hasAdvancedFilters(payload)) {
+    hint.textContent = labels.filterHint;
+    hint.dataset.mode = 'filtered';
+    return;
+  }
+
+  hint.textContent = labels.browseHint;
+  hint.dataset.mode = 'browse';
 }
 
 function renderCheckboxList(targetId, name, items) {
@@ -148,7 +262,7 @@ function includesIgnoreCase(value, keyword) {
   return String(value || '').toLowerCase().includes(String(keyword || '').toLowerCase());
 }
 
-function buildSearchHitReason(book, payload) {
+function buildFilterHitReason(book, payload) {
   const criteria = payload.criteria || {};
   const reasons = [];
   const keyword = String(criteria.name || '').trim();
@@ -208,17 +322,6 @@ function findNamesByIds(items, ids, mapper = item => item.name) {
     .filter(Boolean);
 }
 
-function formatRangeLabel(label, from, to, unit = '') {
-  if (from === null && to === null) return null;
-  if (from !== null && to !== null) {
-    return `${label}${from}-${to}${unit}`;
-  }
-  if (from !== null) {
-    return `${label}${from}${unit} 起`;
-  }
-  return `${label}${to}${unit} 以下`;
-}
-
 function toFiniteNumberOrNull(value) {
   return Number.isFinite(value) ? value : null;
 }
@@ -231,118 +334,237 @@ function formatRangeLabel(label, from, to, unit = '') {
     return `${label}${normalizedFrom}-${normalizedTo}${unit}`;
   }
   if (normalizedFrom !== null) {
-    return `${label}${normalizedFrom}${unit} 以上`;
+    return pageText(`${label}${normalizedFrom}${unit} 以上`, `${label}${normalizedFrom}${unit}+`);
   }
-  return `${label}${normalizedTo}${unit} 以下`;
+  return pageText(`${label}${normalizedTo}${unit} 以下`, `${label}up to ${normalizedTo}${unit}`);
 }
 
-function renderActiveFilterSummary(payload, pagination) {
+function renderSummaryChips(items) {
   const wrap = document.getElementById('active-filter-summary');
   if (!wrap) return;
 
-  const criteria = payload.criteria || {};
-  const segments = [];
-  const keyword = String(criteria.name || '').trim();
-
-  if (keyword) {
-    segments.push({ label: '关键词', value: keyword });
-  }
-
-  const authorNames = findNamesByIds(allAuthors, criteria.authors, item => item.name);
-  if (authorNames.length) {
-    segments.push({ label: '作者', value: authorNames.join('、') });
-  }
-
-  const categoryNames = findNamesByIds(allCategories, criteria.categories, item => BookUi.localizeCategoryName(item.name));
-  if (categoryNames.length) {
-    segments.push({ label: '分类', value: categoryNames.join('、') });
-  }
-
-  const publisherNames = findNamesByIds(allPublishers, criteria.publishers, item => item.name);
-  if (publisherNames.length) {
-    segments.push({ label: '出版社', value: publisherNames.join('、') });
-  }
-
-  const tagNames = findNamesByIds(allTags, criteria.tags, item => item.name);
-  if (tagNames.length) {
-    segments.push({ label: '标签', value: tagNames.join('、') });
-  }
-
-  const priceRange = formatRangeLabel('价格 ', criteria.fromPrice, criteria.toPrice, ' 元');
-  if (priceRange) segments.push({ label: '区间', value: priceRange });
-
-  const pagesRange = formatRangeLabel('页数 ', criteria.fromPagesNumber, criteria.toPagesNumber, ' 页');
-  if (pagesRange) segments.push({ label: '页数', value: pagesRange });
-
-  const durationRange = formatRangeLabel('时长 ', criteria.fromReadingDuration, criteria.toReadingDuration, ' 分钟');
-  if (durationRange) segments.push({ label: '时长', value: durationRange });
-
-  const sortFieldOption = document.querySelector(`#sortField option[value="${payload.sortingByList?.[0]?.fieldName || 'id'}"]`);
-  const sortDirectionOption = document.querySelector(`#sortDirection option[value="${payload.sortingByList?.[0]?.direction || 'ASC'}"]`);
-  segments.push({
-    label: '排序',
-    value: `${sortFieldOption?.textContent || '图书编号'} · ${sortDirectionOption?.textContent || '升序'}`
-  });
-
-  segments.push({
-    label: '结果',
-    value: pagination ? `${pagination.totalNumberOfElements || 0} 本 / 第 ${pagination.pageNumber || 1} 页` : '等待检索'
-  });
-
-  if (!segments.length) {
+  if (!items.length) {
     wrap.classList.add('hidden');
     wrap.innerHTML = '';
     return;
   }
 
   wrap.classList.remove('hidden');
-  wrap.innerHTML = segments.map(item => `
+  wrap.innerHTML = items.map(item => `
     <span class="books-active-label">
       <strong>${escapeHtml(item.label)}</strong>${escapeHtml(item.value)}
     </span>
   `).join('');
 }
 
+function humanizeQueryIntent(queryIntent) {
+  const labels = getBooksLabels();
+  if (queryIntent === 'EXACT_LOOKUP') return labels.exactIntent;
+  if (queryIntent === 'KEYWORD') return labels.keywordIntent;
+  if (queryIntent === 'NATURAL_LANGUAGE') return labels.naturalLanguageIntent;
+  return labels.unknownIntent;
+}
+
+function humanizeSearchStrategy(strategy) {
+  if (!strategy) return '-';
+
+  if (strategy.startsWith('hybrid-v1')) {
+    return pageText('Hybrid v1（精确匹配 + BM25）', 'Hybrid v1 (exact match + BM25)');
+  }
+  if (strategy.startsWith('hybrid-v2(exact-db+vector+bm25)')) {
+    return pageText('Hybrid v2（精确匹配 + 向量语义 + BM25）', 'Hybrid v2 (exact match + vector + BM25)');
+  }
+  if (strategy.startsWith('hybrid-v2(exact-db+bm25+vector)')) {
+    return pageText('Hybrid v2（精确匹配 + BM25 + 向量语义）', 'Hybrid v2 (exact match + BM25 + vector)');
+  }
+  if (strategy === 'bm25') {
+    return 'BM25';
+  }
+  if (strategy === 'exact-db') {
+    return pageText('数据库精确匹配', 'Database exact match');
+  }
+  return strategy;
+}
+
+function humanizeMatchType(matchType) {
+  const labels = getBooksLabels();
+  if (matchType === 'EXACT_DB') return labels.exactMatch;
+  if (matchType === 'BM25') return labels.bm25Match;
+  if (matchType === 'VECTOR') return pageText('语义相似命中', 'Vector semantic hit');
+  return labels.searchMatch;
+}
+
+function buildSearchHitReason(hit) {
+  const parts = [];
+  if (hit.reason) {
+    parts.push(hit.reason);
+  }
+  if (hit.matchType) {
+    parts.push(humanizeMatchType(hit.matchType));
+  }
+  return parts.join(window.BookI18n.isChinese() ? '；' : '; ');
+}
+
+function renderFilterSummary(payload, pagination) {
+  const labels = getBooksLabels();
+  const criteria = payload.criteria || {};
+  const segments = [];
+  const keyword = String(criteria.name || '').trim();
+
+  segments.push({
+    label: labels.mode,
+    value: hasAdvancedFilters(payload) ? labels.filteredMode : labels.browseMode
+  });
+
+  if (keyword) {
+    segments.push({ label: labels.keyword, value: keyword });
+  }
+
+  const authorNames = findNamesByIds(allAuthors, criteria.authors, item => item.name);
+  if (authorNames.length) {
+    segments.push({ label: labels.author, value: authorNames.join(', ') });
+  }
+
+  const categoryNames = findNamesByIds(allCategories, criteria.categories, item => BookUi.localizeCategoryName(item.name));
+  if (categoryNames.length) {
+    segments.push({ label: labels.category, value: categoryNames.join(', ') });
+  }
+
+  const publisherNames = findNamesByIds(allPublishers, criteria.publishers, item => item.name);
+  if (publisherNames.length) {
+    segments.push({ label: labels.publisher, value: publisherNames.join(', ') });
+  }
+
+  const tagNames = findNamesByIds(allTags, criteria.tags, item => item.name);
+  if (tagNames.length) {
+    segments.push({ label: labels.tag, value: tagNames.join(', ') });
+  }
+
+  const priceRange = formatRangeLabel(pageText('价格 ', 'Price '), criteria.fromPrice, criteria.toPrice, pageText(' 元', ''));
+  if (priceRange) segments.push({ label: labels.range, value: priceRange });
+
+  const pagesRange = formatRangeLabel(pageText('页数 ', 'Pages '), criteria.fromPagesNumber, criteria.toPagesNumber, '');
+  if (pagesRange) segments.push({ label: labels.pages, value: pagesRange });
+
+  const durationRange = formatRangeLabel(pageText('时长 ', 'Duration '), criteria.fromReadingDuration, criteria.toReadingDuration, pageText(' 分钟', ' min'));
+  if (durationRange) segments.push({ label: labels.duration, value: durationRange });
+
+  const sortFieldOption = document.querySelector(`#sortField option[value="${payload.sortingByList?.[0]?.fieldName || 'id'}"]`);
+  const sortDirectionOption = document.querySelector(`#sortDirection option[value="${payload.sortingByList?.[0]?.direction || 'ASC'}"]`);
+  segments.push({
+    label: labels.sort,
+    value: `${sortFieldOption?.textContent || 'id'} / ${sortDirectionOption?.textContent || 'ASC'}`
+  });
+
+  segments.push({
+    label: labels.results,
+    value: labels.filteredSummary(
+      pagination.totalNumberOfElements || 0,
+      Math.max(1, Number(pagination.pageNumber || 1)),
+      pagination.totalNumberOfPages || 1
+    )
+  });
+
+  renderSummaryChips(segments);
+}
+
+function renderSearchSummary(response, limit) {
+  const labels = getBooksLabels();
+  const segments = [
+    { label: labels.mode, value: labels.searchMode },
+    { label: labels.query, value: response.query || '' },
+    { label: labels.intent, value: humanizeQueryIntent(response.queryIntent) },
+    { label: labels.strategy, value: humanizeSearchStrategy(response.strategy) },
+    { label: labels.results, value: labels.searchSummary(response.returnedCount || 0) },
+    { label: labels.sort, value: labels.relevanceSort },
+    { label: labels.fallback, value: response.fallbackApplied ? labels.fallbackYes : labels.fallbackNo },
+    { label: labels.range, value: labels.hybridLimit(limit) }
+  ];
+
+  renderSummaryChips(segments);
+}
+
+function setPageControls({ currentPage = 1, prevDisabled = true, nextDisabled = true }) {
+  document.getElementById('currentPage').value = String(currentPage);
+  document.getElementById('prev-page').disabled = prevDisabled;
+  document.getElementById('next-page').disabled = nextDisabled;
+}
+
 async function loadBooks(pageNumber = 1) {
   const target = document.getElementById('book-results');
-  target.innerHTML = `<div class="card muted">${escapeHtml(t('books.loading'))}</div>`;
+  const pageSummary = document.getElementById('page-summary');
   const payload = buildBookFilterPayload(pageNumber);
+  const labels = getBooksLabels();
+  const keyword = payload.criteria?.name || '';
+
+  BookUi.hideMessage('books-message');
+  target.innerHTML = `<div class="card muted">${escapeHtml(t('books.loading'))}</div>`;
 
   try {
+    if (shouldUseSearchApi(payload)) {
+      const limit = payload.pageSize;
+      const encodedQuery = encodeURIComponent(keyword.trim());
+      const response = await BookApi.apiRequest(`/api/search/books?q=${encodedQuery}&limit=${limit}`);
+      const body = response?.body || {};
+      const hits = Array.isArray(body.hits) ? body.hits : [];
+
+      target.innerHTML = hits.length
+        ? hits.map(hit => BookUi.renderBookCard(hit.book, {
+          source: `search:${body.strategy || 'hybrid'}`,
+          sourceLabel: labels.searchSourceLabel,
+          reason: buildSearchHitReason(hit),
+          actionType: 'BOOK_DETAIL_CLICK',
+          searchKeyword: body.query || keyword
+        })).join('')
+        : `<div class="card muted">${escapeHtml(t('books.emptyResults'))}</div>`;
+
+      BookUi.refreshSaveButtons(target);
+      pageSummary.textContent = labels.searchSummary(body.returnedCount || hits.length);
+      renderSearchSummary({
+        query: body.query || keyword,
+        queryIntent: body.queryIntent,
+        strategy: body.strategy,
+        fallbackApplied: Boolean(body.fallbackApplied),
+        returnedCount: body.returnedCount || hits.length
+      }, limit);
+      setPageControls({ currentPage: 1, prevDisabled: true, nextDisabled: true });
+      return;
+    }
+
     const response = await BookApi.apiRequest('/api/book/find-all-paginated-filtered', {
       method: 'POST',
       body: payload
     });
     const pagination = BookApi.parsePaginationResult(response);
     const currentPage = Math.max(1, Number(pagination.pageNumber || pageNumber));
-    const searchKeyword = payload.criteria?.name || '';
 
     target.innerHTML = pagination.list.length
       ? pagination.list.map(book => BookUi.renderBookCard(book, {
         source: 'search:books-page',
-        sourceLabel: t('books.sourceLabel'),
-        reason: buildSearchHitReason(book, payload),
+        sourceLabel: labels.filterSourceLabel,
+        reason: buildFilterHitReason(book, payload),
         actionType: 'BOOK_DETAIL_CLICK',
-        searchKeyword
+        searchKeyword: keyword
       })).join('')
       : `<div class="card muted">${escapeHtml(t('books.emptyResults'))}</div>`;
-    BookUi.refreshSaveButtons(target);
 
-    document.getElementById('page-summary').textContent =
-      t('books.pageSummary', {
-        page: currentPage,
-        totalPages: pagination.totalNumberOfPages || 1,
-        totalElements: pagination.totalNumberOfElements
-      });
-    document.getElementById('currentPage').value = String(currentPage);
-    renderActiveFilterSummary(payload, pagination);
+    BookUi.refreshSaveButtons(target);
+    pageSummary.textContent = t('books.pageSummary', {
+      page: currentPage,
+      totalPages: pagination.totalNumberOfPages || 1,
+      totalElements: pagination.totalNumberOfElements
+    });
+    renderFilterSummary(payload, pagination);
+    setPageControls({
+      currentPage,
+      prevDisabled: currentPage <= 1,
+      nextDisabled: currentPage >= Math.max(1, Number(pagination.totalNumberOfPages || 1))
+    });
   } catch (error) {
-    const summary = document.getElementById('active-filter-summary');
-    if (summary) {
-      summary.classList.add('hidden');
-      summary.innerHTML = '';
-    }
+    renderSummaryChips([]);
+    setPageControls({ currentPage: 1, prevDisabled: true, nextDisabled: true });
     target.innerHTML = `<div class="card">${escapeHtml(t('books.loadFailed', { message: error.message }))}</div>`;
+    pageSummary.textContent = labels.waitingSearch;
   }
 }
 
@@ -351,21 +573,22 @@ function resetSearchForm() {
   document.querySelectorAll('#category-filters input[type="checkbox"], #tag-filters input[type="checkbox"], #author-filter input[type="checkbox"]').forEach(input => {
     input.checked = false;
   });
-  ['publisher-filter'].forEach(selectId => {
-    Array.from(document.getElementById(selectId).options).forEach(option => {
-      option.selected = false;
-    });
+  Array.from(document.getElementById('publisher-filter').options).forEach(option => {
+    option.selected = false;
   });
   document.getElementById('author-search').value = '';
   renderAuthorPicker();
   document.getElementById('pageSize').value = '8';
   document.getElementById('sortField').value = 'id';
   document.getElementById('sortDirection').value = 'ASC';
+  updateSearchModeHint();
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
   if (!BookUi.requireLogin()) return;
   BookUi.injectLayout();
+  ensureSearchModeHint();
+
   document.getElementById('sortField').innerHTML = `
     <option value="id">${t('books.optionId')}</option>
     <option value="name">${t('books.optionName')}</option>
@@ -410,19 +633,41 @@ document.addEventListener('DOMContentLoaded', async () => {
     renderAuthorPicker();
     applyQueryDefaults(allAuthors, allCategories);
     BookUi.refreshScrollShells(document);
+    updateSearchModeHint();
   } catch (error) {
-    BookUi.showMessage('books-message', 'warning', `筛选条件加载失败：${error.message}`);
+    BookUi.showMessage('books-message', 'warning', getBooksLabels().filterBootstrapFailed(error.message));
   }
 
   document.getElementById('author-search').addEventListener('input', () => {
     renderAuthorPicker();
+    updateSearchModeHint();
   });
 
   document.getElementById('author-filter').addEventListener('change', event => {
     if (event.target.matches('input[name="author"]')) {
       renderAuthorPicker();
+      updateSearchModeHint();
     }
   });
+
+  document.getElementById('keyword').addEventListener('input', updateSearchModeHint);
+  document.getElementById('publisher-filter').addEventListener('change', updateSearchModeHint);
+  document.getElementById('sortField').addEventListener('change', updateSearchModeHint);
+  document.getElementById('sortDirection').addEventListener('change', updateSearchModeHint);
+  [
+    'fromPrice',
+    'toPrice',
+    'fromPagesNumber',
+    'toPagesNumber',
+    'fromReadingDuration',
+    'toReadingDuration',
+    'pageSize'
+  ].forEach(id => {
+    document.getElementById(id).addEventListener('input', updateSearchModeHint);
+  });
+
+  document.getElementById('category-filters').addEventListener('change', updateSearchModeHint);
+  document.getElementById('tag-filters').addEventListener('change', updateSearchModeHint);
 
   document.getElementById('filter-form').addEventListener('submit', event => {
     event.preventDefault();
@@ -435,11 +680,13 @@ document.addEventListener('DOMContentLoaded', async () => {
   });
 
   document.getElementById('prev-page').addEventListener('click', () => {
+    if (document.getElementById('prev-page').disabled) return;
     const page = Math.max(1, Number(document.getElementById('currentPage').value || 1) - 1);
     loadBooks(page);
   });
 
   document.getElementById('next-page').addEventListener('click', () => {
+    if (document.getElementById('next-page').disabled) return;
     const page = Number(document.getElementById('currentPage').value || 1) + 1;
     loadBooks(page);
   });

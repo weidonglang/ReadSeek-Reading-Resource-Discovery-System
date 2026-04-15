@@ -67,6 +67,7 @@ public class BookServiceImpl implements BookService {
     private final UserBookRateDao userBookRateDao;
     private final CollaborativeFilteringRecommender collaborativeFilteringRecommender;
     private final BehaviorAnalyticsService behaviorAnalyticsService;
+    private final BookSearchIndexService bookSearchIndexService;
 
     @Autowired
     public BookServiceImpl(BookTransformer bookTransformer,
@@ -80,7 +81,8 @@ public class BookServiceImpl implements BookService {
                            UserService userService,
                            UserBookRateDao userBookRateDao,
                            CollaborativeFilteringRecommender collaborativeFilteringRecommender,
-                           BehaviorAnalyticsService behaviorAnalyticsService) {
+                           BehaviorAnalyticsService behaviorAnalyticsService,
+                           BookSearchIndexService bookSearchIndexService) {
         this.bookTransformer = bookTransformer;
         this.bookDao = bookDao;
         this.bookCategoryService = bookCategoryService;
@@ -93,6 +95,7 @@ public class BookServiceImpl implements BookService {
         this.userBookRateDao = userBookRateDao;
         this.collaborativeFilteringRecommender = collaborativeFilteringRecommender;
         this.behaviorAnalyticsService = behaviorAnalyticsService;
+        this.bookSearchIndexService = bookSearchIndexService;
     }
 
     public BookServiceImpl(BookTransformer bookTransformer,
@@ -106,15 +109,15 @@ public class BookServiceImpl implements BookService {
                            UserService userService,
                            UserBookRateDao userBookRateDao) {
         this(bookTransformer, bookDao, authorService, bookCategoryService, publisherService, tagService,
-                userReadingInfoService, bookLoanDao, userService, userBookRateDao, null, null);
+                userReadingInfoService, bookLoanDao, userService, userBookRateDao, null, null, null);
     }
 
     public BookServiceImpl(BookTransformer bookTransformer, BookDao bookDao, AuthorService authorService, BookCategoryService bookCategoryService, PublisherService publisherService, TagService tagService, UserReadingInfoService userReadingInfoService, BookLoanDao bookLoanDao) {
-        this(bookTransformer, bookDao, authorService, bookCategoryService, publisherService, tagService, userReadingInfoService, bookLoanDao, null, null, null, null);
+        this(bookTransformer, bookDao, authorService, bookCategoryService, publisherService, tagService, userReadingInfoService, bookLoanDao, null, null, null, null, null);
     }
 
     public BookServiceImpl(BookTransformer bookTransformer, BookDao bookDao, AuthorService authorService, UserReadingInfoService userReadingInfoService) {
-        this(bookTransformer, bookDao, authorService, null, null, null, userReadingInfoService, null, null, null, null, null);
+        this(bookTransformer, bookDao, authorService, null, null, null, userReadingInfoService, null, null, null, null, null, null);
     }
 
     @Override
@@ -132,7 +135,9 @@ public class BookServiceImpl implements BookService {
         log.info("BookService: create() called");
         normalizeBookRelations(dto);
         normalizeInventoryForCreate(dto);
-        return getTransformer().transformEntityToDto(getDao().create(getTransformer().transformDtoToEntity(dto)));
+        BookDto createdBook = getTransformer().transformEntityToDto(getDao().create(getTransformer().transformDtoToEntity(dto)));
+        syncBookSearchIndex(createdBook.getId());
+        return createdBook;
     }
 
     @Override
@@ -145,7 +150,9 @@ public class BookServiceImpl implements BookService {
         normalizeBookRelations(dto);
         normalizeInventoryForUpdate(dto, book.get());
         getTransformer().updateEntity(dto, book.get());
-        return getTransformer().transformEntityToDto(getDao().update(book.get()));
+        BookDto updatedBook = getTransformer().transformEntityToDto(getDao().update(book.get()));
+        syncBookSearchIndex(updatedBook.getId());
+        return updatedBook;
     }
 
     @Override
@@ -158,6 +165,19 @@ public class BookServiceImpl implements BookService {
         Book book = optionalBook.get();
         book.setMarkedAsDeleted(true);
         getDao().update(book);
+        syncBookSearchIndex(id);
+    }
+
+    private void syncBookSearchIndex(Long bookId) {
+        if (bookSearchIndexService == null || bookId == null) {
+            return;
+        }
+        try {
+            bookSearchIndexService.indexBook(bookId);
+        } catch (Exception exception) {
+            log.warn("BookService: skip search index sync for bookId={} because {}",
+                    bookId, exception.getMessage());
+        }
     }
 
     private void normalizeBookRelations(BookDto dto) {

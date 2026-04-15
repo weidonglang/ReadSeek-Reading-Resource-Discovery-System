@@ -42,6 +42,7 @@ public class SecurityConfigurations {
                         .requestMatchers(HttpMethod.GET, "/api/user/find-is-email-exists/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/auth/log-in").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/auth/refresh-token").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/search/**").permitAll()
                         .requestMatchers("/api/**").authenticated()
                         .anyRequest().permitAll()
                 )
