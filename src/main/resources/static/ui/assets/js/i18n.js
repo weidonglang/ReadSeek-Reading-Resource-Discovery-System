@@ -517,8 +517,10 @@
     },
     bookDetail: {
       title: '图书详情 - 图书推荐系统',
+      pageKicker: '作品页',
       heading: '图书详情',
       subtitle: '查看图书完整信息，包括出版社、标签、库存、借阅与预约状态。',
+      copyKicker: '作品导读',
       borrow: '借阅图书',
       reserve: '预约图书',
       cancelReservation: '取消预约',
@@ -710,8 +712,10 @@
     },
     bookDetail: {
       title: 'Book Detail - Book Recommendation System',
+      pageKicker: 'Book profile',
       heading: 'Book detail',
       subtitle: 'View the complete book record, including publisher, tags, stock, borrowing, and reservation state.',
+      copyKicker: 'Book guide',
       borrow: 'Borrow',
       reserve: 'Reserve',
       cancelReservation: 'Cancel reservation',
@@ -989,8 +993,10 @@
     ],
     bookDetail: [
       { selector: 'title', key: 'bookDetail.title' },
+      { selector: '#detail-page-kicker', key: 'bookDetail.pageKicker' },
       { selector: '.page-title', key: 'bookDetail.heading' },
       { selector: '.page-subtitle', key: 'bookDetail.subtitle' },
+      { selector: '#detail-copy-kicker', key: 'bookDetail.copyKicker' },
       { selector: '#borrow-book-btn', key: 'bookDetail.borrow' },
       { selector: '#reserve-book-btn', key: 'bookDetail.reserve' },
       { selector: '#cancel-reservation-btn', key: 'bookDetail.cancelReservation' },

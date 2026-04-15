@@ -1,344 +1,495 @@
-# 图书推荐与借阅管理系统
+# Book Discovery and Circulation Management System
+## 图书发现与图书流通管理系统
 
-一个面向毕业设计、课程设计和功能演示场景的图书推荐系统，包含后端 API、权限认证、借阅流转、推荐能力，以及一套可直接访问的前端页面。
+An intelligent backend-oriented system for book discovery, recommendation, and circulation management, designed for graduation projects, coursework, and portfolio demonstrations. It includes backend APIs, authentication, book circulation workflows, recommendation capabilities, and directly accessible frontend pages.
 
-项目当前重点是：
+一个面向图书发现、推荐与图书流通管理的智能后端项目，适用于毕业设计、课程设计和作品集展示场景。项目包含后端 API、权限认证、图书流通业务、推荐能力，以及可直接访问的前端页面。
 
-- 图书检索、详情、评分、推荐与行为记录
-- 图书借阅、归还、续借、预约与排队
-- 用户注册、登录、令牌刷新与权限控制
-- PostgreSQL 持久化与 Liquibase 数据库版本管理
-- 适合答辩演示的前后端一体化体验
+This project is currently better suited for **undergraduate graduation projects, coursework, and portfolio demonstrations**, with a focus on:
 
-主包名：
+本项目当前更适合作为**本科毕业设计 / 课程设计 / 作品集项目**来展示，重点包括：
 
-```text
-com.weidonglang.NewBookRecommendationSystem
-```
+- Book search, details, rating, recommendation, and behavior tracking  
+  图书检索、详情、评分、推荐与行为记录
+- Borrowing, returning, renewal, reservation, and queue handling  
+  图书借阅、归还、续借、预约与排队
+- User registration, login, token refresh, and access control  
+  用户注册、登录、令牌刷新与权限控制
+- PostgreSQL persistence and database version management  
+  PostgreSQL 持久化与数据库版本管理
+- An integrated frontend-backend experience suitable for demos and defense presentations  
+  适合答辩演示的前后端一体化体验
 
-## 项目定位
+---
 
-这个项目更适合作为：
+## Screenshots / 实际效果展示
 
-- 本科毕业设计
-- 课程设计
-- 功能展示型作品集项目
-- 推荐系统与图书流通管理方向的教学演示项目
+### Home Dashboard / 首页阅读看板
+![Home Dashboard](docs/images/home-dashboard.png)
 
-它已经具备较完整的业务链路，但默认配置仍以本地开发和演示为主，不建议直接按当前配置投入生产环境。
+### Search Workspace / 图书检索工作台
+![Search Workspace](docs/images/search-workspace.png)
 
-## 功能概览
+### Book Detail Page / 图书详情页
+![Book Detail](docs/images/book-detail.png)
 
-### 用户与认证
+### Recommendation Shelf / 推荐书架页
+![Recommendation Shelf](docs/images/recommendation-shelf.png)
 
-- 用户注册、登录、退出登录
-- Access Token / Refresh Token 认证流程
-- 基于 Spring Security 的权限控制
-- 默认管理员账号自动引导创建
+### Borrowing Records / 借阅记录页
+![Borrowing Records](docs/images/borrowing-records.png)
 
-### 图书与检索
+### Swagger API Docs / Swagger 接口文档
+![Swagger UI](docs/images/swagger-ui.png)
 
-- 图书列表与多条件筛选
-- 作者、分类、标签、出版社维度筛选
-- 图书详情页
-- 图书评分
-- 用户行为记录与搜索日志
+---
 
-### 推荐能力
+## 1. Overview / 项目简介
 
-- 热门图书推荐
-- 基于阅读偏好的推荐
-- 基于评分和借阅行为的推荐
-- 相似图书推荐
-- 推荐总览书架
-- 首页阅读看板与推荐预览
+This system is designed around two main directions: **book discovery/recommendation** and **book circulation management**. It combines a complete business workflow with recommendation and behavior tracking capabilities, making it suitable for:
 
-### 借阅流转
+本系统围绕 **图书发现 / 推荐** 与 **图书流通管理** 两条主线进行设计与实现，既具备完整业务闭环，也具备推荐与行为记录能力，适合用于：
 
-- 借阅
-- 归还
-- 续借
-- 预约
-- 预约排队与队首优先借阅
-- 借阅状态与到期提醒展示
+- Graduation project defense demonstrations  
+  毕业设计答辩展示
+- Java backend project practice and portfolio building  
+  Java 后端项目练手与作品集沉淀
+- Coursework in book recommendation or library circulation management  
+  图书推荐 / 图书借阅管理方向课程设计
+- Future extension into a more advanced intelligent book discovery system  
+  后续扩展为更完整的智能图书发现系统
 
-### 前端页面
+The project currently targets **local development and demonstration environments**. Its configuration is more suitable for learning, development, demonstrations, and milestone reports, and it is **not recommended for direct production use without further hardening**.
 
-前端静态页面位于 `src/main/resources/static/ui`，当前包含：
+项目当前默认面向**本地开发和演示环境**。当前配置更适合学习、开发、演示和阶段性汇报，**未经进一步改造不建议直接投入生产环境**。
 
-- 首页阅读看板
-- 图书检索工作台
-- 图书详情页
-- 推荐书架页
-- 登录、注册、个人中心、借阅记录等页面
+---
 
-## 技术栈
+## 2. Features Implemented / 当前已实现功能
 
-- Java 11
-- Spring Boot 2.7.5
+### 2.1 User and Authentication / 用户与认证
+- User registration, login, and logout  
+  用户注册、登录、退出登录
+- Access Token / Refresh Token authentication flow  
+  Access Token / Refresh Token 认证流程
+- Role-based access control with Spring Security  
+  基于 Spring Security 的权限控制
+- Guided creation of the default administrator account  
+  默认管理员账号自动引导创建
+
+### 2.2 Books and Search / 图书与检索
+- Book listing with multi-condition filtering  
+  图书列表与多条件筛选
+- Filtering by author, category, tag, publisher, and more  
+  作者、分类、标签、出版社等维度筛选
+- Book detail page  
+  图书详情查看
+- Book rating  
+  图书评分
+- User behavior tracking and search logs  
+  用户行为记录与搜索日志
+
+### 2.3 Recommendation / 推荐能力
+- Popular book recommendation  
+  热门图书推荐
+- Preference-based recommendation  
+  基于阅读偏好的推荐
+- Recommendation based on rating and borrowing behavior  
+  基于评分和借阅行为的推荐
+- Similar book recommendation  
+  相似图书推荐
+- Recommendation overview shelf  
+  推荐总览书架
+- Homepage reading dashboard and recommendation preview  
+  首页阅读看板与推荐预览
+
+### 2.4 Circulation Workflow / 借阅流转
+- Borrow  
+  借阅
+- Return  
+  归还
+- Renew  
+  续借
+- Reserve  
+  预约
+- Reservation queue and head-of-line borrowing priority  
+  预约排队与队首优先借阅
+- Borrowing status and due-date reminder display  
+  借阅状态与到期提醒展示
+
+### 2.5 Frontend Pages / 前端页面
+The frontend static pages are located in `src/main/resources/static/ui`, including but not limited to:
+
+前端静态页面位于 `src/main/resources/static/ui`，包含但不限于：
+
+- Home dashboard  
+  首页阅读看板
+- Search workspace  
+  图书检索工作台
+- Book detail page  
+  图书详情页
+- Recommendation shelf page  
+  推荐书架页
+- Login, registration, profile center, borrowing records, and more  
+  登录、注册、个人中心、借阅记录等页面
+
+---
+
+## 3. Tech Stack / 技术栈
+
+### Backend / 后端
+- Java 17
+- Spring Boot 3.5.7
 - Spring Web
 - Spring Security
 - Spring Data JPA
-- Hibernate
+- Spring Validation
+
+### Data and Documentation / 数据与文档
 - PostgreSQL
-- Liquibase
 - JWT (`com.auth0:java-jwt`)
+- springdoc OpenAPI (Swagger UI)
 - MapStruct
 - Lombok
-- springdoc-openapi-ui
-- 原生 HTML / CSS / JavaScript 前端页面
 
-## 目录结构
+### Testing and Build / 测试与构建
+- Maven
+- H2 (test environment / 测试环境)
+- Spring Boot Test
+
+### Database Change Management / 数据库变更管理
+- Liquibase Maven Plugin
+
+---
+
+## 4. Project Structure / 项目结构
 
 ```text
-book-recommendation-system/
+book-discovery-system/
 ├─ src/main/java/com/weidonglang/NewBookRecommendationSystem/
-│  ├─ config/          # 配置与启动初始化
-│  ├─ controller/      # 接口控制层
-│  ├─ dao/             # 数据访问实现
-│  ├─ dto/             # 请求/响应 DTO
-│  ├─ entity/          # 数据实体
-│  ├─ enums/           # 枚举定义
-│  ├─ exception/       # 全局异常处理
-│  ├─ manager/         # 认证与基础管理器
-│  ├─ recommender/     # 推荐相关实现
-│  ├─ repository/      # JPA Repository
-│  ├─ security/        # 安全配置与 JWT 过滤
-│  ├─ service/         # 业务服务层
-│  ├─ transformer/     # DTO / Entity 转换
-│  └─ utils/           # 通用工具
+│  ├─ config/          # Configuration and bootstrap initialization / 配置与启动初始化
+│  ├─ controller/      # Controller layer / 接口控制层
+│  ├─ dao/             # Data access implementation / 数据访问实现
+│  ├─ dto/             # Request/response DTOs / 请求与响应 DTO
+│  ├─ entity/          # Entities / 数据实体
+│  ├─ enums/           # Enums / 枚举定义
+│  ├─ exception/       # Global exception handling / 全局异常处理
+│  ├─ manager/         # Authentication and base managers / 认证与基础管理器
+│  ├─ recommender/     # Recommendation logic / 推荐相关实现
+│  ├─ repository/      # JPA repositories / JPA Repository
+│  ├─ security/        # Security config and JWT filters / 安全配置与 JWT 过滤
+│  ├─ service/         # Service layer / 业务服务层
+│  ├─ transformer/     # DTO / Entity transformation / DTO 与 Entity 转换
+│  └─ utils/           # Utilities / 通用工具
 ├─ src/main/resources/
-│  ├─ application.properties
-│  ├─ application-dev.properties
-│  ├─ db/              # Liquibase 脚本
-│  ├─ json/            # 初始化或导入数据
-│  └─ static/ui/       # 前端页面
-├─ scripts/            # 项目辅助脚本
+│  ├─ application*.yml / properties
+│  ├─ db/
+│  ├─ static/ui/       # Frontend static pages / 前端静态页面
+│  └─ ...
+├─ scripts/            # Helper scripts / 辅助脚本
 ├─ pom.xml
-├─ mvnw.cmd
-└─ mvnw-jdk11.cmd
-```
+└─ README.md
+````
 
-## 运行环境
+> If your repository name has not been changed yet, replace `book-discovery-system/` with your current folder name.
+> 如果你的仓库名还没改，可以把这里替换成当前实际目录名。
+
+---
+
+## 5. Requirements / 运行环境要求
+
+Recommended environment:
 
 建议环境：
 
-- JDK 11
-- Maven Wrapper（项目已内置）
-- PostgreSQL 12+
-- Windows + IntelliJ IDEA 或任意支持 Maven 的 IDE
+* JDK 17
+* Maven 3.9+
+* PostgreSQL 14+
+* IntelliJ IDEA or VS Code
+  IntelliJ IDEA 或 VS Code
 
-## 默认配置
+---
 
-当前默认配置来自 `src/main/resources/application.properties`：
+## 6. Quick Start / 快速启动
 
-- 服务端口：`8010`
-- 上下文路径：`/book-service`
-- 数据库：`book_recommendation_system`
-- 默认数据库地址：`jdbc:postgresql://localhost:5043/book_recommendation_system`
-- Swagger UI：`/swagger-ui/index.html`
+### 6.1 Clone the Repository / 克隆项目
 
-默认管理员账号：
-
-- 邮箱：`admin@booknook.local`
-- 密码：`Admin123!`
-
-## 启动前说明
-
-项目配置里当前保留了本地开发用数据库连接与 JWT 密钥。若你准备对外发布、部署或多人协作，建议先做这些调整：
-
-- 修改数据库用户名和密码
-- 修改 JWT Secret
-- 使用环境变量或外部配置管理敏感信息
-- 不要继续把本地密码直接提交到公共仓库
-
-## 快速启动
-
-### 1. 创建数据库
-
-```sql
-CREATE DATABASE book_recommendation_system;
+```bash
+git clone https://github.com/weidonglang/new-book-recommendation-system.git
+cd new-book-recommendation-system
 ```
 
-### 2. 修改数据库连接
+> If you rename the repository later, update the clone URL accordingly.
+> 如果你后续修改了仓库名，请同步更新克隆地址。
 
-按你的本地环境修改 `src/main/resources/application.properties`：
+### 6.2 Configure the Database / 配置数据库
 
-```properties
-spring.datasource.url=jdbc:postgresql://localhost:5043/book_recommendation_system
-spring.datasource.username=postgres
-spring.datasource.password=your_password
+Update your local database connection settings in the configuration file, including:
+
+请在配置文件中修改你自己的本地数据库连接信息，包括：
+
+* Database host
+  数据库地址
+* Database port
+  数据库端口
+* Database name
+  数据库名称
+* Username
+  用户名
+* Password
+  密码
+
+> Do not commit real credentials or private connection information to a public repository.
+> 不要将真实账号密码或私有连接信息提交到公开仓库。
+
+### 6.3 Install Dependencies and Run / 安装依赖并启动
+
+```bash
+./mvnw spring-boot:run
 ```
 
-### 3. 使用 JDK 11 编译
+Windows:
 
-如果你本机默认 Java 不是 11，优先使用项目脚本：
-
-```bat
-mvnw-jdk11.cmd -DskipTests compile
-```
-
-### 4. 启动项目
-
-```bat
-mvnw-jdk11.cmd spring-boot:run
-```
-
-如果你的环境已经正确切到 JDK 11，也可以直接用：
-
-```bat
+```bash
 mvnw.cmd spring-boot:run
 ```
 
-## 访问入口
+### 6.4 Package and Run / 打包运行
 
-启动成功后可访问：
-
-- 后端根路径：`http://localhost:8010/book-service`
-- Swagger 文档：`http://localhost:8010/book-service/swagger-ui/index.html`
-- 前端登录页：`http://localhost:8010/book-service/ui/login.html`
-- 前端首页：`http://localhost:8010/book-service/ui/index.html`
-
-## 借阅与预约规则
-
-当前系统内置的业务规则包括：
-
-- 每位用户最多同时借阅 5 本书
-- 默认借期 14 天
-- 每笔借阅最多续借 1 次
-- 每次续借延长 7 天
-- 同一本未归还图书不能重复借阅
-- 图书无可借库存时可进入预约队列
-- 有预约队列时，通常由队首用户优先借阅
-
-## 推荐能力说明
-
-系统当前已经具备以下推荐能力：
-
-- 推荐总览书架
-- 热门推荐
-- 基于偏好的推荐
-- 基于评分和借阅行为的推荐
-- 相似图书推荐
-- 同作者延伸浏览
-- 首页阅读建议与推荐预览
-
-如果后续继续深化，可以进一步扩展：
-
-- 协同过滤排序权重优化
-- 混合推荐策略
-- 推荐理由解释能力增强
-- 用户画像可视化
-
-## 常用接口示例
-
-### 登录
-
-```http
-POST /book-service/api/auth/log-in
-Content-Type: application/json
+```bash
+./mvnw clean package
+java -jar target/book-recommendation-system-0.0.1-SNAPSHOT.jar
 ```
 
-```json
-{
-  "email": "admin@booknook.local",
-  "password": "Admin123!"
-}
+---
+
+## 7. API Documentation / 接口文档
+
+The project integrates springdoc OpenAPI. After startup, you can access the Swagger UI to browse the API documentation.
+
+项目集成了 springdoc OpenAPI，启动后可通过 Swagger UI 查看接口文档。
+
+A common local access URL is:
+
+常见的本地访问地址通常如下：
+
+```text
+http://localhost:8010/swagger-ui/index.html
 ```
 
-### 图书评分
+If you changed the port, context path, or reverse proxy settings, use your actual runtime address.
 
-```http
-POST /book-service/api/book/rate
-Authorization: Bearer <access_token>
-Content-Type: application/json
-```
+若你本地修改过端口、上下文路径或反向代理配置，请以实际运行地址为准。
 
-```json
-{
-  "book": { "id": 10 },
-  "rate": 5
-}
-```
+---
 
-### 借阅图书
+## 8. Highlights / 项目特点
 
-```http
-POST /book-service/api/loan/borrow
-Authorization: Bearer <access_token>
-Content-Type: application/json
-```
+### 8.1 A Relatively Complete Business Workflow / 业务链路比较完整
 
-```json
-{
-  "bookId": 10
-}
-```
+This project is more than a basic CRUD application. It already includes:
 
-## 测试与验证建议
+这个项目不是只做了一个简单的 CRUD 系统，而是已经具备：
 
-建议至少按下面顺序验证：
+* Authentication
+  认证
+* Book management and search
+  图书管理与检索
+* Recommendation
+  推荐
+* Borrowing workflow
+  借阅流转
+* Behavior tracking
+  行为记录
+* Frontend demo pages
+  前端演示页面
 
-1. 编译项目
+This makes it a good comprehensive project for demonstrations, defense presentations, and future expansion.
 
-```bat
-mvnw-jdk11.cmd -DskipTests compile
-```
+因此它更适合作为一个可展示、可答辩、可继续扩展的综合项目。
 
-2. 启动项目
+### 8.2 Easy to Extend / 适合继续升级
 
-```bat
-mvnw-jdk11.cmd spring-boot:run
-```
+This system can be extended in the following directions:
 
-3. 验证登录
+这个系统后续可以继续往以下方向扩展：
 
-- 使用默认管理员登录
-- 检查 Access Token / Refresh Token 是否正常工作
+* Stronger recommendation strategies and offline evaluation
+  更强的推荐策略与离线评测
+* Elasticsearch-based full-text search
+  Elasticsearch 全文检索
+* Natural language query
+  自然语言查询
+* Retrieval-Augmented Generation (RAG)
+  RAG 问答
+* Recommendation explanation
+  推荐理由解释
+* Redis caching optimization
+  Redis 缓存优化
+* Docker deployment
+  Docker 部署
+* Admin statistics dashboard
+  管理后台统计看板
 
-4. 验证核心业务
+### 8.3 Suitable for a Stronger Graduation Project Theme / 适合毕业设计主线升级
 
-- 检索图书
-- 查看图书详情
-- 评分
-- 借阅 / 归还 / 续借 / 预约
-- 查看推荐页与首页看板
+If you want to further upgrade this project into a stronger graduation project, the research theme can gradually evolve into:
 
-## 贡献说明
+如果你后续希望把这个项目进一步提升为更强的毕设题目，可以将论文主线逐步收敛到：
 
-欢迎任何形式的贡献，包括但不限于：
+**A system for retrieval, question answering, and recommendation for natural-language-based book discovery**
+**面向自然语言图书发现的检索、问答与推荐系统**
 
-- 提交 Issue
-- 修复 Bug
-- 补充文档
-- 优化样式或前端交互
-- 增强推荐算法
-- 增加测试
-- 提交 Pull Request
-- 基于此项目继续二次开发
+In other words, it can grow from a “book recommendation and circulation management system” into a system centered on:
 
-如果你准备贡献代码，建议：
+也就是从“图书推荐与借阅管理系统”进一步升级为：
 
-- 保持提交粒度清晰
-- 尽量不要混入无关改动
-- 对配置、依赖和数据库脚本改动写清楚目的
+* Hybrid retrieval
+  混合检索
+* Evidence-grounded question answering
+  证据驱动问答
+* Explainable recommendation
+  可解释推荐
 
-## 开源许可
+This transition helps the project move from pure engineering implementation toward a more research-oriented graduation project.
 
-本项目采用 MIT License。
+这样能让项目从“工程实现”进一步走向“研究型毕设”。
 
-这意味着你基本可以自由地：
+---
 
-- 使用
-- 下载
-- 复制
-- 修改
-- 二次开发
-- 分发
-- 商用
-- 提交衍生工具
-- 贡献代码
+## 9. Current Positioning / 当前阶段定位
 
-唯一需要保留的是原始许可声明与版权声明，同时作者不对软件使用结果承担担保责任。
+The current version is better described as:
 
-完整许可见 [LICENSE](LICENSE)。
+当前版本更适合定义为：
+
+> A Java web system centered on book recommendation and circulation, with authentication, search, recommendation, behavior logging, and frontend demo pages.
+> 一个以图书推荐与借阅流转为核心、具备认证、检索、推荐、行为记录与前端演示能力的 Java Web 系统。
+
+It already provides a solid foundation for a graduation project. If the goal is a stronger award-level project or a more impressive portfolio item, the following areas can still be improved:
+
+它已经具备不错的毕业设计基础，但如果目标是“更强的优秀毕设 / 更亮眼的简历项目”，还可以继续在以下方向做增强：
+
+* Retrieval capability upgrades
+  检索能力升级
+* Better recommendation explainability
+  推荐算法解释性增强
+* System performance optimization
+  系统性能优化
+* Visual analytics
+  可视化分析
+* Engineering deployment
+  工程化部署
+* Experimental evaluation design
+  实验评测体系建设
+
+---
+
+## 10. Roadmap / 后续升级方向
+
+Suggested progression:
+
+建议按以下顺序推进：
+
+### Phase 1: Engineering Improvements / 第一阶段：工程完善
+
+* Improve exception handling
+  完善异常处理
+* Standardize response format
+  统一返回格式
+* Complete API comments and documentation
+  补齐接口注释
+* Improve logging
+  完善日志体系
+* Strengthen parameter validation
+  优化参数校验
+
+### Phase 2: Recommendation Enhancement / 第二阶段：推荐能力增强
+
+* Refactor recommendation strategies
+  推荐策略拆分与重构
+* Further decouple popular / collaborative / content-based recommendation
+  热门推荐 / 协同推荐 / 内容推荐进一步解耦
+* Add recommendation explanation display
+  推荐结果解释展示
+* Add offline recommendation evaluation
+  推荐效果离线评测
+
+### Phase 3: Retrieval Enhancement / 第三阶段：检索能力增强
+
+* Introduce Elasticsearch
+  引入 Elasticsearch
+* Support full-text search
+  支持全文检索
+* Support more advanced filtering and sorting
+  支持更复杂的筛选与排序
+* Prepare for natural language book search
+  为自然语言搜书做铺垫
+
+### Phase 4: Intelligent Features / 第四阶段：智能化能力增强
+
+* Natural language query
+  自然语言查询
+* Retrieval-Augmented Generation (RAG)
+  检索增强问答（RAG）
+* Book comparison QA
+  图书比较问答
+* Reading path suggestion
+  阅读路径建议
+* Natural language recommendation explanations
+  推荐理由自然语言生成
+
+### Phase 5: Engineering Delivery / 第五阶段：工程化与答辩交付
+
+* Docker / Docker Compose
+* Deployment documentation
+  部署文档
+* Test reports
+  测试报告
+* Performance testing
+  性能测试
+* Defense PPT
+  答辩 PPT
+* Demo video
+  演示视频
+
+---
+
+## 11. Use Cases / 适用场景
+
+This project is suitable for:
+
+本项目适用于：
+
+* Undergraduate graduation projects
+  本科毕业设计
+* Java Web coursework
+  Java Web 课程设计
+* Backend practice projects
+  后端开发练手项目
+* Learning in recommendation system direction
+  图书推荐系统方向学习
+* Portfolio and resume showcase
+  简历项目展示
+
+---
+
+## 12. Notes / 说明
+
+1. Use your own local configuration for database connection, credentials, and other private settings.
+   项目中的数据库连接、账号密码等私有配置请使用你自己的本地环境配置。
+
+2. The “roadmap” section describes future extensions and does not mean all features have already been implemented.
+   README 中的“后续升级方向”属于扩展规划，不代表这些能力已经全部完成。
+
+3. If your repository is still under active development, please refer to the latest implementation in your current branch.
+   若你当前仓库代码仍在持续更新，请以你自己最新分支中的实际实现为准。
+
+---
+
+## 13. License / 开源许可
+
+This project is released under the open-source license declared in the current repository. See the `LICENSE` file for details.
+
+本项目采用仓库当前声明的开源许可证，详情见 `LICENSE` 文件。
+
