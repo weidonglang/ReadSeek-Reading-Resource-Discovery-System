@@ -77,10 +77,13 @@ public class BookSearchServiceImpl implements BookSearchService {
         String expandedQuery = searchQueryExpander.expand(normalizedQuery, intent);
 
         LinkedHashMap<Long, BookSearchHitDto> mergedHits = new LinkedHashMap<>();
-        List<BookSearchHitDto> exactHits = findExactMatches(normalizedQuery, normalizedLimit);
+        List<BookSearchHitDto> exactHits = findExactMatches(
+                searchQueryExpander.resolveExactCandidateQueries(normalizedQuery),
+                normalizedLimit
+        );
         exactHits.forEach(hit -> mergedHits.put(hit.getBook().getId(), hit));
 
-        List<BookSearchHitDto> vectorHits = vectorBookSearchService.search(normalizedQuery, normalizedLimit * 2);
+        List<BookSearchHitDto> vectorHits = vectorBookSearchService.search(expandedQuery, normalizedLimit * 2);
         List<BookSearchHitDto> bm25Hits = performBm25Search(expandedQuery, normalizedLimit * 2);
 
         if (intent == SearchQueryIntent.NATURAL_LANGUAGE && !vectorHits.isEmpty()) {
@@ -147,12 +150,32 @@ public class BookSearchServiceImpl implements BookSearchService {
         return Math.min(limit, searchProperties.getMaxResults());
     }
 
-    private List<BookSearchHitDto> findExactMatches(String query, int limit) {
-        List<Book> books = bookRepository.findExactMatches(query, PageRequest.of(0, limit));
-        if (books.isEmpty()) {
+    private List<BookSearchHitDto> findExactMatches(List<String> candidateQueries, int limit) {
+        if (candidateQueries == null || candidateQueries.isEmpty()) {
             return List.of();
         }
-        List<BookDto> bookDtos = bookTransformer.transformEntityToDto(books);
+
+        LinkedHashMap<Long, Book> exactBooks = new LinkedHashMap<>();
+        for (String candidateQuery : candidateQueries) {
+            List<Book> books = bookRepository.findExactMatches(candidateQuery, PageRequest.of(0, limit));
+            for (Book book : books) {
+                if (book != null && book.getId() != null && !exactBooks.containsKey(book.getId())) {
+                    exactBooks.put(book.getId(), book);
+                }
+                if (exactBooks.size() >= limit) {
+                    break;
+                }
+            }
+            if (exactBooks.size() >= limit) {
+                break;
+            }
+        }
+
+        if (exactBooks.isEmpty()) {
+            return List.of();
+        }
+
+        List<BookDto> bookDtos = bookTransformer.transformEntityToDto(new ArrayList<>(exactBooks.values()));
         List<BookSearchHitDto> hits = new ArrayList<>();
         for (BookDto bookDto : bookDtos) {
             hits.add(new BookSearchHitDto(

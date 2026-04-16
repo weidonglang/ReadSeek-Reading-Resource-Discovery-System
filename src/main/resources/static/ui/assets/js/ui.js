@@ -22,6 +22,44 @@
     '儿童文学': 'Kids'
   });
 
+  Object.assign(CATEGORY_NAME_MAP, {
+    'Thriller': '\u60ca\u609a',
+    'Art': '\u827a\u672f',
+    'Biography': '\u4f20\u8bb0',
+    'Business': '\u5546\u4e1a',
+    'Computer Science': '\u8ba1\u7b97\u673a\u79d1\u5b66',
+    'Economics': '\u7ecf\u6d4e\u5b66',
+    'Fantasy': '\u5947\u5e7b',
+    'Fiction': '\u5c0f\u8bf4',
+    'Mathematics': '\u6570\u5b66',
+    'Mystery': '\u60ac\u7591',
+    'Philosophy': '\u54f2\u5b66',
+    'Psychology': '\u5fc3\u7406\u5b66',
+    'Self-Help': '\u81ea\u6211\u6210\u957f'
+  });
+
+  Object.assign(CATEGORY_NAME_REVERSE_MAP, {
+    '\u6050\u6016': 'Horror',
+    '\u52a8\u4f5c\u4e0e\u5192\u9669': 'Action and Adventure',
+    '\u6d6a\u6f2b': 'Romantic',
+    '\u513f\u7ae5\u6587\u5b66': 'Kids',
+    '\u79d1\u5b66\u5e7b\u60f3': 'Science Fiction',
+    '\u827a\u672f': 'Art',
+    '\u4f20\u8bb0': 'Biography',
+    '\u5546\u4e1a': 'Business',
+    '\u8ba1\u7b97\u673a\u79d1\u5b66': 'Computer Science',
+    '\u7ecf\u6d4e\u5b66': 'Economics',
+    '\u5947\u5e7b': 'Fantasy',
+    '\u5c0f\u8bf4': 'Fiction',
+    '\u6570\u5b66': 'Mathematics',
+    '\u60ac\u7591': 'Mystery',
+    '\u672c\u683c\u63a8\u7406': 'Mystery',
+    '\u54f2\u5b66': 'Philosophy',
+    '\u5fc3\u7406\u5b66': 'Psychology',
+    '\u81ea\u6211\u6210\u957f': 'Self-Help',
+    '\u81ea\u6211\u63d0\u5347': 'Self-Help'
+  });
+
   const READING_LEVEL_MAP = {
     BEGINNER: '入门读者',
     INTERMEDIATE: '进阶读者',

@@ -41,4 +41,21 @@ class SearchQueryExpanderTest {
         assertTrue(expanded.contains("book"));
         assertTrue(expanded.contains("novel"));
     }
+
+    @Test
+    void expandAddsAuthorAndMasterpieceAliasesForChineseAuthorQuery() {
+        String expanded = expander.expand(
+                "\u60f3\u770b\u7b80\u5965\u65af\u6c40\u7684\u4ee3\u8868\u4f5c",
+                SearchQueryIntent.NATURAL_LANGUAGE
+        );
+
+        assertTrue(expanded.contains("jane austen austen"));
+        assertTrue(expanded.contains("masterpiece classic signature work"));
+    }
+
+    @Test
+    void resolveExactCandidateQueriesShouldExtractEnglishAuthorAlias() {
+        assertTrue(expander.resolveExactCandidateQueries("\u60f3\u770b\u7b80\u5965\u65af\u6c40\u7684\u4ee3\u8868\u4f5c")
+                .contains("Jane Austen"));
+    }
 }

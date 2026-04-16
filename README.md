@@ -1,5 +1,47 @@
-# Book Discovery and Circulation Management System
-## 图书发现与图书流通管理系统
+# Book Discovery and Recommendation System
+
+Java-based book discovery, recommendation, and circulation project for graduation design, coursework, and local demo use.
+
+Current status:
+- Search, recommendation, borrowing, reservation, rating, and authentication flows are available
+- Frontend demo pages are included under `src/main/resources/static/ui`
+- Elasticsearch-based search is integrated
+- `hybrid-v2` search path is available: exact match + BM25 + vector
+- A minimal local Python AI service is included for embedding integration testing
+
+This repository is suitable for:
+- Graduation project demo
+- Java Web coursework
+- Backend portfolio project
+- A base system for further work on hybrid retrieval, RAG, and explainable recommendation
+
+This is a local-development and demo-oriented version, not a production-hardened release.
+
+## Features
+
+### Core business
+- User registration, login, refresh token flow, and role-based access control
+- Book listing, detail, rating, borrowing, return, renewal, and reservation
+- Recommendation overview, popular books, preference-based recommendation, and collaborative filtering
+- Behavior logging for search, detail click, and recommendation click
+
+### Search
+- PostgreSQL exact matching
+- Elasticsearch BM25 full-text retrieval
+- Hybrid search API for keyword and natural-language queries
+- Chinese query expansion rules for common categories and author aliases
+- Automatic book search index sync on create, update, and logical delete
+
+### Frontend
+- Home dashboard
+- Search workspace
+- Book detail page
+- Recommendation page
+- Borrowing page
+- Profile page
+- Admin page
+
+## Tech Stack
 
 An intelligent backend-oriented system for book discovery, recommendation, and circulation management, designed for graduation projects, coursework, and portfolio demonstrations. It includes backend APIs, authentication, book circulation workflows, recommendation capabilities, and directly accessible frontend pages.
 
@@ -217,6 +259,7 @@ The following backend groundwork has already been added for the next-stage intel
 - Spring Web
 - Spring Security
 - Spring Data JPA
+- Spring Data Elasticsearch
 - Spring Validation
 
 ### Search and Retrieval / 检索与搜索
@@ -227,11 +270,41 @@ The following backend groundwork has already been added for the next-stage intel
 
 ### Data and Documentation / 数据与文档
 - PostgreSQL
-- JWT (`com.auth0:java-jwt`)
-- springdoc OpenAPI (Swagger UI)
+- Elasticsearch 8
+- Liquibase
 - MapStruct
 - Lombok
+- Swagger UI / springdoc OpenAPI
+- Python 3 for the local AI service
+- Docker / Docker Compose
 
+## Repository Structure
+
+```text
+src/main/java/com/weidonglang/NewBookRecommendationSystem/
+  config/
+  controller/
+  dao/
+  dto/
+  entity/
+  enums/
+  exception/
+  manager/
+  recommender/
+  repository/
+  search/
+  security/
+  service/
+  transformer/
+
+src/main/resources/
+  application.properties
+  db/
+  static/ui/
+
+ai-service/
+docs/
+scripts/
 ### Testing and Build / 测试与构建
 - Maven
 - H2 (test environment / 测试环境)
@@ -309,26 +382,9 @@ git clone https://github.com/weidonglang/new-book-recommendation-system.git
 cd new-book-recommendation-system
 ```
 
-> If you rename the repository later, update the clone URL accordingly.
-> 如果你后续修改了仓库名，请同步更新克隆地址。
+## Quick Start
 
-### 6.2 Configure the Database / 配置数据库
-
-Update your local database connection settings in the configuration file, including:
-
-请在配置文件中修改你自己的本地数据库连接信息，包括：
-
-* Database host
-  数据库地址
-* Database port
-  数据库端口
-* Database name
-  数据库名称
-* Username
-  用户名
-* Password
-  密码
-
+### Option A: Recommended local development flow
 If Elasticsearch is enabled in your local environment, also update the related search configuration.
 
 如果你本地启用了 Elasticsearch，也请同步修改相关搜索配置。
@@ -336,18 +392,15 @@ If Elasticsearch is enabled in your local environment, also update the related s
 > Do not commit real credentials or private connection information to a public repository.
 > 不要将真实账号密码或私有连接信息提交到公开仓库。
 
-### 6.3 Install Dependencies and Run / 安装依赖并启动
+Open two terminals in the project root.
 
-```bash
-./mvnw spring-boot:run
+Terminal 1:
+
+```powershell
+.\start-ai-service.bat
 ```
 
-Windows:
-
-```bash
-mvnw.cmd spring-boot:run
-```
-
+Terminal 2:
 You can also use the provided local startup scripts:
 
 你也可以使用当前仓库提供的本地启动脚本：
@@ -364,11 +417,15 @@ scripts/start-dev.ps1
 
 ### 6.4 Package and Run / 打包运行
 
-```bash
-./mvnw clean package
-java -jar target/book-recommendation-system-0.0.1-SNAPSHOT.jar
+```powershell
+.\start-dev.bat -WithAi
 ```
 
+This starts:
+- PostgreSQL on `localhost:5043`
+- Elasticsearch on `localhost:9200`
+- Spring Boot on `http://localhost:8010/book-service`
+- Local AI service on `http://127.0.0.1:8001`
 ### 6.5 Docker Startup / Docker 启动方式
 
 If you want to run the project in a more standardized local environment, you can use:
@@ -390,24 +447,23 @@ The project integrates springdoc OpenAPI. After startup, you can access the Swag
 
 项目集成了 springdoc OpenAPI，启动后可通过 Swagger UI 查看接口文档。
 
-A common local access URL is:
-
-常见的本地访问地址通常如下：
+Swagger UI:
 
 ```text
-http://localhost:8010/swagger-ui/index.html
+http://localhost:8010/book-service/swagger-ui/index.html
 ```
 
-If you changed the port, context path, or reverse proxy settings, use your actual runtime address.
+Frontend search page:
 
-若你本地修改过端口、上下文路径或反向代理配置，请以实际运行地址为准。
+```text
+http://localhost:8010/book-service/ui/books.html
+```
 
----
+### Option B: Docker app container
 
-## 8. Highlights / 项目特点
-
-### 8.1 A Relatively Complete Business Workflow / 业务链路比较完整
-
+```powershell
+docker compose up --build
+```
 This project is more than a basic CRUD application. It already includes:
 
 这个项目不是只做了一个简单的 CRUD 系统，而是已经具备：
@@ -458,38 +514,53 @@ This system can still be extended in the following directions:
 * Performance benchmarking and experimental evaluation
   性能基准与实验评测
 
-### 8.3 Suitable for a Stronger Graduation Project Theme / 适合毕业设计主线升级
+This starts the app, PostgreSQL, and Elasticsearch inside Docker.
 
-If you want to further upgrade this project into a stronger graduation project, the research theme can gradually evolve into:
+## Default Accounts and Local Config
 
-如果你后续希望把这个项目进一步提升为更强的毕设题目，可以将论文主线逐步收敛到：
+Default bootstrap admin:
+- Email: `admin@booknook.local`
+- Password: `Admin123!`
 
-**A system for retrieval, question answering, and recommendation for natural-language-based book discovery**
-**面向自然语言图书发现的检索、问答与推荐系统**
+Default Docker database:
+- Database: `book_recommendation_system`
+- Username: `postgres`
+- Password: `postgres`
 
-In other words, it can grow from a “book recommendation and circulation management system” into a system centered on:
+Important:
+- If your local PostgreSQL volume already contains old data, your actual password may be different
+- In that case, override the backend connection password when starting locally
 
-也就是从“图书推荐与借阅管理系统”进一步升级为：
+For example:
 
-* Hybrid retrieval
-  混合检索
-* Evidence-grounded question answering
-  证据驱动问答
-* Explainable recommendation
-  可解释推荐
+```powershell
+.\start-dev.bat -WithAi -DbPassword 20041117
+```
 
-This transition helps the project move from pure engineering implementation toward a more research-oriented graduation project.
+## Search and Vector Testing
 
-这样能让项目从“工程实现”进一步走向“研究型毕设”。
+### Rebuild the search index
 
----
+Run after startup:
 
-## 9. Current Positioning / 当前阶段定位
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\rebuild-search-index.ps1
+```
 
-The current version is better described as:
+Expected result:
+- successful login
+- `Book search index rebuilt successfully.`
+- `indexedCount > 0`
 
-当前版本更适合定义为：
+### Verify hybrid search
 
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\verify-hybrid-search.ps1 -Query "Pride and Prejudice"
+```
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\verify-hybrid-search.ps1 -Query "classic romance"
+```
 > A Java web system centered on book recommendation and circulation, with authentication, search, recommendation, behavior logging, frontend demo pages, Elasticsearch-based search enhancement, and a reserved vector retrieval skeleton.
 > 一个以图书推荐与借阅流转为核心、具备认证、检索、推荐、行为记录、前端演示能力，并已接入 Elasticsearch 搜索增强与预埋向量检索骨架的 Java Web 系统。
 
@@ -512,8 +583,11 @@ At the current stage, the project has already stabilized the following:
 
 If the goal is a stronger award-level project or a more impressive portfolio item, the following areas can still be improved:
 
-它已经具备不错的毕业设计基础，但如果目标是“更强的优秀毕设 / 更亮眼的简历项目”，还可以继续在以下方向做增强：
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\verify-hybrid-search.ps1 -Query "Jane Austen"
+```
 
+When AI mode is enabled and the index has been rebuilt, the strategy should show:
 * Real embedding service integration
   真实 embedding 服务接入
 * Vector indexing and semantic retrieval activation
@@ -529,8 +603,11 @@ If the goal is a stronger award-level project or a more impressive portfolio ite
 * Experimental evaluation design
   实验评测体系建设
 
----
+```text
+hybrid-v2(exact-db+bm25+vector)
+```
 
+More detailed local testing steps are in:
 ## 10. Project Progress Update / 项目进度更新
 
 This update mainly moved forward along two lines:
@@ -627,10 +704,49 @@ In one sentence:
 
 ## 11. Roadmap / 后续升级方向
 
-Suggested progression:
+- [docs/vector-local-test-checklist.md](docs/vector-local-test-checklist.md)
 
-建议按以下顺序推进：
+## Python AI Service
 
+The current local AI service is intentionally minimal.
+
+It provides:
+- `GET /health`
+- `POST /embed`
+
+Current embedding backend:
+- deterministic `hash-bow`
+- intended for integration and workflow testing
+- not a final semantic model
+
+Details:
+- [ai-service/README.md](ai-service/README.md)
+- [docs/vector-retrieval-ai-service-plan.md](docs/vector-retrieval-ai-service-plan.md)
+
+## Current Search Status
+
+Implemented now:
+- exact match
+- BM25 retrieval
+- hybrid search API
+- vector retrieval skeleton and integration
+- local embedding service integration
+- Chinese query expansion for some common natural-language cases
+
+Not finished yet:
+- real production-grade embedding model
+- final retrieval quality tuning
+- RAG evidence retrieval and answer generation
+- benchmark-quality retrieval evaluation
+
+## Known Limitations
+
+- The current local embedding backend is a placeholder, so semantic quality is limited
+- Natural-language retrieval works as a demo path, but ranking quality still needs improvement
+- Configuration defaults are development-oriented
+- The project is suitable for demo and coursework use, not direct production deployment
+
+## Development Notes
 ### Phase 1: Python Embedding Service Minimum Viable Setup / 第一阶段：Python Embedding 服务最小骨架
 
 * Create an independent Python AI service directory
@@ -684,14 +800,26 @@ Suggested progression:
 * Demo video
   演示视频
 
----
+When to restart what:
+- If you change Java backend code: restart the backend
+- If you change Python AI service code: restart the AI service
+- If you change index structure or embedding write logic: restart backend and rebuild the search index
+- If you only change frontend static resources: hard refresh the page, and restart backend only if needed
 
+Useful commands:
 ## 12. Use Cases / 适用场景
 
-This project is suitable for:
+```powershell
+.\start-ai-service.bat
+```
 
-本项目适用于：
+```powershell
+.\start-dev.bat -WithAi
+```
 
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\rebuild-search-index.ps1
+```
 * Undergraduate graduation projects
   本科毕业设计
 * Java Web coursework
@@ -716,24 +844,37 @@ It is especially suitable for scenarios where you want to show both:
 
 ## 13. Notes / 说明
 
-1. Use your own local configuration for database connection, credentials, and other private settings.
-   项目中的数据库连接、账号密码等私有配置请使用你自己的本地环境配置。
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\verify-hybrid-search.ps1 -Query "classic romance"
+```
 
-2. The “roadmap” section describes future extensions and does not mean all features have already been implemented.
-   README 中的“后续升级方向”属于扩展规划，不代表这些能力已经全部完成。
+## Roadmap
 
+Near-term priorities:
+1. Replace the placeholder embedding backend with a real local embedding model
+2. Improve hybrid retrieval quality and query rewrite rules
+3. Build RAG evidence retrieval
+4. Add answer generation with citation
+5. Add evaluation for retrieval, recommendation, and QA
 3. Vector retrieval is currently only a reserved backend skeleton and is not enabled in the default runnable path.
    当前向量检索仅为预埋后端骨架，并不属于默认可运行链路中的正式能力。
 
 4. If your repository is still under active development, please refer to the latest implementation in your current branch.
    若你当前仓库代码仍在持续更新，请以你自己最新分支中的实际实现为准。
 
----
+## Screenshots
 
+If the image assets exist in your branch, you can use:
 ## 14. License / 开源许可
 
-This project is released under the open-source license declared in the current repository. See the `LICENSE` file for details.
+- `docs/images/home-dashboard.png`
+- `docs/images/search-workspace.png`
+- `docs/images/book-detail.png`
+- `docs/images/recommendation-shelf.png`
+- `docs/images/borrowing-records.png`
+- `docs/images/swagger-ui.png`
 
-本项目采用仓库当前声明的开源许可证，详情见 `LICENSE` 文件。
+## License
 
+See the repository `LICENSE` file if present.
 

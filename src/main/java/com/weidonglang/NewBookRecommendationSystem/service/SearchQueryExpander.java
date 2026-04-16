@@ -3,8 +3,10 @@ package com.weidonglang.NewBookRecommendationSystem.service;
 import com.weidonglang.NewBookRecommendationSystem.enums.SearchQueryIntent;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
@@ -12,6 +14,7 @@ import java.util.Set;
 @Component
 public class SearchQueryExpander {
     private static final Map<String, String> TERM_ALIASES = createAliases();
+    private static final Map<String, String> EXACT_CANDIDATE_ALIASES = createExactCandidateAliases();
 
     public String expand(String rawQuery, SearchQueryIntent intent) {
         String query = rawQuery == null ? "" : rawQuery.trim();
@@ -39,6 +42,25 @@ public class SearchQueryExpander {
         }
 
         return String.join(" ", terms);
+    }
+
+    public List<String> resolveExactCandidateQueries(String rawQuery) {
+        String query = rawQuery == null ? "" : rawQuery.trim();
+        if (query.isBlank()) {
+            return List.of();
+        }
+
+        String loweredQuery = query.toLowerCase(Locale.ROOT);
+        Set<String> candidates = new LinkedHashSet<>();
+        candidates.add(query);
+
+        for (Map.Entry<String, String> entry : EXACT_CANDIDATE_ALIASES.entrySet()) {
+            if (loweredQuery.contains(entry.getKey())) {
+                candidates.add(entry.getValue());
+            }
+        }
+
+        return new ArrayList<>(candidates);
     }
 
     private boolean containsCjk(String value) {
@@ -70,6 +92,23 @@ public class SearchQueryExpander {
         aliases.put("\u60ac\u7591", "mystery suspense thriller");
         aliases.put("\u4f20\u8bb0", "biography memoir");
         aliases.put("\u6210\u957f", "coming of age growth");
+        aliases.put("\u4ee3\u8868\u4f5c", "masterpiece classic signature work");
+        aliases.put("\u8457\u540d", "famous celebrated notable");
+        aliases.put("\u540d\u8457", "classic masterpiece notable work");
+        aliases.put("\u5965\u65af\u6c40", "jane austen austen");
+        aliases.put("\u7b80\u5965\u65af\u6c40", "jane austen austen");
+        aliases.put("\u7b80\u00b7\u5965\u65af\u6c40", "jane austen austen");
+        aliases.put("\u5c0f\u8bf4", "novel fiction");
+        return aliases;
+    }
+
+    private static Map<String, String> createExactCandidateAliases() {
+        Map<String, String> aliases = new LinkedHashMap<>();
+        aliases.put("\u7b80\u5965\u65af\u6c40", "Jane Austen");
+        aliases.put("\u7b80\u00b7\u5965\u65af\u6c40", "Jane Austen");
+        aliases.put("\u5965\u65af\u6c40", "Jane Austen");
+        aliases.put("jane austen", "Jane Austen");
+        aliases.put("austen", "Jane Austen");
         return aliases;
     }
 }

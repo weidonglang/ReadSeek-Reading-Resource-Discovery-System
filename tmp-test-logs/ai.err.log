@@ -1,0 +1,4 @@
+无法覆盖变量 Host，因为该变量为只读变量或常量。
+    + CategoryInfo          : WriteError: (Host:String) [], ParentContainsErrorRecordException
+    + FullyQualifiedErrorId : VariableNotWritable
+ 

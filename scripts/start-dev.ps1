@@ -4,6 +4,9 @@ param(
     [string]$Mode = 'all',
     [string]$JavaHome = 'C:\Program Files\Java\jdk-17.0.18+8',
     [string]$DbPassword = '',
+    [switch]$WithAi,
+    [string]$AiPythonExe = 'python',
+    [int]$AiPort = 8001,
     [switch]$SkipWait
 )
 
@@ -63,6 +66,28 @@ function Wait-ForDockerHealth {
     throw "Timed out waiting for container $ContainerName to become healthy."
 }
 
+function Wait-ForHttpEndpoint {
+    param(
+        [string]$Url,
+        [int]$TimeoutSeconds = 60
+    )
+
+    $deadline = (Get-Date).AddSeconds($TimeoutSeconds)
+    while ((Get-Date) -lt $deadline) {
+        try {
+            $response = Invoke-WebRequest -Uri $Url -UseBasicParsing -TimeoutSec 5
+            if ($response.StatusCode -ge 200 -and $response.StatusCode -lt 300) {
+                Write-Host "$Url is ready"
+                return
+            }
+        } catch {
+        }
+        Start-Sleep -Seconds 2
+    }
+
+    throw "Timed out waiting for endpoint $Url"
+}
+
 function Start-Dependencies {
     Write-Step 'Starting Docker dependencies'
     Assert-CommandExists 'docker'
@@ -88,12 +113,36 @@ function Start-Application {
     $env:SPRING_DATASOURCE_USERNAME = 'postgres'
     $env:SPRING_DATASOURCE_PASSWORD = $ResolvedDbPassword
     $env:SPRING_ELASTICSEARCH_URIS = 'http://localhost:9200'
+    if ($WithAi) {
+        $env:LIBRARY_SEARCH_EMBEDDING_ENABLED = 'true'
+        $env:LIBRARY_SEARCH_VECTOR_ENABLED = 'true'
+        $env:LIBRARY_SEARCH_EMBEDDING_BASE_URL = "http://127.0.0.1:$AiPort"
+    }
 
     Write-Host "JAVA_HOME=$($env:JAVA_HOME)"
     Write-Host "SPRING_DATASOURCE_PASSWORD=<hidden>"
+    if ($WithAi) {
+        Write-Host "LIBRARY_SEARCH_EMBEDDING_BASE_URL=http://127.0.0.1:$AiPort"
+    }
 
     Write-Step 'Starting Spring Boot application'
     & "$projectRoot\mvnw.cmd" spring-boot:run
+}
+
+function Start-AiService {
+    Write-Step 'Starting local AI service'
+    Start-Process powershell -ArgumentList @(
+        '-NoLogo',
+        '-NoProfile',
+        '-ExecutionPolicy', 'Bypass',
+        '-File', "$projectRoot\scripts\start-ai-service.ps1",
+        '-PythonExe', $AiPythonExe,
+        '-Port', "$AiPort"
+    ) | Out-Null
+    Write-Host "Book AI service started in a new PowerShell window on port $AiPort"
+    if (-not $SkipWait) {
+        Wait-ForHttpEndpoint -Url "http://127.0.0.1:$AiPort/health"
+    }
 }
 
 $resolvedDbPassword = Resolve-DatabasePassword -ProvidedPassword $DbPassword
@@ -103,10 +152,16 @@ switch ($Mode) {
         Start-Dependencies
     }
     'app' {
+        if ($WithAi) {
+            Start-AiService
+        }
         Start-Application -ResolvedDbPassword $resolvedDbPassword
     }
     'all' {
         Start-Dependencies
+        if ($WithAi) {
+            Start-AiService
+        }
         Start-Application -ResolvedDbPassword $resolvedDbPassword
     }
 }
