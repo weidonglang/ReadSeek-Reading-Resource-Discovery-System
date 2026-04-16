@@ -57,7 +57,7 @@ Expected:
 Open:
 
 ```text
-http://localhost:8010/book-service/ui/books.html
+http://localhost:8010/readseek-service/ui/books.html
 ```
 
 Verify:

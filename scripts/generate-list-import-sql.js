@@ -8,8 +8,8 @@ const outputPath = path.join(root, 'scripts', 'generated', 'import_from_list_raw
 
 const DEFAULT_AUTHOR_DATE = '1970-01-01';
 const DEFAULT_COUNTRY = 'Unknown';
-const DEFAULT_AUTHOR_IMAGE = '/book-service/book-covers/default-book-cover.svg';
-const DEFAULT_BOOK_IMAGE = '/book-service/book-covers/default-book-cover.svg';
+const DEFAULT_AUTHOR_IMAGE = '/readseek-service/book-covers/default-book-cover.svg';
+const DEFAULT_BOOK_IMAGE = '/readseek-service/book-covers/default-book-cover.svg';
 const DEFAULT_BOOK_DATE = '2000-01-01';
 const DEFAULT_DESCRIPTION = '';
 const DEFAULT_TOTAL_COPIES = 1;

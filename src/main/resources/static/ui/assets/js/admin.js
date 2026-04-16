@@ -354,6 +354,14 @@ document.addEventListener('DOMContentLoaded', async () => {
   const publisherListSearchInput = document.getElementById('publisher-list-search');
   const tagListSearchInput = document.getElementById('tag-list-search');
 
+  function scrollToEditor(formElement) {
+    const target = formElement?.closest('.admin-card') || formElement;
+    if (!target) return;
+    const topOffset = 96;
+    const targetTop = Math.max(0, target.getBoundingClientRect().top + window.scrollY - topOffset);
+    window.scrollTo({ top: targetTop, behavior: 'smooth' });
+  }
+
   function syncAvailableCopiesPreview() {
     const totalCopies = Math.max(1, Number(totalCopiesInput.value || 1));
     const borrowedCount = Number(totalCopiesInput.dataset.borrowedCount || 0);
@@ -482,7 +490,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.getElementById('book-available-copies').value = book.availableCopies ?? 0;
     totalCopiesInput.dataset.borrowedCount = String(Math.max(0, Number(book.totalCopies ?? 0) - Number(book.availableCopies ?? 0)));
     document.getElementById('book-description').value = book.description || '';
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    scrollToEditor(bookForm);
   }
 
   function editAuthor(id) {
@@ -497,7 +505,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.getElementById('author-gender').value = author.gender || 'MALE';
     document.getElementById('author-image-url').value = author.imageUrl || '';
     document.getElementById('author-description').value = author.description || '';
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    scrollToEditor(authorForm);
   }
 
   function editCategory(id) {
@@ -506,7 +514,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.getElementById('category-id').value = category.id;
     document.getElementById('category-name').value = category.name || '';
     document.getElementById('category-description').value = category.description || '';
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    scrollToEditor(categoryForm);
   }
 
   function editPublisher(id) {
@@ -517,7 +525,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.getElementById('publisher-country').value = publisher.country || '';
     document.getElementById('publisher-website').value = publisher.websiteUrl || '';
     document.getElementById('publisher-description').value = publisher.description || '';
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    scrollToEditor(publisherForm);
   }
 
   function editTag(id) {
@@ -526,7 +534,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.getElementById('tag-id').value = tag.id;
     document.getElementById('tag-name').value = tag.name || '';
     document.getElementById('tag-description').value = tag.description || '';
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    scrollToEditor(tagForm);
   }
 
   async function removeBook(id) {

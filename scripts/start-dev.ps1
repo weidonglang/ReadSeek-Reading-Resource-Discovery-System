@@ -94,8 +94,8 @@ function Start-Dependencies {
     docker compose up -d db elasticsearch
     if (-not $SkipWait) {
         Write-Step 'Waiting for PostgreSQL and Elasticsearch'
-        Wait-ForDockerHealth -ContainerName 'book-recommendation-db'
-        Wait-ForDockerHealth -ContainerName 'book-recommendation-search'
+        Wait-ForDockerHealth -ContainerName 'readseek-db'
+        Wait-ForDockerHealth -ContainerName 'readseek-search'
     }
 }
 

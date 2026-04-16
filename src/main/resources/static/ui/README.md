@@ -5,7 +5,7 @@ This directory contains the built-in static demo frontend for ReadSeek, a readin
 Default entry:
 
 ```text
-http://localhost:8010/book-service/ui/login.html
+http://localhost:8010/readseek-service/ui/login.html
 ```
 
 Main pages:

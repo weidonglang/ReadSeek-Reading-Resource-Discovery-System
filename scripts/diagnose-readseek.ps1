@@ -1,6 +1,6 @@
 [CmdletBinding()]
 param(
-    [string]$BaseUrl = 'http://localhost:8010/book-service',
+    [string]$BaseUrl = 'http://localhost:8010/readseek-service',
     [string]$Email = 'admin@booknook.local',
     [string]$Password = 'Admin123!'
 )
@@ -107,8 +107,8 @@ $loginPageLooksBroken = $loginPage.ok -and (-not $loginPageHasForm -or -not $log
 [pscustomobject]@{
     baseUrl = $BaseUrl
     docker = [pscustomobject]@{
-        postgres = Get-DockerContainerStatus -Name 'book-recommendation-db'
-        elasticsearch = Get-DockerContainerStatus -Name 'book-recommendation-search'
+        postgres = Get-DockerContainerStatus -Name 'readseek-db'
+        elasticsearch = Get-DockerContainerStatus -Name 'readseek-search'
     }
     backend = [pscustomobject]@{
         swaggerOk = $swagger.ok

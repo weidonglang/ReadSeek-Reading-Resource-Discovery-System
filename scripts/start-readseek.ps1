@@ -17,17 +17,17 @@ $ErrorActionPreference = 'Stop'
 $projectRoot = Split-Path -Parent $PSScriptRoot
 Set-Location $projectRoot
 
-$backendProbeUrl = 'http://localhost:8010/book-service/swagger-ui/index.html'
+$backendProbeUrl = 'http://localhost:8010/readseek-service/swagger-ui/index.html'
 $aiHealthUrl = "http://127.0.0.1:$AiPort/health"
 
 function Resolve-StartUrl {
     param([string]$Page)
 
     switch ($Page) {
-        'home' { return 'http://localhost:8010/book-service/ui/index.html' }
-        'search' { return 'http://localhost:8010/book-service/ui/books.html' }
-        'swagger' { return 'http://localhost:8010/book-service/swagger-ui/index.html' }
-        default { return 'http://localhost:8010/book-service/ui/login.html' }
+        'home' { return 'http://localhost:8010/readseek-service/ui/index.html' }
+        'search' { return 'http://localhost:8010/readseek-service/ui/books.html' }
+        'swagger' { return 'http://localhost:8010/readseek-service/swagger-ui/index.html' }
+        default { return 'http://localhost:8010/readseek-service/ui/login.html' }
     }
 }
 
@@ -147,8 +147,8 @@ function Start-DockerDependencies {
     docker compose up -d db elasticsearch
     if (-not $SkipWait) {
         Write-Step 'Waiting for PostgreSQL and Elasticsearch'
-        Wait-ForDockerHealth -ContainerName 'book-recommendation-db'
-        Wait-ForDockerHealth -ContainerName 'book-recommendation-search'
+        Wait-ForDockerHealth -ContainerName 'readseek-db'
+        Wait-ForDockerHealth -ContainerName 'readseek-search'
     }
 }
 

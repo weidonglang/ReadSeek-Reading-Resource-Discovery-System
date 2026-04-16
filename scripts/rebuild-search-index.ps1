@@ -1,6 +1,6 @@
 [CmdletBinding()]
 param(
-    [string]$BaseUrl = 'http://localhost:8010/book-service',
+    [string]$BaseUrl = 'http://localhost:8010/readseek-service',
     [string]$Email = 'admin@booknook.local',
     [string]$Password = 'Admin123!'
 )

@@ -1,6 +1,6 @@
 [CmdletBinding()]
 param(
-    [string]$BaseUrl = 'http://localhost:8010/book-service',
+    [string]$BaseUrl = 'http://localhost:8010/readseek-service',
     [string]$Query = 'Pride and Prejudice',
     [int]$Limit = 8,
     [string]$Email = 'admin@booknook.local',

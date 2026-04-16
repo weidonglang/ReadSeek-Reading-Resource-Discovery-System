@@ -10,10 +10,10 @@
     </parent>
 
     <groupId>com.weidonglang</groupId>
-    <artifactId>book-recommendation-system</artifactId>
+    <artifactId>readseek</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>book-recommendation-system</name>
-    <description>book-recommendation-system</description>
+    <name>readseek</name>
+    <description>ReadSeek reading-resource discovery, hybrid retrieval, explainable recommendation, and evidence-driven QA system</description>
 
     <properties>
         <java.version>17</java.version>
@@ -108,10 +108,14 @@
     </dependencies>
 
     <build>
+        <finalName>readseek-${project.version}</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>com.weidonglang.readseek.ReadSeekApplication</mainClass>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

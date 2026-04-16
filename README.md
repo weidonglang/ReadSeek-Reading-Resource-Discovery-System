@@ -63,7 +63,8 @@ This is a local-development and demo-oriented version, not a production-hardened
 ## Repository Structure
 
 ```text
-src/main/java/com/weidonglang/NewBookRecommendationSystem/
+src/main/java/com/weidonglang/readseek/
+  ReadSeekApplication.java
   config/
   controller/
   dao/
@@ -108,9 +109,9 @@ Or run it from PowerShell:
 This starts:
 - PostgreSQL on `localhost:5043`
 - Elasticsearch on `localhost:9200`
-- Spring Boot on `http://localhost:8010/book-service`
+- Spring Boot on `http://localhost:8010/readseek-service`
 - Local AI service on `http://127.0.0.1:8001`
-- Browser page `http://localhost:8010/book-service/ui/login.html`
+- Browser page `http://localhost:8010/readseek-service/ui/login.html`
 
 Useful switches:
 
@@ -149,19 +150,19 @@ Terminal 2:
 This starts:
 - PostgreSQL on `localhost:5043`
 - Elasticsearch on `localhost:9200`
-- Spring Boot on `http://localhost:8010/book-service`
+- Spring Boot on `http://localhost:8010/readseek-service`
 - Local AI service on `http://127.0.0.1:8001`
 
 Swagger UI:
 
 ```text
-http://localhost:8010/book-service/swagger-ui/index.html
+http://localhost:8010/readseek-service/swagger-ui/index.html
 ```
 
 Frontend search page:
 
 ```text
-http://localhost:8010/book-service/ui/books.html
+http://localhost:8010/readseek-service/ui/books.html
 ```
 
 ### Option C: Docker app container

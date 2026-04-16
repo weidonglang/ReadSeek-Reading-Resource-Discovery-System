@@ -36,4 +36,4 @@ Notes:
 
 - This is additive. It does not truncate existing authors or books.
 - `books.failed.json` is not imported because it only contains unresolved fetch failures, not complete book rows.
-- Blank cover URLs are replaced with `/book-service/book-covers/default-book-cover.svg`.
+- Blank cover URLs are replaced with `/readseek-service/book-covers/default-book-cover.svg`.
