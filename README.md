@@ -1,6 +1,6 @@
 # ReadSeek: Reading Resource Discovery System
 
-面向阅读资源发现的自然语言混合检索、证据驱动问答与可解释推荐关键技术研究与系统实现。
+# 面向阅读资源发现的自然语言混合检索、证据驱动问答与可解释推荐关键技术研究与系统实现。
 
 ReadSeek is a Java-based reading-resource discovery system. It uses books as the current demonstration and experimental resource type, while the system positioning is broader than a traditional library or book management system.
 
