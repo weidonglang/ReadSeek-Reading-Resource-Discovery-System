@@ -7,1282 +7,1282 @@ BEGIN;
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT '倪匡', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT '倪匡', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('倪匡') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Adam Smith', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Adam Smith', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Adam Smith') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Adrian Keith Goldsworthy', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Adrian Keith Goldsworthy', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Adrian Keith Goldsworthy') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Agatha Christie', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Agatha Christie', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Agatha Christie') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Alain De Botton', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Alain De Botton', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Alain De Botton') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Alasdair MacIntyre', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Alasdair MacIntyre', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Alasdair MacIntyre') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Albert Camus', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Albert Camus', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Albert Camus') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Albert Howe Lybyer', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Albert Howe Lybyer', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Albert Howe Lybyer') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Albert John Walford', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Albert John Walford', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Albert John Walford') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Alejandro Cassini', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Alejandro Cassini', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Alejandro Cassini') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Alexander McCall Smith', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Alexander McCall Smith', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Alexander McCall Smith') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Alfred Marshall', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Alfred Marshall', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Alfred Marshall') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Algernon Blackwood', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Algernon Blackwood', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Algernon Blackwood') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Allan Gut', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Allan Gut', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Allan Gut') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Amartya Sen', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Amartya Sen', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Amartya Sen') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Amos Harpaz', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Amos Harpaz', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Amos Harpaz') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Anatole France', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Anatole France', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Anatole France') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Andreas M. Hinz', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Andreas M. Hinz', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Andreas M. Hinz') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Anthony G. Hopwood', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Anthony G. Hopwood', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Anthony G. Hopwood') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Anthony Horowitz', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Anthony Horowitz', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Anthony Horowitz') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Aristotle', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Aristotle', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Aristotle') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Arthur Conan Doyle', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Arthur Conan Doyle', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Arthur Conan Doyle') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Arthur Shavit', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Arthur Shavit', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Arthur Shavit') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Astrid Lindgren', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Astrid Lindgren', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Astrid Lindgren') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Augustine', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Augustine', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Augustine') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Brad Inwood', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Brad Inwood', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Brad Inwood') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Bram Stoker', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Bram Stoker', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Bram Stoker') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Brian Jacques', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Brian Jacques', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Brian Jacques') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Brian M. Stableford', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Brian M. Stableford', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Brian M. Stableford') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Bruno Schulz', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Bruno Schulz', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Bruno Schulz') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Bryan Pfaffenberger', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Bryan Pfaffenberger', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Bryan Pfaffenberger') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Camille Paglia', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Camille Paglia', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Camille Paglia') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Canon Ronald Brownrigg', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Canon Ronald Brownrigg', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Canon Ronald Brownrigg') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Carl Schmitt', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Carl Schmitt', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Carl Schmitt') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Carnegie Library of Pittsburgh', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Carnegie Library of Pittsburgh', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Carnegie Library of Pittsburgh') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Cassandra Clare', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Cassandra Clare', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Cassandra Clare') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Charles Darwin', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Charles Darwin', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Charles Darwin') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Charles Dickens', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Charles Dickens', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Charles Dickens') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Charles Duhigg', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Charles Duhigg', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Charles Duhigg') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Charles H. Talbert', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Charles H. Talbert', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Charles H. Talbert') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Charles Kingsley', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Charles Kingsley', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Charles Kingsley') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Charles Knight', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Charles Knight', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Charles Knight') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Charlotte Brontë', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Charlotte Brontë', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Charlotte Brontë') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Chiara Thumiger', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Chiara Thumiger', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Chiara Thumiger') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Christian N. Madu', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Christian N. Madu', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Christian N. Madu') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Christopher Pike', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Christopher Pike', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Christopher Pike') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Claus Pias', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Claus Pias', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Claus Pias') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Clive Barker', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Clive Barker', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Clive Barker') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Clive Staples Lewis', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Clive Staples Lewis', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Clive Staples Lewis') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Dalai Lama XIV Bstan-ʼdzin-rgya-mtsho', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Dalai Lama XIV Bstan-ʼdzin-rgya-mtsho', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Dalai Lama XIV Bstan-ʼdzin-rgya-mtsho') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Damodar N. Gujarati', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Damodar N. Gujarati', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Damodar N. Gujarati') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Dan Brown', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Dan Brown', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Dan Brown') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Daniel Cohen', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Daniel Cohen', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Daniel Cohen') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Daniel Defoe', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Daniel Defoe', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Daniel Defoe') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Danielle Steel', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Danielle Steel', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Danielle Steel') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'David Balson', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'David Balson', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('David Balson') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'David H. Jonassen', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'David H. Jonassen', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('David H. Jonassen') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'David Herbert Lawrence', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'David Herbert Lawrence', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('David Herbert Lawrence') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'David Hume', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'David Hume', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('David Hume') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'David Kroyanker', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'David Kroyanker', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('David Kroyanker') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'David Ricardo', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'David Ricardo', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('David Ricardo') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'David Semple', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'David Semple', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('David Semple') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Desmond Shum', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Desmond Shum', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Desmond Shum') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Diogenes Laertius', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Diogenes Laertius', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Diogenes Laertius') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Dirk J. Struik', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Dirk J. Struik', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Dirk J. Struik') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Donald Ervin Knuth', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Donald Ervin Knuth', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Donald Ervin Knuth') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'E. Mumford', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'E. Mumford', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('E. Mumford') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Edmund K. Burke', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Edmund K. Burke', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Edmund K. Burke') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Edward O. Wilson', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Edward O. Wilson', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Edward O. Wilson') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Edwin A. Abbott', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Edwin A. Abbott', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Edwin A. Abbott') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Eliyahu M. Goldratt', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Eliyahu M. Goldratt', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Eliyahu M. Goldratt') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Elizabeth Gilbert', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Elizabeth Gilbert', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Elizabeth Gilbert') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Elizabeth Irene Price', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Elizabeth Irene Price', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Elizabeth Irene Price') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Emily Bront?e', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Emily Bront?e', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Emily Bront?e') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Erich Kästner', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Erich Kästner', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Erich Kästner') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Ernst Friedrich Schumacher', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Ernst Friedrich Schumacher', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Ernst Friedrich Schumacher') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Eugene Morlock Emme', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Eugene Morlock Emme', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Eugene Morlock Emme') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Eva Baer', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Eva Baer', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Eva Baer') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Florian Cajori', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Florian Cajori', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Florian Cajori') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Frances M. Epps', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Frances M. Epps', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Frances M. Epps') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Frances Upham', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Frances Upham', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Frances Upham') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Fred Vargas', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Fred Vargas', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Fred Vargas') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Friedrich August Hayek', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Friedrich August Hayek', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Friedrich August Hayek') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Friedrich Nietzsche', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Friedrich Nietzsche', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Friedrich Nietzsche') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Friedrich Wilhelm Nietzsche', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Friedrich Wilhelm Nietzsche', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Friedrich Wilhelm Nietzsche') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Fyodor Dostoyevsky', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Fyodor Dostoyevsky', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Fyodor Dostoyevsky') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'G. Sreeramulu', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'G. Sreeramulu', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('G. Sreeramulu') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Gaston Leroux', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Gaston Leroux', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Gaston Leroux') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Gene H. Golub', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Gene H. Golub', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Gene H. Golub') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Geoffrey A. Hosking', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Geoffrey A. Hosking', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Geoffrey A. Hosking') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Geoffrey Hunter', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Geoffrey Hunter', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Geoffrey Hunter') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Georg Wilhelm Friedrich Hegel', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Georg Wilhelm Friedrich Hegel', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Georg Wilhelm Friedrich Hegel') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'George Bernard Shaw', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'George Bernard Shaw', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('George Bernard Shaw') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Gogol Google Translate', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Gogol Google Translate', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Gogol Google Translate') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Guanzhong Luo', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Guanzhong Luo', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Guanzhong Luo') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Guy Debord', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Guy Debord', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Guy Debord') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Helena Lindholm Schulz', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Helena Lindholm Schulz', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Helena Lindholm Schulz') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Hendrikus Laan', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Hendrikus Laan', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Hendrikus Laan') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Henry M. Stanley', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Henry M. Stanley', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Henry M. Stanley') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Hergé', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Hergé', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Hergé') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Hermann Hesse', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Hermann Hesse', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Hermann Hesse') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Howard Phillips Lovecraft', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Howard Phillips Lovecraft', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Howard Phillips Lovecraft') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Ida Minerva Tarbell', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Ida Minerva Tarbell', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Ida Minerva Tarbell') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Irving Singer', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Irving Singer', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Irving Singer') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Isabel Allende', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Isabel Allende', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Isabel Allende') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'J. E. Lapin', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'J. E. Lapin', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('J. E. Lapin') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'J. K. Rowling', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'J. K. Rowling', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('J. K. Rowling') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'J. P. Verma', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'J. P. Verma', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('J. P. Verma') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'j.r.r. tolkien', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'j.r.r. tolkien', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('j.r.r. tolkien') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Jack Kerouac', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Jack Kerouac', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Jack Kerouac') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Jack London', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Jack London', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Jack London') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Jacques Hebenstreit', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Jacques Hebenstreit', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Jacques Hebenstreit') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'James Joyce', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'James Joyce', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('James Joyce') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'James Matthew Barrie', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'James Matthew Barrie', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('James Matthew Barrie') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'James R. Flynn', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'James R. Flynn', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('James R. Flynn') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Jane Austen', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Jane Austen', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Jane Austen') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Jane Cary Peck', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Jane Cary Peck', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Jane Cary Peck') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Jane Loevinger', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Jane Loevinger', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Jane Loevinger') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Jane Portal', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Jane Portal', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Jane Portal') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Jean Baptiste Say', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Jean Baptiste Say', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Jean Baptiste Say') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Jean Baudrillard', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Jean Baudrillard', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Jean Baudrillard') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Jean Giono', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Jean Giono', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Jean Giono') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Jean Lave', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Jean Lave', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Jean Lave') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Jean-Loup Baer', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Jean-Loup Baer', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Jean-Loup Baer') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Jennette McCurdy', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Jennette McCurdy', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Jennette McCurdy') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Jessica Townsend', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Jessica Townsend', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Jessica Townsend') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Jing Chen', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Jing Chen', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Jing Chen') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Johann Joachim Winckelmann', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Johann Joachim Winckelmann', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Johann Joachim Winckelmann') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Johanna Lindsey', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Johanna Lindsey', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Johanna Lindsey') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Johannes Hirschmeier', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Johannes Hirschmeier', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Johannes Hirschmeier') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'John Aikin', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'John Aikin', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('John Aikin') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'John Boyne', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'John Boyne', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('John Boyne') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'John Dewey', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'John Dewey', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('John Dewey') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'John Gottman', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'John Gottman', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('John Gottman') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'John Grisham', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'John Grisham', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('John Grisham') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'John R. McIntyre', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'John R. McIntyre', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('John R. McIntyre') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'John Ronald Reuel Tolkien', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'John Ronald Reuel Tolkien', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('John Ronald Reuel Tolkien') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'John Ruskin', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'John Ruskin', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('John Ruskin') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Jojo Moyes', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Jojo Moyes', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Jojo Moyes') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Jorunn Jacobsen Buckley', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Jorunn Jacobsen Buckley', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Jorunn Jacobsen Buckley') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Joseph A. Schumpeter', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Joseph A. Schumpeter', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Joseph A. Schumpeter') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Joseph L. Cavinato', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Joseph L. Cavinato', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Joseph L. Cavinato') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Joseph Warren Dauben', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Joseph Warren Dauben', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Joseph Warren Dauben') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Josephine Tey', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Josephine Tey', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Josephine Tey') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Judith McNaught', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Judith McNaught', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Judith McNaught') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Judy Kay', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Judy Kay', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Judy Kay') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Jules Verne', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Jules Verne', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Jules Verne') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Jürgen Habermas', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Jürgen Habermas', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Jürgen Habermas') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Kakuzō Okakura', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Kakuzō Okakura', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Kakuzō Okakura') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Kalyanmoy Deb', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Kalyanmoy Deb', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Kalyanmoy Deb') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Karl Beckson', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Karl Beckson', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Karl Beckson') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Karl Marx', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Karl Marx', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Karl Marx') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Kate Fleet', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Kate Fleet', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Kate Fleet') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Kate Morton', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Kate Morton', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Kate Morton') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Kathryn Allen Rabuzzi', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Kathryn Allen Rabuzzi', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Kathryn Allen Rabuzzi') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Kenneth Grahame', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Kenneth Grahame', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Kenneth Grahame') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Kirk J. Schneider', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Kirk J. Schneider', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Kirk J. Schneider') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Knud Haakonssen', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Knud Haakonssen', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Knud Haakonssen') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Knut Hamsun', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Knut Hamsun', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Knut Hamsun') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Kumari Jayawardena', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Kumari Jayawardena', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Kumari Jayawardena') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'L. Mirsky', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'L. Mirsky', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('L. Mirsky') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Lafcadio Hearn', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Lafcadio Hearn', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Lafcadio Hearn') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Lee Child', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Lee Child', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Lee Child') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Len Jenkin', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Len Jenkin', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Len Jenkin') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Leon Harold Warshay', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Leon Harold Warshay', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Leon Harold Warshay') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Leonardo (da Vinci)', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Leonardo (da Vinci)', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Leonardo (da Vinci)') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Lisa Zunshine', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Lisa Zunshine', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Lisa Zunshine') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Lucius Annaeus Seneca', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Lucius Annaeus Seneca', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Lucius Annaeus Seneca') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Ludwig Wittgenstein', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Ludwig Wittgenstein', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Ludwig Wittgenstein') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Lyman Frank Baum', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Lyman Frank Baum', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Lyman Frank Baum') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'M.P. Feldman', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'M.P. Feldman', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('M.P. Feldman') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Marat Terterov', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Marat Terterov', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Marat Terterov') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Marcus du Sautoy', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Marcus du Sautoy', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Marcus du Sautoy') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Mark Haddon', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Mark Haddon', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Mark Haddon') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Mark Pesce', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Mark Pesce', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Mark Pesce') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Mark Saunders', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Mark Saunders', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Mark Saunders') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Mark Twain', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Mark Twain', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Mark Twain') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Mary Lee Zawadski', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Mary Lee Zawadski', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Mary Lee Zawadski') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Mary Shelley', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Mary Shelley', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Mary Shelley') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Mary Wollstonecraft Shelley', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Mary Wollstonecraft Shelley', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Mary Wollstonecraft Shelley') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Michael Connelly', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Michael Connelly', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Michael Connelly') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Michael White', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Michael White', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Michael White') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Michel Foucault', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Michel Foucault', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Michel Foucault') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Muḥammad ibn Aḥmad Bīrūnī', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Muḥammad ibn Aḥmad Bīrūnī', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Muḥammad ibn Aḥmad Bīrūnī') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Muhammad Umer Chapra', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Muhammad Umer Chapra', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Muhammad Umer Chapra') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Murray Milgate', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Murray Milgate', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Murray Milgate') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Nancy Holder', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Nancy Holder', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Nancy Holder') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Nandan Kamath', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Nandan Kamath', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Nandan Kamath') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Nora Roberts', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Nora Roberts', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Nora Roberts') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Norbert Wiener', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Norbert Wiener', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Norbert Wiener') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Norman K. Denzin', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Norman K. Denzin', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Norman K. Denzin') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Oliver E. Williamson', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Oliver E. Williamson', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Oliver E. Williamson') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Orhan Pamuk', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Orhan Pamuk', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Orhan Pamuk') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Oscar Wilde', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Oscar Wilde', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Oscar Wilde') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'P.D. James', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'P.D. James', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('P.D. James') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Paul Carus', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Paul Carus', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Paul Carus') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Plato', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Plato', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Plato') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Plutarch', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Plutarch', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Plutarch') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Ptolemy', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Ptolemy', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Ptolemy') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'R. Keith Sawyer', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'R. Keith Sawyer', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('R. Keith Sawyer') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Riane Eisler', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Riane Eisler', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Riane Eisler') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Richard B. Stuart', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Richard B. Stuart', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Richard B. Stuart') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Richard Clogg', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Richard Clogg', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Richard Clogg') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Richard H. Thaler', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Richard H. Thaler', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Richard H. Thaler') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Roald Dahl', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Roald Dahl', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Roald Dahl') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Robert Louis Stevenson', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Robert Louis Stevenson', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Robert Louis Stevenson') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Robert Ludlum', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Robert Ludlum', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Robert Ludlum') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Robert Nozick', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Robert Nozick', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Robert Nozick') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Roberto S. Mariano', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Roberto S. Mariano', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Roberto S. Mariano') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Roman Frigg', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Roman Frigg', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Roman Frigg') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Ronald Brownrigg', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Ronald Brownrigg', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Ronald Brownrigg') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Ronald Herbert Sack', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Ronald Herbert Sack', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Ronald Herbert Sack') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Rory C. O''Connor', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Rory C. O''Connor', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Rory C. O''Connor') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Rosanne du Bois Brouwer', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Rosanne du Bois Brouwer', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Rosanne du Bois Brouwer') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Ross Burns', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Ross Burns', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Ross Burns') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Royal Institution of Great Britain', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Royal Institution of Great Britain', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Royal Institution of Great Britain') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Royal Society of Canada', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Royal Society of Canada', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Royal Society of Canada') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Ruth Rendell', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Ruth Rendell', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Ruth Rendell') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Santa Montefiore', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Santa Montefiore', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Santa Montefiore') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Serge Lang', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Serge Lang', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Serge Lang') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Sigmund Freud', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Sigmund Freud', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Sigmund Freud') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Silke Knippschild', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Silke Knippschild', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Silke Knippschild') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Siyuan Liu', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Siyuan Liu', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Siyuan Liu') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Slavoj Žižek', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Slavoj Žižek', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Slavoj Žižek') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Stanley I. Greenspan', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Stanley I. Greenspan', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Stanley I. Greenspan') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Stephen D. Fairbanks', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Stephen D. Fairbanks', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Stephen D. Fairbanks') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Stephen King', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Stephen King', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Stephen King') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Steve Alten', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Steve Alten', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Steve Alten') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Sue Grafton', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Sue Grafton', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Sue Grafton') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Sue Mosher', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Sue Mosher', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Sue Mosher') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Suhas Patankar', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Suhas Patankar', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Suhas Patankar') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Sumathi Ramaswamy', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Sumathi Ramaswamy', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Sumathi Ramaswamy') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Thane Gustafson', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Thane Gustafson', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Thane Gustafson') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Theodor Adorno', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Theodor Adorno', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Theodor Adorno') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Theodore Provder', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Theodore Provder', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Theodore Provder') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Thomas Hardy', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Thomas Hardy', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Thomas Hardy') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Thomas Sherrer Ross Boase', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Thomas Sherrer Ross Boase', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Thomas Sherrer Ross Boase') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Thorstein Veblen', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Thorstein Veblen', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Thorstein Veblen') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Tim Bowler', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Tim Bowler', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Tim Bowler') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Tsering Shakya', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Tsering Shakya', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Tsering Shakya') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'United States. Bureau of International Commerce', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'United States. Bureau of International Commerce', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('United States. Bureau of International Commerce') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Ursula K. Le Guin', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Ursula K. Le Guin', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Ursula K. Le Guin') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Valentina Cuccio', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Valentina Cuccio', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Valentina Cuccio') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Vasiliki Limberis', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Vasiliki Limberis', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Vasiliki Limberis') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Virginia Woolf', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Virginia Woolf', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Virginia Woolf') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Wallace D. Wattles', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Wallace D. Wattles', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Wallace D. Wattles') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Walter Isaacson', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Walter Isaacson', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Walter Isaacson') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'William Fulton', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'William Fulton', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('William Fulton') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'William G. Zikmund', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'William G. Zikmund', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('William G. Zikmund') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'William Henry Giles Kingston', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'William Henry Giles Kingston', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('William Henry Giles Kingston') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'William James', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'William James', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('William James') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'William Smith', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'William Smith', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('William Smith') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Yann Martel', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Yann Martel', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Yann Martel') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Yiu-Wai Chu', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Yiu-Wai Chu', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Yiu-Wai Chu') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Yukio Mishima', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Yukio Mishima', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Yukio Mishima') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.author
 (name, description, birthdate, deathdate, country, age, gender, image_url, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT 'Zhongzhi Shi', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/book-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT 'Zhongzhi Shi', '', DATE '1970-01-01', NULL, 'Unknown', 0, 'OTHERS', '/readseek-service/book-covers/default-book-cover.svg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE NOT EXISTS (SELECT 1 FROM public.author WHERE lower(name) = lower('Zhongzhi Shi') AND marked_as_deleted = FALSE);
 
 INSERT INTO public.book_category
@@ -1372,7 +1372,7 @@ ON CONFLICT (name) DO NOTHING;
 
 INSERT INTO public.book
 (author_id, category_id, name, price, rate, users_rate_count, pages_number, reading_duration, publish_date, description, image_url, total_copies, available_copies, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT (SELECT id FROM public.author WHERE lower(name) = lower('倪匡') AND marked_as_deleted = FALSE ORDER BY id LIMIT 1), (SELECT id FROM public.book_category WHERE name = 'Action and Adventure' AND marked_as_deleted = FALSE ORDER BY id LIMIT 1), '追空', 0, 0, 0, 221, 442, DATE '2004-01-01', '', '/book-service/book-covers/default-book-cover.svg', 1, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT (SELECT id FROM public.author WHERE lower(name) = lower('倪匡') AND marked_as_deleted = FALSE ORDER BY id LIMIT 1), (SELECT id FROM public.book_category WHERE name = 'Action and Adventure' AND marked_as_deleted = FALSE ORDER BY id LIMIT 1), '追空', 0, 0, 0, 221, 442, DATE '2004-01-01', '', '/readseek-service/book-covers/default-book-cover.svg', 1, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE (SELECT id FROM public.author WHERE lower(name) = lower('倪匡') AND marked_as_deleted = FALSE ORDER BY id LIMIT 1) IS NOT NULL
   AND (SELECT id FROM public.book_category WHERE name = 'Action and Adventure' AND marked_as_deleted = FALSE ORDER BY id LIMIT 1) IS NOT NULL
   AND NOT EXISTS (
@@ -1482,7 +1482,7 @@ WHERE (SELECT id FROM public.author WHERE lower(name) = lower('Brian Jacques') A
 
 INSERT INTO public.book
 (author_id, category_id, name, price, rate, users_rate_count, pages_number, reading_duration, publish_date, description, image_url, total_copies, available_copies, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT (SELECT id FROM public.author WHERE lower(name) = lower('Hergé') AND marked_as_deleted = FALSE ORDER BY id LIMIT 1), (SELECT id FROM public.book_category WHERE name = 'Action and Adventure' AND marked_as_deleted = FALSE ORDER BY id LIMIT 1), 'Tintin in America', 0, 0, 0, 100, 200, DATE '1979-11-30', 'The classic graphic novel. Tintin comes to the U.S.A. to clean up the mean streets of Chicago but ends up in the wild west! Will Tintin make it back home?', '/book-service/book-covers/default-book-cover.svg', 1, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT (SELECT id FROM public.author WHERE lower(name) = lower('Hergé') AND marked_as_deleted = FALSE ORDER BY id LIMIT 1), (SELECT id FROM public.book_category WHERE name = 'Action and Adventure' AND marked_as_deleted = FALSE ORDER BY id LIMIT 1), 'Tintin in America', 0, 0, 0, 100, 200, DATE '1979-11-30', 'The classic graphic novel. Tintin comes to the U.S.A. to clean up the mean streets of Chicago but ends up in the wild west! Will Tintin make it back home?', '/readseek-service/book-covers/default-book-cover.svg', 1, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE (SELECT id FROM public.author WHERE lower(name) = lower('Hergé') AND marked_as_deleted = FALSE ORDER BY id LIMIT 1) IS NOT NULL
   AND (SELECT id FROM public.book_category WHERE name = 'Action and Adventure' AND marked_as_deleted = FALSE ORDER BY id LIMIT 1) IS NOT NULL
   AND NOT EXISTS (
@@ -1889,7 +1889,7 @@ WHERE (SELECT id FROM public.author WHERE lower(name) = lower('Plutarch') AND ma
 
 INSERT INTO public.book
 (author_id, category_id, name, price, rate, users_rate_count, pages_number, reading_duration, publish_date, description, image_url, total_copies, available_copies, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT (SELECT id FROM public.author WHERE lower(name) = lower('Plutarch') AND marked_as_deleted = FALSE ORDER BY id LIMIT 1), (SELECT id FROM public.book_category WHERE name = 'Biography' AND marked_as_deleted = FALSE ORDER BY id LIMIT 1), 'The Lives of the Noble Grecians and Romanes', 0, 0, 0, 100, 200, DATE '1928-01-01', '', '/book-service/book-covers/default-book-cover.svg', 1, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT (SELECT id FROM public.author WHERE lower(name) = lower('Plutarch') AND marked_as_deleted = FALSE ORDER BY id LIMIT 1), (SELECT id FROM public.book_category WHERE name = 'Biography' AND marked_as_deleted = FALSE ORDER BY id LIMIT 1), 'The Lives of the Noble Grecians and Romanes', 0, 0, 0, 100, 200, DATE '1928-01-01', '', '/readseek-service/book-covers/default-book-cover.svg', 1, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE (SELECT id FROM public.author WHERE lower(name) = lower('Plutarch') AND marked_as_deleted = FALSE ORDER BY id LIMIT 1) IS NOT NULL
   AND (SELECT id FROM public.book_category WHERE name = 'Biography' AND marked_as_deleted = FALSE ORDER BY id LIMIT 1) IS NOT NULL
   AND NOT EXISTS (
@@ -1922,7 +1922,7 @@ WHERE (SELECT id FROM public.author WHERE lower(name) = lower('Canon Ronald Brow
 
 INSERT INTO public.book
 (author_id, category_id, name, price, rate, users_rate_count, pages_number, reading_duration, publish_date, description, image_url, total_copies, available_copies, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT (SELECT id FROM public.author WHERE lower(name) = lower('Anthony G. Hopwood') AND marked_as_deleted = FALSE ORDER BY id LIMIT 1), (SELECT id FROM public.book_category WHERE name = 'Business' AND marked_as_deleted = FALSE ORDER BY id LIMIT 1), 'Accounting for Sustainability', 0, 0, 0, 100, 200, DATE '1988-01-01', '', '/book-service/book-covers/default-book-cover.svg', 1, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT (SELECT id FROM public.author WHERE lower(name) = lower('Anthony G. Hopwood') AND marked_as_deleted = FALSE ORDER BY id LIMIT 1), (SELECT id FROM public.book_category WHERE name = 'Business' AND marked_as_deleted = FALSE ORDER BY id LIMIT 1), 'Accounting for Sustainability', 0, 0, 0, 100, 200, DATE '1988-01-01', '', '/readseek-service/book-covers/default-book-cover.svg', 1, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE (SELECT id FROM public.author WHERE lower(name) = lower('Anthony G. Hopwood') AND marked_as_deleted = FALSE ORDER BY id LIMIT 1) IS NOT NULL
   AND (SELECT id FROM public.book_category WHERE name = 'Business' AND marked_as_deleted = FALSE ORDER BY id LIMIT 1) IS NOT NULL
   AND NOT EXISTS (
@@ -1944,7 +1944,7 @@ WHERE (SELECT id FROM public.author WHERE lower(name) = lower('John R. McIntyre'
 
 INSERT INTO public.book
 (author_id, category_id, name, price, rate, users_rate_count, pages_number, reading_duration, publish_date, description, image_url, total_copies, available_copies, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT (SELECT id FROM public.author WHERE lower(name) = lower('William G. Zikmund') AND marked_as_deleted = FALSE ORDER BY id LIMIT 1), (SELECT id FROM public.book_category WHERE name = 'Business' AND marked_as_deleted = FALSE ORDER BY id LIMIT 1), 'Business Research Methods', 0, 0, 0, 776, 1552, DATE '1994-01-01', '', '/book-service/book-covers/default-book-cover.svg', 1, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT (SELECT id FROM public.author WHERE lower(name) = lower('William G. Zikmund') AND marked_as_deleted = FALSE ORDER BY id LIMIT 1), (SELECT id FROM public.book_category WHERE name = 'Business' AND marked_as_deleted = FALSE ORDER BY id LIMIT 1), 'Business Research Methods', 0, 0, 0, 776, 1552, DATE '1994-01-01', '', '/readseek-service/book-covers/default-book-cover.svg', 1, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE (SELECT id FROM public.author WHERE lower(name) = lower('William G. Zikmund') AND marked_as_deleted = FALSE ORDER BY id LIMIT 1) IS NOT NULL
   AND (SELECT id FROM public.book_category WHERE name = 'Business' AND marked_as_deleted = FALSE ORDER BY id LIMIT 1) IS NOT NULL
   AND NOT EXISTS (
@@ -2109,7 +2109,7 @@ WHERE (SELECT id FROM public.author WHERE lower(name) = lower('Jing Chen') AND m
 
 INSERT INTO public.book
 (author_id, category_id, name, price, rate, users_rate_count, pages_number, reading_duration, publish_date, description, image_url, total_copies, available_copies, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT (SELECT id FROM public.author WHERE lower(name) = lower('Riane Eisler') AND marked_as_deleted = FALSE ORDER BY id LIMIT 1), (SELECT id FROM public.book_category WHERE name = 'Business' AND marked_as_deleted = FALSE ORDER BY id LIMIT 1), 'The Real Wealth of Nations', 0, 0, 0, 600, 1200, DATE '2017-05-23', 'From the author of the bestselling classic The Chalice and the Blade, The Real Wealth of Nations proposes a dramatic new economic model that could help resolve many of the most critical problems we face today, and offers concrete steps for putting this model into practice.Adam Smith''s The Wealth of Nations provided the first, most influential and lasting explanation of the workings of modern economics. But with his focus on ''''''''the market'''''''' as the best mechanism for producing and distributing the necessities of life, Smith''s concepts only told part of the story, leading to flawed economic models that devalue activities that fall outside of the market''s parameters of buying and selling. The real wealth of nations, Riane Eisler argues, is not merely financial, but includes the contributions of people and our natural environment. Here, Eisler goes beyond the market to reexamine economics from a larger perspective-and shows that we must give visibility and value to the socially andeconomically essential work of caring for people and the planet if we are to meet the enormous challenges we are facing. Most importantly, she provides practical proposals for new economic inventions-new measures, policies, rules, and practices-to bring about a caring economics that fulfills human needs.''''''''Eisler delivers another impressive work that''s remarkably well referenced, well argued, insightful, and hopeful', '/book-service/book-covers/default-book-cover.svg', 1, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT (SELECT id FROM public.author WHERE lower(name) = lower('Riane Eisler') AND marked_as_deleted = FALSE ORDER BY id LIMIT 1), (SELECT id FROM public.book_category WHERE name = 'Business' AND marked_as_deleted = FALSE ORDER BY id LIMIT 1), 'The Real Wealth of Nations', 0, 0, 0, 600, 1200, DATE '2017-05-23', 'From the author of the bestselling classic The Chalice and the Blade, The Real Wealth of Nations proposes a dramatic new economic model that could help resolve many of the most critical problems we face today, and offers concrete steps for putting this model into practice.Adam Smith''s The Wealth of Nations provided the first, most influential and lasting explanation of the workings of modern economics. But with his focus on ''''''''the market'''''''' as the best mechanism for producing and distributing the necessities of life, Smith''s concepts only told part of the story, leading to flawed economic models that devalue activities that fall outside of the market''s parameters of buying and selling. The real wealth of nations, Riane Eisler argues, is not merely financial, but includes the contributions of people and our natural environment. Here, Eisler goes beyond the market to reexamine economics from a larger perspective-and shows that we must give visibility and value to the socially andeconomically essential work of caring for people and the planet if we are to meet the enormous challenges we are facing. Most importantly, she provides practical proposals for new economic inventions-new measures, policies, rules, and practices-to bring about a caring economics that fulfills human needs.''''''''Eisler delivers another impressive work that''s remarkably well referenced, well argued, insightful, and hopeful', '/readseek-service/book-covers/default-book-cover.svg', 1, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE (SELECT id FROM public.author WHERE lower(name) = lower('Riane Eisler') AND marked_as_deleted = FALSE ORDER BY id LIMIT 1) IS NOT NULL
   AND (SELECT id FROM public.book_category WHERE name = 'Business' AND marked_as_deleted = FALSE ORDER BY id LIMIT 1) IS NOT NULL
   AND NOT EXISTS (
@@ -2131,7 +2131,7 @@ WHERE (SELECT id FROM public.author WHERE lower(name) = lower('Thorstein Veblen'
 
 INSERT INTO public.book
 (author_id, category_id, name, price, rate, users_rate_count, pages_number, reading_duration, publish_date, description, image_url, total_copies, available_copies, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT (SELECT id FROM public.author WHERE lower(name) = lower('Roberto S. Mariano') AND marked_as_deleted = FALSE ORDER BY id LIMIT 1), (SELECT id FROM public.book_category WHERE name = 'Computer Science' AND marked_as_deleted = FALSE ORDER BY id LIMIT 1), 'Advances in Statistical Analysis and Statistical Computing', 0, 0, 0, 100, 200, DATE '1986-01-01', '', '/book-service/book-covers/default-book-cover.svg', 1, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT (SELECT id FROM public.author WHERE lower(name) = lower('Roberto S. Mariano') AND marked_as_deleted = FALSE ORDER BY id LIMIT 1), (SELECT id FROM public.book_category WHERE name = 'Computer Science' AND marked_as_deleted = FALSE ORDER BY id LIMIT 1), 'Advances in Statistical Analysis and Statistical Computing', 0, 0, 0, 100, 200, DATE '1986-01-01', '', '/readseek-service/book-covers/default-book-cover.svg', 1, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE (SELECT id FROM public.author WHERE lower(name) = lower('Roberto S. Mariano') AND marked_as_deleted = FALSE ORDER BY id LIMIT 1) IS NOT NULL
   AND (SELECT id FROM public.book_category WHERE name = 'Computer Science' AND marked_as_deleted = FALSE ORDER BY id LIMIT 1) IS NOT NULL
   AND NOT EXISTS (
@@ -2164,7 +2164,7 @@ WHERE (SELECT id FROM public.author WHERE lower(name) = lower('Theodore Provder'
 
 INSERT INTO public.book
 (author_id, category_id, name, price, rate, users_rate_count, pages_number, reading_duration, publish_date, description, image_url, total_copies, available_copies, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT (SELECT id FROM public.author WHERE lower(name) = lower('Bryan Pfaffenberger') AND marked_as_deleted = FALSE ORDER BY id LIMIT 1), (SELECT id FROM public.book_category WHERE name = 'Computer Science' AND marked_as_deleted = FALSE ORDER BY id LIMIT 1), 'Computers in Your Future 2003', 0, 0, 0, 100, 200, DATE '1995-01-01', '', '/book-service/book-covers/default-book-cover.svg', 1, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT (SELECT id FROM public.author WHERE lower(name) = lower('Bryan Pfaffenberger') AND marked_as_deleted = FALSE ORDER BY id LIMIT 1), (SELECT id FROM public.book_category WHERE name = 'Computer Science' AND marked_as_deleted = FALSE ORDER BY id LIMIT 1), 'Computers in Your Future 2003', 0, 0, 0, 100, 200, DATE '1995-01-01', '', '/readseek-service/book-covers/default-book-cover.svg', 1, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE (SELECT id FROM public.author WHERE lower(name) = lower('Bryan Pfaffenberger') AND marked_as_deleted = FALSE ORDER BY id LIMIT 1) IS NOT NULL
   AND (SELECT id FROM public.book_category WHERE name = 'Computer Science' AND marked_as_deleted = FALSE ORDER BY id LIMIT 1) IS NOT NULL
   AND NOT EXISTS (
@@ -2274,7 +2274,7 @@ WHERE (SELECT id FROM public.author WHERE lower(name) = lower('Mark Pesce') AND 
 
 INSERT INTO public.book
 (author_id, category_id, name, price, rate, users_rate_count, pages_number, reading_duration, publish_date, description, image_url, total_copies, available_copies, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT (SELECT id FROM public.author WHERE lower(name) = lower('Daniel Cohen') AND marked_as_deleted = FALSE ORDER BY id LIMIT 1), (SELECT id FROM public.book_category WHERE name = 'Computer Science' AND marked_as_deleted = FALSE ORDER BY id LIMIT 1), 'The Simon & Schuster Question & Answer Book, Computers', 0, 0, 0, 100, 200, DATE '1986-09-07', 'Includes questions and answers about United States geography, climate, history, places of interest, people, culture, and other topics.', '/book-service/book-covers/default-book-cover.svg', 1, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT (SELECT id FROM public.author WHERE lower(name) = lower('Daniel Cohen') AND marked_as_deleted = FALSE ORDER BY id LIMIT 1), (SELECT id FROM public.book_category WHERE name = 'Computer Science' AND marked_as_deleted = FALSE ORDER BY id LIMIT 1), 'The Simon & Schuster Question & Answer Book, Computers', 0, 0, 0, 100, 200, DATE '1986-09-07', 'Includes questions and answers about United States geography, climate, history, places of interest, people, culture, and other topics.', '/readseek-service/book-covers/default-book-cover.svg', 1, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE (SELECT id FROM public.author WHERE lower(name) = lower('Daniel Cohen') AND marked_as_deleted = FALSE ORDER BY id LIMIT 1) IS NOT NULL
   AND (SELECT id FROM public.book_category WHERE name = 'Computer Science' AND marked_as_deleted = FALSE ORDER BY id LIMIT 1) IS NOT NULL
   AND NOT EXISTS (
@@ -2285,7 +2285,7 @@ WHERE (SELECT id FROM public.author WHERE lower(name) = lower('Daniel Cohen') AN
 
 INSERT INTO public.book
 (author_id, category_id, name, price, rate, users_rate_count, pages_number, reading_duration, publish_date, description, image_url, total_copies, available_copies, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT (SELECT id FROM public.author WHERE lower(name) = lower('Claus Pias') AND marked_as_deleted = FALSE ORDER BY id LIMIT 1), (SELECT id FROM public.book_category WHERE name = 'Computer Science' AND marked_as_deleted = FALSE ORDER BY id LIMIT 1), 'Zukünfte des Computers', 0, 0, 0, 304, 608, DATE '2005-01-01', '', '/book-service/book-covers/default-book-cover.svg', 1, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT (SELECT id FROM public.author WHERE lower(name) = lower('Claus Pias') AND marked_as_deleted = FALSE ORDER BY id LIMIT 1), (SELECT id FROM public.book_category WHERE name = 'Computer Science' AND marked_as_deleted = FALSE ORDER BY id LIMIT 1), 'Zukünfte des Computers', 0, 0, 0, 304, 608, DATE '2005-01-01', '', '/readseek-service/book-covers/default-book-cover.svg', 1, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE (SELECT id FROM public.author WHERE lower(name) = lower('Claus Pias') AND marked_as_deleted = FALSE ORDER BY id LIMIT 1) IS NOT NULL
   AND (SELECT id FROM public.book_category WHERE name = 'Computer Science' AND marked_as_deleted = FALSE ORDER BY id LIMIT 1) IS NOT NULL
   AND NOT EXISTS (
@@ -2428,7 +2428,7 @@ WHERE (SELECT id FROM public.author WHERE lower(name) = lower('Ernst Friedrich S
 
 INSERT INTO public.book
 (author_id, category_id, name, price, rate, users_rate_count, pages_number, reading_duration, publish_date, description, image_url, total_copies, available_copies, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT (SELECT id FROM public.author WHERE lower(name) = lower('Knud Haakonssen') AND marked_as_deleted = FALSE ORDER BY id LIMIT 1), (SELECT id FROM public.book_category WHERE name = 'Economics' AND marked_as_deleted = FALSE ORDER BY id LIMIT 1), 'The Cambridge Companion to Adam Smith', 0, 0, 0, 100, 200, DATE '2005-01-01', '', '/book-service/book-covers/default-book-cover.svg', 1, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT (SELECT id FROM public.author WHERE lower(name) = lower('Knud Haakonssen') AND marked_as_deleted = FALSE ORDER BY id LIMIT 1), (SELECT id FROM public.book_category WHERE name = 'Economics' AND marked_as_deleted = FALSE ORDER BY id LIMIT 1), 'The Cambridge Companion to Adam Smith', 0, 0, 0, 100, 200, DATE '2005-01-01', '', '/readseek-service/book-covers/default-book-cover.svg', 1, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE (SELECT id FROM public.author WHERE lower(name) = lower('Knud Haakonssen') AND marked_as_deleted = FALSE ORDER BY id LIMIT 1) IS NOT NULL
   AND (SELECT id FROM public.book_category WHERE name = 'Economics' AND marked_as_deleted = FALSE ORDER BY id LIMIT 1) IS NOT NULL
   AND NOT EXISTS (
@@ -2461,7 +2461,7 @@ WHERE (SELECT id FROM public.author WHERE lower(name) = lower('David Ricardo') A
 
 INSERT INTO public.book
 (author_id, category_id, name, price, rate, users_rate_count, pages_number, reading_duration, publish_date, description, image_url, total_copies, available_copies, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT (SELECT id FROM public.author WHERE lower(name) = lower('Friedrich August Hayek') AND marked_as_deleted = FALSE ORDER BY id LIMIT 1), (SELECT id FROM public.book_category WHERE name = 'Economics' AND marked_as_deleted = FALSE ORDER BY id LIMIT 1), 'The Road to Serfdom', 0, 0, 0, 100, 200, DATE '2007-03-30', 'An unimpeachable classic work in political philosophy, intellectual and cultural history, and economics, The Road to Serfdom has inspired and infuriated politicians, scholars, and general readers for half a century. Originally published in 1944—when Eleanor Roosevelt supported the efforts of Stalin, and Albert Einstein subscribed lock, stock, and barrel to the socialist program—The Road to Serfdom was seen as heretical for its passionate warning against the dangers of state control over the means of production. For F. A. Hayek, the collectivist idea of empowering government with increasing economic control would lead not to a utopia but to the horrors of Nazi Germany and Fascist Italy. First published by the University of Chicago Press on September 18, 1944, The Road to Serfdom garnered immediate, widespread attention. The first printing of 2,000 copies was exhausted instantly, and within six months more than 30,000 books were sold. In April 1945, Reader’s Digest published a condensed version of the book, and soon thereafter the Book-of-the-Month Club distributed this edition to more than 600,000 readers. A perennial best seller, the book has sold 400,000 copies in the United States alone and has been translated into more than twenty languages, along the way becoming one of the most important and influential books of the century. With this new edition, The Road to Serfdom takes its place in the series The Collected Works of F. A. Hayek. The volume includes a foreword by series editor and leading Hayek scholar Bruce Caldwell explaining the book''s origins and publishing history and assessing common misinterpretations of Hayek''s thought. Caldwell has also standardized and corrected Hayek''s references and added helpful new explanatory notes. Supplemented with an appendix of related materials ranging from prepublication reports on the initial manuscript to forewords to earlier editions by John Chamberlain, Milton Friedman, and Hayek himself, this new edition of The Road to Serfdom will be the definitive version of Friedrich Hayek''s enduring masterwork.', '/book-service/book-covers/default-book-cover.svg', 1, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT (SELECT id FROM public.author WHERE lower(name) = lower('Friedrich August Hayek') AND marked_as_deleted = FALSE ORDER BY id LIMIT 1), (SELECT id FROM public.book_category WHERE name = 'Economics' AND marked_as_deleted = FALSE ORDER BY id LIMIT 1), 'The Road to Serfdom', 0, 0, 0, 100, 200, DATE '2007-03-30', 'An unimpeachable classic work in political philosophy, intellectual and cultural history, and economics, The Road to Serfdom has inspired and infuriated politicians, scholars, and general readers for half a century. Originally published in 1944—when Eleanor Roosevelt supported the efforts of Stalin, and Albert Einstein subscribed lock, stock, and barrel to the socialist program—The Road to Serfdom was seen as heretical for its passionate warning against the dangers of state control over the means of production. For F. A. Hayek, the collectivist idea of empowering government with increasing economic control would lead not to a utopia but to the horrors of Nazi Germany and Fascist Italy. First published by the University of Chicago Press on September 18, 1944, The Road to Serfdom garnered immediate, widespread attention. The first printing of 2,000 copies was exhausted instantly, and within six months more than 30,000 books were sold. In April 1945, Reader’s Digest published a condensed version of the book, and soon thereafter the Book-of-the-Month Club distributed this edition to more than 600,000 readers. A perennial best seller, the book has sold 400,000 copies in the United States alone and has been translated into more than twenty languages, along the way becoming one of the most important and influential books of the century. With this new edition, The Road to Serfdom takes its place in the series The Collected Works of F. A. Hayek. The volume includes a foreword by series editor and leading Hayek scholar Bruce Caldwell explaining the book''s origins and publishing history and assessing common misinterpretations of Hayek''s thought. Caldwell has also standardized and corrected Hayek''s references and added helpful new explanatory notes. Supplemented with an appendix of related materials ranging from prepublication reports on the initial manuscript to forewords to earlier editions by John Chamberlain, Milton Friedman, and Hayek himself, this new edition of The Road to Serfdom will be the definitive version of Friedrich Hayek''s enduring masterwork.', '/readseek-service/book-covers/default-book-cover.svg', 1, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE (SELECT id FROM public.author WHERE lower(name) = lower('Friedrich August Hayek') AND marked_as_deleted = FALSE ORDER BY id LIMIT 1) IS NOT NULL
   AND (SELECT id FROM public.book_category WHERE name = 'Economics' AND marked_as_deleted = FALSE ORDER BY id LIMIT 1) IS NOT NULL
   AND NOT EXISTS (
@@ -2582,7 +2582,7 @@ WHERE (SELECT id FROM public.author WHERE lower(name) = lower('Astrid Lindgren')
 
 INSERT INTO public.book
 (author_id, category_id, name, price, rate, users_rate_count, pages_number, reading_duration, publish_date, description, image_url, total_copies, available_copies, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT (SELECT id FROM public.author WHERE lower(name) = lower('John Ronald Reuel Tolkien') AND marked_as_deleted = FALSE ORDER BY id LIMIT 1), (SELECT id FROM public.book_category WHERE name = 'Fantasy' AND marked_as_deleted = FALSE ORDER BY id LIMIT 1), 'The Fellowship of the Ring', 0, 0, 0, 423, 846, DATE '1971-01-01', '', '/book-service/book-covers/default-book-cover.svg', 1, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT (SELECT id FROM public.author WHERE lower(name) = lower('John Ronald Reuel Tolkien') AND marked_as_deleted = FALSE ORDER BY id LIMIT 1), (SELECT id FROM public.book_category WHERE name = 'Fantasy' AND marked_as_deleted = FALSE ORDER BY id LIMIT 1), 'The Fellowship of the Ring', 0, 0, 0, 423, 846, DATE '1971-01-01', '', '/readseek-service/book-covers/default-book-cover.svg', 1, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE (SELECT id FROM public.author WHERE lower(name) = lower('John Ronald Reuel Tolkien') AND marked_as_deleted = FALSE ORDER BY id LIMIT 1) IS NOT NULL
   AND (SELECT id FROM public.book_category WHERE name = 'Fantasy' AND marked_as_deleted = FALSE ORDER BY id LIMIT 1) IS NOT NULL
   AND NOT EXISTS (
@@ -2934,7 +2934,7 @@ WHERE (SELECT id FROM public.author WHERE lower(name) = lower('Sigmund Freud') A
 
 INSERT INTO public.book
 (author_id, category_id, name, price, rate, users_rate_count, pages_number, reading_duration, publish_date, description, image_url, total_copies, available_copies, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT (SELECT id FROM public.author WHERE lower(name) = lower('Ronald Herbert Sack') AND marked_as_deleted = FALSE ORDER BY id LIMIT 1), (SELECT id FROM public.book_category WHERE name = 'History' AND marked_as_deleted = FALSE ORDER BY id LIMIT 1), 'Images of Nebuchadnezzar', 0, 0, 0, 100, 200, DATE '2004-01-01', '', '/book-service/book-covers/default-book-cover.svg', 1, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT (SELECT id FROM public.author WHERE lower(name) = lower('Ronald Herbert Sack') AND marked_as_deleted = FALSE ORDER BY id LIMIT 1), (SELECT id FROM public.book_category WHERE name = 'History' AND marked_as_deleted = FALSE ORDER BY id LIMIT 1), 'Images of Nebuchadnezzar', 0, 0, 0, 100, 200, DATE '2004-01-01', '', '/readseek-service/book-covers/default-book-cover.svg', 1, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE (SELECT id FROM public.author WHERE lower(name) = lower('Ronald Herbert Sack') AND marked_as_deleted = FALSE ORDER BY id LIMIT 1) IS NOT NULL
   AND (SELECT id FROM public.book_category WHERE name = 'History' AND marked_as_deleted = FALSE ORDER BY id LIMIT 1) IS NOT NULL
   AND NOT EXISTS (
@@ -3583,7 +3583,7 @@ WHERE (SELECT id FROM public.author WHERE lower(name) = lower('Orhan Pamuk') AND
 
 INSERT INTO public.book
 (author_id, category_id, name, price, rate, users_rate_count, pages_number, reading_duration, publish_date, description, image_url, total_copies, available_copies, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT (SELECT id FROM public.author WHERE lower(name) = lower('Agatha Christie') AND marked_as_deleted = FALSE ORDER BY id LIMIT 1), (SELECT id FROM public.book_category WHERE name = 'Mystery' AND marked_as_deleted = FALSE ORDER BY id LIMIT 1), 'QBD Murder on the Orient Express', 0, 0, 0, 100, 200, DATE '2015-06-08', '', '/book-service/book-covers/default-book-cover.svg', 1, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT (SELECT id FROM public.author WHERE lower(name) = lower('Agatha Christie') AND marked_as_deleted = FALSE ORDER BY id LIMIT 1), (SELECT id FROM public.book_category WHERE name = 'Mystery' AND marked_as_deleted = FALSE ORDER BY id LIMIT 1), 'QBD Murder on the Orient Express', 0, 0, 0, 100, 200, DATE '2015-06-08', '', '/readseek-service/book-covers/default-book-cover.svg', 1, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE (SELECT id FROM public.author WHERE lower(name) = lower('Agatha Christie') AND marked_as_deleted = FALSE ORDER BY id LIMIT 1) IS NOT NULL
   AND (SELECT id FROM public.book_category WHERE name = 'Mystery' AND marked_as_deleted = FALSE ORDER BY id LIMIT 1) IS NOT NULL
   AND NOT EXISTS (
@@ -3616,7 +3616,7 @@ WHERE (SELECT id FROM public.author WHERE lower(name) = lower('P.D. James') AND 
 
 INSERT INTO public.book
 (author_id, category_id, name, price, rate, users_rate_count, pages_number, reading_duration, publish_date, description, image_url, total_copies, available_copies, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT (SELECT id FROM public.author WHERE lower(name) = lower('Mark Haddon') AND marked_as_deleted = FALSE ORDER BY id LIMIT 1), (SELECT id FROM public.book_category WHERE name = 'Mystery' AND marked_as_deleted = FALSE ORDER BY id LIMIT 1), 'The Curious Incident of the Dog in the Night-time', 0, 0, 0, 271, 542, DATE '2004-01-01', 'Narrated by a 15-year-old autistic savant obsessed with Sherlock Holmes, this dazzling novel weaves together an old-fashioned mystery, a contemporary coming-of-age story, and a fascinating excursion into a mind incapable of processing emotions.', '/book-service/book-covers/default-book-cover.svg', 1, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT (SELECT id FROM public.author WHERE lower(name) = lower('Mark Haddon') AND marked_as_deleted = FALSE ORDER BY id LIMIT 1), (SELECT id FROM public.book_category WHERE name = 'Mystery' AND marked_as_deleted = FALSE ORDER BY id LIMIT 1), 'The Curious Incident of the Dog in the Night-time', 0, 0, 0, 271, 542, DATE '2004-01-01', 'Narrated by a 15-year-old autistic savant obsessed with Sherlock Holmes, this dazzling novel weaves together an old-fashioned mystery, a contemporary coming-of-age story, and a fascinating excursion into a mind incapable of processing emotions.', '/readseek-service/book-covers/default-book-cover.svg', 1, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE (SELECT id FROM public.author WHERE lower(name) = lower('Mark Haddon') AND marked_as_deleted = FALSE ORDER BY id LIMIT 1) IS NOT NULL
   AND (SELECT id FROM public.book_category WHERE name = 'Mystery' AND marked_as_deleted = FALSE ORDER BY id LIMIT 1) IS NOT NULL
   AND NOT EXISTS (
@@ -3682,7 +3682,7 @@ WHERE (SELECT id FROM public.author WHERE lower(name) = lower('Len Jenkin') AND 
 
 INSERT INTO public.book
 (author_id, category_id, name, price, rate, users_rate_count, pages_number, reading_duration, publish_date, description, image_url, total_copies, available_copies, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT (SELECT id FROM public.author WHERE lower(name) = lower('Michael Connelly') AND marked_as_deleted = FALSE ORDER BY id LIMIT 1), (SELECT id FROM public.book_category WHERE name = 'Mystery' AND marked_as_deleted = FALSE ORDER BY id LIMIT 1), 'The Narrows', 0, 0, 0, 100, 200, DATE '2010-01-01', 'FBI agent Rachel Walling gets the call that tells her the Poet has surfaced. She has never forgotten the serial killer who wove lines of poetry in his hideous crimes. Former LAPD detective Harry Bosch gets a call too, from the widow of an old friend. Her husband''s death seems natural, but his ties to the hunt for the Poet make Bosch dig deep. Arriving at a derelict spot in the California desert Bosch joins forces with Rachel. Police procedural.', '/book-service/book-covers/default-book-cover.svg', 1, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT (SELECT id FROM public.author WHERE lower(name) = lower('Michael Connelly') AND marked_as_deleted = FALSE ORDER BY id LIMIT 1), (SELECT id FROM public.book_category WHERE name = 'Mystery' AND marked_as_deleted = FALSE ORDER BY id LIMIT 1), 'The Narrows', 0, 0, 0, 100, 200, DATE '2010-01-01', 'FBI agent Rachel Walling gets the call that tells her the Poet has surfaced. She has never forgotten the serial killer who wove lines of poetry in his hideous crimes. Former LAPD detective Harry Bosch gets a call too, from the widow of an old friend. Her husband''s death seems natural, but his ties to the hunt for the Poet make Bosch dig deep. Arriving at a derelict spot in the California desert Bosch joins forces with Rachel. Police procedural.', '/readseek-service/book-covers/default-book-cover.svg', 1, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE (SELECT id FROM public.author WHERE lower(name) = lower('Michael Connelly') AND marked_as_deleted = FALSE ORDER BY id LIMIT 1) IS NOT NULL
   AND (SELECT id FROM public.book_category WHERE name = 'Mystery' AND marked_as_deleted = FALSE ORDER BY id LIMIT 1) IS NOT NULL
   AND NOT EXISTS (
@@ -3836,7 +3836,7 @@ WHERE (SELECT id FROM public.author WHERE lower(name) = lower('Friedrich Nietzsc
 
 INSERT INTO public.book
 (author_id, category_id, name, price, rate, users_rate_count, pages_number, reading_duration, publish_date, description, image_url, total_copies, available_copies, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT (SELECT id FROM public.author WHERE lower(name) = lower('Brad Inwood') AND marked_as_deleted = FALSE ORDER BY id LIMIT 1), (SELECT id FROM public.book_category WHERE name = 'Philosophy' AND marked_as_deleted = FALSE ORDER BY id LIMIT 1), 'The Cambridge Companion to the Stoics', 0, 0, 0, 438, 876, DATE '2003-01-01', 'This unique volume offers an odyssey through the ideas of the Stoics in three particular ways: first, through the historical trajectory of the school itself and its influence; second, through the recovery of the history of Stoic thought; third, through the ongoing confrontation with Stoicism, showing how it refines philosophical traditions, challenges the imagination, and ultimately defines the kind of life one chooses to lead. A distinguished roster of specialists have written an authoritative guide to the entire philosophical tradition. The first two chapters chart the history of the school in the ancient world, and are followed by chapters on the core themes of the Stoic system: epistemology, logic, natural philosophy, theology, determinism, and metaphysics. There are two chapters on what might be thought of as the heart and soul of the Stoics system: ethics.', '/book-service/book-covers/default-book-cover.svg', 1, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT (SELECT id FROM public.author WHERE lower(name) = lower('Brad Inwood') AND marked_as_deleted = FALSE ORDER BY id LIMIT 1), (SELECT id FROM public.book_category WHERE name = 'Philosophy' AND marked_as_deleted = FALSE ORDER BY id LIMIT 1), 'The Cambridge Companion to the Stoics', 0, 0, 0, 438, 876, DATE '2003-01-01', 'This unique volume offers an odyssey through the ideas of the Stoics in three particular ways: first, through the historical trajectory of the school itself and its influence; second, through the recovery of the history of Stoic thought; third, through the ongoing confrontation with Stoicism, showing how it refines philosophical traditions, challenges the imagination, and ultimately defines the kind of life one chooses to lead. A distinguished roster of specialists have written an authoritative guide to the entire philosophical tradition. The first two chapters chart the history of the school in the ancient world, and are followed by chapters on the core themes of the Stoic system: epistemology, logic, natural philosophy, theology, determinism, and metaphysics. There are two chapters on what might be thought of as the heart and soul of the Stoics system: ethics.', '/readseek-service/book-covers/default-book-cover.svg', 1, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE (SELECT id FROM public.author WHERE lower(name) = lower('Brad Inwood') AND marked_as_deleted = FALSE ORDER BY id LIMIT 1) IS NOT NULL
   AND (SELECT id FROM public.book_category WHERE name = 'Philosophy' AND marked_as_deleted = FALSE ORDER BY id LIMIT 1) IS NOT NULL
   AND NOT EXISTS (
@@ -4012,7 +4012,7 @@ WHERE (SELECT id FROM public.author WHERE lower(name) = lower('Robert Nozick') A
 
 INSERT INTO public.book
 (author_id, category_id, name, price, rate, users_rate_count, pages_number, reading_duration, publish_date, description, image_url, total_copies, available_copies, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT (SELECT id FROM public.author WHERE lower(name) = lower('John Gottman') AND marked_as_deleted = FALSE ORDER BY id LIMIT 1), (SELECT id FROM public.book_category WHERE name = 'Psychology' AND marked_as_deleted = FALSE ORDER BY id LIMIT 1), 'Raising An Emotionally Intelligent Child', 0, 0, 0, 100, 200, DATE '1998-08-12', 'Raising an Emotionally Intelligent Child is John Gottman’s groundbreaking guide to teaching children to understand and regulate their emotional world. Intelligence That Comes from the Heart Every parent knows the importance of equipping children with the intellectual skills they need to succeed in school and life. But children also need to master their emotions. Raising an Emotionally Intelligent Child is a guide to teaching children to understand and regulate their emotional world. And as acclaimed psychologist and researcher John Gottman shows, once they master this important life skill, emotionally intelligent children will enjoy increased self-confidence, greater physical health, better performance in school, and healthier social relationships. Raising an Emotionally Intelligent Child will equip parents with a five-step “emotion coaching” process that teaches how to: -Be aware of a child''s emotions -Recognize emotional expression as an opportunity for intimacy and teaching -Listen empathetically and validate a child''s feelings -Label emotions in words a child can understand -Help a child come up with an appropriate way to solve a problem or deal with an upsetting issue or situation Written for parents of children of all ages, Raising an Emotionally Intelligent Child will enrich the bonds between parent and child and contribute immeasurably to the development of a generation of emotionally healthy adults.', '/book-service/book-covers/default-book-cover.svg', 1, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT (SELECT id FROM public.author WHERE lower(name) = lower('John Gottman') AND marked_as_deleted = FALSE ORDER BY id LIMIT 1), (SELECT id FROM public.book_category WHERE name = 'Psychology' AND marked_as_deleted = FALSE ORDER BY id LIMIT 1), 'Raising An Emotionally Intelligent Child', 0, 0, 0, 100, 200, DATE '1998-08-12', 'Raising an Emotionally Intelligent Child is John Gottman’s groundbreaking guide to teaching children to understand and regulate their emotional world. Intelligence That Comes from the Heart Every parent knows the importance of equipping children with the intellectual skills they need to succeed in school and life. But children also need to master their emotions. Raising an Emotionally Intelligent Child is a guide to teaching children to understand and regulate their emotional world. And as acclaimed psychologist and researcher John Gottman shows, once they master this important life skill, emotionally intelligent children will enjoy increased self-confidence, greater physical health, better performance in school, and healthier social relationships. Raising an Emotionally Intelligent Child will equip parents with a five-step “emotion coaching” process that teaches how to: -Be aware of a child''s emotions -Recognize emotional expression as an opportunity for intimacy and teaching -Listen empathetically and validate a child''s feelings -Label emotions in words a child can understand -Help a child come up with an appropriate way to solve a problem or deal with an upsetting issue or situation Written for parents of children of all ages, Raising an Emotionally Intelligent Child will enrich the bonds between parent and child and contribute immeasurably to the development of a generation of emotionally healthy adults.', '/readseek-service/book-covers/default-book-cover.svg', 1, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE (SELECT id FROM public.author WHERE lower(name) = lower('John Gottman') AND marked_as_deleted = FALSE ORDER BY id LIMIT 1) IS NOT NULL
   AND (SELECT id FROM public.book_category WHERE name = 'Psychology' AND marked_as_deleted = FALSE ORDER BY id LIMIT 1) IS NOT NULL
   AND NOT EXISTS (
@@ -4133,7 +4133,7 @@ WHERE (SELECT id FROM public.author WHERE lower(name) = lower('Wallace D. Wattle
 
 INSERT INTO public.book
 (author_id, category_id, name, price, rate, users_rate_count, pages_number, reading_duration, publish_date, description, image_url, total_copies, available_copies, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT (SELECT id FROM public.author WHERE lower(name) = lower('James R. Flynn') AND marked_as_deleted = FALSE ORDER BY id LIMIT 1), (SELECT id FROM public.book_category WHERE name = 'Psychology' AND marked_as_deleted = FALSE ORDER BY id LIMIT 1), 'What Is Intelligence?', 0, 0, 0, 100, 200, DATE '2009-03-23', 'Professor James Flynn is one of the most creative and influential psychologists in the field of intelligence. The ''Flynn Effect'' refers to the massive increase in IQ test scores over the course of the twentieth century and the term was coined to recognize Professor Flynn''s central role in measuring and analyzing these gains. For over twenty years, psychologists have struggled to understand the implications of IQ gains. Do they mean that each generation is more intelligent than the last? Do they suggest how each of us can enhance our own intelligence? Professor Flynn is finally ready to give his own views. He asks what intelligence really is and gives a surprising and illuminating answer. This book bridges the gulf that separates our minds from those of our ancestors a century ago. It is a fascinating and unique book that makes an important contribution to our understanding of human intelligence.', '/book-service/book-covers/default-book-cover.svg', 1, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT (SELECT id FROM public.author WHERE lower(name) = lower('James R. Flynn') AND marked_as_deleted = FALSE ORDER BY id LIMIT 1), (SELECT id FROM public.book_category WHERE name = 'Psychology' AND marked_as_deleted = FALSE ORDER BY id LIMIT 1), 'What Is Intelligence?', 0, 0, 0, 100, 200, DATE '2009-03-23', 'Professor James Flynn is one of the most creative and influential psychologists in the field of intelligence. The ''Flynn Effect'' refers to the massive increase in IQ test scores over the course of the twentieth century and the term was coined to recognize Professor Flynn''s central role in measuring and analyzing these gains. For over twenty years, psychologists have struggled to understand the implications of IQ gains. Do they mean that each generation is more intelligent than the last? Do they suggest how each of us can enhance our own intelligence? Professor Flynn is finally ready to give his own views. He asks what intelligence really is and gives a surprising and illuminating answer. This book bridges the gulf that separates our minds from those of our ancestors a century ago. It is a fascinating and unique book that makes an important contribution to our understanding of human intelligence.', '/readseek-service/book-covers/default-book-cover.svg', 1, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE (SELECT id FROM public.author WHERE lower(name) = lower('James R. Flynn') AND marked_as_deleted = FALSE ORDER BY id LIMIT 1) IS NOT NULL
   AND (SELECT id FROM public.book_category WHERE name = 'Psychology' AND marked_as_deleted = FALSE ORDER BY id LIMIT 1) IS NOT NULL
   AND NOT EXISTS (
@@ -4177,7 +4177,7 @@ WHERE (SELECT id FROM public.author WHERE lower(name) = lower('Roald Dahl') AND 
 
 INSERT INTO public.book
 (author_id, category_id, name, price, rate, users_rate_count, pages_number, reading_duration, publish_date, description, image_url, total_copies, available_copies, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT (SELECT id FROM public.author WHERE lower(name) = lower('Charlotte Brontë') AND marked_as_deleted = FALSE ORDER BY id LIMIT 1), (SELECT id FROM public.book_category WHERE name = 'Romantic' AND marked_as_deleted = FALSE ORDER BY id LIMIT 1), 'Jane Eyre', 0, 0, 0, 100, 200, DATE '2024-01-01', '', '/book-service/book-covers/default-book-cover.svg', 1, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT (SELECT id FROM public.author WHERE lower(name) = lower('Charlotte Brontë') AND marked_as_deleted = FALSE ORDER BY id LIMIT 1), (SELECT id FROM public.book_category WHERE name = 'Romantic' AND marked_as_deleted = FALSE ORDER BY id LIMIT 1), 'Jane Eyre', 0, 0, 0, 100, 200, DATE '2024-01-01', '', '/readseek-service/book-covers/default-book-cover.svg', 1, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE (SELECT id FROM public.author WHERE lower(name) = lower('Charlotte Brontë') AND marked_as_deleted = FALSE ORDER BY id LIMIT 1) IS NOT NULL
   AND (SELECT id FROM public.book_category WHERE name = 'Romantic' AND marked_as_deleted = FALSE ORDER BY id LIMIT 1) IS NOT NULL
   AND NOT EXISTS (
@@ -4353,7 +4353,7 @@ WHERE (SELECT id FROM public.author WHERE lower(name) = lower('Danielle Steel') 
 
 INSERT INTO public.book
 (author_id, category_id, name, price, rate, users_rate_count, pages_number, reading_duration, publish_date, description, image_url, total_copies, available_copies, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT (SELECT id FROM public.author WHERE lower(name) = lower('Emily Bront?e') AND marked_as_deleted = FALSE ORDER BY id LIMIT 1), (SELECT id FROM public.book_category WHERE name = 'Romantic' AND marked_as_deleted = FALSE ORDER BY id LIMIT 1), 'Wuthering Heights', 0, 0, 0, 100, 200, DATE '1997-01-01', '', '/book-service/book-covers/default-book-cover.svg', 1, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT (SELECT id FROM public.author WHERE lower(name) = lower('Emily Bront?e') AND marked_as_deleted = FALSE ORDER BY id LIMIT 1), (SELECT id FROM public.book_category WHERE name = 'Romantic' AND marked_as_deleted = FALSE ORDER BY id LIMIT 1), 'Wuthering Heights', 0, 0, 0, 100, 200, DATE '1997-01-01', '', '/readseek-service/book-covers/default-book-cover.svg', 1, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE (SELECT id FROM public.author WHERE lower(name) = lower('Emily Bront?e') AND marked_as_deleted = FALSE ORDER BY id LIMIT 1) IS NOT NULL
   AND (SELECT id FROM public.book_category WHERE name = 'Romantic' AND marked_as_deleted = FALSE ORDER BY id LIMIT 1) IS NOT NULL
   AND NOT EXISTS (
@@ -4419,7 +4419,7 @@ WHERE (SELECT id FROM public.author WHERE lower(name) = lower('Roman Frigg') AND
 
 INSERT INTO public.book
 (author_id, category_id, name, price, rate, users_rate_count, pages_number, reading_duration, publish_date, description, image_url, total_copies, available_copies, created_date, modified_date, created_by, modified_by, marked_as_deleted)
-SELECT (SELECT id FROM public.author WHERE lower(name) = lower('Alejandro Cassini') AND marked_as_deleted = FALSE ORDER BY id LIMIT 1), (SELECT id FROM public.book_category WHERE name = 'Science Fiction' AND marked_as_deleted = FALSE ORDER BY id LIMIT 1), 'Models and Idealizations in Science', 0, 0, 0, 100, 200, DATE '2021-01-01', 'This book provides both an introduction to the philosophy of scientific modeling and a contribution to the discussion and clarification of two recent philosophical conceptions of models: artifactualism and fictionalism. These can be viewed as different stances concerning the standard representationalist account of scientific models. By better understanding these two alternative views, readers will gain a deeper insight into what a model is as well as how models function in different sciences. Fictionalism has been a traditional epistemological stance related to antirealist construals of laws and theories, such as instrumentalism and inferentialism. By contrast, the more recent fictional view of models holds that scientific models must be conceived of as the same kind of entities as literary characters and places. This approach is essentially an answer to the ontological question concerning the nature of models, which in principle is not incompatible with a representationalist account of the function of models. The artifactual view of models is an approach according to which scientific models are epistemic artifacts, whose main function is not to represent the phenomena but rather to provide epistemic access to them. It can be conceived of as a non-representationalist and pragmatic account of modeling, which does not intend to focus on the ontology of models but rather on the ways they are built and used for different purposes. The different essays address questions such as the artifactual view of idealization, the use of information theory to elucidate the concepts of abstraction and idealization, the deidealization of models, the nature of scientific fictions, the structural account of representation and the ontological status of structures, the role of surrogative reasoning with models, and the use of models for explaining and predicting physical phenomena.', '/book-service/book-covers/default-book-cover.svg', 1, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
+SELECT (SELECT id FROM public.author WHERE lower(name) = lower('Alejandro Cassini') AND marked_as_deleted = FALSE ORDER BY id LIMIT 1), (SELECT id FROM public.book_category WHERE name = 'Science Fiction' AND marked_as_deleted = FALSE ORDER BY id LIMIT 1), 'Models and Idealizations in Science', 0, 0, 0, 100, 200, DATE '2021-01-01', 'This book provides both an introduction to the philosophy of scientific modeling and a contribution to the discussion and clarification of two recent philosophical conceptions of models: artifactualism and fictionalism. These can be viewed as different stances concerning the standard representationalist account of scientific models. By better understanding these two alternative views, readers will gain a deeper insight into what a model is as well as how models function in different sciences. Fictionalism has been a traditional epistemological stance related to antirealist construals of laws and theories, such as instrumentalism and inferentialism. By contrast, the more recent fictional view of models holds that scientific models must be conceived of as the same kind of entities as literary characters and places. This approach is essentially an answer to the ontological question concerning the nature of models, which in principle is not incompatible with a representationalist account of the function of models. The artifactual view of models is an approach according to which scientific models are epistemic artifacts, whose main function is not to represent the phenomena but rather to provide epistemic access to them. It can be conceived of as a non-representationalist and pragmatic account of modeling, which does not intend to focus on the ontology of models but rather on the ways they are built and used for different purposes. The different essays address questions such as the artifactual view of idealization, the use of information theory to elucidate the concepts of abstraction and idealization, the deidealization of models, the nature of scientific fictions, the structural account of representation and the ontological status of structures, the role of surrogative reasoning with models, and the use of models for explaining and predicting physical phenomena.', '/readseek-service/book-covers/default-book-cover.svg', 1, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'list-import', 'list-import', FALSE
 WHERE (SELECT id FROM public.author WHERE lower(name) = lower('Alejandro Cassini') AND marked_as_deleted = FALSE ORDER BY id LIMIT 1) IS NOT NULL
   AND (SELECT id FROM public.book_category WHERE name = 'Science Fiction' AND marked_as_deleted = FALSE ORDER BY id LIMIT 1) IS NOT NULL
   AND NOT EXISTS (

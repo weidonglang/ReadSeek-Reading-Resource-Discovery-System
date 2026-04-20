@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>阅读规划 - ReadSeek</title>
+  <link rel="stylesheet" href="assets/css/common.css?v=20260417-planning-select" />
+  <link rel="stylesheet" href="assets/css/planning.css?v=20260417-planning-select" />
+</head>
+<body data-page="planning">
+  <div class="app-shell">
+    <main class="page planning-page">
+      <section class="planning-hero card">
+        <div>
+          <div class="planning-kicker">Reading Plan</div>
+          <h1>对比资源，生成阶段化阅读路径</h1>
+          <p class="muted">这个页面提供两个非模型工具：先搜索并选择资源进行对比，也可以围绕主题生成入门、核心、拓展三个阶段的阅读路径。</p>
+        </div>
+        <div class="planning-hero-panel">
+          <strong>面向毕设演示</strong>
+          <span>展示系统如何把检索结果、元数据、可借状态和解释信息组织成可执行阅读建议。</span>
+        </div>
+      </section>
+
+      <div id="planning-message" class="alert hidden"></div>
+
+      <section class="planning-layout">
+        <article class="card planning-tool-card">
+          <h2>资源对比</h2>
+          <p class="muted">不用手动找 ID。输入关键词搜索资源，点击“加入对比”，选择 2 到 4 个资源后生成对比。</p>
+          <form id="compare-search-form" class="planning-form">
+            <div class="field">
+              <label class="label" for="compare-query">搜索资源</label>
+              <input id="compare-query" placeholder="例如：Pride and Prejudice / Jane Austen / 心理学" />
+            </div>
+            <button class="primary" type="submit">搜索可对比资源</button>
+          </form>
+          <div id="compare-search-results" class="compare-search-results muted">先搜索资源，再加入对比列表。</div>
+          <div class="compare-selected-head">
+            <strong>已选资源</strong>
+            <span id="compare-selected-count" class="muted">0 / 4</span>
+          </div>
+          <div id="compare-selected" class="compare-selected muted">暂未选择资源。</div>
+          <button id="compare-submit" class="primary" type="button" disabled>生成对比</button>
+          <div id="compare-result" class="planning-result muted">等待选择资源。</div>
+        </article>
+
+        <article class="card planning-tool-card">
+          <h2>阅读路径</h2>
+          <p class="muted">输入主题或自然语言目标，系统会复用混合检索结果生成阶段化阅读顺序。</p>
+          <form id="path-form" class="planning-form">
+            <div class="field">
+              <label class="label" for="path-topic">主题</label>
+              <input id="path-topic" placeholder="例如：经典爱情小说 / 简奥斯汀代表作 / 入门心理学" />
+            </div>
+            <div class="planning-inline-fields">
+              <label class="field" for="path-level">
+                <span class="label">阅读等级</span>
+                <select id="path-level">
+                  <option value="BEGINNER">入门</option>
+                  <option value="INTERMEDIATE" selected>进阶</option>
+                  <option value="EXPERT">深入</option>
+                </select>
+              </label>
+              <label class="field" for="path-limit">
+                <span class="label">资源数</span>
+                <select id="path-limit">
+                  <option value="6">6</option>
+                  <option value="9" selected>9</option>
+                  <option value="12">12</option>
+                </select>
+              </label>
+            </div>
+            <button class="primary" type="submit">生成路径</button>
+          </form>
+          <div class="planning-examples">
+            <button type="button" data-path-topic="想看简奥斯汀的代表作">简奥斯汀代表作</button>
+            <button type="button" data-path-topic="经典爱情小说">经典爱情小说</button>
+            <button type="button" data-path-topic="入门心理学">入门心理学</button>
+          </div>
+        </article>
+      </section>
+
+      <section class="card path-result-card">
+        <div class="section-head">
+          <div>
+            <h2>阅读路径结果</h2>
+            <p id="path-summary" class="muted">等待生成路径。</p>
+          </div>
+        </div>
+        <div id="path-result" class="path-result muted">输入主题后生成。</div>
+      </section>
+    </main>
+  </div>
+  <script src="assets/js/config.js?v=20260417-planning-select"></script>
+  <script src="assets/js/api.js?v=20260417-planning-select"></script>
+  <script src="assets/js/i18n.js?v=20260417-planning-select"></script>
+  <script src="assets/js/ui.js?v=20260417-planning-select"></script>
+  <script src="assets/js/planning.js?v=20260417-planning-select"></script>
+</body>
+</html>

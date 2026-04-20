@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>证据问答 - ReadSeek</title>
+  <link rel="stylesheet" href="assets/css/common.css?v=20260417-qa" />
+  <link rel="stylesheet" href="assets/css/qa.css?v=20260417-qa" />
+</head>
+<body data-page="qa">
+  <div class="app-shell">
+    <main class="page qa-page">
+      <section class="qa-hero card">
+        <div>
+          <div class="qa-kicker">Evidence QA</div>
+          <h1>基于馆藏证据回答阅读资源问题</h1>
+          <p class="muted">输入自然语言问题，系统会先调用混合检索，再用检索命中的资源生成模板化回答，并展示每条证据的来源、命中类型和理由。</p>
+        </div>
+        <div class="qa-hero-panel">
+          <strong>当前阶段</strong>
+          <span>模板化证据问答骨架，后续可替换为本地大模型 RAG 生成器。</span>
+        </div>
+      </section>
+
+      <div id="qa-message" class="alert hidden"></div>
+
+      <section class="qa-layout">
+        <article class="card qa-ask-card">
+          <h2>提出问题</h2>
+          <form id="qa-form" class="qa-form">
+            <div class="field">
+              <label class="label" for="qa-question">问题</label>
+              <textarea id="qa-question" placeholder="例如：想看简奥斯汀的代表作，应该从哪本开始？"></textarea>
+            </div>
+            <div class="qa-form-row">
+              <label class="field" for="qa-limit">
+                <span class="label">证据数量</span>
+                <select id="qa-limit">
+                  <option value="3">3 条</option>
+                  <option value="5" selected>5 条</option>
+                  <option value="8">8 条</option>
+                </select>
+              </label>
+              <button class="primary" type="submit">生成证据回答</button>
+            </div>
+          </form>
+          <div class="qa-examples">
+            <button type="button" data-example-question="想看简奥斯汀的代表作，应该从哪本开始？">简奥斯汀代表作</button>
+            <button type="button" data-example-question="想找一本经典爱情小说">经典爱情小说</button>
+            <button type="button" data-example-question="比较 Pride and Prejudice 和 Sense and Sensibility">比较两本书</button>
+          </div>
+        </article>
+
+        <article class="card qa-answer-card">
+          <div class="section-head">
+            <div>
+              <h2>回答</h2>
+              <p id="qa-summary" class="muted">等待提问。</p>
+            </div>
+          </div>
+          <div id="qa-answer" class="qa-answer-placeholder">输入问题后，这里会展示模板答案、检索策略、证据资源和限制说明。</div>
+        </article>
+      </section>
+
+      <section class="card qa-evidence-card">
+        <div class="section-head">
+          <div>
+            <h2>证据资源</h2>
+            <p class="muted">每条证据都来自当前系统的检索结果，可继续打开详情验证。</p>
+          </div>
+        </div>
+        <div id="qa-evidence-list" class="qa-evidence-list"></div>
+      </section>
+    </main>
+  </div>
+  <script src="assets/js/config.js?v=20260417-qa"></script>
+  <script src="assets/js/api.js?v=20260417-qa"></script>
+  <script src="assets/js/i18n.js?v=20260417-qa"></script>
+  <script src="assets/js/ui.js?v=20260417-qa"></script>
+  <script src="assets/js/qa.js?v=20260417-qa"></script>
+</body>
+</html>

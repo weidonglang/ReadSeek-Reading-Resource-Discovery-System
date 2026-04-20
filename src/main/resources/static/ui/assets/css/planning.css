@@ -1,0 +1,216 @@
+.planning-page {
+  display: grid;
+  gap: 24px;
+}
+
+.planning-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(280px, 0.75fr);
+  gap: 22px;
+  align-items: stretch;
+  padding: 28px;
+  background:
+    radial-gradient(circle at top right, rgba(124, 75, 52, 0.14), transparent 30%),
+    linear-gradient(145deg, #fffdf8 0%, #f6ede1 56%, #efe2d1 100%);
+}
+
+.planning-kicker {
+  display: inline-flex;
+  width: fit-content;
+  padding: 7px 12px;
+  border-radius: 999px;
+  color: var(--primary-deep);
+  background: rgba(249, 240, 229, 0.9);
+  border: 1px solid rgba(124, 75, 52, 0.18);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.planning-hero h1 {
+  max-width: 14em;
+  margin: 16px 0 10px;
+  color: var(--primary-deep);
+  font-family: var(--font-display);
+  font-size: 34px;
+  line-height: 1.18;
+}
+
+.planning-hero-panel {
+  display: grid;
+  align-content: center;
+  gap: 8px;
+  padding: 18px;
+  border-radius: 18px;
+  border: 1px solid rgba(124, 75, 52, 0.14);
+  background: rgba(255, 252, 247, 0.84);
+}
+
+.planning-hero-panel strong {
+  color: var(--primary-deep);
+  font-size: 18px;
+}
+
+.planning-layout {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.planning-tool-card,
+.path-result-card {
+  background: rgba(255, 251, 245, 0.94);
+}
+
+.planning-form {
+  display: grid;
+  gap: 14px;
+  margin-top: 16px;
+}
+
+.planning-inline-fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.planning-examples {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 16px;
+}
+
+.planning-examples button {
+  padding: 8px 11px;
+  border-radius: 999px;
+  color: var(--primary-deep);
+  background: rgba(249, 240, 229, 0.84);
+  border: 1px solid rgba(124, 75, 52, 0.16);
+  box-shadow: none;
+  font-size: 12px;
+}
+
+.compare-search-results,
+.compare-selected {
+  display: grid;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.compare-search-item,
+.compare-selected-item {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 12px;
+  align-items: center;
+  padding: 12px;
+  border-radius: 16px;
+  border: 1px solid rgba(124, 75, 52, 0.14);
+  background: rgba(255, 252, 247, 0.9);
+}
+
+.compare-search-item h3 {
+  margin: 0 0 5px;
+  color: var(--primary-deep);
+  font-size: 16px;
+}
+
+.compare-search-item p {
+  margin: 8px 0 0;
+}
+
+.compare-selected-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.compare-selected-item strong,
+.compare-selected-item span {
+  display: block;
+}
+
+.ghost-button {
+  padding: 8px 11px;
+  border-radius: 999px;
+  color: var(--primary-deep);
+  background: transparent;
+  border: 1px solid rgba(124, 75, 52, 0.2);
+  box-shadow: none;
+  font-size: 12px;
+}
+
+.planning-result,
+.path-result {
+  display: grid;
+  gap: 14px;
+  margin-top: 16px;
+}
+
+.comparison-summary,
+.path-summary-box {
+  padding: 16px;
+  border-radius: 16px;
+  border: 1px solid rgba(124, 75, 52, 0.14);
+  background: linear-gradient(180deg, rgba(255, 252, 247, 0.96), rgba(244, 236, 226, 0.92));
+}
+
+.comparison-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+}
+
+.comparison-item,
+.path-step,
+.path-resource {
+  display: grid;
+  gap: 8px;
+  padding: 14px;
+  border-radius: 16px;
+  border: 1px solid rgba(124, 75, 52, 0.14);
+  background: rgba(255, 252, 247, 0.9);
+}
+
+.comparison-item h3,
+.path-step h3,
+.path-resource h4 {
+  margin: 0;
+  color: var(--primary-deep);
+}
+
+.planning-list {
+  margin: 8px 0 0;
+}
+
+.path-step {
+  gap: 12px;
+}
+
+.path-resource-list {
+  display: grid;
+  gap: 10px;
+}
+
+.path-resource-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+@media (max-width: 920px) {
+  .planning-hero,
+  .planning-layout,
+  .planning-inline-fields {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 620px) {
+  .compare-search-item,
+  .compare-selected-item {
+    grid-template-columns: 1fr;
+  }
+}

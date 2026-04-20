@@ -3,7 +3,7 @@
 -- changeset codex:20260401_fix_invalid_seed_book_images
 
 UPDATE public.book
-SET image_url = '/book-service/book-covers/default-book-cover.svg',
+SET image_url = '/readseek-service/book-covers/default-book-cover.svg',
     modified_date = CURRENT_TIMESTAMP,
     modified_by = 'codex'
 WHERE image_url LIKE 'https://example.com/books/%'
