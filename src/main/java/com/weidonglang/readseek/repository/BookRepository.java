@@ -2,6 +2,7 @@ package com.weidonglang.readseek.repository;
 
 import com.weidonglang.readseek.entity.Book;
 import jakarta.persistence.LockModeType;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -10,7 +11,9 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 @Repository
 public interface BookRepository extends JpaRepository<Book, Long> {
@@ -18,8 +21,30 @@ public interface BookRepository extends JpaRepository<Book, Long> {
     @Query("SELECT b FROM Book b WHERE b.id = :id")
     java.util.Optional<Book> findByIdForUpdate(@Param("id") Long id);
 
+    @EntityGraph(attributePaths = {"author", "category", "publisher", "tags"})
+    @Query("SELECT b FROM Book b WHERE b.id = :id")
+    Optional<Book> findByIdWithRelations(@Param("id") Long id);
+
+    @EntityGraph(attributePaths = {"author", "category", "publisher", "tags"})
+    @Query("SELECT DISTINCT b FROM Book b WHERE b.id IN :ids")
+    List<Book> findAllWithRelationsByIdIn(@Param("ids") Collection<Long> ids);
+
+    @Query(value = "SELECT b.id FROM Book b WHERE b.markedAsDeleted = :deletedRecords",
+            countQuery = "SELECT COUNT(b.id) FROM Book b WHERE b.markedAsDeleted = :deletedRecords")
+    Page<Long> findIds(Pageable pageable, @Param("deletedRecords") Boolean deletedRecords);
+
+    @EntityGraph(attributePaths = {"author", "category", "publisher", "tags"})
+    @Query("SELECT b FROM Book b")
+    List<Book> findAllWithRelations();
+
+    @EntityGraph(attributePaths = {"author", "category", "publisher", "tags"})
+    @Query("SELECT b FROM Book b WHERE b.markedAsDeleted = false")
+    List<Book> findActiveBooksWithRelations();
+
+    @EntityGraph(attributePaths = {"author", "category", "publisher", "tags"})
     List<Book> findByMarkedAsDeletedFalseOrderByCreatedDateDesc(Pageable pageable);
 
+    @EntityGraph(attributePaths = {"author", "category", "publisher", "tags"})
     List<Book> findAllByAuthorIdAndMarkedAsDeletedFalse(Long authorId);
 
     Boolean existsByAuthorIdAndMarkedAsDeletedFalse(Long authorId);
@@ -33,6 +58,7 @@ public interface BookRepository extends JpaRepository<Book, Long> {
     @Query("SELECT b FROM Book b WHERE b.markedAsDeleted = :deletedRecords ")
     Page<Book> findAll(Pageable pageable, Boolean deletedRecords);
 
+    @EntityGraph(attributePaths = {"author", "category", "publisher", "tags"})
     List<Book> findAllByCategoryNameInAndMarkedAsDeletedFalse(List<String> categories);
 
     @Query(
@@ -84,34 +110,41 @@ public interface BookRepository extends JpaRepository<Book, Long> {
 
     @Query("SELECT b FROM Book b WHERE b.markedAsDeleted = false " +
             "ORDER BY b.usersRateCount DESC, b.rate DESC, b.availableCopies DESC, b.name ASC")
+    @EntityGraph(attributePaths = {"author", "category", "publisher", "tags"})
     List<Book> findPopularBooks(Pageable pageable);
 
     @Query("SELECT b FROM Book b WHERE b.markedAsDeleted = false AND b.id NOT IN :excludedIds " +
             "ORDER BY b.usersRateCount DESC, b.rate DESC, b.availableCopies DESC, b.name ASC")
+    @EntityGraph(attributePaths = {"author", "category", "publisher", "tags"})
     List<Book> findPopularBooksExcluding(@Param("excludedIds") Set<Long> excludedIds, Pageable pageable);
 
     @Query("SELECT b FROM Book b WHERE b.markedAsDeleted = false AND b.category.id IN :categoryIds " +
             "ORDER BY b.usersRateCount DESC, b.rate DESC, b.availableCopies DESC, b.name ASC")
+    @EntityGraph(attributePaths = {"author", "category", "publisher", "tags"})
     List<Book> findRecommendedByCategoryIds(@Param("categoryIds") Set<Long> categoryIds, Pageable pageable);
 
     @Query("SELECT b FROM Book b WHERE b.markedAsDeleted = false AND b.category.id IN :categoryIds AND b.id NOT IN :excludedIds " +
             "ORDER BY b.usersRateCount DESC, b.rate DESC, b.availableCopies DESC, b.name ASC")
+    @EntityGraph(attributePaths = {"author", "category", "publisher", "tags"})
     List<Book> findRecommendedByCategoryIdsExcluding(@Param("categoryIds") Set<Long> categoryIds,
                                                      @Param("excludedIds") Set<Long> excludedIds,
                                                      Pageable pageable);
 
     @Query("SELECT b FROM Book b WHERE b.markedAsDeleted = false AND b.id <> :bookId AND b.category.id = :categoryId " +
             "ORDER BY b.usersRateCount DESC, b.rate DESC, b.availableCopies DESC, b.name ASC")
+    @EntityGraph(attributePaths = {"author", "category", "publisher", "tags"})
     List<Book> findSimilarBooksByCategory(@Param("bookId") Long bookId,
                                           @Param("categoryId") Long categoryId,
                                           Pageable pageable);
 
     @Query("SELECT DISTINCT b FROM Book b JOIN b.tags t WHERE b.markedAsDeleted = false AND t.id IN :tagIds " +
             "ORDER BY b.usersRateCount DESC, b.rate DESC, b.availableCopies DESC, b.name ASC")
+    @EntityGraph(attributePaths = {"author", "category", "publisher", "tags"})
     List<Book> findBooksByTagIds(@Param("tagIds") Set<Long> tagIds, Pageable pageable);
 
     @Query("SELECT DISTINCT b FROM Book b JOIN b.tags t WHERE b.markedAsDeleted = false AND t.id IN :tagIds AND b.id NOT IN :excludedIds " +
             "ORDER BY b.usersRateCount DESC, b.rate DESC, b.availableCopies DESC, b.name ASC")
+    @EntityGraph(attributePaths = {"author", "category", "publisher", "tags"})
     List<Book> findBooksByTagIdsExcluding(@Param("tagIds") Set<Long> tagIds,
                                           @Param("excludedIds") Set<Long> excludedIds,
                                           Pageable pageable);
@@ -122,6 +155,7 @@ public interface BookRepository extends JpaRepository<Book, Long> {
     @Query("SELECT DISTINCT b FROM Book b WHERE b.markedAsDeleted = false AND (" +
             "lower(b.name) = lower(:query) OR lower(coalesce(b.isbn, '')) = lower(:query) OR lower(b.author.name) = lower(:query)" +
             ") ORDER BY b.usersRateCount DESC, b.rate DESC, b.availableCopies DESC, b.name ASC")
+    @EntityGraph(attributePaths = {"author", "category", "publisher", "tags"})
     List<Book> findExactMatches(@Param("query") String query, Pageable pageable);
 }
 /*

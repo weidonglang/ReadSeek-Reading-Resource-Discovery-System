@@ -48,8 +48,7 @@ public class BookSearchIndexServiceImpl implements BookSearchIndexService {
         indexOperations.create();
         indexOperations.putMapping(indexOperations.createMapping(BookSearchDocument.class));
 
-        List<BookSearchDocument> documents = bookRepository.findAll().stream()
-                .filter(book -> !Boolean.TRUE.equals(book.getMarkedAsDeleted()))
+        List<BookSearchDocument> documents = bookRepository.findActiveBooksWithRelations().stream()
                 .map(this::toDocument)
                 .collect(Collectors.toList());
 
@@ -67,7 +66,7 @@ public class BookSearchIndexServiceImpl implements BookSearchIndexService {
             return;
         }
         ensureIndex();
-        Book book = bookRepository.findById(bookId)
+        Book book = bookRepository.findByIdWithRelations(bookId)
                 .orElseThrow(() -> new EntityNotFoundException("Book not found for id: " + bookId));
         if (Boolean.TRUE.equals(book.getMarkedAsDeleted())) {
             bookSearchRepository.deleteById(bookId);

@@ -21,6 +21,7 @@ import com.weidonglang.readseek.repository.UserBookRatingRepository;
 import com.weidonglang.readseek.transformer.BookLoanTransformer;
 import com.weidonglang.readseek.transformer.BookReservationTransformer;
 import com.weidonglang.readseek.transformer.BookTransformer;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
@@ -37,6 +38,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
+@Slf4j
 public class HomeDashboardServiceImpl implements HomeDashboardService {
     private static final int DUE_SOON_DAYS = 3;
     private static final int RECENT_VIEWED_LIMIT = 6;
@@ -118,7 +120,7 @@ public class HomeDashboardServiceImpl implements HomeDashboardService {
                 extractPreferredCategories(readingInfo),
                 bookLoanTransformer.transformEntityToDto(urgentLoans),
                 bookReservationTransformer.transformEntityToDto(activeReservations),
-                buildRecentViewedBooks(userId),
+                buildRecentViewedBooksSafely(userId),
                 behaviorAnalyticsService.findTopKeywords(TREND_LIMIT, 30),
                 behaviorAnalyticsService.findTopCategories(TREND_LIMIT, 30),
                 bookTransformer.transformEntityToDto(bookRepository.findByMarkedAsDeletedFalseOrderByCreatedDateDesc(PageRequest.of(0, NEW_ARRIVAL_LIMIT))),
@@ -145,6 +147,16 @@ public class HomeDashboardServiceImpl implements HomeDashboardService {
                 .filter(Objects::nonNull)
                 .distinct()
                 .collect(Collectors.toList());
+    }
+
+    private List<BookDto> buildRecentViewedBooksSafely(Long userId) {
+        try {
+            return buildRecentViewedBooks(userId);
+        } catch (Exception exception) {
+            log.warn("HomeDashboardService: recent viewed books unavailable for userId={} because {}",
+                    userId, exception.getMessage());
+            return List.of();
+        }
     }
 
     private List<BookDto> buildRecentViewedBooks(Long userId) {

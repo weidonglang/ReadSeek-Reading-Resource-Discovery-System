@@ -21,8 +21,11 @@ import jakarta.persistence.criteria.JoinType;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 @Component
 public class BookDaoImpl implements BookDao {
     private final BookRepository bookRepository;
@@ -36,6 +39,16 @@ public class BookDaoImpl implements BookDao {
     @Override
     public BookRepository getRepository() {
         return bookRepository;
+    }
+
+    @Override
+    public List<Book> findAll() {
+        return getRepository().findAllWithRelations();
+    }
+
+    @Override
+    public Optional<Book> findById(Long id) {
+        return getRepository().findByIdWithRelations(id);
     }
 
     @Override
@@ -59,8 +72,10 @@ public class BookDaoImpl implements BookDao {
     public Page<Book> findAllBooksPaginatedAndFiltered(FilterPaginationRequest<BookFilterPaginationRequest> bookFilterPaginationRequest) {
         PageRequest pageRequest = getPageRequest(bookFilterPaginationRequest);
         BookFilterPaginationRequest criteria = normalizeCriteria(bookFilterPaginationRequest.getCriteria());
-        if (criteria == null || isCriteriaEmpty(criteria))
-            return getRepository().findAll(pageRequest, bookFilterPaginationRequest.getDeletedRecords());
+        if (criteria == null || isCriteriaEmpty(criteria)) {
+            Page<Long> idPage = getRepository().findIds(pageRequest, bookFilterPaginationRequest.getDeletedRecords());
+            return new PageImpl<>(loadBooksWithRelationsPreservingOrder(idPage.getContent()), pageRequest, idPage.getTotalElements());
+        }
 
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
 
@@ -94,7 +109,22 @@ public class BookDaoImpl implements BookDao {
         countQuery.select(criteriaBuilder.countDistinct(countRoot)).where(countPredicates.toArray(new Predicate[0]));
         Long total = entityManager.createQuery(countQuery).getSingleResult();
 
-        return new PageImpl<>(result, pageRequest, total);
+        List<Long> ids = result.stream()
+                .map(Book::getId)
+                .collect(Collectors.toList());
+        return new PageImpl<>(loadBooksWithRelationsPreservingOrder(ids), pageRequest, total);
+    }
+
+    private List<Book> loadBooksWithRelationsPreservingOrder(List<Long> ids) {
+        if (ids == null || ids.isEmpty()) {
+            return List.of();
+        }
+        Map<Long, Book> booksById = getRepository().findAllWithRelationsByIdIn(ids).stream()
+                .collect(Collectors.toMap(Book::getId, book -> book, (left, right) -> left, LinkedHashMap::new));
+        return ids.stream()
+                .map(booksById::get)
+                .filter(book -> book != null)
+                .collect(Collectors.toList());
     }
 
     private PageRequest getPageRequest(FilterPaginationRequest<BookFilterPaginationRequest> bookFilterPaginationRequest) {

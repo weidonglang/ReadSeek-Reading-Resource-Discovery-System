@@ -6,12 +6,14 @@ import com.weidonglang.readseek.dto.base.request.RefreshTokenRequest;
 import com.weidonglang.readseek.dto.base.response.ApiResponse;
 import com.weidonglang.readseek.dto.base.response.AuthResponse;
 import com.weidonglang.readseek.manager.JWTAuthenticationManager;
+import com.weidonglang.readseek.security.AuthenticationRateLimiter;
 import com.weidonglang.readseek.service.UserService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.mock.web.MockHttpServletRequest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -29,11 +31,16 @@ class AuthenticationControllerTest {
     @Mock
     private UserService userService;
 
+    @Mock
+    private AuthenticationRateLimiter authenticationRateLimiter;
+
     private AuthenticationController controller;
+    private MockHttpServletRequest request;
 
     @BeforeEach
     void setUp() {
-        controller = new AuthenticationController(jwtAuthenticationManager, userService);
+        controller = new AuthenticationController(jwtAuthenticationManager, userService, authenticationRateLimiter);
+        request = new MockHttpServletRequest();
     }
 
     @Test
@@ -44,12 +51,14 @@ class AuthenticationControllerTest {
         AuthResponse authResponse = new AuthResponse("access", 3600L, "refresh", 86400L);
         when(jwtAuthenticationManager.login(authRequest)).thenReturn(authResponse);
 
-        ApiResponse response = controller.login(authRequest);
+        ApiResponse response = controller.login(authRequest, request);
 
         assertTrue(response.getSuccess());
         assertEquals("User logged in successfully.", response.getMessage());
         assertSame(authResponse, response.getBody());
         assertNotNull(response.getTimestamp());
+        verify(authenticationRateLimiter).checkLoginAllowed(authRequest.getEmail(), request);
+        verify(authenticationRateLimiter).recordLoginSuccess(authRequest.getEmail(), request);
         verify(jwtAuthenticationManager).login(authRequest);
     }
 
@@ -77,12 +86,17 @@ class AuthenticationControllerTest {
         AuthResponse authResponse = new AuthResponse("new-access", 3600L, "new-refresh", 86400L);
         when(jwtAuthenticationManager.refreshToken(refreshTokenRequest)).thenReturn(authResponse);
 
-        ApiResponse response = controller.refreshToken(refreshTokenRequest);
+        ApiResponse response = controller.refreshToken(refreshTokenRequest, request);
 
         assertTrue(response.getSuccess());
         assertEquals("Token Refreshed successfully.", response.getMessage());
         assertSame(authResponse, response.getBody());
         assertNotNull(response.getTimestamp());
+        verify(authenticationRateLimiter).checkRefreshAllowed(
+                refreshTokenRequest.getEmail(),
+                refreshTokenRequest.getRefreshToken(),
+                request
+        );
         verify(jwtAuthenticationManager).refreshToken(refreshTokenRequest);
     }
 

@@ -1,7 +1,5 @@
 @echo off
 setlocal
 
-set "JAVA_HOME=C:\Program Files\Java\jdk-17.0.18+8"
-set "PATH=%JAVA_HOME%\bin;%PATH%"
-
-call "%~dp0mvnw.cmd" %*
+echo ReadSeek requires Java 17. Delegating to mvnw-jdk17.cmd.
+call "%~dp0mvnw-jdk17.cmd" %*

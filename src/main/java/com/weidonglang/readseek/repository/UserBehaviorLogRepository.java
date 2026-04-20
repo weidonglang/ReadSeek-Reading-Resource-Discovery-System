@@ -3,6 +3,7 @@ package com.weidonglang.readseek.repository;
 import com.weidonglang.readseek.entity.UserBehaviorLog;
 import com.weidonglang.readseek.enums.UserBehaviorActionType;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -21,12 +22,15 @@ public interface UserBehaviorLogRepository extends JpaRepository<UserBehaviorLog
 
     List<UserBehaviorLog> findByUserIdAndMarkedAsDeletedFalseOrderByCreatedDateDesc(Long userId);
 
+    @EntityGraph(attributePaths = {"user", "book", "book.author", "book.category", "book.publisher", "book.tags"})
     List<UserBehaviorLog> findByUserIdAndMarkedAsDeletedFalseOrderByCreatedDateDesc(Long userId, Pageable pageable);
 
+    @EntityGraph(attributePaths = {"user", "book", "book.author", "book.category", "book.publisher", "book.tags"})
     List<UserBehaviorLog> findByUserIdAndMarkedAsDeletedFalseAndActionTypeInOrderByCreatedDateDesc(Long userId,
                                                                                                      Collection<UserBehaviorActionType> actionTypes,
                                                                                                      Pageable pageable);
 
+    @EntityGraph(attributePaths = {"user", "book", "book.author", "book.category", "book.publisher", "book.tags"})
     List<UserBehaviorLog> findByBookIdAndMarkedAsDeletedFalseOrderByCreatedDateDesc(Long bookId, Pageable pageable);
 
     @Query("SELECT ubl.book.id, COUNT(ubl.id) FROM UserBehaviorLog ubl " +

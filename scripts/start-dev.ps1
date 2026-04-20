@@ -2,7 +2,7 @@
 param(
     [ValidateSet('all', 'deps', 'app')]
     [string]$Mode = 'all',
-    [string]$JavaHome = 'C:\Program Files\Java\jdk-17.0.18+8',
+    [string]$JavaHome = '',
     [string]$DbPassword = '',
     [switch]$WithAi,
     [string]$AiPythonExe = 'python',
@@ -34,7 +34,6 @@ function Resolve-DatabasePassword {
         return $env:SPRING_DATASOURCE_PASSWORD
     }
 
-    # Keep local development aligned with the user's current persisted database.
     return '20041117'
 }
 
@@ -44,6 +43,36 @@ function Assert-CommandExists {
     if (-not (Get-Command $CommandName -ErrorAction SilentlyContinue)) {
         throw "Missing required command: $CommandName"
     }
+}
+
+function Resolve-ReadSeekJavaHome {
+    param([string]$ProvidedJavaHome)
+
+    $candidates = @(
+        $ProvidedJavaHome,
+        $env:JAVA_HOME,
+        "$env:USERPROFILE\.jdks\ms-17.0.18",
+        'C:\Program Files\Java\jdk-17.0.18+8'
+    ) | Where-Object { -not [string]::IsNullOrWhiteSpace($_) }
+
+    foreach ($candidate in $candidates) {
+        if ((Test-Path $candidate) -and (Test-Path (Join-Path $candidate 'bin\java.exe'))) {
+            return $candidate
+        }
+    }
+
+    $jdkRoot = Join-Path $env:USERPROFILE '.jdks'
+    if (Test-Path $jdkRoot) {
+        $detected = Get-ChildItem -Path $jdkRoot -Directory -ErrorAction SilentlyContinue |
+            Where-Object { Test-Path (Join-Path $_.FullName 'bin\java.exe') } |
+            Sort-Object Name -Descending |
+            Select-Object -First 1
+        if ($detected) {
+            return $detected.FullName
+        }
+    }
+
+    throw 'Could not find JDK 17. Pass -JavaHome "C:\path\to\jdk17" or fix JAVA_HOME.'
 }
 
 function Wait-ForDockerHealth {
@@ -103,33 +132,11 @@ function Remove-StaleSearchContainer {
     docker rm readseek-search | Out-Null
 }
 
-function Ensure-DatabaseContainer {
-    $containerId = (docker ps -a --filter 'name=^/readseek-db$' --format '{{.ID}}' 2>$null | Select-Object -First 1)
-    if ([string]::IsNullOrWhiteSpace($containerId)) {
-        return $false
-    }
-
-    $state = (docker inspect --format '{{.State.Status}}' readseek-db 2>$null | Out-String).Trim()
-    if ($state -eq 'running') {
-        Write-Host 'Reusing running PostgreSQL container readseek-db.'
-        return $true
-    }
-
-    Write-Host "Starting existing PostgreSQL container readseek-db ($state)."
-    docker start readseek-db | Out-Null
-    return $true
-}
-
 function Start-Dependencies {
     Write-Step 'Starting Docker dependencies'
     Assert-CommandExists 'docker'
-    $hasDatabaseContainer = Ensure-DatabaseContainer
     Remove-StaleSearchContainer
-    if ($hasDatabaseContainer) {
-        docker compose up -d elasticsearch
-    } else {
-        docker compose up -d db elasticsearch
-    }
+    docker compose up -d db elasticsearch
     if (-not $SkipWait) {
         Write-Step 'Waiting for PostgreSQL and Elasticsearch'
         Wait-ForDockerHealth -ContainerName 'readseek-db'
@@ -137,20 +144,18 @@ function Start-Dependencies {
     }
 }
 
-function Apply-LocalSchemaPatches {
-    Write-Step 'Applying database schema patches'
-    powershell -NoLogo -NoProfile -ExecutionPolicy Bypass -File "$projectRoot\scripts\apply-local-schema-patches.ps1"
-}
-
 function Start-Application {
-    param([string]$ResolvedDbPassword)
+    param(
+        [string]$ResolvedDbPassword,
+        [string]$ResolvedJavaHome
+    )
 
     Write-Step 'Preparing Java environment'
-    if (-not (Test-Path $JavaHome)) {
-        throw "JAVA_HOME not found: $JavaHome"
+    if (-not (Test-Path $ResolvedJavaHome)) {
+        throw "JAVA_HOME not found: $ResolvedJavaHome"
     }
-    $env:JAVA_HOME = $JavaHome
-    $env:Path = "$JavaHome\bin;$env:Path"
+    $env:JAVA_HOME = $ResolvedJavaHome
+    $env:Path = "$ResolvedJavaHome\bin;$env:Path"
 
     $env:SPRING_DATASOURCE_URL = 'jdbc:postgresql://localhost:5043/book_recommendation_system'
     $env:SPRING_DATASOURCE_USERNAME = 'postgres'
@@ -189,24 +194,23 @@ function Start-AiService {
 }
 
 $resolvedDbPassword = Resolve-DatabasePassword -ProvidedPassword $DbPassword
+$resolvedJavaHome = Resolve-ReadSeekJavaHome -ProvidedJavaHome $JavaHome
 
 switch ($Mode) {
     'deps' {
         Start-Dependencies
-        Apply-LocalSchemaPatches
     }
     'app' {
         if ($WithAi) {
             Start-AiService
         }
-        Start-Application -ResolvedDbPassword $resolvedDbPassword
+        Start-Application -ResolvedDbPassword $resolvedDbPassword -ResolvedJavaHome $resolvedJavaHome
     }
     'all' {
         Start-Dependencies
-        Apply-LocalSchemaPatches
         if ($WithAi) {
             Start-AiService
         }
-        Start-Application -ResolvedDbPassword $resolvedDbPassword
+        Start-Application -ResolvedDbPassword $resolvedDbPassword -ResolvedJavaHome $resolvedJavaHome
     }
 }

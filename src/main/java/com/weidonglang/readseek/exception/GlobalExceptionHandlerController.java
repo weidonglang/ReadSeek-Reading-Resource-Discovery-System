@@ -17,6 +17,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import java.time.LocalDateTime;
@@ -72,6 +73,21 @@ public class GlobalExceptionHandlerController extends ResponseEntityExceptionHan
     public ResponseEntity<ApiResponse> handleIllegalArgumentException(IllegalArgumentException exception) {
         log.warn("GlobalExceptionHandlerController: invalid request", exception);
         return buildErrorResponse(HttpStatus.BAD_REQUEST, resolveClientMessage(exception.getMessage(), "Invalid request."));
+    }
+
+    @ExceptionHandler(ResponseStatusException.class)
+    public ResponseEntity<ApiResponse> handleResponseStatusException(ResponseStatusException exception) {
+        HttpStatus status = HttpStatus.resolve(exception.getStatusCode().value());
+        HttpStatus resolvedStatus = status == null ? HttpStatus.INTERNAL_SERVER_ERROR : status;
+        if (resolvedStatus.is5xxServerError()) {
+            log.error("GlobalExceptionHandlerController: response status exception", exception);
+        } else {
+            log.warn("GlobalExceptionHandlerController: response status exception", exception);
+        }
+        String message = resolvedStatus.is5xxServerError()
+                ? INTERNAL_ERROR_MESSAGE
+                : resolveClientMessage(exception.getReason(), resolvedStatus.getReasonPhrase());
+        return buildErrorResponse(resolvedStatus, message);
     }
 
     @ExceptionHandler(Exception.class)

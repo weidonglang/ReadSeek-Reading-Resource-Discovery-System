@@ -249,7 +249,7 @@ public class BehaviorAnalyticsServiceImpl implements BehaviorAnalyticsService {
                 .map(Map.Entry::getKey)
                 .collect(Collectors.toList());
 
-        Map<Long, Book> booksById = bookRepository.findAllById(orderedIds).stream()
+        Map<Long, Book> booksById = bookRepository.findAllWithRelationsByIdIn(orderedIds).stream()
                 .filter(book -> !Boolean.TRUE.equals(book.getMarkedAsDeleted()))
                 .collect(Collectors.toMap(Book::getId, Function.identity()));
 

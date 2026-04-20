@@ -68,7 +68,6 @@ public class BookServiceImpl implements BookService {
     private final CollaborativeFilteringRecommender collaborativeFilteringRecommender;
     private final BehaviorAnalyticsService behaviorAnalyticsService;
     private final BookSearchIndexService bookSearchIndexService;
-    private final RecommendationEventService recommendationEventService;
 
     @Autowired
     public BookServiceImpl(BookTransformer bookTransformer,
@@ -83,8 +82,7 @@ public class BookServiceImpl implements BookService {
                            UserBookRateDao userBookRateDao,
                            CollaborativeFilteringRecommender collaborativeFilteringRecommender,
                            BehaviorAnalyticsService behaviorAnalyticsService,
-                           BookSearchIndexService bookSearchIndexService,
-                           RecommendationEventService recommendationEventService) {
+                           BookSearchIndexService bookSearchIndexService) {
         this.bookTransformer = bookTransformer;
         this.bookDao = bookDao;
         this.bookCategoryService = bookCategoryService;
@@ -98,25 +96,6 @@ public class BookServiceImpl implements BookService {
         this.collaborativeFilteringRecommender = collaborativeFilteringRecommender;
         this.behaviorAnalyticsService = behaviorAnalyticsService;
         this.bookSearchIndexService = bookSearchIndexService;
-        this.recommendationEventService = recommendationEventService;
-    }
-
-    public BookServiceImpl(BookTransformer bookTransformer,
-                           BookDao bookDao,
-                           AuthorService authorService,
-                           BookCategoryService bookCategoryService,
-                           PublisherService publisherService,
-                           TagService tagService,
-                           UserReadingInfoService userReadingInfoService,
-                           BookLoanDao bookLoanDao,
-                           UserService userService,
-                           UserBookRateDao userBookRateDao,
-                           CollaborativeFilteringRecommender collaborativeFilteringRecommender,
-                           BehaviorAnalyticsService behaviorAnalyticsService,
-                           BookSearchIndexService bookSearchIndexService) {
-        this(bookTransformer, bookDao, authorService, bookCategoryService, publisherService, tagService,
-                userReadingInfoService, bookLoanDao, userService, userBookRateDao, collaborativeFilteringRecommender,
-                behaviorAnalyticsService, bookSearchIndexService, null);
     }
 
     public BookServiceImpl(BookTransformer bookTransformer,
@@ -311,7 +290,6 @@ public class BookServiceImpl implements BookService {
             shelves.add(buildShelf("popular", "Popular Books",
                     String.format("Combined popularity over the last %d days using borrow, click, and rating signals.", normalizedRecentDays),
                     popularBooks,
-                    "POPULARITY",
                     book -> String.format("Recently popular: %d ratings, average %.1f, available %d/%d copies.",
                             safeLong(book.getUsersRateCount()),
                             safeDouble(book.getRate()),
@@ -325,7 +303,6 @@ public class BookServiceImpl implements BookService {
             shelves.add(buildShelf("collaborative", "Readers Like You",
                     "Recommendations inferred from users with similar rating patterns.",
                     collaborativeBooks,
-                    "COLLABORATIVE_FILTERING",
                     book -> String.format("Users with similar tastes also liked %s. Current rating %.1f.",
                             safeString(book.getName()),
                             safeDouble(book.getRate()))));
@@ -337,7 +314,6 @@ public class BookServiceImpl implements BookService {
             shelves.add(buildShelf("preferences", "Preferred Categories",
                     "Recommendations aligned with the categories selected in your profile.",
                     preferenceBooks,
-                    "PREFERENCE_CATEGORY",
                     book -> String.format("Matches your preferred category: %s.",
                             localizeCategoryName(book.getCategory() == null ? null : book.getCategory().getName()))));
             usedBookIds.addAll(preferenceBooks.stream().map(Book::getId).collect(Collectors.toSet()));
@@ -348,14 +324,11 @@ public class BookServiceImpl implements BookService {
             shelves.add(buildShelf("activity", "Based On Your Activity",
                     "Built from the categories and tags of books you rated or borrowed.",
                     activityBooks,
-                    "USER_ACTIVITY",
                     book -> String.format("Close to books you already engaged with in category %s.",
                             localizeCategoryName(book.getCategory() == null ? null : book.getCategory().getName()))));
         }
 
-        BookRecommendationOverviewDto overview = new BookRecommendationOverviewDto(String.format("Recommendation Shelves (%d-day window)", normalizedRecentDays), shelves);
-        recordRecommendationExposure(overview, "overview:" + normalizedRecentDays);
-        return overview;
+        return new BookRecommendationOverviewDto(String.format("Recommendation Shelves (%d-day window)", normalizedRecentDays), shelves);
     }
 
     @Override
@@ -385,7 +358,6 @@ public class BookServiceImpl implements BookService {
             shelves.add(buildShelf("same-category", "Same Category",
                     "Books from the same category, ranked by shared tags and popularity.",
                     sameCategoryBooks,
-                    "SAME_CATEGORY",
                     book -> String.format("%s is in the same category %s and shares %d tags.",
                             safeString(sourceBook.getName()),
                             localizeCategoryName(book.getCategory() == null ? null : book.getCategory().getName()),
@@ -411,7 +383,6 @@ public class BookServiceImpl implements BookService {
             shelves.add(buildShelf("shared-tags", "Shared Tags",
                     "Books that overlap with the current title on one or more tags.",
                     tagSimilarBooks,
-                    "SHARED_TAGS",
                     book -> String.format("%s shares %d tags: %s.",
                             safeString(sourceBook.getName()),
                             sharedTagCount(sourceBook, book),
@@ -425,14 +396,11 @@ public class BookServiceImpl implements BookService {
                 shelves.add(buildShelf("fallback", "Fallback Picks",
                         "Used when the current book has too few close neighbors.",
                         fallbackBooks,
-                        "FALLBACK_POPULAR",
                         book -> String.format("Fallback popular recommendation: %s.", safeString(book.getName()))));
             }
         }
 
-        BookRecommendationOverviewDto overview = new BookRecommendationOverviewDto("Similar Book Recommendations", shelves);
-        recordRecommendationExposure(overview, "similar:" + bookId);
-        return overview;
+        return new BookRecommendationOverviewDto("Similar Book Recommendations", shelves);
     }
 
     private List<Book> findPopularBookEntities(int limit, Set<Long> excludedIds) {
@@ -553,7 +521,7 @@ public class BookServiceImpl implements BookService {
         if (bookIds == null || bookIds.isEmpty()) {
             return Collections.emptyList();
         }
-        Map<Long, Book> booksById = getDao().getRepository().findAllById(bookIds).stream()
+        Map<Long, Book> booksById = getDao().getRepository().findAllWithRelationsByIdIn(bookIds).stream()
                 .filter(book -> !Boolean.TRUE.equals(book.getMarkedAsDeleted()))
                 .collect(Collectors.toMap(Book::getId, Function.identity()));
 
@@ -686,23 +654,6 @@ public class BookServiceImpl implements BookService {
                                                   String title,
                                                   String description,
                                                   List<Book> books,
-                                                  String reasonType,
-                                                  Function<Book, String> reasonBuilder) {
-        BookRecommendationShelfDto shelf = buildShelf(key, title, description, books, reasonBuilder);
-        if (shelf.getBooks() != null) {
-            for (int index = 0; index < shelf.getBooks().size(); index++) {
-                BookDto bookDto = shelf.getBooks().get(index);
-                bookDto.setRecommendationReasonType(reasonType);
-                bookDto.setRecommendationRank(index + 1);
-            }
-        }
-        return shelf;
-    }
-
-    private BookRecommendationShelfDto buildShelf(String key,
-                                                  String title,
-                                                  String description,
-                                                  List<Book> books,
                                                   Function<Book, String> reasonBuilder) {
         List<BookDto> bookDtos = getTransformer().transformEntityToDto(books);
         for (BookDto bookDto : bookDtos) {
@@ -713,13 +664,6 @@ public class BookServiceImpl implements BookService {
                     .ifPresent(book -> bookDto.setRecommendationReason(reasonBuilder.apply(book)));
         }
         return new BookRecommendationShelfDto(key, title, description, bookDtos);
-    }
-
-    private void recordRecommendationExposure(BookRecommendationOverviewDto overview, String requestContext) {
-        if (recommendationEventService == null) {
-            return;
-        }
-        recommendationEventService.recordOverviewExposure(overview, requestContext);
     }
 
     // free hosting cause leak algo speed for fetching

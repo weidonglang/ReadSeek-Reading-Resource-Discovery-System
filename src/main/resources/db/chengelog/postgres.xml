@@ -23,6 +23,5 @@
     <include file="db/chengelog/postgres/20260406_fix_user_enum_string_values.sql"/>
     <include file="db/chengelog/postgres/20260410_add_book_version_and_inventory_checks.sql"/>
     <include file="db/chengelog/postgres/20260414_backfill_book_version_and_inventory_constraints.sql"/>
-    <include file="db/chengelog/postgres/20260417_create_recommendation_event.sql"/>
 
 </databaseChangeLog>

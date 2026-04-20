@@ -52,6 +52,15 @@ public class UserController implements BaseController<UserService> {
                 "User reading info fetched successfully.", userReadingInfoService.findUserReadingInfo());
     }
 
+    @GetMapping("/reading-info/status")
+    @PreAuthorize("isAuthenticated()")
+    public ApiResponse findUserReadingPreferenceStatus() {
+        log.info("UserController: findUserReadingPreferenceStatus() called");
+        return new ApiResponse(true, LocalDateTime.now().toString(),
+                "User reading preference status fetched successfully.",
+                userReadingInfoService.findCurrentUserReadingPreferenceStatus());
+    }
+
     @GetMapping("/home-dashboard")
     @PreAuthorize("isAuthenticated()")
     public ApiResponse findCurrentUserHomeDashboard() {

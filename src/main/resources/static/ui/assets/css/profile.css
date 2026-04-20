@@ -9,3 +9,25 @@
   border: 1px solid rgba(124, 75, 52, 0.14);
   background: linear-gradient(180deg, rgba(255, 252, 247, 0.96) 0%, rgba(241, 233, 221, 0.94) 100%);
 }
+
+.profile-category-picker {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.profile-category-chip {
+  padding: 8px 12px;
+  border-radius: 999px;
+  color: var(--primary-deep);
+  background: rgba(255, 252, 247, 0.88);
+  border: 1px solid rgba(124, 75, 52, 0.18);
+  box-shadow: none;
+}
+
+.profile-category-chip.active {
+  color: #fffaf6;
+  border-color: rgba(85, 114, 88, 0.82);
+  background: linear-gradient(135deg, #557258 0%, #7c6f58 100%);
+}

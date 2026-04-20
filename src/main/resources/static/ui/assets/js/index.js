@@ -41,6 +41,7 @@ const CATEGORY_BLURBS = {
 const homeState = {
   user: null,
   categories: [],
+  readingPreferenceStatus: null,
   overview: { shelves: [] },
   dashboard: {
     readingStreakDays: 0,
@@ -63,6 +64,8 @@ const homeState = {
 };
 
 let homeMessageTimer = null;
+const preferenceDraftCategoryIds = new Set();
+let preferenceDraftReadingLevel = 'BEGINNER';
 
 function categoryBlurb(name) {
   const entry = CATEGORY_BLURBS[name];
@@ -83,6 +86,114 @@ function showTransientMessage(type, message, timeout = 2400) {
   homeMessageTimer = window.setTimeout(() => {
     BookUi.hideMessage('home-message');
   }, timeout);
+}
+
+function hasUsefulReadingPreference(status) {
+  return Boolean(status?.initialized) && Number(status?.preferredCategoryCount || 0) > 0;
+}
+
+function getCategoryId(category) {
+  const id = Number(category?.id);
+  return Number.isFinite(id) && id > 0 ? id : null;
+}
+
+function renderPreferenceCategoryOptions() {
+  const options = (homeState.categories || []).slice(0, 16);
+  if (!options.length) {
+    return `<div class="muted">${escapeHtml(isChinese() ? '分类数据暂时不可用，请稍后到个人资料页完善偏好。' : 'Category data is temporarily unavailable. Please update preferences from Profile later.')}</div>`;
+  }
+  return options.map(category => {
+    const id = getCategoryId(category);
+    if (!id) return '';
+    const active = preferenceDraftCategoryIds.has(id);
+    const name = BookUi.localizeCategoryName(category?.name);
+    return `
+      <button class="preference-chip${active ? ' active' : ''}" type="button" data-preference-category-id="${id}">
+        ${escapeHtml(name)}
+      </button>
+    `;
+  }).join('');
+}
+
+function ensureReadingPreferencePrompt() {
+  let container = document.getElementById('reading-preference-onboarding');
+  if (container) return container;
+
+  container = document.createElement('section');
+  container.id = 'reading-preference-onboarding';
+  container.className = 'reading-preference-onboarding hidden';
+  const homeMessage = document.getElementById('home-message');
+  homeMessage?.insertAdjacentElement('afterend', container);
+  return container;
+}
+
+function renderReadingPreferencePrompt() {
+  const container = ensureReadingPreferencePrompt();
+  if (hasUsefulReadingPreference(homeState.readingPreferenceStatus)) {
+    container.classList.add('hidden');
+    container.innerHTML = '';
+    return;
+  }
+
+  container.classList.remove('hidden');
+  container.innerHTML = `
+    <div class="preference-onboarding-card">
+      <div>
+        <div class="panel-kicker">${escapeHtml(isChinese() ? '新用户兴趣初始化' : 'Preference setup')}</div>
+        <h2>${escapeHtml(isChinese() ? '先选几个阅读偏好，推荐会更稳定' : 'Choose a few interests to stabilize recommendations')}</h2>
+        <p class="muted">${escapeHtml(isChinese() ? '这里会写入你的阅读等级和偏好分类，用于首页推荐、可解释推荐和后续检索排序。' : 'This saves reading level and preferred categories for homepage recommendations, explanations, and future ranking signals.')}</p>
+      </div>
+      <form id="reading-preference-form" class="preference-onboarding-form">
+        <label class="label" for="home-reading-level">${escapeHtml(isChinese() ? '阅读等级' : 'Reading level')}</label>
+        <select id="home-reading-level">
+          <option value="BEGINNER"${preferenceDraftReadingLevel === 'BEGINNER' ? ' selected' : ''}>${escapeHtml(t('common.readLevelBeginner'))}</option>
+          <option value="INTERMEDIATE"${preferenceDraftReadingLevel === 'INTERMEDIATE' ? ' selected' : ''}>${escapeHtml(t('common.readLevelIntermediate'))}</option>
+          <option value="EXPERT"${preferenceDraftReadingLevel === 'EXPERT' ? ' selected' : ''}>${escapeHtml(t('common.readLevelExpert'))}</option>
+        </select>
+        <div class="preference-picker-head">
+          <span class="label">${escapeHtml(isChinese() ? '偏好分类' : 'Preferred categories')}</span>
+          <span class="muted">${escapeHtml(isChinese() ? '至少选择 1 个' : 'Select at least one')}</span>
+        </div>
+        <div class="preference-chip-grid" id="home-preference-category-grid">
+          ${renderPreferenceCategoryOptions()}
+        </div>
+        <div class="preference-onboarding-actions">
+          <button class="primary" type="submit">${escapeHtml(isChinese() ? '保存偏好并刷新推荐' : 'Save and refresh recommendations')}</button>
+          <a class="button-link soft" href="profile.html">${escapeHtml(isChinese() ? '去个人资料页维护' : 'Open profile')}</a>
+        </div>
+      </form>
+    </div>
+  `;
+}
+
+async function refreshRecommendationPanelsAfterPreferenceSave() {
+  const [recommendResult, dashboardResult] = await Promise.allSettled([
+    BookApi.apiRequest('/api/resources/recommendations/overview'),
+    BookApi.apiRequest('/api/user/home-dashboard')
+  ]);
+
+  if (recommendResult.status === 'fulfilled') {
+    homeState.overview = recommendResult.value?.body || { shelves: [] };
+  }
+  if (dashboardResult.status === 'fulfilled') {
+    homeState.dashboard = {
+      ...homeState.dashboard,
+      ...(dashboardResult.value?.body || {})
+    };
+  }
+
+  const recommendSummary = document.getElementById('recommend-summary');
+  const recommendWrap = document.getElementById('recommend-list');
+  if (recommendSummary) {
+    recommendSummary.innerHTML = renderRecommendationSummary(homeState.overview);
+  }
+  if (recommendWrap) {
+    recommendWrap.innerHTML = BookUi.renderRecommendationShelves(buildPreviewOverview(homeState.overview), {
+      emptyMessage: isChinese() ? '暂无推荐数据。' : 'No recommendation data available.'
+    });
+  }
+  renderInsightCards();
+  BookUi.refreshSaveButtons(document);
 }
 
 function toDisplayDateTime(value) {
@@ -1177,11 +1288,60 @@ function bindHomeEvents() {
   });
 }
 
+function bindReadingPreferencePromptEvents() {
+  document.addEventListener('click', event => {
+    const categoryButton = event.target.closest('[data-preference-category-id]');
+    if (!categoryButton) return;
+    const id = Number(categoryButton.dataset.preferenceCategoryId);
+    if (!Number.isFinite(id) || id <= 0) return;
+    if (preferenceDraftCategoryIds.has(id)) {
+      preferenceDraftCategoryIds.delete(id);
+    } else {
+      preferenceDraftCategoryIds.add(id);
+    }
+    renderReadingPreferencePrompt();
+  });
+
+  document.addEventListener('submit', async event => {
+    if (event.target.id !== 'reading-preference-form') return;
+    event.preventDefault();
+    if (!preferenceDraftCategoryIds.size) {
+      showTransientMessage('warning', isChinese() ? '请至少选择一个偏好分类。' : 'Select at least one preferred category.', 2600);
+      return;
+    }
+
+    const payload = {
+      readingLevel: preferenceDraftReadingLevel,
+      userBookCategories: Array.from(preferenceDraftCategoryIds).map(id => ({ category: { id } }))
+    };
+
+    try {
+      const result = await BookApi.apiRequest('/api/user/reading-info', { method: 'POST', body: payload });
+      homeState.readingPreferenceStatus = {
+        initialized: true,
+        preferredCategoryCount: preferenceDraftCategoryIds.size,
+        readingInfo: result?.body || null
+      };
+      renderReadingPreferencePrompt();
+      await refreshRecommendationPanelsAfterPreferenceSave();
+      showTransientMessage('success', isChinese() ? '阅读偏好已保存，推荐结果已刷新。' : 'Reading preferences saved and recommendations refreshed.', 2800);
+    } catch (error) {
+      showTransientMessage('error', error.message, 3600);
+    }
+  });
+
+  document.addEventListener('change', event => {
+    if (event.target.id !== 'home-reading-level') return;
+    preferenceDraftReadingLevel = event.target.value || 'BEGINNER';
+  });
+}
+
 document.addEventListener('DOMContentLoaded', async () => {
   if (!BookUi.requireLogin()) return;
   BookUi.injectLayout();
   bindHomeEvents();
   bindHomeModal();
+  bindReadingPreferencePromptEvents();
 
   updateLiveClock();
   window.setInterval(updateLiveClock, 30 * 1000);
@@ -1194,10 +1354,11 @@ document.addEventListener('DOMContentLoaded', async () => {
   try {
     homeState.user = await BookApi.fetchCurrentUser();
 
-    const [categoryResult, recommendResult, dashboardResult] = await Promise.allSettled([
+    const [categoryResult, recommendResult, dashboardResult, preferenceStatusResult] = await Promise.allSettled([
       BookApi.apiRequest('/api/resources/categories'),
       BookApi.apiRequest('/api/resources/recommendations/overview'),
-      BookApi.apiRequest('/api/user/home-dashboard')
+      BookApi.apiRequest('/api/user/home-dashboard'),
+      BookApi.apiRequest('/api/user/reading-info/status')
     ]);
 
     if (categoryResult.status === 'fulfilled') {
@@ -1212,8 +1373,17 @@ document.addEventListener('DOMContentLoaded', async () => {
         ...(dashboardResult.value?.body || {})
       };
     }
+    if (preferenceStatusResult.status === 'fulfilled') {
+      homeState.readingPreferenceStatus = preferenceStatusResult.value?.body || null;
+      preferenceDraftReadingLevel = homeState.readingPreferenceStatus?.readingInfo?.readingLevel || 'BEGINNER';
+      const existingCategories = homeState.readingPreferenceStatus?.readingInfo?.userBookCategories || [];
+      existingCategories.forEach(item => {
+        const id = getCategoryId(item?.category);
+        if (id) preferenceDraftCategoryIds.add(id);
+      });
+    }
 
-    if (categoryResult.status === 'rejected' || recommendResult.status === 'rejected' || dashboardResult.status === 'rejected') {
+    if (categoryResult.status === 'rejected' || recommendResult.status === 'rejected' || dashboardResult.status === 'rejected' || preferenceStatusResult.status === 'rejected') {
       showTransientMessage('warning', isChinese() ? '首页部分数据加载失败，已按可用信息继续展示。' : 'Some homepage data failed to load, so the page is continuing with the available information.', 3200);
     }
 
@@ -1224,6 +1394,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       emptyMessage: isChinese() ? '暂无推荐数据。' : 'No recommendation data available.'
     });
     renderInsightCards();
+    renderReadingPreferencePrompt();
     BookUi.refreshSaveButtons(document);
   } catch (error) {
     BookUi.showMessage('home-message', 'warning', isChinese() ? `首页数据加载失败：${error.message}` : `Failed to load homepage data: ${error.message}`);

@@ -74,7 +74,7 @@ public class Book extends BaseEntity {
     @Column(name = "available_copies", nullable = false)
     private Integer availableCopies;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "book_tag", schema = "public",
             joinColumns = @JoinColumn(name = "book_id"),
             inverseJoinColumns = @JoinColumn(name = "tag_id"))

@@ -795,55 +795,6 @@ ol {
   color: #435947;
 }
 
-.recommendation-feedback {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  flex-wrap: nowrap;
-  overflow-x: auto;
-  padding: 8px 10px;
-  border-radius: 14px;
-  background: rgba(255, 252, 247, 0.74);
-  border: 1px solid rgba(124, 75, 52, 0.12);
-  scrollbar-width: thin;
-}
-
-.recommendation-feedback::-webkit-scrollbar {
-  height: 6px;
-}
-
-.recommendation-feedback::-webkit-scrollbar-thumb {
-  border-radius: 999px;
-  background: rgba(124, 75, 52, 0.22);
-}
-
-.recommendation-feedback-label {
-  flex: 0 0 auto;
-  color: var(--muted);
-  font-size: 12px;
-  font-weight: 700;
-}
-
-.recommendation-feedback-button {
-  flex: 0 0 auto;
-  min-width: auto;
-  padding: 6px 9px;
-  border-radius: 999px;
-  color: var(--primary-deep);
-  background: rgba(249, 240, 229, 0.78);
-  border: 1px solid rgba(124, 75, 52, 0.16);
-  box-shadow: none;
-  font-size: 11px;
-  line-height: 1;
-  white-space: nowrap;
-}
-
-.recommendation-feedback-button.active {
-  color: #fffaf6;
-  border-color: rgba(85, 114, 88, 0.82);
-  background: linear-gradient(135deg, #557258 0%, #7c6f58 100%);
-}
-
 .section-head {
   display: flex;
   align-items: flex-start;

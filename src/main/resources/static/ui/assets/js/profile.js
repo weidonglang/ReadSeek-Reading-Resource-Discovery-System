@@ -4,6 +4,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (!BookUi.requireLogin()) return;
 
   const birthdateInput = document.getElementById('birthdate');
+  const selectedCategoryIds = new Set();
+  let categoryOptions = [];
 
   function formatBirthdateForInput(value) {
     if (!value) return '';
@@ -37,6 +39,60 @@ document.addEventListener('DOMContentLoaded', async () => {
     birthdateInput.value = formatBirthdateForInput(birthdateInput.value);
   });
 
+  function getCategoryId(category) {
+    const id = Number(category?.id);
+    return Number.isFinite(id) && id > 0 ? id : null;
+  }
+
+  function updateCategoryIdsInput() {
+    const input = document.getElementById('categoryIds');
+    if (input) {
+      input.value = Array.from(selectedCategoryIds).join(',');
+    }
+  }
+
+  function renderCategoryPicker() {
+    const input = document.getElementById('categoryIds');
+    if (!input) return;
+    input.type = 'hidden';
+
+    let picker = document.getElementById('profile-category-picker');
+    if (!picker) {
+      picker = document.createElement('div');
+      picker.id = 'profile-category-picker';
+      picker.className = 'profile-category-picker';
+      input.insertAdjacentElement('afterend', picker);
+    }
+
+    if (!categoryOptions.length) {
+      picker.innerHTML = `<div class="muted">${BookUi.escapeHtml(window.BookI18n.isChinese() ? '分类数据暂时不可用，可以先保留原有偏好。' : 'Category data is temporarily unavailable. Existing preferences can be kept for now.')}</div>`;
+      return;
+    }
+
+    picker.innerHTML = categoryOptions.map(category => {
+      const id = getCategoryId(category);
+      if (!id) return '';
+      const active = selectedCategoryIds.has(id);
+      return `
+        <button class="profile-category-chip${active ? ' active' : ''}" type="button" data-profile-category-id="${id}">
+          ${BookUi.escapeHtml(BookUi.localizeCategoryName(category?.name))}
+        </button>
+      `;
+    }).join('');
+  }
+
+  function setSelectedCategoryIds(ids) {
+    selectedCategoryIds.clear();
+    ids.forEach(id => {
+      const normalizedId = Number(id);
+      if (Number.isFinite(normalizedId) && normalizedId > 0) {
+        selectedCategoryIds.add(normalizedId);
+      }
+    });
+    updateCategoryIdsInput();
+    renderCategoryPicker();
+  }
+
   document.getElementById('gender').innerHTML = `
     <option value="">${t('common.noneSelected')}</option>
     <option value="MALE">${t('common.genderMale')}</option>
@@ -56,10 +112,13 @@ document.addEventListener('DOMContentLoaded', async () => {
   `;
 
   try {
-    const [user, readingRes] = await Promise.all([
+    const [user, readingRes, categoryRes] = await Promise.all([
       BookApi.fetchCurrentUser(),
-      BookApi.apiRequest('/api/user/find-reading-info').catch(() => ({ body: null }))
+      BookApi.apiRequest('/api/user/find-reading-info').catch(() => ({ body: null })),
+      BookApi.apiRequest('/api/resources/categories').catch(() => ({ body: [] }))
     ]);
+
+    categoryOptions = Array.isArray(categoryRes?.body) ? categoryRes.body : [];
 
     document.getElementById('profile-id').textContent = user?.id ?? '-';
     document.getElementById('profile-email-view').textContent = user?.email ?? '-';
@@ -80,9 +139,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     const readingInfo = readingRes?.body;
     document.getElementById('reading-user-id').value = user?.id ?? '';
     document.getElementById('readingLevel').value = readingInfo?.readingLevel ?? 'BEGINNER';
-    document.getElementById('categoryIds').value = Array.isArray(readingInfo?.userBookCategories)
-      ? readingInfo.userBookCategories.map(item => item?.category?.id || '').filter(Boolean).join(',')
-      : '';
+    setSelectedCategoryIds(Array.isArray(readingInfo?.userBookCategories)
+      ? readingInfo.userBookCategories.map(item => item?.category?.id).filter(Boolean)
+      : []);
   } catch (error) {
     if (/anonymousUser|401|403|not exists/i.test(error.message)) {
       BookApi.clearSession();
@@ -127,12 +186,14 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   document.getElementById('reading-form').addEventListener('submit', async event => {
     event.preventDefault();
-    const ids = document.getElementById('categoryIds').value
-      .split(',')
-      .map(value => value.trim())
-      .filter(Boolean)
-      .map(Number)
-      .filter(value => Number.isFinite(value) && value > 0);
+    const ids = selectedCategoryIds.size
+      ? Array.from(selectedCategoryIds)
+      : document.getElementById('categoryIds').value
+        .split(',')
+        .map(value => value.trim())
+        .filter(Boolean)
+        .map(Number)
+        .filter(value => Number.isFinite(value) && value > 0);
     const payload = {
       readingLevel: document.getElementById('readingLevel').value,
       userBookCategories: ids.map(id => ({ category: { id } }))
@@ -144,5 +205,19 @@ document.addEventListener('DOMContentLoaded', async () => {
     } catch (error) {
       BookUi.showMessage('reading-message', 'error', error.message);
     }
+  });
+
+  document.addEventListener('click', event => {
+    const categoryButton = event.target.closest('[data-profile-category-id]');
+    if (!categoryButton) return;
+    const id = Number(categoryButton.dataset.profileCategoryId);
+    if (!Number.isFinite(id) || id <= 0) return;
+    if (selectedCategoryIds.has(id)) {
+      selectedCategoryIds.delete(id);
+    } else {
+      selectedCategoryIds.add(id);
+    }
+    updateCategoryIdsInput();
+    renderCategoryPicker();
   });
 });

@@ -5,7 +5,7 @@ services:
     environment:
       POSTGRES_DB: book_recommendation_system
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+      POSTGRES_PASSWORD: 20041117
     ports:
       - "5043:5432"
     healthcheck:
@@ -31,6 +31,18 @@ services:
       timeout: 10s
       retries: 20
 
+  redis:
+    image: redis:7-alpine
+    container_name: readseek-redis
+    command: ["redis-server", "--appendonly", "no"]
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
   app:
     build:
       context: .
@@ -41,12 +53,16 @@ services:
         condition: service_healthy
       elasticsearch:
         condition: service_healthy
+      redis:
+        condition: service_healthy
     environment:
       SERVER_PORT: 8010
       SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/book_recommendation_system
       SPRING_DATASOURCE_USERNAME: postgres
-      SPRING_DATASOURCE_PASSWORD: postgres
+      SPRING_DATASOURCE_PASSWORD: 20041117
       SPRING_ELASTICSEARCH_URIS: http://elasticsearch:9200
+      SPRING_DATA_REDIS_HOST: redis
+      SPRING_DATA_REDIS_PORT: 6379
       SPRING_JPA_SHOW_SQL: "false"
       SPRING_JPA_FORMAT_SQL: "false"
       LIBRARY_SECURITY_JWT_SECRET: change-me-in-production

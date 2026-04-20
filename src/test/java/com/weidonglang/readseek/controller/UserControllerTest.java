@@ -2,6 +2,7 @@ package com.weidonglang.readseek.controller;
 
 import com.weidonglang.readseek.dto.UserDto;
 import com.weidonglang.readseek.dto.UserReadingInfoDto;
+import com.weidonglang.readseek.dto.UserReadingPreferenceStatusDto;
 import com.weidonglang.readseek.dto.base.response.ApiResponse;
 import com.weidonglang.readseek.enums.UserGender;
 import com.weidonglang.readseek.enums.UserMartialStatus;
@@ -88,6 +89,20 @@ class UserControllerTest {
         assertSame(readingInfo, response.getBody());
         assertNotNull(response.getTimestamp());
         verify(userReadingInfoService).findUserReadingInfo();
+    }
+
+    @Test
+    void testFindUserReadingPreferenceStatus() {
+        UserReadingPreferenceStatusDto status = new UserReadingPreferenceStatusDto(true, 2, new UserReadingInfoDto());
+        when(userReadingInfoService.findCurrentUserReadingPreferenceStatus()).thenReturn(status);
+
+        ApiResponse response = controller.findUserReadingPreferenceStatus();
+
+        assertTrue(response.getSuccess());
+        assertEquals("User reading preference status fetched successfully.", response.getMessage());
+        assertSame(status, response.getBody());
+        assertNotNull(response.getTimestamp());
+        verify(userReadingInfoService).findCurrentUserReadingPreferenceStatus();
     }
 
     @Test

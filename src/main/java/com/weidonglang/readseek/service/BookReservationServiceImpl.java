@@ -10,6 +10,7 @@ import com.weidonglang.readseek.entity.BookReservation;
 import com.weidonglang.readseek.enums.BookReservationStatus;
 import com.weidonglang.readseek.transformer.BookReservationTransformer;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import jakarta.persistence.EntityExistsException;
@@ -26,13 +27,25 @@ public class BookReservationServiceImpl implements BookReservationService {
     private final BookDao bookDao;
     private final BookLoanDao bookLoanDao;
     private final UserService userService;
+    private final ReservationRequestGuard reservationRequestGuard;
 
     public BookReservationServiceImpl(BookReservationDao bookReservationDao, BookReservationTransformer bookReservationTransformer, BookDao bookDao, BookLoanDao bookLoanDao, UserService userService) {
+        this(bookReservationDao, bookReservationTransformer, bookDao, bookLoanDao, userService, ReservationRequestGuard.noOp());
+    }
+
+    @Autowired
+    public BookReservationServiceImpl(BookReservationDao bookReservationDao,
+                                      BookReservationTransformer bookReservationTransformer,
+                                      BookDao bookDao,
+                                      BookLoanDao bookLoanDao,
+                                      UserService userService,
+                                      ReservationRequestGuard reservationRequestGuard) {
         this.bookReservationDao = bookReservationDao;
         this.bookReservationTransformer = bookReservationTransformer;
         this.bookDao = bookDao;
         this.bookLoanDao = bookLoanDao;
         this.userService = userService;
+        this.reservationRequestGuard = reservationRequestGuard;
     }
 
     @Override
@@ -50,28 +63,34 @@ public class BookReservationServiceImpl implements BookReservationService {
     public BookReservationDto reserveBook(Long bookId) {
         log.info("BookReservationService: reserveBook() called");
         Long currentUserId = userService.getCurrentUser().getId();
-        Book book = findBookEntityForUpdate(bookId);
+        ReservationRequestGuard.GuardToken guardToken = reservationRequestGuard.acquire(currentUserId, bookId);
+        try {
+            Book book = findBookEntityForUpdate(bookId);
 
-        if (Boolean.TRUE.equals(book.getMarkedAsDeleted())) {
-            throw new EntityExistsException("Book is not available for reservation.");
-        }
-        if (book.getAvailableCopies() > 0) {
-            throw new EntityExistsException("Book is available now. Borrow it directly instead of reserving.");
-        }
-        if (bookLoanDao.findActiveLoanByUserIdAndBookId(currentUserId, bookId).isPresent()) {
-            throw new EntityExistsException("You already borrowed this book.");
-        }
-        if (getDao().findActiveReservationByUserIdAndBookId(currentUserId, bookId).isPresent()) {
-            throw new EntityExistsException("You already have an active reservation for this book.");
-        }
+            if (Boolean.TRUE.equals(book.getMarkedAsDeleted())) {
+                throw new EntityExistsException("Book is not available for reservation.");
+            }
+            if (book.getAvailableCopies() > 0) {
+                throw new EntityExistsException("Book is available now. Borrow it directly instead of reserving.");
+            }
+            if (bookLoanDao.findActiveLoanByUserIdAndBookId(currentUserId, bookId).isPresent()) {
+                throw new EntityExistsException("You already borrowed this book.");
+            }
+            if (getDao().findActiveReservationByUserIdAndBookId(currentUserId, bookId).isPresent()) {
+                throw new EntityExistsException("You already have an active reservation for this book.");
+            }
 
-        BookReservation reservation = new BookReservation();
-        reservation.setUser(userService.getDao().findById(currentUserId).orElseThrow(EntityNotFoundException::new));
-        reservation.setBook(book);
-        reservation.setRequestedAt(LocalDateTime.now());
-        reservation.setStatus(BookReservationStatus.ACTIVE);
+            BookReservation reservation = new BookReservation();
+            reservation.setUser(userService.getDao().findById(currentUserId).orElseThrow(EntityNotFoundException::new));
+            reservation.setBook(book);
+            reservation.setRequestedAt(LocalDateTime.now());
+            reservation.setStatus(BookReservationStatus.ACTIVE);
 
-        return getTransformer().transformEntityToDto(getDao().create(reservation));
+            return getTransformer().transformEntityToDto(getDao().create(reservation));
+        } catch (RuntimeException exception) {
+            reservationRequestGuard.release(guardToken);
+            throw exception;
+        }
     }
 
     @Override

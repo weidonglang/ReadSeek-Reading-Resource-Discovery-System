@@ -24,7 +24,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyIterable;
+import static org.mockito.ArgumentMatchers.anyCollection;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -155,7 +155,7 @@ class BookSearchServiceImplTest {
         when(searchHit.getContent()).thenReturn(document);
         when(searchHit.getScore()).thenReturn(score);
         when(elasticsearchOperations.search(any(Query.class), eq(BookSearchDocument.class))).thenReturn(searchHits);
-        when(bookRepository.findAllById(anyIterable())).thenReturn(List.of(bookEntity));
+        when(bookRepository.findAllWithRelationsByIdIn(anyCollection())).thenReturn(List.of(bookEntity));
         when(bookTransformer.transformEntityToDto(any(List.class))).thenReturn(List.of(bookDto));
     }
 

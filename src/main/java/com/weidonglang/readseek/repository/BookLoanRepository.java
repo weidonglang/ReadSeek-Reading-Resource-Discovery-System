@@ -2,6 +2,7 @@ package com.weidonglang.readseek.repository;
 
 import com.weidonglang.readseek.entity.BookLoan;
 import com.weidonglang.readseek.enums.BookLoanStatus;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -23,15 +24,19 @@ public interface BookLoanRepository extends JpaRepository<BookLoan, Long> {
     Long countByMarkedAsDeletedFalse();
 
     @Query("SELECT bl FROM BookLoan bl WHERE bl.user.id = :userId AND bl.status = :status AND bl.markedAsDeleted = false ORDER BY bl.dueDate ASC, bl.borrowedAt DESC")
+    @EntityGraph(attributePaths = {"user", "book", "book.author", "book.category", "book.publisher", "book.tags"})
     List<BookLoan> findCurrentUserLoansByStatus(@Param("userId") Long userId, @Param("status") BookLoanStatus status);
 
     @Query("SELECT bl FROM BookLoan bl WHERE bl.user.id = :userId AND bl.status = :status AND bl.markedAsDeleted = false ORDER BY bl.returnedAt DESC, bl.borrowedAt DESC")
+    @EntityGraph(attributePaths = {"user", "book", "book.author", "book.category", "book.publisher", "book.tags"})
     List<BookLoan> findCurrentUserLoanHistory(@Param("userId") Long userId, @Param("status") BookLoanStatus status);
 
     @Query("SELECT bl FROM BookLoan bl WHERE bl.status = :status AND bl.markedAsDeleted = false ORDER BY bl.dueDate ASC, bl.borrowedAt DESC")
+    @EntityGraph(attributePaths = {"user", "book", "book.author", "book.category", "book.publisher", "book.tags"})
     List<BookLoan> findAllLoansByStatusOrderByDueDateAsc(@Param("status") BookLoanStatus status);
 
     @Query("SELECT bl FROM BookLoan bl WHERE bl.status = :status AND bl.markedAsDeleted = false ORDER BY bl.returnedAt DESC, bl.borrowedAt DESC")
+    @EntityGraph(attributePaths = {"user", "book", "book.author", "book.category", "book.publisher", "book.tags"})
     List<BookLoan> findAllLoanHistoryByStatusOrderByReturnedAtDesc(@Param("status") BookLoanStatus status);
 
     @Query("SELECT bl.book.id, COUNT(bl.id) FROM BookLoan bl " +

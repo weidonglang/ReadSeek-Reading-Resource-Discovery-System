@@ -516,8 +516,6 @@
     const protectedLinks = user ? `
             <a data-nav="home" href="index.html">${t('common.nav.home')}</a>
             <a data-nav="books" href="books.html">${t('common.nav.books')}</a>
-            <a data-nav="qa" href="qa.html">${window.BookI18n?.isChinese?.() ? '证据问答' : 'Evidence QA'}</a>
-            <a data-nav="planning" href="planning.html">${window.BookI18n?.isChinese?.() ? '阅读规划' : 'Reading Plan'}</a>
             <a data-nav="borrowings" href="borrowings.html">${t('common.nav.borrowings')}</a>
             <a data-nav="recommendations" href="recommendations.html">${t('common.nav.recommendations')}</a>
             <a data-nav="profile" href="profile.html">${t('common.nav.profile')}</a>
@@ -808,42 +806,6 @@
     });
   }
 
-  function bindRecommendationFeedback() {
-    document.addEventListener('click', async event => {
-      const button = event.target.closest('[data-recommendation-feedback]');
-      if (!button) return;
-      const bookId = Number(button.dataset.bookId);
-      if (!Number.isFinite(bookId) || bookId <= 0) return;
-
-      button.disabled = true;
-      try {
-        await window.BookApi.apiRequest('/api/recommendation-events/feedback', {
-          method: 'POST',
-          body: {
-            bookId,
-            feedbackType: button.dataset.recommendationFeedback,
-            source: button.dataset.source || null,
-            reason: button.dataset.reason || null,
-            reasonType: button.dataset.reasonType || null,
-            rankPosition: button.dataset.rank ? Number(button.dataset.rank) : null,
-            requestContext: button.dataset.requestContext || null
-          }
-        });
-        button.classList.add('active');
-        document.dispatchEvent(new CustomEvent('book:toast', {
-          detail: {
-            message: window.BookI18n?.isChinese?.() ? '推荐反馈已记录。' : 'Recommendation feedback recorded.'
-          }
-        }));
-      } catch (error) {
-        document.dispatchEvent(new CustomEvent('book:toast', {
-          detail: { message: error.message }
-        }));
-        button.disabled = false;
-      }
-    });
-  }
-
   function injectLayout() {
     const shell = document.querySelector('.app-shell');
     if (!shell) return;
@@ -853,7 +815,6 @@
     setActiveNav();
     bindBehaviorTracker();
     bindStorageActions();
-    bindRecommendationFeedback();
     refreshSaveButtons();
     refreshScrollShells();
     window.addEventListener('resize', () => refreshScrollShells());
@@ -882,23 +843,12 @@
     const description = book?.description || t('common.noDescription');
     const reason = localizeRecommendationReason(options.reason || book?.recommendationReason || options.comment || '');
     const source = options.source || book?.recommendationSource || '';
-    const reasonType = options.reasonType || book?.recommendationReasonType || '';
-    const rankPosition = options.rankPosition || book?.recommendationRank || '';
-    const requestContext = options.requestContext || '';
     const actionType = options.actionType || (source.startsWith('recommendation:') ? 'RECOMMENDATION_CLICK' : 'BOOK_DETAIL_CLICK');
     const sourceLabel = localizeRecommendationTitle(options.sourceLabel || source);
     const searchKeyword = options.searchKeyword || '';
     const detailHref = buildBookDetailHref(id, { source, reason });
     const normalizedBook = normalizeStoredBook(book) || { id };
     const savePayload = escapeHtml(JSON.stringify(normalizedBook));
-    const feedbackMarkup = source.startsWith('recommendation:') ? `
-        <div class="recommendation-feedback">
-          <span class="recommendation-feedback-label">${escapeHtml(window.BookI18n?.isChinese?.() ? '反馈' : 'Feedback')}</span>
-          <button type="button" class="recommendation-feedback-button" data-recommendation-feedback="INTERESTED" data-book-id="${escapeHtml(id)}" data-source="${escapeHtml(source)}" data-reason="${escapeHtml(reason)}" data-reason-type="${escapeHtml(reasonType)}" data-rank="${escapeHtml(rankPosition)}" data-request-context="${escapeHtml(requestContext)}">${escapeHtml(window.BookI18n?.isChinese?.() ? '感兴趣' : 'Interested')}</button>
-          <button type="button" class="recommendation-feedback-button" data-recommendation-feedback="NOT_INTERESTED" data-book-id="${escapeHtml(id)}" data-source="${escapeHtml(source)}" data-reason="${escapeHtml(reason)}" data-reason-type="${escapeHtml(reasonType)}" data-rank="${escapeHtml(rankPosition)}" data-request-context="${escapeHtml(requestContext)}">${escapeHtml(window.BookI18n?.isChinese?.() ? '不感兴趣' : 'Not interested')}</button>
-          <button type="button" class="recommendation-feedback-button" data-recommendation-feedback="ALREADY_READ" data-book-id="${escapeHtml(id)}" data-source="${escapeHtml(source)}" data-reason="${escapeHtml(reason)}" data-reason-type="${escapeHtml(reasonType)}" data-rank="${escapeHtml(rankPosition)}" data-request-context="${escapeHtml(requestContext)}">${escapeHtml(window.BookI18n?.isChinese?.() ? '已读过' : 'Already read')}</button>
-          <button type="button" class="recommendation-feedback-button" data-recommendation-feedback="LESS_SIMILAR" data-book-id="${escapeHtml(id)}" data-source="${escapeHtml(source)}" data-reason="${escapeHtml(reason)}" data-reason-type="${escapeHtml(reasonType)}" data-rank="${escapeHtml(rankPosition)}" data-request-context="${escapeHtml(requestContext)}">${escapeHtml(window.BookI18n?.isChinese?.() ? '少推荐类似' : 'Less similar')}</button>
-        </div>` : '';
     const hitMeta = (sourceLabel || reason) ? `
       <div class="book-hit-meta">
         ${sourceLabel ? `<span class="tag source-chip">${escapeHtml(t('common.source', { value: sourceLabel }))}</span>` : ''}
@@ -921,7 +871,6 @@
         </div>
         <div class="book-summary muted">${escapeHtml(description.slice(0, 100))}${description.length > 100 ? '...' : ''}</div>
         ${hitMeta}
-        ${feedbackMarkup}
         <div class="book-actions">
           <a href="${detailHref}"
              class="action-link primary"
@@ -958,9 +907,6 @@
         source: `recommendation:${shelf.key || 'overview'}`,
         sourceLabel: shelf.title || shelf.key || t('common.recommendationShelf'),
         reason: book?.recommendationReason || shelf.description || '',
-        reasonType: book?.recommendationReasonType || shelf.key || '',
-        rankPosition: book?.recommendationRank || '',
-        requestContext: overview?.title || '',
         actionType: 'RECOMMENDATION_CLICK'
       })).join('');
 

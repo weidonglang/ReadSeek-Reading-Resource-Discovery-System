@@ -222,7 +222,7 @@ public class BookSearchServiceImpl implements BookSearchService {
                     .filter(Objects::nonNull)
                     .collect(Collectors.toList());
 
-            Map<Long, BookDto> booksById = bookTransformer.transformEntityToDto(bookRepository.findAllById(ids)).stream()
+            Map<Long, BookDto> booksById = bookTransformer.transformEntityToDto(bookRepository.findAllWithRelationsByIdIn(ids)).stream()
                     .collect(Collectors.toMap(BookDto::getId, Function.identity()));
 
             List<BookSearchHitDto> hits = new ArrayList<>();

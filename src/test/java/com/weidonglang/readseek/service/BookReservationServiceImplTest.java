@@ -10,6 +10,7 @@ import com.weidonglang.readseek.entity.Book;
 import com.weidonglang.readseek.entity.BookReservation;
 import com.weidonglang.readseek.entity.User;
 import com.weidonglang.readseek.transformer.BookReservationTransformer;
+import jakarta.persistence.EntityExistsException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -18,8 +19,10 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Optional;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -43,6 +46,9 @@ class BookReservationServiceImplTest {
 
     @Mock
     private UserDao userDao;
+
+    @Mock
+    private ReservationRequestGuard reservationRequestGuard;
 
     private BookReservationServiceImpl service;
 
@@ -87,5 +93,28 @@ class BookReservationServiceImplTest {
         verify(bookDao).findByIdForUpdate(401L);
         verify(bookReservationDao).create(any(BookReservation.class));
         assertSame(resultDto, actual);
+    }
+
+    @Test
+    void reserveBookShouldStopBeforeDatabaseWorkWhenRedisGuardRejectsDuplicateRequest() {
+        UserDto currentUser = new UserDto();
+        currentUser.setId(31L);
+        service = new BookReservationServiceImpl(
+                bookReservationDao,
+                bookReservationTransformer,
+                bookDao,
+                bookLoanDao,
+                userService,
+                reservationRequestGuard
+        );
+
+        when(userService.getCurrentUser()).thenReturn(currentUser);
+        when(reservationRequestGuard.acquire(31L, 401L))
+                .thenThrow(new EntityExistsException("A reservation request for this book is already being processed."));
+
+        assertThrows(EntityExistsException.class, () -> service.reserveBook(401L));
+
+        verify(bookDao, never()).findByIdForUpdate(401L);
+        verify(bookReservationDao, never()).create(any(BookReservation.class));
     }
 }

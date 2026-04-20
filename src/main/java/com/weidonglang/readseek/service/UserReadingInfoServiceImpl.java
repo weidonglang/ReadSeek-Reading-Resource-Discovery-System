@@ -3,13 +3,13 @@ package com.weidonglang.readseek.service;
 import com.weidonglang.readseek.dao.UserReadingInfoDao;
 import com.weidonglang.readseek.dto.UserBookCategoryDto;
 import com.weidonglang.readseek.dto.UserReadingInfoDto;
+import com.weidonglang.readseek.dto.UserReadingPreferenceStatusDto;
 import com.weidonglang.readseek.entity.User;
 import com.weidonglang.readseek.entity.UserReadingInfo;
 import com.weidonglang.readseek.transformer.UserReadingInfoTransformer;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import jakarta.persistence.EntityExistsException;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import java.util.ArrayList;
@@ -85,5 +85,19 @@ public class UserReadingInfoServiceImpl implements UserReadingInfoService {
         UserReadingInfoDto userReadingInfoDto = getTransformer().transformEntityToDto(userReadingInfo.get());
         userReadingInfoDto.setUserBookCategories(userBookCategoryService.findAllUserBookCategories());
         return userReadingInfoDto;
+    }
+
+    @Override
+    public UserReadingPreferenceStatusDto findCurrentUserReadingPreferenceStatus() {
+        log.info("UserReadingInfoService: findCurrentUserReadingPreferenceStatus() called");
+        Optional<UserReadingInfo> userReadingInfo = getDao().findByUserId(userService.getCurrentUser().getId());
+        if (userReadingInfo.isEmpty()) {
+            return new UserReadingPreferenceStatusDto(false, 0, null);
+        }
+
+        UserReadingInfoDto userReadingInfoDto = getTransformer().transformEntityToDto(userReadingInfo.get());
+        List<UserBookCategoryDto> userBookCategories = userBookCategoryService.findAllUserBookCategories();
+        userReadingInfoDto.setUserBookCategories(userBookCategories);
+        return new UserReadingPreferenceStatusDto(true, userBookCategories.size(), userReadingInfoDto);
     }
 }

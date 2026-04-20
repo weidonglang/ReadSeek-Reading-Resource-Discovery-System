@@ -156,43 +156,16 @@ function Remove-StaleSearchContainer {
     docker rm readseek-search | Out-Null
 }
 
-function Ensure-DatabaseContainer {
-    $containerId = (docker ps -a --filter 'name=^/readseek-db$' --format '{{.ID}}' 2>$null | Select-Object -First 1)
-    if ([string]::IsNullOrWhiteSpace($containerId)) {
-        return $false
-    }
-
-    $state = (docker inspect --format '{{.State.Status}}' readseek-db 2>$null | Out-String).Trim()
-    if ($state -eq 'running') {
-        Write-Host 'Reusing running PostgreSQL container readseek-db.'
-        return $true
-    }
-
-    Write-Host "Starting existing PostgreSQL container readseek-db ($state)."
-    docker start readseek-db | Out-Null
-    return $true
-}
-
 function Start-DockerDependencies {
     Write-Step 'Starting Docker dependencies'
     Assert-CommandExists 'docker'
-    $hasDatabaseContainer = Ensure-DatabaseContainer
     Remove-StaleSearchContainer
-    if ($hasDatabaseContainer) {
-        docker compose up -d elasticsearch
-    } else {
-        docker compose up -d db elasticsearch
-    }
+    docker compose up -d db elasticsearch
     if (-not $SkipWait) {
         Write-Step 'Waiting for PostgreSQL and Elasticsearch'
         Wait-ForDockerHealth -ContainerName 'readseek-db'
         Wait-ForDockerHealth -ContainerName 'readseek-search'
     }
-}
-
-function Apply-LocalSchemaPatches {
-    Write-Step 'Applying database schema patches'
-    powershell -NoLogo -NoProfile -ExecutionPolicy Bypass -File "$projectRoot\scripts\apply-local-schema-patches.ps1"
 }
 
 function Start-ReadSeekAiService {
@@ -257,7 +230,6 @@ Write-Host "JAVA_HOME: $resolvedJavaHome"
 Write-Host 'Database password: <hidden>'
 
 Start-DockerDependencies
-Apply-LocalSchemaPatches
 
 if (-not $NoAi) {
     Start-ReadSeekAiService

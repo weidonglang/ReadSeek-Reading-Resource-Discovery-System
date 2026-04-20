@@ -100,7 +100,7 @@ public class ElasticsearchVectorBookSearchService implements VectorBookSearchSer
                     .filter(Objects::nonNull)
                     .collect(Collectors.toList());
 
-            Map<Long, BookDto> booksById = bookTransformer.transformEntityToDto(bookRepository.findAllById(ids)).stream()
+            Map<Long, BookDto> booksById = bookTransformer.transformEntityToDto(bookRepository.findAllWithRelationsByIdIn(ids)).stream()
                     .collect(Collectors.toMap(BookDto::getId, Function.identity()));
 
             List<BookSearchHitDto> hits = new ArrayList<>();

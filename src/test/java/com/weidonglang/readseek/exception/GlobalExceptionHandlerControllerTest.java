@@ -10,6 +10,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.web.server.ResponseStatusException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -65,6 +66,16 @@ class GlobalExceptionHandlerControllerTest {
         assertEquals(HttpStatus.CONFLICT, response.getStatusCode());
         assertEquals("The request conflicts with the current state of the resource.", response.getBody().getMessage());
         assertNull(response.getBody().getBody());
+    }
+
+    @Test
+    void handleResponseStatusExceptionReturnsOriginalClientStatus() {
+        ResponseEntity<ApiResponse> response = handler.handleResponseStatusException(
+                new ResponseStatusException(HttpStatus.TOO_MANY_REQUESTS, "Too many authentication attempts. Please try again later.")
+        );
+
+        assertEquals(HttpStatus.TOO_MANY_REQUESTS, response.getStatusCode());
+        assertEquals("Too many authentication attempts. Please try again later.", response.getBody().getMessage());
     }
 
     @Test
