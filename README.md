@@ -10,7 +10,7 @@ The current demo uses **book data** as the primary resource type and focuses on 
 - user behavior analytics.
 
 **ReadSeek** 是一个面向阅读资源发现的 Java Web 系统。  
-当前版本以**图书数据**作为主要演示资源类型，重点展示**自然语言混合检索、可解释推荐、借阅流通与用户行为分析**能力。
+当前版本以**图书数据**作为主要演示资源类型，重点展示**自然语言混合检索、可解释推荐、借阅流通与用户行为分析**的能力。
 
 ---
 
