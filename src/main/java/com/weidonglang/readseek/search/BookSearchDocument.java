@@ -45,7 +45,7 @@ public class BookSearchDocument {
     @Field(type = FieldType.Text)
     private String searchableText;
 
-    @Field(type = FieldType.Dense_Vector, dims = 384)
+    @Field(type = FieldType.Dense_Vector, dims = 1024)
     private List<Float> embedding;
 
     @Field(type = FieldType.Double)

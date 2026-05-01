@@ -36,3 +36,37 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# Python virtual environments
+.venv/
+.venv-ai/
+venv/
+env/
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Python/package cache
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+pip-wheel-metadata/
+
+# Hugging Face / model cache
+.cache/
+huggingface/
+models/
+AIModels/
+*.safetensors
+*.bin
+*.pt
+*.pth
+*.onnx
+*.gguf
+*.ckpt
+
+# Local AI runtime cache
+ai-service/.cache/
+ai-service/models/
+ai-service/huggingface/

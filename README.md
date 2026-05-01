@@ -611,6 +611,97 @@ A production-ready version would still require:
 
 ---
 
+## Local BGE-M3 Embedding Service
+
+ReadSeek supports `BAAI/bge-m3` as a local multilingual embedding model for hybrid retrieval.
+
+The model weights are not stored in this repository. On first startup, the AI service downloads the model into the local Hugging Face cache. You can customize the cache location with `READSEEK_MODEL_HOME`.
+
+### First-time setup
+
+```bat
+scripts\setup-bge-m3-ai-env.bat
+```
+
+### Start AI service
+
+```bat
+start-bge-m3-ai-service.bat
+```
+
+To use a custom model cache directory:
+
+```bat
+set READSEEK_MODEL_HOME=D:\AIModels\huggingface
+start-bge-m3-ai-service.bat
+```
+
+### Health check
+
+```bat
+curl http://127.0.0.1:8001/health
+```
+
+Expected response:
+
+```json
+{
+  "status": "ok",
+  "embeddingBackend": "bge-m3",
+  "dimensions": 1024,
+  "model": "BAAI/bge-m3"
+}
+```
+
+### Test embedding API
+
+```bat
+.venv-ai\Scripts\python.exe ai-service\test_embed_api.py
+```
+
+Expected output:
+
+```text
+backend: bge-m3
+dimensions: 1024
+vector length: 1024
+```
+
+### Rebuild search index
+
+After starting the AI service and Spring Boot backend:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\rebuild-search-index.ps1
+```
+
+### Verify hybrid retrieval
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\verify-hybrid-search.ps1 -Query "想找类似三体但更容易读的英文科幻小说"
+powershell -ExecutionPolicy Bypass -File .\scripts\verify-hybrid-search.ps1 -Query "books like The Alchemist about personal growth"
+```
+
+Expected strategy examples:
+
+```text
+hybrid-v2(exact-db+vector+bm25)
+hybrid-v2(exact-db+bm25+vector)
+```
+
+### Offline demonstration
+
+For offline demonstrations, prepare the model cache in advance and copy it to the target machine. Then set:
+
+```bat
+set READSEEK_MODEL_HOME=D:\AIModels\huggingface
+start-bge-m3-ai-service.bat
+```
+
+Do not commit model weights or virtual environments into Git.
+
+---
+
 ## License
 
 See [LICENSE](LICENSE).

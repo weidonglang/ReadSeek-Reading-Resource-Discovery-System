@@ -32,6 +32,8 @@ public class BookDto extends BaseDto {
     private Set<TagDto> tags;
     private String recommendationSource;
     private String recommendationReason;
+    private String recommendationReasonType;
+    private Integer recommendationRank;
 }
 /*
 weidonglang
