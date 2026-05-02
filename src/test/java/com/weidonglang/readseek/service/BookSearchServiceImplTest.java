@@ -21,10 +21,12 @@ import org.springframework.data.elasticsearch.core.SearchHits;
 import org.springframework.data.elasticsearch.core.query.Query;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyCollection;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -51,6 +53,9 @@ class BookSearchServiceImplTest {
     @Mock
     private VectorBookSearchService vectorBookSearchService;
 
+    @Mock
+    private BookReranker bookReranker;
+
     private SearchProperties searchProperties;
     private BookSearchServiceImpl service;
 
@@ -66,7 +71,8 @@ class BookSearchServiceImplTest {
                 elasticsearchOperations,
                 searchQueryIntentClassifier,
                 searchQueryExpander,
-                vectorBookSearchService
+                vectorBookSearchService,
+                bookReranker
         );
     }
 
@@ -137,6 +143,63 @@ class BookSearchServiceImplTest {
         assertEquals("EXACT_DB", response.getHits().get(0).getMatchType());
         verify(bookRepository).findExactMatches(eq("Jane Austen"), any(Pageable.class));
         verify(vectorBookSearchService).search(any(String.class), any(Integer.class));
+    }
+
+    @Test
+    void searchBooksShouldUseRerankerWhenAvailable() {
+        String query = "books like The Alchemist about personal growth";
+        BookDto vectorBook = buildBookDto(1L, "Vector Match");
+        BookDto bm25Book = buildBookDto(2L, "BM25 Match");
+
+        when(searchQueryIntentClassifier.classify(query)).thenReturn(SearchQueryIntent.KEYWORD);
+        when(searchQueryExpander.expand(query, SearchQueryIntent.KEYWORD)).thenReturn(query);
+        when(searchQueryExpander.resolveExactCandidateQueries(query)).thenReturn(List.of(query));
+        when(bookRepository.findExactMatches(eq(query), any(Pageable.class))).thenReturn(List.of());
+        when(vectorBookSearchService.search(eq(query), any(Integer.class)))
+                .thenReturn(List.of(new BookSearchHitDto(vectorBook, 1.2D, "VECTOR", "Semantic similarity from vector search.")));
+        mockBm25Result(2L, bm25Book, 1.04f);
+        when(bookReranker.isEnabled()).thenReturn(true);
+        when(bookReranker.rerank(eq(query), any(List.class), anyInt()))
+                .thenReturn(Optional.of(List.of(
+                        new BookSearchHitDto(vectorBook, 0.92D, "VECTOR+RERANK", "Reranked."),
+                        new BookSearchHitDto(bm25Book, 0.81D, "BM25+RERANK", "Reranked.")
+                )));
+
+        BookSearchResponseDto response = service.searchBooks(query, 5);
+
+        assertEquals("hybrid-v3(exact-db+bm25+vector+reranker)", response.getStrategy());
+        assertEquals(List.of(1L, 2L), response.getHits().stream().map(hit -> hit.getBook().getId()).toList());
+    }
+
+    @Test
+    void searchBooksShouldKeepExactMatchesPinnedBeforeRerankedCandidates() {
+        String query = "9780141995359";
+        BookDto exactBook = buildBookDto(9L, "Exact ISBN Match");
+        BookDto vectorBook = buildBookDto(1L, "Vector Match");
+        Book exactEntity = new Book();
+        exactEntity.setId(9L);
+        exactEntity.setName("Exact ISBN Match");
+
+        when(searchQueryIntentClassifier.classify(query)).thenReturn(SearchQueryIntent.EXACT_LOOKUP);
+        when(searchQueryExpander.expand(query, SearchQueryIntent.EXACT_LOOKUP)).thenReturn(query);
+        when(searchQueryExpander.resolveExactCandidateQueries(query)).thenReturn(List.of(query));
+        when(bookRepository.findExactMatches(eq(query), any(Pageable.class))).thenReturn(List.of(exactEntity));
+        when(vectorBookSearchService.search(eq(query), any(Integer.class)))
+                .thenReturn(List.of(new BookSearchHitDto(vectorBook, 1.2D, "VECTOR", "Semantic similarity from vector search.")));
+        SearchHits<BookSearchDocument> emptySearchHits = mockEmptySearchHits();
+        when(elasticsearchOperations.search(any(Query.class), eq(BookSearchDocument.class))).thenReturn(emptySearchHits);
+        when(bookTransformer.transformEntityToDto(List.of(exactEntity))).thenReturn(List.of(exactBook));
+        when(bookReranker.isEnabled()).thenReturn(true);
+        when(bookReranker.rerank(eq(query), any(List.class), anyInt()))
+                .thenReturn(Optional.of(List.of(
+                        new BookSearchHitDto(vectorBook, 0.92D, "VECTOR+RERANK", "Reranked.")
+                )));
+
+        BookSearchResponseDto response = service.searchBooks(query, 3);
+
+        assertEquals("hybrid-v3(exact-db+bm25+vector+reranker)", response.getStrategy());
+        assertEquals(List.of(9L, 1L), response.getHits().stream().map(hit -> hit.getBook().getId()).toList());
+        assertEquals("EXACT_DB", response.getHits().get(0).getMatchType());
     }
 
     private void mockBm25Result(Long bookId, BookDto bookDto, float score) {

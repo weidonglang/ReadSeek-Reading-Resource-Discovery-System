@@ -9,6 +9,7 @@ import com.weidonglang.readseek.dto.UserDto;
 import com.weidonglang.readseek.entity.Book;
 import com.weidonglang.readseek.entity.BookLoan;
 import com.weidonglang.readseek.entity.BookReservation;
+import com.weidonglang.readseek.entity.User;
 import com.weidonglang.readseek.enums.BookLoanStatus;
 import com.weidonglang.readseek.enums.BookReservationStatus;
 import com.weidonglang.readseek.transformer.BookLoanTransformer;
@@ -113,15 +114,17 @@ public class BookLoanServiceImpl implements BookLoanService {
             reservation.setFulfilledAt(now);
             bookReservationDao.update(reservation);
         }
-        BookLoanDto loanDto = new BookLoanDto();
-        loanDto.setUser(currentUser);
-        loanDto.setBook(book);
-        loanDto.setBorrowedAt(now);
-        loanDto.setDueDate(now.plusDays(DEFAULT_LOAN_DAYS));
-        loanDto.setRenewCount(0);
-        loanDto.setStatus(BookLoanStatus.BORROWED);
+        User userEntity = userService.getDao().findById(currentUser.getId())
+                .orElseThrow(() -> new EntityNotFoundException("User not found for id: " + currentUser.getId()));
+        BookLoan loan = new BookLoan();
+        loan.setUser(userEntity);
+        loan.setBook(bookEntity);
+        loan.setBorrowedAt(now);
+        loan.setDueDate(now.plusDays(DEFAULT_LOAN_DAYS));
+        loan.setRenewCount(0);
+        loan.setStatus(BookLoanStatus.BORROWED);
 
-        BookLoanDto createdLoan = getTransformer().transformEntityToDto(getDao().create(getTransformer().transformDtoToEntity(loanDto)));
+        BookLoanDto createdLoan = getTransformer().transformEntityToDto(getDao().create(loan));
         if (userBehaviorLogService != null) {
             userBehaviorLogService.recordBookBorrow(bookId, "鐢ㄦ埛鎴愬姛鍊熼槄鍥句功");
         }

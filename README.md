@@ -613,9 +613,10 @@ A production-ready version would still require:
 
 ## Local BGE-M3 Embedding Service
 
-ReadSeek supports `BAAI/bge-m3` as a local multilingual embedding model for hybrid retrieval.
+ReadSeek supports `BAAI/bge-m3` as a local multilingual embedding model for hybrid retrieval. The same local AI service also exposes `BAAI/bge-reranker-v2-m3` for optional query-passage reranking after exact, BM25, and vector candidates are merged.
 
 The model weights are not stored in this repository. On first startup, the AI service downloads the model into the local Hugging Face cache. You can customize the cache location with `READSEEK_MODEL_HOME`.
+The reranker model is also cached locally and must not be committed to Git.
 
 ### First-time setup
 
@@ -667,6 +668,23 @@ dimensions: 1024
 vector length: 1024
 ```
 
+### Test rerank API
+
+The first rerank request may take longer because `BAAI/bge-reranker-v2-m3` is lazy-loaded and downloaded if it is not already in the local cache.
+
+```bat
+.venv-ai\Scripts\python.exe ai-service\test_rerank_api.py
+```
+
+Expected output:
+
+```text
+backend: bge-reranker-v2-m3
+model: BAAI/bge-reranker-v2-m3
+topN: 2
+results:
+```
+
 ### Rebuild search index
 
 After starting the AI service and Spring Boot backend:
@@ -685,9 +703,17 @@ powershell -ExecutionPolicy Bypass -File .\scripts\verify-hybrid-search.ps1 -Que
 Expected strategy examples:
 
 ```text
+hybrid-v3(exact-db+bm25+vector+reranker)
+```
+
+If the reranker is disabled or unavailable, ReadSeek automatically falls back to the previous hybrid strategies:
+
+```text
 hybrid-v2(exact-db+vector+bm25)
 hybrid-v2(exact-db+bm25+vector)
 ```
+
+Exact ISBN and exact title matches stay pinned ahead of reranked candidates.
 
 ### Offline demonstration
 

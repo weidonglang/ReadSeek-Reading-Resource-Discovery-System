@@ -15,6 +15,7 @@ public class SearchProperties {
     private int maxResults = 20;
     private VectorProperties vector = new VectorProperties();
     private EmbeddingProperties embedding = new EmbeddingProperties();
+    private RerankerProperties reranker = new RerankerProperties();
 
     @Getter
     @Setter
@@ -35,5 +36,16 @@ public class SearchProperties {
         private long timeoutMs = 5000L;
         private String queryInputType = "query";
         private String documentInputType = "document";
+    }
+
+    @Getter
+    @Setter
+    public static class RerankerProperties {
+        private boolean enabled = false;
+        private String provider = "local-ai";
+        private String baseUrl = "http://localhost:8001";
+        private String model = "BAAI/bge-reranker-v2-m3";
+        private long timeoutMs = 30000L;
+        private int candidateLimit = 20;
     }
 }

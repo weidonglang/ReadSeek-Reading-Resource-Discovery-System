@@ -887,6 +887,44 @@
       </article>`;
   }
 
+  function getRecommendationShelfTextByKey(shelf, kind) {
+    const language = window.BookI18n?.isChinese?.() ? 'zh' : 'en';
+    const key = String(shelf?.key || '').trim();
+    const textByKey = {
+      'same-category': {
+        title: {
+          zh: '\u540c\u5206\u7c7b\u63a8\u8350',
+          en: 'Same Category'
+        },
+        description: {
+          zh: '\u540c\u4e00\u5206\u7c7b\u4e0b\u7684\u56fe\u4e66\uff0c\u5e76\u6309\u5171\u4eab\u6807\u7b7e\u548c\u70ed\u5ea6\u6392\u5e8f\u3002',
+          en: 'Books from the same category, ranked by shared tags and popularity.'
+        }
+      },
+      'same-author': {
+        title: {
+          zh: '\u540c\u4f5c\u8005\u66f4\u591a\u4f5c\u54c1',
+          en: 'More from the Same Author'
+        },
+        description: {
+          zh: '\u8865\u5145\u5c55\u793a\u540c\u4e00\u4f5c\u8005\u7684\u5176\u4ed6\u9605\u8bfb\u8d44\u6e90\uff0c\u65b9\u4fbf\u7ee7\u7eed\u6d4f\u89c8\u3002',
+          en: 'More reading resources by the same author.'
+        }
+      },
+      'shared-tags': {
+        title: {
+          zh: '\u5171\u4eab\u6807\u7b7e\u63a8\u8350',
+          en: 'Shared Tags'
+        },
+        description: {
+          zh: '\u6839\u636e\u5171\u4eab\u6807\u7b7e\u63a8\u8350\u76f8\u5173\u9605\u8bfb\u8d44\u6e90\u3002',
+          en: 'Related reading resources based on shared tags.'
+        }
+      }
+    };
+    return textByKey[key]?.[kind]?.[language] || '';
+  }
+
   function renderRecommendationShelves(overview, options = {}) {
     const shelves = Array.isArray(overview?.shelves) ? overview.shelves : [];
     const emptyMessage = options.emptyMessage || t('common.emptyRecommendation');
@@ -919,8 +957,8 @@
       <section class="recommend-shelf">
         <div class="section-head">
           <div>
-            <h2>${escapeHtml(localizeRecommendationTitle(shelf.title || t('common.recommendationShelf')))}</h2>
-            <div class="muted">${escapeHtml(localizeRecommendationDescription(shelf.description || ''))}</div>
+            <h2>${escapeHtml(getRecommendationShelfTextByKey(shelf, 'title') || localizeRecommendationTitle(shelf.title || t('common.recommendationShelf')))}</h2>
+            <div class="muted">${escapeHtml(getRecommendationShelfTextByKey(shelf, 'description') || localizeRecommendationDescription(shelf.description || ''))}</div>
           </div>
         </div>
         ${resolvedScrollSize ? `<div class="hover-scroll-shell recommend-scroll-shell">${listMarkup}</div>` : listMarkup}

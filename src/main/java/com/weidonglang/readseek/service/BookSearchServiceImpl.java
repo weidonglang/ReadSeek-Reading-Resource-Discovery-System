@@ -35,6 +35,7 @@ public class BookSearchServiceImpl implements BookSearchService {
     private final SearchQueryIntentClassifier searchQueryIntentClassifier;
     private final SearchQueryExpander searchQueryExpander;
     private final VectorBookSearchService vectorBookSearchService;
+    private final BookReranker bookReranker;
 
     public BookSearchServiceImpl(SearchProperties searchProperties,
                                  BookRepository bookRepository,
@@ -42,7 +43,8 @@ public class BookSearchServiceImpl implements BookSearchService {
                                  ElasticsearchOperations elasticsearchOperations,
                                  SearchQueryIntentClassifier searchQueryIntentClassifier,
                                  SearchQueryExpander searchQueryExpander,
-                                 VectorBookSearchService vectorBookSearchService) {
+                                 VectorBookSearchService vectorBookSearchService,
+                                 BookReranker bookReranker) {
         this.searchProperties = searchProperties;
         this.bookRepository = bookRepository;
         this.bookTransformer = bookTransformer;
@@ -50,6 +52,7 @@ public class BookSearchServiceImpl implements BookSearchService {
         this.searchQueryIntentClassifier = searchQueryIntentClassifier;
         this.searchQueryExpander = searchQueryExpander;
         this.vectorBookSearchService = vectorBookSearchService;
+        this.bookReranker = bookReranker;
     }
 
     @Override
@@ -73,39 +76,45 @@ public class BookSearchServiceImpl implements BookSearchService {
     public BookSearchResponseDto searchBooks(String query, Integer limit) {
         String normalizedQuery = normalizeQuery(query);
         int normalizedLimit = normalizeLimit(limit);
+        int candidateLimit = resolveCandidateLimit(normalizedLimit);
         SearchQueryIntent intent = searchQueryIntentClassifier.classify(normalizedQuery);
         String expandedQuery = searchQueryExpander.expand(normalizedQuery, intent);
 
         LinkedHashMap<Long, BookSearchHitDto> mergedHits = new LinkedHashMap<>();
         List<BookSearchHitDto> exactHits = findExactMatches(
                 searchQueryExpander.resolveExactCandidateQueries(normalizedQuery),
-                normalizedLimit
+                candidateLimit
         );
         exactHits.forEach(hit -> mergedHits.put(hit.getBook().getId(), hit));
 
-        List<BookSearchHitDto> vectorHits = vectorBookSearchService.search(expandedQuery, normalizedLimit * 2);
-        List<BookSearchHitDto> bm25Hits = performBm25Search(expandedQuery, normalizedLimit * 2);
+        List<BookSearchHitDto> vectorHits = vectorBookSearchService.search(expandedQuery, candidateLimit * 2);
+        List<BookSearchHitDto> bm25Hits = performBm25Search(expandedQuery, candidateLimit * 2);
 
         if (intent == SearchQueryIntent.NATURAL_LANGUAGE && !vectorHits.isEmpty()) {
-            mergeHits(mergedHits, vectorHits, normalizedLimit);
-            mergeHits(mergedHits, bm25Hits, normalizedLimit);
+            mergeHits(mergedHits, vectorHits, candidateLimit);
+            mergeHits(mergedHits, bm25Hits, candidateLimit);
         } else {
-            mergeHits(mergedHits, bm25Hits, normalizedLimit);
-            mergeHits(mergedHits, vectorHits, normalizedLimit);
+            mergeHits(mergedHits, bm25Hits, candidateLimit);
+            mergeHits(mergedHits, vectorHits, candidateLimit);
         }
 
         List<BookSearchHitDto> hits = new ArrayList<>(mergedHits.values());
-        if (hits.size() > normalizedLimit) {
-            hits = hits.subList(0, normalizedLimit);
-        }
-
         boolean fallbackApplied = intent == SearchQueryIntent.EXACT_LOOKUP
                 && exactHits.isEmpty()
                 && (!bm25Hits.isEmpty() || !vectorHits.isEmpty());
+        String strategy = resolveHybridStrategy(intent, vectorHits);
+        RerankOutcome rerankOutcome = applyReranker(normalizedQuery, hits, normalizedLimit, strategy);
+        if (rerankOutcome.applied()) {
+            hits = rerankOutcome.hits();
+            strategy = "hybrid-v3(exact-db+bm25+vector+reranker)";
+        } else if (hits.size() > normalizedLimit) {
+            hits = hits.subList(0, normalizedLimit);
+        }
+
         return new BookSearchResponseDto(
                 normalizedQuery,
                 intent,
-                resolveHybridStrategy(intent, vectorHits),
+                strategy,
                 fallbackApplied,
                 hits.size(),
                 hits
@@ -134,6 +143,76 @@ public class BookSearchServiceImpl implements BookSearchService {
             return "hybrid-v2(exact-db+vector+bm25)";
         }
         return "hybrid-v2(exact-db+bm25+vector)";
+    }
+
+    private int resolveCandidateLimit(int normalizedLimit) {
+        if (bookReranker != null && bookReranker.isEnabled()) {
+            int rerankerCandidateLimit = searchProperties.getReranker().getCandidateLimit();
+            if (rerankerCandidateLimit > normalizedLimit) {
+                return Math.min(searchProperties.getMaxResults(), rerankerCandidateLimit);
+            }
+        }
+        return normalizedLimit;
+    }
+
+    private RerankOutcome applyReranker(String query,
+                                       List<BookSearchHitDto> hits,
+                                       int normalizedLimit,
+                                       String strategy) {
+        if (bookReranker == null
+                || !bookReranker.isEnabled()
+                || hits == null
+                || hits.isEmpty()
+                || strategy == null
+                || !strategy.startsWith("hybrid-v2")) {
+            return RerankOutcome.notApplied();
+        }
+
+        List<BookSearchHitDto> pinnedExactHits = hits.stream()
+                .filter(this::isExactHit)
+                .toList();
+        if (pinnedExactHits.size() >= normalizedLimit) {
+            return RerankOutcome.notApplied();
+        }
+
+        List<BookSearchHitDto> rerankableHits = hits.stream()
+                .filter(hit -> !isExactHit(hit))
+                .toList();
+        if (rerankableHits.isEmpty()) {
+            return RerankOutcome.notApplied();
+        }
+
+        int topN = Math.min(normalizedLimit - pinnedExactHits.size(), rerankableHits.size());
+        try {
+            var rerankedResult = bookReranker.rerank(query, rerankableHits, topN);
+            if (rerankedResult == null) {
+                return RerankOutcome.notApplied();
+            }
+            return rerankedResult
+                    .filter(rerankedHits -> rerankedHits.size() >= topN)
+                    .map(rerankedHits -> {
+                        List<BookSearchHitDto> finalHits = new ArrayList<>(pinnedExactHits);
+                        finalHits.addAll(rerankedHits.subList(0, topN));
+                        return RerankOutcome.applied(finalHits);
+                    })
+                    .orElseGet(RerankOutcome::notApplied);
+        } catch (Exception exception) {
+            return RerankOutcome.notApplied();
+        }
+    }
+
+    private boolean isExactHit(BookSearchHitDto hit) {
+        return hit != null && "EXACT_DB".equalsIgnoreCase(hit.getMatchType());
+    }
+
+    private record RerankOutcome(boolean applied, List<BookSearchHitDto> hits) {
+        private static RerankOutcome applied(List<BookSearchHitDto> hits) {
+            return new RerankOutcome(true, hits);
+        }
+
+        private static RerankOutcome notApplied() {
+            return new RerankOutcome(false, List.of());
+        }
     }
 
     private String normalizeQuery(String query) {
