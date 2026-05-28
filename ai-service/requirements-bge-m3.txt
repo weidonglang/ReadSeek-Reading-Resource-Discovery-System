@@ -21,7 +21,7 @@ h11==0.16.0
 hf-xet==1.4.3
 httpcore==1.0.9
 httpx==0.28.1
-huggingface_hub==1.13.0
+huggingface_hub==0.36.2
 idna==3.13
 ijson==3.5.0
 inscriptis==2.7.1
@@ -62,12 +62,12 @@ six==1.17.0
 soupsieve==2.8.3
 sympy==1.14.0
 threadpoolctl==3.6.0
-tokenizers==0.22.2
+tokenizers==0.22.1
 torch==2.11.0+cu128
 torchaudio==2.11.0+cu128
 torchvision==0.26.0+cu128
 tqdm==4.67.3
-transformers==5.7.0
+transformers==4.57.1
 trec-car-tools==2.6
 typer==0.25.1
 typing_extensions==4.15.0
