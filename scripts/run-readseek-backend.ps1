@@ -27,6 +27,7 @@ $env:SPRING_ELASTICSEARCH_URIS = 'http://localhost:9200'
 $env:SPRING_JPA_SHOW_SQL = 'false'
 $env:SPRING_JPA_FORMAT_SQL = 'false'
 $env:LIBRARY_SEARCH_ENABLED = 'true'
+$env:MANAGEMENT_HEALTH_ELASTICSEARCH_ENABLED = 'false'
 
 if ($WithAi) {
     $env:LIBRARY_SEARCH_EMBEDDING_ENABLED = 'true'

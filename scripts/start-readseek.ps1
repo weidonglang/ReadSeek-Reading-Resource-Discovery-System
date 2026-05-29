@@ -160,11 +160,12 @@ function Start-DockerDependencies {
     Write-Step 'Starting Docker dependencies'
     Assert-CommandExists 'docker'
     Remove-StaleSearchContainer
-    docker compose up -d db elasticsearch
+    docker compose up -d db elasticsearch redis
     if (-not $SkipWait) {
-        Write-Step 'Waiting for PostgreSQL and Elasticsearch'
+        Write-Step 'Waiting for PostgreSQL, Elasticsearch, and Redis'
         Wait-ForDockerHealth -ContainerName 'readseek-db'
         Wait-ForDockerHealth -ContainerName 'readseek-search'
+        Wait-ForDockerHealth -ContainerName 'readseek-redis'
     }
 }
 
