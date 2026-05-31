@@ -3,11 +3,13 @@ package com.weidonglang.readseek.service;
 import com.weidonglang.readseek.dao.BookDao;
 import com.weidonglang.readseek.dao.BookLoanDao;
 import com.weidonglang.readseek.dao.BookReservationDao;
+import com.weidonglang.readseek.dao.UserDao;
 import com.weidonglang.readseek.dto.BookDto;
 import com.weidonglang.readseek.dto.BookLoanDto;
 import com.weidonglang.readseek.dto.UserDto;
 import com.weidonglang.readseek.entity.Book;
 import com.weidonglang.readseek.entity.BookLoan;
+import com.weidonglang.readseek.entity.User;
 import com.weidonglang.readseek.transformer.BookLoanTransformer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -48,6 +50,9 @@ class BookLoanServiceImplTest {
     @Mock
     private UserBehaviorLogService userBehaviorLogService;
 
+    @Mock
+    private UserDao userDao;
+
     private BookLoanServiceImpl service;
 
     @BeforeEach
@@ -78,19 +83,21 @@ class BookLoanServiceImplTest {
         bookEntity.setAvailableCopies(1);
         bookEntity.setMarkedAsDeleted(false);
 
-        BookLoan loanEntity = new BookLoan();
+        User userEntity = new User();
+        userEntity.setId(21L);
         BookLoanDto resultDto = new BookLoanDto();
 
         when(userService.getCurrentUser()).thenReturn(currentUser);
+        when(userService.getDao()).thenReturn(userDao);
+        when(userDao.findById(21L)).thenReturn(Optional.of(userEntity));
         when(bookService.findById(301L)).thenReturn(bookDto);
         when(bookDao.findByIdForUpdate(301L)).thenReturn(Optional.of(bookEntity));
         when(bookReservationDao.findActiveReservationByUserIdAndBookId(21L, 301L)).thenReturn(Optional.empty());
         when(bookReservationDao.findFirstActiveReservationByBookId(301L)).thenReturn(Optional.empty());
         when(bookLoanDao.findActiveLoanByUserIdAndBookId(21L, 301L)).thenReturn(Optional.empty());
         when(bookLoanDao.countActiveLoansByUserId(21L)).thenReturn(0L);
-        when(bookLoanTransformer.transformDtoToEntity(any(BookLoanDto.class))).thenReturn(loanEntity);
-        when(bookLoanDao.create(loanEntity)).thenReturn(loanEntity);
-        when(bookLoanTransformer.transformEntityToDto(loanEntity)).thenReturn(resultDto);
+        when(bookLoanDao.create(any(BookLoan.class))).thenAnswer(invocation -> invocation.getArgument(0));
+        when(bookLoanTransformer.transformEntityToDto(any(BookLoan.class))).thenReturn(resultDto);
 
         BookLoanDto actual = service.borrowBook(301L);
 

@@ -1,6 +1,7 @@
 package com.weidonglang.readseek.controller;
 
 import com.weidonglang.readseek.dto.RecommendationFeedbackRequestDto;
+import com.weidonglang.readseek.dto.RecommendationClickRequestDto;
 import com.weidonglang.readseek.dto.base.response.ApiResponse;
 import com.weidonglang.readseek.service.RecommendationEventService;
 import lombok.AllArgsConstructor;
@@ -33,6 +34,15 @@ public class RecommendationEventController {
                 recommendationEventService.recordFeedback(requestDto));
     }
 
+    @PostMapping("/click")
+    @PreAuthorize("isAuthenticated()")
+    public ApiResponse recordClick(@RequestBody RecommendationClickRequestDto requestDto) {
+        log.info("RecommendationEventController: recordClick() called");
+        return new ApiResponse(true, LocalDateTime.now().toString(),
+                "Recommendation click recorded successfully.",
+                recommendationEventService.recordClick(requestDto));
+    }
+
     @GetMapping("/recent")
     @PreAuthorize("hasRole('ADMIN')")
     public ApiResponse findRecentEvents(@RequestParam(defaultValue = "20") Integer limit) {
@@ -49,5 +59,15 @@ public class RecommendationEventController {
         return new ApiResponse(true, LocalDateTime.now().toString(),
                 "Recent recommendation feedback fetched successfully.",
                 recommendationEventService.findRecentFeedback(limit));
+    }
+
+    @GetMapping("/analytics")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ApiResponse getAnalytics(@RequestParam(required = false) Integer recentDays,
+                                    @RequestParam(defaultValue = "20") Integer limit) {
+        log.info("RecommendationEventController: getAnalytics() called");
+        return new ApiResponse(true, LocalDateTime.now().toString(),
+                "Recommendation analytics fetched successfully.",
+                recommendationEventService.buildAnalytics(recentDays, limit));
     }
 }

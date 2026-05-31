@@ -18,9 +18,11 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -62,7 +64,7 @@ public class BookSearchServiceImpl implements BookSearchService {
         SearchQueryIntent intent = searchQueryIntentClassifier.classify(normalizedQuery);
         String expandedQuery = searchQueryExpander.expand(normalizedQuery, intent);
         List<BookSearchHitDto> hits = performBm25Search(expandedQuery, normalizedLimit);
-        return new BookSearchResponseDto(
+        BookSearchResponseDto response = new BookSearchResponseDto(
                 normalizedQuery,
                 intent,
                 "bm25",
@@ -70,6 +72,15 @@ public class BookSearchServiceImpl implements BookSearchService {
                 hits.size(),
                 hits
         );
+        response.setExpandedQuery(expandedQuery);
+        response.setStrategySteps(List.of(
+                "intent=" + intent + " uses keyword-first BM25 retrieval.",
+                "bm25 searches title, ISBN, author, category, publisher, tags, description, and searchableText.",
+                "reranker is not used by the BM25-only endpoint."
+        ));
+        response.setRerankerApplied(false);
+        response.setCandidateCount(hits.size());
+        return response;
     }
 
     @Override
@@ -99,6 +110,7 @@ public class BookSearchServiceImpl implements BookSearchService {
         }
 
         List<BookSearchHitDto> hits = new ArrayList<>(mergedHits.values());
+        int candidateCount = hits.size();
         boolean fallbackApplied = intent == SearchQueryIntent.EXACT_LOOKUP
                 && exactHits.isEmpty()
                 && (!bm25Hits.isEmpty() || !vectorHits.isEmpty());
@@ -111,7 +123,7 @@ public class BookSearchServiceImpl implements BookSearchService {
             hits = hits.subList(0, normalizedLimit);
         }
 
-        return new BookSearchResponseDto(
+        BookSearchResponseDto response = new BookSearchResponseDto(
                 normalizedQuery,
                 intent,
                 strategy,
@@ -119,6 +131,18 @@ public class BookSearchServiceImpl implements BookSearchService {
                 hits.size(),
                 hits
         );
+        response.setExpandedQuery(expandedQuery);
+        response.setStrategySteps(buildHybridStrategySteps(
+                intent,
+                !exactHits.isEmpty(),
+                !bm25Hits.isEmpty(),
+                !vectorHits.isEmpty(),
+                rerankOutcome.applied(),
+                fallbackApplied
+        ));
+        response.setRerankerApplied(rerankOutcome.applied());
+        response.setCandidateCount(candidateCount);
+        return response;
     }
 
     private void mergeHits(LinkedHashMap<Long, BookSearchHitDto> mergedHits,
@@ -126,13 +150,77 @@ public class BookSearchServiceImpl implements BookSearchService {
                            int limit) {
         for (BookSearchHitDto hit : candidateHits) {
             Long bookId = hit.getBook() == null ? null : hit.getBook().getId();
-            if (bookId != null && !mergedHits.containsKey(bookId)) {
+            if (bookId == null) {
+                continue;
+            }
+            BookSearchHitDto existingHit = mergedHits.get(bookId);
+            if (existingHit == null) {
                 mergedHits.put(bookId, hit);
+            } else {
+                mergeDuplicateHit(existingHit, hit);
             }
             if (mergedHits.size() >= limit) {
                 return;
             }
         }
+    }
+
+    private void mergeDuplicateHit(BookSearchHitDto existingHit, BookSearchHitDto incomingHit) {
+        if (existingHit == null || incomingHit == null) {
+            return;
+        }
+        if (incomingHit.getScore() != null
+                && (existingHit.getScore() == null || incomingHit.getScore() > existingHit.getScore())) {
+            existingHit.setScore(incomingHit.getScore());
+        }
+        existingHit.setMatchType(mergeTokenString(existingHit.getMatchType(), incomingHit.getMatchType(), "+"));
+        existingHit.setSource(mergeTokenString(existingHit.getSource(), incomingHit.getSource(), ","));
+        existingHit.setRetrievalStage(mergeTokenString(existingHit.getRetrievalStage(), incomingHit.getRetrievalStage(), "+"));
+        existingHit.setReason(mergeSentence(existingHit.getReason(), incomingHit.getReason()));
+        existingHit.setReranked(Boolean.TRUE.equals(existingHit.getReranked()) || Boolean.TRUE.equals(incomingHit.getReranked()));
+        existingHit.setExplanationTags(mergeTags(existingHit.getExplanationTags(), incomingHit.getExplanationTags()));
+    }
+
+    private String mergeTokenString(String left, String right, String delimiter) {
+        LinkedHashSet<String> values = new LinkedHashSet<>();
+        addSplitTokens(values, left, delimiter);
+        addSplitTokens(values, right, delimiter);
+        return values.isEmpty() ? null : String.join(delimiter, values);
+    }
+
+    private void addSplitTokens(Set<String> values, String rawValue, String delimiter) {
+        if (rawValue == null || rawValue.isBlank()) {
+            return;
+        }
+        for (String value : rawValue.split("\\" + delimiter)) {
+            if (value != null && !value.isBlank()) {
+                values.add(value.trim());
+            }
+        }
+    }
+
+    private String mergeSentence(String left, String right) {
+        if (right == null || right.isBlank()) {
+            return left;
+        }
+        if (left == null || left.isBlank()) {
+            return right;
+        }
+        if (left.contains(right)) {
+            return left;
+        }
+        return left + " " + right;
+    }
+
+    private List<String> mergeTags(List<String> left, List<String> right) {
+        LinkedHashSet<String> tags = new LinkedHashSet<>();
+        if (left != null) {
+            left.stream().filter(tag -> tag != null && !tag.isBlank()).map(String::trim).forEach(tags::add);
+        }
+        if (right != null) {
+            right.stream().filter(tag -> tag != null && !tag.isBlank()).map(String::trim).forEach(tags::add);
+        }
+        return tags.isEmpty() ? null : new ArrayList<>(tags);
     }
 
     private String resolveHybridStrategy(SearchQueryIntent intent, List<BookSearchHitDto> vectorHits) {
@@ -202,7 +290,41 @@ public class BookSearchServiceImpl implements BookSearchService {
     }
 
     private boolean isExactHit(BookSearchHitDto hit) {
-        return hit != null && "EXACT_DB".equalsIgnoreCase(hit.getMatchType());
+        if (hit == null || hit.getMatchType() == null) {
+            return false;
+        }
+        for (String token : hit.getMatchType().split("\\+")) {
+            if ("EXACT_DB".equalsIgnoreCase(token.trim())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private List<String> buildHybridStrategySteps(SearchQueryIntent intent,
+                                                  boolean hasExactHits,
+                                                  boolean hasBm25Hits,
+                                                  boolean hasVectorHits,
+                                                  boolean rerankerApplied,
+                                                  boolean fallbackApplied) {
+        List<String> steps = new ArrayList<>();
+        steps.add("intent=" + intent + " controls candidate ordering: natural-language queries prefer vector first; keyword/exact queries prefer BM25 first.");
+        steps.add(hasExactHits
+                ? "exact-db found title, author, or ISBN matches and pins them before scored candidates."
+                : "exact-db ran first and found no pinned match.");
+        steps.add(hasBm25Hits
+                ? "BM25 contributed keyword candidates from the Elasticsearch text fields."
+                : "BM25 returned no candidate or was unavailable.");
+        steps.add(hasVectorHits
+                ? "vector contributed semantic candidates from local embeddings and Elasticsearch cosine similarity."
+                : "vector returned no candidate or was unavailable, so the chain degrades to exact/BM25.");
+        steps.add(rerankerApplied
+                ? "reranker reordered non-exact candidates with the local BGE reranker; exact hits stayed pinned."
+                : "reranker was not applied because it was disabled, unavailable, or there were not enough rerankable candidates.");
+        if (fallbackApplied) {
+            steps.add("fallback=true because exact lookup had no exact hit but BM25/vector still found candidates.");
+        }
+        return steps;
     }
 
     private record RerankOutcome(boolean applied, List<BookSearchHitDto> hits) {
@@ -257,12 +379,17 @@ public class BookSearchServiceImpl implements BookSearchService {
         List<BookDto> bookDtos = bookTransformer.transformEntityToDto(new ArrayList<>(exactBooks.values()));
         List<BookSearchHitDto> hits = new ArrayList<>();
         for (BookDto bookDto : bookDtos) {
-            hits.add(new BookSearchHitDto(
+            BookSearchHitDto hit = new BookSearchHitDto(
                     bookDto,
                     1000D,
                     "EXACT_DB",
                     "Exact match on title, author, or ISBN."
-            ));
+            );
+            hit.setSource("exact-db");
+            hit.setRetrievalStage("exact");
+            hit.setReranked(false);
+            hit.setExplanationTags(List.of("pinned", "exact-match"));
+            hits.add(hit);
         }
         return hits;
     }
@@ -309,12 +436,17 @@ public class BookSearchServiceImpl implements BookSearchService {
                 Long bookId = searchHit.getContent() == null ? null : searchHit.getContent().getId();
                 BookDto bookDto = booksById.get(bookId);
                 if (bookId != null && bookDto != null) {
-                    hits.add(new BookSearchHitDto(
+                    BookSearchHitDto hit = new BookSearchHitDto(
                             bookDto,
                             Double.valueOf(searchHit.getScore()),
                             "BM25",
                             "Keyword relevance from Elasticsearch BM25 ranking."
-                    ));
+                    );
+                    hit.setSource("bm25");
+                    hit.setRetrievalStage("bm25");
+                    hit.setReranked(false);
+                    hit.setExplanationTags(List.of("keyword", "text-score"));
+                    hits.add(hit);
                 }
             }
             return hits;

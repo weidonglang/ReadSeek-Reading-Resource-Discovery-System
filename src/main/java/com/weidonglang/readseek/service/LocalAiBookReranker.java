@@ -162,7 +162,48 @@ public class LocalAiBookReranker implements BookReranker {
         } else if (!hit.getMatchType().contains("RERANK")) {
             hit.setMatchType(hit.getMatchType() + "+RERANK");
         }
-        hit.setReason("Reranked by BGE reranker based on query-passage relevance.");
+        hit.setSource(appendToken(hit.getSource(), "reranker", ","));
+        hit.setRetrievalStage(appendToken(hit.getRetrievalStage(), "reranker", "+"));
+        hit.setReranked(true);
+        hit.setExplanationTags(appendTag(hit.getExplanationTags(), "reranked"));
+        hit.setReason(appendReason(hit.getReason(), "Reranked by BGE reranker based on query-passage relevance."));
+    }
+
+    private String appendToken(String value, String token, String delimiter) {
+        if (token == null || token.isBlank()) {
+            return value;
+        }
+        if (value == null || value.isBlank()) {
+            return token;
+        }
+        for (String existingToken : value.split("\\" + delimiter)) {
+            if (token.equalsIgnoreCase(existingToken.trim())) {
+                return value;
+            }
+        }
+        return value + delimiter + token;
+    }
+
+    private List<String> appendTag(List<String> tags, String tag) {
+        List<String> updated = new ArrayList<>();
+        if (tags != null) {
+            updated.addAll(tags);
+        }
+        if (tag != null && !tag.isBlank()
+                && updated.stream().noneMatch(existing -> existing != null && tag.equalsIgnoreCase(existing))) {
+            updated.add(tag);
+        }
+        return updated;
+    }
+
+    private String appendReason(String existingReason, String rerankReason) {
+        if (existingReason == null || existingReason.isBlank()) {
+            return rerankReason;
+        }
+        if (existingReason.contains(rerankReason)) {
+            return existingReason;
+        }
+        return existingReason + " " + rerankReason;
     }
 
     private URI resolveRerankUri() {

@@ -14,11 +14,11 @@
         <div>
           <div class="qa-kicker">Evidence QA</div>
           <h1>基于馆藏证据回答阅读资源问题</h1>
-          <p class="muted">输入自然语言问题，系统会先调用混合检索，再用检索命中的资源生成模板化回答，并展示每条证据的来源、命中类型和理由。</p>
+          <p class="muted">输入自然语言问题，系统会先调用混合检索与 reranker，再用检索命中的馆藏证据生成带引用的回答，并展示每条证据的来源、命中类型和理由。</p>
         </div>
         <div class="qa-hero-panel">
           <strong>当前阶段</strong>
-          <span>模板化证据问答骨架，后续可替换为本地大模型 RAG 生成器。</span>
+          <span>本地 Ollama / 在线兼容 API：只基于检索证据回答，证据不足时拒答或降级。</span>
         </div>
       </section>
 
@@ -33,12 +33,29 @@
               <textarea id="qa-question" placeholder="例如：想看简奥斯汀的代表作，应该从哪本开始？"></textarea>
             </div>
             <div class="qa-form-row">
+              <label class="field" for="qa-mode">
+                <span class="label">模式</span>
+                <select id="qa-mode">
+                  <option value="fast">fast</option>
+                  <option value="standard" selected>standard</option>
+                  <option value="expert">expert</option>
+                </select>
+              </label>
+              <label class="field" for="qa-provider">
+                <span class="label">模型来源</span>
+                <select id="qa-provider">
+                  <option value="ollama" selected>Ollama</option>
+                  <option value="online">Online API</option>
+                  <option value="deterministic">Deterministic</option>
+                </select>
+              </label>
               <label class="field" for="qa-limit">
                 <span class="label">证据数量</span>
                 <select id="qa-limit">
                   <option value="3">3 条</option>
                   <option value="5" selected>5 条</option>
                   <option value="8">8 条</option>
+                  <option value="20">20 条</option>
                 </select>
               </label>
               <button class="primary" type="submit">生成证据回答</button>
@@ -58,7 +75,7 @@
               <p id="qa-summary" class="muted">等待提问。</p>
             </div>
           </div>
-          <div id="qa-answer" class="qa-answer-placeholder">输入问题后，这里会展示模板答案、检索策略、证据资源和限制说明。</div>
+          <div id="qa-answer" class="qa-answer-placeholder">输入问题后，这里会展示带引用的回答、检索策略、证据资源和限制说明。</div>
         </article>
       </section>
 

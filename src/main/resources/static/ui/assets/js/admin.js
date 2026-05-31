@@ -283,6 +283,96 @@ function renderBehaviorLogItem(item) {
     </article>`;
 }
 
+function percent(value) {
+  const number = Number(value || 0);
+  return `${(number * 100).toFixed(1)}%`;
+}
+
+function renderRecommendationAnalytics(data) {
+  if (!data) {
+    return `<div class="muted">${escapeHtml(adminText('暂无推荐统计。', 'No recommendation analytics yet.'))}</div>`;
+  }
+  const rows = [
+    [adminText('曝光', 'Exposure'), data.exposureCount ?? 0],
+    [adminText('点击', 'Clicks'), data.clickCount ?? 0],
+    [adminText('反馈', 'Feedback'), data.feedbackCount ?? 0],
+    [adminText('CTR', 'CTR'), percent(data.ctr)],
+    [adminText('反馈率', 'Feedback rate'), percent(data.feedbackRate)]
+  ];
+  return rows.map(([label, value]) => `
+    <article class="admin-item">
+      <div class="compact-item-title">
+        <strong>${escapeHtml(label)}</strong>
+        <span class="tag">${escapeHtml(value)}</span>
+      </div>
+    </article>`).join('');
+}
+
+function renderQaAnalytics(data) {
+  if (!data) {
+    return `<div class="muted">${escapeHtml(adminText('暂无问答统计。', 'No QA analytics yet.'))}</div>`;
+  }
+  const rows = [
+    [adminText('请求', 'Requests'), data.requestCount ?? 0],
+    [adminText('可回答', 'Answerable'), data.answerableCount ?? 0],
+    [adminText('拒答', 'Refused'), data.refusalCount ?? 0],
+    [adminText('引用点击', 'Citation clicks'), data.citationClickCount ?? 0],
+    [adminText('引用点击率', 'Citation click rate'), percent(data.citationClickRate)],
+    [adminText('平均耗时', 'Avg latency'), `${Number(data.averageLatencyMs || 0).toFixed(0)} ms`]
+  ];
+  return rows.map(([label, value]) => `
+    <article class="admin-item">
+      <div class="compact-item-title">
+        <strong>${escapeHtml(label)}</strong>
+        <span class="tag">${escapeHtml(value)}</span>
+      </div>
+    </article>`).join('');
+}
+
+function renderQaEventItem(item) {
+  const label = item.eventType === 'CITATION_CLICK'
+    ? adminText('引用点击', 'Citation click')
+    : adminText('问答请求', 'QA request');
+  const main = item.bookName || item.question || adminText('无内容', 'No content');
+  const meta = [
+    item.ragMode,
+    item.provider,
+    item.model,
+    item.answerable === false ? adminText('拒答', 'refused') : null,
+    item.totalLatencyMs == null ? null : `${item.totalLatencyMs} ms`
+  ].filter(Boolean).join(' | ');
+  return `
+    <article class="admin-item">
+      <div class="compact-item-title">
+        <strong>${escapeHtml(label)}</strong>
+        <span class="tag">${escapeHtml(formatDateTime(item.createdDate))}</span>
+      </div>
+      <div class="muted">${escapeHtml(main)}</div>
+      ${meta ? `<div class="muted">${escapeHtml(meta)}</div>` : ''}
+    </article>`;
+}
+
+function renderRecommendationEventItem(item) {
+  const label = item.eventType === 'EXPOSURE'
+    ? adminText('推荐曝光', 'Recommendation exposure')
+    : (item.eventType === 'CLICK' ? adminText('推荐点击', 'Recommendation click') : adminText('推荐反馈', 'Recommendation feedback'));
+  const meta = [
+    item.source,
+    item.reasonType,
+    item.rankPosition ? `#${item.rankPosition}` : null,
+    item.feedbackType
+  ].filter(Boolean).join(' | ');
+  return `
+    <article class="admin-item">
+      <div class="compact-item-title">
+        <strong>${escapeHtml(label)}</strong>
+        <span class="tag">${escapeHtml(formatDateTime(item.createdDate))}</span>
+      </div>
+      <div class="muted">${escapeHtml(item.bookName || adminText('无关联图书', 'No linked book'))}</div>
+      ${meta ? `<div class="muted">${escapeHtml(meta)}</div>` : ''}
+    </article>`;
+}
+
 document.addEventListener('DOMContentLoaded', async () => {
   const t = window.BookI18n.t;
   if (!BookUi.requireLogin()) return;
@@ -327,6 +417,9 @@ document.addEventListener('DOMContentLoaded', async () => {
   const adminReservationHistory = document.getElementById('admin-reservation-history');
   const analyticsSummary = document.getElementById('admin-analytics-summary');
   const recommendationStrategyList = document.getElementById('admin-recommendation-strategy');
+  const recommendationAnalyticsList = document.getElementById('admin-recommendation-analytics');
+  const qaAnalyticsList = document.getElementById('admin-qa-analytics');
+  const aiEventsList = document.getElementById('admin-ai-events');
   const topKeywordsList = document.getElementById('admin-top-keywords');
   const topCategoriesList = document.getElementById('admin-top-categories');
   const topAuthorsList = document.getElementById('admin-top-authors');
@@ -891,6 +984,9 @@ document.addEventListener('DOMContentLoaded', async () => {
   async function loadAnalytics() {
     analyticsSummary.innerHTML = `<div class="analytics-stat"><span class="muted">${escapeHtml(adminText('正在加载摘要...', 'Loading summary...'))}</span></div>`;
     recommendationStrategyList.innerHTML = `<div class="muted">${escapeHtml(adminText('正在加载推荐模型...', 'Loading recommendation model...'))}</div>`;
+    recommendationAnalyticsList.innerHTML = `<div class="muted">${escapeHtml(adminText('正在加载推荐漏斗...', 'Loading recommendation funnel...'))}</div>`;
+    qaAnalyticsList.innerHTML = `<div class="muted">${escapeHtml(adminText('正在加载问答质量...', 'Loading QA quality...'))}</div>`;
+    aiEventsList.innerHTML = `<div class="muted">${escapeHtml(adminText('正在加载 AI 事件...', 'Loading AI events...'))}</div>`;
     topKeywordsList.innerHTML = `<div class="muted">${escapeHtml(adminText('正在加载热门关键词...', 'Loading top keywords...'))}</div>`;
     topCategoriesList.innerHTML = `<div class="muted">${escapeHtml(adminText('正在加载热门分类...', 'Loading top categories...'))}</div>`;
     topAuthorsList.innerHTML = `<div class="muted">${escapeHtml(adminText('正在加载热门作者...', 'Loading top authors...'))}</div>`;
@@ -903,8 +999,14 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     const selectedWindow = analyticsWindowSelect?.value ? Number(analyticsWindowSelect.value) : null;
     const query = selectedWindow ? `?limit=5&recentDays=${selectedWindow}` : '?limit=5';
-    const response = await BookApi.apiRequest(`/api/behavior-log/dashboard${query}`);
+    const [response, recommendationAnalyticsResponse, qaAnalyticsResponse] = await Promise.all([
+      BookApi.apiRequest(`/api/behavior-log/dashboard${query}`),
+      BookApi.apiRequest(`/api/recommendation-events/analytics${query}`),
+      BookApi.apiRequest(`/api/qa/analytics${query}`)
+    ]);
     const dashboard = response?.body || {};
+    const recommendationAnalytics = recommendationAnalyticsResponse?.body || {};
+    const qaAnalytics = qaAnalyticsResponse?.body || {};
     const recentDaysApplied = dashboard.recentDaysApplied ?? selectedWindow;
     const windowLabel = recentDaysApplied
       ? adminText(`最近 ${recentDaysApplied} 天`, `last ${recentDaysApplied} days`)
@@ -950,8 +1052,12 @@ document.addEventListener('DOMContentLoaded', async () => {
     const topBorrowedBooks = Array.isArray(dashboard.topBorrowedBooks) ? dashboard.topBorrowedBooks : [];
     const recentSearches = Array.isArray(dashboard.recentSearchLogs) ? dashboard.recentSearchLogs : [];
     const recentBehavior = Array.isArray(dashboard.recentBehaviorLogs) ? dashboard.recentBehaviorLogs : [];
+    const recentRecommendationEvents = Array.isArray(recommendationAnalytics.recentEvents) ? recommendationAnalytics.recentEvents : [];
+    const recentQaEvents = Array.isArray(qaAnalytics.recentEvents) ? qaAnalytics.recentEvents : [];
 
     recommendationStrategyList.innerHTML = renderRecommendationStrategy(dashboard.recommendationStrategy, recentDaysApplied);
+    recommendationAnalyticsList.innerHTML = renderRecommendationAnalytics(recommendationAnalytics);
+    qaAnalyticsList.innerHTML = renderQaAnalytics(qaAnalytics);
     topKeywordsList.innerHTML = topKeywords.length
       ? topKeywords.map((item, index) => renderKeywordStatItem(item, index)).join('')
       : `<div class="muted">${escapeHtml(adminText('暂无关键词行为记录。', 'No keyword activity has been recorded yet.'))}</div>`;
@@ -976,6 +1082,13 @@ document.addEventListener('DOMContentLoaded', async () => {
     recentSearchesList.innerHTML = recentSearches.length
       ? recentSearches.map(item => renderSearchLogItem(item)).join('')
       : `<div class="muted">${escapeHtml(adminText('暂无搜索日志。', 'No search logs have been recorded yet.'))}</div>`;
+    const aiEvents = [
+      ...recentQaEvents.map(item => ({ kind: 'qa', createdDate: item.createdDate, html: renderQaEventItem(item) })),
+      ...recentRecommendationEvents.map(item => ({ kind: 'recommendation', createdDate: item.createdDate, html: renderRecommendationEventItem(item) }))
+    ].sort((a, b) => new Date(b.createdDate || 0).getTime() - new Date(a.createdDate || 0).getTime());
+    aiEventsList.innerHTML = aiEvents.length
+      ? aiEvents.slice(0, 10).map(item => item.html).join('')
+      : `<div class="muted">${escapeHtml(adminText('暂无 AI 问答或推荐事件。', 'No AI QA or recommendation events yet.'))}</div>`;
     recentBehaviorList.innerHTML = recentBehavior.length
       ? recentBehavior.map(item => renderBehaviorLogItem(item)).join('')
       : `<div class="muted">${escapeHtml(adminText('暂无行为日志。', 'No behavior logs have been recorded yet.'))}</div>`;

@@ -23,4 +23,40 @@ public class EvidenceQaResponseDto {
     private List<EvidenceSnippetDto> evidence;
     private List<String> limitations;
     private List<String> followUpSuggestions;
+    private Boolean answerable;
+    private String generationBackend;
+    private String evidencePolicy;
+    private List<String> citations;
+    private Double confidence;
+    private Long qaEventId;
+    private String ragMode;
+    private String llmProvider;
+    private String model;
+    private Boolean llmFallbackApplied;
+    private String llmFallbackReason;
+    private Long retrievalLatencyMs;
+    private Long generationLatencyMs;
+    private Long totalLatencyMs;
+
+    public EvidenceQaResponseDto(String question,
+                                 String answer,
+                                 String answerMode,
+                                 String strategy,
+                                 SearchQueryIntent queryIntent,
+                                 Boolean fallbackApplied,
+                                 Integer evidenceCount,
+                                 List<EvidenceSnippetDto> evidence,
+                                 List<String> limitations,
+                                 List<String> followUpSuggestions) {
+        this.question = question;
+        this.answer = answer;
+        this.answerMode = answerMode;
+        this.strategy = strategy;
+        this.queryIntent = queryIntent;
+        this.fallbackApplied = fallbackApplied;
+        this.evidenceCount = evidenceCount;
+        this.evidence = evidence;
+        this.limitations = limitations;
+        this.followUpSuggestions = followUpSuggestions;
+    }
 }

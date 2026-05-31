@@ -6,6 +6,7 @@ function qaText(zh, en) {
 
 function formatStrategy(strategy) {
   if (!strategy) return '-';
+  if (strategy.startsWith('hybrid-v3')) return 'Hybrid v3 + reranker';
   if (strategy.startsWith('hybrid-v2')) return 'Hybrid v2';
   if (strategy.startsWith('hybrid-v1')) return 'Hybrid v1';
   return strategy;
@@ -16,10 +17,12 @@ function renderAnswer(body) {
   const summary = document.getElementById('qa-summary');
   const limitations = Array.isArray(body.limitations) ? body.limitations : [];
   const followUps = Array.isArray(body.followUpSuggestions) ? body.followUpSuggestions : [];
+  const citations = Array.isArray(body.citations) ? body.citations : [];
+  const confidence = Number.isFinite(Number(body.confidence)) ? Number(body.confidence) : null;
 
   summary.textContent = qaText(
-    `已生成回答，使用 ${body.evidenceCount || 0} 条证据。`,
-    `Answer generated with ${body.evidenceCount || 0} evidence item(s).`
+    `${body.answerable ? '已生成证据回答' : '证据不足，已拒答'}，使用 ${body.evidenceCount || 0} 条证据。`,
+    `${body.answerable ? 'Grounded answer generated' : 'Evidence insufficient, refused'} with ${body.evidenceCount || 0} evidence item(s).`
   );
 
   answerWrap.className = 'qa-answer-body';
@@ -28,10 +31,23 @@ function renderAnswer(body) {
     <div class="qa-meta-grid">
       <div class="qa-meta-item"><span>问题</span><strong>${escapeHtml(body.question || '-')}</strong></div>
       <div class="qa-meta-item"><span>模式</span><strong>${escapeHtml(body.answerMode || '-')}</strong></div>
+      <div class="qa-meta-item"><span>RAG 档位</span><strong>${escapeHtml(body.ragMode || '-')}</strong></div>
+      <div class="qa-meta-item"><span>LLM Provider</span><strong>${escapeHtml(body.llmProvider || '-')}</strong></div>
+      <div class="qa-meta-item"><span>模型</span><strong>${escapeHtml(body.model || '-')}</strong></div>
+      <div class="qa-meta-item"><span>可回答</span><strong>${escapeHtml(body.answerable ? '是' : '否')}</strong></div>
+      <div class="qa-meta-item"><span>生成层</span><strong>${escapeHtml(body.generationBackend || '-')}</strong></div>
       <div class="qa-meta-item"><span>检索策略</span><strong>${escapeHtml(formatStrategy(body.strategy))}</strong></div>
-      <div class="qa-meta-item"><span>回退</span><strong>${escapeHtml(body.fallbackApplied ? '是' : '否')}</strong></div>
+      <div class="qa-meta-item"><span>回退</span><strong>${escapeHtml((body.fallbackApplied || body.llmFallbackApplied) ? '是' : '否')}</strong></div>
+      <div class="qa-meta-item"><span>置信度</span><strong>${escapeHtml(confidence == null ? '-' : confidence.toFixed(2))}</strong></div>
+      <div class="qa-meta-item"><span>耗时</span><strong>${escapeHtml(body.totalLatencyMs == null ? '-' : `${body.totalLatencyMs} ms`)}</strong></div>
+      <div class="qa-meta-item"><span>证据策略</span><strong>${escapeHtml(body.evidencePolicy || '-')}</strong></div>
     </div>
+    ${body.llmFallbackReason ? `<div class="muted qa-fallback-reason">${escapeHtml(body.llmFallbackReason)}</div>` : ''}
     <div class="qa-lists">
+      <div>
+        <strong>${escapeHtml(qaText('引用来源', 'Citations'))}</strong>
+        <ul>${citations.map(item => `<li>${escapeHtml(item)}</li>`).join('')}</ul>
+      </div>
       <div>
         <strong>${escapeHtml(qaText('限制说明', 'Limitations'))}</strong>
         <ul>${limitations.map(item => `<li>${escapeHtml(item)}</li>`).join('')}</ul>
@@ -56,13 +72,23 @@ function renderEvidence(body) {
     <article class="qa-evidence-item">
       <div class="qa-evidence-head">
         <div>
-          <h3>${escapeHtml(item.rank || '-')}. ${escapeHtml(item.title || qaText('未知资源', 'Unknown resource'))}</h3>
+          <h3>${escapeHtml(item.citation || `[${item.rank || '-'}]`)} ${escapeHtml(item.title || qaText('未知资源', 'Unknown resource'))}</h3>
           <div class="muted">${escapeHtml(item.author || qaText('未知作者', 'Unknown author'))} · ${escapeHtml(BookUi.localizeCategoryName(item.category || ''))}</div>
         </div>
-        ${item.resourceId ? `<a class="action-link primary" href="${BookUi.buildBookDetailHref(item.resourceId, { source: 'qa:evidence', reason: item.reason || 'Evidence QA' })}">${escapeHtml(qaText('查看详情', 'View detail'))}</a>` : ''}
+        ${item.resourceId ? `<a class="action-link primary"
+             href="${BookUi.buildBookDetailHref(item.resourceId, { source: 'qa:evidence', reason: item.reason || 'Evidence QA' })}"
+             data-qa-citation-click="1"
+             data-qa-event-id="${escapeHtml(body.qaEventId || '')}"
+             data-book-id="${escapeHtml(item.resourceId)}"
+             data-citation="${escapeHtml(item.citation || '')}"
+             data-question="${escapeHtml(body.question || '')}"
+             data-answer-mode="${escapeHtml(body.answerMode || '')}"
+             data-rag-mode="${escapeHtml(body.ragMode || '')}">${escapeHtml(qaText('查看详情', 'View detail'))}</a>` : ''}
       </div>
       <div class="tags">
         <span class="tag">match: ${escapeHtml(item.matchType || '-')}</span>
+        <span class="tag">source: ${escapeHtml(item.source || '-')}</span>
+        <span class="tag">reranker: ${escapeHtml(item.reranked ? 'yes' : 'no')}</span>
         <span class="tag">score: ${escapeHtml(item.score == null ? '-' : Number(item.score).toFixed(3))}</span>
       </div>
       ${item.reason ? `<div class="book-hit-meta"><span class="tag reason-chip">${escapeHtml(item.reason)}</span></div>` : ''}
@@ -75,6 +101,8 @@ async function askQuestion(event) {
   event.preventDefault();
   const question = document.getElementById('qa-question').value.trim();
   const limit = Number(document.getElementById('qa-limit').value || 5);
+  const mode = document.getElementById('qa-mode').value || 'standard';
+  const provider = document.getElementById('qa-provider').value || 'ollama';
   if (!question) {
     BookUi.showMessage('qa-message', 'warning', qaText('请先输入问题。', 'Please enter a question first.'));
     return;
@@ -89,7 +117,7 @@ async function askQuestion(event) {
   try {
     const response = await BookApi.apiRequest('/api/qa/evidence', {
       method: 'POST',
-      body: { question, limit }
+      body: { question, limit, mode, provider }
     });
     const body = response?.body || {};
     renderAnswer(body);
@@ -102,11 +130,36 @@ async function askQuestion(event) {
   }
 }
 
+async function trackCitationClick(event) {
+  const link = event.target.closest('a[data-qa-citation-click="1"]');
+  if (!link) return;
+  if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+  event.preventDefault();
+  try {
+    await BookApi.apiRequest('/api/qa/citation-click', {
+      method: 'POST',
+      body: {
+        qaEventId: link.dataset.qaEventId ? Number(link.dataset.qaEventId) : null,
+        bookId: link.dataset.bookId ? Number(link.dataset.bookId) : null,
+        citation: link.dataset.citation || null,
+        question: link.dataset.question || null,
+        answerMode: link.dataset.answerMode || null,
+        ragMode: link.dataset.ragMode || null
+      }
+    });
+  } catch (error) {
+    console.warn('QA citation tracking failed:', error.message);
+  } finally {
+    window.location.href = link.href;
+  }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   BookUi.injectLayout();
   if (!BookUi.requireLogin()) return;
 
   document.getElementById('qa-form').addEventListener('submit', askQuestion);
+  document.addEventListener('click', trackCitationClick);
   document.addEventListener('click', event => {
     const button = event.target.closest('[data-example-question]');
     if (!button) return;

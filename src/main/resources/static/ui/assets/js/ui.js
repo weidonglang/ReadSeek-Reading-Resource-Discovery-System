@@ -246,6 +246,7 @@
     { aliases: ['Same Category', '同分类推荐'], zh: '同分类推荐', en: 'Same Category' },
     { aliases: ['Shared Tags', '共享标签推荐'], zh: '共享标签推荐', en: 'Shared Tags' },
     { aliases: ['Fallback Picks', '补充推荐'], zh: '补充推荐', en: 'Fallback Picks' },
+    { aliases: ['Cold Start Picks', '冷启动推荐'], zh: '冷启动推荐', en: 'Cold Start Picks' },
     { aliases: ['Similar Book Recommendations', '相似图书推荐'], zh: '相似图书推荐', en: 'Similar Book Recommendations' },
     { aliases: ['Author shelf', '同作者书架'], zh: '同作者书架', en: 'Author shelf' },
     { aliases: ['More from the same author', '同作者更多作品'], zh: '同作者更多作品', en: 'More from the same author' }
@@ -281,6 +282,46 @@
       aliases: ['Used when the current book has too few close neighbors.', '当当前图书缺少足够相似项时的补充推荐。'],
       zh: '当当前图书缺少足够相似项时的补充推荐。',
       en: 'Used when the current book has too few close neighbors.'
+    },
+    {
+      aliases: ['Used when the current book has too few close neighbors; falls back to broadly popular books.', '当当前图书缺少足够相似项时，回退到整体热门资源。'],
+      zh: '当当前图书缺少足够相似项时，回退到整体热门资源。',
+      en: 'Used when the current book has too few close neighbors; falls back to broadly popular books.'
+    },
+    {
+      aliases: ['Rank by recent borrow, click, rating, rating count, and availability signals.', '按近期借阅、点击、评分、评分人数和可借库存信号排序。'],
+      zh: '按近期借阅、点击、评分、评分人数和可借库存信号排序。',
+      en: 'Rank by recent borrow, click, rating, rating count, and availability signals.'
+    },
+    {
+      aliases: ['Use collaborative filtering from users with similar rating patterns.', '使用评分模式相近用户的协同过滤结果。'],
+      zh: '使用评分模式相近用户的协同过滤结果。',
+      en: 'Use collaborative filtering from users with similar rating patterns.'
+    },
+    {
+      aliases: ["Match resources to categories selected in the user's reading profile.", '匹配用户阅读资料中选择的偏好分类。'],
+      zh: '匹配用户阅读资料中选择的偏好分类。',
+      en: "Match resources to categories selected in the user's reading profile."
+    },
+    {
+      aliases: ['Match categories and tags from resources the user rated or borrowed.', '匹配用户评分或借阅资源中的分类与标签。'],
+      zh: '匹配用户评分或借阅资源中的分类与标签。',
+      en: 'Match categories and tags from resources the user rated or borrowed.'
+    },
+    {
+      aliases: ['Use content similarity from category overlap, then shared tags and popularity.', '先按分类重叠找内容相似，再结合共享标签和热度排序。'],
+      zh: '先按分类重叠找内容相似，再结合共享标签和热度排序。',
+      en: 'Use content similarity from category overlap, then shared tags and popularity.'
+    },
+    {
+      aliases: ['Use content similarity from shared tags, then popularity.', '按共享标签找内容相似，再结合热度排序。'],
+      zh: '按共享标签找内容相似，再结合热度排序。',
+      en: 'Use content similarity from shared tags, then popularity.'
+    },
+    {
+      aliases: ['Use popular resources when user or item evidence is too sparse.', '当用户或图书证据过少时使用热门资源兜底。'],
+      zh: '当用户或图书证据过少时使用热门资源兜底。',
+      en: 'Use popular resources when user or item evidence is too sparse.'
     }
   ];
 
@@ -301,6 +342,7 @@
     'same-category': { zh: '同分类推荐', en: 'Same Category' },
     'shared-tags': { zh: '共享标签推荐', en: 'Shared Tags' },
     fallback: { zh: '补充推荐', en: 'Fallback Picks' },
+    'cold-start': { zh: '冷启动推荐', en: 'Cold Start Picks' },
     overview: { zh: '推荐书架', en: 'Recommendation shelf' },
     'author-shelf': { zh: '同作者书架', en: 'Author shelf' },
     'same-author': { zh: '同作者更多作品', en: 'More from the same author' }
@@ -449,17 +491,17 @@
         : `${title} shares ${count} tags: ${tags}.`;
     }
 
-    const fallbackEnMatch = normalized.match(/^Fallback popular recommendation: (.+)\.$/);
+    const fallbackEnMatch = normalized.match(/^(Fallback popular recommendation|Cold-start fallback from popular resources): (.+)\.$/);
     if (fallbackEnMatch) {
       return language === 'zh'
-        ? `补充热门推荐：《${fallbackEnMatch[1]}》。`
+        ? `冷启动热门推荐：《${fallbackEnMatch[2]}》。`
         : normalized;
     }
-    const fallbackZhMatch = normalized.match(/^补充热门推荐：《(.+)》。$/);
+    const fallbackZhMatch = normalized.match(/^(补充热门推荐|冷启动热门推荐)：《(.+)》。$/);
     if (fallbackZhMatch) {
       return language === 'zh'
         ? normalized
-        : `Fallback popular recommendation: ${fallbackZhMatch[1]}.`;
+        : `Cold-start fallback from popular resources: ${fallbackZhMatch[2]}.`;
     }
 
     return normalized;
@@ -637,7 +679,9 @@
       category: book.category ? { id: book.category.id ?? null, name: book.category.name || '' } : null,
       publisher: book.publisher ? { id: book.publisher.id ?? null, name: book.publisher.name || '' } : null,
       recommendationSource: book.recommendationSource || '',
-      recommendationReason: book.recommendationReason || ''
+      recommendationReason: book.recommendationReason || '',
+      recommendationReasonType: book.recommendationReasonType || '',
+      recommendationRank: book.recommendationRank ?? null
     };
   }
 
@@ -736,6 +780,17 @@
         reason: link.dataset.reason || null
       });
       if (actionType === 'RECOMMENDATION_CLICK') {
+        await window.BookApi.apiRequest('/api/recommendation-events/click', {
+          method: 'POST',
+          body: {
+            bookId: link.dataset.bookId ? Number(link.dataset.bookId) : null,
+            source: link.dataset.source || null,
+            reason: link.dataset.reason || null,
+            reasonType: link.dataset.reasonType || null,
+            rankPosition: link.dataset.rankPosition ? Number(link.dataset.rankPosition) : null,
+            requestContext: document.body?.dataset?.page || window.location.pathname
+          }
+        });
         await window.BookApi.logBehavior({
           actionType: 'BOOK_DETAIL_CLICK',
           bookId: link.dataset.bookId ? Number(link.dataset.bookId) : null,
@@ -751,10 +806,39 @@
     }
   }
 
+  async function trackRecommendationFeedbackClick(event) {
+    if (!event.target || typeof event.target.closest !== 'function') return;
+    const button = event.target.closest('button[data-recommendation-feedback]');
+    if (!button || button.disabled) return;
+    button.disabled = true;
+    const originalText = button.textContent;
+    try {
+      await window.BookApi.apiRequest('/api/recommendation-events/feedback', {
+        method: 'POST',
+        body: {
+          bookId: button.dataset.bookId ? Number(button.dataset.bookId) : null,
+          feedbackType: button.dataset.recommendationFeedback,
+          source: button.dataset.source || null,
+          reason: button.dataset.reason || null,
+          reasonType: button.dataset.reasonType || null,
+          rankPosition: button.dataset.rankPosition ? Number(button.dataset.rankPosition) : null,
+          requestContext: document.body?.dataset?.page || window.location.pathname,
+          comment: null
+        }
+      });
+      button.textContent = window.BookI18n?.isChinese?.() ? '已记录' : 'Saved';
+    } catch (error) {
+      console.warn('recommendation feedback failed:', error.message);
+      button.textContent = originalText;
+      button.disabled = false;
+    }
+  }
+
   function bindBehaviorTracker() {
     if (behaviorTrackerBound) return;
     behaviorTrackerBound = true;
     document.addEventListener('click', trackBookLinkClick);
+    document.addEventListener('click', trackRecommendationFeedbackClick);
   }
 
   function updateSaveButtonLabel(button) {
@@ -843,17 +927,39 @@
     const description = book?.description || t('common.noDescription');
     const reason = localizeRecommendationReason(options.reason || book?.recommendationReason || options.comment || '');
     const source = options.source || book?.recommendationSource || '';
+    const reasonType = options.reasonType || book?.recommendationReasonType || '';
+    const rankPosition = options.rankPosition || book?.recommendationRank || '';
     const actionType = options.actionType || (source.startsWith('recommendation:') ? 'RECOMMENDATION_CLICK' : 'BOOK_DETAIL_CLICK');
     const sourceLabel = localizeRecommendationTitle(options.sourceLabel || source);
     const searchKeyword = options.searchKeyword || '';
+    const isRecommendation = source.startsWith('recommendation:') || Boolean(book?.recommendationSource);
     const detailHref = buildBookDetailHref(id, { source, reason });
     const normalizedBook = normalizeStoredBook(book) || { id };
     const savePayload = escapeHtml(JSON.stringify(normalizedBook));
     const hitMeta = (sourceLabel || reason) ? `
       <div class="book-hit-meta">
         ${sourceLabel ? `<span class="tag source-chip">${escapeHtml(t('common.source', { value: sourceLabel }))}</span>` : ''}
+        ${reasonType ? `<span class="tag source-chip">${escapeHtml(reasonType)}</span>` : ''}
+        ${rankPosition ? `<span class="tag source-chip">#${escapeHtml(rankPosition)}</span>` : ''}
         ${reason ? `<span class="tag reason-chip">${escapeHtml(t('common.reason', { value: reason }))}</span>` : ''}
       </div>` : '';
+    const feedbackActions = isRecommendation ? `
+          <button type="button"
+                  class="action-link"
+                  data-recommendation-feedback="INTERESTED"
+                  data-book-id="${escapeHtml(id)}"
+                  data-source="${escapeHtml(source)}"
+                  data-reason="${escapeHtml(reason)}"
+                  data-reason-type="${escapeHtml(reasonType)}"
+                  data-rank-position="${escapeHtml(rankPosition)}">${escapeHtml(window.BookI18n?.isChinese?.() ? '感兴趣' : 'Interested')}</button>
+          <button type="button"
+                  class="action-link"
+                  data-recommendation-feedback="NOT_INTERESTED"
+                  data-book-id="${escapeHtml(id)}"
+                  data-source="${escapeHtml(source)}"
+                  data-reason="${escapeHtml(reason)}"
+                  data-reason-type="${escapeHtml(reasonType)}"
+                  data-rank-position="${escapeHtml(rankPosition)}">${escapeHtml(window.BookI18n?.isChinese?.() ? '不感兴趣' : 'Not interested')}</button>` : '';
 
     return `
       <article class="card book-card">
@@ -879,10 +985,13 @@
              data-book-id="${escapeHtml(id)}"
              data-source="${escapeHtml(source)}"
              data-reason="${escapeHtml(reason)}"
+             data-reason-type="${escapeHtml(reasonType)}"
+             data-rank-position="${escapeHtml(rankPosition)}"
              data-keyword="${escapeHtml(searchKeyword)}">${escapeHtml(t('common.viewDetail'))}</a>
           <a href="rate-book.html?bookId=${id}" class="action-link">${escapeHtml(t('common.rateBook'))}</a>
           <button type="button" class="action-link" data-save-book="1" data-book-payload="${savePayload}">${escapeHtml(t('common.readLater'))}</button>
           ${authorId ? `<a href="books.html?authorId=${authorId}" class="action-link">${escapeHtml(t('common.sameAuthorBooks'))}</a>` : ''}
+          ${feedbackActions}
         </div>
       </article>`;
   }
@@ -942,9 +1051,11 @@
       }
 
       const booksMarkup = (Array.isArray(shelf.books) ? shelf.books : []).map(book => renderBookCard(book, {
-        source: `recommendation:${shelf.key || 'overview'}`,
+        source: `recommendation:${book?.recommendationSource || shelf.key || 'overview'}`,
         sourceLabel: shelf.title || shelf.key || t('common.recommendationShelf'),
         reason: book?.recommendationReason || shelf.description || '',
+        reasonType: book?.recommendationReasonType || shelf.reasonType || '',
+        rankPosition: book?.recommendationRank || '',
         actionType: 'RECOMMENDATION_CLICK'
       })).join('');
 
@@ -959,6 +1070,7 @@
           <div>
             <h2>${escapeHtml(getRecommendationShelfTextByKey(shelf, 'title') || localizeRecommendationTitle(shelf.title || t('common.recommendationShelf')))}</h2>
             <div class="muted">${escapeHtml(getRecommendationShelfTextByKey(shelf, 'description') || localizeRecommendationDescription(shelf.description || ''))}</div>
+            ${shelf.strategy ? `<div class="muted">${escapeHtml(localizeRecommendationDescription(shelf.strategy))}</div>` : ''}
           </div>
         </div>
         ${resolvedScrollSize ? `<div class="hover-scroll-shell recommend-scroll-shell">${listMarkup}</div>` : listMarkup}

@@ -3,6 +3,8 @@ package com.weidonglang.readseek.service;
 import com.weidonglang.readseek.dto.BookDto;
 import com.weidonglang.readseek.dto.BookRecommendationOverviewDto;
 import com.weidonglang.readseek.dto.BookRecommendationShelfDto;
+import com.weidonglang.readseek.dto.RecommendationAnalyticsDto;
+import com.weidonglang.readseek.dto.RecommendationClickRequestDto;
 import com.weidonglang.readseek.dto.RecommendationEventDto;
 import com.weidonglang.readseek.dto.RecommendationFeedbackRequestDto;
 import com.weidonglang.readseek.dto.UserDto;
@@ -141,5 +143,57 @@ class RecommendationEventServiceImplTest {
         assertEquals(1, events.get(0).getRankPosition());
         assertEquals(2, events.get(1).getRankPosition());
         assertEquals("overview:30", events.get(1).getRequestContext());
+    }
+
+    @Test
+    void recordClickShouldPersistRecommendationClickEvent() {
+        RecommendationClickRequestDto request = new RecommendationClickRequestDto(
+                21L,
+                "recommendation:popular",
+                "ranked by popularity",
+                "POPULARITY",
+                3,
+                "recommendations"
+        );
+        Book book = new Book();
+        book.setId(21L);
+        book.setName("The Hobbit");
+        when(bookRepository.findById(21L)).thenReturn(Optional.of(book));
+        when(recommendationEventRepository.save(any(RecommendationEvent.class))).thenAnswer(invocation -> {
+            RecommendationEvent event = invocation.getArgument(0);
+            event.setId(51L);
+            return event;
+        });
+
+        RecommendationEventDto saved = service.recordClick(request);
+
+        ArgumentCaptor<RecommendationEvent> captor = ArgumentCaptor.forClass(RecommendationEvent.class);
+        verify(recommendationEventRepository).save(captor.capture());
+        RecommendationEvent event = captor.getValue();
+        assertEquals(RecommendationEventType.CLICK, event.getEventType());
+        assertEquals("recommendation:popular", event.getSource());
+        assertEquals("POPULARITY", event.getReasonType());
+        assertEquals(3, event.getRankPosition());
+        assertEquals("The Hobbit", saved.getBookName());
+    }
+
+    @Test
+    void buildAnalyticsShouldCalculateRecommendationRates() {
+        when(recommendationEventRepository.countByEventTypeAndMarkedAsDeletedFalse(RecommendationEventType.EXPOSURE))
+                .thenReturn(10L);
+        when(recommendationEventRepository.countByEventTypeAndMarkedAsDeletedFalse(RecommendationEventType.CLICK))
+                .thenReturn(4L);
+        when(recommendationEventRepository.countByEventTypeAndMarkedAsDeletedFalse(RecommendationEventType.FEEDBACK))
+                .thenReturn(2L);
+        when(recommendationEventRepository.findByMarkedAsDeletedFalseOrderByCreatedDateDesc(any()))
+                .thenReturn(List.of());
+
+        RecommendationAnalyticsDto analytics = service.buildAnalytics(null, 5);
+
+        assertEquals(10L, analytics.getExposureCount());
+        assertEquals(4L, analytics.getClickCount());
+        assertEquals(2L, analytics.getFeedbackCount());
+        assertEquals(0.4D, analytics.getCtr());
+        assertEquals(0.2D, analytics.getFeedbackRate());
     }
 }

@@ -11,8 +11,10 @@ import java.util.regex.Pattern;
 public class SearchQueryIntentClassifier {
     private static final Pattern ISBN_PATTERN = Pattern.compile("^(97(8|9))?[\\d-]{9,18}[\\dxX]$");
     private static final Set<String> NATURAL_LANGUAGE_HINTS = Set.of(
-            "想找", "推荐", "有没有", "适合", "类似", "比较", "介绍", "阅读路径", "主题",
-            "looking for", "recommend", "similar", "compare", "suggest", "what should", "which book"
+            "想找", "想看", "帮我", "推荐", "有没有", "适合", "类似", "比较", "介绍", "阅读路径", "主题",
+            "哪本", "哪个", "入门", "书单", "路线", "不要", "像",
+            "looking for", "recommend", "similar", "compare", "suggest", "what should", "which book",
+            "should i", "easy to read", "beginner", "books like"
     );
 
     public SearchQueryIntent classify(String rawQuery) {

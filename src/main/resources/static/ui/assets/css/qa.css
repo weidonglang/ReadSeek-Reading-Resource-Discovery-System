@@ -80,6 +80,7 @@
 
 .qa-form-row .field {
   flex: 1;
+  min-width: 130px;
 }
 
 .qa-examples {
@@ -166,6 +167,10 @@
 
 .qa-lists ul {
   margin: 8px 0 0;
+}
+
+.qa-fallback-reason {
+  margin-top: 12px;
 }
 
 @media (max-width: 900px) {

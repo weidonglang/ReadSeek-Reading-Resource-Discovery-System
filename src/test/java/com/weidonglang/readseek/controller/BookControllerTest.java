@@ -14,6 +14,7 @@ import com.weidonglang.readseek.dto.base.response.ApiResponse;
 import com.weidonglang.readseek.dto.base.response.PaginationResponse;
 import com.weidonglang.readseek.service.BookCategoryService;
 import com.weidonglang.readseek.service.BookService;
+import com.weidonglang.readseek.service.RecommendationEventService;
 import com.weidonglang.readseek.service.UserBehaviorLogService;
 import com.weidonglang.readseek.service.UserBookRateService;
 import org.junit.jupiter.api.BeforeEach;
@@ -48,11 +49,14 @@ class BookControllerTest {
     @Mock
     private UserBehaviorLogService userBehaviorLogService;
 
+    @Mock
+    private RecommendationEventService recommendationEventService;
+
     private BookController controller;
 
     @BeforeEach
     void setUp() {
-        controller = new BookController(bookService, bookCategoryService, userBookRateService, userBehaviorLogService);
+        controller = new BookController(bookService, bookCategoryService, userBookRateService, userBehaviorLogService, recommendationEventService);
     }
 
     @Test
@@ -129,6 +133,7 @@ class BookControllerTest {
         assertEquals("Recommendation overview fetched successfully.", response.getMessage());
         assertSame(overview, response.getBody());
         verify(bookService).findRecommendationOverview(null);
+        verify(recommendationEventService).recordOverviewExposure(overview, "book-overview:recentDays=null");
     }
 
     @Test
@@ -142,6 +147,7 @@ class BookControllerTest {
         assertEquals("Similar book recommendations fetched successfully.", response.getMessage());
         assertSame(overview, response.getBody());
         verify(bookService).findBookSimilarityRecommendations(8L);
+        verify(recommendationEventService).recordOverviewExposure(overview, "book-similar:bookId=8");
     }
 
     @Test

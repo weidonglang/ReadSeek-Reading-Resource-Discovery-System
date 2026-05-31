@@ -193,7 +193,8 @@
   max-height: 320px;
 }
 
-#admin-recent-searches.scroll-size-md {
+#admin-recent-searches.scroll-size-md,
+#admin-ai-events.scroll-size-md {
   max-height: 420px;
 }
 
@@ -280,7 +281,8 @@
   #category-admin-list.scroll-size-md,
   #publisher-admin-list.scroll-size-md,
   #tag-admin-list.scroll-size-md,
-  #admin-recent-searches.scroll-size-md {
+  #admin-recent-searches.scroll-size-md,
+  #admin-ai-events.scroll-size-md {
     max-height: 400px;
   }
 }

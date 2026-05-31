@@ -260,10 +260,13 @@ public class BookServiceImpl implements BookService {
         if (behaviorAnalyticsService != null) {
             List<BookDto> popularBooks = behaviorAnalyticsService.findPopularBooks(normalizedLimit, normalizedRecentDays);
             if (!popularBooks.isEmpty()) {
-                return popularBooks;
+                return annotateRecommendationDtos(popularBooks, "popular");
             }
         }
-        return getTransformer().transformEntityToDto(findPopularBookEntities(normalizedLimit, Collections.emptySet()));
+        return annotateRecommendationDtos(
+                getTransformer().transformEntityToDto(findPopularBookEntities(normalizedLimit, Collections.emptySet())),
+                "popular"
+        );
     }
 
     @Override
@@ -393,10 +396,10 @@ public class BookServiceImpl implements BookService {
         if (shelves.isEmpty()) {
             List<Book> fallbackBooks = findPopularBookEntities(DETAIL_RECOMMENDATION_LIMIT, excludedIds);
             if (!fallbackBooks.isEmpty()) {
-                shelves.add(buildShelf("fallback", "Fallback Picks",
-                        "Used when the current book has too few close neighbors.",
+                shelves.add(buildShelf("cold-start", "Cold Start Picks",
+                        "Used when the current book has too few close neighbors; falls back to broadly popular books.",
                         fallbackBooks,
-                        book -> String.format("Fallback popular recommendation: %s.", safeString(book.getName()))));
+                        book -> String.format("Cold-start fallback from popular resources: %s.", safeString(book.getName()))));
             }
         }
 
@@ -656,14 +659,69 @@ public class BookServiceImpl implements BookService {
                                                   List<Book> books,
                                                   Function<Book, String> reasonBuilder) {
         List<BookDto> bookDtos = getTransformer().transformEntityToDto(books);
-        for (BookDto bookDto : bookDtos) {
+        String reasonType = resolveRecommendationReasonType(key);
+        Map<Long, Book> booksById = books == null ? Collections.emptyMap() : books.stream()
+                .filter(book -> book.getId() != null)
+                .collect(Collectors.toMap(Book::getId, Function.identity(), (left, right) -> left, LinkedHashMap::new));
+        for (int index = 0; index < bookDtos.size(); index++) {
+            BookDto bookDto = bookDtos.get(index);
             bookDto.setRecommendationSource(key);
-            books.stream()
-                    .filter(book -> book.getId() != null && book.getId().equals(bookDto.getId()))
-                    .findFirst()
+            bookDto.setRecommendationReasonType(reasonType);
+            bookDto.setRecommendationRank(index + 1);
+            Optional.ofNullable(booksById.get(bookDto.getId()))
                     .ifPresent(book -> bookDto.setRecommendationReason(reasonBuilder.apply(book)));
         }
-        return new BookRecommendationShelfDto(key, title, description, bookDtos);
+        BookRecommendationShelfDto shelfDto = new BookRecommendationShelfDto(key, title, description, bookDtos);
+        shelfDto.setSource(key);
+        shelfDto.setReasonType(reasonType);
+        shelfDto.setStrategy(resolveRecommendationStrategy(key, description));
+        return shelfDto;
+    }
+
+    private String resolveRecommendationReasonType(String key) {
+        return switch (safeString(key)) {
+            case "popular" -> "POPULARITY";
+            case "collaborative" -> "COLLABORATIVE_FILTERING";
+            case "preferences" -> "PROFILE_PREFERENCE";
+            case "activity" -> "USER_ACTIVITY";
+            case "same-category" -> "CONTENT_SIMILARITY";
+            case "shared-tags" -> "TAG_SIMILARITY";
+            case "cold-start", "fallback" -> "COLD_START_FALLBACK";
+            default -> "RECOMMENDATION_RULE";
+        };
+    }
+
+    private String resolveRecommendationStrategy(String key, String description) {
+        return switch (safeString(key)) {
+            case "popular" -> "Rank by recent borrow, click, rating, rating count, and availability signals.";
+            case "collaborative" -> "Use collaborative filtering from users with similar rating patterns.";
+            case "preferences" -> "Match resources to categories selected in the user's reading profile.";
+            case "activity" -> "Match categories and tags from resources the user rated or borrowed.";
+            case "same-category" -> "Use content similarity from category overlap, then shared tags and popularity.";
+            case "shared-tags" -> "Use content similarity from shared tags, then popularity.";
+            case "cold-start", "fallback" -> "Use popular resources when user or item evidence is too sparse.";
+            default -> description;
+        };
+    }
+
+    private List<BookDto> annotateRecommendationDtos(List<BookDto> bookDtos, String source) {
+        if (bookDtos == null || bookDtos.isEmpty()) {
+            return bookDtos;
+        }
+        String reasonType = resolveRecommendationReasonType(source);
+        for (int index = 0; index < bookDtos.size(); index++) {
+            BookDto bookDto = bookDtos.get(index);
+            if (bookDto == null) {
+                continue;
+            }
+            bookDto.setRecommendationSource(source);
+            bookDto.setRecommendationReasonType(reasonType);
+            bookDto.setRecommendationRank(index + 1);
+            if (bookDto.getRecommendationReason() == null || bookDto.getRecommendationReason().isBlank()) {
+                bookDto.setRecommendationReason(String.format("Popular recommendation ranked by recent behavior and rating signals. Current rank #%d.", index + 1));
+            }
+        }
+        return bookDtos;
     }
 
     // free hosting cause leak algo speed for fetching

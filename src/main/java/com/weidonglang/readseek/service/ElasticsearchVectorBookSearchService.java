@@ -108,12 +108,17 @@ public class ElasticsearchVectorBookSearchService implements VectorBookSearchSer
                 Long bookId = hit.getContent() == null ? null : hit.getContent().getId();
                 BookDto bookDto = booksById.get(bookId);
                 if (bookId != null && bookDto != null && hit.getScore() >= searchProperties.getVector().getMinScore()) {
-                    hits.add(new BookSearchHitDto(
+                    BookSearchHitDto searchHitDto = new BookSearchHitDto(
                             bookDto,
                             Double.valueOf(hit.getScore()),
                             "VECTOR",
                             "Semantic similarity from vector search."
-                    ));
+                    );
+                    searchHitDto.setSource("vector");
+                    searchHitDto.setRetrievalStage("vector");
+                    searchHitDto.setReranked(false);
+                    searchHitDto.setExplanationTags(List.of("semantic", "embedding"));
+                    hits.add(searchHitDto);
                 }
             }
             return hits;

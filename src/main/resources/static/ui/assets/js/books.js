@@ -31,6 +31,9 @@ function getBooksLabels() {
     results: pageText('结果', 'Results'),
     sort: pageText('排序', 'Sort'),
     fallback: pageText('回退', 'Fallback'),
+    expandedQuery: pageText('扩展查询', 'Expanded query'),
+    candidates: pageText('候选', 'Candidates'),
+    reranker: pageText('Reranker', 'Reranker'),
     query: pageText('查询', 'Query'),
     browseMode: pageText('图书浏览', 'Catalog browse'),
     filteredMode: pageText('高级筛选', 'Advanced filters'),
@@ -38,6 +41,8 @@ function getBooksLabels() {
     relevanceSort: pageText('相关性优先', 'Relevance first'),
     fallbackYes: pageText('已启用', 'Applied'),
     fallbackNo: pageText('未启用', 'Not applied'),
+    rerankerYes: pageText('已重排', 'Applied'),
+    rerankerNo: pageText('未重排', 'Not applied'),
     noPaging: pageText('当前模式不分页，按限制条数返回', 'This mode is not paginated and returns up to the requested limit'),
     filterSourceLabel: pageText('图书筛选', 'Filtered browse'),
     searchSourceLabel: pageText('智能搜索', 'Hybrid search'),
@@ -377,6 +382,9 @@ function humanizeSearchStrategy(strategy) {
   if (strategy.startsWith('hybrid-v2(exact-db+bm25+vector)')) {
     return pageText('Hybrid v2（精确匹配 + BM25 + 向量语义）', 'Hybrid v2 (exact match + BM25 + vector)');
   }
+  if (strategy.startsWith('hybrid-v3')) {
+    return pageText('Hybrid v3（精确匹配 + BM25 + 向量语义 + Reranker）', 'Hybrid v3 (exact match + BM25 + vector + reranker)');
+  }
   if (strategy === 'bm25') {
     return 'BM25';
   }
@@ -388,9 +396,13 @@ function humanizeSearchStrategy(strategy) {
 
 function humanizeMatchType(matchType) {
   const labels = getBooksLabels();
-  if (matchType === 'EXACT_DB') return labels.exactMatch;
-  if (matchType === 'BM25') return labels.bm25Match;
-  if (matchType === 'VECTOR') return pageText('语义相似命中', 'Vector semantic hit');
+  const normalized = String(matchType || '').toUpperCase();
+  const parts = [];
+  if (normalized.includes('EXACT_DB')) parts.push(labels.exactMatch);
+  if (normalized.includes('BM25')) parts.push(labels.bm25Match);
+  if (normalized.includes('VECTOR')) parts.push(pageText('语义相似命中', 'Vector semantic hit'));
+  if (normalized.includes('RERANK')) parts.push(pageText('Reranker 重排', 'Reranker reranked'));
+  if (parts.length) return parts.join(window.BookI18n.isChinese() ? ' + ' : ' + ');
   return labels.searchMatch;
 }
 
@@ -401,6 +413,15 @@ function buildSearchHitReason(hit) {
   }
   if (hit.matchType) {
     parts.push(humanizeMatchType(hit.matchType));
+  }
+  if (hit.source) {
+    parts.push(pageText(`来源：${hit.source}`, `source: ${hit.source}`));
+  }
+  if (hit.retrievalStage) {
+    parts.push(pageText(`链路：${hit.retrievalStage}`, `stage: ${hit.retrievalStage}`));
+  }
+  if (hit.reranked) {
+    parts.push(pageText('已进入 reranker 最终排序', 'included in reranker final ranking'));
   }
   return parts.join(window.BookI18n.isChinese() ? '；' : '; ');
 }
@@ -470,12 +491,16 @@ function renderFilterSummary(payload, pagination) {
 
 function renderSearchSummary(response, limit) {
   const labels = getBooksLabels();
+  const expandedQuery = response.expandedQuery && response.expandedQuery !== response.query ? response.expandedQuery : null;
   const segments = [
     { label: labels.mode, value: labels.searchMode },
     { label: labels.query, value: response.query || '' },
     { label: labels.intent, value: humanizeQueryIntent(response.queryIntent) },
+    ...(expandedQuery ? [{ label: labels.expandedQuery, value: expandedQuery }] : []),
     { label: labels.strategy, value: humanizeSearchStrategy(response.strategy) },
     { label: labels.results, value: labels.searchSummary(response.returnedCount || 0) },
+    { label: labels.candidates, value: String(response.candidateCount ?? response.returnedCount ?? 0) },
+    { label: labels.reranker, value: response.rerankerApplied ? labels.rerankerYes : labels.rerankerNo },
     { label: labels.sort, value: labels.relevanceSort },
     { label: labels.fallback, value: response.fallbackApplied ? labels.fallbackYes : labels.fallbackNo },
     { label: labels.range, value: labels.hybridLimit(limit) }
@@ -524,6 +549,9 @@ async function loadBooks(pageNumber = 1) {
         query: body.query || keyword,
         queryIntent: body.queryIntent,
         strategy: body.strategy,
+        expandedQuery: body.expandedQuery,
+        candidateCount: body.candidateCount,
+        rerankerApplied: Boolean(body.rerankerApplied),
         fallbackApplied: Boolean(body.fallbackApplied),
         returnedCount: body.returnedCount || hits.length
       }, limit);

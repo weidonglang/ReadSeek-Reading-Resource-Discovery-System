@@ -17,4 +17,22 @@ public class BookSearchResponseDto {
     private boolean fallbackApplied;
     private Integer returnedCount;
     private List<BookSearchHitDto> hits;
+    private String expandedQuery;
+    private List<String> strategySteps;
+    private Boolean rerankerApplied;
+    private Integer candidateCount;
+
+    public BookSearchResponseDto(String query,
+                                 SearchQueryIntent queryIntent,
+                                 String strategy,
+                                 boolean fallbackApplied,
+                                 Integer returnedCount,
+                                 List<BookSearchHitDto> hits) {
+        this.query = query;
+        this.queryIntent = queryIntent;
+        this.strategy = strategy;
+        this.fallbackApplied = fallbackApplied;
+        this.returnedCount = returnedCount;
+        this.hits = hits;
+    }
 }

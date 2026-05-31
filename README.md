@@ -1,733 +1,357 @@
-
-# ReadSeek: Intelligent Discovery System for Reading Resources
-
-**ReadSeek** is a Java Web system for discovering reading resources.  
-The current demo uses **book data** as the primary resource type and focuses on showcasing:
-
-- natural-language hybrid retrieval,
-- explainable recommendation,
-- borrowing and circulation workflows,
-- user behavior analytics.
-
-**ReadSeek** 是一个面向阅读资源发现的 Java Web 系统。  
-当前版本以**图书数据**作为主要演示资源类型，重点展示**自然语言混合检索、可解释推荐、借阅流通与用户行为分析**的能力。
-
----
-
-## Research Title / 项目完整题目
-
-
-Research and System Implementation of Natural-Language Hybrid Retrieval,
-Evidence-Driven Question Answering, and Explainable Recommendation
-for Reading Resource Discovery
-
-面向阅读资源发现的自然语言混合检索、证据驱动问答与可解释推荐关键技术研究与系统实现
-
-
----
-
-## Project Positioning / 项目定位
-
-This version is designed for:
-
-* graduation project demonstrations,
-* Java Web course projects,
-* backend portfolio showcases.
-
-It already covers the core workflow of:
-
-* resource discovery,
-* search,
-* recommendation,
-* borrowing,
-* reservation,
-* rating,
-* administration.
-
-It also integrates **Elasticsearch / BM25**, while providing a **minimal vector retrieval skeleton** and a **Python AI service stub** for future extension.
-
-> **Important:** Evidence-driven QA and production-grade embedding models are **not fully implemented** in the current version. They should be treated as future work rather than finished production features.
-
-本版本适合：
-
-* 毕业设计演示，
-* Java Web 课程项目，
-* 后端作品集展示。
-
-当前已经实现**资源发现、检索、推荐、借阅、预约、评分、后台管理**等核心流程，
-并接入 **Elasticsearch / BM25**，同时提供**向量检索骨架**与 **Python AI 服务最小集成**。
-
-> **说明：** 证据驱动问答与真实生产级 embedding 模型仍属于后续扩展，当前版本**不应被理解为已完整生产化实现**。
-
----
-
-## Features / 已实现能力
-
-### 1. Resource and User Workflows / 资源与用户业务
-
-* User registration, login, JWT authentication, and role-based access control.
-
-* Resource listing, detail view, rating, borrowing, returning, renewal, and reservation.
-
-* Admin-side maintenance for resources, authors, categories, publishers, tags, borrow records, reservations, and behavior data.
-
-* User behavior logging, including search actions, detail clicks, and recommendation clicks.
-
-* 用户注册、登录、JWT 鉴权、角色权限控制。
-
-* 阅读资源列表、详情、评分、借阅、归还、续借和预约。
-
-* 管理端可维护资源、作者、分类、出版社、标签、借阅、预约和行为数据。
-
-* 用户行为日志，包括搜索、详情点击和推荐点击。
-
-### 2. Search and Recommendation / 检索与推荐
-
-* PostgreSQL exact match and structured filtering.
-
-* Elasticsearch BM25 full-text search.
-
-* Hybrid retrieval API: exact match + BM25 + vector semantic skeleton.
-
-* Chinese query expansion rules, including common categories, natural-language intents, and author aliases.
-
-* Automatic search index synchronization on create, update, and logical delete.
-
-* Recommendation overview, popular resources, similar resources, and collaborative filtering recommendations.
-
-* PostgreSQL 精确匹配与结构化筛选。
-
-* Elasticsearch BM25 全文检索。
-
-* 混合检索接口：精确匹配 + BM25 + 向量语义骨架。
-
-* 中文查询扩展规则，包括常见分类、自然语言意图和作者别名。
-
-* 资源在创建、更新、逻辑删除时自动同步搜索索引。
-
-* 推荐概览、热门资源、相似资源与协同过滤推荐。
-
-### 3. Engineering and Delivery / 工程化能力
-
-* Dockerfile and Docker Compose support.
-
-* One-click startup scripts for Windows.
-
-* Swagger UI / OpenAPI integration.
-
-* Spring Boot Actuator endpoints for `health`, `info`, and `metrics`.
-
-* Basic GitHub Actions CI for testing and packaging.
-
-* 提供 Dockerfile 与 Docker Compose。
-
-* 提供 Windows 一键启动脚本。
-
-* 集成 Swagger UI / OpenAPI。
-
-* 提供 Actuator `health`、`info`、`metrics` 基础观测端点。
-
-* 提供 GitHub Actions 基础 CI（测试与打包）。
-
----
-
-## Screenshots / 系统截图
-
-### Home Dashboard / 首页仪表盘
-
-![Home Dashboard](docs/images/home-dashboard.png)
-
-### Search Workspace / 检索工作台
-
-![Search Workspace](docs/images/search-workspace.png)
-
-### Resource Detail / 资源详情
-
-![Resource Detail](docs/images/book-detail.png)
-
-### Recommendation Shelf / 推荐书架
-
-![Recommendation Shelf](docs/images/recommendation-shelf.png)
-
-### Borrowing Records / 借阅记录
-
-![Borrowing Records](docs/images/borrowing-records.png)
-
-### Swagger UI
-
-![Swagger UI](docs/images/swagger-ui.png)
-
----
-
-## Roadmap and Future Work / 未完成或后续扩展
-
-The following items are **research directions or future enhancements** and are **not fully implemented** in the current version:
-
-* production-grade embedding model integration and retrieval quality tuning,
-* RAG-based evidence retrieval and answer generation,
-* evidence-driven QA with source citation,
-* systematic evaluation datasets for search, recommendation, and QA,
-* production-grade governance such as distributed rate limiting, tracing, and vulnerability scanning.
-
-以下内容属于**研究方向或后续增强**，**不代表当前版本已完整实现**：
-
-* 真实生产级 embedding 模型接入与检索质量优化，
-* RAG 证据检索与答案生成，
-* 带引用来源的证据驱动问答，
-* 系统化的检索、推荐与问答评测集，
-* 分布式限流、Tracing、漏洞扫描等生产级治理能力。
-
----
-
-## Tech Stack / 技术栈
-
-* Java 17
-* Spring Boot 3.5.7
-* Spring Web / Spring Security
-* Spring Data JPA
-* Spring Data Elasticsearch
-* PostgreSQL
-* Elasticsearch 8
-* Liquibase
-* MapStruct / Lombok
-* springdoc OpenAPI / Swagger UI
-* Spring Boot Actuator
-* Python 3 local AI service
-* Docker / Docker Compose
-
----
-
-## Project Structure / 项目结构
+# ReadSeek Reading Resource Discovery System
+
+ReadSeek is a Spring Boot based reading-resource discovery system. It combines a traditional library workflow with hybrid retrieval, evidence-grounded RAG question answering, and explainable recommendations.
+
+当前版本已经完成项目开发主线：图书业务闭环、混合检索、BGE-M3 向量召回、BGE reranker、Ollama/Qwen 本地 LLM RAG、在线 AI Provider 预留接口、可解释推荐、推荐/问答行为日志和后台统计。
+
+## Core Features
+
+- User registration, login, JWT authentication, role-based admin access.
+- Book, author, category, publisher, tag, inventory, borrowing, renewal, return, and reservation management.
+- Hybrid search strategy:
+  - PostgreSQL exact match
+  - Elasticsearch BM25
+  - BGE-M3 dense vector retrieval
+  - exact/BM25/vector hybrid merge
+  - BGE reranker final ranking
+  - visible query intent, source labels, ranking reasons, reranker markers
+- Evidence-grounded RAG QA:
+  - `/api/qa/evidence`
+  - fast / standard / expert modes
+  - local Ollama provider
+  - OpenAI-compatible online API provider placeholder
+  - retrieved evidence + rerank + citation-based answer
+  - refusal when evidence is insufficient
+  - deterministic fallback when LLM is unavailable
+- Explainable recommendations:
+  - popular, preference, collaborative, similar, same-author, same-category, cold-start shelves
+  - recommendation source, reason type, strategy, rank position
+  - exposure, click, and feedback logging
+  - recommendation CTR and feedback-rate analytics
+- Admin analytics:
+  - search keywords
+  - popular categories/authors/tags/publishers
+  - clicked and borrowed books
+  - recommendation funnel
+  - QA request, answerable/refusal count, citation clicks, average latency
+
+## Tech Stack
+
+- Java 17
+- Spring Boot 3.5.x
+- Spring Security + JWT
+- Spring Data JPA
+- PostgreSQL
+- Elasticsearch 8
+- Redis
+- Liquibase
+- Lombok / MapStruct
+- Static HTML/CSS/JavaScript frontend
+- Python 3.11 local AI service
+- FlagEmbedding / BGE-M3 / BGE reranker
+- Ollama local LLM
+- Docker Compose
+
+## Runtime Architecture
 
 ```text
-src/main/java/com/weidonglang/readseek/
-  ReadSeekApplication.java
-  config/
-  controller/
-  dao/
-  dto/
-  entity/
-  enums/
-  exception/
-  manager/
-  recommender/
-  repository/
-  search/
-  security/
-  service/
-  transformer/
-
-src/main/resources/
-  application.properties
-  db/readseek.xml
-  static/ui/
-
-ai-service/
-docs/
-scripts/
-.github/workflows/
+Browser UI
+  -> Spring Boot API :8010/readseek-service
+      -> PostgreSQL :5043
+      -> Redis :6379
+      -> Elasticsearch :9200
+      -> Python AI service :8001
+          -> BGE-M3 embedding
+          -> BGE reranker
+      -> Ollama :11434
+          -> qwen2.5:7b / qwen3:8b / qwen3:14b
+      -> Optional online OpenAI-compatible API
 ```
 
----
+## Prerequisites
 
-## Quick Start / 快速启动
+- Windows 10/11
+- Docker Desktop
+- JDK 17
+- Python 3.11
+- Ollama for Windows
+- At least 20 GB free disk space for local LLM models
 
-### Option A: One-click startup on Windows / 方式 A：Windows 一键启动
-
-Double-click the following file in the project root:
-
-```text
-start-readseek.bat
-```
-
-Or run it in PowerShell:
+Recommended local models:
 
 ```powershell
+ollama pull qwen2.5:7b
+ollama pull qwen3:8b
+ollama pull qwen3:14b
+```
+
+`qwen3:8b` is the default RAG model. `qwen3:14b` is used only for expert mode.
+
+## Quick Start
+
+From the project root:
+
+```powershell
+cd E:\javacode\new-book-recommendation-system
 .\start-readseek.bat
 ```
 
-The script will start:
-
-* PostgreSQL: `localhost:5043`
-* Elasticsearch: `localhost:9200`
-* Python AI service: `http://127.0.0.1:8001`
-* Spring Boot: `http://localhost:8010/readseek-service`
-* Default browser page: `http://localhost:8010/readseek-service/ui/login.html`
-
-脚本会自动启动：
-
-* PostgreSQL: `localhost:5043`
-* Elasticsearch: `localhost:9200`
-* Python AI service: `http://127.0.0.1:8001`
-* Spring Boot: `http://localhost:8010/readseek-service`
-* 默认浏览器页面：`http://localhost:8010/readseek-service/ui/login.html`
-
-Common options / 常用参数：
+If you prefer starting pieces manually:
 
 ```powershell
-.\start-readseek.bat -NoAi
-.\start-readseek.bat -NoBrowser
-.\start-readseek.bat -StartPage home
-.\start-readseek.bat -StartPage search
-.\start-readseek.bat -StartPage swagger
-.\start-readseek.bat -DbPassword 20041117
-.\start-readseek.bat -JavaHome "C:\Users\WDL\.jdks\ms-17.0.18"
+docker compose up -d
+
+.\.venv-ai\Scripts\activate
+.\start-bge-m3-ai-service.bat
+
+.\mvnw-jdk17.cmd spring-boot:run
 ```
 
-If startup or login fails, run the diagnostic script:
+Open:
 
-```powershell
-powershell -ExecutionPolicy Bypass -File .\scripts\diagnose-readseek.ps1
-```
+- Frontend: `http://localhost:8010/readseek-service/ui/login.html`
+- Swagger UI: `http://localhost:8010/readseek-service/swagger-ui/index.html`
+- AI health: `http://127.0.0.1:8001/health`
+- Ollama health: `http://localhost:11434/api/tags`
 
-若启动或登录异常，可运行诊断脚本：
-
-```powershell
-powershell -ExecutionPolicy Bypass -File .\scripts\diagnose-readseek.ps1
-```
-
----
-
-### Option B: Manual development startup / 方式 B：手动开发启动
-
-Start dependencies and the backend together:
-
-```powershell
-.\start-dev.bat -WithAi
-```
-
-Or start the AI service separately:
-
-```powershell
-.\start-ai-service.bat
-```
-
-可通过以下方式手动启动开发环境：
-
-```powershell
-.\start-dev.bat -WithAi
-```
-
-或单独启动 AI 服务：
-
-```powershell
-.\start-ai-service.bat
-```
-
----
-
-### Option C: Start the full application with Docker / 方式 C：Docker 启动完整应用
-
-```powershell
-docker compose up --build
-```
-
----
-
-## Default Accounts and Local Configuration / 默认账号与本地配置
-
-### Default admin account / 默认管理员账号
-
-* Email: `admin@booknook.local`
-* Password: `Admin123!`
-
-### Default Docker database settings / 默认 Docker 数据库配置
-
-* Database: `book_recommendation_system`
-* Username: `postgres`
-* Password: `20041117`
-
-### Notes / 说明
-
-* The current database name remains `book_recommendation_system` to preserve compatibility with existing local volumes.
-
-* If your existing local PostgreSQL volume uses a different password, override it with `-DbPassword`.
-
-* 当前数据库名保留为 `book_recommendation_system`，用于兼容已有本地数据卷。
-
-* 如果旧数据卷的 PostgreSQL 密码不同，可通过 `-DbPassword` 覆盖。
-
----
-
-## Common URLs / 常用地址
+Default local admin account:
 
 ```text
-Frontend:
-http://localhost:8010/readseek-service/ui/login.html
-
-Swagger UI:
-http://localhost:8010/readseek-service/swagger-ui/index.html
-
-Actuator Health:
-http://localhost:8010/readseek-service/actuator/health
-
-Actuator Info:
-http://localhost:8010/readseek-service/actuator/info
-
-Actuator Metrics:
-http://localhost:8010/readseek-service/actuator/metrics
+Email: admin@booknook.local
+Password: Admin123!
 ```
 
----
+## Local AI Service
 
-## Build / 打包
+The Python AI service provides embedding and reranking:
 
-Build the project:
+- embedding model: `BAAI/bge-m3`
+- reranker model: `BAAI/bge-reranker-v2-m3`
+- service URL: `http://127.0.0.1:8001`
 
-```powershell
-.\mvnw.cmd clean package
+Main backend config:
+
+```properties
+library.search.embedding.enabled=true
+library.search.embedding.base-url=http://127.0.0.1:8001
+library.search.embedding.model=BAAI/bge-m3
+library.search.embedding.dimensions=1024
+
+library.search.reranker.enabled=true
+library.search.reranker.base-url=http://127.0.0.1:8001
+library.search.reranker.model=BAAI/bge-reranker-v2-m3
 ```
 
-Generated artifact:
+## RAG LLM Configuration
+
+Default local LLM provider:
+
+```env
+LLM_PROVIDER=ollama
+OLLAMA_BASE_URL=http://localhost:11434
+OLLAMA_CHAT_ENDPOINT=http://localhost:11434/api/chat
+OLLAMA_STREAM=false
+OLLAMA_THINK=false
+
+RAG_DEFAULT_MODE=standard
+RAG_FAST_MODEL=qwen2.5:7b
+RAG_STANDARD_MODEL=qwen3:8b
+RAG_EXPERT_MODEL=qwen3:14b
+```
+
+Mode defaults:
 
 ```text
-target/readseek-0.0.1-SNAPSHOT.jar
+fast:
+  model: qwen2.5:7b
+  top_k: 5
+  rerank_top_k: 3
+  timeout: 60s
+
+standard:
+  model: qwen3:8b
+  top_k: 10
+  rerank_top_k: 5
+  timeout: 120s
+
+expert:
+  model: qwen3:14b
+  top_k: 20
+  rerank_top_k: 8
+  timeout: 240s
 ```
 
-Package without running tests:
+Optional online AI provider. It uses an OpenAI-compatible `/chat/completions` API and is disabled by default:
 
-```powershell
-.\mvnw.cmd -DskipTests package
+```env
+ONLINE_AI_ENABLED=true
+ONLINE_AI_BASE_URL=https://api.example.com/v1
+ONLINE_AI_CHAT_COMPLETIONS_ENDPOINT=/chat/completions
+ONLINE_AI_API_KEY=your_api_key
+ONLINE_AI_MODEL=gpt-4o-mini
+LLM_PROVIDER=online
 ```
 
-项目打包命令如下：
+The online provider is intentionally generic. It can be wired to OpenAI-compatible services by setting the base URL, API key, and model.
 
-```powershell
-.\mvnw.cmd clean package
-```
+## Important API Endpoints
 
-跳过测试打包：
-
-```powershell
-.\mvnw.cmd -DskipTests package
-```
-
----
-
-## Search Index and Hybrid Retrieval Verification / 搜索索引与混合检索测试
-
-Rebuild the search index after startup:
-
-```powershell
-powershell -ExecutionPolicy Bypass -File .\scripts\rebuild-search-index.ps1
-```
-
-Verify hybrid retrieval with English query:
-
-```powershell
-powershell -ExecutionPolicy Bypass -File .\scripts\verify-hybrid-search.ps1 -Query "Pride and Prejudice"
-```
-
-Verify hybrid retrieval with Chinese natural-language query:
-
-```powershell
-powershell -ExecutionPolicy Bypass -File .\scripts\verify-hybrid-search.ps1 -Query "想看简奥斯汀的代表作"
-```
-
-When the AI service is enabled and the index has been rebuilt, the retrieval strategy will display:
+Search:
 
 ```text
-hybrid-v2(exact-db+bm25+vector)
-```
-
-启动后可通过以下脚本重建索引并验证混合检索：
-
-```powershell
-powershell -ExecutionPolicy Bypass -File .\scripts\rebuild-search-index.ps1
-powershell -ExecutionPolicy Bypass -File .\scripts\verify-hybrid-search.ps1 -Query "Pride and Prejudice"
-powershell -ExecutionPolicy Bypass -File .\scripts\verify-hybrid-search.ps1 -Query "想看简奥斯汀的代表作"
-```
-
-当 AI 服务启用且索引已重建时，检索策略会显示：
-
-```text
-hybrid-v2(exact-db+bm25+vector)
-```
-
----
-
-## Main APIs / 主要 API
-
-### Resource discovery APIs / 资源发现接口
-
-```text
-GET  /api/resources/{resourceId}
+GET  /api/search/books?q=...&limit=10
 POST /api/resources/search
-GET  /api/resources/recommended
-GET  /api/resources/recommendations/popular
-GET  /api/resources/recommendations/overview
-GET  /api/resources/recommendations/similar/{resourceId}
-GET  /api/resources/categories
-GET  /api/search/resources?q=...&limit=...
-GET  /api/search/resources/bm25?q=...&limit=...
-POST /api/search/index/resources/rebuild
+POST /api/search/rebuild-index
 ```
 
-Legacy `/api/book/...` and `/api/search/books...` endpoints are still preserved for compatibility,
-but all new pages and documentation prefer the **resource-discovery API naming**.
-
-旧的 `/api/book/...` 和 `/api/search/books...` 接口仍保留兼容，
-但新页面和新文档优先使用**资源发现语义接口**。
-
----
-
-## Python AI Service / Python AI 服务
-
-The current Python AI service is a **minimal integration stub** mainly used to validate the call chain from the Java backend to the embedding service.
-
-Current endpoints:
-
-* `GET /health`
-* `POST /embed`
-
-Current embedding backend:
-
-* deterministic `hash-bow`
-* suitable for integration testing and workflow validation
-* **not** representative of the final semantic retrieval quality
-
-当前 Python AI 服务是一个**最小集成骨架**，主要用于验证 Java 后端到 embedding 服务的调用链。
-
-当前提供接口：
-
-* `GET /health`
-* `POST /embed`
-
-当前 embedding 后端：
-
-* deterministic `hash-bow`
-* 适合联调和流程验证
-* **不代表最终语义检索模型质量**
-
-More details / 更多说明：
-
-* [ai-service/README.md](ai-service/README.md)
-* [docs/vector-retrieval-ai-service-plan.md](docs/vector-retrieval-ai-service-plan.md)
-* [docs/vector-local-test-checklist.md](docs/vector-local-test-checklist.md)
-
----
-
-## CI / 持续集成
-
-GitHub Actions workflow:
+Evidence QA:
 
 ```text
-.github/workflows/ci.yml
+POST /api/qa/evidence
+POST /api/qa/citation-click
+GET  /api/qa/analytics
+GET  /api/qa/events/recent
 ```
 
-Current quality gates:
+Recommendation:
 
-* JDK 17
-* Maven dependency cache
-* `./mvnw -q test`
-* `./mvnw -q -DskipTests package`
-
-当前 CI 质量门禁包括：
-
-* JDK 17
-* Maven 依赖缓存
-* `./mvnw -q test`
-* `./mvnw -q -DskipTests package`
-
----
-
-## Development Notes / 开发说明
-
-### When restart is required / 什么时候需要重启
-
-* If you modify Java backend code, restart the backend.
-
-* If you modify Python AI service code, restart the AI service.
-
-* If you change index structure or embedding write logic, restart the backend **and** rebuild the search index.
-
-* If you only modify static frontend assets, hard-refresh the browser; if needed, run `mvn process-resources`.
-
-* 修改 Java 后端代码：重启后端。
-
-* 修改 Python AI 服务代码：重启 AI 服务。
-
-* 修改索引结构或 embedding 写入逻辑：重启后端并重建搜索索引。
-
-* 只修改静态前端资源：强刷浏览器，必要时执行 `mvn process-resources`。
-
-### Frequently used commands / 常用命令
-
-```powershell
-.\start-readseek.bat
+```text
+GET  /api/resources/recommendations/overview
+GET  /api/resources/{id}/recommendations/similar
+POST /api/recommendation-events/click
+POST /api/recommendation-events/feedback
+GET  /api/recommendation-events/analytics
+GET  /api/recommendation-events/recent
 ```
 
-```powershell
-powershell -ExecutionPolicy Bypass -File .\scripts\diagnose-readseek.ps1
+Behavior analytics:
+
+```text
+POST /api/behavior-log
+GET  /api/behavior-log/dashboard
+GET  /api/behavior-log/searches/top-keywords
+GET  /api/behavior-log/books/top-clicked
+GET  /api/behavior-log/books/top-borrowed
 ```
 
-```powershell
-powershell -ExecutionPolicy Bypass -File .\scripts\rebuild-search-index.ps1
-```
-
-```powershell
-.\mvnw.cmd test
-```
-
----
-
-## Version Boundary / 版本边界
-
-This version is a **stable local-demo release** intended for graduation projects and portfolio demonstrations.
-
-It already provides:
-
-* a complete business workflow for a reading resource discovery system,
-* a workable hybrid retrieval engineering skeleton,
-* a usable recommendation and borrowing pipeline.
-
-However, it is **not a production-grade system**.
-A production-ready version would still require:
-
-* real embedding models,
-* a complete RAG-based QA pipeline,
-* systematic evaluation,
-* distributed rate limiting,
-* full observability,
-* stronger security governance.
-
-当前版本是一个面向**毕设与本地演示**的稳定版本。
-
-它已经具备：
-
-* 阅读资源发现系统的完整业务闭环，
-* 混合检索的工程骨架，
-* 可运行的推荐与借阅流程。
-
-但它**不是生产级系统**。
-如果要进一步生产化，仍需补充：
-
-* 真实 embedding 模型，
-* 完整的 RAG 问答链路，
-* 系统化评测，
-* 分布式限流，
-* 完整可观测性，
-* 更强的安全治理能力。
-
----
-
-## Local BGE-M3 Embedding Service
-
-ReadSeek supports `BAAI/bge-m3` as a local multilingual embedding model for hybrid retrieval. The same local AI service also exposes `BAAI/bge-reranker-v2-m3` for optional query-passage reranking after exact, BM25, and vector candidates are merged.
-
-The model weights are not stored in this repository. On first startup, the AI service downloads the model into the local Hugging Face cache. You can customize the cache location with `READSEEK_MODEL_HOME`.
-The reranker model is also cached locally and must not be committed to Git.
-
-### First-time setup
-
-```bat
-scripts\setup-bge-m3-ai-env.bat
-```
-
-### Start AI service
-
-```bat
-start-bge-m3-ai-service.bat
-```
-
-To use a custom model cache directory:
-
-```bat
-set READSEEK_MODEL_HOME=D:\AIModels\huggingface
-start-bge-m3-ai-service.bat
-```
-
-### Health check
-
-```bat
-curl http://127.0.0.1:8001/health
-```
-
-Expected response:
+## RAG Request Example
 
 ```json
 {
-  "status": "ok",
-  "embeddingBackend": "bge-m3",
-  "dimensions": 1024,
-  "model": "BAAI/bge-m3"
+  "question": "想看关于个人成长的书，应该从哪本开始？",
+  "limit": 10,
+  "mode": "standard",
+  "provider": "ollama"
 }
 ```
 
-### Test embedding API
+Response includes:
 
-```bat
-.venv-ai\Scripts\python.exe ai-service\test_embed_api.py
-```
+- `answer`
+- `answerable`
+- `answerMode`
+- `ragMode`
+- `llmProvider`
+- `model`
+- `generationBackend`
+- `evidence`
+- `citations`
+- `confidence`
+- `retrievalLatencyMs`
+- `generationLatencyMs`
+- `totalLatencyMs`
+- `llmFallbackApplied`
 
-Expected output:
+## Testing
 
-```text
-backend: bge-m3
-dimensions: 1024
-vector length: 1024
-```
-
-### Test rerank API
-
-The first rerank request may take longer because `BAAI/bge-reranker-v2-m3` is lazy-loaded and downloaded if it is not already in the local cache.
-
-```bat
-.venv-ai\Scripts\python.exe ai-service\test_rerank_api.py
-```
-
-Expected output:
-
-```text
-backend: bge-reranker-v2-m3
-model: BAAI/bge-reranker-v2-m3
-topN: 2
-results:
-```
-
-### Rebuild search index
-
-After starting the AI service and Spring Boot backend:
+Run the full automated test suite:
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File .\scripts\rebuild-search-index.ps1
+.\mvnw-jdk17.cmd test
 ```
 
-### Verify hybrid retrieval
+Current result:
+
+```text
+Tests run: 92
+Failures: 0
+Errors: 0
+Skipped: 0
+```
+
+The tests cover controllers, search, RAG answer generation, QA logging, recommendation events, recommendation analytics, borrowing, reservation, rating, security rate limiting, and application context startup.
+
+## Smoke Test Checklist
+
+After startup:
+
+1. Log in as admin.
+2. Open the search page and run a natural-language query.
+3. Confirm search results show source, reason, strategy, and reranker marker.
+4. Open the QA page and ask a question in `standard` mode with provider `Ollama`.
+5. Confirm the answer has citations and evidence cards.
+6. Click a QA citation and verify admin analytics records a citation click.
+7. Open recommendations and click a recommendation.
+8. Send interested/not-interested feedback.
+9. Open admin analytics and verify recommendation funnel and QA quality panels.
+10. Stop Ollama and ask again; the answer should fall back instead of crashing.
+
+## Troubleshooting
+
+Container name conflict:
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File .\scripts\verify-hybrid-search.ps1 -Query "想找类似三体但更容易读的英文科幻小说"
-powershell -ExecutionPolicy Bypass -File .\scripts\verify-hybrid-search.ps1 -Query "books like The Alchemist about personal growth"
+docker ps -a
+docker rm -f readseek-db readseek-search readseek-redis
+docker compose up -d
 ```
 
-Expected strategy examples:
+Ollama model missing:
 
-```text
-hybrid-v3(exact-db+bm25+vector+reranker)
+```powershell
+ollama pull qwen3:8b
 ```
 
-If the reranker is disabled or unavailable, ReadSeek automatically falls back to the previous hybrid strategies:
+AI service slow on first run:
 
-```text
-hybrid-v2(exact-db+vector+bm25)
-hybrid-v2(exact-db+bm25+vector)
+- The first BGE-M3 and reranker startup downloads model files.
+- Keep the cache at `C:\Users\<user>\.cache\readseek\huggingface`.
+- Windows symlink warnings from Hugging Face are harmless, but Developer Mode can reduce duplicate cache storage.
+
+Elasticsearch index stale:
+
+```powershell
+.\scripts\rebuild-search-index.ps1
 ```
 
-Exact ISBN and exact title matches stay pinned ahead of reranked candidates.
+Run backend tests only:
 
-### Offline demonstration
-
-For offline demonstrations, prepare the model cache in advance and copy it to the target machine. Then set:
-
-```bat
-set READSEEK_MODEL_HOME=D:\AIModels\huggingface
-start-bge-m3-ai-service.bat
+```powershell
+.\mvnw-jdk17.cmd test
 ```
 
-Do not commit model weights or virtual environments into Git.
+## Project Status
 
----
+Development status: feature-complete for the current ReadSeek graduation/course-project scope.
 
-## License
+Completed:
 
-See [LICENSE](LICENSE).
+- Core library workflows
+- Hybrid retrieval
+- Vector retrieval
+- Reranker
+- RAG QA with local LLM and fallback
+- Online AI Provider interface
+- Explainable recommendation
+- Recommendation exposure/click/feedback logs
+- QA request/citation logs
+- Admin analytics
+- Automated regression tests
+- Local startup documentation
+
+Remaining work outside development scope:
+
+- Formal experiment datasets and reports
+- Thesis writing
+- Defense PPT
+- Optional deployment hardening for production environments

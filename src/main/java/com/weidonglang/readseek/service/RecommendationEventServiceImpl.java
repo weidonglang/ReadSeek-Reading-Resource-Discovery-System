@@ -3,6 +3,8 @@ package com.weidonglang.readseek.service;
 import com.weidonglang.readseek.dto.BookDto;
 import com.weidonglang.readseek.dto.BookRecommendationOverviewDto;
 import com.weidonglang.readseek.dto.BookRecommendationShelfDto;
+import com.weidonglang.readseek.dto.RecommendationAnalyticsDto;
+import com.weidonglang.readseek.dto.RecommendationClickRequestDto;
 import com.weidonglang.readseek.dto.RecommendationEventDto;
 import com.weidonglang.readseek.dto.RecommendationFeedbackRequestDto;
 import com.weidonglang.readseek.entity.Book;
@@ -16,6 +18,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -108,6 +111,27 @@ public class RecommendationEventServiceImpl implements RecommendationEventServic
     }
 
     @Override
+    public RecommendationEventDto recordClick(RecommendationClickRequestDto requestDto) {
+        if (requestDto == null || requestDto.getBookId() == null) {
+            throw new IllegalArgumentException("bookId is required.");
+        }
+        Book book = bookRepository.findById(requestDto.getBookId())
+                .orElseThrow(() -> new IllegalArgumentException("Book not found for recommendation click."));
+
+        RecommendationEvent event = new RecommendationEvent();
+        event.setEventType(RecommendationEventType.CLICK);
+        event.setBook(book);
+        resolveCurrentUser().ifPresent(event::setUser);
+        event.setSource(normalizeText(requestDto.getSource(), 120));
+        event.setReason(normalizeText(requestDto.getReason(), 1000));
+        event.setReasonType(normalizeText(requestDto.getReasonType(), 80));
+        event.setRankPosition(requestDto.getRankPosition());
+        event.setRequestContext(normalizeText(requestDto.getRequestContext(), 255));
+        event.setMarkedAsDeleted(false);
+        return toDto(recommendationEventRepository.save(event));
+    }
+
+    @Override
     public List<RecommendationEventDto> findRecentEvents(Integer limit) {
         return recommendationEventRepository
                 .findByMarkedAsDeletedFalseOrderByCreatedDateDesc(PageRequest.of(0, sanitizeLimit(limit)))
@@ -126,6 +150,25 @@ public class RecommendationEventServiceImpl implements RecommendationEventServic
                 .stream()
                 .map(this::toDto)
                 .toList();
+    }
+
+    @Override
+    public RecommendationAnalyticsDto buildAnalytics(Integer recentDays, Integer limit) {
+        LocalDateTime fromDate = resolveFromDate(recentDays);
+        long exposures = count(RecommendationEventType.EXPOSURE, fromDate);
+        long clicks = count(RecommendationEventType.CLICK, fromDate);
+        long feedback = count(RecommendationEventType.FEEDBACK, fromDate);
+        double ctr = exposures == 0 ? 0.0D : (double) clicks / exposures;
+        double feedbackRate = exposures == 0 ? 0.0D : (double) feedback / exposures;
+        return new RecommendationAnalyticsDto(
+                normalizeRecentDays(recentDays),
+                exposures,
+                clicks,
+                feedback,
+                round(ctr),
+                round(feedbackRate),
+                findRecentEvents(limit)
+        );
     }
 
     private RecommendationEventDto toDto(RecommendationEvent event) {
@@ -161,6 +204,23 @@ public class RecommendationEventServiceImpl implements RecommendationEventServic
         }
     }
 
+    private long count(RecommendationEventType eventType, LocalDateTime fromDate) {
+        return fromDate == null
+                ? recommendationEventRepository.countByEventTypeAndMarkedAsDeletedFalse(eventType)
+                : recommendationEventRepository.countByEventTypeAndCreatedDateGreaterThanEqualAndMarkedAsDeletedFalse(eventType, fromDate);
+    }
+
+    private LocalDateTime resolveFromDate(Integer recentDays) {
+        if (recentDays == null || recentDays < 1) {
+            return null;
+        }
+        return LocalDateTime.now().minusDays(recentDays);
+    }
+
+    private Integer normalizeRecentDays(Integer recentDays) {
+        return recentDays == null || recentDays < 1 ? null : recentDays;
+    }
+
     private String normalizeText(String value, int maxLength) {
         if (value == null) {
             return null;
@@ -177,5 +237,9 @@ public class RecommendationEventServiceImpl implements RecommendationEventServic
             return 20;
         }
         return Math.min(limit, MAX_RECENT_LIMIT);
+    }
+
+    private double round(double value) {
+        return Math.round(value * 100.0D) / 100.0D;
     }
 }

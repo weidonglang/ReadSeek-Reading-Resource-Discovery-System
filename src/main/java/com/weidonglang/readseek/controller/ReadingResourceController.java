@@ -10,9 +10,11 @@ import com.weidonglang.readseek.dto.base.response.ApiResponse;
 import com.weidonglang.readseek.dto.base.response.PaginationResponse;
 import com.weidonglang.readseek.service.BookCategoryService;
 import com.weidonglang.readseek.service.BookService;
+import com.weidonglang.readseek.service.RecommendationEventService;
 import com.weidonglang.readseek.service.UserBehaviorLogService;
 import com.weidonglang.readseek.service.UserBookRateService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -39,15 +41,26 @@ public class ReadingResourceController {
     private final BookCategoryService bookCategoryService;
     private final UserBookRateService userBookRateService;
     private final UserBehaviorLogService userBehaviorLogService;
+    private final RecommendationEventService recommendationEventService;
+
+    @Autowired
+    public ReadingResourceController(BookService bookService,
+                                     BookCategoryService bookCategoryService,
+                                     UserBookRateService userBookRateService,
+                                     UserBehaviorLogService userBehaviorLogService,
+                                     RecommendationEventService recommendationEventService) {
+        this.bookService = bookService;
+        this.bookCategoryService = bookCategoryService;
+        this.userBookRateService = userBookRateService;
+        this.userBehaviorLogService = userBehaviorLogService;
+        this.recommendationEventService = recommendationEventService;
+    }
 
     public ReadingResourceController(BookService bookService,
                                      BookCategoryService bookCategoryService,
                                      UserBookRateService userBookRateService,
                                      UserBehaviorLogService userBehaviorLogService) {
-        this.bookService = bookService;
-        this.bookCategoryService = bookCategoryService;
-        this.userBookRateService = userBookRateService;
-        this.userBehaviorLogService = userBehaviorLogService;
+        this(bookService, bookCategoryService, userBookRateService, userBehaviorLogService, null);
     }
 
     @GetMapping("/{resourceId}")
@@ -89,6 +102,7 @@ public class ReadingResourceController {
     public ApiResponse findRecommendationOverview(@RequestParam(required = false) Integer recentDays) {
         log.info("ReadingResourceController: findRecommendationOverview() called");
         BookRecommendationOverviewDto overview = bookService.findRecommendationOverview(recentDays);
+        recordRecommendationExposure(overview, "resource-overview:recentDays=" + recentDays);
         return new ApiResponse(true, LocalDateTime.now().toString(),
                 "Reading-resource recommendation overview fetched successfully.", overview);
     }
@@ -97,6 +111,7 @@ public class ReadingResourceController {
     public ApiResponse findSimilarResourceRecommendations(@PathVariable Long resourceId) {
         log.info("ReadingResourceController: findSimilarResourceRecommendations() called");
         BookRecommendationOverviewDto overview = bookService.findBookSimilarityRecommendations(resourceId);
+        recordRecommendationExposure(overview, "resource-similar:resourceId=" + resourceId);
         return new ApiResponse(true, LocalDateTime.now().toString(),
                 "Similar reading-resource recommendations fetched successfully.", overview);
     }
@@ -261,5 +276,12 @@ public class ReadingResourceController {
             return;
         }
         userBehaviorLogService.recordRecommendationClick(resourceId, normalizedSource, reason);
+    }
+
+    private void recordRecommendationExposure(BookRecommendationOverviewDto overview, String requestContext) {
+        if (recommendationEventService == null) {
+            return;
+        }
+        recommendationEventService.recordOverviewExposure(overview, requestContext);
     }
 }

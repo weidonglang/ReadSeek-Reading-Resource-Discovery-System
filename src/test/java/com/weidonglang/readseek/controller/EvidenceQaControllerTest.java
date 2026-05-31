@@ -4,6 +4,7 @@ import com.weidonglang.readseek.dto.EvidenceQaRequestDto;
 import com.weidonglang.readseek.dto.EvidenceQaResponseDto;
 import com.weidonglang.readseek.dto.base.response.ApiResponse;
 import com.weidonglang.readseek.service.EvidenceQaService;
+import com.weidonglang.readseek.service.QaEventService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -25,11 +26,14 @@ class EvidenceQaControllerTest {
     @Mock
     private EvidenceQaService evidenceQaService;
 
+    @Mock
+    private QaEventService qaEventService;
+
     private EvidenceQaController controller;
 
     @BeforeEach
     void setUp() {
-        controller = new EvidenceQaController(evidenceQaService);
+        controller = new EvidenceQaController(evidenceQaService, qaEventService);
     }
 
     @Test

@@ -93,6 +93,9 @@ class BookSearchServiceImplTest {
         BookSearchResponseDto response = service.searchBooks(query, 5);
 
         assertEquals("hybrid-v2(exact-db+vector+bm25)", response.getStrategy());
+        assertEquals("expanded classic romance", response.getExpandedQuery());
+        assertEquals(false, response.getRerankerApplied());
+        assertEquals(2, response.getCandidateCount());
         assertEquals(List.of(1L, 2L), response.getHits().stream().map(hit -> hit.getBook().getId()).toList());
     }
 
@@ -114,6 +117,29 @@ class BookSearchServiceImplTest {
 
         assertEquals("hybrid-v2(exact-db+bm25+vector)", response.getStrategy());
         assertEquals(List.of(2L, 1L), response.getHits().stream().map(hit -> hit.getBook().getId()).toList());
+    }
+
+    @Test
+    void searchBooksShouldMergeDuplicateSourcesForTheSameBook() {
+        String query = "classic romance";
+        BookDto sharedBook = buildBookDto(2L, "Shared Match");
+        BookSearchHitDto vectorHit = new BookSearchHitDto(sharedBook, 1.5D, "VECTOR", "Semantic similarity from vector search.");
+        vectorHit.setSource("vector");
+        vectorHit.setRetrievalStage("vector");
+
+        when(searchQueryIntentClassifier.classify(query)).thenReturn(SearchQueryIntent.KEYWORD);
+        when(searchQueryExpander.expand(query, SearchQueryIntent.KEYWORD)).thenReturn(query);
+        when(searchQueryExpander.resolveExactCandidateQueries(query)).thenReturn(List.of(query));
+        when(bookRepository.findExactMatches(eq(query), any(Pageable.class))).thenReturn(List.of());
+        when(vectorBookSearchService.search(query, 10)).thenReturn(List.of(vectorHit));
+        mockBm25Result(2L, sharedBook, 1.04f);
+
+        BookSearchResponseDto response = service.searchBooks(query, 5);
+
+        assertEquals(1, response.getHits().size());
+        assertEquals("BM25+VECTOR", response.getHits().get(0).getMatchType());
+        assertEquals("bm25,vector", response.getHits().get(0).getSource());
+        assertEquals(1.5D, response.getHits().get(0).getScore());
     }
 
     @Test
@@ -168,6 +194,7 @@ class BookSearchServiceImplTest {
         BookSearchResponseDto response = service.searchBooks(query, 5);
 
         assertEquals("hybrid-v3(exact-db+bm25+vector+reranker)", response.getStrategy());
+        assertEquals(true, response.getRerankerApplied());
         assertEquals(List.of(1L, 2L), response.getHits().stream().map(hit -> hit.getBook().getId()).toList());
     }
 

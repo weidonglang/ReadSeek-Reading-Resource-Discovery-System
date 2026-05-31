@@ -12,4 +12,11 @@ import lombok.Setter;
 public class EvidenceQaRequestDto {
     private String question;
     private Integer limit;
+    private String mode;
+    private String provider;
+
+    public EvidenceQaRequestDto(String question, Integer limit) {
+        this.question = question;
+        this.limit = limit;
+    }
 }

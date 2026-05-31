@@ -11,6 +11,7 @@ import com.weidonglang.readseek.dto.base.response.ApiResponse;
 import com.weidonglang.readseek.dto.base.response.PaginationResponse;
 import com.weidonglang.readseek.service.BookCategoryService;
 import com.weidonglang.readseek.service.BookService;
+import com.weidonglang.readseek.service.RecommendationEventService;
 import com.weidonglang.readseek.service.UserBehaviorLogService;
 import com.weidonglang.readseek.service.UserBookRateService;
 import lombok.extern.slf4j.Slf4j;
@@ -31,16 +32,26 @@ public class BookController implements BaseController<BookService> {
     private final BookCategoryService bookCategoryService;
     private final UserBookRateService userBookRateService;
     private final UserBehaviorLogService userBehaviorLogService;
+    private final RecommendationEventService recommendationEventService;
 
     @Autowired
     public BookController(BookService bookService,
                           BookCategoryService bookCategoryService,
                           UserBookRateService userBookRateService,
-                          UserBehaviorLogService userBehaviorLogService) {
+                          UserBehaviorLogService userBehaviorLogService,
+                          RecommendationEventService recommendationEventService) {
         this.bookService = bookService;
         this.bookCategoryService = bookCategoryService;
         this.userBookRateService = userBookRateService;
         this.userBehaviorLogService = userBehaviorLogService;
+        this.recommendationEventService = recommendationEventService;
+    }
+
+    public BookController(BookService bookService,
+                          BookCategoryService bookCategoryService,
+                          UserBookRateService userBookRateService,
+                          UserBehaviorLogService userBehaviorLogService) {
+        this(bookService, bookCategoryService, userBookRateService, userBehaviorLogService, null);
     }
 
     public BookController(BookService bookService,
@@ -88,6 +99,7 @@ public class BookController implements BaseController<BookService> {
     public ApiResponse findRecommendationOverview(@RequestParam(required = false) Integer recentDays) {
         log.info("BookController: findRecommendationOverview() called");
         BookRecommendationOverviewDto overview = getService().findRecommendationOverview(recentDays);
+        recordRecommendationExposure(overview, "book-overview:recentDays=" + recentDays);
         return new ApiResponse(true, LocalDateTime.now().toString(),
                 "Recommendation overview fetched successfully.", overview);
     }
@@ -96,6 +108,7 @@ public class BookController implements BaseController<BookService> {
     public ApiResponse findSimilarBookRecommendations(@PathVariable Long bookId) {
         log.info("BookController: findSimilarBookRecommendations() called");
         BookRecommendationOverviewDto overview = getService().findBookSimilarityRecommendations(bookId);
+        recordRecommendationExposure(overview, "book-similar:bookId=" + bookId);
         return new ApiResponse(true, LocalDateTime.now().toString(),
                 "Similar book recommendations fetched successfully.", overview);
     }
@@ -284,6 +297,13 @@ public class BookController implements BaseController<BookService> {
             return;
         }
         userBehaviorLogService.recordRecommendationClick(bookId, normalizedSource, reason);
+    }
+
+    private void recordRecommendationExposure(BookRecommendationOverviewDto overview, String requestContext) {
+        if (recommendationEventService == null) {
+            return;
+        }
+        recommendationEventService.recordOverviewExposure(overview, requestContext);
     }
 }
 /*

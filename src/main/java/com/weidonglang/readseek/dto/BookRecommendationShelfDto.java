@@ -15,6 +15,16 @@ public class BookRecommendationShelfDto {
     private String title;
     private String description;
     private List<BookDto> books;
+    private String source;
+    private String reasonType;
+    private String strategy;
+
+    public BookRecommendationShelfDto(String key, String title, String description, List<BookDto> books) {
+        this.key = key;
+        this.title = title;
+        this.description = description;
+        this.books = books;
+    }
 }
 /*
 weidonglang
