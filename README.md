@@ -1,8 +1,23 @@
 # ReadSeek Reading Resource Discovery System
 
-ReadSeek is a Spring Boot based reading-resource discovery system. It combines a traditional library workflow with hybrid retrieval, evidence-grounded RAG question answering, and explainable recommendations.
+ReadSeek is a Spring Boot based reading-resource discovery system. It combines a traditional library workflow with hybrid retrieval, evidence-grounded RAG question answering, explainable recommendations, and behavior analytics.
 
-当前版本已经完成项目开发主线：图书业务闭环、混合检索、BGE-M3 向量召回、BGE reranker、Ollama/Qwen 本地 LLM RAG、在线 AI Provider 预留接口、可解释推荐、推荐/问答行为日志和后台统计。
+## Project Status
+
+Current status: feature-complete prototype for graduation-project defense.
+
+Implemented:
+- Core library workflows: book, author, category, publisher, tag, inventory, borrowing, renewal, return, reservation, rating, and admin management.
+- Hybrid retrieval: PostgreSQL exact match, Elasticsearch BM25, BGE-M3 dense-vector retrieval, and BGE reranker.
+- Evidence-grounded RAG QA: local Ollama/Qwen provider, OpenAI-compatible online provider interface, retrieved evidence, citations, refusal on insufficient evidence, and deterministic fallback.
+- Explainable recommendations: popular, preference-based, collaborative filtering, activity-based, similar-book, same-category, shared-tag, and cold-start shelves.
+- Behavior analytics: search logs, recommendation exposure/click/feedback logs, QA logs, citation-click logs, CTR and feedback-rate analytics.
+- Local development stack: PostgreSQL, Elasticsearch, Redis, Python BGE-M3 AI service, Ollama, and Docker Compose.
+
+Out of scope for the current prototype:
+- Formal retrieval/recommendation/RAG benchmark report.
+- Production security hardening.
+- Cloud deployment and production-scale load testing.
 
 ## Core Features
 
