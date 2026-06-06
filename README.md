@@ -1,304 +1,97 @@
-<<<<<<< HEAD
-# ReadSeek
-
-> AI 驱动的阅读资源发现系统：图书馆藏管理、混合检索、向量召回、重排序、RAG 问答、智能找书、可解释推荐、行为分析、离线评测与 Rust 基准测试工具。
-
-ReadSeek 不是传统图书管理系统，而是一个面向“阅读资源发现”的完整 AI 应用。系统以 Spring Boot 后端为核心，结合 PostgreSQL、Elasticsearch、Redis、BGE-M3 向量模型、BGE reranker、本地 Ollama 大模型、Vue 3 前端和 Rust 评测 CLI，实现从馆藏数据补全、搜索推荐、RAG 问答到评测报告展示的完整闭环。
-
-当前版本已经完成：
-
-- 373 本演示馆藏的 AI 元数据补全与搜索索引重建。
-- 精确匹配、BM25、BGE-M3 向量召回、混合召回、BGE reranker 四路检索。
-- 基于馆藏证据的 RAG QA 和 AI 阅读助手。
-- 智能找书、自然语言推荐、引用证据卡片、推荐理由和限制说明。
-- 推荐货架、相似推荐、用户行为日志、点击和反馈分析。
-- 100 条检索评测、60 个 RAG 问题集、推荐离线评测、API 压测。
-- Rust 版 `readseek-bench-rs` 基准测试工具。
-- 静态 HTML 评测 Dashboard，可调用本地模型分析并使用 `qwen2.5-coder:7b` 生成独立 HTML 报告。
-
-## Screenshots
-
-| Home | Search | Recommendation |
-| --- | --- | --- |
-| ![Home dashboard](home-dashboard.png) | ![Search workspace](search-workspace.png) | ![Recommendation shelf](recommendation-shelf.png) |
-
-| Book Detail | Borrowing Records | Swagger |
-| --- | --- | --- |
-| ![Book detail](book-detail.png) | ![Borrowing records](borrowing-records.png) | ![Swagger UI](swagger-ui.png) |
-=======
 # ReadSeek 阅读资源发现系统 / ReadSeek Reading Resource Discovery System
 
-ReadSeek 是一个基于 Spring Boot 的阅读资源发现系统。它在传统图书馆业务流程基础上，集成了混合检索、证据驱动 RAG 问答、可解释推荐和行为分析能力。
+> 一个面向“图书检索、智能推荐、RAG 问答和离线评测”的完整 Java 课程项目。
 
-ReadSeek is a Spring Boot based reading-resource discovery system. It combines a traditional library workflow with hybrid retrieval, evidence-grounded RAG question answering, explainable recommendations, and behavior analytics.
->>>>>>> 6054fd47ead630e750de5f082723a02a2dee97ce
+ReadSeek 不是普通的图书管理系统。它在传统图书馆业务流程之上，加入了 PostgreSQL 精确匹配、Elasticsearch BM25、BGE-M3 向量召回、BGE reranker、馆藏证据约束的 RAG 问答、可解释推荐、用户行为分析、AI 馆藏补全，以及 Rust 离线评测工具。
+
+ReadSeek is a Spring Boot based reading-resource discovery system. It combines library management, hybrid retrieval, evidence-grounded RAG QA, explainable recommendation, behavior analytics, and an independent Rust benchmark suite.
 
 ---
 
-<<<<<<< HEAD
-### 1. Hybrid Retrieval
-
-ReadSeek 的检索链路不是单一关键词搜索，而是完整的多阶段召回与排序：
-
-- PostgreSQL 精确匹配和基础字段兜底。
-- Elasticsearch BM25 全文检索。
-- BGE-M3 embedding 向量召回。
-- exact / BM25 / vector 候选合并。
-- BGE reranker 重排序。
-- 查询意图识别、候选数、召回来源、是否 fallback、排序理由可视化。
-
-已暴露的对比接口：
-
-```text
-GET /api/search/resources/bm25
-GET /api/search/resources/vector
-GET /api/search/resources/hybrid-basic
-GET /api/search/resources
-```
-
-### 2. Evidence-grounded RAG QA
-
-RAG 问答严格基于当前馆藏元数据、简介、标签、分类、作者和检索证据：
-
-- `fast / standard / expert` 三种模式。
-- 引用编号、证据卡片、证据来源、reranker 标识。
-- answerable 判断、limitations、follow-up suggestions。
-- 检索耗时、生成耗时、总耗时记录。
-- 证据不足时不编造馆藏外事实。
-
-### 3. AI Reading Assistant
-
-AI 阅读助手支持类似 ChatGPT 的多轮体验，但回答优先受馆藏证据约束：
-
-- 多轮 session。
-- 每轮记录证据、推荐图书和策略。
-- 支持阅读建议、找书、比较、阅读路径规划。
-- 可切换本地 Ollama 模型。
-
-### 4. Explainable Recommendation
-
-推荐模块强调“为什么推荐”：
-
-- 首页推荐货架。
-- 相似图书推荐。
-- 基于分类、标签、作者、简介和行为数据的解释。
-- 曝光、点击、反馈日志。
-- 推荐漏斗、CTR、反馈率等管理端分析。
-
-### 5. AI Catalog Enrichment
-
-项目提供本地脚本，支持调用 OpenAI-compatible API 批量补全馆藏信息：
-
-- 简介。
-- 标签。
-- 搜索关键词。
-- 目标读者。
-- 难度。
-- 推荐理由。
-- 置信度。
-
-已经完成一次全量补全、人工校正并写入数据库，随后重建搜索索引：
-
-```text
-Indexed catalog resources: 373
-```
-
-### 6. Evaluation and Benchmark
-
-项目内置完整评测资产：
-
-- `docs/evaluation/search_queries_100.json`
-- `docs/evaluation/rag_questions_60.json`
-- Python 评测脚本。
-- Rust 评测 CLI。
-- Markdown、CSV、JSON、HTML 报告。
-- 静态 Dashboard 和本地 AI 辅助分析。
-
-## Final Benchmark Snapshot
-
-以下指标来自 `readseek-bench-rs` 对当前 373 本馆藏和真实运行服务的评测。
-
-### Retrieval: 100 Queries
-
-| Method | Success | Precision@5 | Recall@5 | MRR | NDCG@10 | Avg ms | P95 ms |
-| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| BM25 | 100/100 | 0.3080 | 0.1904 | 0.6440 | 0.3568 | 42.6 | 78.8 |
-| Hybrid | 100/100 | 0.3460 | 0.2017 | 0.7043 | 0.3922 | 110.9 | 142.9 |
-| Vector | 100/100 | 0.4940 | 0.2536 | 0.8884 | 0.5078 | 62.0 | 73.3 |
-| Hybrid + Reranker | 100/100 | 0.5040 | 0.2630 | 0.9167 | 0.5035 | 266.2 | 316.9 |
-
-结论：`hybrid_reranker` 的 Precision@5 和 MRR 最优，适合正式推荐与高质量检索场景；`vector` 速度和排序质量均衡，适合快速检索档。
-
-### RAG: 60 Questions
-
-| Metric | Value |
-| --- | ---: |
-| Answerable rate | 1.0000 |
-| Evidence hit rate | 0.8167 |
-| Mean evidence recall | 0.6444 |
-| Mean citation coverage | 0.7933 |
-| Average total latency | 25555.0 ms |
-
-### Recommendation Offline Evaluation
-
-| Metric | Value |
-| --- | ---: |
-| Overview cases | 120 |
-| Similar recommendation cases | 25 |
-| Precision@10 | 0.1731 |
-| Recall@10 | 0.1039 |
-| NDCG@10 | 0.1939 |
-
-### API Load Test
-
-| Scope | Success rate | Avg ms | P50 | P90 | P95 | P99 | Max |
-| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| Overall | 1.0000 | 630.0 | 103.5 | 1269.7 | 1405.3 | 1562.8 | 1694.8 |
-| Recommendation | 1.0000 | 67.2 | 65.1 | 75.3 | 102.1 | 103.5 | 103.5 |
-| Search | 1.0000 | 1192.8 | 1202.6 | 1405.3 | 1492.3 | 1694.8 | 1694.8 |
-
-## Architecture
-
-```text
-Vue 3 Frontend :5173
-        |
-        v
-Spring Boot API :8010/readseek-service
-        |
-        +--> PostgreSQL :5043
-        |       catalog, users, borrowing, ratings, behavior logs
-        |
-        +--> Elasticsearch :9200
-        |       BM25 retrieval and indexed catalog documents
-        |
-        +--> Redis :6379
-        |       cache and runtime support
-        |
-        +--> Python AI Service :8001
-        |       BGE-M3 embeddings
-        |       BGE reranker
-        |
-        +--> Ollama :11434
-                qwen2.5:7b
-                qwen3:8b
-                qwen3:14b
-                qwen2.5-coder:7b
-```
-=======
 ## 项目状态 / Project Status
 
-当前状态：面向毕业设计答辩的功能完整原型系统。
+当前版本已经进入收官状态，适合作为课程设计、答辩展示和 GitHub 作品集项目。
 
-Current status: feature-complete prototype for graduation-project defense.
-
-已实现功能 / Implemented:
-
-- 核心图书馆业务流程：图书、作者、分类、出版社、标签、库存、借阅、续借、归还、预约、评分和后台管理。
-  Core library workflows: book, author, category, publisher, tag, inventory, borrowing, renewal, return, reservation, rating, and admin management.
-- 混合检索：PostgreSQL 精确匹配、Elasticsearch BM25、BGE-M3 稠密向量召回和 BGE reranker 重排。
-  Hybrid retrieval: PostgreSQL exact match, Elasticsearch BM25, BGE-M3 dense-vector retrieval, and BGE reranker.
-- 证据驱动 RAG 问答：本地 Ollama/Qwen Provider、OpenAI-compatible 在线 Provider 接口、检索证据、引用来源、证据不足拒答和确定性降级回答。
-  Evidence-grounded RAG QA: local Ollama/Qwen provider, OpenAI-compatible online provider interface, retrieved evidence, citations, refusal on insufficient evidence, and deterministic fallback.
-- 可解释推荐：热门推荐、偏好推荐、协同过滤、行为推荐、相似图书、同分类、共享标签和冷启动推荐。
-  Explainable recommendations: popular, preference-based, collaborative filtering, activity-based, similar-book, same-category, shared-tag, and cold-start shelves.
-- 行为分析：搜索日志、推荐曝光/点击/反馈日志、QA 日志、引用点击日志、CTR 和反馈率统计。
-  Behavior analytics: search logs, recommendation exposure/click/feedback logs, QA logs, citation-click logs, CTR and feedback-rate analytics.
-- 本地开发栈：PostgreSQL、Elasticsearch、Redis、Python BGE-M3 AI service、Ollama 和 Docker Compose。
-  Local development stack: PostgreSQL, Elasticsearch, Redis, Python BGE-M3 AI service, Ollama, and Docker Compose.
-
-当前原型范围外的工作 / Out of scope for the current prototype:
-
-- 正式的检索、推荐和 RAG 基准实验报告。
-  Formal retrieval/recommendation/RAG benchmark report.
-- 生产环境安全加固。
-  Production security hardening.
-- 云端部署和生产规模压力测试。
-  Cloud deployment and production-scale load testing.
+- 已完成 373 本演示馆藏的 AI 元数据补全、人工校正和索引重建。
+- 已实现 exact、BM25、vector、hybrid、hybrid + reranker 多路检索链路。
+- 已实现“智能问答与找书”和类 ChatGPT 的 AI 阅读助手。
+- 已实现推荐货架、相似图书推荐、推荐理由、证据卡片和行为分析。
+- 已实现 100 条检索评测、60 条 RAG 问题集、推荐评测和 API 压测。
+- 已实现 Rust CLI `readseek-bench-rs`，可输出 Markdown、CSV、JSON 和静态 HTML 报告。
+- 已实现本地报告 Dashboard，可调用 Ollama 小模型分析结果，并调用代码模型生成更美观的独立 HTML 分析页。
 
 ---
 
-## 核心功能 / Core Features
+## 核心亮点 / Highlights
 
-- 用户注册、登录、JWT 认证和基于角色的管理员权限控制。  
-  User registration, login, JWT authentication, and role-based admin access.
-- 图书、作者、分类、出版社、标签、库存、借阅、续借、归还和预约管理。  
-  Book, author, category, publisher, tag, inventory, borrowing, renewal, return, and reservation management.
-- 混合检索策略 / Hybrid search strategy:
-  - PostgreSQL 精确匹配 / PostgreSQL exact match
-  - Elasticsearch BM25
-  - BGE-M3 稠密向量召回 / BGE-M3 dense vector retrieval
-  - 精确匹配、BM25 与向量结果融合 / exact/BM25/vector hybrid merge
-  - BGE reranker 最终重排 / BGE reranker final ranking
-  - 可见的查询意图、来源标签、排序理由和重排标记 / visible query intent, source labels, ranking reasons, and reranker markers
-- 证据驱动 RAG 问答 / Evidence-grounded RAG QA:
-  - `/api/qa/evidence`
-  - fast / standard / expert 三种模式 / fast, standard, and expert modes
-  - 本地 Ollama Provider / local Ollama provider
-  - OpenAI-compatible 在线 API Provider 接口 / OpenAI-compatible online API provider interface
-  - 检索证据、重排和基于引用的回答 / retrieved evidence, rerank, and citation-based answer
-  - 证据不足时拒答 / refusal when evidence is insufficient
-  - LLM 不可用时确定性降级 / deterministic fallback when LLM is unavailable
-- 可解释推荐 / Explainable recommendations:
-  - 热门、偏好、协同过滤、相似、同作者、同分类和冷启动推荐货架 / popular, preference, collaborative, similar, same-author, same-category, and cold-start shelves
-  - 推荐来源、理由类型、策略和排序位置 / recommendation source, reason type, strategy, and rank position
-  - 曝光、点击和反馈日志 / exposure, click, and feedback logging
-  - 推荐 CTR 和反馈率分析 / recommendation CTR and feedback-rate analytics
-- 管理员分析 / Admin analytics:
-  - 搜索关键词 / search keywords
-  - 热门分类、作者、标签和出版社 / popular categories, authors, tags, and publishers
-  - 点击和借阅最多的图书 / clicked and borrowed books
-  - 推荐漏斗 / recommendation funnel
-  - QA 请求数、可回答/拒答数、引用点击数和平均延迟 / QA request count, answerable/refusal count, citation clicks, and average latency
->>>>>>> 6054fd47ead630e750de5f082723a02a2dee97ce
+| 模块 | 已实现能力 |
+| --- | --- |
+| 馆藏管理 | 图书、作者、分类、出版社、标签、借阅、预约、评分、管理员账户 |
+| 混合检索 | PostgreSQL 精确匹配、Elasticsearch BM25、BGE-M3 embedding、混合召回、BGE reranker |
+| 智能问答 | 基于馆藏证据回答，支持引用编号、证据卡片、可回答判断、限制说明、追问建议 |
+| 智能找书 | 支持按书名、作者、主题、分类、标签、简介和自然语言意图推荐图书 |
+| 推荐系统 | 热门推荐、相似推荐、可解释推荐、曝光、点击、反馈和推荐漏斗分析 |
+| 数据补全 | OpenAI-compatible API 批量生成简介、标签、搜索关键词、难度、目标读者和推荐理由 |
+| 前端体验 | Vue 3 + Element Plus 管理端与用户端，包含搜索页、RAG 页、AI Chat 页、评测页和分析页 |
+| 离线评测 | Python 原有脚本继续保留，Rust 版本用于更快、更稳定地生成正式报告 |
+| 静态报告 | 展示检索、RAG、推荐、压测结果，支持图表、指标解释、本地 AI 辅助分析和 HTML 导出 |
 
 ---
 
 ## 技术栈 / Tech Stack
 
-<<<<<<< HEAD
-| Layer | Stack |
+| 层级 | 技术 |
 | --- | --- |
-| Backend | Java 17, Spring Boot 3.5, Spring Security JWT, Spring Data JPA, Spring Data Elasticsearch, Redis, Liquibase |
+| Backend | Java 17, Spring Boot 3.5.7, Spring Security, JWT, Spring Data JPA, Liquibase |
 | Database | PostgreSQL 16 |
-| Search | Elasticsearch 8, BM25, BGE-M3 vector recall, BGE reranker |
-| AI Service | Python 3.11, FlagEmbedding, BGE-M3, BGE reranker |
-| LLM | Ollama local models, optional OpenAI-compatible provider |
-| Frontend | Vue 3, Vite, TypeScript, Pinia, Vue Router, Element Plus, ECharts |
-| Benchmark | Python scripts, Rust CLI, CSV/JSON/Markdown/HTML reports |
-| DevOps | Docker Compose, Maven Wrapper, GitHub Actions |
-
-## Repository Layout
-=======
-- Java 17
-- Spring Boot 3.5.x
-- Spring Security + JWT
-- Spring Data JPA
-- PostgreSQL
-- Elasticsearch 8
-- Redis
-- Liquibase
-- Lombok / MapStruct
-- 静态 HTML/CSS/JavaScript 前端 / Static HTML/CSS/JavaScript frontend
-- Python 3.11 本地 AI 服务 / Python 3.11 local AI service
-- FlagEmbedding / BGE-M3 / BGE reranker
-- Ollama 本地 LLM / Ollama local LLM
-- Docker Compose
+| Search | Elasticsearch 8.15.3, BM25, dense vector field |
+| Cache | Redis 7 |
+| AI Service | Python, FastAPI style local service, BAAI/bge-m3, BAAI/bge-reranker-v2-m3 |
+| LLM | Ollama, qwen2.5:7b, qwen3:8b, qwen3:14b, qwen2.5-coder:7b |
+| Frontend | Vue 3, TypeScript, Vite, Pinia, Vue Router, Element Plus, ECharts |
+| Evaluation | Python scripts, Rust CLI, Markdown, CSV, JSON, static HTML dashboard |
+| DevOps | Docker Compose, Maven, npm, PowerShell startup scripts |
 
 ---
 
 ## 运行架构 / Runtime Architecture
->>>>>>> 6054fd47ead630e750de5f082723a02a2dee97ce
+
+```text
+Vue 3 Frontend              http://127.0.0.1:5173
+        |
+        v
+Spring Boot API             http://localhost:8010/readseek-service
+        |
+        +-- PostgreSQL       localhost:5043
+        +-- Elasticsearch    localhost:9200
+        +-- Redis            localhost:6379
+        +-- Local AI Service http://127.0.0.1:8001
+        +-- Ollama           http://localhost:11434
+
+Rust Evaluation Dashboard   http://127.0.0.1:8765/index.html
+```
+
+---
+
+## 目录结构 / Repository Layout
 
 ```text
 .
-├── src/                         # Spring Boot backend
-├── frontend/                    # Vue 3 frontend
-├── ai-service/                  # Python BGE-M3 embedding/reranker service
-├── scripts/                     # startup, enrichment, evaluation, report scripts
-├── docs/evaluation/             # 100 queries, 60 RAG questions, generated reports
-├── readseek-bench-rs/           # Rust benchmark CLI
-├── docker-compose.yml           # PostgreSQL, Elasticsearch, Redis, app
-├── pom.xml                      # backend build
+├── src/main/java/com/weidonglang/readseek
+│   ├── controller          # REST API
+│   ├── service             # 检索、推荐、RAG、行为分析等业务逻辑
+│   ├── repository          # JPA 数据访问
+│   ├── document            # Elasticsearch document
+│   └── config              # 安全、CORS、AI、搜索配置
+├── src/main/resources
+│   ├── application*.properties
+│   └── db                  # Liquibase schema 与演示数据
+├── frontend                # Vue 3 前端
+├── scripts                 # 启动、AI 补全、评测和报告服务脚本
+├── docs/evaluation         # 评测数据集、报告和生成结果
+├── readseek-bench-rs       # Rust 评测 CLI
+├── docker-compose.yml
+├── start-readseek.bat
 └── README.md
 ```
 
@@ -306,25 +99,17 @@ Current status: feature-complete prototype for graduation-project defense.
 
 ## 环境要求 / Prerequisites
 
-Recommended environment:
+推荐本地环境：
 
-- Windows 10/11
-- Docker Desktop
 - JDK 17
-- Python 3.11
-<<<<<<< HEAD
-- Node.js 22+
-- Rust toolchain, for `readseek-bench-rs`
-- Ollama
+- Maven 3.9+
+- Node.js 20+
+- Python 3.10+
+- Docker Desktop
+- Rust toolchain，可通过 `rustup` 安装
+- Ollama，本地 RAG 与报告分析需要
 
-Recommended local Ollama models:
-=======
-- Ollama for Windows
-- 至少 20 GB 可用磁盘空间，用于本地 LLM 模型。  
-  At least 20 GB free disk space for local LLM models.
-
-推荐本地模型 / Recommended local models:
->>>>>>> 6054fd47ead630e750de5f082723a02a2dee97ce
+推荐 Ollama 模型：
 
 ```powershell
 ollama pull qwen2.5:7b
@@ -333,293 +118,163 @@ ollama pull qwen3:14b
 ollama pull qwen2.5-coder:7b
 ```
 
-<<<<<<< HEAD
-The dashboard can also use these models if installed:
-
-```text
-llama3.2:3b
-phi4-mini-reasoning
-openbmb/minicpm-v4.6
-```
-=======
-`qwen3:8b` 是默认 RAG 模型，`qwen3:14b` 仅用于 expert 模式。  
-`qwen3:8b` is the default RAG model. `qwen3:14b` is used only for expert mode.
->>>>>>> 6054fd47ead630e750de5f082723a02a2dee97ce
-
 ---
 
-<<<<<<< HEAD
-### 1. Clone
-
-```powershell
-git clone https://github.com/<your-name>/<your-repo>.git
-cd new-book-recommendation-system
-```
-
-### 2. Prepare Local Configuration
-
-The repository includes `.env.example`. Real `.env` is ignored by Git.
-
-```powershell
-Copy-Item .env.example .env
-notepad .env
-```
-
-Important values:
-
-```env
-POSTGRES_PASSWORD=your-local-password
-SPRING_DATASOURCE_PASSWORD=your-local-password
-LIBRARY_SECURITY_JWT_SECRET=replace-with-a-long-random-secret
-LIBRARY_BOOTSTRAP_ADMIN_EMAIL=admin@booknook.local
-LIBRARY_BOOTSTRAP_ADMIN_PASSWORD=your-admin-password
-LIBRARY_BOOTSTRAP_ADMIN_RESET_PASSWORD=true
-```
-
-Do not commit `.env`.
-
-### 3. Start Everything
-=======
 ## 快速启动 / Quick Start
 
-从项目根目录执行 / From the project root:
->>>>>>> 6054fd47ead630e750de5f082723a02a2dee97ce
+Windows 下最简单的方式：
 
 ```powershell
 .\start-readseek.bat
 ```
 
-<<<<<<< HEAD
-The launcher starts:
-=======
-也可以手动启动各组件 / If you prefer starting pieces manually:
->>>>>>> 6054fd47ead630e750de5f082723a02a2dee97ce
+该脚本会自动处理：
 
-- Docker dependencies: PostgreSQL, Elasticsearch, Redis.
-- Python AI service.
-- Spring Boot backend.
-- Vue frontend.
+- 创建或读取 `.env`
+- 启动 PostgreSQL、Elasticsearch、Redis
+- 启动 Spring Boot 后端
+- 启动本地 embedding/reranker AI 服务
+- 启动 Vue 前端
+- 打开默认页面
 
-访问地址 / Open:
-
-<<<<<<< HEAD
-```text
-Frontend:       http://127.0.0.1:5173/
-Search page:    http://127.0.0.1:5173/search
-Swagger UI:     http://localhost:8010/readseek-service/swagger-ui/index.html
-Backend health: http://localhost:8010/readseek-service/actuator/health
-AI health:      http://127.0.0.1:8001/health
-```
-
-### 4. Rebuild Search Index
-
-After importing or enriching catalog data:
-
-```powershell
-.\scripts\rebuild-search-index.ps1
-```
-
-Expected successful result:
-
-```json
-{
-  "success": true,
-  "message": "Book search index rebuilt successfully.",
-  "body": {
-    "indexedCount": 373
-  }
-}
-```
-
-## Frontend Routes
-
-| Route | Purpose |
-| --- | --- |
-| `/login` | Login |
-| `/register` | Register |
-| `/` | Home dashboard |
-| `/books` | Catalog browsing |
-| `/books/:id` | Book detail |
-| `/search` | Hybrid search and intelligent book finding |
-| `/rag` | Evidence-grounded RAG QA |
-| `/ai-chat` | Multi-turn AI reading assistant |
-| `/recommendations` | Recommendation shelves |
-| `/borrowings` | Borrowing records |
-| `/planning` | Reading plan |
-| `/profile` | User profile and preferences |
-| `/management` | Resource management |
-| `/admin` | Analytics and admin dashboard |
-| `/evaluation` | Evaluation report page |
-
-## Important APIs
-
-### Search
-=======
-- 前端 / Frontend: `http://localhost:8010/readseek-service/ui/login.html`
-- Swagger UI: `http://localhost:8010/readseek-service/swagger-ui/index.html`
-- AI 健康检查 / AI health: `http://127.0.0.1:8001/health`
-- Ollama 健康检查 / Ollama health: `http://localhost:11434/api/tags`
-
-默认本地管理员账号 / Default local admin account:
->>>>>>> 6054fd47ead630e750de5f082723a02a2dee97ce
+常用入口：
 
 ```text
-GET  /api/search/resources
-GET  /api/search/resources/bm25
-GET  /api/search/resources/vector
-GET  /api/search/resources/hybrid-basic
-POST /api/search/index/books/rebuild
+前端首页:     http://127.0.0.1:5173
+后端健康检查: http://localhost:8010/readseek-service/actuator/health
+Swagger:      http://localhost:8010/readseek-service/swagger-ui/index.html
 ```
 
-<<<<<<< HEAD
-### RAG QA
-=======
-> 注意：默认账号和默认密码仅用于本地开发和答辩演示，生产部署前必须改为安全配置。  
-> Note: the default account and password are intended for local development and defense demonstration only. They must be replaced before production deployment.
+默认本地管理员账号由 `.env` 控制。开发环境默认邮箱通常是：
+
+```text
+admin@booknook.local
+```
+
+请不要把真实 `.env`、真实密码或真实 API Key 上传到 GitHub。
 
 ---
 
-## 本地 AI 服务 / Local AI Service
+## 本地 AI 与 RAG 配置 / Local AI and RAG
 
-Python AI 服务提供 embedding 和 reranking 能力。  
-The Python AI service provides embedding and reranking:
+RAG 支持三档模式：
 
-- embedding 模型 / embedding model: `BAAI/bge-m3`
-- reranker 模型 / reranker model: `BAAI/bge-reranker-v2-m3`
-- 服务地址 / service URL: `http://127.0.0.1:8001`
+| 模式 | 默认模型 | 适用场景 |
+| --- | --- | --- |
+| fast | qwen2.5:7b | 快速回答、普通找书 |
+| standard | qwen3:8b | 默认问答、推荐解释 |
+| expert | qwen3:14b | 更复杂的阅读规划、对比分析 |
 
-主要后端配置 / Main backend config:
+相关配置位于 `src/main/resources/application.properties`，也可以通过 `.env` 覆盖：
 
 ```properties
-library.search.embedding.enabled=true
-library.search.embedding.base-url=http://127.0.0.1:8001
-library.search.embedding.model=BAAI/bge-m3
-library.search.embedding.dimensions=1024
-
-library.search.reranker.enabled=true
-library.search.reranker.base-url=http://127.0.0.1:8001
-library.search.reranker.model=BAAI/bge-reranker-v2-m3
-```
-
----
-
-## RAG LLM 配置 / RAG LLM Configuration
-
-默认本地 LLM Provider / Default local LLM provider:
-
-```env
+RAG_LLM_ENABLED=true
 LLM_PROVIDER=ollama
 OLLAMA_BASE_URL=http://localhost:11434
-OLLAMA_CHAT_ENDPOINT=http://localhost:11434/api/chat
-OLLAMA_STREAM=false
-OLLAMA_THINK=false
-
-RAG_DEFAULT_MODE=standard
 RAG_FAST_MODEL=qwen2.5:7b
 RAG_STANDARD_MODEL=qwen3:8b
 RAG_EXPERT_MODEL=qwen3:14b
 ```
 
-模式默认参数 / Mode defaults:
-
-```text
-fast:
-  model: qwen2.5:7b
-  top_k: 5
-  rerank_top_k: 3
-  timeout: 60s
-
-standard:
-  model: qwen3:8b
-  top_k: 10
-  rerank_top_k: 5
-  timeout: 120s
-
-expert:
-  model: qwen3:14b
-  top_k: 20
-  rerank_top_k: 8
-  timeout: 240s
-```
-
-可选在线 AI Provider 使用 OpenAI-compatible `/chat/completions` API，默认关闭。  
-The optional online AI provider uses an OpenAI-compatible `/chat/completions` API and is disabled by default:
-
-```env
-ONLINE_AI_ENABLED=true
-ONLINE_AI_BASE_URL=https://api.example.com/v1
-ONLINE_AI_CHAT_COMPLETIONS_ENDPOINT=/chat/completions
-ONLINE_AI_API_KEY=your_api_key
-ONLINE_AI_MODEL=gpt-4o-mini
-LLM_PROVIDER=online
-```
-
-在线 Provider 设计为通用接口，可通过 base URL、API key 和 model 接入 OpenAI-compatible 服务。  
-The online provider is intentionally generic. It can be wired to OpenAI-compatible services by setting the base URL, API key, and model.
+系统的回答策略是“优先基于馆藏证据”。当证据不足时，系统会给出限制说明，而不是直接编造馆藏外事实。
 
 ---
 
-## 重要 API 接口 / Important API Endpoints
+## 混合检索 / Hybrid Retrieval
 
-搜索 / Search:
+ReadSeek 的检索链路包含：
+
+- PostgreSQL 基础字段兜底：书名、作者、分类、标签、出版社、ISBN。
+- Elasticsearch BM25 全文检索：适合关键词匹配和标题、简介检索。
+- BGE-M3 向量召回：适合语义相近但关键词不同的查询。
+- hybrid 合并：合并 exact、BM25、vector 候选。
+- BGE reranker 重排序：对候选结果做相关性精排。
+- 前端展示：查询意图、候选数、召回来源、是否 fallback、排序理由和证据详情。
+
+对比接口：
 
 ```text
-GET  /api/search/books?q=...&limit=10
-POST /api/resources/search
-POST /api/search/rebuild-index
+GET  /api/search/resources/bm25
+GET  /api/search/resources/vector
+GET  /api/search/resources/hybrid-basic
+GET  /api/search/resources
+POST /api/search/index/resources/rebuild
 ```
 
-证据问答 / Evidence QA:
->>>>>>> 6054fd47ead630e750de5f082723a02a2dee97ce
+---
+
+## 智能问答与找书 / RAG QA and Book Discovery
+
+主要接口：
 
 ```text
 POST /api/qa/evidence
-POST /api/qa/citation-click
-GET  /api/qa/analytics
-GET  /api/qa/events/recent
+POST /api/ai-chat/message
+GET  /api/ai-chat/sessions
+GET  /api/ai-chat/sessions/{id}
 ```
 
-<<<<<<< HEAD
-### AI Chat
+能力说明：
+
+- 支持“找书”和“问问题”两种使用方式。
+- 支持 fast、standard、expert 模式。
+- 返回答案、证据卡片、引用编号、推荐书籍、策略、模型、耗时和限制说明。
+- 支持多轮 AI Chat，每轮记录证据、引用和推荐结果。
+- 当搜索索引暂时不可用时，会回退到数据库基础字段。
+
+---
+
+## 推荐与行为分析 / Recommendation and Analytics
+
+主要接口：
 
 ```text
-POST   /api/ai-chat/message
-GET    /api/ai-chat/sessions
-GET    /api/ai-chat/sessions/{id}
-DELETE /api/ai-chat/sessions/{id}
-```
-
-### Recommendation
-=======
-推荐 / Recommendation:
->>>>>>> 6054fd47ead630e750de5f082723a02a2dee97ce
-
-```text
+GET  /api/resources/recommended
+GET  /api/resources/recommendations/popular
 GET  /api/resources/recommendations/overview
-GET  /api/resources/recommendations/similar/{id}
+GET  /api/resources/recommendations/similar/{resourceId}
 POST /api/recommendation-events/click
 POST /api/recommendation-events/feedback
 GET  /api/recommendation-events/analytics
+GET  /api/behavior-log/dashboard
 ```
 
-<<<<<<< HEAD
-## AI Catalog Enrichment
+推荐模块不仅返回“推荐了什么”，也返回“为什么推荐”：
 
-The enrichment script can call an OpenAI-compatible API to generate catalog metadata.
+- 基于分类、标签、作者、简介、关键词和用户行为。
+- 支持热门推荐、相似图书推荐和个性化推荐入口。
+- 记录曝光、点击、反馈和搜索行为。
+- 管理端可查看推荐漏斗、CTR、反馈率、热门关键词和热门图书。
 
-Preview mode:
+---
+
+## AI 馆藏补全 / Catalog Enrichment
+
+项目提供 `scripts/enrich_catalog_ai.py`，可调用 OpenAI-compatible API 批量补全馆藏元数据。
+
+补全字段包括：
+
+- description
+- tags
+- search_keywords
+- difficulty
+- target_audience
+- recommendation_reason
+- confidence
+
+推荐流程：
 
 ```powershell
+# 1. 小批量预览
 .\.venv-ai\Scripts\python.exe scripts\enrich_catalog_ai.py `
   --ai-base-url https://dashscope.aliyuncs.com/compatible-mode/v1 `
   --ai-model qwen3.5-omni-plus-2026-03-15 `
   --ai-api-key-env DASHSCOPE_API_KEY `
   --limit 5
-```
 
-Apply from a corrected preview:
+# 2. 人工检查生成的 preview JSON
 
-```powershell
+# 3. 从人工校正后的 preview 写入数据库并重建索引
 .\.venv-ai\Scripts\python.exe scripts\enrich_catalog_ai.py `
   --input-preview scripts\generated\catalog_ai_enrichment_all_preview_corrected.json `
   --output scripts\generated\catalog_ai_enrichment_all_apply_result.json `
@@ -628,187 +283,154 @@ Apply from a corrected preview:
   --rebuild-index
 ```
 
-The script intentionally supports dry-run and preview correction before writing to the database.
+当前项目已经完成一次全量补全并重建索引：
 
-## Python Evaluation Scripts
-
-Generate evaluation assets:
-
-```powershell
-.\.venv-ai\Scripts\python.exe scripts\generate_evaluation_assets.py
+```text
+Indexed catalog resources: 373
 ```
 
-Run four-way retrieval evaluation:
+---
 
-```powershell
-.\.venv-ai\Scripts\python.exe scripts\run_retrieval_evaluation.py `
-  --queries docs/evaluation/search_queries_100.json `
-  --output-dir docs/evaluation/generated `
-  --limit 10
+## 最终评测结果 / Final Benchmark Snapshot
+
+以下结果来自 `readseek-bench-rs` 对当前 373 本馆藏和本地运行服务的评测。
+
+### Retrieval
+
+100 条检索查询，指标重点为 Precision@5。
+
+| Method | Success | Precision@5 | Recall@5 | MRR | NDCG@10 | Avg ms | P95 ms |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| bm25 | 100/100 | 0.3080 | 0.1904 | 0.6440 | 0.3568 | 42.6 | 78.8 |
+| hybrid | 100/100 | 0.3460 | 0.2017 | 0.7043 | 0.3922 | 110.9 | 142.9 |
+| vector | 100/100 | 0.4940 | 0.2536 | 0.8884 | 0.5078 | 62.0 | 73.3 |
+| hybrid_reranker | 100/100 | 0.5040 | 0.2630 | 0.9167 | 0.5035 | 266.2 | 316.9 |
+
+结论：`hybrid_reranker` 的 Precision@5 和 MRR 最强，说明重排序对结果相关性提升明显；`vector` 的 NDCG@10 略高且延迟更低，适合对速度更敏感的语义搜索。
+
+### RAG
+
+60 条 RAG 问题，模式为 `standard / ollama`。
+
+| Metric | Value |
+| --- | ---: |
+| Answerable rate | 1.0000 |
+| Evidence hit rate | 0.8167 |
+| Mean evidence recall | 0.6444 |
+| Mean citation coverage | 0.7933 |
+| Average total latency ms | 25555.0 |
+
+结论：RAG 能覆盖全部问题，证据命中和引用覆盖较稳定；主要短板是本地大模型生成耗时较高。
+
+### Recommendation
+
+| Metric | Value |
+| --- | ---: |
+| Overview samples | 120 |
+| Similar anchor samples | 25 |
+| Precision@10 | 0.1731 |
+| Recall@10 | 0.1039 |
+| NDCG@10 | 0.1939 |
+
+结论：推荐模块已经有完整的可解释与行为闭环，但由于演示数据规模较小、真实用户行为较少，个性化推荐指标仍有提升空间。
+
+### Load Test
+
+| Metric | Value |
+| --- | ---: |
+| Overall success rate | 1.0000 |
+| Overall avg ms | 630.0 |
+| Overall p50 ms | 103.5 |
+| Overall p90 ms | 1269.7 |
+| Overall p95 ms | 1405.3 |
+| Overall p99 ms | 1562.8 |
+| Max ms | 1694.8 |
+
+分场景：
+
+| Scenario | Avg ms | P95 ms |
+| --- | ---: | ---: |
+| recommendation | 67.2 | 102.1 |
+| search | 1192.8 | 1492.3 |
+
+---
+
+## 评测与报告 / Evaluation and Reports
+
+完整评测数据集：
+
+```text
+docs/evaluation/search_queries_100.json
+docs/evaluation/rag_questions_60.json
 ```
 
-Run RAG evaluation:
-
-```powershell
-.\.venv-ai\Scripts\python.exe scripts\run_rag_evaluation.py `
-  --questions docs/evaluation/rag_questions_60.json `
-  --output-dir docs/evaluation/generated `
-  --mode standard `
-  --provider ollama `
-  --limit 8
-```
-
-Run recommendation evaluation:
-
-```powershell
-.\.venv-ai\Scripts\python.exe scripts\run_recommendation_offline_evaluation.py `
-  --queries docs/evaluation/search_queries_100.json `
-  --output-dir docs/evaluation/generated
-```
-
-Run API load test:
-
-```powershell
-.\.venv-ai\Scripts\python.exe scripts\run_api_load_test.py `
-  --scenarios search,recommendation `
-  --requests 100 `
-  --concurrency 8 `
-  --output-dir docs/evaluation/generated
-```
-
-## Rust Benchmark CLI
-
-`readseek-bench-rs` is a standalone Rust CLI. It reuses the same evaluation data and APIs as the Python scripts, but provides a typed, distributable benchmark tool.
-
-Run the full suite:
+运行 Rust 全量评测：
 
 ```powershell
 .\scripts\run_readseek_bench_rs_suite.ps1
 ```
 
-Run retrieval only:
+快速调小评测规模：
 
 ```powershell
-.\scripts\run_readseek_bench_rs.ps1
+.\scripts\run_readseek_bench_rs_suite.ps1 `
+  -RetrievalQueryLimit 10 `
+  -RagQuestionLimit 8 `
+  -LoadRequests 40 `
+  -LoadConcurrency 4 `
+  -OllamaModel qwen2.5:7b `
+  -CoderModel qwen2.5-coder:7b
 ```
 
-Open the static benchmark dashboard:
+启动静态报告服务：
 
 ```powershell
 .\scripts\serve_readseek_report.ps1
 ```
 
-Then open:
-=======
-行为分析 / Behavior analytics:
->>>>>>> 6054fd47ead630e750de5f082723a02a2dee97ce
+打开：
 
 ```text
 http://127.0.0.1:8765/index.html
 ```
 
-<<<<<<< HEAD
-Dashboard capabilities:
-=======
+注意：不要直接用 `file://` 打开报告页。浏览器会因为 file origin 限制拦截本地模型请求。
+
 ---
 
-## RAG 请求示例 / RAG Request Example
->>>>>>> 6054fd47ead630e750de5f082723a02a2dee97ce
+## Rust 评测 CLI / readseek-bench-rs
 
-- Shows retrieval, RAG, recommendation and load-test metrics.
-- Displays quality bars, latency charts, RAG circular indicators and quality-first modeling score.
-- Can call a local analysis model such as `qwen2.5:7b`, `qwen3:8b` or `qwen3:14b`.
-- Can call `qwen2.5-coder:7b` to generate a standalone HTML report.
-- Provides live preview and download for the generated HTML.
+`readseek-bench-rs` 是独立 Rust CLI，用来补齐项目的工程证据。
 
-If the browser blocks direct access to Ollama, configure local origins and restart Ollama:
+它可以：
+
+- 读取检索查询和 RAG 问题集。
+- 调用 ReadSeek 后端 API。
+- 对比 bm25、vector、hybrid、hybrid_reranker。
+- 计算 Precision@K、Recall@K、MRR、NDCG、p50、p95、p99。
+- 输出 Markdown、CSV、JSON。
+- 生成静态 HTML Dashboard。
+- 调用本地 Ollama 模型分析报告。
+- 调用 `qwen2.5-coder:7b` 生成更精美的独立 HTML 分析页。
+
+单独运行：
 
 ```powershell
-$env:OLLAMA_ORIGINS="*"
-ollama serve
+cd readseek-bench-rs
+cargo run --release -- --help
 ```
-
-<<<<<<< HEAD
-## Testing
-
-Backend tests:
-=======
-响应包含 / Response includes:
-
-- `answer`
-- `answerable`
-- `answerMode`
-- `ragMode`
-- `llmProvider`
-- `model`
-- `generationBackend`
-- `evidence`
-- `citations`
-- `confidence`
-- `retrievalLatencyMs`
-- `generationLatencyMs`
-- `totalLatencyMs`
-- `llmFallbackApplied`
 
 ---
 
 ## 测试 / Testing
 
-运行完整自动化测试套件 / Run the full automated test suite:
->>>>>>> 6054fd47ead630e750de5f082723a02a2dee97ce
+后端单元测试：
 
 ```powershell
-.\mvnw-jdk17.cmd test
+mvn test
 ```
 
-<<<<<<< HEAD
-Frontend build:
-=======
-当前结果 / Current result:
-
-```text
-Tests run: 92
-Failures: 0
-Errors: 0
-Skipped: 0
-```
-
-测试覆盖 controller、搜索、RAG 回答生成、QA 日志、推荐事件、推荐分析、借阅、预约、评分、安全限流和应用上下文启动。  
-The tests cover controllers, search, RAG answer generation, QA logging, recommendation events, recommendation analytics, borrowing, reservation, rating, security rate limiting, and application context startup.
-
----
-
-## 冒烟测试清单 / Smoke Test Checklist
-
-启动后 / After startup:
-
-1. 使用管理员账号登录。  
-   Log in as admin.
-2. 打开搜索页面并执行一次自然语言查询。  
-   Open the search page and run a natural-language query.
-3. 确认搜索结果显示来源、理由、策略和 reranker 标记。  
-   Confirm search results show source, reason, strategy, and reranker marker.
-4. 打开 QA 页面，使用 `standard` 模式和 `Ollama` Provider 提问。  
-   Open the QA page and ask a question in `standard` mode with provider `Ollama`.
-5. 确认回答包含 citations 和 evidence cards。  
-   Confirm the answer has citations and evidence cards.
-6. 点击 QA 引用，并验证管理员分析中记录了 citation click。  
-   Click a QA citation and verify admin analytics records a citation click.
-7. 打开推荐页面并点击一个推荐项。  
-   Open recommendations and click a recommendation.
-8. 提交 interested / not-interested 反馈。  
-   Send interested/not-interested feedback.
-9. 打开管理员分析页面，查看推荐漏斗和 QA 质量面板。  
-   Open admin analytics and verify recommendation funnel and QA quality panels.
-10. 停止 Ollama 后再次提问，确认系统会降级回答而不是崩溃。  
-    Stop Ollama and ask again; the answer should fall back instead of crashing.
-
----
-
-## 故障排查 / Troubleshooting
-
-容器名称冲突 / Container name conflict:
->>>>>>> 6054fd47ead630e750de5f082723a02a2dee97ce
+前端类型检查与构建：
 
 ```powershell
 cd frontend
@@ -816,136 +438,136 @@ npm install
 npm run build
 ```
 
-<<<<<<< HEAD
-Rust benchmark tests:
-=======
-Ollama 模型缺失 / Ollama model missing:
->>>>>>> 6054fd47ead630e750de5f082723a02a2dee97ce
+Rust CLI 测试：
 
 ```powershell
 cd readseek-bench-rs
 cargo test
 ```
 
-<<<<<<< HEAD
-Docker Compose validation:
-=======
-AI 服务首次启动较慢 / AI service slow on first run:
-
-- 首次启动 BGE-M3 和 reranker 会下载模型文件。  
-  The first BGE-M3 and reranker startup downloads model files.
-- 建议保留缓存目录 `C:\Users\<user>\.cache\readseek\huggingface`。  
-  Keep the cache at `C:\Users\<user>\.cache\readseek\huggingface`.
-- Hugging Face 的 Windows symlink warning 通常无害，开启 Developer Mode 可以减少重复缓存占用。  
-  Windows symlink warnings from Hugging Face are harmless, but Developer Mode can reduce duplicate cache storage.
-
-Elasticsearch 索引过期 / Elasticsearch index stale:
->>>>>>> 6054fd47ead630e750de5f082723a02a2dee97ce
+建议在提交 GitHub 前至少执行：
 
 ```powershell
-docker compose config --quiet
+mvn test
+cd frontend
+npm run build
+cd ..\readseek-bench-rs
+cargo test
 ```
 
-<<<<<<< HEAD
-## Stop Local Services
+---
 
-If started with the project scripts, close the spawned terminals or stop by port/process. Docker dependencies can be stopped with:
+## 常见问题 / Troubleshooting
+
+### README 中文在 PowerShell 里乱码
+
+这是 PowerShell 控制台编码显示问题，不一定是文件损坏。GitHub 和 UTF-8 编辑器通常能正常显示。
+
+可用下面命令检查：
 
 ```powershell
-docker compose stop db elasticsearch redis
+python -c "from pathlib import Path; print(Path('README.md').read_text(encoding='utf-8')[:200])"
 ```
 
-If the static report server is running, stop the terminal running:
+### 天气一直显示正在刷新
+
+天气依赖浏览器定位、网络定位和后端代理配置。若精确定位不可用，系统会尝试网络位置；仍失败时应检查浏览器定位权限、网络访问和后端天气配置。
+
+### AI 问答没有结果
+
+优先检查：
+
+- 数据库是否已有补全后的 description、tags、search_keywords。
+- Elasticsearch 索引是否重建。
+- 本地 AI 服务 `http://127.0.0.1:8001/health` 是否正常。
+- Ollama `http://localhost:11434` 是否运行。
+
+重建资源索引：
+
+```text
+POST /api/search/index/resources/rebuild
+```
+
+### 静态报告的 AI 分析按钮没反应
+
+不要用 `file://` 打开报告。请启动本地报告服务器：
 
 ```powershell
 .\scripts\serve_readseek_report.ps1
 ```
 
-## GitHub Notes
+然后访问：
 
-Before publishing:
-
-1. Ensure `.env` is not committed.
-2. Remove or ignore runtime logs such as `*.log`.
-3. Keep `docs/evaluation/generated/` only if you want to publish measured benchmark artifacts.
-4. Keep screenshots in the repository root if you want them displayed in this README.
-5. Run backend, frontend and Rust tests once before pushing.
-
-Useful checks:
-=======
-仅运行后端测试 / Run backend tests only:
->>>>>>> 6054fd47ead630e750de5f082723a02a2dee97ce
-
-```powershell
-.\mvnw-jdk17.cmd test
-cd frontend
-npm run build
-cd ..
-cd readseek-bench-rs
-cargo test
+```text
+http://127.0.0.1:8765/index.html
 ```
 
-<<<<<<< HEAD
-## Current Scope and Boundaries
+### 14B 模型太慢
 
-ReadSeek is designed around catalog-level reading resources, not full-book text ingestion.
+报告分析和 RAG 都可以选择更小模型。推荐：
 
-Currently included:
+- 快速分析：`qwen2.5:7b`
+- 默认分析：`qwen3:8b`
+- 深度分析：`qwen3:14b`
+- HTML 代码生成：`qwen2.5-coder:7b`
 
-- Catalog metadata, descriptions, tags, categories, authors and publisher fields.
-- Search and RAG over resource metadata and summaries.
-- Evidence-grounded answers and recommendations.
-- Evaluation on the current 373-book demo catalog.
-
-Currently not included:
-
-- Full PDF/EPUB chapter ingestion.
-- Chapter-level QA.
-- Copyrighted full-text indexing.
-- Large public recommendation datasets such as Goodreads.
-- Production multi-node deployment.
-
-## Project Status
-
-This version is a complete portfolio/course-project release:
-
-- Full-stack application.
-- AI-enhanced catalog.
-- Hybrid retrieval and RAG.
-- Explainable recommendation.
-- Admin analytics.
-- Modern Vue UI.
-- Python and Rust evaluation toolchains.
-- Reproducible reports and static benchmark dashboard.
-
-ReadSeek can be presented as a mature AI reading-resource discovery system and as an engineering case study for retrieval, recommendation, RAG and evaluation.
-=======
 ---
 
-## 开发范围总结 / Development Scope Summary
+## 上传 GitHub 前 / Before Publishing
 
-当前开发状态：已完成 ReadSeek 毕业设计/课程设计范围内的核心功能。  
-Development status: feature-complete for the current ReadSeek graduation/course-project scope.
+建议上传：
 
-已完成 / Completed:
+- `src/`
+- `frontend/`
+- `scripts/`
+- `docs/evaluation/`
+- `readseek-bench-rs/`
+- `docker-compose.yml`
+- `Dockerfile`
+- `pom.xml`
+- `README.md`
+- `.env.example`
 
-- 核心图书馆业务流程 / Core library workflows
-- 混合检索 / Hybrid retrieval
-- 向量召回 / Vector retrieval
-- BGE reranker 重排 / Reranker
-- 基于本地 LLM 和 fallback 的 RAG QA / RAG QA with local LLM and fallback
-- 在线 AI Provider 接口 / Online AI Provider interface
-- 可解释推荐 / Explainable recommendation
-- 推荐曝光、点击和反馈日志 / Recommendation exposure/click/feedback logs
-- QA 请求和引用日志 / QA request/citation logs
-- 管理员分析 / Admin analytics
-- 自动化回归测试 / Automated regression tests
-- 本地启动文档 / Local startup documentation
+不要上传：
 
-当前开发范围外的后续工作 / Remaining work outside development scope:
+- `.env`
+- 真实 API Key
+- 数据库本地卷
+- `.venv-ai/`
+- `target/`
+- `frontend/node_modules/`
+- `frontend/dist/`
+- `readseek-bench-rs/target/`
+- 本地日志和临时文件
 
-- 正式实验数据集和评测报告 / Formal experiment datasets and reports
-- 毕业论文撰写 / Thesis writing
-- 答辩 PPT / Defense PPT
-- 生产环境部署加固 / Optional deployment hardening for production environments
->>>>>>> 6054fd47ead630e750de5f082723a02a2dee97ce
+如果之前误把密钥写进仓库，应该立即作废旧 Key，并重新生成。
+
+---
+
+## 项目边界 / Scope
+
+ReadSeek 当前版本已经覆盖课程项目需要展示的完整链路，但仍保留一些合理边界：
+
+- 当前馆藏是演示规模数据，不等同于大规模真实图书馆生产数据。
+- 推荐评测受限于真实用户行为数量，个性化指标还有提升空间。
+- 本地 RAG 延迟主要取决于 Ollama 模型大小和机器性能。
+- 静态报告的 AI 分析依赖本地浏览器、报告服务和 Ollama 可访问性。
+
+---
+
+## 总结 / Summary
+
+ReadSeek 的最终版本形成了一个完整闭环：
+
+```text
+馆藏数据补全
+  -> 检索索引重建
+  -> 混合搜索和智能推荐
+  -> 证据约束 RAG 问答
+  -> 用户行为记录和管理端分析
+  -> Python / Rust 离线评测
+  -> Markdown / HTML 报告展示
+  -> 本地 AI 辅助解释和报告生成
+```
+
+这使它不只是一个“能借书还书”的管理系统，而是一个具备 AI 检索、推荐、问答、评测和工程展示能力的阅读资源发现平台。
