@@ -1,35 +1,48 @@
 {
-  "dataset": "readseek-small-evaluation-template",
-  "status": "sample-placeholder",
-  "note": "These queries define the evaluation structure only. Replace relevantResourceIds after manual judgment before reporting final metrics.",
-  "queries": [
+  "dataset": "readseek-retrieval-evaluation",
+  "status": "real-query-set-index",
+  "note": "The real 100-query retrieval dataset is stored in search_queries_100.json. Resolved judgments used by the latest Rust suite are stored in generated/rust-suite/search_queries_100_resolved.json.",
+  "queryCount": 100,
+  "primaryDataset": "search_queries_100.json",
+  "latestResolvedDataset": "generated/rust-suite/search_queries_100_resolved.json",
+  "latestResults": "generated/rust-suite/retrieval_results.json",
+  "intentCoverage": [
+    "exact-title",
+    "author-work",
+    "theme-cn",
+    "theme-en",
+    "natural-cn",
+    "multi-condition",
+    "comparison",
+    "reading-path",
+    "metadata-fallback",
+    "exact-cn"
+  ],
+  "sampleQueries": [
     {
-      "id": "q-self-help-growth",
-      "query": "个人成长 入门",
-      "intent": "theme",
-      "description": "Chinese topic query for self-help, psychology, focus, and growth resources.",
-      "relevantResourceIds": []
+      "id": "q001",
+      "query": "Pride and Prejudice",
+      "intent": "exact-title"
     },
     {
-      "id": "q-author-austen",
-      "query": "Jane Austen representative works",
-      "intent": "author-work",
-      "description": "Author and representative-work query where exact metadata and BM25 should be strong.",
-      "relevantResourceIds": []
+      "id": "q021",
+      "query": "爱情小说 推荐",
+      "intent": "theme-cn"
     },
     {
-      "id": "q-sci-fi-path",
-      "query": "科幻小说 阅读路径",
-      "intent": "reading-path",
-      "description": "Reading path query for a category-oriented recommendation scenario.",
-      "relevantResourceIds": []
+      "id": "q061",
+      "query": "比较 Pride and Prejudice 和 Sense and Sensibility",
+      "intent": "comparison"
     },
     {
-      "id": "q-compare-psychology",
-      "query": "compare psychology and decision making books",
-      "intent": "comparison",
-      "description": "English comparison query that should benefit from hybrid semantic recall.",
-      "relevantResourceIds": []
+      "id": "q070",
+      "query": "数学入门阅读顺序",
+      "intent": "reading-path"
+    },
+    {
+      "id": "q073",
+      "query": "Java 系统设计 编程",
+      "intent": "metadata-fallback"
     }
   ]
 }

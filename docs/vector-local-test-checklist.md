@@ -77,6 +77,7 @@ Verify:
 
 ## 8. Notes
 
-- The current AI service uses a deterministic `hash-bow` embedding backend.
-- This stage validates the vector retrieval path and integration flow, not final semantic quality.
+- This checklist was originally created for the lightweight deterministic `hash-bow` embedding service.
+- The final ReadSeek semantic retrieval demo and benchmark use `ai-service/server_bge_m3.py` with BGE-M3 embeddings and BGE reranker.
+- The `hash-bow` service is still useful for quick vector-path integration checks when model download is unavailable, but it should not be cited as the final semantic model.
 - If AI mode is disabled, search should fall back safely to BM25 and exact-db retrieval.

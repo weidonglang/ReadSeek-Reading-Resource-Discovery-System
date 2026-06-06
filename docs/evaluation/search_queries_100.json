@@ -1,7 +1,7 @@
 {
   "dataset": "readseek-search-100",
-  "status": "ready-for-resolution",
-  "note": "Relevant ids can be resolved dynamically from current catalog by scripts/run_retrieval_evaluation.py.",
+  "status": "base-query-set",
+  "note": "Relevant ids are resolved dynamically from the current catalog. The latest resolved dataset used for reported metrics is generated/rust-suite/search_queries_100_resolved.json.",
   "queries": [
     {
       "id": "q001",
