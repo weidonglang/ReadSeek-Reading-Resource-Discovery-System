@@ -1,0 +1,13 @@
+scenario,sequence,success,latencyMs,resultCount,error
+recommendation,1,True,90.50509999997303,2,
+recommendation,2,True,107.64710000012201,2,
+recommendation,3,True,118.79700000008597,2,
+recommendation,4,True,92.68659999997908,2,
+recommendation,7,True,88.01630000016303,2,
+search,8,True,633.5725000003549,8,
+search,6,True,928.348399999777,8,
+search,5,True,947.8005000000849,8,
+search,9,True,424.1586000002826,8,
+recommendation,12,True,104.96180000018285,2,
+search,10,True,502.00849999964703,8,
+search,11,True,564.8276000001715,8,

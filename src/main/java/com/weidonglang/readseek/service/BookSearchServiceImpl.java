@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
@@ -29,6 +30,9 @@ import java.util.stream.Collectors;
 @Service
 public class BookSearchServiceImpl implements BookSearchService {
     private static final int DEFAULT_LIMIT = 10;
+    private static final Set<String> GENERIC_FALLBACK_TERMS = Set.of(
+            "book", "books", "novel", "fiction", "guide", "basic", "introductory", "introduction", "reader"
+    );
 
     private final SearchProperties searchProperties;
     private final BookRepository bookRepository;
@@ -85,9 +89,44 @@ public class BookSearchServiceImpl implements BookSearchService {
 
     @Override
     public BookSearchResponseDto searchBooks(String query, Integer limit) {
+        return searchBooksInternal(query, limit, true);
+    }
+
+    @Override
+    public BookSearchResponseDto searchBooksWithoutReranker(String query, Integer limit) {
+        return searchBooksInternal(query, limit, false);
+    }
+
+    @Override
+    public BookSearchResponseDto searchByVector(String query, Integer limit) {
         String normalizedQuery = normalizeQuery(query);
         int normalizedLimit = normalizeLimit(limit);
-        int candidateLimit = resolveCandidateLimit(normalizedLimit);
+        SearchQueryIntent intent = searchQueryIntentClassifier.classify(normalizedQuery);
+        String expandedQuery = searchQueryExpander.expand(normalizedQuery, intent);
+        List<BookSearchHitDto> hits = vectorBookSearchService.search(expandedQuery, normalizedLimit);
+        BookSearchResponseDto response = new BookSearchResponseDto(
+                normalizedQuery,
+                intent,
+                "vector-only",
+                false,
+                hits.size(),
+                hits
+        );
+        response.setExpandedQuery(expandedQuery);
+        response.setStrategySteps(List.of(
+                "intent=" + intent + " expands the query before vector retrieval.",
+                "vector-only calls the local embedding provider and searches Elasticsearch dense vectors.",
+                "BM25, exact-db, catalog-db fallback, and reranker are not used by this endpoint."
+        ));
+        response.setRerankerApplied(false);
+        response.setCandidateCount(hits.size());
+        return response;
+    }
+
+    private BookSearchResponseDto searchBooksInternal(String query, Integer limit, boolean allowReranker) {
+        String normalizedQuery = normalizeQuery(query);
+        int normalizedLimit = normalizeLimit(limit);
+        int candidateLimit = allowReranker ? resolveCandidateLimit(normalizedLimit) : normalizedLimit;
         SearchQueryIntent intent = searchQueryIntentClassifier.classify(normalizedQuery);
         String expandedQuery = searchQueryExpander.expand(normalizedQuery, intent);
 
@@ -109,13 +148,29 @@ public class BookSearchServiceImpl implements BookSearchService {
             mergeHits(mergedHits, vectorHits, candidateLimit);
         }
 
+        boolean databaseFallbackApplied = false;
+        if (mergedHits.isEmpty()) {
+            List<BookSearchHitDto> databaseFallbackHits = findDatabaseFallbackMatches(
+                    normalizedQuery,
+                    expandedQuery,
+                    candidateLimit
+            );
+            mergeHits(mergedHits, databaseFallbackHits, candidateLimit);
+            databaseFallbackApplied = !databaseFallbackHits.isEmpty();
+        }
+
         List<BookSearchHitDto> hits = new ArrayList<>(mergedHits.values());
         int candidateCount = hits.size();
         boolean fallbackApplied = intent == SearchQueryIntent.EXACT_LOOKUP
                 && exactHits.isEmpty()
-                && (!bm25Hits.isEmpty() || !vectorHits.isEmpty());
-        String strategy = resolveHybridStrategy(intent, vectorHits);
-        RerankOutcome rerankOutcome = applyReranker(normalizedQuery, hits, normalizedLimit, strategy);
+                && (!bm25Hits.isEmpty() || !vectorHits.isEmpty() || databaseFallbackApplied);
+        fallbackApplied = fallbackApplied || databaseFallbackApplied;
+        String strategy = databaseFallbackApplied
+                ? "hybrid-v1(exact-db+bm25+catalog-db-fallback)"
+                : resolveHybridStrategy(intent, vectorHits);
+        RerankOutcome rerankOutcome = allowReranker
+                ? applyReranker(normalizedQuery, hits, normalizedLimit, strategy)
+                : RerankOutcome.notApplied();
         if (rerankOutcome.applied()) {
             hits = rerankOutcome.hits();
             strategy = "hybrid-v3(exact-db+bm25+vector+reranker)";
@@ -137,6 +192,7 @@ public class BookSearchServiceImpl implements BookSearchService {
                 !exactHits.isEmpty(),
                 !bm25Hits.isEmpty(),
                 !vectorHits.isEmpty(),
+                databaseFallbackApplied,
                 rerankOutcome.applied(),
                 fallbackApplied
         ));
@@ -305,6 +361,7 @@ public class BookSearchServiceImpl implements BookSearchService {
                                                   boolean hasExactHits,
                                                   boolean hasBm25Hits,
                                                   boolean hasVectorHits,
+                                                  boolean hasDatabaseFallbackHits,
                                                   boolean rerankerApplied,
                                                   boolean fallbackApplied) {
         List<String> steps = new ArrayList<>();
@@ -318,11 +375,14 @@ public class BookSearchServiceImpl implements BookSearchService {
         steps.add(hasVectorHits
                 ? "vector contributed semantic candidates from local embeddings and Elasticsearch cosine similarity."
                 : "vector returned no candidate or was unavailable, so the chain degrades to exact/BM25.");
+        steps.add(hasDatabaseFallbackHits
+                ? "catalog-db-fallback matched basic database metadata, so search still works when the Elasticsearch index, vectors, or detailed descriptions are missing."
+                : "catalog-db-fallback was not needed because earlier retrieval stages already produced candidates.");
         steps.add(rerankerApplied
                 ? "reranker reordered non-exact candidates with the local BGE reranker; exact hits stayed pinned."
                 : "reranker was not applied because it was disabled, unavailable, or there were not enough rerankable candidates.");
         if (fallbackApplied) {
-            steps.add("fallback=true because exact lookup had no exact hit but BM25/vector still found candidates.");
+            steps.add("fallback=true because the primary retrieval stages had insufficient candidates and a backup path was used.");
         }
         return steps;
     }
@@ -392,6 +452,91 @@ public class BookSearchServiceImpl implements BookSearchService {
             hits.add(hit);
         }
         return hits;
+    }
+
+    private List<BookSearchHitDto> findDatabaseFallbackMatches(String normalizedQuery, String expandedQuery, int limit) {
+        LinkedHashMap<Long, Book> fallbackBooks = new LinkedHashMap<>();
+        for (String candidateQuery : buildDatabaseFallbackQueries(normalizedQuery, expandedQuery)) {
+            List<Book> books = bookRepository.findCatalogFallbackMatches(candidateQuery, PageRequest.of(0, limit));
+            for (Book book : books) {
+                if (book != null && book.getId() != null && !fallbackBooks.containsKey(book.getId())) {
+                    fallbackBooks.put(book.getId(), book);
+                }
+                if (fallbackBooks.size() >= limit) {
+                    break;
+                }
+            }
+            if (fallbackBooks.size() >= limit) {
+                break;
+            }
+        }
+
+        if (fallbackBooks.isEmpty()) {
+            return List.of();
+        }
+
+        List<BookDto> bookDtos = bookTransformer.transformEntityToDto(new ArrayList<>(fallbackBooks.values()));
+        List<BookSearchHitDto> hits = new ArrayList<>();
+        for (int index = 0; index < bookDtos.size(); index++) {
+            BookSearchHitDto hit = new BookSearchHitDto(
+                    bookDtos.get(index),
+                    Math.max(0.1D, 0.45D - index * 0.02D),
+                    "CATALOG_DB",
+                    "Matched basic catalog metadata from the database when search index or detailed descriptions were unavailable."
+            );
+            hit.setSource("catalog-db");
+            hit.setRetrievalStage("database-fallback");
+            hit.setReranked(false);
+            hit.setExplanationTags(List.of("database-fallback", "metadata"));
+            hits.add(hit);
+        }
+        return hits;
+    }
+
+    private List<String> buildDatabaseFallbackQueries(String normalizedQuery, String expandedQuery) {
+        LinkedHashSet<String> candidates = new LinkedHashSet<>();
+        addDatabaseFallbackQuery(candidates, normalizedQuery, normalizedQuery);
+        searchQueryExpander.resolveExactCandidateQueries(normalizedQuery)
+                .forEach(candidate -> addDatabaseFallbackQuery(candidates, candidate, normalizedQuery));
+        addDatabaseFallbackQuery(candidates, expandedQuery, normalizedQuery);
+        if (expandedQuery != null) {
+            for (String token : expandedQuery.split("[\\s,;，；、]+")) {
+                addDatabaseFallbackQuery(candidates, token, normalizedQuery);
+            }
+        }
+        return new ArrayList<>(candidates);
+    }
+
+    private void addDatabaseFallbackQuery(Set<String> candidates, String rawValue, String originalQuery) {
+        String normalized = rawValue == null ? "" : rawValue.trim();
+        if (!isUsefulDatabaseFallbackQuery(normalized, originalQuery)) {
+            return;
+        }
+        candidates.add(normalized);
+    }
+
+    private boolean isUsefulDatabaseFallbackQuery(String value, String originalQuery) {
+        if (value == null || value.isBlank()) {
+            return false;
+        }
+        String normalized = value.trim();
+        String lower = normalized.toLowerCase(Locale.ROOT);
+        String original = originalQuery == null ? "" : originalQuery.trim().toLowerCase(Locale.ROOT);
+        if (lower.equals(original)) {
+            return normalized.length() >= 2;
+        }
+        if (GENERIC_FALLBACK_TERMS.contains(lower)) {
+            return false;
+        }
+        if (containsCjk(normalized)) {
+            return normalized.length() >= 2;
+        }
+        return normalized.length() >= 3;
+    }
+
+    private boolean containsCjk(String value) {
+        return value.codePoints().anyMatch(codePoint ->
+                Character.UnicodeScript.of(codePoint) == Character.UnicodeScript.HAN);
     }
 
     private List<BookSearchHitDto> performBm25Search(String query, int limit) {

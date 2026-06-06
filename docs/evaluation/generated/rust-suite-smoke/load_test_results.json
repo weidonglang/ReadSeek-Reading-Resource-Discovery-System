@@ -1,0 +1,118 @@
+{
+  "requests": [
+    {
+      "error": "",
+      "latencyMs": 88.5565,
+      "resultCount": 2,
+      "scenario": "recommendation",
+      "sequence": 2,
+      "success": true
+    },
+    {
+      "error": "",
+      "latencyMs": 401.7072,
+      "resultCount": 8,
+      "scenario": "search",
+      "sequence": 3,
+      "success": true
+    },
+    {
+      "error": "",
+      "latencyMs": 495.716,
+      "resultCount": 8,
+      "scenario": "search",
+      "sequence": 1,
+      "success": true
+    },
+    {
+      "error": "",
+      "latencyMs": 70.62129999999999,
+      "resultCount": 2,
+      "scenario": "recommendation",
+      "sequence": 4,
+      "success": true
+    },
+    {
+      "error": "",
+      "latencyMs": 74.66290000000001,
+      "resultCount": 2,
+      "scenario": "recommendation",
+      "sequence": 6,
+      "success": true
+    },
+    {
+      "error": "",
+      "latencyMs": 417.7293,
+      "resultCount": 8,
+      "scenario": "search",
+      "sequence": 5,
+      "success": true
+    },
+    {
+      "error": "",
+      "latencyMs": 338.8886,
+      "resultCount": 8,
+      "scenario": "search",
+      "sequence": 7,
+      "success": true
+    },
+    {
+      "error": "",
+      "latencyMs": 67.8919,
+      "resultCount": 2,
+      "scenario": "recommendation",
+      "sequence": 8,
+      "success": true
+    }
+  ],
+  "summary": {
+    "apiBaseUrl": "http://localhost:8010/readseek-service",
+    "byScenario": {
+      "recommendation": {
+        "avgLatencyMs": 75.43315,
+        "failures": 0,
+        "maxLatencyMs": 88.5565,
+        "p50LatencyMs": 70.62129999999999,
+        "p90LatencyMs": 88.5565,
+        "p95LatencyMs": 88.5565,
+        "p99LatencyMs": 88.5565,
+        "requests": 4,
+        "successRate": 1.0,
+        "successes": 4
+      },
+      "search": {
+        "avgLatencyMs": 413.510275,
+        "failures": 0,
+        "maxLatencyMs": 495.716,
+        "p50LatencyMs": 401.7072,
+        "p90LatencyMs": 495.716,
+        "p95LatencyMs": 495.716,
+        "p99LatencyMs": 495.716,
+        "requests": 4,
+        "successRate": 1.0,
+        "successes": 4
+      }
+    },
+    "concurrency": 2,
+    "elapsedSeconds": 0.9835627,
+    "generatedAt": "2026-06-06T09:34:54",
+    "overall": {
+      "avgLatencyMs": 244.4717125,
+      "failures": 0,
+      "maxLatencyMs": 495.716,
+      "p50LatencyMs": 88.5565,
+      "p90LatencyMs": 495.716,
+      "p95LatencyMs": 495.716,
+      "p99LatencyMs": 495.716,
+      "requests": 8,
+      "successRate": 1.0,
+      "successes": 8
+    },
+    "requests": 8,
+    "throughputRps": 8.133696001281871,
+    "tool": {
+      "name": "readseek-bench-rs",
+      "version": "0.1.0"
+    }
+  }
+}

@@ -1,0 +1,854 @@
+{
+  "requests": [
+    {
+      "error": "",
+      "latencyMs": 101.8135,
+      "resultCount": 2,
+      "scenario": "recommendation",
+      "sequence": 6,
+      "success": true
+    },
+    {
+      "error": "",
+      "latencyMs": 102.3055,
+      "resultCount": 2,
+      "scenario": "recommendation",
+      "sequence": 4,
+      "success": true
+    },
+    {
+      "error": "",
+      "latencyMs": 103.5254,
+      "resultCount": 2,
+      "scenario": "recommendation",
+      "sequence": 2,
+      "success": true
+    },
+    {
+      "error": "",
+      "latencyMs": 102.0957,
+      "resultCount": 2,
+      "scenario": "recommendation",
+      "sequence": 8,
+      "success": true
+    },
+    {
+      "error": "",
+      "latencyMs": 74.3066,
+      "resultCount": 2,
+      "scenario": "recommendation",
+      "sequence": 10,
+      "success": true
+    },
+    {
+      "error": "",
+      "latencyMs": 74.1575,
+      "resultCount": 2,
+      "scenario": "recommendation",
+      "sequence": 12,
+      "success": true
+    },
+    {
+      "error": "",
+      "latencyMs": 73.4281,
+      "resultCount": 2,
+      "scenario": "recommendation",
+      "sequence": 14,
+      "success": true
+    },
+    {
+      "error": "",
+      "latencyMs": 1024.6881,
+      "resultCount": 8,
+      "scenario": "search",
+      "sequence": 3,
+      "success": true
+    },
+    {
+      "error": "",
+      "latencyMs": 1038.6503,
+      "resultCount": 8,
+      "scenario": "search",
+      "sequence": 7,
+      "success": true
+    },
+    {
+      "error": "",
+      "latencyMs": 1052.6026,
+      "resultCount": 8,
+      "scenario": "search",
+      "sequence": 1,
+      "success": true
+    },
+    {
+      "error": "",
+      "latencyMs": 66.06389999999999,
+      "resultCount": 2,
+      "scenario": "recommendation",
+      "sequence": 16,
+      "success": true
+    },
+    {
+      "error": "",
+      "latencyMs": 66.9087,
+      "resultCount": 2,
+      "scenario": "recommendation",
+      "sequence": 18,
+      "success": true
+    },
+    {
+      "error": "",
+      "latencyMs": 66.6961,
+      "resultCount": 2,
+      "scenario": "recommendation",
+      "sequence": 20,
+      "success": true
+    },
+    {
+      "error": "",
+      "latencyMs": 1248.6777,
+      "resultCount": 8,
+      "scenario": "search",
+      "sequence": 9,
+      "success": true
+    },
+    {
+      "error": "",
+      "latencyMs": 1178.25,
+      "resultCount": 8,
+      "scenario": "search",
+      "sequence": 13,
+      "success": true
+    },
+    {
+      "error": "",
+      "latencyMs": 1256.8133,
+      "resultCount": 8,
+      "scenario": "search",
+      "sequence": 11,
+      "success": true
+    },
+    {
+      "error": "",
+      "latencyMs": 1360.4502,
+      "resultCount": 8,
+      "scenario": "search",
+      "sequence": 5,
+      "success": true
+    },
+    {
+      "error": "",
+      "latencyMs": 65.932,
+      "resultCount": 2,
+      "scenario": "recommendation",
+      "sequence": 22,
+      "success": true
+    },
+    {
+      "error": "",
+      "latencyMs": 61.6174,
+      "resultCount": 2,
+      "scenario": "recommendation",
+      "sequence": 24,
+      "success": true
+    },
+    {
+      "error": "",
+      "latencyMs": 57.4536,
+      "resultCount": 2,
+      "scenario": "recommendation",
+      "sequence": 26,
+      "success": true
+    },
+    {
+      "error": "",
+      "latencyMs": 1231.5236,
+      "resultCount": 8,
+      "scenario": "search",
+      "sequence": 15,
+      "success": true
+    },
+    {
+      "error": "",
+      "latencyMs": 62.8171,
+      "resultCount": 2,
+      "scenario": "recommendation",
+      "sequence": 28,
+      "success": true
+    },
+    {
+      "error": "",
+      "latencyMs": 58.1077,
+      "resultCount": 2,
+      "scenario": "recommendation",
+      "sequence": 30,
+      "success": true
+    },
+    {
+      "error": "",
+      "latencyMs": 1213.5982000000001,
+      "resultCount": 8,
+      "scenario": "search",
+      "sequence": 23,
+      "success": true
+    },
+    {
+      "error": "",
+      "latencyMs": 1492.2713999999999,
+      "resultCount": 8,
+      "scenario": "search",
+      "sequence": 19,
+      "success": true
+    },
+    {
+      "error": "",
+      "latencyMs": 1162.358,
+      "resultCount": 8,
+      "scenario": "search",
+      "sequence": 27,
+      "success": true
+    },
+    {
+      "error": "",
+      "latencyMs": 1231.2793,
+      "resultCount": 8,
+      "scenario": "search",
+      "sequence": 25,
+      "success": true
+    },
+    {
+      "error": "",
+      "latencyMs": 1405.3238999999999,
+      "resultCount": 8,
+      "scenario": "search",
+      "sequence": 21,
+      "success": true
+    },
+    {
+      "error": "",
+      "latencyMs": 1562.8156,
+      "resultCount": 8,
+      "scenario": "search",
+      "sequence": 17,
+      "success": true
+    },
+    {
+      "error": "",
+      "latencyMs": 58.9409,
+      "resultCount": 2,
+      "scenario": "recommendation",
+      "sequence": 32,
+      "success": true
+    },
+    {
+      "error": "",
+      "latencyMs": 64.69279999999999,
+      "resultCount": 2,
+      "scenario": "recommendation",
+      "sequence": 34,
+      "success": true
+    },
+    {
+      "error": "",
+      "latencyMs": 75.267,
+      "resultCount": 2,
+      "scenario": "recommendation",
+      "sequence": 36,
+      "success": true
+    },
+    {
+      "error": "",
+      "latencyMs": 65.5854,
+      "resultCount": 2,
+      "scenario": "recommendation",
+      "sequence": 38,
+      "success": true
+    },
+    {
+      "error": "",
+      "latencyMs": 57.5863,
+      "resultCount": 2,
+      "scenario": "recommendation",
+      "sequence": 40,
+      "success": true
+    },
+    {
+      "error": "",
+      "latencyMs": 1255.4202,
+      "resultCount": 8,
+      "scenario": "search",
+      "sequence": 29,
+      "success": true
+    },
+    {
+      "error": "",
+      "latencyMs": 67.1496,
+      "resultCount": 2,
+      "scenario": "recommendation",
+      "sequence": 42,
+      "success": true
+    },
+    {
+      "error": "",
+      "latencyMs": 59.7093,
+      "resultCount": 2,
+      "scenario": "recommendation",
+      "sequence": 44,
+      "success": true
+    },
+    {
+      "error": "",
+      "latencyMs": 1261.8695,
+      "resultCount": 8,
+      "scenario": "search",
+      "sequence": 31,
+      "success": true
+    },
+    {
+      "error": "",
+      "latencyMs": 66.16890000000001,
+      "resultCount": 2,
+      "scenario": "recommendation",
+      "sequence": 46,
+      "success": true
+    },
+    {
+      "error": "",
+      "latencyMs": 781.8374,
+      "resultCount": 8,
+      "scenario": "search",
+      "sequence": 33,
+      "success": true
+    },
+    {
+      "error": "",
+      "latencyMs": 67.7007,
+      "resultCount": 2,
+      "scenario": "recommendation",
+      "sequence": 48,
+      "success": true
+    },
+    {
+      "error": "",
+      "latencyMs": 1010.5390000000001,
+      "resultCount": 8,
+      "scenario": "search",
+      "sequence": 37,
+      "success": true
+    },
+    {
+      "error": "",
+      "latencyMs": 66.3796,
+      "resultCount": 2,
+      "scenario": "recommendation",
+      "sequence": 50,
+      "success": true
+    },
+    {
+      "error": "",
+      "latencyMs": 1103.3447,
+      "resultCount": 8,
+      "scenario": "search",
+      "sequence": 35,
+      "success": true
+    },
+    {
+      "error": "",
+      "latencyMs": 64.0026,
+      "resultCount": 2,
+      "scenario": "recommendation",
+      "sequence": 52,
+      "success": true
+    },
+    {
+      "error": "",
+      "latencyMs": 1119.4188000000001,
+      "resultCount": 8,
+      "scenario": "search",
+      "sequence": 39,
+      "success": true
+    },
+    {
+      "error": "",
+      "latencyMs": 75.42540000000001,
+      "resultCount": 2,
+      "scenario": "recommendation",
+      "sequence": 54,
+      "success": true
+    },
+    {
+      "error": "",
+      "latencyMs": 1215.8926000000001,
+      "resultCount": 8,
+      "scenario": "search",
+      "sequence": 41,
+      "success": true
+    },
+    {
+      "error": "",
+      "latencyMs": 1184.1588000000002,
+      "resultCount": 8,
+      "scenario": "search",
+      "sequence": 43,
+      "success": true
+    },
+    {
+      "error": "",
+      "latencyMs": 59.1992,
+      "resultCount": 2,
+      "scenario": "recommendation",
+      "sequence": 56,
+      "success": true
+    },
+    {
+      "error": "",
+      "latencyMs": 62.190799999999996,
+      "resultCount": 2,
+      "scenario": "recommendation",
+      "sequence": 58,
+      "success": true
+    },
+    {
+      "error": "",
+      "latencyMs": 1210.3127,
+      "resultCount": 8,
+      "scenario": "search",
+      "sequence": 45,
+      "success": true
+    },
+    {
+      "error": "",
+      "latencyMs": 1143.7791,
+      "resultCount": 8,
+      "scenario": "search",
+      "sequence": 47,
+      "success": true
+    },
+    {
+      "error": "",
+      "latencyMs": 59.4044,
+      "resultCount": 2,
+      "scenario": "recommendation",
+      "sequence": 60,
+      "success": true
+    },
+    {
+      "error": "",
+      "latencyMs": 72.4416,
+      "resultCount": 2,
+      "scenario": "recommendation",
+      "sequence": 62,
+      "success": true
+    },
+    {
+      "error": "",
+      "latencyMs": 1208.5351,
+      "resultCount": 8,
+      "scenario": "search",
+      "sequence": 49,
+      "success": true
+    },
+    {
+      "error": "",
+      "latencyMs": 56.4033,
+      "resultCount": 2,
+      "scenario": "recommendation",
+      "sequence": 64,
+      "success": true
+    },
+    {
+      "error": "",
+      "latencyMs": 1280.74,
+      "resultCount": 8,
+      "scenario": "search",
+      "sequence": 51,
+      "success": true
+    },
+    {
+      "error": "",
+      "latencyMs": 1202.7144,
+      "resultCount": 8,
+      "scenario": "search",
+      "sequence": 53,
+      "success": true
+    },
+    {
+      "error": "",
+      "latencyMs": 61.9428,
+      "resultCount": 2,
+      "scenario": "recommendation",
+      "sequence": 66,
+      "success": true
+    },
+    {
+      "error": "",
+      "latencyMs": 55.6711,
+      "resultCount": 2,
+      "scenario": "recommendation",
+      "sequence": 68,
+      "success": true
+    },
+    {
+      "error": "",
+      "latencyMs": 1254.4288,
+      "resultCount": 8,
+      "scenario": "search",
+      "sequence": 55,
+      "success": true
+    },
+    {
+      "error": "",
+      "latencyMs": 1195.0578,
+      "resultCount": 8,
+      "scenario": "search",
+      "sequence": 57,
+      "success": true
+    },
+    {
+      "error": "",
+      "latencyMs": 64.4383,
+      "resultCount": 2,
+      "scenario": "recommendation",
+      "sequence": 70,
+      "success": true
+    },
+    {
+      "error": "",
+      "latencyMs": 1172.8734000000002,
+      "resultCount": 8,
+      "scenario": "search",
+      "sequence": 59,
+      "success": true
+    },
+    {
+      "error": "",
+      "latencyMs": 69.4246,
+      "resultCount": 2,
+      "scenario": "recommendation",
+      "sequence": 72,
+      "success": true
+    },
+    {
+      "error": "",
+      "latencyMs": 1206.7904999999998,
+      "resultCount": 8,
+      "scenario": "search",
+      "sequence": 61,
+      "success": true
+    },
+    {
+      "error": "",
+      "latencyMs": 58.6114,
+      "resultCount": 2,
+      "scenario": "recommendation",
+      "sequence": 74,
+      "success": true
+    },
+    {
+      "error": "",
+      "latencyMs": 1146.6223,
+      "resultCount": 8,
+      "scenario": "search",
+      "sequence": 63,
+      "success": true
+    },
+    {
+      "error": "",
+      "latencyMs": 60.281,
+      "resultCount": 2,
+      "scenario": "recommendation",
+      "sequence": 76,
+      "success": true
+    },
+    {
+      "error": "",
+      "latencyMs": 67.8463,
+      "resultCount": 2,
+      "scenario": "recommendation",
+      "sequence": 78,
+      "success": true
+    },
+    {
+      "error": "",
+      "latencyMs": 1423.4973,
+      "resultCount": 8,
+      "scenario": "search",
+      "sequence": 67,
+      "success": true
+    },
+    {
+      "error": "",
+      "latencyMs": 1269.7038,
+      "resultCount": 8,
+      "scenario": "search",
+      "sequence": 71,
+      "success": true
+    },
+    {
+      "error": "",
+      "latencyMs": 1185.9984,
+      "resultCount": 8,
+      "scenario": "search",
+      "sequence": 73,
+      "success": true
+    },
+    {
+      "error": "",
+      "latencyMs": 1114.6812,
+      "resultCount": 8,
+      "scenario": "search",
+      "sequence": 75,
+      "success": true
+    },
+    {
+      "error": "",
+      "latencyMs": 1694.7882000000002,
+      "resultCount": 8,
+      "scenario": "search",
+      "sequence": 65,
+      "success": true
+    },
+    {
+      "error": "",
+      "latencyMs": 1317.4184,
+      "resultCount": 8,
+      "scenario": "search",
+      "sequence": 69,
+      "success": true
+    },
+    {
+      "error": "",
+      "latencyMs": 65.5727,
+      "resultCount": 2,
+      "scenario": "recommendation",
+      "sequence": 82,
+      "success": true
+    },
+    {
+      "error": "",
+      "latencyMs": 72.3737,
+      "resultCount": 2,
+      "scenario": "recommendation",
+      "sequence": 80,
+      "success": true
+    },
+    {
+      "error": "",
+      "latencyMs": 74.1005,
+      "resultCount": 2,
+      "scenario": "recommendation",
+      "sequence": 84,
+      "success": true
+    },
+    {
+      "error": "",
+      "latencyMs": 59.3493,
+      "resultCount": 2,
+      "scenario": "recommendation",
+      "sequence": 86,
+      "success": true
+    },
+    {
+      "error": "",
+      "latencyMs": 54.6693,
+      "resultCount": 2,
+      "scenario": "recommendation",
+      "sequence": 88,
+      "success": true
+    },
+    {
+      "error": "",
+      "latencyMs": 1197.1923,
+      "resultCount": 8,
+      "scenario": "search",
+      "sequence": 77,
+      "success": true
+    },
+    {
+      "error": "",
+      "latencyMs": 65.0876,
+      "resultCount": 2,
+      "scenario": "recommendation",
+      "sequence": 90,
+      "success": true
+    },
+    {
+      "error": "",
+      "latencyMs": 54.413700000000006,
+      "resultCount": 2,
+      "scenario": "recommendation",
+      "sequence": 92,
+      "success": true
+    },
+    {
+      "error": "",
+      "latencyMs": 1240.6028000000001,
+      "resultCount": 8,
+      "scenario": "search",
+      "sequence": 79,
+      "success": true
+    },
+    {
+      "error": "",
+      "latencyMs": 68.3345,
+      "resultCount": 2,
+      "scenario": "recommendation",
+      "sequence": 94,
+      "success": true
+    },
+    {
+      "error": "",
+      "latencyMs": 923.6779,
+      "resultCount": 8,
+      "scenario": "search",
+      "sequence": 83,
+      "success": true
+    },
+    {
+      "error": "",
+      "latencyMs": 57.0417,
+      "resultCount": 2,
+      "scenario": "recommendation",
+      "sequence": 96,
+      "success": true
+    },
+    {
+      "error": "",
+      "latencyMs": 1108.7547,
+      "resultCount": 8,
+      "scenario": "search",
+      "sequence": 87,
+      "success": true
+    },
+    {
+      "error": "",
+      "latencyMs": 1071.9151,
+      "resultCount": 8,
+      "scenario": "search",
+      "sequence": 89,
+      "success": true
+    },
+    {
+      "error": "",
+      "latencyMs": 1202.5957,
+      "resultCount": 8,
+      "scenario": "search",
+      "sequence": 81,
+      "success": true
+    },
+    {
+      "error": "",
+      "latencyMs": 59.960899999999995,
+      "resultCount": 2,
+      "scenario": "recommendation",
+      "sequence": 98,
+      "success": true
+    },
+    {
+      "error": "",
+      "latencyMs": 56.2168,
+      "resultCount": 2,
+      "scenario": "recommendation",
+      "sequence": 100,
+      "success": true
+    },
+    {
+      "error": "",
+      "latencyMs": 1417.3001000000002,
+      "resultCount": 8,
+      "scenario": "search",
+      "sequence": 85,
+      "success": true
+    },
+    {
+      "error": "",
+      "latencyMs": 1292.2068,
+      "resultCount": 8,
+      "scenario": "search",
+      "sequence": 91,
+      "success": true
+    },
+    {
+      "error": "",
+      "latencyMs": 1189.7785999999999,
+      "resultCount": 8,
+      "scenario": "search",
+      "sequence": 93,
+      "success": true
+    },
+    {
+      "error": "",
+      "latencyMs": 1179.0735,
+      "resultCount": 8,
+      "scenario": "search",
+      "sequence": 95,
+      "success": true
+    },
+    {
+      "error": "",
+      "latencyMs": 776.2868000000001,
+      "resultCount": 8,
+      "scenario": "search",
+      "sequence": 97,
+      "success": true
+    },
+    {
+      "error": "",
+      "latencyMs": 621.2948,
+      "resultCount": 8,
+      "scenario": "search",
+      "sequence": 99,
+      "success": true
+    }
+  ],
+  "summary": {
+    "apiBaseUrl": "http://localhost:8010/readseek-service",
+    "byScenario": {
+      "recommendation": {
+        "avgLatencyMs": 67.21625600000002,
+        "failures": 0,
+        "maxLatencyMs": 103.5254,
+        "p50LatencyMs": 65.0876,
+        "p90LatencyMs": 75.267,
+        "p95LatencyMs": 102.0957,
+        "p99LatencyMs": 103.5254,
+        "requests": 50,
+        "successRate": 1.0,
+        "successes": 50
+      },
+      "search": {
+        "avgLatencyMs": 1192.8080740000003,
+        "failures": 0,
+        "maxLatencyMs": 1694.7882000000002,
+        "p50LatencyMs": 1202.5957,
+        "p90LatencyMs": 1405.3238999999999,
+        "p95LatencyMs": 1492.2713999999999,
+        "p99LatencyMs": 1694.7882000000002,
+        "requests": 50,
+        "successRate": 1.0,
+        "successes": 50
+      }
+    },
+    "concurrency": 8,
+    "elapsedSeconds": 8.2176298,
+    "generatedAt": "2026-06-06T10:01:51",
+    "overall": {
+      "avgLatencyMs": 630.0121650000001,
+      "failures": 0,
+      "maxLatencyMs": 1694.7882000000002,
+      "p50LatencyMs": 103.5254,
+      "p90LatencyMs": 1269.7038,
+      "p95LatencyMs": 1405.3238999999999,
+      "p99LatencyMs": 1562.8156,
+      "requests": 100,
+      "successRate": 1.0,
+      "successes": 100
+    },
+    "requests": 100,
+    "throughputRps": 12.168958986203055,
+    "tool": {
+      "name": "readseek-bench-rs",
+      "version": "0.1.0"
+    }
+  }
+}

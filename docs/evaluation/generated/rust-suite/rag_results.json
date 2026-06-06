@@ -1,0 +1,2186 @@
+{
+  "results": [
+    {
+      "answer": "根据您的需求，以下是推荐顺序及理由：\n\n1. **《Pride and Prejudice》**（《傲慢与偏见》）[2]  \n   - 推荐理由：作为简·奥斯汀最广为人知的作品之一，本书以机智讽刺的笔触描绘社会阶层与婚恋观念，故事围绕偏见与误解的消解展开，适合入门浪漫小说的读者，同时具备经典文学价值。\n\n2. **《Sense and Sensibility》**（《理智与情感》）[1]  \n   - 推荐理由：与《傲慢与偏见》同属简·奥斯汀的经典作品，本书探讨理性与情感在爱情、婚姻及社会规范中的张力，适合在熟悉经典浪漫主义风格后进一步阅读。\n\n3. **《Jane Eyre》**（《简·爱》）[5]  \n   - 推荐理由：本书以第一人称叙述女性成长、自我尊严与情感追求，融合哥特氛围与社会批判，适合在了解古典浪漫主义后，进一步探索带有社会批判与女性意识的浪漫小说。\n\n4. **《After the Party》**（《派对之后》）[3]  \n   - 推荐理由：本书探讨爱情、时间与人生选择的主题，适合在阅读经典后，转向更现代、情感细腻的浪漫小说，关注人物内心世界的成长。\n\n5. **《The Giver of Stars》**（《星星的给予者》）[4]  \n   - 推荐理由：本书以细腻笔触描绘人际关系与情感成长，强调书籍对生活的启发，适合在阅读完前四本后，进一步体验温情叙事与文学性兼具的浪漫小说。\n\n以上推荐顺序从经典入门逐步过渡到现代情感细腻的浪漫小说，适合构建一个完整的浪漫小说阅读路径。",
+      "answerModeActual": "READING_PATH",
+      "answerModeExpected": "recommendation",
+      "answerable": true,
+      "citationCoverage": 1.0,
+      "error": null,
+      "evidenceCount": 5,
+      "evidenceIds": [
+        402,
+        400,
+        62,
+        56,
+        393
+      ],
+      "evidenceRecall": 0.6,
+      "expectedEvidenceHit": true,
+      "expectedResourceIds": [
+        55,
+        56,
+        271,
+        400,
+        402
+      ],
+      "fallbackApplied": false,
+      "generationLatencyMs": 30376,
+      "id": "r001",
+      "limitations": [
+        "回答严格受当前检索证据约束，不使用馆藏外事实补充。",
+        "证据范围仅限当前系统已入库并已建立索引的阅读资源。"
+      ],
+      "llmFallbackApplied": false,
+      "model": "qwen3:8b",
+      "question": "帮我推荐几本爱情小说，并说明推荐顺序。",
+      "requestLatencyMs": 30864.2735,
+      "retrievalLatencyMs": 473,
+      "strategy": "hybrid-v3(exact-db+bm25+vector+reranker)",
+      "totalLatencyMs": 30849
+    },
+    {
+      "answer": "根据证据片段，Pride and Prejudice 和 Sense and Sensibility 均为简·奥斯汀的经典浪漫小说，适合喜爱古典浪漫主义与社会风俗描写的读者。若需推荐阅读顺序，可参考以下路径：\n\n**推荐顺序：**\n1. **Sense and Sensibility** [1]  \n   - 理由：该书以细腻笔触探讨理性与情感的平衡，展现19世纪英国社会风貌与女性命运，适合初接触奥斯汀作品的读者，有助于建立对奥斯汀写作风格与主题的初步理解。\n\n2. **Pride and Prejudice** [2]  \n   - 理由：该书以机智讽刺的笔触描绘社会阶层与婚恋观念，故事围绕偏见与误解的消解展开，适合在熟悉奥斯汀风格后进一步深入阅读，体验其更复杂的人物心理与社会批判。\n\n**理由总结：**  \n- Sense and Sensibility 更注重人物内心成长与道德抉择，适合入门；  \n- Pride and Prejudice 则在情感与社会批判上更具张力，适合进阶阅读。",
+      "answerModeActual": "READING_PATH",
+      "answerModeExpected": "comparison",
+      "answerable": true,
+      "citationCoverage": 0.4,
+      "error": null,
+      "evidenceCount": 5,
+      "evidenceIds": [
+        402,
+        400,
+        271,
+        163,
+        336
+      ],
+      "evidenceRecall": 1.0,
+      "expectedEvidenceHit": true,
+      "expectedResourceIds": [
+        271,
+        400,
+        402
+      ],
+      "fallbackApplied": false,
+      "generationLatencyMs": 18437,
+      "id": "r002",
+      "limitations": [
+        "回答严格受当前检索证据约束，不使用馆藏外事实补充。",
+        "证据范围仅限当前系统已入库并已建立索引的阅读资源。"
+      ],
+      "llmFallbackApplied": false,
+      "model": "qwen3:8b",
+      "question": "Pride and Prejudice 和 Sense and Sensibility 应该先读哪本？",
+      "requestLatencyMs": 18747.6587,
+      "retrievalLatencyMs": 294,
+      "strategy": "hybrid-v3(exact-db+bm25+vector+reranker)",
+      "totalLatencyMs": 18733
+    },
+    {
+      "answer": "根据你的需求，推荐从以下几本经典科幻作品入门，并按推荐顺序如下：\n\n1. **《The War of the Worlds》**（《世界大战》） - H. G. Wells  \n   理由：作为科幻文学奠基之作，本书是了解科幻起源的必读之作，具有极高的文学价值与思想深度 [5]。\n\n2. **《The Invisible Man》**（《隐形人》） - H. G. Wells  \n   理由：这是科幻先驱H.G. Wells的另一部经典，以寓言形式探讨科学伦理与人性，适合入门读者 [3]。\n\n3. **《Journey to the Center of the Earth》**（《地心游记》） - Jules Verne  \n   理由：儒勒·凡尔纳的科幻冒险经典，融合科学想象与惊险探险，展现19世纪科学乐观主义精神 [4]。\n\n4. **《Player Piano》**（《玩家钢琴》） - Kurt Vonnegut  \n   理由：库尔特·冯内古特的处女作，以反乌托邦视角探讨技术统治与社会异化，适合喜欢深度思考科技伦理的读者 [2]。\n\n这些作品从科幻起源、伦理反思、冒险探索到社会批判，逐步引导你进入经典科幻的世界。若想进一步深入，可继续探索《The Hobbit》（《霍比特人》）等奇幻与科幻结合的佳作 [1]。",
+      "answerModeActual": "READING_PATH",
+      "answerModeExpected": "reading-path",
+      "answerable": true,
+      "citationCoverage": 1.0,
+      "error": null,
+      "evidenceCount": 5,
+      "evidenceIds": [
+        253,
+        15,
+        19,
+        263,
+        18
+      ],
+      "evidenceRecall": 1.0,
+      "expectedEvidenceHit": true,
+      "expectedResourceIds": [
+        15,
+        18,
+        19
+      ],
+      "fallbackApplied": false,
+      "generationLatencyMs": 26999,
+      "id": "r003",
+      "limitations": [
+        "回答严格受当前检索证据约束，不使用馆藏外事实补充。",
+        "证据范围仅限当前系统已入库并已建立索引的阅读资源。"
+      ],
+      "llmFallbackApplied": false,
+      "model": "qwen3:8b",
+      "question": "我想从经典科幻入门，先读哪几本？",
+      "requestLatencyMs": 27338.6587,
+      "retrievalLatencyMs": 332,
+      "strategy": "hybrid-v3(exact-db+bm25+vector+reranker)",
+      "totalLatencyMs": 27331
+    },
+    {
+      "answer": "是的，《The Every》和《Player Piano》都讨论了技术社会，但它们的侧重点和表现形式有所不同，以下是按维度的对比分析：\n\n### 1. **主题聚焦**\n- **《The Every》**：聚焦于科技巨头合并后形成的垄断对社会的深远影响，探讨数字时代权力集中、隐私危机与人性异化等主题 [1]。\n- **《Player Piano》**：以反乌托邦视角探讨技术统治、自动化对人类尊严的冲击及社会异化主题 [2]。\n\n### 2. **叙事风格**\n- **《The Every》**：采用寓言式叙事，以讽刺手法反思当代互联网生态 [1]。\n- **《Player Piano》**：展现库尔特·冯内古特独特的讽刺风格与人文关怀 [2]。\n\n### 3. **社会批判**\n- **《The Every》**：关注科技伦理与现代文明困境，适合关注科技伦理的读者 [1]。\n- **《Player Piano》**：深入探讨科技伦理与社会结构，适合喜爱深度思考的读者 [2]。\n\n### 4. **技术社会的呈现**\n- **《The Every》**：更侧重于数字时代权力集中与隐私危机 [1]。\n- **《Player Piano》**：更强调技术统治与自动化对人类尊严的冲击 [2]。\n\n### 5. **读者定位**\n- **《The Every》**：适合关注科技伦理与现代文明困境的读者 [1]。\n- **《Player Piano》**：适合喜爱深度思考科技伦理与社会结构的读者 [2]。\n\n### 总结\n两者都讨论了技术社会，但《The Every》更关注数字时代的垄断与隐私危机，而《Player Piano》则更强调技术统治与自动化对人类尊严的冲击。两者在叙事风格和社会批判上各有特色，适合不同兴趣的读者。",
+      "answerModeActual": "COMPARISON",
+      "answerModeExpected": "comparison",
+      "answerable": true,
+      "citationCoverage": 0.4,
+      "error": null,
+      "evidenceCount": 5,
+      "evidenceIds": [
+        14,
+        15,
+        288,
+        90,
+        223
+      ],
+      "evidenceRecall": 1.0,
+      "expectedEvidenceHit": true,
+      "expectedResourceIds": [
+        14,
+        15
+      ],
+      "fallbackApplied": false,
+      "generationLatencyMs": 33776,
+      "id": "r004",
+      "limitations": [
+        "回答严格受当前检索证据约束，不使用馆藏外事实补充。",
+        "证据范围仅限当前系统已入库并已建立索引的阅读资源。"
+      ],
+      "llmFallbackApplied": false,
+      "model": "qwen3:8b",
+      "question": "The Every 和 Player Piano 都在讨论技术社会吗？帮我比较。",
+      "requestLatencyMs": 34057.06,
+      "retrievalLatencyMs": 271,
+      "strategy": "hybrid-v3(exact-db+bm25+vector+reranker)",
+      "totalLatencyMs": 34048
+    },
+    {
+      "answer": "以下是几本关于外星人、未来社会或技术伦理的科幻书籍推荐，按相关性排序：\n\n1. **《The War of the Worlds》** - H. G. Wells  \n   探讨外星文明入侵地球的惊悚图景，展现人类在高等智慧威胁下的脆弱与抗争，具有极高的文学价值与思想深度 [4]。\n\n2. **《Player Piano》** - Kurt Vonnegut  \n   以反乌托邦视角探讨技术统治、自动化对人类尊严的冲击及社会异化主题，适合喜爱深度思考科技伦理与社会结构的读者 [1]。\n\n3. **《The Every》** - Dave Eggers  \n   探讨科技巨头合并后形成的垄断对社会的深远影响，聚焦数字时代权力集中、隐私危机与人性异化等主题 [2]。\n\n4. **《The Invisible Man》** - H. G. Wells  \n   以寓言形式探讨贪婪、孤立以及缺乏伦理约束的科学所带来的危险，兼具惊悚氛围与深刻社会反思 [3]。\n\n5. **《Cloning》** - Stephen D. Fairbanks  \n   虽被归为科学/生物学非虚构，但内容聚焦克隆技术、遗传学、分子生物学及相关伦理议题，适合希望了解克隆原理、应用与社会争议的读者 [5]。  \n\n以上推荐均基于关键词匹配与相关性排序，如需进一步筛选或深入分析，可继续提供具体方向。",
+      "answerModeActual": "FACTUAL_LOOKUP",
+      "answerModeExpected": "recommendation",
+      "answerable": true,
+      "citationCoverage": 1.0,
+      "error": null,
+      "evidenceCount": 5,
+      "evidenceIds": [
+        15,
+        14,
+        19,
+        18,
+        410
+      ],
+      "evidenceRecall": 1.0,
+      "expectedEvidenceHit": true,
+      "expectedResourceIds": [
+        14,
+        18,
+        19
+      ],
+      "fallbackApplied": false,
+      "generationLatencyMs": 26462,
+      "id": "r005",
+      "limitations": [
+        "回答严格受当前检索证据约束，不使用馆藏外事实补充。",
+        "证据范围仅限当前系统已入库并已建立索引的阅读资源。"
+      ],
+      "llmFallbackApplied": false,
+      "model": "qwen3:8b",
+      "question": "找几本关于外星人、未来社会或技术伦理的科幻。",
+      "requestLatencyMs": 26756.0658,
+      "retrievalLatencyMs": 284,
+      "strategy": "hybrid-v3(exact-db+bm25+vector+reranker)",
+      "totalLatencyMs": 26747
+    },
+    {
+      "answer": "根据提供的证据，以下是关于机器人或人工智能主题的书籍推荐，按相关性排序：\n\n1. **《Intelligence Science》**（Zhongzhi Shi）  \n   - 推荐理由：本书系统介绍智能科学的概念与方法论，涵盖脑科学、认知科学与人工智能的交叉研究，是人工智能领域的权威教材与参考书 [2]。\n\n2. **《Robot》**（Adam Wisniewski-Snerg）  \n   - 推荐理由：作为一部东欧科幻作品，它通过哲学化的科幻想象探讨自动化与人类处境等主题，适合对人工智能哲学和社会影响感兴趣的读者 [1]。\n\n3. **《Cybernetics Or Control and Communication in the Animal and the Machine》**（Norbert Wiener）  \n   - 推荐理由：这是控制论的奠基之作，探讨信息流动与反馈机制，对理解人工智能的系统思维和信息理论有重要参考价值 [4]。\n\n4. **《Models and Idealizations in Science》**（Alejandro Cassini）  \n   - 推荐理由：本书从科学哲学角度分析模型的本体论地位，适合对人工智能建模与科学哲学感兴趣的读者 [3]。\n\n5. **《The Book of Sand》**（Theo Clare）  \n   - 推荐理由：虽然是一部科幻作品，但它通过末世氛围探讨文明消逝后的生存与人性主题，可作为人工智能伦理与社会影响的延伸阅读 [5]。\n\n以上推荐基于语义相似性与关键词相关性，优先推荐与人工智能直接相关的书籍。",
+      "answerModeActual": "FACTUAL_LOOKUP",
+      "answerModeExpected": "recommendation",
+      "answerable": true,
+      "citationCoverage": 1.0,
+      "error": null,
+      "evidenceCount": 5,
+      "evidenceIds": [
+        13,
+        216,
+        415,
+        370,
+        17
+      ],
+      "evidenceRecall": 0.6666666666666666,
+      "expectedEvidenceHit": true,
+      "expectedResourceIds": [
+        13,
+        216,
+        389
+      ],
+      "fallbackApplied": false,
+      "generationLatencyMs": 28028,
+      "id": "r006",
+      "limitations": [
+        "回答严格受当前检索证据约束，不使用馆藏外事实补充。",
+        "证据范围仅限当前系统已入库并已建立索引的阅读资源。"
+      ],
+      "llmFallbackApplied": false,
+      "model": "qwen3:8b",
+      "question": "有没有关于机器人或人工智能主题的书？",
+      "requestLatencyMs": 28381.7606,
+      "retrievalLatencyMs": 344,
+      "strategy": "hybrid-v3(exact-db+bm25+vector+reranker)",
+      "totalLatencyMs": 28373
+    },
+    {
+      "answer": "根据您的需求，推荐以下几本恐怖悬疑小说，这些书籍均符合“不要太学术”的要求，偏向于通俗易懂、情节紧凑的类型：\n\n1. **《The Murders in the Rue Morgue》**（《莫格街凶杀案》）  \n   - 作者：Edgar Allan Poe  \n   - 推荐理由：作为侦探小说的开山之作，本书融合了恐怖氛围与理性推理，适合喜爱古典推理与心理惊悚的读者。[1]\n\n2. **《Christine》**（《Christine》）  \n   - 作者：Stephen King  \n   - 推荐理由：斯蒂芬·金的经典恐怖小说，讲述一辆被超自然力量附身的汽车，充满心理惊悚与超自然元素，适合喜爱美式恐怖与车辆拟人化题材的读者。[3]\n\n3. **《Murder on the Orient Express》**（《东方快车谋杀案》）  \n   - 作者：Agatha Christie  \n   - 推荐理由：阿加莎·克里斯蒂的代表作，以封闭空间内的离奇命案为核心，展现严密的逻辑推理与人性博弈，适合喜爱传统本格推理的读者。[4]\n\n4. **《Four Past Midnight》**（《午夜过后》）  \n   - 作者：Stephen King  \n   - 推荐理由：斯蒂芬·金的短篇恐怖小说集，聚焦于深夜时分的诡异氛围与心理惊悚，适合喜爱短篇叙事及悬疑氛围的读者。[5]\n\n5. **《Frankenstein》**（《弗兰肯斯坦》）  \n   - 作者：Mary Shelley  \n   - 推荐理由：虽然偏重哲学思辨，但其哥特式氛围与人性反思也符合恐怖悬疑的阅读体验，适合喜欢惊悚与深度思考的读者。[2]\n\n以上推荐按照“经典悬疑”、“恐怖心理”、“短篇集”等维度进行排序，兼顾了通俗性与可读性。",
+      "answerModeActual": "FACTUAL_LOOKUP",
+      "answerModeExpected": "recommendation",
+      "answerable": true,
+      "citationCoverage": 1.0,
+      "error": null,
+      "evidenceCount": 5,
+      "evidenceIds": [
+        29,
+        28,
+        298,
+        340,
+        301
+      ],
+      "evidenceRecall": 0.0,
+      "expectedEvidenceHit": false,
+      "expectedResourceIds": [
+        23,
+        24,
+        26
+      ],
+      "fallbackApplied": false,
+      "generationLatencyMs": 36965,
+      "id": "r007",
+      "limitations": [
+        "回答严格受当前检索证据约束，不使用馆藏外事实补充。",
+        "证据范围仅限当前系统已入库并已建立索引的阅读资源。"
+      ],
+      "llmFallbackApplied": false,
+      "model": "qwen3:8b",
+      "question": "帮我找几本恐怖悬疑小说，要求不要太学术。",
+      "requestLatencyMs": 37302.7039,
+      "retrievalLatencyMs": 329,
+      "strategy": "hybrid-v3(exact-db+bm25+vector+reranker)",
+      "totalLatencyMs": 37294
+    },
+    {
+      "answer": "《The Year of the Witching》适合以下读者：\n\n1. **喜爱心理恐怖与社会寓言的读者** [1]  \n   本书融合《使女的故事》与《神秘村》风格，营造压抑惊悚氛围，探讨信仰、压迫与女性生存议题，适合对心理恐怖和深层社会隐喻感兴趣的读者。\n\n2. **对女性主义题材感兴趣的读者** [1]  \n   作品通过女性视角探讨女性在压迫环境下的生存与反抗，适合关注女性主义议题的读者。\n\n3. **喜欢黑暗奇幻与哥特风格的读者** [1]  \n   尽管本书属于恐怖类型，但其风格与《Wuthering Heights》等哥特文学有相似之处，适合喜欢黑暗氛围与复杂人物心理描写的读者。\n\n4. **对女性成长与自我意识主题感兴趣的读者** [1]  \n   本书通过女性主角的经历，展现女性在压抑社会中的成长与自我觉醒，适合对女性成长故事感兴趣的读者。\n\n**推荐顺序与理由**：  \n1. **心理恐怖与社会寓言爱好者** [1]  \n   本书的核心风格与主题最贴近这一群体，推荐优先阅读。\n\n2. **女性主义与成长题材读者** [1]  \n   作品在探讨女性生存与成长方面有深度，适合对女性主义议题感兴趣的读者。\n\n3. **哥特风格与黑暗奇幻爱好者** [1]  \n   虽然本书以恐怖为主，但其氛围与哥特文学有相似之处，适合喜欢黑暗氛围与复杂心理描写的读者。\n\n4. **对社会隐喻与压抑氛围感兴趣的读者** [1]  \n   本书通过压抑的氛围和隐喻性的叙事，探讨社会压迫与人性挣扎，适合喜欢这类风格的读者。",
+      "answerModeActual": "RECOMMENDATION",
+      "answerModeExpected": "factual",
+      "answerable": true,
+      "citationCoverage": 0.2,
+      "error": null,
+      "evidenceCount": 5,
+      "evidenceIds": [
+        23,
+        145,
+        254,
+        311,
+        409
+      ],
+      "evidenceRecall": 1.0,
+      "expectedEvidenceHit": true,
+      "expectedResourceIds": [
+        23
+      ],
+      "fallbackApplied": false,
+      "generationLatencyMs": 32420,
+      "id": "r008",
+      "limitations": [
+        "回答严格受当前检索证据约束，不使用馆藏外事实补充。",
+        "证据范围仅限当前系统已入库并已建立索引的阅读资源。"
+      ],
+      "llmFallbackApplied": false,
+      "model": "qwen3:8b",
+      "question": "The Year of the Witching 适合什么读者？",
+      "requestLatencyMs": 32708.701699999998,
+      "retrievalLatencyMs": 275,
+      "strategy": "hybrid-v3(exact-db+bm25+vector+reranker)",
+      "totalLatencyMs": 32695
+    },
+    {
+      "answer": "《The Chalk Man》和《Pine》都属于恐怖小说，但它们在风格上存在一些差异：\n\n1. **主题与氛围**：  \n   - 《The Chalk Man》更注重童年记忆与未解谜团的结合，营造出一种阴森、紧张的氛围，带有强烈的心理惊悚和超自然元素 [1]。  \n   - 《Pine》则更偏向于犯罪题材，融合悬疑与惊悚元素，营造压抑氛围，探索人性的幽暗面 [2]。\n\n2. **叙事风格**：  \n   - 《The Chalk Man》以心理惊悚为主，强调悬疑和未解谜团的张力 [1]。  \n   - 《Pine》则更注重犯罪推理和人性剖析，带有较强的叙事结构和情节推进 [2]。\n\n3. **读者定位**：  \n   - 《The Chalk Man》适合喜爱心理惊悚与超自然元素的读者 [1]。  \n   - 《Pine》则更适合对犯罪题材和人性探索感兴趣的读者 [2]。\n\n综上，《The Chalk Man》更偏向心理惊悚与超自然，而《Pine》更偏向犯罪推理与人性剖析。",
+      "answerModeActual": "COMPARISON",
+      "answerModeExpected": "comparison",
+      "answerable": true,
+      "citationCoverage": 0.4,
+      "error": null,
+      "evidenceCount": 5,
+      "evidenceIds": [
+        26,
+        24,
+        269,
+        19,
+        154
+      ],
+      "evidenceRecall": 1.0,
+      "expectedEvidenceHit": true,
+      "expectedResourceIds": [
+        24,
+        26
+      ],
+      "fallbackApplied": false,
+      "generationLatencyMs": 23014,
+      "id": "r009",
+      "limitations": [
+        "回答严格受当前检索证据约束，不使用馆藏外事实补充。",
+        "证据范围仅限当前系统已入库并已建立索引的阅读资源。"
+      ],
+      "llmFallbackApplied": false,
+      "model": "qwen3:8b",
+      "question": "The Chalk Man 和 Pine 的风格有什么区别？",
+      "requestLatencyMs": 23287.1019,
+      "retrievalLatencyMs": 264,
+      "strategy": "hybrid-v3(exact-db+bm25+vector+reranker)",
+      "totalLatencyMs": 23279
+    },
+    {
+      "answer": "根据提供的证据，以下是为恐怖小说入门读者设计的阅读路径，按推荐顺序排列：\n\n---\n\n### **阶段一：经典恐怖入门**\n1. **《Dracula》** - 布拉姆·斯托克  \n   - 理由：作为恐怖文学的奠基之作，其哥特式氛围和吸血鬼形象是恐怖小说的标志性元素，适合入门读者建立对恐怖题材的基本认知 [2]。\n\n2. **《Frankenstein》** - 玛丽·雪莱  \n   - 理由：这部作品不仅具有恐怖元素，还深入探讨科学伦理与人性，适合对恐怖与哲学思辨感兴趣的读者 [3]。\n\n---\n\n### **阶段二：现代恐怖与悬疑结合**\n3. **《The Secret Path》** - Christopher Pike  \n   - 理由：面向青少年的恐怖小说，结合超自然恐惧与同伴冒险，适合喜欢紧张刺激与奇幻元素的读者 [1]。\n\n4. **《On Fire》** - Nancy Holder  \n   - 理由：融合超自然元素与青春成长主题，故事节奏紧凑，适合喜欢悬疑与奇幻交织的读者 [4]。\n\n---\n\n### **阶段三：深度恐怖与心理探索**\n5. **《QBD Murder on the Orient Express》** - 阿加莎·克里斯蒂  \n   - 理由：虽然属于悬疑类，但其严密的逻辑与心理描写为恐怖小说提供了叙事结构的参考，适合对推理与心理恐惧感兴趣的读者 [5]。\n\n---\n\n### **推荐理由总结**\n- **经典奠基**：从《Dracula》和《Frankenstein》开始，帮助读者建立对恐怖文学的基本认知。\n- **现代风格**：通过《The Secret Path》和《On Fire》引入现代恐怖与悬疑元素，增强阅读体验。\n- **深度探索**：以《Murder on the Orient Express》作为进阶阅读，拓展对恐怖与心理描写的理解。\n\n如需进一步扩展阅读路径，可考虑加入更多现代恐怖作家如Stephen King或Clive Barker的作品。",
+      "answerModeActual": "READING_PATH",
+      "answerModeExpected": "reading-path",
+      "answerable": true,
+      "citationCoverage": 1.0,
+      "error": null,
+      "evidenceCount": 5,
+      "evidenceIds": [
+        310,
+        33,
+        28,
+        302,
+        340
+      ],
+      "evidenceRecall": 0.0,
+      "expectedEvidenceHit": false,
+      "expectedResourceIds": [
+        23,
+        24,
+        26
+      ],
+      "fallbackApplied": false,
+      "generationLatencyMs": 36103,
+      "id": "r010",
+      "limitations": [
+        "回答严格受当前检索证据约束，不使用馆藏外事实补充。",
+        "证据范围仅限当前系统已入库并已建立索引的阅读资源。"
+      ],
+      "llmFallbackApplied": false,
+      "model": "qwen3:8b",
+      "question": "帮我做一个恐怖小说入门阅读路径。",
+      "requestLatencyMs": 36425.7456,
+      "retrievalLatencyMs": 308,
+      "strategy": "hybrid-v3(exact-db+bm25+vector+reranker)",
+      "totalLatencyMs": 36412
+    },
+    {
+      "answer": "推荐顺序及理由如下：\n\n1. **《The Power of Habit》** - Charles Duhigg [3]  \n   这本书是习惯形成与改变的经典之作，结合心理学与实际案例，能帮助你理解习惯运作机制，是提升自我管理能力的首选。\n\n2. **《Act Thin, Stay Thin》** - Richard B. Stuart [1]  \n   若你希望改善生活习惯并实现健康目标，这本书提供了具体的行为调整与心理策略，适合追求健康生活方式的读者。\n\n3. **《The Magic Within》** - Mary Lee Zawadski [4]  \n   这本书聚焦内在潜能与心态转变，适合在建立习惯基础后，进一步探索自我成长与内心平静。\n\n4. **《The Principles of Psychology》** - William James [2]  \n   若你希望深入理解习惯与行为背后的心理学原理，这本书是经典理论读物，适合有一定基础的读者。\n\n5. **《Constellations of Life Satisfaction in Three Cohorts of Women》** - Rosanne du Bois Brouwer [5]  \n   若你关注女性成长与心理健康，这本书提供了独特的视角，适合特定兴趣群体参考。",
+      "answerModeActual": "FACTUAL_LOOKUP",
+      "answerModeExpected": "reading-path",
+      "answerable": true,
+      "citationCoverage": 1.0,
+      "error": null,
+      "evidenceCount": 5,
+      "evidenceIds": [
+        422,
+        386,
+        385,
+        435,
+        424
+      ],
+      "evidenceRecall": 0.6666666666666666,
+      "expectedEvidenceHit": true,
+      "expectedResourceIds": [
+        385,
+        429,
+        435
+      ],
+      "fallbackApplied": false,
+      "generationLatencyMs": 20024,
+      "id": "r011",
+      "limitations": [
+        "回答严格受当前检索证据约束，不使用馆藏外事实补充。",
+        "证据范围仅限当前系统已入库并已建立索引的阅读资源。"
+      ],
+      "llmFallbackApplied": false,
+      "model": "qwen3:8b",
+      "question": "我想提升习惯和自我管理，应该读哪几本？",
+      "requestLatencyMs": 20287.8903,
+      "retrievalLatencyMs": 256,
+      "strategy": "hybrid-v3(exact-db+bm25+vector+reranker)",
+      "totalLatencyMs": 20280
+    },
+    {
+      "answer": "《The Power of Habit》适合入门的原因如下：\n\n1. **内容易懂且实用**：本书通过科学研究与真实案例，深入浅出地解释了习惯的形成机制及改变方法，适合初学者理解并应用到实际生活中 [1]。\n\n2. **主题贴近日常生活**：习惯是每个人日常生活中不可或缺的一部分，本书从个人效率、成功生活等角度切入，容易引起读者共鸣 [1]。\n\n3. **结构清晰，逻辑性强**：作者以清晰的结构和逻辑性阐述习惯的运作方式，便于入门读者逐步掌握核心概念 [1]。\n\n4. **适合跨领域阅读**：本书融合心理学与商业管理知识，既适合心理学入门读者，也适合对商业管理感兴趣的初学者，具有广泛的适用性 [1]。\n\n**推荐顺序**：  \n1. **The Power of Habit** [1] —— 作为入门首选，因其内容实用、主题贴近生活，适合初学者建立对习惯的初步认知。  \n2. **The Science of Getting Rich** [3] —— 在理解习惯后，可进一步探索财富思维与心理机制，适合对个人成长感兴趣的读者。  \n3. **The Principles of Psychology (Vol. 1&2)** [5] —— 若希望深入心理学领域，可选择此书作为进阶阅读。",
+      "answerModeActual": "RECOMMENDATION",
+      "answerModeExpected": "factual",
+      "answerable": true,
+      "citationCoverage": 0.6,
+      "error": null,
+      "evidenceCount": 5,
+      "evidenceIds": [
+        385,
+        206,
+        388,
+        435,
+        387
+      ],
+      "evidenceRecall": 1.0,
+      "expectedEvidenceHit": true,
+      "expectedResourceIds": [
+        385
+      ],
+      "fallbackApplied": false,
+      "generationLatencyMs": 23779,
+      "id": "r012",
+      "limitations": [
+        "回答严格受当前检索证据约束，不使用馆藏外事实补充。",
+        "证据范围仅限当前系统已入库并已建立索引的阅读资源。"
+      ],
+      "llmFallbackApplied": false,
+      "model": "qwen3:8b",
+      "question": "The Power of Habit 为什么适合入门？",
+      "requestLatencyMs": 24092.9605,
+      "retrievalLatencyMs": 300,
+      "strategy": "hybrid-v3(exact-db+bm25+vector+reranker)",
+      "totalLatencyMs": 24079
+    },
+    {
+      "answer": "以下是几本关于自我探索和心理成长的书籍推荐，按相关性与主题匹配度排序：\n\n1. **《Inquiring about Myself》** - Frances M. Epps  \n   本书聚焦于内省、个人成长与自我认知，适合希望提升心理觉察力、寻找生活方向的读者。内容温和实用，强调内在对话与持续成长的价值 [1]。\n\n2. **《The Magic Within》** - Mary Lee Zawadski  \n   本书引导读者探索内在潜能与心灵力量，适合希望提升自我认知、寻求内心平静与生活启发的读者。通过温和的指引，帮助人们在日常生活中发现并运用属于自己的“内在魔法” [2]。\n\n3. **《The Development of the Ego》** - Stanley I. Greenspan  \n   本书探讨自我发展的各个阶段，从婴儿早期开始，涵盖任务与挑战、内在自我及客体表征等心理学主题，适合对心理发展理论、自我结构形成感兴趣的读者 [4]。\n\n4. **《The Science of Getting Rich》** - Wallace D. Wattles  \n   这是一本经典的个人成长与财富心理学著作，探讨思维模式、信念系统与物质成功之间的内在联系，适合希望提升财商、重塑金钱观及探索潜意识力量的读者 [3]。\n\n5. **《Jane Eyre》** - Charlotte Brontë  \n   虽然属于浪漫小说类，但《简·爱》通过第一人称叙述展现了女性成长、自我尊严与情感追求，具有深远的阅读启示，适合对文学与心理成长感兴趣的读者 [5]。\n\n**推荐理由**：以上书籍均与自我探索和心理成长相关，涵盖不同角度，如内省、潜能开发、心理发展阶段、财富心理学以及文学中的成长主题，适合不同兴趣和需求的读者。",
+      "answerModeActual": "FACTUAL_LOOKUP",
+      "answerModeExpected": "recommendation",
+      "answerable": true,
+      "citationCoverage": 1.0,
+      "error": null,
+      "evidenceCount": 5,
+      "evidenceIds": [
+        429,
+        435,
+        388,
+        434,
+        393
+      ],
+      "evidenceRecall": 0.6666666666666666,
+      "expectedEvidenceHit": true,
+      "expectedResourceIds": [
+        429,
+        435,
+        436
+      ],
+      "fallbackApplied": false,
+      "generationLatencyMs": 33215,
+      "id": "r013",
+      "limitations": [
+        "回答严格受当前检索证据约束，不使用馆藏外事实补充。",
+        "证据范围仅限当前系统已入库并已建立索引的阅读资源。"
+      ],
+      "llmFallbackApplied": false,
+      "model": "qwen3:8b",
+      "question": "找几本关于自我探索和心理成长的书。",
+      "requestLatencyMs": 33508.642199999995,
+      "retrievalLatencyMs": 285,
+      "strategy": "hybrid-v3(exact-db+bm25+vector+reranker)",
+      "totalLatencyMs": 33501
+    },
+    {
+      "answer": "根据提供的证据，以下是与 **ego development** 相关的书籍及其难度分析：\n\n### 推荐书籍及难度排序：\n\n1. **The Development of the Ego** - Stanley I. Greenspan  \n   - **难度：中等偏高**  \n   - 本书深入探讨自我发展的心理学理论，适合有一定心理学基础的读者。内容较为学术，适合对心理发展理论、自我结构形成感兴趣的读者 [1]。\n\n2. **Measuring Ego Development** - Jane Loevinger  \n   - **难度：中等**  \n   - 本书聚焦于自我发展的测量方法与理论框架，适合对人格成长、心理测评及学术研究感兴趣的读者。内容偏向理论与实践结合，难度适中 [2]。\n\n3. **Ego Analysis in the Helping Professions** - Frances Upham  \n   - **难度：中等**  \n   - 本书适用于心理咨询、社会工作等助人专业从业者，内容聚焦于自我分析与职业效能提升，适合有一定专业背景的读者 [3]。\n\n4. **Inquiring about Myself** - Frances M. Epps  \n   - **难度：较低**  \n   - 本书是一本温和实用的自我探索读物，适合希望提升心理觉察力、寻找生活方向的读者。内容风格轻松，适合入门阅读 [4]。\n\n5. **The Science of Getting Rich** - Wallace D. Wattles  \n   - **难度：较低**  \n   - 本书属于经典自助文学，内容通俗易懂，适合对财富心理学、个人成长感兴趣的读者。虽然与 ego development 直接关联较弱，但其关于自我信念和思维模式的探讨可作为延伸阅读 [5]。\n\n### 总结：\n若以 **ego development** 为核心主题，推荐优先阅读 **[1]** 和 **[2]**，它们提供了较为系统和深入的理论与实践内容。若希望从基础入手，可先阅读 **[4]** 或 **[5]**，再逐步深入 [1] 和 [2]。",
+      "answerModeActual": "FACTUAL_LOOKUP",
+      "answerModeExpected": "recommendation",
+      "answerable": true,
+      "citationCoverage": 1.0,
+      "error": null,
+      "evidenceCount": 5,
+      "evidenceIds": [
+        434,
+        430,
+        425,
+        429,
+        388
+      ],
+      "evidenceRecall": 1.0,
+      "expectedEvidenceHit": true,
+      "expectedResourceIds": [
+        425,
+        430,
+        434
+      ],
+      "fallbackApplied": false,
+      "generationLatencyMs": 36067,
+      "id": "r014",
+      "limitations": [
+        "回答严格受当前检索证据约束，不使用馆藏外事实补充。",
+        "证据范围仅限当前系统已入库并已建立索引的阅读资源。"
+      ],
+      "llmFallbackApplied": false,
+      "model": "qwen3:8b",
+      "question": "ego development 相关书有哪些，难度如何？",
+      "requestLatencyMs": 36351.5127,
+      "retrievalLatencyMs": 274,
+      "strategy": "hybrid-v3(exact-db+bm25+vector+reranker)",
+      "totalLatencyMs": 36342
+    },
+    {
+      "answer": "女性成长或女性赋权主题的书籍推荐如下，按相关性与主题覆盖排序：\n\n1. **《简·爱》（Jane Eyre）** - Charlotte Brontë [1]  \n   该书通过第一人称叙述展现女性成长、自我尊严与情感追求，具有深刻的社会批判与文学价值。\n\n2. **《Empowerment of Women Through Self Help Groups》** - G. Sreeramulu [2]  \n   本书聚焦自助小组在女性赋权中的作用，结合政策视角与具体案例，适合研究社会学与公共政策的读者。\n\n3. **《Motherself》** - Kathryn Allen Rabuzzi [3]  \n   该书探讨女性自我实现路径，构建基于女神原型的神话体系，为女性提供灵性成长的新视角。\n\n4. **《Constellations of Life Satisfaction in Three Cohorts of Women》** - Rosanne du Bois Brouwer [4]  \n   本书研究不同世代女性的幸福感构成，适合关注女性成长、心理健康及社会变迁的读者。\n\n5. **《A Love Story for Bewildered Girls》** - Emma Morgan [5]  \n   该书以细腻笔触探讨迷茫女性的情感旅程与自我发现，适合寻求温暖治愈故事的读者。\n\n以上书籍涵盖文学、社会学、心理学与灵性成长等多个维度，可作为女性成长与赋权主题的阅读参考。",
+      "answerModeActual": "FACTUAL_LOOKUP",
+      "answerModeExpected": "recommendation",
+      "answerable": true,
+      "citationCoverage": 1.0,
+      "error": null,
+      "evidenceCount": 5,
+      "evidenceIds": [
+        393,
+        426,
+        432,
+        424,
+        53
+      ],
+      "evidenceRecall": 0.6666666666666666,
+      "expectedEvidenceHit": true,
+      "expectedResourceIds": [
+        426,
+        431,
+        432
+      ],
+      "fallbackApplied": false,
+      "generationLatencyMs": 25207,
+      "id": "r015",
+      "limitations": [
+        "回答严格受当前检索证据约束，不使用馆藏外事实补充。",
+        "证据范围仅限当前系统已入库并已建立索引的阅读资源。"
+      ],
+      "llmFallbackApplied": false,
+      "model": "qwen3:8b",
+      "question": "女性成长或女性赋权主题有哪些书？",
+      "requestLatencyMs": 25496.586700000003,
+      "retrievalLatencyMs": 274,
+      "strategy": "hybrid-v3(exact-db+bm25+vector+reranker)",
+      "totalLatencyMs": 25482
+    },
+    {
+      "answer": "**推荐顺序及理由：**\n\n1. **[1] Empowerment of Women Through Self Help Groups**  \n   - **推荐理由**：本书直接聚焦“女性通过自助小组赋权”这一主题，内容涵盖政策视角、实施评估及社会经济背景，适合研究社会学、经济学及公共政策的学者与从业者参考，是该主题最相关的书籍 [1]。\n\n2. **[4] Midlife Mothers in Transition**  \n   - **推荐理由**：本书探讨中年母亲在人生转折期的心理调适与身份重塑，与女性成长和生活阶段变化密切相关，适合处于相似生命阶段的女性读者参考 [4]。\n\n3. **[2] Constellations of Life Satisfaction in Three Cohorts of Women**  \n   - **推荐理由**：本书聚焦女性生活满意度研究，探讨不同世代女性的幸福感构成与影响因素，适合关注女性成长、心理健康及社会变迁的读者参考 [2]。\n\n4. **[3] Motherself**  \n   - **推荐理由**：本书从灵性成长角度探讨女性自我实现路径，适合寻求灵性认同、对女性叙事与宗教经验感兴趣的读者 [3]。\n\n5. **[5] Self and Family**  \n   - **推荐理由**：本书聚焦个人成长与家庭关系的平衡，适合关注心理健康与家庭动态的读者参考 [5]。\n\n**总结**：若读者关注女性赋权与社会政策，优先推荐 [1]；若关注中年女性成长，推荐 [4]；若关注女性幸福感与世代差异，推荐 [2]；若对灵性成长与女性叙事感兴趣，推荐 [3]；若关注家庭与个人成长平衡，推荐 [5]。",
+      "answerModeActual": "RECOMMENDATION",
+      "answerModeExpected": "factual",
+      "answerable": true,
+      "citationCoverage": 1.0,
+      "error": null,
+      "evidenceCount": 5,
+      "evidenceIds": [
+        426,
+        424,
+        432,
+        431,
+        433
+      ],
+      "evidenceRecall": 1.0,
+      "expectedEvidenceHit": true,
+      "expectedResourceIds": [
+        426
+      ],
+      "fallbackApplied": false,
+      "generationLatencyMs": 31061,
+      "id": "r016",
+      "limitations": [
+        "回答严格受当前检索证据约束，不使用馆藏外事实补充。",
+        "证据范围仅限当前系统已入库并已建立索引的阅读资源。"
+      ],
+      "llmFallbackApplied": false,
+      "model": "qwen3:8b",
+      "question": "Empowerment of Women Through Self Help Groups 主要适合谁读？",
+      "requestLatencyMs": 31365.3809,
+      "retrievalLatencyMs": 297,
+      "strategy": "hybrid-v3(exact-db+bm25+vector+reranker)",
+      "totalLatencyMs": 31358
+    },
+    {
+      "answer": "推荐顺序及理由如下：\n\n1. **《Japan Story》** - Christopher Harding  \n   推荐理由：本书以普通民众的视角切入日本近代史，聚焦社会变迁下个体的真实体验，提供不同于宏大叙事的另类历史解读，非常适合对日本近代史及社会心理感兴趣的读者 [1]。\n\n2. **《The Origins of Entrepreneurship in Meiji Japan》** - Johannes Hirschmeier  \n   推荐理由：本书深入探讨明治时期日本企业家精神的起源，属于商业史与经济史研究范畴，适合对日本商业历史与制度变迁感兴趣的读者 [3]。\n\n3. **《Silk and Insight》** - Yukio Mishima  \n   推荐理由：本书以1950年代日本丝织厂罢工为背景，探讨劳资冲突与社会转型，呈现战后日本企业管理的复杂面貌，适合关注商业伦理与历史变迁的读者 [2]。\n\n4. **《Transforming Tradition》** - Siyuan Liu  \n   推荐理由：虽然本书聚焦中国戏曲改革，但其探讨传统艺术在现代社会转型中的变迁、政策干预与文化延续，对理解社会变迁与文化政策有重要参考价值 [5]。\n\n5. **《We Were Eight Years in Power》** - Ta-Nehisi Coates  \n   推荐理由：虽然本书聚焦美国社会变迁，但其对种族、性别、阶级等议题的探讨，有助于读者从更广泛的社会视角理解历史变迁的复杂性 [4]。",
+      "answerModeActual": "FACTUAL_LOOKUP",
+      "answerModeExpected": "recommendation",
+      "answerable": true,
+      "citationCoverage": 1.0,
+      "error": null,
+      "evidenceCount": 5,
+      "evidenceIds": [
+        74,
+        203,
+        207,
+        73,
+        296
+      ],
+      "evidenceRecall": 1.0,
+      "expectedEvidenceHit": true,
+      "expectedResourceIds": [
+        74
+      ],
+      "fallbackApplied": false,
+      "generationLatencyMs": 26896,
+      "id": "r017",
+      "limitations": [
+        "回答严格受当前检索证据约束，不使用馆藏外事实补充。",
+        "证据范围仅限当前系统已入库并已建立索引的阅读资源。"
+      ],
+      "llmFallbackApplied": false,
+      "model": "qwen3:8b",
+      "question": "我想读日本历史或社会变迁方向的书。",
+      "requestLatencyMs": 27181.466,
+      "retrievalLatencyMs": 277,
+      "strategy": "hybrid-v3(exact-db+bm25+vector+reranker)",
+      "totalLatencyMs": 27173
+    },
+    {
+      "answer": "**推荐顺序与理由：**\n\n1. **《The Winner's Curse》** [1]  \n   - **推荐理由**：本书属于经济学领域，探讨经济理性假设与市场行为的异常现象，适合对行为经济学感兴趣的读者。作为推荐首选，因其直接关联“Winner's Curse”主题，且提供批判性视角，有助于理解真实市场行为。\n\n2. **《The Lord of the Rings》** [4]  \n   - **推荐理由**：作为奇幻文学经典，其宏大世界观与深刻主题（如权力、勇气）与《The Winner's Curse》的批判性视角形成对比，适合拓展阅读兴趣，尤其对喜欢史诗级作品的读者。\n\n3. **《The Hobbit, Or, There and Back Again》** [5]  \n   - **推荐理由**：作为托尔金的早期作品，语言生动幽默，适合初入奇幻文学的读者，可作为《The Lord of the Rings》的入门推荐。\n\n4. **《Harry Potter and the Chamber of Secrets》** [3]  \n   - **推荐理由**：奇幻冒险题材，结合成长与勇气主题，适合喜欢魔法世界与青少年成长故事的读者，可作为奇幻文学的延伸阅读。\n\n5. **《Crime and Punishment》** [2]  \n   - **推荐理由**：心理小说与哲学思考结合，适合对人性与道德困境感兴趣的读者，可作为深度文学的补充阅读。\n\n**总结**：推荐顺序以主题相关性为优先，结合文学类型与深度，逐步从经济学批判扩展至奇幻与文学经典，满足不同阅读层次需求。",
+      "answerModeActual": "RECOMMENDATION",
+      "answerModeExpected": "factual",
+      "answerable": true,
+      "citationCoverage": 1.0,
+      "error": null,
+      "evidenceCount": 5,
+      "evidenceIds": [
+        242,
+        336,
+        145,
+        255,
+        253
+      ],
+      "evidenceRecall": 1.0,
+      "expectedEvidenceHit": true,
+      "expectedResourceIds": [
+        242
+      ],
+      "fallbackApplied": false,
+      "generationLatencyMs": 28527,
+      "id": "r018",
+      "limitations": [
+        "回答严格受当前检索证据约束，不使用馆藏外事实补充。",
+        "证据范围仅限当前系统已入库并已建立索引的阅读资源。"
+      ],
+      "llmFallbackApplied": false,
+      "model": "qwen3:8b",
+      "question": "The Winner's Curse 可以归到什么主题，为什么推荐？",
+      "requestLatencyMs": 28822.003500000003,
+      "retrievalLatencyMs": 286,
+      "strategy": "hybrid-v3(exact-db+bm25+vector+reranker)",
+      "totalLatencyMs": 28814
+    },
+    {
+      "answer": "推荐顺序如下：\n\n1. **《Flatland》** [5]  \n   作为数学入门的第一本书，本书以寓言形式引导读者思考维度与空间结构，兼具趣味性与哲思，适合激发数学兴趣和思维拓展。\n\n2. **《An Introduction to Linear Algebra》** [2]  \n   线性代数是数学基础之一，本书内容基础易读，适合系统建立数学基础，为后续学习打下坚实基础。\n\n3. **《Lectures on Classical Differential Geometry》** [3]  \n   微分几何是数学的重要分支，本书作为经典入门教材，内容简明且权威，适合在掌握线性代数后进一步学习。\n\n4. **《Fundamentals of Differential Geometry》** [1]  \n   本书是微分流形与微分几何的进阶教材，适合在掌握经典微分几何后，进一步深入学习更严格的数学框架。\n\n5. **《Matrix Computations》** [4]  \n   作为数值线性代数的经典著作，本书适合在掌握基础线性代数后，进一步学习矩阵计算与数值方法，适用于科研与工程实践。",
+      "answerModeActual": "READING_PATH",
+      "answerModeExpected": "reading-path",
+      "answerable": true,
+      "citationCoverage": 1.0,
+      "error": null,
+      "evidenceCount": 5,
+      "evidenceIds": [
+        318,
+        316,
+        320,
+        321,
+        317
+      ],
+      "evidenceRecall": 0.0,
+      "expectedEvidenceHit": false,
+      "expectedResourceIds": [
+        315,
+        329
+      ],
+      "fallbackApplied": false,
+      "generationLatencyMs": 21099,
+      "id": "r019",
+      "limitations": [
+        "回答严格受当前检索证据约束，不使用馆藏外事实补充。",
+        "证据范围仅限当前系统已入库并已建立索引的阅读资源。"
+      ],
+      "llmFallbackApplied": false,
+      "model": "qwen3:8b",
+      "question": "推荐几本数学入门相关的书，并说明先后顺序。",
+      "requestLatencyMs": 21420.9665,
+      "retrievalLatencyMs": 314,
+      "strategy": "hybrid-v3(exact-db+bm25+vector+reranker)",
+      "totalLatencyMs": 21413
+    },
+    {
+      "answer": "此问题为阅读路径问题，需根据读者背景和目标选择合适的阅读顺序。以下是推荐路径：\n\n**推荐顺序：先读《The Music of the Primes》[1]，再读《A History of Mathematics》[2]。**\n\n**理由：**\n1. **《The Music of the Primes》[1]** 是一本数学科普读物，聚焦素数分布与黎曼假设，适合对数学史和数论感兴趣的读者入门。它以通俗易懂的方式介绍数学概念，有助于建立对数学思想的初步理解。\n2. **《A History of Mathematics》[2]** 是一部数学发展史的经典著作，适合在对数学有初步兴趣后阅读。它提供了数学发展的历史脉络，帮助读者理解数学思想的演变过程，是深入学习数学史的必读之作。\n\n**总结：**\n若读者希望从数学的神秘与未解之谜入手，再系统了解数学的发展历程，建议先读《The Music of the Primes》[1]，再读《A History of Mathematics》[2]。",
+      "answerModeActual": "READING_PATH",
+      "answerModeExpected": "comparison",
+      "answerable": true,
+      "citationCoverage": 0.4,
+      "error": null,
+      "evidenceCount": 5,
+      "evidenceIds": [
+        329,
+        315,
+        232,
+        70,
+        254
+      ],
+      "evidenceRecall": 1.0,
+      "expectedEvidenceHit": true,
+      "expectedResourceIds": [
+        315,
+        329
+      ],
+      "fallbackApplied": false,
+      "generationLatencyMs": 19803,
+      "id": "r020",
+      "limitations": [
+        "回答严格受当前检索证据约束，不使用馆藏外事实补充。",
+        "证据范围仅限当前系统已入库并已建立索引的阅读资源。"
+      ],
+      "llmFallbackApplied": false,
+      "model": "qwen3:8b",
+      "question": "The Music of the Primes 和 A History of Mathematics 哪本更适合先读？",
+      "requestLatencyMs": 20113.7835,
+      "retrievalLatencyMs": 303,
+      "strategy": "hybrid-v3(exact-db+bm25+vector+reranker)",
+      "totalLatencyMs": 20106
+    },
+    {
+      "answer": "根据您的需求，以下是与 Java 或系统设计相关的书籍推荐，按相关性排序：\n\n1. **Portable C and UNIX System Programming** [1]  \n   - 理由：虽然本书主要聚焦于 C 语言和 UNIX 系统编程，但其内容涉及系统级编程和跨平台开发，对理解系统设计和底层实现有帮助，适合 Java 开发者扩展系统设计知识。\n\n2. **Intelligence Science** [5]  \n   - 理由：本书涉及人工智能与系统设计的交叉领域，尤其是智能系统的设计与实现，对系统设计的理论基础有补充作用。\n\n3. **Multi-Objective Optimization using Evolutionary Algorithms** [3]  \n   - 理由：虽然本书属于数学与优化领域，但其内容涉及系统设计中的优化问题，适合对系统设计中算法与性能优化感兴趣的读者。\n\n**说明**：当前提供的证据片段中，没有直接与 Java 或系统设计相关的书籍。上述推荐基于语义相似性与扩展性，若需更精准的 Java 或系统设计书籍，建议进一步检索以下方向：  \n- Java 编程语言相关书籍（如《Effective Java》）  \n- 系统设计经典书籍（如《Designing Data-Intensive Applications》）  \n- 软件工程与架构设计相关书籍（如《Clean Architecture》）",
+      "answerModeActual": "FACTUAL_LOOKUP",
+      "answerModeExpected": "recommendation",
+      "answerable": true,
+      "citationCoverage": 0.6,
+      "error": null,
+      "evidenceCount": 5,
+      "evidenceIds": [
+        220,
+        214,
+        323,
+        200,
+        216
+      ],
+      "evidenceRecall": 0.5,
+      "expectedEvidenceHit": true,
+      "expectedResourceIds": [
+        220,
+        222
+      ],
+      "fallbackApplied": false,
+      "generationLatencyMs": 24448,
+      "id": "r021",
+      "limitations": [
+        "回答严格受当前检索证据约束，不使用馆藏外事实补充。",
+        "证据范围仅限当前系统已入库并已建立索引的阅读资源。"
+      ],
+      "llmFallbackApplied": false,
+      "model": "qwen3:8b",
+      "question": "帮我找几本和 Java 或系统设计相关的书。",
+      "requestLatencyMs": 24717.2029,
+      "retrievalLatencyMs": 255,
+      "strategy": "hybrid-v3(exact-db+bm25+vector+reranker)",
+      "totalLatencyMs": 24704
+    },
+    {
+      "answer": "如果没有 Java 书，系统无法基于证据提供与 Java 相关的信息，因为提供的证据片段中没有涉及 Java 的内容。建议进一步检索 Java 相关的书籍或资料以获取所需信息。\n\n参考来源：[1] Metalogic；[2] The Simon & Schuster Question & Answer Book, Computers；[3] Modelling Nature: An Opinionated Introduction to Scientific Representation",
+      "answerModeActual": "FACTUAL_LOOKUP",
+      "answerModeExpected": "limitation",
+      "answerable": true,
+      "citationCoverage": 0.6,
+      "error": null,
+      "evidenceCount": 5,
+      "evidenceIds": [
+        322,
+        224,
+        414,
+        323,
+        374
+      ],
+      "evidenceRecall": 0.0,
+      "expectedEvidenceHit": false,
+      "expectedResourceIds": [
+        220
+      ],
+      "fallbackApplied": false,
+      "generationLatencyMs": 5585,
+      "id": "r022",
+      "limitations": [
+        "回答严格受当前检索证据约束，不使用馆藏外事实补充。",
+        "证据范围仅限当前系统已入库并已建立索引的阅读资源。"
+      ],
+      "llmFallbackApplied": false,
+      "model": "qwen3:8b",
+      "question": "如果没有 Java 书，系统应该如何基于证据回答？",
+      "requestLatencyMs": 5973.8615,
+      "retrievalLatencyMs": 267,
+      "strategy": "hybrid-v3(exact-db+bm25+vector+reranker)",
+      "totalLatencyMs": 5852
+    },
+    {
+      "answer": "**Portable C and UNIX System Programming 与算法书的区别**：\n\n1. **内容方向**  \n   - *Portable C and UNIX System Programming* [1] 主要聚焦于 **C语言跨平台开发** 和 **UNIX系统编程**，强调构建高可移植性软件的技术细节，以及如何处理不同系统间的差异。  \n   - 算法书（如《The Art of Computer Programming: Semi-numerical algorithms》[3]）则专注于 **算法设计与分析**，特别是半数值算法，如随机数生成、数论等，内容偏向理论与数学推导。\n\n2. **目标读者**  \n   - *Portable C and UNIX System Programming* [1] 适合 **有C语言基础的开发者**，尤其是需要进行系统级编程或跨平台开发的读者。  \n   - 算法书 [3] 更适合 **希望深入理解算法理论与实现** 的读者，通常为计算机专业学生或研究人员。\n\n3. **应用场景**  \n   - *Portable C and UNIX System Programming* [1] 用于解决 **实际开发中的可移植性问题**，帮助开发者优化代码以适应不同系统环境。  \n   - 算法书 [3] 用于 **算法设计、优化与理论研究**，适合需要深入理解算法原理的场景。\n\n4. **风格与深度**  \n   - *Portable C and UNIX System Programming* [1] 风格偏向 **实践导向**，注重代码实现与系统差异分析。  \n   - 算法书 [3] 风格偏向 **理论导向**，强调数学严谨性与算法复杂度分析。\n\n**总结**：  \n*Portable C and UNIX System Programming* 是 **系统编程与跨平台开发** 的实用指南，而算法书（如《The Art of Computer Programming》）是 **算法理论与设计** 的经典著作，两者在内容方向、目标读者和应用场景上有明显区别。",
+      "answerModeActual": "COMPARISON",
+      "answerModeExpected": "comparison",
+      "answerable": true,
+      "citationCoverage": 0.4,
+      "error": null,
+      "evidenceCount": 5,
+      "evidenceIds": [
+        220,
+        212,
+        222,
+        211,
+        224
+      ],
+      "evidenceRecall": 1.0,
+      "expectedEvidenceHit": true,
+      "expectedResourceIds": [
+        220,
+        222
+      ],
+      "fallbackApplied": false,
+      "generationLatencyMs": 35069,
+      "id": "r023",
+      "limitations": [
+        "回答严格受当前检索证据约束，不使用馆藏外事实补充。",
+        "证据范围仅限当前系统已入库并已建立索引的阅读资源。"
+      ],
+      "llmFallbackApplied": false,
+      "model": "qwen3:8b",
+      "question": "Portable C and UNIX System Programming 和算法书有什么区别？",
+      "requestLatencyMs": 35459.841400000005,
+      "retrievalLatencyMs": 280,
+      "strategy": "hybrid-v3(exact-db+bm25+vector+reranker)",
+      "totalLatencyMs": 35350
+    },
+    {
+      "answer": "《Tractatus Logico-Philosophicus》会出现在数学或逻辑相关检索中，主要是因为其内容涉及逻辑与哲学的交叉领域。该书探讨了逻辑语言的结构与世界本质的关系，对逻辑学的发展产生了深远影响，因此在逻辑学和哲学的检索中可能被关联到。此外，由于其内容深度和理论性，也可能被归入与逻辑相关的主题中。[1]",
+      "answerModeActual": "FACTUAL_LOOKUP",
+      "answerModeExpected": "factual",
+      "answerable": true,
+      "citationCoverage": 0.2,
+      "error": null,
+      "evidenceCount": 5,
+      "evidenceIds": [
+        369,
+        419,
+        322,
+        362,
+        331
+      ],
+      "evidenceRecall": 1.0,
+      "expectedEvidenceHit": true,
+      "expectedResourceIds": [
+        369
+      ],
+      "fallbackApplied": false,
+      "generationLatencyMs": 9165,
+      "id": "r024",
+      "limitations": [
+        "回答严格受当前检索证据约束，不使用馆藏外事实补充。",
+        "证据范围仅限当前系统已入库并已建立索引的阅读资源。"
+      ],
+      "llmFallbackApplied": false,
+      "model": "qwen3:8b",
+      "question": "Tractatus Logico-Philosophicus 为什么会出现在数学或逻辑相关检索里？",
+      "requestLatencyMs": 9503.2483,
+      "retrievalLatencyMs": 329,
+      "strategy": "hybrid-v3(exact-db+bm25+vector+reranker)",
+      "totalLatencyMs": 9495
+    },
+    {
+      "answer": "推荐顺序及理由如下：\n\n1. **《Metalogic》** - Geoffrey Hunter [1]  \n   推荐理由：本书是系统学习逻辑学基础的优秀选择，尤其适合希望深入理解一阶逻辑、数学与集合论概念的读者。内容严谨，配有大量习题及解答，适合自学者。\n\n2. **《The Tower of Hanoi – Myths and Maths》** - Andreas M. Hinz [2]  \n   推荐理由：本书是关于汉诺塔问题的数学理论专著，涵盖组合数学、算法证明等内容，适合对数学思维、算法设计及计算机科学感兴趣的读者。\n\n3. **《The Goal》** - Eliyahu M. Goldratt [3]  \n   推荐理由：虽然属于商业管理类书籍，但其通过小说形式探讨了流程优化、瓶颈理论等逻辑思维与决策分析，适合希望提升系统性思维与问题解决能力的读者。\n\n4. **《Advances in Statistical Analysis and Statistical Computing》** - Roberto S. Mariano [4]  \n   推荐理由：本书聚焦统计分析与计算的前沿进展，适合希望深入了解统计建模、算法实现及数据分析理论的研究人员。\n\n5. **《QBD Murder on the Orient Express》** - Agatha Christie [5]  \n   推荐理由：作为经典悬疑小说，其严密的逻辑推理与结构设计是逻辑思维训练的绝佳素材，适合喜欢通过故事理解逻辑与推理的读者。\n\n以上推荐基于内容与目标读者的匹配度，优先推荐逻辑与数学思维相关书籍，其次是算法与问题解决类内容。",
+      "answerModeActual": "RECOMMENDATION",
+      "answerModeExpected": "recommendation",
+      "answerable": true,
+      "citationCoverage": 1.0,
+      "error": null,
+      "evidenceCount": 5,
+      "evidenceIds": [
+        322,
+        331,
+        206,
+        211,
+        340
+      ],
+      "evidenceRecall": 0.0,
+      "expectedEvidenceHit": false,
+      "expectedResourceIds": [
+        222,
+        315,
+        329,
+        369
+      ],
+      "fallbackApplied": false,
+      "generationLatencyMs": 29270,
+      "id": "r025",
+      "limitations": [
+        "回答严格受当前检索证据约束，不使用馆藏外事实补充。",
+        "证据范围仅限当前系统已入库并已建立索引的阅读资源。"
+      ],
+      "llmFallbackApplied": false,
+      "model": "qwen3:8b",
+      "question": "推荐几本适合讨论逻辑、数学思维或算法的书。",
+      "requestLatencyMs": 29565.6008,
+      "retrievalLatencyMs": 280,
+      "strategy": "hybrid-v3(exact-db+bm25+vector+reranker)",
+      "totalLatencyMs": 29551
+    },
+    {
+      "answer": "根据您的兴趣“星球大战”，以下是相关馆藏书籍推荐，按匹配度排序：\n\n1. **《A Star Wars Story》** - 作者：Mur Lafferty  \n   本书是官方认可的《星球大战》衍生作品，聚焦韩·索罗的早年经历，适合喜爱《星球大战》宇宙的读者 [1]。\n\n2. **《The Martian》** - 作者：Andy Weir  \n   虽然不属于《星球大战》系列，但该书涉及太空探索与生存冒险，与《星球大战》的科幻风格和主题高度契合 [3]。\n\n3. **《The War of the Worlds》** - 作者：H. G. Wells  \n   作为科幻经典，本书探讨外星文明与人类冲突，与《星球大战》的宇宙观有相似之处，适合拓展科幻阅读 [2]。\n\n4. **《The Cretan Runner》** - 作者：George Psychoundakis  \n   虽为动作冒险类，但其强调勇气与坚韧的主题，与《星球大战》中角色的英雄主义精神相呼应 [5]。\n\n5. **《The Red Arrows》** - 作者：David Montenegro  \n   虽为历史军事题材，但其对勇气与技能的探讨，与《星球大战》中飞行员和战士的形象有共通之处 [4]。\n\n**推荐理由**：  \n- **《A Star Wars Story》** 是最直接相关的《星球大战》衍生作品，优先推荐 [1]。  \n- **《The Martian》** 和 **《The War of the Worlds》** 提供了与《星球大战》相似的科幻背景和冒险元素 [3]、[2]。  \n- 其他书籍虽不直接关联，但主题与《星球大战》精神有共鸣，适合进一步探索 [5]、[4]。",
+      "answerModeActual": "FACTUAL_LOOKUP",
+      "answerModeExpected": "recommendation",
+      "answerable": true,
+      "citationCoverage": 1.0,
+      "error": null,
+      "evidenceCount": 5,
+      "evidenceIds": [
+        21,
+        18,
+        49,
+        82,
+        45
+      ],
+      "evidenceRecall": 1.0,
+      "expectedEvidenceHit": true,
+      "expectedResourceIds": [
+        21
+      ],
+      "fallbackApplied": false,
+      "generationLatencyMs": 33296,
+      "id": "r026",
+      "limitations": [
+        "回答严格受当前检索证据约束，不使用馆藏外事实补充。",
+        "证据范围仅限当前系统已入库并已建立索引的阅读资源。"
+      ],
+      "llmFallbackApplied": false,
+      "model": "qwen3:8b",
+      "question": "我喜欢星球大战，有馆藏相关书吗？",
+      "requestLatencyMs": 33544.482299999996,
+      "retrievalLatencyMs": 235,
+      "strategy": "hybrid-v3(exact-db+bm25+vector+reranker)",
+      "totalLatencyMs": 33531
+    },
+    {
+      "answer": "《Doctor Who: Molten Heart》是科幻类型的书，属于科幻冒险小说 [1]。",
+      "answerModeActual": "FACTUAL_LOOKUP",
+      "answerModeExpected": "factual",
+      "answerable": true,
+      "citationCoverage": 0.2,
+      "error": null,
+      "evidenceCount": 5,
+      "evidenceIds": [
+        22,
+        145,
+        33,
+        28,
+        21
+      ],
+      "evidenceRecall": 1.0,
+      "expectedEvidenceHit": true,
+      "expectedResourceIds": [
+        22
+      ],
+      "fallbackApplied": false,
+      "generationLatencyMs": 3855,
+      "id": "r027",
+      "limitations": [
+        "回答严格受当前检索证据约束，不使用馆藏外事实补充。",
+        "证据范围仅限当前系统已入库并已建立索引的阅读资源。"
+      ],
+      "llmFallbackApplied": false,
+      "model": "qwen3:8b",
+      "question": "Doctor Who: Molten Heart 是什么类型的书？",
+      "requestLatencyMs": 4132.7549,
+      "retrievalLatencyMs": 269,
+      "strategy": "hybrid-v3(exact-db+bm25+vector+reranker)",
+      "totalLatencyMs": 4125
+    },
+    {
+      "answer": "《Eve of Man》适合青少年读者。根据证据 [1]，该书是 Tom Fletcher 与 Giovanna Fletcher 合著的青少年科幻/反乌托邦小说，内容围绕生存、控制、自由、身份与个体选择展开，适合喜欢青少年反乌托邦与成长叙事的读者。\n\n**推荐理由：**\n1. **主题契合**：作品探讨自由、身份与个体选择等青少年成长中常见的议题，具有思想深度 [1]。\n2. **风格适配**：作为青少年科幻/反乌托邦小说，语言与情节设计符合青少年阅读习惯 [1]。\n3. **作者背景**：Tom Fletcher 是知名青少年文学作家，其作品常被推荐为青少年阅读书目 [1]。\n\n综上，《Eve of Man》是适合青少年读者的书籍。",
+      "answerModeActual": "RECOMMENDATION",
+      "answerModeExpected": "factual",
+      "answerable": true,
+      "citationCoverage": 0.2,
+      "error": null,
+      "evidenceCount": 5,
+      "evidenceIds": [
+        20,
+        337,
+        310,
+        72,
+        267
+      ],
+      "evidenceRecall": 1.0,
+      "expectedEvidenceHit": true,
+      "expectedResourceIds": [
+        20
+      ],
+      "fallbackApplied": false,
+      "generationLatencyMs": 15288,
+      "id": "r028",
+      "limitations": [
+        "回答严格受当前检索证据约束，不使用馆藏外事实补充。",
+        "证据范围仅限当前系统已入库并已建立索引的阅读资源。"
+      ],
+      "llmFallbackApplied": false,
+      "model": "qwen3:8b",
+      "question": "Eve of Man 适合青少年读者吗？请基于证据回答。",
+      "requestLatencyMs": 15564.9662,
+      "retrievalLatencyMs": 268,
+      "strategy": "hybrid-v3(exact-db+bm25+vector+reranker)",
+      "totalLatencyMs": 15557
+    },
+    {
+      "answer": "《The Book of Sand》适合喜爱末世氛围与哲学思考的科幻读者，尤其是对文明消逝后的生存、希望与人性主题感兴趣的读者。这本书通过极简叙事引发对未来的深层反思，适合希望在科幻作品中探索存在主义与社会议题的读者 [1]。\n\n推荐顺序如下：\n1. **《The Book of Sand》**：作为核心推荐，因其独特的末世主题与哲学深度，适合希望在科幻中思考文明与人性的读者。\n2. **《Jurassic Park》**：若读者偏好快节奏的惊悚与科技伦理探讨，可作为补充阅读 [3]。\n3. **《The Martian》**：若读者对硬科幻与求生题材感兴趣，可进一步延伸阅读 [2]。\n4. **《Journey to the Center of the Earth》**：若读者喜爱冒险与科学幻想结合的作品，可作为经典科幻入门 [4]。\n5. **《The Lord of the Rings》**：若读者对史诗奇幻与神话构建感兴趣，可作为扩展阅读 [5]。",
+      "answerModeActual": "RECOMMENDATION",
+      "answerModeExpected": "factual",
+      "answerable": true,
+      "citationCoverage": 1.0,
+      "error": null,
+      "evidenceCount": 5,
+      "evidenceIds": [
+        17,
+        49,
+        47,
+        263,
+        255
+      ],
+      "evidenceRecall": 1.0,
+      "expectedEvidenceHit": true,
+      "expectedResourceIds": [
+        17
+      ],
+      "fallbackApplied": false,
+      "generationLatencyMs": 19017,
+      "id": "r029",
+      "limitations": [
+        "回答严格受当前检索证据约束，不使用馆藏外事实补充。",
+        "证据范围仅限当前系统已入库并已建立索引的阅读资源。"
+      ],
+      "llmFallbackApplied": false,
+      "model": "qwen3:8b",
+      "question": "The Book of Sand 这本书适合什么样的科幻读者？",
+      "requestLatencyMs": 19305.9912,
+      "retrievalLatencyMs": 275,
+      "strategy": "hybrid-v3(exact-db+bm25+vector+reranker)",
+      "totalLatencyMs": 19293
+    },
+    {
+      "answer": "根据提供的证据：\n\n- **Appliance** [1] 通过碎片化独白探讨被测试者的焦虑与不安，呈现反乌托邦氛围，具有明显的心理氛围。\n- **The Book of Sand** [2] 虽然描绘了废墟景象，但其核心主题是文明消逝后的生存、希望与人性，更偏向末世氛围与哲学思考，心理氛围不如 Appliance 明显。\n\n因此，**Appliance 更偏心理氛围，而 The Book of Sand 不如其偏心理氛围**。",
+      "answerModeActual": "FACTUAL_LOOKUP",
+      "answerModeExpected": "comparison",
+      "answerable": true,
+      "citationCoverage": 0.4,
+      "error": null,
+      "evidenceCount": 5,
+      "evidenceIds": [
+        16,
+        17,
+        311,
+        32,
+        24
+      ],
+      "evidenceRecall": 1.0,
+      "expectedEvidenceHit": true,
+      "expectedResourceIds": [
+        16,
+        17
+      ],
+      "fallbackApplied": false,
+      "generationLatencyMs": 10712,
+      "id": "r030",
+      "limitations": [
+        "回答严格受当前检索证据约束，不使用馆藏外事实补充。",
+        "证据范围仅限当前系统已入库并已建立索引的阅读资源。"
+      ],
+      "llmFallbackApplied": false,
+      "model": "qwen3:8b",
+      "question": "Appliance 和 The Book of Sand 都偏心理氛围吗？",
+      "requestLatencyMs": 10997.3271,
+      "retrievalLatencyMs": 277,
+      "strategy": "hybrid-v3(exact-db+bm25+vector+reranker)",
+      "totalLatencyMs": 10990
+    },
+    {
+      "answer": "根据您的要求，以下是按入门、进阶、深入三个阶段推荐的科幻书籍：\n\n### 入门推荐：\n1. **《The Martian》** - Andy Weir  \n   本书适合刚接触科幻的读者，内容紧凑、情节引人，融合了硬科幻元素与紧张的求生故事，易于理解和投入 [1]。\n\n### 进阶推荐：\n2. **《The War of the Worlds》** - H. G. Wells  \n   作为科幻文学的奠基之作，本书探讨了人类在高等智慧威胁下的脆弱与抗争，具有极高的文学价值与思想深度，适合进阶读者 [3]。\n\n### 深入推荐：\n3. **《The Book of Sand》** - Theo Clare  \n   本书通过末世氛围与哲学思考，引发对未来的深层反思，适合希望深入探索科幻主题与人性本质的读者 [2]。\n\n如需更多推荐或对比，可继续提供具体需求。",
+      "answerModeActual": "FACTUAL_LOOKUP",
+      "answerModeExpected": "reading-path",
+      "answerable": true,
+      "citationCoverage": 0.6,
+      "error": null,
+      "evidenceCount": 5,
+      "evidenceIds": [
+        49,
+        17,
+        18,
+        21,
+        263
+      ],
+      "evidenceRecall": 0.25,
+      "expectedEvidenceHit": true,
+      "expectedResourceIds": [
+        14,
+        15,
+        18,
+        19
+      ],
+      "fallbackApplied": false,
+      "generationLatencyMs": 17295,
+      "id": "r031",
+      "limitations": [
+        "回答严格受当前检索证据约束，不使用馆藏外事实补充。",
+        "证据范围仅限当前系统已入库并已建立索引的阅读资源。"
+      ],
+      "llmFallbackApplied": false,
+      "model": "qwen3:8b",
+      "question": "按入门、进阶、深入给我排几本科幻。",
+      "requestLatencyMs": 17644.0819,
+      "retrievalLatencyMs": 335,
+      "strategy": "hybrid-v3(exact-db+bm25+vector+reranker)",
+      "totalLatencyMs": 17630
+    },
+    {
+      "answer": "推荐顺序及理由如下：\n\n1. **《The Every》** - Dave Eggers  \n   推荐理由：本书以科幻讽刺形式探讨科技巨头垄断、隐私危机与人性异化，是关注科技伦理与现代文明困境的首选读物 [1]。\n\n2. **《Player Piano》** - Kurt Vonnegut  \n   推荐理由：作为库尔特·冯内古特的处女作，本书以反乌托邦视角深入探讨技术统治与社会异化，适合喜欢深度思考科技伦理与社会结构的读者 [2]。\n\n3. **《Frankenstein》** - Mary Shelley  \n   推荐理由：这部经典恐怖小说通过科学家创造生命的故事，深刻探讨科学伦理、创造与责任等主题，适合喜爱哲学思辨与哥特式氛围的读者 [3]。\n\n4. **《Cloning》** - Stephen D. Fairbanks  \n   推荐理由：虽然被归类为非虚构，但本书聚焦克隆技术、遗传学与伦理议题，适合希望了解克隆原理与社会争议的读者 [4]。\n\n5. **《The Martian》** - Andy Weir  \n   推荐理由：本书虽以冒险与求生为主，但融合了硬科幻元素，适合喜爱科技乐观主义叙事与太空探索题材的读者 [5]。",
+      "answerModeActual": "RECOMMENDATION",
+      "answerModeExpected": "recommendation",
+      "answerable": true,
+      "citationCoverage": 1.0,
+      "error": null,
+      "evidenceCount": 5,
+      "evidenceIds": [
+        14,
+        15,
+        28,
+        410,
+        49
+      ],
+      "evidenceRecall": 0.6666666666666666,
+      "expectedEvidenceHit": true,
+      "expectedResourceIds": [
+        14,
+        15,
+        19
+      ],
+      "fallbackApplied": false,
+      "generationLatencyMs": 23747,
+      "id": "r032",
+      "limitations": [
+        "回答严格受当前检索证据约束，不使用馆藏外事实补充。",
+        "证据范围仅限当前系统已入库并已建立索引的阅读资源。"
+      ],
+      "llmFallbackApplied": false,
+      "model": "qwen3:8b",
+      "question": "我想看科技伦理，但不要纯技术书，有哪些小说？",
+      "requestLatencyMs": 24026.680200000003,
+      "retrievalLatencyMs": 265,
+      "strategy": "hybrid-v3(exact-db+bm25+vector+reranker)",
+      "totalLatencyMs": 24013
+    },
+    {
+      "answer": "以下是几本具有社会批判意味的小说推荐，按相关性排序：\n\n1. **《We Were Eight Years in Power》** - Ta-Nehisi Coates  \n   本书通过回顾奥巴马执政时期，批判性地探讨了种族、性别与阶级等议题对美国社会的影响，兼具希望与批判视角 [1]。\n\n2. **《The Society of the Spectacle》** - Guy Debord  \n   这是一部文化批判经典，基于马克思主义理论，剖析了图像与商品化如何中介人类经验并导致社会异化，对现代性批判具有奠基意义 [3]。\n\n3. **《Empireland》** - Sathnam Sanghera  \n   本书揭示了大英帝国历史遗产如何隐秘地影响当代英国社会，适合希望理解后殖民时代社会结构与文化根源的读者 [4]。\n\n4. **《Japan Story》** - Christopher Harding  \n   通过普通民众的视角，讲述日本在现代化与民族主义浪潮中的个体体验，提供不同于宏大叙事的另类历史解读 [5]。\n\n5. **《Silk and Insight》** - Yukio Mishima  \n   以1950年代日本丝织厂罢工为背景，探讨劳资冲突与社会转型，融合商业叙事与社会评论 [2]。\n\n以上推荐均基于社会批判视角，涵盖历史、文化、政治等多维度。若需更具体的推荐方向（如某类社会问题或特定地区），可进一步说明。",
+      "answerModeActual": "FACTUAL_LOOKUP",
+      "answerModeExpected": "recommendation",
+      "answerable": true,
+      "citationCoverage": 1.0,
+      "error": null,
+      "evidenceCount": 5,
+      "evidenceIds": [
+        73,
+        203,
+        172,
+        80,
+        74
+      ],
+      "evidenceRecall": 0.0,
+      "expectedEvidenceHit": false,
+      "expectedResourceIds": [
+        14,
+        15,
+        400
+      ],
+      "fallbackApplied": false,
+      "generationLatencyMs": 26841,
+      "id": "r033",
+      "limitations": [
+        "回答严格受当前检索证据约束，不使用馆藏外事实补充。",
+        "证据范围仅限当前系统已入库并已建立索引的阅读资源。"
+      ],
+      "llmFallbackApplied": false,
+      "model": "qwen3:8b",
+      "question": "找几本带社会批判意味的小说。",
+      "requestLatencyMs": 27143.0196,
+      "retrievalLatencyMs": 293,
+      "strategy": "hybrid-v3(exact-db+bm25+vector+reranker)",
+      "totalLatencyMs": 27134
+    },
+    {
+      "answer": "Jane Austen 的作品具有以下共同特点：\n\n1. **浪漫主义风格**：她的作品大多被归类为浪漫主义，注重情感表达与人物心理描写 [1]、[2]、[3]、[5]。\n\n2. **社会批判**：她的小说常通过婚姻、阶级和性别角色等主题，对19世纪英国社会进行批判 [1]、[5]。\n\n3. **人物性格成长**：她的作品通常围绕人物的成长与自我认知展开，展现角色在社会环境中的变化 [1]、[2]、[3]、[5]。\n\n4. **幽默与讽刺**：她以机智讽刺的笔触描绘社会现象，尤其在《Pride and Prejudice》和《Northanger Abbey》中表现突出 [1]、[3]。\n\n5. **细腻的心理描写**：她的作品注重人物内心世界的刻画，使读者能够深入理解角色的动机与情感 [2]、[5]。\n\n6. **婚姻与女性角色**：婚姻是她作品中的重要主题，常探讨女性在社会中的地位与选择 [1]、[2]、[5]。\n\n7. **文学深度与社会风俗描写**：她的作品兼具文学深度与对社会风俗的细致描绘，如《Sense and Sensibility》和《Mansfield Park》 [2]、[5]。\n\n如需进一步了解她的生平或书信内容，可参考 [4]。",
+      "answerModeActual": "FACTUAL_LOOKUP",
+      "answerModeExpected": "author",
+      "answerable": true,
+      "citationCoverage": 1.0,
+      "error": null,
+      "evidenceCount": 5,
+      "evidenceIds": [
+        400,
+        402,
+        398,
+        284,
+        395
+      ],
+      "evidenceRecall": 0.6666666666666666,
+      "expectedEvidenceHit": true,
+      "expectedResourceIds": [
+        271,
+        400,
+        402
+      ],
+      "fallbackApplied": false,
+      "generationLatencyMs": 26226,
+      "id": "r034",
+      "limitations": [
+        "回答严格受当前检索证据约束，不使用馆藏外事实补充。",
+        "证据范围仅限当前系统已入库并已建立索引的阅读资源。"
+      ],
+      "llmFallbackApplied": false,
+      "model": "qwen3:8b",
+      "question": "Jane Austen 的作品有什么共同特点？",
+      "requestLatencyMs": 26482.5226,
+      "retrievalLatencyMs": 247,
+      "strategy": "hybrid-v3(exact-db+bm25+vector+reranker)",
+      "totalLatencyMs": 26474
+    },
+    {
+      "answer": "根据提供的证据，H. G. Wells 的两本馆藏作品为：\n\n1. **《The War of the Worlds》** [1]  \n2. **《The Invisible Man》** [2]  \n\n### 推荐理由：\n- **《The War of the Worlds》** 是科幻文学的奠基之作，具有极高的文学价值与思想深度，适合对科幻、末日危机及文明反思感兴趣的读者 [1]。\n- **《The Invisible Man》** 是早期科幻恐怖小说的代表，探讨贪婪、孤立与科学伦理的危险，兼具惊悚氛围与深刻社会反思，适合喜爱经典科幻与人性主题研究的读者 [2]。\n\n若需进一步选择，可优先阅读《The War of the Worlds》以了解科幻文学的起源，再通过《The Invisible Man》深入探讨科学伦理与人性主题。",
+      "answerModeActual": "FACTUAL_LOOKUP",
+      "answerModeExpected": "author",
+      "answerable": true,
+      "citationCoverage": 0.4,
+      "error": null,
+      "evidenceCount": 5,
+      "evidenceIds": [
+        18,
+        19,
+        253,
+        145,
+        255
+      ],
+      "evidenceRecall": 1.0,
+      "expectedEvidenceHit": true,
+      "expectedResourceIds": [
+        18,
+        19
+      ],
+      "fallbackApplied": false,
+      "generationLatencyMs": 15450,
+      "id": "r035",
+      "limitations": [
+        "回答严格受当前检索证据约束，不使用馆藏外事实补充。",
+        "证据范围仅限当前系统已入库并已建立索引的阅读资源。"
+      ],
+      "llmFallbackApplied": false,
+      "model": "qwen3:8b",
+      "question": "H. G. Wells 的两本馆藏作品怎么选？",
+      "requestLatencyMs": 15758.273799999999,
+      "retrievalLatencyMs": 300,
+      "strategy": "hybrid-v3(exact-db+bm25+vector+reranker)",
+      "totalLatencyMs": 15751
+    },
+    {
+      "answer": "推荐顺序及理由如下：\n\n1. **The Giver of Stars** [1]  \n   - 推荐理由：这是 Jojo Moyes 的作品，与用户问题直接相关。书中聚焦爱、社区与阅读的力量，情感细腻，适合喜爱浪漫小说与温情叙事的读者。作品兼具文学性与可读性，是 Jojo Moyes 的代表作之一。\n\n2. **Me Before You (Movie Tie-In)** [3]  \n   - 推荐理由：同样是 Jojo Moyes 的浪漫小说，情感细腻，探讨爱与生命意义，适合喜欢温情爱情题材的读者。作为电影改编作品，其故事广为人知，情感共鸣强。\n\n3. **Wuthering Heights** [4]  \n   - 推荐理由：作为经典浪漫小说，情感浓烈，叙事独特，适合喜欢哥特风格与心理描写的读者。若用户对浪漫小说有更深兴趣，可作为进阶阅读选择。\n\n**推荐理由总结**：  \n- **The Giver of Stars** 是最直接相关的推荐，因其作者与主题均匹配用户需求。  \n- **Me Before You** 作为同作者的另一部浪漫小说，可作为补充阅读。  \n- **Wuthering Heights** 作为经典浪漫作品，适合对浪漫小说有进一步兴趣的读者。",
+      "answerModeActual": "RECOMMENDATION",
+      "answerModeExpected": "factual",
+      "answerable": true,
+      "citationCoverage": 0.6,
+      "error": null,
+      "evidenceCount": 5,
+      "evidenceIds": [
+        56,
+        145,
+        397,
+        409,
+        17
+      ],
+      "evidenceRecall": 1.0,
+      "expectedEvidenceHit": true,
+      "expectedResourceIds": [
+        56
+      ],
+      "fallbackApplied": false,
+      "generationLatencyMs": 23035,
+      "id": "r036",
+      "limitations": [
+        "回答严格受当前检索证据约束，不使用馆藏外事实补充。",
+        "证据范围仅限当前系统已入库并已建立索引的阅读资源。"
+      ],
+      "llmFallbackApplied": false,
+      "model": "qwen3:8b",
+      "question": "Jojo Moyes 的 The Giver of Stars 推荐理由是什么？",
+      "requestLatencyMs": 23350.0744,
+      "retrievalLatencyMs": 300,
+      "strategy": "hybrid-v3(exact-db+bm25+vector+reranker)",
+      "totalLatencyMs": 23335
+    },
+    {
+      "answer": "根据提供的证据片段，**《Live a Little》** 和 **《Mix Tape》** 均被归类为温情爱情题材，但它们在情感表达和主题侧重上略有不同：\n\n1. **情感深度与主题**：  \n   - 《Live a Little》聚焦于“人生暮年重新坠入爱河”的主题，强调生命的延续与情感的重生，被描述为“充满生命力与温度的爱情故事” [1]。  \n   - 《Mix Tape》则围绕“第二次机会”展开，以怀旧和情感重逢为核心，营造出“温柔而愉悦”的阅读体验 [2]。\n\n2. **情感基调**：  \n   - 《Live a Little》更偏向于对生命与爱情的深刻反思，情感细腻且富有哲理性 [1]。  \n   - 《Mix Tape》则更注重情感的治愈与陪伴，带有较强的怀旧氛围 [2]。\n\n**结论**：若更倾向于**深刻的情感共鸣与生命主题**，则推荐《Live a Little》 [1]；若更偏好**温柔治愈与怀旧氛围**，则推荐《Mix Tape》 [2]。",
+      "answerModeActual": "FACTUAL_LOOKUP",
+      "answerModeExpected": "comparison",
+      "answerable": true,
+      "citationCoverage": 0.4,
+      "error": null,
+      "evidenceCount": 5,
+      "evidenceIds": [
+        54,
+        55,
+        397,
+        403,
+        56
+      ],
+      "evidenceRecall": 1.0,
+      "expectedEvidenceHit": true,
+      "expectedResourceIds": [
+        54,
+        55
+      ],
+      "fallbackApplied": false,
+      "generationLatencyMs": 20488,
+      "id": "r037",
+      "limitations": [
+        "回答严格受当前检索证据约束，不使用馆藏外事实补充。",
+        "证据范围仅限当前系统已入库并已建立索引的阅读资源。"
+      ],
+      "llmFallbackApplied": false,
+      "model": "qwen3:8b",
+      "question": "Mix Tape 和 Live a Little 哪本更偏温情爱情？",
+      "requestLatencyMs": 20794.5332,
+      "retrievalLatencyMs": 298,
+      "strategy": "hybrid-v3(exact-db+bm25+vector+reranker)",
+      "totalLatencyMs": 20787
+    },
+    {
+      "answer": "根据您的需求，以下是关于“第二次机会的爱情小说”的推荐列表，按匹配度和主题契合度排序：\n\n1. **《Mix Tape》** - Jane Sanderson  \n   推荐理由：直接以“第二次机会”为主题，故事温馨动人，适合追求情感共鸣的读者 [1]。\n\n2. **《Second Chance》** - Danielle Steel  \n   推荐理由：聚焦情感重建与个人成长，展现爱如何弥合分歧，适合喜欢温馨治愈系罗曼史的读者 [2]。\n\n3. **《Live a Little》** - Howard Jacobson  \n   推荐理由：探讨人生暮年重新坠入爱河的主题，作品充满生命力与温度，适合喜爱当代文学与情感题材的读者 [3]。\n\n4. **《After the Party》** - Lisa Jewell  \n   推荐理由：审视多年后关系的变化与内心的成长，适合喜爱情感细腻、关注人物内心世界的读者 [4]。\n\n5. **《Wuthering Heights》** - Emily Brontë  \n   推荐理由：虽然主题更偏向激情与复仇，但其情感浓烈，适合喜爱哥特风格与心理描写的读者 [5]。\n\n以上推荐基于语义相似度与主题契合度，优先推荐前四本更贴近“第二次机会”主题的作品。",
+      "answerModeActual": "FACTUAL_LOOKUP",
+      "answerModeExpected": "recommendation",
+      "answerable": true,
+      "citationCoverage": 1.0,
+      "error": null,
+      "evidenceCount": 5,
+      "evidenceIds": [
+        55,
+        401,
+        54,
+        62,
+        409
+      ],
+      "evidenceRecall": 1.0,
+      "expectedEvidenceHit": true,
+      "expectedResourceIds": [
+        55
+      ],
+      "fallbackApplied": false,
+      "generationLatencyMs": 22599,
+      "id": "r038",
+      "limitations": [
+        "回答严格受当前检索证据约束，不使用馆藏外事实补充。",
+        "证据范围仅限当前系统已入库并已建立索引的阅读资源。"
+      ],
+      "llmFallbackApplied": false,
+      "model": "qwen3:8b",
+      "question": "帮我找一本关于第二次机会的爱情小说。",
+      "requestLatencyMs": 22907.8954,
+      "retrievalLatencyMs": 294,
+      "strategy": "hybrid-v3(exact-db+bm25+vector+reranker)",
+      "totalLatencyMs": 22894
+    },
+    {
+      "answer": "根据您的需求，以下是关于“晚年爱情”主题的小说推荐，按匹配度和推荐理由排序：\n\n1. **《Live a Little》** - Howard Jacobson  \n   推荐理由：直接聚焦“晚年重新坠入爱河”的主题，情感细腻且充满生命力，是最贴合“晚年爱情”题材的作品 [1]。\n\n2. **《Special Delivery》** - Danielle Steel  \n   推荐理由：讲述中年人跨越差异寻找爱情的故事，适合喜欢温馨治愈系罗曼史的读者，情感成长与成熟爱情主题契合晚年爱情主题 [2]。\n\n3. **《After the Party》** - Lisa Jewell  \n   推荐理由：探讨多年后关系的变化与内心成长，适合喜爱情感细腻、关注人物内心世界的读者，与晚年爱情主题有较高契合度 [3]。\n\n4. **《Marriage Most Scandalous》** - Johanna Lindsey  \n   推荐理由：虽然为历史言情，但其浪漫冲突与情感张力适合喜欢经典爱情故事的读者，可作为晚年爱情题材的延伸阅读 [4]。\n\n5. **《Regency Buck》** - Georgette Heyer  \n   推荐理由：作为经典历史言情，其精致时代氛围和优雅情感适合喜欢浪漫冲突与时代背景的读者，可作为晚年爱情题材的补充阅读 [5]。\n\n如需进一步筛选或对比，可提供更具体的偏好（如风格、年代、文化背景等）。",
+      "answerModeActual": "FACTUAL_LOOKUP",
+      "answerModeExpected": "recommendation",
+      "answerable": true,
+      "citationCoverage": 1.0,
+      "error": null,
+      "evidenceCount": 5,
+      "evidenceIds": [
+        54,
+        405,
+        62,
+        396,
+        58
+      ],
+      "evidenceRecall": 1.0,
+      "expectedEvidenceHit": true,
+      "expectedResourceIds": [
+        54
+      ],
+      "fallbackApplied": false,
+      "generationLatencyMs": 26049,
+      "id": "r039",
+      "limitations": [
+        "回答严格受当前检索证据约束，不使用馆藏外事实补充。",
+        "证据范围仅限当前系统已入库并已建立索引的阅读资源。"
+      ],
+      "llmFallbackApplied": false,
+      "model": "qwen3:8b",
+      "question": "帮我找一本关于晚年爱情的小说。",
+      "requestLatencyMs": 26360.4645,
+      "retrievalLatencyMs": 297,
+      "strategy": "hybrid-v3(exact-db+bm25+vector+reranker)",
+      "totalLatencyMs": 26346
+    },
+    {
+      "answer": "推荐顺序及理由如下：\n\n1. **《Mansfield Park》** - 简·奥斯汀的这部作品深入探讨了女性教育、理想化女性气质的压迫以及奴隶制等议题，是经典文学与社会批判的结合，适合进行女性主义与女性处境的讨论 [1]。\n\n2. **《The White Woman's Other Burden》** - 这部历史研究著作重新审视了英属时期在南亚生活工作的西方女性，探讨了种族、阶级与性别议题，为当代女性主义辩论提供了重要视角 [5]。\n\n3. **《Jane Eyre》** - 夏洛蒂·勃朗特的这部经典作品展现了女性在逆境中坚守独立人格的故事，融合了哥特氛围与社会批判，具有深远的文学价值与阅读启示 [3]。\n\n4. **《Motherself》** - 本书探讨了女性自我实现的路径，构建了基于女神原型的 gynocentric 神话体系，为女性提供表达宗教经验的新视角，适合寻求灵性认同的读者 [2]。\n\n5. **《Eat, Pray, Love》** - 虽然更偏向个人成长与心灵治愈，但其对自我疗愈与内心重建的探讨，也能为女性处境的讨论提供情感与精神层面的参考 [4]。",
+      "answerModeActual": "RECOMMENDATION",
+      "answerModeExpected": "recommendation",
+      "answerable": true,
+      "citationCoverage": 1.0,
+      "error": null,
+      "evidenceCount": 5,
+      "evidenceIds": [
+        395,
+        432,
+        393,
+        178,
+        295
+      ],
+      "evidenceRecall": 0.3333333333333333,
+      "expectedEvidenceHit": true,
+      "expectedResourceIds": [
+        23,
+        426,
+        432
+      ],
+      "fallbackApplied": false,
+      "generationLatencyMs": 24100,
+      "id": "r040",
+      "limitations": [
+        "回答严格受当前检索证据约束，不使用馆藏外事实补充。",
+        "证据范围仅限当前系统已入库并已建立索引的阅读资源。"
+      ],
+      "llmFallbackApplied": false,
+      "model": "qwen3:8b",
+      "question": "找几本适合做女性主义或女性处境讨论的书。",
+      "requestLatencyMs": 24396.3204,
+      "retrievalLatencyMs": 282,
+      "strategy": "hybrid-v3(exact-db+bm25+vector+reranker)",
+      "totalLatencyMs": 24383
+    },
+    {
+      "answer": "根据您的需求，馆藏中与古典文学分析相关的书籍推荐如下：\n\n1. **Plutarch's Lives, tr. by J. and W. Langhorne** [1]  \n   - 推荐理由：作为西方传记文学经典，本书通过对比古希腊与古罗马杰出人物的生平，探讨性格、命运与道德主题，是研究古典人文精神的重要文献。\n\n2. **The Lives of the Noble Grecians and Romanes** [2]  \n   - 推荐理由：本书为古希腊罗马传记经典，通过对比希腊与罗马杰出人物生平，探讨美德、命运与领导力等永恒主题，是研究古典历史人物评价与伦理思想的重要读物。\n\n3. **The Lives of the Noble Grecians and Romaines** [5]  \n   - 推荐理由：本书为古希腊罗马名人传记合集，通过对比希腊与罗马杰出人物生平，探讨德行、命运与领导、领导力等永恒主题，是研究古典文明与人文思想的重要文献。\n\n4. **Why We Read Fiction** [3]  \n   - 推荐理由：本书探讨认知心理学中的“心智理论”及其对文学研究的启示，涵盖从经典小说到流行文化的广泛叙事，适合对文学与文化认知研究感兴趣的读者。\n\n5. **The Birth of Tragedy** [4]  \n   - 推荐理由：尼采哲学经典，探讨古希腊悲剧的起源与本质，提出阿波罗式的理性节制与狄奥尼索斯式的激情非理性相融合的美学观点，是理解西方现代哲学与美学思想的重要入门读物。\n\n**推荐顺序说明**：  \n1. **Plutarch's Lives** [1] 作为古典传记文学的代表，是理解古典文学分析的起点。  \n2. **The Lives of the Noble Grecians and Romanes** [2] 与 [5] 为同一作品的不同版本，可作为对比阅读。  \n3. **Why We Read Fiction** [3] 提供认知心理学视角，适合深入分析文学阅读的心理动因。  \n4. **The Birth of Tragedy** [4] 为哲学与美学视角，适合对古典文学的哲学基础感兴趣者。",
+      "answerModeActual": "FACTUAL_LOOKUP",
+      "answerModeExpected": "recommendation",
+      "answerable": true,
+      "citationCoverage": 1.0,
+      "error": null,
+      "evidenceCount": 5,
+      "evidenceIds": [
+        186,
+        189,
+        421,
+        361,
+        188
+      ],
+      "evidenceRecall": 0.0,
+      "expectedEvidenceHit": false,
+      "expectedResourceIds": [
+        427
+      ],
+      "fallbackApplied": false,
+      "generationLatencyMs": 42163,
+      "id": "r041",
+      "limitations": [
+        "回答严格受当前检索证据约束，不使用馆藏外事实补充。",
+        "证据范围仅限当前系统已入库并已建立索引的阅读资源。"
+      ],
+      "llmFallbackApplied": false,
+      "model": "qwen3:8b",
+      "question": "我想读古典文学分析相关内容，馆藏有什么？",
+      "requestLatencyMs": 42472.8328,
+      "retrievalLatencyMs": 301,
+      "strategy": "hybrid-v3(exact-db+bm25+vector+reranker)",
+      "totalLatencyMs": 42464
+    },
+    {
+      "answer": "根据现有证据，**Hidden Paths** 似乎并不适合初学者，原因如下：\n\n1. **内容深度较高**：《Hidden Paths》聚焦希腊悲剧中的人物表征，以欧里庇得斯的《酒神的女信徒》为核心，探讨自我观念的演变，涉及复杂的文本分析与哲学思考，对古典文学与戏剧研究者有较高要求 [1]。\n\n2. **主题复杂**：本书通过细致的文本关键词、意象与风格分析，揭示人物构建的“隐秘路径”，这需要读者具备一定的文学分析能力和对古典戏剧的了解，对初学者来说可能较为困难。\n\n3. **缺乏通俗性**：与其他面向青少年或大众读者的恐怖小说（如《The Secret Path》[2]、《The Howling Ghost》[3]）相比，《Hidden Paths》更偏向学术性与深度解读，不适合初学者入门。\n\n综上，**Hidden Paths** 更适合有一定古典文学基础的读者，而非初学者。若需推荐适合初学者的书籍，可优先考虑《Harry Potter and the Chamber of Secrets》[5] 或《The Secret Path》[2] 等更通俗易懂的作品。",
+      "answerModeActual": "RECOMMENDATION",
+      "answerModeExpected": "factual",
+      "answerable": true,
+      "citationCoverage": 0.8,
+      "error": null,
+      "evidenceCount": 5,
+      "evidenceIds": [
+        427,
+        310,
+        307,
+        303,
+        145
+      ],
+      "evidenceRecall": 1.0,
+      "expectedEvidenceHit": true,
+      "expectedResourceIds": [
+        427
+      ],
+      "fallbackApplied": false,
+      "generationLatencyMs": 20976,
+      "id": "r042",
+      "limitations": [
+        "回答严格受当前检索证据约束，不使用馆藏外事实补充。",
+        "证据范围仅限当前系统已入库并已建立索引的阅读资源。"
+      ],
+      "llmFallbackApplied": false,
+      "model": "qwen3:8b",
+      "question": "Hidden Paths 为什么可能不适合初学者？",
+      "requestLatencyMs": 21310.921400000003,
+      "retrievalLatencyMs": 314,
+      "strategy": "hybrid-v3(exact-db+bm25+vector+reranker)",
+      "totalLatencyMs": 21291
+    },
+    {
+      "answer": "推荐顺序及理由如下：\n\n1. **《Self and Family》** [1]  \n   推荐理由：本书直接聚焦家庭与自我之间的关系，内容涉及自我认知、人际互动及家庭和谐，适合希望在家庭与个人成长之间找到平衡的读者。\n\n2. **《Inquiring about Myself》** [2]  \n   推荐理由：本书强调自我探索与内在成长，适合希望深入理解自我、提升心理觉察力的读者，同时也能帮助改善家庭关系。\n\n3. **《Midlife Mothers in Transition》** [3]  \n   推荐理由：本书针对中年母亲群体，探讨自我成长与家庭角色平衡，适合处于人生转折期、寻求心理调适的读者。\n\n4. **《Rachel's Holiday》** [4]  \n   推荐理由：虽然属于小说类，但其内容涉及家庭、亲密关系与自我认知，适合希望通过故事启发思考的读者。\n\n5. **《Special Delivery》** [5]  \n   推荐理由：本书聚焦情感成长与家庭关系，适合喜欢温馨治愈故事的读者，同时也能引发对自我与关系的反思。\n\n以上推荐基于内容与主题的相关性，优先推荐自助类书籍，若需进一步筛选，可结合个人兴趣或阅读偏好。",
+      "answerModeActual": "FACTUAL_LOOKUP",
+      "answerModeExpected": "recommendation",
+      "answerable": true,
+      "citationCoverage": 1.0,
+      "error": null,
+      "evidenceCount": 5,
+      "evidenceIds": [
+        433,
+        429,
+        431,
+        61,
+        405
+      ],
+      "evidenceRecall": 1.0,
+      "expectedEvidenceHit": true,
+      "expectedResourceIds": [
+        433
+      ],
+      "fallbackApplied": false,
+      "generationLatencyMs": 23272,
+      "id": "r043",
+      "limitations": [
+        "回答严格受当前检索证据约束，不使用馆藏外事实补充。",
+        "证据范围仅限当前系统已入库并已建立索引的阅读资源。"
+      ],
+      "llmFallbackApplied": false,
+      "model": "qwen3:8b",
+      "question": "找一本与家庭、自我和关系有关的自助书。",
+      "requestLatencyMs": 23552.2853,
+      "retrievalLatencyMs": 271,
+      "strategy": "hybrid-v3(exact-db+bm25+vector+reranker)",
+      "totalLatencyMs": 23544
+    },
+    {
+      "answer": "《Midlife Mothers in Transition》面向的是处于中年阶段的母亲群体，即那些在人生转折期面临心理调适与身份重塑挑战的女性。这本书为处于相似生命阶段的读者提供情感支持与实用指引，帮助她们应对中年阶段的变化 [1]。",
+      "answerModeActual": "FACTUAL_LOOKUP",
+      "answerModeExpected": "factual",
+      "answerable": true,
+      "citationCoverage": 0.2,
+      "error": null,
+      "evidenceCount": 5,
+      "evidenceIds": [
+        431,
+        72,
+        178,
+        405,
+        162
+      ],
+      "evidenceRecall": 1.0,
+      "expectedEvidenceHit": true,
+      "expectedResourceIds": [
+        431
+      ],
+      "fallbackApplied": false,
+      "generationLatencyMs": 6605,
+      "id": "r044",
+      "limitations": [
+        "回答严格受当前检索证据约束，不使用馆藏外事实补充。",
+        "证据范围仅限当前系统已入库并已建立索引的阅读资源。"
+      ],
+      "llmFallbackApplied": false,
+      "model": "qwen3:8b",
+      "question": "Midlife Mothers in Transition 面向什么人群？",
+      "requestLatencyMs": 6902.1170999999995,
+      "retrievalLatencyMs": 289,
+      "strategy": "hybrid-v3(exact-db+bm25+vector+reranker)",
+      "totalLatencyMs": 6894
+    },
+    {
+      "answer": "若是推荐问题，请给出推荐顺序和理由：\n\n1. **Inquiring about Myself** [1]  \n   推荐理由：本书聚焦于内省与自我认知，内容风格温和实用，适合入门者逐步建立心理觉察力与生活方向感。\n\n2. **The Magic Within** [2]  \n   推荐理由：本书以探索内在潜能为主题，语言温和，适合希望在日常生活中发现自我力量的读者，是自我成长的进阶读物。\n\n3. **The Paradoxical Self** [5]  \n   推荐理由：若读者在入门后希望深入探索自我矛盾与心理整合，本书提供更深刻的反思视角与实用启示。\n\n**总结**：若为入门推荐，**Inquiring about Myself** 是更合适的起点，因其内容更贴近基础自我探索，适合初学者建立自我认知框架。",
+      "answerModeActual": "RECOMMENDATION",
+      "answerModeExpected": "comparison",
+      "answerable": true,
+      "citationCoverage": 0.6,
+      "error": null,
+      "evidenceCount": 5,
+      "evidenceIds": [
+        429,
+        435,
+        148,
+        145,
+        436
+      ],
+      "evidenceRecall": 1.0,
+      "expectedEvidenceHit": true,
+      "expectedResourceIds": [
+        429,
+        435
+      ],
+      "fallbackApplied": false,
+      "generationLatencyMs": 15982,
+      "id": "r045",
+      "limitations": [
+        "回答严格受当前检索证据约束，不使用馆藏外事实补充。",
+        "证据范围仅限当前系统已入库并已建立索引的阅读资源。"
+      ],
+      "llmFallbackApplied": false,
+      "model": "qwen3:8b",
+      "question": "The Magic Within 和 Inquiring about Myself 哪本更适合入门？",
+      "requestLatencyMs": 16332.209200000001,
+      "retrievalLatencyMs": 336,
+      "strategy": "hybrid-v3(exact-db+bm25+vector+reranker)",
+      "totalLatencyMs": 16318
+    },
+    {
+      "answer": "根据您的需求，以下是关于“母亲原型或女性灵性”的书籍推荐，按相关性排序：\n\n1. **《Motherself》** - Kathryn Allen Rabuzzi  \n   本书直接探讨女性自我实现路径，以“母亲”原型替代西方男性英雄叙事，构建基于女神原型的灵性体系，适合寻求女性灵性认同的读者 [1]。\n\n2. **《The Goddess and the Nation》** - Sumathi Ramaswamy  \n   本书从历史角度分析“印度母亲”图像在民族认同中的作用，涉及女性灵性与文化象征，适合对南亚历史与女性形象感兴趣的读者 [3]。\n\n3. **《Divine Heiress》** - Vasiliki Limberis  \n   本书聚焦圣母玛利亚从犹太少女到神圣守护者的转变，结合女神传统与宗教文化，适合对女性灵性与宗教文化感兴趣的读者 [2]。\n\n4. **《Eat, Pray, Love》** - Elizabeth Gilbert  \n   虽非直接探讨母亲原型，但书中涉及精神启蒙与自我疗愈，适合对女性灵性成长与内心重建感兴趣的读者 [5]。\n\n5. **《Jane Eyre》** - Charlotte Brontë  \n   作为经典文学作品，其女性主角展现了独立人格与自我尊严，虽非灵性书籍，但对女性成长与灵性认同有启发意义 [4]。\n\n**推荐理由**：  \n- **《Motherself》** 是最直接相关的书籍，明确以“母亲原型”为核心，适合您的主题。  \n- **《The Goddess and the Nation》** 与 **《Divine Heiress》** 从历史与宗教角度探讨女性灵性，适合深入研究。  \n- **《Eat, Pray, Love》** 与 **《Jane Eyre》** 虽非直接相关，但对女性成长与灵性认同有间接启发。",
+      "answerModeActual": "FACTUAL_LOOKUP",
+      "answerModeExpected": "recommendation",
+      "answerable": true,
+      "citationCoverage": 1.0,
+      "error": null,
+      "evidenceCount": 5,
+      "evidenceIds": [
+        432,
+        158,
+        291,
+        393,
+        178
+      ],
+      "evidenceRecall": 1.0,
+      "expectedEvidenceHit": true,
+      "expectedResourceIds": [
+        432
+      ],
+      "fallbackApplied": false,
+      "generationLatencyMs": 34104,
+      "id": "r046",
+      "limitations": [
+        "回答严格受当前检索证据约束，不使用馆藏外事实补充。",
+        "证据范围仅限当前系统已入库并已建立索引的阅读资源。"
+      ],
+      "llmFallbackApplied": false,
+      "model": "qwen3:8b",
+      "question": "我想找关于母亲原型或女性灵性的书。",
+      "requestLatencyMs": 34417.197100000005,
+      "retrievalLatencyMs": 298,
+      "strategy": "hybrid-v3(exact-db+bm25+vector+reranker)",
+      "totalLatencyMs": 34403
+    },
+    {
+      "answer": "根据您的需求，以下是推荐的历史类或真实事件相关书籍，按推荐顺序排列并附上推荐理由：\n\n1. **《Hitler》**（Leisa Stewart-Sharpe）  \n   - 推荐理由：本书是关于阿道夫·希特勒的权威传记体系，内容严谨，适合希望深入理解二战与纳粹德国历史的读者 [3]。\n\n2. **《Munich》**（Robert Harris）  \n   - 推荐理由：以1938年慕尼摘会议为背景的历史惊悚小说，结合政治博弈与人性探讨，适合喜爱历史题材与悬疑情节的读者 [1]。\n\n3. **《How I Found Livingstone》**（Henry M. Stanley）  \n   - 推荐理由：记录19世纪非洲探险的纪实文本，涉及殖民时代地理想象与探险叙事，适合对历史、旅行文学和殖民史感兴趣的读者 [5]。\n\n4. **《Icebreaker》**（Horatio Clare）  \n   - 推荐理由：结合百年独立庆典背景，探讨极地探险与航海史，提供独特的历史视角与阅读体验 [2]。\n\n5. **《The Red Arrows》**（David Montenegro）  \n   - 推荐理由：聚焦英国皇家空军“红箭”飞行表演队，内容涉及航空史与军事精英文化，适合对航空史及飞行表演感兴趣的读者 [4]。\n\n以上推荐按历史深度、叙事风格及主题多样性排序，兼顾真实事件与历史背景的深度挖掘。",
+      "answerModeActual": "RECOMMENDATION",
+      "answerModeExpected": "recommendation",
+      "answerable": true,
+      "citationCoverage": 1.0,
+      "error": null,
+      "evidenceCount": 5,
+      "evidenceIds": [
+        48,
+        79,
+        75,
+        82,
+        262
+      ],
+      "evidenceRecall": 0.0,
+      "expectedEvidenceHit": false,
+      "expectedResourceIds": [
+        74
+      ],
+      "fallbackApplied": false,
+      "generationLatencyMs": 27972,
+      "id": "r047",
+      "limitations": [
+        "回答严格受当前检索证据约束，不使用馆藏外事实补充。",
+        "证据范围仅限当前系统已入库并已建立索引的阅读资源。"
+      ],
+      "llmFallbackApplied": false,
+      "model": "qwen3:8b",
+      "question": "帮我推荐一些历史类或真实事件相关书。",
+      "requestLatencyMs": 28276.722800000003,
+      "retrievalLatencyMs": 290,
+      "strategy": "hybrid-v3(exact-db+bm25+vector+reranker)",
+      "totalLatencyMs": 28263
+    },
+    {
+      "answer": "根据您的需求，以下是运动或励志传记相关的馆藏推荐，按相关性与推荐顺序排列：\n\n1. **Believe** - Nicola Adams  \n   本书由奥运拳击冠军Nicola Adams撰写，回顾其在2012年伦敦奥运会与2016年里约奥运会连续夺金的历程，展现女性运动员突破历史、坚持梦想的精神力量 [1]。\n\n2. **Adrenaline** - Zlatan Ibrahimovic  \n   由足球传奇兹拉坦·伊布拉希莫维奇撰写，聚焦其职业生涯回顾与个人心路历程，展现其独特的竞技精神与个性魅力 [2]。\n\n3. **All In** - Billie Jean King  \n   网球传奇比利·简·金的自传，回顾其职业生涯并探讨其社会行动主义，主题涵盖平等、公平与社会正义 [3]。\n\n4. **The Cretan Runner** - George Psychoundakis  \n   虽为动作冒险类作品，但内容聚焦于勇气、坚韧与人性光辉，适合喜爱战争背景下的个人英雄叙事及历史题材的读者 [4]。\n\n5. **Freedom in Exile** - Dalai Lama XIV  \n   第十四世达赖喇嘛的自传，讲述其早年经历、被认定为达赖喇嘛、离开西藏后的流亡生活，以及其对信仰、政治、非暴力与文化保存的思考 [5]。\n\n以上推荐均基于关键词相关性与重排序模型的判断，如需进一步筛选或获取更多馆藏信息，可继续提供具体方向（如作者、主题、年代等）进行检索。",
+      "answerModeActual": "FACTUAL_LOOKUP",
+      "answerModeExpected": "recommendation",
+      "answerable": true,
+      "citationCoverage": 1.0,
+      "error": null,
+      "evidenceCount": 5,
+      "evidenceIds": [
+        86,
+        84,
+        90,
+        45,
+        180
+      ],
+      "evidenceRecall": 0.0,
+      "expectedEvidenceHit": true,
+      "expectedResourceIds": [],
+      "fallbackApplied": false,
+      "generationLatencyMs": 30682,
+      "id": "r048",
+      "limitations": [
+        "回答严格受当前检索证据约束，不使用馆藏外事实补充。",
+        "证据范围仅限当前系统已入库并已建立索引的阅读资源。"
+      ],
+      "llmFallbackApplied": false,
+      "model": "qwen3:8b",
+      "question": "找运动或励志传记相关馆藏。",
+      "requestLatencyMs": 30985.717699999997,
+      "retrievalLatencyMs": 291,
+      "strategy": "hybrid-v3(exact-db+bm25+vector+reranker)",
+      "totalLatencyMs": 30974
+    },
+    {
+      "answer": "当证据不足时，回答应限制结论，避免做出未经证实的断言。具体做法如下：\n\n1. **明确说明证据不足**：指出当前提供的信息不足以支持某一结论，避免误导读者。\n2. **不编造信息**：不添加馆藏中没有的内容或推测性信息。\n3. **提供可继续检索的方向**：建议用户补充相关证据或提供更具体的查询方向，以便进一步验证或扩展信息。\n\n例如，若用户询问“某本书是否讨论了逻辑学基础”，但提供的证据中没有明确提及该书内容，应回答：“当前证据未明确提及该书是否讨论逻辑学基础，建议补充相关书目信息或提供更具体的查询方向。”\n\n参考来源：[1] Metalogic；[2] The Final Problem；[3] Appliance",
+      "answerModeActual": "FACTUAL_LOOKUP",
+      "answerModeExpected": "limitation",
+      "answerable": true,
+      "citationCoverage": 0.6,
+      "error": null,
+      "evidenceCount": 5,
+      "evidenceIds": [
+        322,
+        274,
+        16,
+        420,
+        374
+      ],
+      "evidenceRecall": 0.0,
+      "expectedEvidenceHit": true,
+      "expectedResourceIds": [],
+      "fallbackApplied": false,
+      "generationLatencyMs": 13948,
+      "id": "r049",
+      "limitations": [
+        "回答严格受当前检索证据约束，不使用馆藏外事实补充。",
+        "证据范围仅限当前系统已入库并已建立索引的阅读资源。"
+      ],
+      "llmFallbackApplied": false,
+      "model": "qwen3:8b",
+      "question": "如果证据不足，回答应该怎样限制结论？",
+      "requestLatencyMs": 14234.867400000001,
+      "retrievalLatencyMs": 277,
+      "strategy": "hybrid-v3(exact-db+bm25+vector+reranker)",
+      "totalLatencyMs": 14226
+    },
+    {
+      "answer": "基于当前馆藏，推荐数据密集型系统设计书的顺序如下：\n\n1. **《The Art of Computer Programming: Semi-numerical algorithms》** [5]  \n   理由：本书是计算机科学经典著作，聚焦半数值算法，涵盖随机数生成、算术运算及数论算法等核心领域，适合需要深入理解算法设计与理论的读者。\n\n2. **《Matrix Computations》** [3]  \n   理由：本书是数值线性代和领域的经典著作，内容涵盖矩阵计算的理论与应用，适合需要解决矩阵问题并理解其数学性质的科研人员与工程师。\n\n3. **《Cybernetics Or Control and Communication in the Animal and the Machine》** [4]  \n   理由：作为控制论奠基之作，本书探讨信息流动与反馈机制，适合对系统思维、信息理论及跨学科研究感兴趣的读者。\n\n4. **《Repeated Measures Design for Empirical Researchers》** [2]  \n   理由：本书介绍重复测量设计在实证研究中的应用，适合需要掌握统计设计与数据分析的研究人员。\n\n5. **《Microsoft Outlook Programming》** [1]  \n   理由：虽然本书主要面向Outlook自动化开发，但其内容涉及对象模型、VBA/COM自动化等技术，对系统设计有一定参考价值，但与数据密集型系统设计的关联较弱。",
+      "answerModeActual": "RECOMMENDATION",
+      "answerModeExpected": "limitation",
+      "answerable": true,
+      "citationCoverage": 1.0,
+      "error": null,
+      "evidenceCount": 5,
+      "evidenceIds": [
+        200,
+        326,
+        321,
+        370,
+        222
+      ],
+      "evidenceRecall": 0.0,
+      "expectedEvidenceHit": true,
+      "expectedResourceIds": [],
+      "fallbackApplied": false,
+      "generationLatencyMs": 27294,
+      "id": "r050",
+      "limitations": [
+        "回答严格受当前检索证据约束，不使用馆藏外事实补充。",
+        "证据范围仅限当前系统已入库并已建立索引的阅读资源。"
+      ],
+      "llmFallbackApplied": false,
+      "model": "qwen3:8b",
+      "question": "基于当前馆藏，能不能推荐数据密集型系统设计书？",
+      "requestLatencyMs": 27588.4866,
+      "retrievalLatencyMs": 279,
+      "strategy": "hybrid-v3(exact-db+bm25+vector+reranker)",
+      "totalLatencyMs": 27573
+    },
+    {
+      "answer": "爱情类推荐证据中的共同主题可总结如下：\n\n1. **情感的重逢与治愈**：如《Mix Tape》中通过怀旧与情感重逢带来治愈 [1]。  \n2. **理性与情感的张力**：如《Sense and Sensibility》探讨理性与情感在爱情与社会规范中的冲突 [2]。  \n3. **激情与人性的复杂性**：如《Wuthering Heights》展现激情、复仇与人性黑暗面 [3]。  \n4. **爱与时间的恒常性**：如《The Japanese Lover》颂扬爱在时间与变迁中的坚韧 [4]。  \n5. **人性与命运的探索**：如《Meet Me at the Museum》通过情感叙事探讨人性与命运 [5]。  \n\n这些作品均以细腻的情感描写为核心，结合社会背景或心理深度，展现爱情的多维面貌。",
+      "answerModeActual": "SUMMARY",
+      "answerModeExpected": "summary",
+      "answerable": true,
+      "citationCoverage": 1.0,
+      "error": null,
+      "evidenceCount": 5,
+      "evidenceIds": [
+        55,
+        402,
+        409,
+        407,
+        60
+      ],
+      "evidenceRecall": 0.4,
+      "expectedEvidenceHit": true,
+      "expectedResourceIds": [
+        55,
+        56,
+        271,
+        400,
+        402
+      ],
+      "fallbackApplied": false,
+      "generationLatencyMs": 16944,
+      "id": "r051",
+      "limitations": [
+        "回答严格受当前检索证据约束，不使用馆藏外事实补充。",
+        "证据范围仅限当前系统已入库并已建立索引的阅读资源。"
+      ],
+      "llmFallbackApplied": false,
+      "model": "qwen3:8b",
+      "question": "请总结爱情类推荐证据里的共同主题。",
+      "requestLatencyMs": 17263.893,
+      "retrievalLatencyMs": 310,
+      "strategy": "hybrid-v3(exact-db+bm25+vector+reranker)",
+      "totalLatencyMs": 17254
+    },
+    {
+      "answer": "科幻类推荐证据中的共同主题主要集中在以下几个方面：\n\n1. **文明与人类命运的反思**：多部作品探讨了文明消逝、人类在极端环境下的生存状态以及未来社会的可能走向，如《The Book of Sand》中对末世的描绘 [1]。\n\n2. **科技与社会的伦理冲突**：《The Every》通过科技巨头垄断的寓言，反映了数字时代隐私危机与人性异化问题 [2]，而《Appliance》则聚焦于未知实验与人身自由受限的反乌托邦情境 [5]。\n\n3. **哲学与道德思辨**：《That Hideous Strength》融合了基督教道德与现代科学幻想，探讨善恶对抗与人性堕落 [4]，《Science Fiction and Space Futures》则通过太空探索与未来学视角引发对宇宙与人类角色的思考 [3]。\n\n4. **个体在系统中的困境**：多部作品关注个体在庞大社会结构或科技系统中的无力感与焦虑，如《Appliance》中的心理悬疑与非传统叙事 [5]。\n\n这些主题反映了科幻文学对现实社会、科技发展与人类未来的深度关切。",
+      "answerModeActual": "SUMMARY",
+      "answerModeExpected": "summary",
+      "answerable": true,
+      "citationCoverage": 1.0,
+      "error": null,
+      "evidenceCount": 5,
+      "evidenceIds": [
+        17,
+        14,
+        418,
+        273,
+        16
+      ],
+      "evidenceRecall": 0.3333333333333333,
+      "expectedEvidenceHit": true,
+      "expectedResourceIds": [
+        14,
+        15,
+        18
+      ],
+      "fallbackApplied": false,
+      "generationLatencyMs": 21848,
+      "id": "r052",
+      "limitations": [
+        "回答严格受当前检索证据约束，不使用馆藏外事实补充。",
+        "证据范围仅限当前系统已入库并已建立索引的阅读资源。"
+      ],
+      "llmFallbackApplied": false,
+      "model": "qwen3:8b",
+      "question": "请总结科幻类推荐证据里的共同主题。",
+      "requestLatencyMs": 22138.2163,
+      "retrievalLatencyMs": 281,
+      "strategy": "hybrid-v3(exact-db+bm25+vector+reranker)",
+      "totalLatencyMs": 22129
+    },
+    {
+      "answer": "自我成长类书籍的常见适读人群主要包括以下几类：\n\n1. **希望提升自我认知与内心平静的读者**：这类人群通常对内在潜能、心态转变及自我赋能感兴趣，适合阅读如《The Magic Within》[1] 这类书籍。\n\n2. **关注财富心理学与财商提升的读者**：对思维模式、信念系统与物质成功关系感兴趣的读者，适合阅读如《The Science of Getting Rich》[2] 这类经典著作。\n\n3. **对心理发展理论与自我结构形成感兴趣的读者**：这类读者可能对人类心智成长的学术视角感兴趣，适合阅读如《The Development of the Ego》[3] 这类书籍。\n\n4. **希望拓宽认知视野与提升文化敏感度的读者**：对跨文化接触与自我认同影响感兴趣的读者，适合阅读如《Breadth of Perspective, Culture Contact, and Self》[4] 这类书籍。\n\n5. **对文学作品中女性成长与独立人格感兴趣的读者**：虽然《Jane Eyre》[5] 不属于典型的自我成长类书籍，但其展现的女性成长与自我尊严主题，仍可作为自我成长的文学参考。\n\n以上总结基于提供的证据片段，若需进一步细分或推荐，可继续检索具体人群特征与书籍匹配度。",
+      "answerModeActual": "SUMMARY",
+      "answerModeExpected": "summary",
+      "answerable": true,
+      "citationCoverage": 1.0,
+      "error": null,
+      "evidenceCount": 5,
+      "evidenceIds": [
+        435,
+        388,
+        434,
+        423,
+        393
+      ],
+      "evidenceRecall": 0.3333333333333333,
+      "expectedEvidenceHit": true,
+      "expectedResourceIds": [
+        385,
+        429,
+        435
+      ],
+      "fallbackApplied": false,
+      "generationLatencyMs": 25660,
+      "id": "r053",
+      "limitations": [
+        "回答严格受当前检索证据约束，不使用馆藏外事实补充。",
+        "证据范围仅限当前系统已入库并已建立索引的阅读资源。"
+      ],
+      "llmFallbackApplied": false,
+      "model": "qwen3:8b",
+      "question": "请总结自我成长类书籍的常见适读人群。",
+      "requestLatencyMs": 25971.9329,
+      "retrievalLatencyMs": 303,
+      "strategy": "hybrid-v3(exact-db+bm25+vector+reranker)",
+      "totalLatencyMs": 25964
+    },
+    {
+      "answer": "根据可借资源中提供的爱情小说信息，若需优先选择一本，推荐顺序如下：\n\n1. **Pride and Prejudice** [1]  \n   - 理由：作为简·奥斯汀的经典之作，该书以深刻的社会批判与细腻的情感描写著称，适合喜爱经典文学与细腻心理描写的读者，兼具文学深度与阅读愉悦。\n\n2. **Sense and Sensibility** [4]  \n   - 理由：同样是简·奥斯汀的作品，聚焦理性与情感的张力，展现人物内心成长与道德抉择，适合喜爱古典浪漫主义与社会风俗描写的读者。\n\n3. **Second Chance** [2]  \n   - 理由：讲述跨越生活方式差异的爱情故事，聚焦情感重建与个人成长，适合喜爱温馨治愈系罗曼史的读者。\n\n4. **The Giver of Stars** [3]  \n   - 理由：以细腻笔触描绘人际关系与情感成长，强调书籍对生活的启发，兼具文学性与可读性，适合喜爱浪漫小说与温情叙事的读者。\n\n5. **Meet Me at the Museum** [5]  \n   - 理由：通过喜悦、绝望与发现的私密叙事，展现友谊与真相的张力，适合喜爱情感细腻、探讨人性与命运主题的读者。\n\n综上，若优先选择一本，**Pride and Prejudice** [1] 是最经典且广受好评的选择。",
+      "answerModeActual": "FACTUAL_LOOKUP",
+      "answerModeExpected": "recommendation",
+      "answerable": true,
+      "citationCoverage": 1.0,
+      "error": null,
+      "evidenceCount": 5,
+      "evidenceIds": [
+        400,
+        401,
+        56,
+        402,
+        60
+      ],
+      "evidenceRecall": 0.75,
+      "expectedEvidenceHit": true,
+      "expectedResourceIds": [
+        56,
+        271,
+        400,
+        402
+      ],
+      "fallbackApplied": false,
+      "generationLatencyMs": 27047,
+      "id": "r054",
+      "limitations": [
+        "回答严格受当前检索证据约束，不使用馆藏外事实补充。",
+        "证据范围仅限当前系统已入库并已建立索引的阅读资源。"
+      ],
+      "llmFallbackApplied": false,
+      "model": "qwen3:8b",
+      "question": "只看可借资源，爱情小说应该优先选哪本？",
+      "requestLatencyMs": 27348.396999999997,
+      "retrievalLatencyMs": 293,
+      "strategy": "hybrid-v3(exact-db+bm25+vector+reranker)",
+      "totalLatencyMs": 27341
+    },
+    {
+      "answer": "根据可借资源中科幻小说的分类与简介，推荐顺序如下：\n\n1. **《The Martian》**（《火星救援》）  \n   - 理由：作为国际畅销书并改编为同名电影，融合硬科幻元素与紧张情节，适合喜爱太空探索与科技乐观主义叙事的读者 [5]。\n\n2. **《The Book of Sand》**（《沙之书》）  \n   - 理由：描绘末世景象，探讨文明消逝后的生存与人性主题，适合喜爱哲学思考与末世氛围的读者 [2]。\n\n3. **A Star Wars Story**（《星球大战》故事）  \n   - 理由：作为官方认可的衍生作品，聚焦韩·索罗的早年经历，适合喜爱太空歌剧与角色背景故事的读者 [4]。\n\n**说明**：  \n- 《Cloning》虽被归类为科幻，但实际为科学/生物学非虚构作品，不推荐作为科幻小说优先选择 [3]。  \n- 《The Hobbit》为奇幻文学，非科幻小说，因此不纳入推荐 [1]。",
+      "answerModeActual": "FACTUAL_LOOKUP",
+      "answerModeExpected": "recommendation",
+      "answerable": true,
+      "citationCoverage": 1.0,
+      "error": null,
+      "evidenceCount": 5,
+      "evidenceIds": [
+        253,
+        17,
+        410,
+        21,
+        49
+      ],
+      "evidenceRecall": 0.0,
+      "expectedEvidenceHit": false,
+      "expectedResourceIds": [
+        14,
+        18,
+        19
+      ],
+      "fallbackApplied": false,
+      "generationLatencyMs": 20180,
+      "id": "r055",
+      "limitations": [
+        "回答严格受当前检索证据约束，不使用馆藏外事实补充。",
+        "证据范围仅限当前系统已入库并已建立索引的阅读资源。"
+      ],
+      "llmFallbackApplied": false,
+      "model": "qwen3:8b",
+      "question": "只看可借资源，科幻小说应该优先选哪本？",
+      "requestLatencyMs": 20477.6314,
+      "retrievalLatencyMs": 288,
+      "strategy": "hybrid-v3(exact-db+bm25+vector+reranker)",
+      "totalLatencyMs": 20468
+    },
+    {
+      "answer": "根据提供的证据片段，以下是按难度重新排序的自助书证据：\n\n1. **《Thermodynamics》**（Arthur Shavit） - 难度：中等  \n   理由：虽然属于数学类，但本书被描述为“面向初学者的热力学入门教材”，在保持严谨性的同时提供了更易理解的讲解方式，适合需要系统建立热力学概念的读者 [2]。\n\n2. **《Metalogic》**（Geoffrey Hunter） - 难度：较高  \n   理由：本书面向“无数学专业背景的读者”，提供“标准一阶逻辑基本元定理的完整证明”，并涉及“数学与集合论概念”，配有大量习题及详尽解答，适合希望系统理解逻辑学基础的自学者 [4]。\n\n3. **《Self and Family》**（Jane Cary Peck） - 难度：中等  \n   理由：本书聚焦于“个人成长与家庭关系的平衡”，内容可能探讨“自我认知、人际互动及家庭和谐等主题”，旨在帮助读者在复杂的社会角色中寻找内心秩序，适合关注心理健康与家庭动态的读者 [1]。\n\n4. **《Motherself》**（Kathryn Allen Rabuzzi） - 难度：中等  \n   理由：本书属自助与灵性成长类，探讨“女性自我实现路径”，构建基于“女神原型的 gynocentric 神话体系”，为女性提供表达宗教经验的新视角，适合寻求灵性认同的读者 [3]。\n\n5. **《In an African Direction》**（Hendrikus Laan） - 难度：中等  \n   理由：本书是一部自助类作品，探讨“个人成长与方向选择”，结合“非洲文化视角或象征意义”，引导读者反思“生活目标、内在动力与精神旅程”，适合寻求心灵启发与自我提升的读者 [5]。\n\n**总结**：  \n- **《Metalogic》** 难度最高，适合有较强数学或逻辑背景的读者。  \n- **《Thermodynamics》** 难度中等，适合初学者。  \n- 其余自助类书籍（《Self and Family》、《Motherself》、《In an African Direction》）难度相近，适合不同方向的自我成长与灵性探索。",
+      "answerModeActual": "FACTUAL_LOOKUP",
+      "answerModeExpected": "reading-path",
+      "answerable": true,
+      "citationCoverage": 1.0,
+      "error": null,
+      "evidenceCount": 5,
+      "evidenceIds": [
+        433,
+        332,
+        432,
+        322,
+        428
+      ],
+      "evidenceRecall": 0.0,
+      "expectedEvidenceHit": false,
+      "expectedResourceIds": [
+        385,
+        435,
+        436
+      ],
+      "fallbackApplied": false,
+      "generationLatencyMs": 43520,
+      "id": "r056",
+      "limitations": [
+        "回答严格受当前检索证据约束，不使用馆藏外事实补充。",
+        "证据范围仅限当前系统已入库并已建立索引的阅读资源。"
+      ],
+      "llmFallbackApplied": false,
+      "model": "qwen3:8b",
+      "question": "按难度重新排序这些自助书证据。",
+      "requestLatencyMs": 43787.359000000004,
+      "retrievalLatencyMs": 258,
+      "strategy": "hybrid-v3(exact-db+bm25+vector+reranker)",
+      "totalLatencyMs": 43779
+    },
+    {
+      "answer": "Jane Austen 的相关作品包括以下几部：\n\n1. **《Pride and Prejudice》** [1]  \n   - 类别：Romantic  \n   - 简介：以机智讽刺的笔触描绘社会阶层与婚恋观念，展现人物性格成长与真挚情感。\n\n2. **《Sense and Sensibility》** [2]  \n   - 类别：Romantic  \n   - 简介：探讨理性与情感在爱情、婚姻及社会规范中的张力，展现19世纪英国乡绅阶层的生活图景。\n\n3. **《Northanger Abbey》** [3]  \n   - 类别：Romantic  \n   - 简介：讲述想象力丰富的少女凯瑟琳在巴斯社交圈与诺桑觉寺的经历，探讨天真、幻想与现实之间的冲突。\n\n4. **《Jane Austen's Letters》** [4]  \n   - 类别：History  \n   - 简介：收录简·奥斯汀书信并融入最新学术成果，是研究奥斯汀及其时代的重要史料文献。\n\n5. **《Mansfield Park》** [5]  \n   - 类别：Romantic  \n   - 简介：探讨奴隶制、理想化女性气质的压迫及女性教育等议题，适合喜爱经典文学与社会批判的读者。\n\n**推荐顺序**：  \n1. **《Pride and Prejudice》** [1]：作为简·奥斯汀最广为人知的作品，适合入门。  \n2. **《Sense and Sensibility》** [2]：风格与主题与《Pride and Prejudice》相似，适合进一步阅读。  \n3. **《Mansfield Park》** [5]：风格更复杂，适合对社会批判感兴趣的读者。  \n4. **《Northanger Abbey》** [3]：风格幽默，适合喜欢英式讽刺的读者。  \n5. **《Jane Austen's Letters》** [4]：适合研究简·奥斯汀生平与时代背景的读者。",
+      "answerModeActual": "FACTUAL_LOOKUP",
+      "answerModeExpected": "author",
+      "answerable": true,
+      "citationCoverage": 1.0,
+      "error": null,
+      "evidenceCount": 5,
+      "evidenceIds": [
+        400,
+        402,
+        398,
+        284,
+        395
+      ],
+      "evidenceRecall": 0.6666666666666666,
+      "expectedEvidenceHit": true,
+      "expectedResourceIds": [
+        271,
+        400,
+        402
+      ],
+      "fallbackApplied": false,
+      "generationLatencyMs": 36596,
+      "id": "r057",
+      "limitations": [
+        "回答严格受当前检索证据约束，不使用馆藏外事实补充。",
+        "证据范围仅限当前系统已入库并已建立索引的阅读资源。"
+      ],
+      "llmFallbackApplied": false,
+      "model": "qwen3:8b",
+      "question": "继续找 Jane Austen 的相关作品。",
+      "requestLatencyMs": 36819.852699999996,
+      "retrievalLatencyMs": 215,
+      "strategy": "hybrid-v3(exact-db+bm25+vector+reranker)",
+      "totalLatencyMs": 36811
+    },
+    {
+      "answer": "H. G. Wells 的相关作品包括以下几部：\n\n1. **《The Invisible Man》**  \n   - 类别：Science Fiction  \n   - 简介：这是科幻先驱 H.G. Wells 的经典之作，属于早期科幻恐怖小说。故事以寓言形式探讨贪婪、孤立以及缺乏伦理约束的科学所带来的危险。作品兼具惊悚氛围与深刻社会反思，适合喜爱经典科幻与人性主题研究的读者。[1]\n\n2. **《The War of the Worlds》**  \n   - 类别：Science Fiction  \n   - 简介：这是科幻文学奠基之作，描绘外星文明入侵地球的惊悚图景。作品探讨人类在高等智慧威胁下的脆弱与抗争，展现末日危机中的文明反思，具有极高的文学价值与思想深度。[2]\n\n若需进一步查找 H. G. Wells 的其他作品，可考虑检索关键词如 \"H.G. Wells other works\" 或 \"H.G. Wells bibliography\"，以获取更全面的著作列表。",
+      "answerModeActual": "FACTUAL_LOOKUP",
+      "answerModeExpected": "author",
+      "answerable": true,
+      "citationCoverage": 0.4,
+      "error": null,
+      "evidenceCount": 5,
+      "evidenceIds": [
+        19,
+        18,
+        321,
+        359,
+        178
+      ],
+      "evidenceRecall": 1.0,
+      "expectedEvidenceHit": true,
+      "expectedResourceIds": [
+        18,
+        19
+      ],
+      "fallbackApplied": false,
+      "generationLatencyMs": 18860,
+      "id": "r058",
+      "limitations": [
+        "回答严格受当前检索证据约束，不使用馆藏外事实补充。",
+        "证据范围仅限当前系统已入库并已建立索引的阅读资源。"
+      ],
+      "llmFallbackApplied": false,
+      "model": "qwen3:8b",
+      "question": "继续找 H. G. Wells 的相关作品。",
+      "requestLatencyMs": 19130.011,
+      "retrievalLatencyMs": 255,
+      "strategy": "hybrid-v3(exact-db+bm25+vector+reranker)",
+      "totalLatencyMs": 19116
+    },
+    {
+      "answer": "根据提供的证据片段，以下是针对数学和逻辑相关书籍的比较分析：\n\n### 1. **目标读者**\n- **《Metalogic》** [1]：适合无数学专业背景的读者，旨在系统理解逻辑学基础。\n- **《Matrix Computations》** [3]：适合科研人员与工程师，侧重于数值线性代和矩阵计算。\n- **《The Final Problem》** [4]：适合喜爱逻辑解谜与经典探案故事的读者。\n- **《Emil and the Detectives》** [2]：适合青少年，培养逻辑思维与阅读兴趣。\n- **《The Monist》** [5]：适合对哲学与逻辑学感兴趣的读者，具有学术参考价值。\n\n### 2. **内容深度**\n- **《Metalogic》** [1]：提供标准一阶逻辑基本元定理的完整证明，内容深入。\n- **《Matrix Computations》** [3]：涵盖理论与应用，新增张量计算、快速变换及大规模SVD等内容，内容丰富。\n- **《The Final Problem》** [4]：以推理文学为主，内容偏向故事性。\n- **《The Monist》** [5]：收录多位思想家的文章，内容具有哲学深度。\n- **《Emil and the Detectives》** [2]：以儿童侦探小说为主，内容偏向趣味性。\n\n### 3. **适用场景**\n- **《Metalogic》** [1]：适合希望系统理解逻辑学基础的自学者。\n- **《Matrix Computations》** [3]：适合需要解决矩阵问题并理解其数学性质的科研人员与工程师。\n- **《The Final Problem》** [4]：适合喜爱逻辑解谜与经典探案故事的读者。\n- **《The Monist》** [5]：适合对哲学与逻辑学感兴趣的读者，具有学术参考价值。\n- **《Emil and the Detectives》** [2]：适合青少年，培养逻辑思维与阅读兴趣。\n\n### 4. **推荐顺序**\n1. **《Metalogic》** [1]：适合希望系统理解逻辑学基础的读者。\n2. **《Matrix Computations》** [3]：适合需要解决矩阵问题并理解其数学性质的读者。\n3. **《The Final Problem》** [4]：适合喜爱逻辑解谜与经典探案故事的读者。\n4. **《The Monist》** [5]：适合对哲学与逻辑学感兴趣的读者。\n5. **《Emil and the Detectives》** [2]：适合青少年，培养逻辑思维与阅读兴趣。\n\n### 5. **阅读路径建议**\n- **初级阶段**：阅读《Emil and the Detectives》 [2]，培养逻辑思维与阅读兴趣。\n- **中级阶段**：阅读《Metalogic》 [1]，系统理解逻辑学基础。\n- **高级阶段**：阅读《Matrix Computations》 [3]，深入理解数值线性代数与矩阵计算。\n- **拓展阅读**：阅读《The Final Problem》 [4] 和《The Monist》 [5]，拓展逻辑与哲学思维。\n\n以上是比较分析，如需进一步推荐或阅读路径规划，可提供更具体的需求。",
+      "answerModeActual": "COMPARISON",
+      "answerModeExpected": "comparison",
+      "answerable": true,
+      "citationCoverage": 1.0,
+      "error": null,
+      "evidenceCount": 5,
+      "evidenceIds": [
+        322,
+        337,
+        321,
+        274,
+        419
+      ],
+      "evidenceRecall": 0.0,
+      "expectedEvidenceHit": false,
+      "expectedResourceIds": [
+        315,
+        329,
+        369
+      ],
+      "fallbackApplied": false,
+      "generationLatencyMs": 60503,
+      "id": "r059",
+      "limitations": [
+        "回答严格受当前检索证据约束，不使用馆藏外事实补充。",
+        "证据范围仅限当前系统已入库并已建立索引的阅读资源。"
+      ],
+      "llmFallbackApplied": false,
+      "model": "qwen3:8b",
+      "question": "帮我比较几本数学和逻辑相关的书。",
+      "requestLatencyMs": 60780.3023,
+      "retrievalLatencyMs": 263,
+      "strategy": "hybrid-v3(exact-db+bm25+vector+reranker)",
+      "totalLatencyMs": 60767
+    },
+    {
+      "answer": "**阅读路径：从爱情小说到社会讽刺**\n\n**阶段一：经典爱情小说入门**  \n1. **《Pride and Prejudice》** [1]  \n   - 简·奥斯汀的代表作，以机智讽刺的笔触描绘社会阶层与婚恋观念，兼具爱情叙事与社会批判，是浪漫小说的典范。  \n2. **《Sense and Sensibility》** [3]  \n   - 同为简·奥斯汀的作品，探讨理性与情感在爱情、婚姻及社会规范中的张力，适合进一步理解浪漫小说的深度与社会背景。  \n3. **《Jane Eyre》** [2]  \n   - 夏洛蒂·勃朗特的代表作，以第一人称叙述女性成长与情感追求，融合哥特氛围与社会批判，展现独立人格的坚守。\n\n**阶段二：向社会讽刺与批判过渡**  \n1. **《Mansfield Park》** [4]  \n   - 简·奥斯汀最复杂深沉的小说之一，通过范妮·普莱斯的视角探讨奴隶制、女性教育与道德困境，展现更深层的社会批判。  \n2. **《The Giver of Stars》** [5]  \n   - Jojo Moyes的作品，虽仍属浪漫小说，但强调书籍对生活的启发，体现文学与社会的联系，为向更深刻的社会叙事过渡做铺垫。\n\n**理由**：  \n- 从简·奥斯汀的浪漫小说入手，逐步深入其社会批判，再过渡到更广泛的社会议题，符合从爱情叙事到社会讽刺的阅读路径。  \n- 每部作品均保留浪漫小说的情感张力，同时逐步增加社会批判的深度，使读者在情感共鸣中理解社会问题。",
+      "answerModeActual": "READING_PATH",
+      "answerModeExpected": "reading-path",
+      "answerable": true,
+      "citationCoverage": 1.0,
+      "error": null,
+      "evidenceCount": 5,
+      "evidenceIds": [
+        400,
+        393,
+        402,
+        395,
+        56
+      ],
+      "evidenceRecall": 0.5,
+      "expectedEvidenceHit": true,
+      "expectedResourceIds": [
+        14,
+        271,
+        400,
+        402
+      ],
+      "fallbackApplied": false,
+      "generationLatencyMs": 31933,
+      "id": "r060",
+      "limitations": [
+        "回答严格受当前检索证据约束，不使用馆藏外事实补充。",
+        "证据范围仅限当前系统已入库并已建立索引的阅读资源。"
+      ],
+      "llmFallbackApplied": false,
+      "model": "qwen3:8b",
+      "question": "请给一个从爱情小说到社会讽刺的阅读路径。",
+      "requestLatencyMs": 32231.623900000002,
+      "retrievalLatencyMs": 285,
+      "strategy": "hybrid-v3(exact-db+bm25+vector+reranker)",
+      "totalLatencyMs": 32218
+    }
+  ],
+  "summary": {
+    "answerableRate": 1.0,
+    "avgTotalLatencyMs": 25555.016666666666,
+    "dataset": "readseek-rag-60",
+    "evidenceHitRate": 0.8166666666666667,
+    "generatedAt": "2026-06-06T10:01:42",
+    "meanCitationCoverage": 0.7933333333333333,
+    "meanEvidenceRecall": 0.6444444444444445,
+    "mode": "standard",
+    "provider": "ollama",
+    "questionCount": 60,
+    "successfulQuestions": 60,
+    "tool": {
+      "name": "readseek-bench-rs",
+      "version": "0.1.0"
+    }
+  }
+}

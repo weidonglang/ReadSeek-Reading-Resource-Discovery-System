@@ -1,0 +1,9 @@
+scenario,sequence,success,latencyMs,resultCount,error
+recommendation,2,true,88.5565,2,
+search,3,true,401.7072,8,
+search,1,true,495.716,8,
+recommendation,4,true,70.62129999999999,2,
+recommendation,6,true,74.66290000000001,2,
+search,5,true,417.7293,8,
+search,7,true,338.8886,8,
+recommendation,8,true,67.8919,2,

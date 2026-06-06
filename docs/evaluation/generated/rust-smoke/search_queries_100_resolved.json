@@ -1,0 +1,112 @@
+{
+  "queries": [
+    {
+      "description": "exact-title evaluation query for ReadSeek hybrid retrieval.",
+      "id": "q001",
+      "intent": "exact-title",
+      "maxRelevantIds": null,
+      "query": "Pride and Prejudice",
+      "relevance": {
+        "authorHints": [],
+        "categoryHints": [],
+        "keywordHints": [
+          "romantic"
+        ],
+        "maxRelevantIds": 12,
+        "tagHints": [
+          "Jane Austen"
+        ],
+        "titleHints": [
+          "Pride and Prejudice"
+        ]
+      },
+      "relevantResourceIds": [],
+      "resolvedRelevantResourceIds": [
+        400,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        390
+      ]
+    },
+    {
+      "description": "exact-title evaluation query for ReadSeek hybrid retrieval.",
+      "id": "q002",
+      "intent": "exact-title",
+      "maxRelevantIds": null,
+      "query": "Sense and Sensibility",
+      "relevance": {
+        "authorHints": [],
+        "categoryHints": [],
+        "keywordHints": [
+          "romantic"
+        ],
+        "maxRelevantIds": 12,
+        "tagHints": [
+          "Jane Austen"
+        ],
+        "titleHints": [
+          "Sense and Sensibility"
+        ]
+      },
+      "relevantResourceIds": [],
+      "resolvedRelevantResourceIds": [
+        402,
+        271,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62
+      ]
+    },
+    {
+      "description": "exact-title evaluation query for ReadSeek hybrid retrieval.",
+      "id": "q003",
+      "intent": "exact-title",
+      "maxRelevantIds": null,
+      "query": "The War of the Worlds",
+      "relevance": {
+        "authorHints": [],
+        "categoryHints": [],
+        "keywordHints": [
+          "science fiction"
+        ],
+        "maxRelevantIds": 12,
+        "tagHints": [
+          "H. G. Wells"
+        ],
+        "titleHints": [
+          "The War of the Worlds"
+        ]
+      },
+      "relevantResourceIds": [],
+      "resolvedRelevantResourceIds": [
+        18,
+        13,
+        14,
+        15,
+        16,
+        17,
+        19,
+        20,
+        21,
+        22,
+        410,
+        411
+      ]
+    }
+  ]
+}

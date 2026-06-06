@@ -47,7 +47,7 @@ public class EvidenceQaServiceImpl implements EvidenceQaService {
         int evidenceLimit = sanitizeEvidenceLimit(ragMode, searchLimit);
 
         long retrievalStartedAt = System.nanoTime();
-        BookSearchResponseDto searchResponse = bookSearchService.searchBooks(question, searchLimit);
+        BookSearchResponseDto searchResponse = searchWithQaFallback(question, searchLimit);
         long retrievalLatencyMs = Duration.ofNanos(System.nanoTime() - retrievalStartedAt).toMillis();
         List<BookSearchHitDto> hits = searchResponse == null || searchResponse.getHits() == null
                 ? List.of()
@@ -119,6 +119,65 @@ public class EvidenceQaServiceImpl implements EvidenceQaService {
         snippet.setSource(hit == null || hit.getSource() == null ? fallbackSource(hit) : hit.getSource());
         snippet.setReranked(hit != null && Boolean.TRUE.equals(hit.getReranked()));
         return snippet;
+    }
+
+    private BookSearchResponseDto searchWithQaFallback(String question, int searchLimit) {
+        BookSearchResponseDto initialResponse = bookSearchService.searchBooks(question, searchLimit);
+        if (hasSearchHits(initialResponse)) {
+            return initialResponse;
+        }
+
+        for (String fallbackQuery : buildQaFallbackQueries(question)) {
+            BookSearchResponseDto fallbackResponse = bookSearchService.searchBooks(fallbackQuery, searchLimit);
+            if (hasSearchHits(fallbackResponse)) {
+                fallbackResponse.setQuery(question);
+                fallbackResponse.setFallbackApplied(true);
+                String strategy = fallbackResponse.getStrategy() == null ? "qa-query-expansion" : fallbackResponse.getStrategy();
+                fallbackResponse.setStrategy(strategy + "+qa-query-expansion");
+                return fallbackResponse;
+            }
+        }
+        return initialResponse;
+    }
+
+    private boolean hasSearchHits(BookSearchResponseDto response) {
+        return response != null && response.getHits() != null && !response.getHits().isEmpty();
+    }
+
+    private List<String> buildQaFallbackQueries(String question) {
+        String normalized = question == null ? "" : question.trim();
+        String lower = normalized.toLowerCase(Locale.ROOT);
+        List<String> queries = new ArrayList<>();
+
+        if (normalized.contains("\u4eba\u5de5\u667a\u80fd")
+                || lower.contains(" ai")
+                || lower.contains("artificial intelligence")
+                || lower.contains("machine learning")) {
+            queries.add("artificial intelligence machine learning deep learning intelligence science");
+            queries.add("computer science artificial intelligence beginner introduction");
+            queries.add("Intelligence Science computer science cognition artificial intelligence");
+        }
+        if (normalized.contains("\u8ba1\u7b97\u673a") || lower.contains("computer science")) {
+            queries.add("computer science programming software technology");
+        }
+        if (normalized.contains("\u4e2a\u4eba\u6210\u957f") || normalized.contains("\u6210\u957f")
+                || normalized.contains("\u4e13\u6ce8") || lower.contains("self management")) {
+            queries.add("self help focus psychology behavior productivity");
+            queries.add("psychology self help personal growth");
+        }
+        if (normalized.contains("\u8003\u7814") || normalized.contains("\u590d\u4e60")
+                || lower.contains("exam")) {
+            queries.add("study learning exam preparation textbook");
+            queries.add("education learning method focus");
+        }
+
+        queries.add(normalized.replaceAll("[\u6211\u60f3\u5e94\u8be5\u54ea\u51e0\u672c\u5148\u8bfb\u7cfb\u7edf\u5b66\u4e60\uff1f?]", " ").trim());
+        queries.add("book beginner introduction guide");
+        return queries.stream()
+                .filter(query -> query != null && !query.isBlank())
+                .filter(query -> !query.equalsIgnoreCase(normalized))
+                .distinct()
+                .toList();
     }
 
     private boolean hasReliableEvidence(List<EvidenceSnippetDto> evidence) {

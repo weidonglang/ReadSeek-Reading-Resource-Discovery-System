@@ -1,0 +1,97 @@
+{
+  "results": [
+    {
+      "answer": "根据您的需求，以下是推荐顺序及理由：\n\n1. **《Pride and Prejudice》**（《傲慢与偏见》）[2]  \n   - 推荐理由：作为简·奥斯汀最广为人知的作品之一，它以机智讽刺的笔触描绘社会阶层与婚恋观念，故事围绕偏见与误解的消解展开，适合入门浪漫小说的读者，同时具备经典文学价值。\n\n2. **《Sense and Sensibility》**（《理智与情感》）[1]  \n   - 推荐理由：同样是简·奥斯汀的经典之作，探讨理性与情感在爱情、婚姻及社会规范中的张力，适合在熟悉经典浪漫主义风格后，进一步深入阅读。\n\n3. **《Jane Eyre》**（《简·爱》）[5]  \n   - 推荐理由：夏洛蒂·勃朗特的代表作，融合哥特氛围与社会批判，展现女性独立人格与情感追求，适合在了解古典浪漫主义后，探索更具文学深度与女性意识的作品。\n\n4. **《After the Party》**（《派对之后》）[3]  \n   - 推荐理由：现代浪漫小说，关注人物内心世界与情感变化，适合在熟悉经典后，转向更贴近当代情感体验的阅读。\n\n5. **《The Giver of Stars》**（《星星的给予者》）[4]  \n   - 推荐理由：Jojo Moyes的作品，以温情叙事与书籍的力量为主题，适合在阅读完经典与现代浪漫小说后，体验更具人文关怀与生活启发的读物。\n\n此推荐顺序从经典入门，逐步深入，最后转向现代温情叙事，形成一个完整的浪漫小说阅读路径。",
+      "answerModeActual": "READING_PATH",
+      "answerModeExpected": "recommendation",
+      "answerable": true,
+      "citationCoverage": 1.0,
+      "error": null,
+      "evidenceCount": 5,
+      "evidenceIds": [
+        402,
+        400,
+        62,
+        56,
+        393
+      ],
+      "evidenceRecall": 0.6,
+      "expectedEvidenceHit": true,
+      "expectedResourceIds": [
+        55,
+        56,
+        271,
+        400,
+        402
+      ],
+      "fallbackApplied": false,
+      "generationLatencyMs": 38206,
+      "id": "r001",
+      "limitations": [
+        "回答严格受当前检索证据约束，不使用馆藏外事实补充。",
+        "证据范围仅限当前系统已入库并已建立索引的阅读资源。"
+      ],
+      "llmFallbackApplied": false,
+      "model": "qwen3:8b",
+      "question": "帮我推荐几本爱情小说，并说明推荐顺序。",
+      "requestLatencyMs": 38533.6181,
+      "retrievalLatencyMs": 309,
+      "strategy": "hybrid-v3(exact-db+bm25+vector+reranker)",
+      "totalLatencyMs": 38515
+    },
+    {
+      "answer": "根据提供的证据，Pride and Prejudice 和 Sense and Sensibility 均为简·奥斯汀的经典浪漫小说，适合喜爱古典浪漫主义与社会风俗描写的读者。若需推荐阅读顺序，可参考以下建议：\n\n**推荐顺序：Sense and Sensibility → Pride and Prejudice**\n\n**理由：**\n- **Sense and Sensibility** 更侧重于理性与情感的平衡，探讨人物在社会规范下的成长与抉择，语言风格较为细腻，适合初次接触奥斯汀作品的读者 [1]。\n- **Pride and Prejudice** 则以机智讽刺的笔触描绘社会阶层与婚恋观念，故事围绕偏见与误解的消解展开，人物性格成长与情感描写更为鲜明，适合在熟悉奥斯汀风格后进一步阅读 [2]。\n\n若希望从更基础的文学风格入手，可优先选择《Sense and Sensibility》；若偏好更鲜明的社会批判与心理描写，则可选择《Pride and Prejudice》。两者均可作为奥斯汀作品的入门选择，建议根据个人阅读偏好决定顺序。",
+      "answerModeActual": "READING_PATH",
+      "answerModeExpected": "comparison",
+      "answerable": true,
+      "citationCoverage": 0.4,
+      "error": null,
+      "evidenceCount": 5,
+      "evidenceIds": [
+        402,
+        400,
+        271,
+        163,
+        336
+      ],
+      "evidenceRecall": 1.0,
+      "expectedEvidenceHit": true,
+      "expectedResourceIds": [
+        271,
+        400,
+        402
+      ],
+      "fallbackApplied": false,
+      "generationLatencyMs": 19906,
+      "id": "r002",
+      "limitations": [
+        "回答严格受当前检索证据约束，不使用馆藏外事实补充。",
+        "证据范围仅限当前系统已入库并已建立索引的阅读资源。"
+      ],
+      "llmFallbackApplied": false,
+      "model": "qwen3:8b",
+      "question": "Pride and Prejudice 和 Sense and Sensibility 应该先读哪本？",
+      "requestLatencyMs": 20244.061999999998,
+      "retrievalLatencyMs": 324,
+      "strategy": "hybrid-v3(exact-db+bm25+vector+reranker)",
+      "totalLatencyMs": 20230
+    }
+  ],
+  "summary": {
+    "answerableRate": 1.0,
+    "avgTotalLatencyMs": 29372.5,
+    "dataset": "readseek-rag-60",
+    "evidenceHitRate": 1.0,
+    "generatedAt": "2026-06-06T09:34:53",
+    "meanCitationCoverage": 0.7,
+    "meanEvidenceRecall": 0.8,
+    "mode": "standard",
+    "provider": "ollama",
+    "questionCount": 2,
+    "successfulQuestions": 2,
+    "tool": {
+      "name": "readseek-bench-rs",
+      "version": "0.1.0"
+    }
+  }
+}

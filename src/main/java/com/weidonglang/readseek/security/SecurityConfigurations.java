@@ -3,7 +3,8 @@ package com.weidonglang.readseek.security;
 import com.weidonglang.readseek.security.jwt.JWTAccessDeniedHandler;
 import com.weidonglang.readseek.security.jwt.JWTAuthenticationEntryPoint;
 import com.weidonglang.readseek.security.jwt.JWTRequestFilter;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -21,15 +22,18 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-import java.util.Collections;
+import java.util.Arrays;
+import java.util.List;
 
 @Configuration
 @EnableWebSecurity
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class SecurityConfigurations {
     private final JWTRequestFilter jwtRequestFilter;
     private final JWTAuthenticationEntryPoint jwtAuthenticationEntryPoint;
     private final JWTAccessDeniedHandler jwtAccessDeniedHandler;
+    @Value("${readseek.security.cors.allowed-origins:http://localhost:3000,http://localhost:5173,http://127.0.0.1:5173}")
+    private String allowedOrigins;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
@@ -68,10 +72,14 @@ public class SecurityConfigurations {
     protected CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration corsConfig = new CorsConfiguration();
 
-        corsConfig.setAllowedOrigins(Collections.singletonList("http://localhost:3000"));
-        corsConfig.setExposedHeaders(Collections.singletonList("Authorization"));
-        corsConfig.setAllowedHeaders(Collections.singletonList("*"));
-        corsConfig.setAllowedMethods(Collections.singletonList("*"));
+        List<String> origins = Arrays.stream(allowedOrigins.split(","))
+                .map(String::trim)
+                .filter(origin -> !origin.isBlank())
+                .toList();
+        corsConfig.setAllowedOrigins(origins);
+        corsConfig.setExposedHeaders(List.of("Authorization"));
+        corsConfig.setAllowedHeaders(List.of("*"));
+        corsConfig.setAllowedMethods(List.of("*"));
         corsConfig.setAllowCredentials(true);
         corsConfig.setMaxAge(3600L);
 

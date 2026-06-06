@@ -27,8 +27,11 @@ public class AdminBootstrapRunner implements ApplicationRunner {
     @Value("${library.bootstrap.admin.email:admin@booknook.local}")
     private String adminEmail;
 
-    @Value("${library.bootstrap.admin.password:Admin123!}")
+    @Value("${library.bootstrap.admin.password:replace-with-your-local-admin-password}")
     private String adminPassword;
+
+    @Value("${library.bootstrap.admin.reset-password:true}")
+    private boolean resetAdminPassword;
 
     @Value("${library.bootstrap.admin.first-name:System}")
     private String adminFirstName;
@@ -51,10 +54,19 @@ public class AdminBootstrapRunner implements ApplicationRunner {
         Optional<User> optionalAdmin = userRepository.findByEmail(adminEmail);
         if (optionalAdmin.isPresent()) {
             User existingAdmin = optionalAdmin.get();
+            boolean changed = false;
             if (existingAdmin.getRole() != UserRole.ADMIN) {
                 existingAdmin.setRole(UserRole.ADMIN);
-                userRepository.save(existingAdmin);
+                changed = true;
                 log.info("AdminBootstrapRunner: upgraded existing user to admin - {}", adminEmail);
+            }
+            if (resetAdminPassword && !passwordEncoder.matches(adminPassword, existingAdmin.getPassword())) {
+                existingAdmin.setPassword(passwordEncoder.encode(adminPassword));
+                changed = true;
+                log.info("AdminBootstrapRunner: synchronized bootstrap admin password - {}", adminEmail);
+            }
+            if (changed) {
+                userRepository.save(existingAdmin);
             }
             return;
         }

@@ -126,7 +126,7 @@ public class BookLoanServiceImpl implements BookLoanService {
 
         BookLoanDto createdLoan = getTransformer().transformEntityToDto(getDao().create(loan));
         if (userBehaviorLogService != null) {
-            userBehaviorLogService.recordBookBorrow(bookId, "鐢ㄦ埛鎴愬姛鍊熼槄鍥句功");
+            userBehaviorLogService.recordBookBorrow(bookId, "用户成功借阅图书");
         }
         return createdLoan;
     }

@@ -33,8 +33,11 @@ function Resolve-DatabasePassword {
     if (-not [string]::IsNullOrWhiteSpace($env:SPRING_DATASOURCE_PASSWORD)) {
         return $env:SPRING_DATASOURCE_PASSWORD
     }
+    if (-not [string]::IsNullOrWhiteSpace($env:POSTGRES_PASSWORD)) {
+        return $env:POSTGRES_PASSWORD
+    }
 
-    return '20041117'
+    return 'readseek-local-postgres-change-me'
 }
 
 function Assert-CommandExists {

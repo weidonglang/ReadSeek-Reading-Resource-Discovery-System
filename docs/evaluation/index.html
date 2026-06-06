@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ReadSeek Retrieval Evaluation</title>
+    <style>
+      body {
+        background: #f5f7fb;
+        color: #18212f;
+        font-family: Inter, "Microsoft YaHei", system-ui, sans-serif;
+        margin: 0;
+      }
+      main {
+        margin: 0 auto;
+        max-width: 1100px;
+        padding: 32px;
+      }
+      section {
+        background: #fff;
+        border: 1px solid #e5e9f2;
+        border-radius: 8px;
+        margin-bottom: 18px;
+        padding: 18px;
+      }
+      table {
+        border-collapse: collapse;
+        width: 100%;
+      }
+      th, td {
+        border-bottom: 1px solid #e5e9f2;
+        padding: 10px;
+        text-align: left;
+      }
+      .notice {
+        border-left: 4px solid #d97706;
+      }
+      .muted {
+        color: #667085;
+      }
+      code {
+        background: #edf2f7;
+        border-radius: 4px;
+        padding: 2px 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>ReadSeek Retrieval Evaluation Report</h1>
+      <p class="muted">Hybrid + Reranker retrieval evaluation template.</p>
+
+      <section class="notice">
+        <strong>Sample / placeholder status</strong>
+        <p>This report defines the protocol and layout only. Replace <code>queries.json</code> and <code>results.json</code> with real judgment data before citing metrics.</p>
+      </section>
+
+      <section>
+        <h2>Evaluation Goal</h2>
+        <p>Compare BM25 only, Vector only, Hybrid, and Hybrid + Reranker on small query sets representing exact, keyword, semantic, comparison, and reading-path intents.</p>
+      </section>
+
+      <section>
+        <h2>Overall Metrics</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Method</th>
+              <th>Recall@5</th>
+              <th>MRR</th>
+              <th>NDCG@10</th>
+              <th>Average Latency</th>
+            </tr>
+          </thead>
+          <tbody id="metricRows"></tbody>
+        </table>
+      </section>
+
+      <section>
+        <h2>Query Set</h2>
+        <div id="queries"></div>
+      </section>
+
+      <section>
+        <h2>Case Studies and Failure Analysis</h2>
+        <div id="cases"></div>
+      </section>
+
+      <section>
+        <h2>Conclusion</h2>
+        <p>The report is ready for real data collection. The current placeholder values intentionally avoid fabricated conclusions.</p>
+      </section>
+    </main>
+
+    <script>
+      async function loadJson(path) {
+        const response = await fetch(path);
+        return response.json();
+      }
+
+      function format(value) {
+        return value === null || value === undefined ? 'sample / pending' : value;
+      }
+
+      Promise.all([loadJson('./queries.json'), loadJson('./results.json')]).then(([queries, results]) => {
+        document.getElementById('metricRows').innerHTML = results.metrics.map((row) => `
+          <tr>
+            <td>${row.method}</td>
+            <td>${format(row.recallAt5)}</td>
+            <td>${format(row.mrr)}</td>
+            <td>${format(row.ndcgAt10)}</td>
+            <td>${format(row.avgLatencyMs)}</td>
+          </tr>
+        `).join('');
+
+        document.getElementById('queries').innerHTML = queries.queries.map((query) => `
+          <p><strong>${query.id}</strong> - ${query.query}<br /><span class="muted">${query.description}</span></p>
+        `).join('');
+
+        document.getElementById('cases').innerHTML = results.caseStudies.map((item) => `
+          <p><strong>${item.query}</strong><br />${item.analysis}<br /><span class="muted">${item.failureAnalysis}</span></p>
+        `).join('');
+      });
+    </script>
+  </body>
+</html>

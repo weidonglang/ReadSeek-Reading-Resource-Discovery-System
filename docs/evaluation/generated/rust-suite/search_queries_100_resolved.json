@@ -1,0 +1,3628 @@
+{
+  "queries": [
+    {
+      "description": "exact-title evaluation query for ReadSeek hybrid retrieval.",
+      "id": "q001",
+      "intent": "exact-title",
+      "maxRelevantIds": null,
+      "query": "Pride and Prejudice",
+      "relevance": {
+        "authorHints": [],
+        "categoryHints": [],
+        "keywordHints": [
+          "romantic"
+        ],
+        "maxRelevantIds": 12,
+        "tagHints": [
+          "Jane Austen"
+        ],
+        "titleHints": [
+          "Pride and Prejudice"
+        ]
+      },
+      "relevantResourceIds": [],
+      "resolvedRelevantResourceIds": [
+        400,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        390
+      ]
+    },
+    {
+      "description": "exact-title evaluation query for ReadSeek hybrid retrieval.",
+      "id": "q002",
+      "intent": "exact-title",
+      "maxRelevantIds": null,
+      "query": "Sense and Sensibility",
+      "relevance": {
+        "authorHints": [],
+        "categoryHints": [],
+        "keywordHints": [
+          "romantic"
+        ],
+        "maxRelevantIds": 12,
+        "tagHints": [
+          "Jane Austen"
+        ],
+        "titleHints": [
+          "Sense and Sensibility"
+        ]
+      },
+      "relevantResourceIds": [],
+      "resolvedRelevantResourceIds": [
+        402,
+        271,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62
+      ]
+    },
+    {
+      "description": "exact-title evaluation query for ReadSeek hybrid retrieval.",
+      "id": "q003",
+      "intent": "exact-title",
+      "maxRelevantIds": null,
+      "query": "The War of the Worlds",
+      "relevance": {
+        "authorHints": [],
+        "categoryHints": [],
+        "keywordHints": [
+          "science fiction"
+        ],
+        "maxRelevantIds": 12,
+        "tagHints": [
+          "H. G. Wells"
+        ],
+        "titleHints": [
+          "The War of the Worlds"
+        ]
+      },
+      "relevantResourceIds": [],
+      "resolvedRelevantResourceIds": [
+        18,
+        13,
+        14,
+        15,
+        16,
+        17,
+        19,
+        20,
+        21,
+        22,
+        410,
+        411
+      ]
+    },
+    {
+      "description": "exact-title evaluation query for ReadSeek hybrid retrieval.",
+      "id": "q004",
+      "intent": "exact-title",
+      "maxRelevantIds": null,
+      "query": "The Invisible Man",
+      "relevance": {
+        "authorHints": [],
+        "categoryHints": [],
+        "keywordHints": [
+          "science fiction",
+          "horror"
+        ],
+        "maxRelevantIds": 12,
+        "tagHints": [
+          "H. G. Wells"
+        ],
+        "titleHints": [
+          "The Invisible Man"
+        ]
+      },
+      "relevantResourceIds": [],
+      "resolvedRelevantResourceIds": [
+        19,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        20,
+        21,
+        22,
+        23,
+        24
+      ]
+    },
+    {
+      "description": "exact-title evaluation query for ReadSeek hybrid retrieval.",
+      "id": "q005",
+      "intent": "exact-title",
+      "maxRelevantIds": null,
+      "query": "Player Piano",
+      "relevance": {
+        "authorHints": [],
+        "categoryHints": [],
+        "keywordHints": [
+          "science fiction"
+        ],
+        "maxRelevantIds": 12,
+        "tagHints": [
+          "Kurt Vonnegut"
+        ],
+        "titleHints": [
+          "Player Piano"
+        ]
+      },
+      "relevantResourceIds": [],
+      "resolvedRelevantResourceIds": [
+        15,
+        13,
+        14,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        410,
+        411
+      ]
+    },
+    {
+      "description": "exact-title evaluation query for ReadSeek hybrid retrieval.",
+      "id": "q006",
+      "intent": "exact-title",
+      "maxRelevantIds": null,
+      "query": "The Every",
+      "relevance": {
+        "authorHints": [],
+        "categoryHints": [],
+        "keywordHints": [
+          "science fiction",
+          "dystopia"
+        ],
+        "maxRelevantIds": 12,
+        "tagHints": [
+          "Dave Eggers"
+        ],
+        "titleHints": [
+          "The Every"
+        ]
+      },
+      "relevantResourceIds": [],
+      "resolvedRelevantResourceIds": [
+        14,
+        13,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        410,
+        411
+      ]
+    },
+    {
+      "description": "exact-title evaluation query for ReadSeek hybrid retrieval.",
+      "id": "q007",
+      "intent": "exact-title",
+      "maxRelevantIds": null,
+      "query": "The Book of Sand",
+      "relevance": {
+        "authorHints": [],
+        "categoryHints": [],
+        "keywordHints": [
+          "science fiction"
+        ],
+        "maxRelevantIds": 12,
+        "tagHints": [],
+        "titleHints": [
+          "The Book of Sand"
+        ]
+      },
+      "relevantResourceIds": [],
+      "resolvedRelevantResourceIds": [
+        17,
+        13,
+        14,
+        15,
+        16,
+        18,
+        19,
+        20,
+        21,
+        22,
+        410,
+        411
+      ]
+    },
+    {
+      "description": "exact-title evaluation query for ReadSeek hybrid retrieval.",
+      "id": "q008",
+      "intent": "exact-title",
+      "maxRelevantIds": null,
+      "query": "The Chalk Man",
+      "relevance": {
+        "authorHints": [],
+        "categoryHints": [],
+        "keywordHints": [
+          "horror",
+          "thriller"
+        ],
+        "maxRelevantIds": 12,
+        "tagHints": [],
+        "titleHints": [
+          "The Chalk Man"
+        ]
+      },
+      "relevantResourceIds": [],
+      "resolvedRelevantResourceIds": [
+        26,
+        19,
+        23,
+        24,
+        25,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33
+      ]
+    },
+    {
+      "description": "exact-title evaluation query for ReadSeek hybrid retrieval.",
+      "id": "q009",
+      "intent": "exact-title",
+      "maxRelevantIds": null,
+      "query": "The Year of the Witching",
+      "relevance": {
+        "authorHints": [],
+        "categoryHints": [],
+        "keywordHints": [
+          "horror"
+        ],
+        "maxRelevantIds": 12,
+        "tagHints": [],
+        "titleHints": [
+          "The Year of the Witching"
+        ]
+      },
+      "relevantResourceIds": [],
+      "resolvedRelevantResourceIds": [
+        23,
+        19,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33
+      ]
+    },
+    {
+      "description": "exact-title evaluation query for ReadSeek hybrid retrieval.",
+      "id": "q010",
+      "intent": "exact-title",
+      "maxRelevantIds": null,
+      "query": "The Power of Habit",
+      "relevance": {
+        "authorHints": [],
+        "categoryHints": [],
+        "keywordHints": [
+          "self-help",
+          "habit"
+        ],
+        "maxRelevantIds": 12,
+        "tagHints": [],
+        "titleHints": [
+          "The Power of Habit"
+        ]
+      },
+      "relevantResourceIds": [],
+      "resolvedRelevantResourceIds": [
+        385,
+        422,
+        423,
+        424,
+        425,
+        426,
+        427,
+        428,
+        429,
+        430,
+        431,
+        432
+      ]
+    },
+    {
+      "description": "author-work evaluation query for ReadSeek hybrid retrieval.",
+      "id": "q011",
+      "intent": "author-work",
+      "maxRelevantIds": null,
+      "query": "Jane Austen representative works",
+      "relevance": {
+        "authorHints": [
+          "Jane Austen"
+        ],
+        "categoryHints": [
+          "Romantic"
+        ],
+        "keywordHints": [
+          "classic romance"
+        ],
+        "maxRelevantIds": 12,
+        "tagHints": [],
+        "titleHints": [
+          "Pride and Prejudice",
+          "Sense and Sensibility"
+        ]
+      },
+      "relevantResourceIds": [],
+      "resolvedRelevantResourceIds": [
+        400,
+        402,
+        271,
+        395,
+        398,
+        57,
+        284,
+        53,
+        54,
+        55,
+        56,
+        58
+      ]
+    },
+    {
+      "description": "author-work evaluation query for ReadSeek hybrid retrieval.",
+      "id": "q012",
+      "intent": "author-work",
+      "maxRelevantIds": null,
+      "query": "H. G. Wells science fiction",
+      "relevance": {
+        "authorHints": [
+          "H. G. Wells"
+        ],
+        "categoryHints": [
+          "Science Fiction"
+        ],
+        "keywordHints": [
+          "classic science fiction"
+        ],
+        "maxRelevantIds": 12,
+        "tagHints": [],
+        "titleHints": [
+          "The War of the Worlds",
+          "The Invisible Man"
+        ]
+      },
+      "relevantResourceIds": [],
+      "resolvedRelevantResourceIds": [
+        18,
+        19,
+        13,
+        14,
+        15,
+        16,
+        17,
+        20,
+        21,
+        22,
+        410,
+        411
+      ]
+    },
+    {
+      "description": "author-work evaluation query for ReadSeek hybrid retrieval.",
+      "id": "q013",
+      "intent": "author-work",
+      "maxRelevantIds": null,
+      "query": "Dave Eggers technology monopoly",
+      "relevance": {
+        "authorHints": [
+          "Dave Eggers"
+        ],
+        "categoryHints": [
+          "Science Fiction"
+        ],
+        "keywordHints": [
+          "technology monopoly",
+          "dystopia"
+        ],
+        "maxRelevantIds": 12,
+        "tagHints": [],
+        "titleHints": [
+          "The Every"
+        ]
+      },
+      "relevantResourceIds": [],
+      "resolvedRelevantResourceIds": [
+        14,
+        13,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        410,
+        411
+      ]
+    },
+    {
+      "description": "author-work evaluation query for ReadSeek hybrid retrieval.",
+      "id": "q014",
+      "intent": "author-work",
+      "maxRelevantIds": null,
+      "query": "Kurt Vonnegut automation society",
+      "relevance": {
+        "authorHints": [
+          "Kurt Vonnegut"
+        ],
+        "categoryHints": [
+          "Science Fiction"
+        ],
+        "keywordHints": [
+          "automation",
+          "dystopia"
+        ],
+        "maxRelevantIds": 12,
+        "tagHints": [],
+        "titleHints": [
+          "Player Piano"
+        ]
+      },
+      "relevantResourceIds": [],
+      "resolvedRelevantResourceIds": [
+        15,
+        13,
+        14,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        410,
+        411
+      ]
+    },
+    {
+      "description": "author-work evaluation query for ReadSeek hybrid retrieval.",
+      "id": "q015",
+      "intent": "author-work",
+      "maxRelevantIds": null,
+      "query": "Jojo Moyes romantic books",
+      "relevance": {
+        "authorHints": [
+          "Jojo Moyes"
+        ],
+        "categoryHints": [
+          "Romantic"
+        ],
+        "keywordHints": [
+          "love",
+          "community"
+        ],
+        "maxRelevantIds": 12,
+        "tagHints": [],
+        "titleHints": [
+          "The Giver of Stars"
+        ]
+      },
+      "relevantResourceIds": [],
+      "resolvedRelevantResourceIds": [
+        56,
+        397,
+        53,
+        404,
+        407,
+        54,
+        55,
+        57,
+        58,
+        59,
+        60,
+        61
+      ]
+    },
+    {
+      "description": "author-work evaluation query for ReadSeek hybrid retrieval.",
+      "id": "q016",
+      "intent": "author-work",
+      "maxRelevantIds": null,
+      "query": "Horror books by C. J. Tudor",
+      "relevance": {
+        "authorHints": [
+          "C. J. Tudor"
+        ],
+        "categoryHints": [
+          "Horror"
+        ],
+        "keywordHints": [
+          "suspense"
+        ],
+        "maxRelevantIds": 12,
+        "tagHints": [],
+        "titleHints": [
+          "The Chalk Man"
+        ]
+      },
+      "relevantResourceIds": [],
+      "resolvedRelevantResourceIds": [
+        26,
+        23,
+        24,
+        25,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        298,
+        299
+      ]
+    },
+    {
+      "description": "author-work evaluation query for ReadSeek hybrid retrieval.",
+      "id": "q017",
+      "intent": "author-work",
+      "maxRelevantIds": null,
+      "query": "Doctor Who adventure science fiction",
+      "relevance": {
+        "authorHints": [
+          "Una McCormack"
+        ],
+        "categoryHints": [
+          "Science Fiction"
+        ],
+        "keywordHints": [
+          "Doctor Who",
+          "adventure"
+        ],
+        "maxRelevantIds": 12,
+        "tagHints": [],
+        "titleHints": [
+          "Doctor Who: Molten Heart"
+        ]
+      },
+      "relevantResourceIds": [],
+      "resolvedRelevantResourceIds": [
+        22,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        410,
+        411
+      ]
+    },
+    {
+      "description": "author-work evaluation query for ReadSeek hybrid retrieval.",
+      "id": "q018",
+      "intent": "author-work",
+      "maxRelevantIds": null,
+      "query": "Star Wars Han Solo novel",
+      "relevance": {
+        "authorHints": [
+          "Mur Lafferty"
+        ],
+        "categoryHints": [
+          "Science Fiction"
+        ],
+        "keywordHints": [
+          "Star Wars",
+          "Han Solo"
+        ],
+        "maxRelevantIds": 12,
+        "tagHints": [],
+        "titleHints": [
+          "A Star Wars Story"
+        ]
+      },
+      "relevantResourceIds": [],
+      "resolvedRelevantResourceIds": [
+        21,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        22,
+        410,
+        411
+      ]
+    },
+    {
+      "description": "author-work evaluation query for ReadSeek hybrid retrieval.",
+      "id": "q019",
+      "intent": "author-work",
+      "maxRelevantIds": null,
+      "query": "Mary Shelley gothic science fiction",
+      "relevance": {
+        "authorHints": [
+          "Mary Shelley"
+        ],
+        "categoryHints": [
+          "Science Fiction",
+          "Horror"
+        ],
+        "keywordHints": [
+          "gothic",
+          "classic"
+        ],
+        "maxRelevantIds": 12,
+        "tagHints": [],
+        "titleHints": []
+      },
+      "relevantResourceIds": [],
+      "resolvedRelevantResourceIds": [
+        28,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23
+      ]
+    },
+    {
+      "description": "author-work evaluation query for ReadSeek hybrid retrieval.",
+      "id": "q020",
+      "intent": "author-work",
+      "maxRelevantIds": null,
+      "query": "Oscar Wilde classic literature",
+      "relevance": {
+        "authorHints": [
+          "Oscar Wilde"
+        ],
+        "categoryHints": [
+          "Classic"
+        ],
+        "keywordHints": [
+          "aestheticism",
+          "classic"
+        ],
+        "maxRelevantIds": 12,
+        "tagHints": [],
+        "titleHints": []
+      },
+      "relevantResourceIds": [],
+      "resolvedRelevantResourceIds": [
+        40,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        41,
+        42,
+        168,
+        57
+      ]
+    },
+    {
+      "description": "theme-cn evaluation query for ReadSeek hybrid retrieval.",
+      "id": "q021",
+      "intent": "theme-cn",
+      "maxRelevantIds": null,
+      "query": "爱情小说 推荐",
+      "relevance": {
+        "authorHints": [],
+        "categoryHints": [
+          "Romantic"
+        ],
+        "keywordHints": [
+          "爱情",
+          "浪漫",
+          "love",
+          "romance"
+        ],
+        "maxRelevantIds": 12,
+        "tagHints": [],
+        "titleHints": [
+          "Pride and Prejudice",
+          "Sense and Sensibility",
+          "The Giver of Stars",
+          "Mix Tape",
+          "Live a Little"
+        ]
+      },
+      "relevantResourceIds": [],
+      "resolvedRelevantResourceIds": [
+        54,
+        55,
+        56,
+        400,
+        402,
+        396,
+        407,
+        271,
+        53,
+        57,
+        58,
+        60
+      ]
+    },
+    {
+      "description": "theme-cn evaluation query for ReadSeek hybrid retrieval.",
+      "id": "q022",
+      "intent": "theme-cn",
+      "maxRelevantIds": null,
+      "query": "经典浪漫主义小说",
+      "relevance": {
+        "authorHints": [],
+        "categoryHints": [
+          "Romantic",
+          "Classic"
+        ],
+        "keywordHints": [
+          "经典",
+          "爱情",
+          "romance"
+        ],
+        "maxRelevantIds": 12,
+        "tagHints": [],
+        "titleHints": [
+          "Pride and Prejudice",
+          "Sense and Sensibility"
+        ]
+      },
+      "relevantResourceIds": [],
+      "resolvedRelevantResourceIds": [
+        400,
+        402,
+        396,
+        271,
+        35,
+        57,
+        58,
+        33,
+        34,
+        36,
+        37,
+        38
+      ]
+    },
+    {
+      "description": "theme-cn evaluation query for ReadSeek hybrid retrieval.",
+      "id": "q023",
+      "intent": "theme-cn",
+      "maxRelevantIds": null,
+      "query": "科幻小说 入门",
+      "relevance": {
+        "authorHints": [],
+        "categoryHints": [
+          "Science Fiction"
+        ],
+        "keywordHints": [
+          "科幻",
+          "science fiction"
+        ],
+        "maxRelevantIds": 12,
+        "tagHints": [],
+        "titleHints": [
+          "The War of the Worlds",
+          "The Invisible Man",
+          "Player Piano",
+          "The Every"
+        ]
+      },
+      "relevantResourceIds": [],
+      "resolvedRelevantResourceIds": [
+        14,
+        15,
+        18,
+        19,
+        13,
+        16,
+        17,
+        20,
+        21,
+        22,
+        410,
+        411
+      ]
+    },
+    {
+      "description": "theme-cn evaluation query for ReadSeek hybrid retrieval.",
+      "id": "q024",
+      "intent": "theme-cn",
+      "maxRelevantIds": null,
+      "query": "反乌托邦 科技垄断 小说",
+      "relevance": {
+        "authorHints": [],
+        "categoryHints": [
+          "Science Fiction"
+        ],
+        "keywordHints": [
+          "反乌托邦",
+          "dystopia",
+          "technology"
+        ],
+        "maxRelevantIds": 12,
+        "tagHints": [],
+        "titleHints": [
+          "The Every",
+          "Player Piano"
+        ]
+      },
+      "relevantResourceIds": [],
+      "resolvedRelevantResourceIds": [
+        15,
+        14,
+        16,
+        20,
+        13,
+        17,
+        18,
+        19,
+        21,
+        22,
+        410,
+        411
+      ]
+    },
+    {
+      "description": "theme-cn evaluation query for ReadSeek hybrid retrieval.",
+      "id": "q025",
+      "intent": "theme-cn",
+      "maxRelevantIds": null,
+      "query": "机器人 人工智能 科幻",
+      "relevance": {
+        "authorHints": [],
+        "categoryHints": [
+          "Science Fiction"
+        ],
+        "keywordHints": [
+          "robot",
+          "AI",
+          "人工智能"
+        ],
+        "maxRelevantIds": 12,
+        "tagHints": [],
+        "titleHints": [
+          "Robot"
+        ]
+      },
+      "relevantResourceIds": [],
+      "resolvedRelevantResourceIds": [
+        13,
+        410,
+        416,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22
+      ]
+    },
+    {
+      "description": "theme-cn evaluation query for ReadSeek hybrid retrieval.",
+      "id": "q026",
+      "intent": "theme-cn",
+      "maxRelevantIds": null,
+      "query": "外星人入侵 经典科幻",
+      "relevance": {
+        "authorHints": [],
+        "categoryHints": [
+          "Science Fiction"
+        ],
+        "keywordHints": [
+          "alien",
+          "invasion",
+          "火星"
+        ],
+        "maxRelevantIds": 12,
+        "tagHints": [],
+        "titleHints": [
+          "The War of the Worlds"
+        ]
+      },
+      "relevantResourceIds": [],
+      "resolvedRelevantResourceIds": [
+        18,
+        13,
+        14,
+        15,
+        16,
+        17,
+        19,
+        20,
+        21,
+        22,
+        410,
+        411
+      ]
+    },
+    {
+      "description": "theme-cn evaluation query for ReadSeek hybrid retrieval.",
+      "id": "q027",
+      "intent": "theme-cn",
+      "maxRelevantIds": null,
+      "query": "隐身 科学伦理 小说",
+      "relevance": {
+        "authorHints": [],
+        "categoryHints": [
+          "Science Fiction",
+          "Horror"
+        ],
+        "keywordHints": [
+          "invisible",
+          "ethics"
+        ],
+        "maxRelevantIds": 12,
+        "tagHints": [],
+        "titleHints": [
+          "The Invisible Man"
+        ]
+      },
+      "relevantResourceIds": [],
+      "resolvedRelevantResourceIds": [
+        19,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        20,
+        21,
+        22,
+        23,
+        24
+      ]
+    },
+    {
+      "description": "theme-cn evaluation query for ReadSeek hybrid retrieval.",
+      "id": "q028",
+      "intent": "theme-cn",
+      "maxRelevantIds": null,
+      "query": "末世 生存 家庭 科幻",
+      "relevance": {
+        "authorHints": [],
+        "categoryHints": [
+          "Science Fiction"
+        ],
+        "keywordHints": [
+          "末世",
+          "生存",
+          "post-apocalyptic"
+        ],
+        "maxRelevantIds": 12,
+        "tagHints": [],
+        "titleHints": [
+          "The Book of Sand"
+        ]
+      },
+      "relevantResourceIds": [],
+      "resolvedRelevantResourceIds": [
+        17,
+        20,
+        13,
+        14,
+        15,
+        16,
+        18,
+        19,
+        21,
+        22,
+        410,
+        411
+      ]
+    },
+    {
+      "description": "theme-cn evaluation query for ReadSeek hybrid retrieval.",
+      "id": "q029",
+      "intent": "theme-cn",
+      "maxRelevantIds": null,
+      "query": "心理悬疑 恐怖小说",
+      "relevance": {
+        "authorHints": [],
+        "categoryHints": [
+          "Horror"
+        ],
+        "keywordHints": [
+          "心理",
+          "悬疑",
+          "thriller"
+        ],
+        "maxRelevantIds": 12,
+        "tagHints": [],
+        "titleHints": [
+          "The Chalk Man",
+          "Pine"
+        ]
+      },
+      "relevantResourceIds": [],
+      "resolvedRelevantResourceIds": [
+        24,
+        26,
+        25,
+        27,
+        29,
+        30,
+        32,
+        301,
+        311,
+        23,
+        31,
+        298
+      ]
+    },
+    {
+      "description": "theme-cn evaluation query for ReadSeek hybrid retrieval.",
+      "id": "q030",
+      "intent": "theme-cn",
+      "maxRelevantIds": null,
+      "query": "女巫 宗教 恐怖",
+      "relevance": {
+        "authorHints": [],
+        "categoryHints": [
+          "Horror"
+        ],
+        "keywordHints": [
+          "witch",
+          "religion",
+          "feminist"
+        ],
+        "maxRelevantIds": 12,
+        "tagHints": [],
+        "titleHints": [
+          "The Year of the Witching"
+        ]
+      },
+      "relevantResourceIds": [],
+      "resolvedRelevantResourceIds": [
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        298,
+        299
+      ]
+    },
+    {
+      "description": "theme-en evaluation query for ReadSeek hybrid retrieval.",
+      "id": "q031",
+      "intent": "theme-en",
+      "maxRelevantIds": null,
+      "query": "self help personal growth beginner",
+      "relevance": {
+        "authorHints": [],
+        "categoryHints": [
+          "Self-Help"
+        ],
+        "keywordHints": [
+          "personal growth",
+          "habit",
+          "self"
+        ],
+        "maxRelevantIds": 12,
+        "tagHints": [],
+        "titleHints": [
+          "The Power of Habit",
+          "Inquiring about Myself",
+          "The Magic Within"
+        ]
+      },
+      "relevantResourceIds": [],
+      "resolvedRelevantResourceIds": [
+        429,
+        435,
+        385,
+        422,
+        423,
+        424,
+        425,
+        426,
+        427,
+        428,
+        430,
+        431
+      ]
+    },
+    {
+      "description": "theme-en evaluation query for ReadSeek hybrid retrieval.",
+      "id": "q032",
+      "intent": "theme-en",
+      "maxRelevantIds": null,
+      "query": "habit productivity psychology",
+      "relevance": {
+        "authorHints": [],
+        "categoryHints": [
+          "Self-Help"
+        ],
+        "keywordHints": [
+          "habit",
+          "productivity",
+          "psychology"
+        ],
+        "maxRelevantIds": 12,
+        "tagHints": [],
+        "titleHints": [
+          "The Power of Habit"
+        ]
+      },
+      "relevantResourceIds": [],
+      "resolvedRelevantResourceIds": [
+        385,
+        422,
+        423,
+        424,
+        425,
+        426,
+        427,
+        428,
+        429,
+        430,
+        431,
+        432
+      ]
+    },
+    {
+      "description": "theme-en evaluation query for ReadSeek hybrid retrieval.",
+      "id": "q033",
+      "intent": "theme-en",
+      "maxRelevantIds": null,
+      "query": "women empowerment self help groups",
+      "relevance": {
+        "authorHints": [],
+        "categoryHints": [
+          "Self-Help"
+        ],
+        "keywordHints": [
+          "women",
+          "empowerment"
+        ],
+        "maxRelevantIds": 12,
+        "tagHints": [],
+        "titleHints": [
+          "Empowerment of Women Through Self Help Groups"
+        ]
+      },
+      "relevantResourceIds": [],
+      "resolvedRelevantResourceIds": [
+        426,
+        424,
+        422,
+        423,
+        425,
+        427,
+        428,
+        429,
+        430,
+        431,
+        432,
+        433
+      ]
+    },
+    {
+      "description": "theme-en evaluation query for ReadSeek hybrid retrieval.",
+      "id": "q034",
+      "intent": "theme-en",
+      "maxRelevantIds": null,
+      "query": "ego development psychology book",
+      "relevance": {
+        "authorHints": [],
+        "categoryHints": [
+          "Self-Help"
+        ],
+        "keywordHints": [
+          "ego",
+          "psychology"
+        ],
+        "maxRelevantIds": 12,
+        "tagHints": [],
+        "titleHints": [
+          "Measuring Ego Development",
+          "The Development of the Ego",
+          "Ego Analysis in the Helping Professions"
+        ]
+      },
+      "relevantResourceIds": [],
+      "resolvedRelevantResourceIds": [
+        425,
+        430,
+        434,
+        422,
+        423,
+        424,
+        426,
+        427,
+        428,
+        429,
+        431,
+        432
+      ]
+    },
+    {
+      "description": "theme-en evaluation query for ReadSeek hybrid retrieval.",
+      "id": "q035",
+      "intent": "theme-en",
+      "maxRelevantIds": null,
+      "query": "Greek tragedy literary analysis",
+      "relevance": {
+        "authorHints": [],
+        "categoryHints": [
+          "Self-Help",
+          "Classic"
+        ],
+        "keywordHints": [
+          "Greek tragedy",
+          "Euripides"
+        ],
+        "maxRelevantIds": 12,
+        "tagHints": [],
+        "titleHints": [
+          "Hidden Paths"
+        ]
+      },
+      "relevantResourceIds": [],
+      "resolvedRelevantResourceIds": [
+        427,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        422
+      ]
+    },
+    {
+      "description": "theme-en evaluation query for ReadSeek hybrid retrieval.",
+      "id": "q036",
+      "intent": "theme-en",
+      "maxRelevantIds": null,
+      "query": "sports biography inspirational",
+      "relevance": {
+        "authorHints": [],
+        "categoryHints": [
+          "Sport"
+        ],
+        "keywordHints": [
+          "sports",
+          "biography",
+          "inspirational"
+        ],
+        "maxRelevantIds": 12,
+        "tagHints": [],
+        "titleHints": []
+      },
+      "relevantResourceIds": [],
+      "resolvedRelevantResourceIds": [
+        86,
+        90,
+        83,
+        84,
+        85,
+        87,
+        88,
+        89,
+        173,
+        174,
+        175,
+        176
+      ]
+    },
+    {
+      "description": "theme-en evaluation query for ReadSeek hybrid retrieval.",
+      "id": "q037",
+      "intent": "theme-en",
+      "maxRelevantIds": null,
+      "query": "Japanese history social change",
+      "relevance": {
+        "authorHints": [],
+        "categoryHints": [
+          "History"
+        ],
+        "keywordHints": [
+          "Japan",
+          "history"
+        ],
+        "maxRelevantIds": 12,
+        "tagHints": [],
+        "titleHints": [
+          "Japan Story"
+        ]
+      },
+      "relevantResourceIds": [],
+      "resolvedRelevantResourceIds": [
+        74,
+        73,
+        75,
+        76,
+        77,
+        78,
+        79,
+        80,
+        81,
+        82,
+        279,
+        280
+      ]
+    },
+    {
+      "description": "theme-en evaluation query for ReadSeek hybrid retrieval.",
+      "id": "q038",
+      "intent": "theme-en",
+      "maxRelevantIds": null,
+      "query": "economic behavior market anomalies",
+      "relevance": {
+        "authorHints": [],
+        "categoryHints": [
+          "History",
+          "Self-Help"
+        ],
+        "keywordHints": [
+          "economics",
+          "market",
+          "behavior"
+        ],
+        "maxRelevantIds": 12,
+        "tagHints": [],
+        "titleHints": [
+          "The Winner's Curse"
+        ]
+      },
+      "relevantResourceIds": [],
+      "resolvedRelevantResourceIds": [
+        242,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79,
+        80,
+        81,
+        82,
+        279
+      ]
+    },
+    {
+      "description": "theme-en evaluation query for ReadSeek hybrid retrieval.",
+      "id": "q039",
+      "intent": "theme-en",
+      "maxRelevantIds": null,
+      "query": "mathematics history beginner",
+      "relevance": {
+        "authorHints": [],
+        "categoryHints": [],
+        "keywordHints": [
+          "mathematics",
+          "history"
+        ],
+        "maxRelevantIds": 12,
+        "tagHints": [],
+        "titleHints": [
+          "A History of Mathematics"
+        ]
+      },
+      "relevantResourceIds": [],
+      "resolvedRelevantResourceIds": [
+        315,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79,
+        80,
+        81,
+        82,
+        165
+      ]
+    },
+    {
+      "description": "theme-en evaluation query for ReadSeek hybrid retrieval.",
+      "id": "q040",
+      "intent": "theme-en",
+      "maxRelevantIds": null,
+      "query": "prime numbers Riemann hypothesis",
+      "relevance": {
+        "authorHints": [],
+        "categoryHints": [],
+        "keywordHints": [
+          "prime",
+          "Riemann",
+          "mathematics"
+        ],
+        "maxRelevantIds": 12,
+        "tagHints": [],
+        "titleHints": [
+          "The Music of the Primes"
+        ]
+      },
+      "relevantResourceIds": [],
+      "resolvedRelevantResourceIds": [
+        329,
+        315,
+        316,
+        317,
+        318,
+        319,
+        320,
+        321,
+        322,
+        323,
+        324,
+        325
+      ]
+    },
+    {
+      "description": "natural-cn evaluation query for ReadSeek hybrid retrieval.",
+      "id": "q041",
+      "intent": "natural-cn",
+      "maxRelevantIds": null,
+      "query": "我想找一本适合入门的心理学和习惯养成的书",
+      "relevance": {
+        "authorHints": [],
+        "categoryHints": [
+          "Self-Help"
+        ],
+        "keywordHints": [
+          "习惯",
+          "心理学",
+          "入门"
+        ],
+        "maxRelevantIds": 12,
+        "tagHints": [],
+        "titleHints": [
+          "The Power of Habit"
+        ]
+      },
+      "relevantResourceIds": [],
+      "resolvedRelevantResourceIds": [
+        385,
+        422,
+        425,
+        430,
+        434,
+        436,
+        423,
+        424,
+        426,
+        427,
+        428,
+        429
+      ]
+    },
+    {
+      "description": "natural-cn evaluation query for ReadSeek hybrid retrieval.",
+      "id": "q042",
+      "intent": "natural-cn",
+      "maxRelevantIds": null,
+      "query": "有没有关于科技公司控制社会的反乌托邦小说",
+      "relevance": {
+        "authorHints": [],
+        "categoryHints": [
+          "Science Fiction"
+        ],
+        "keywordHints": [
+          "科技",
+          "垄断",
+          "反乌托邦"
+        ],
+        "maxRelevantIds": 12,
+        "tagHints": [],
+        "titleHints": [
+          "The Every"
+        ]
+      },
+      "relevantResourceIds": [],
+      "resolvedRelevantResourceIds": [
+        14,
+        15,
+        16,
+        20,
+        13,
+        17,
+        18,
+        19,
+        21,
+        22,
+        410,
+        411
+      ]
+    },
+    {
+      "description": "natural-cn evaluation query for ReadSeek hybrid retrieval.",
+      "id": "q043",
+      "intent": "natural-cn",
+      "maxRelevantIds": null,
+      "query": "想看简奥斯汀那种有婚恋和社会讽刺的作品",
+      "relevance": {
+        "authorHints": [
+          "Jane Austen"
+        ],
+        "categoryHints": [
+          "Romantic"
+        ],
+        "keywordHints": [
+          "婚恋",
+          "讽刺"
+        ],
+        "maxRelevantIds": 12,
+        "tagHints": [],
+        "titleHints": [
+          "Pride and Prejudice",
+          "Sense and Sensibility"
+        ]
+      },
+      "relevantResourceIds": [],
+      "resolvedRelevantResourceIds": [
+        400,
+        402,
+        271,
+        398,
+        395,
+        284,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58
+      ]
+    },
+    {
+      "description": "natural-cn evaluation query for ReadSeek hybrid retrieval.",
+      "id": "q044",
+      "intent": "natural-cn",
+      "maxRelevantIds": null,
+      "query": "找一本外星文明入侵地球的经典科幻",
+      "relevance": {
+        "authorHints": [],
+        "categoryHints": [
+          "Science Fiction"
+        ],
+        "keywordHints": [
+          "外星",
+          "入侵"
+        ],
+        "maxRelevantIds": 12,
+        "tagHints": [],
+        "titleHints": [
+          "The War of the Worlds"
+        ]
+      },
+      "relevantResourceIds": [],
+      "resolvedRelevantResourceIds": [
+        18,
+        22,
+        418,
+        13,
+        14,
+        15,
+        16,
+        17,
+        19,
+        20,
+        21,
+        410
+      ]
+    },
+    {
+      "description": "natural-cn evaluation query for ReadSeek hybrid retrieval.",
+      "id": "q045",
+      "intent": "natural-cn",
+      "maxRelevantIds": null,
+      "query": "想读关于自动化取代人类工作的小说",
+      "relevance": {
+        "authorHints": [],
+        "categoryHints": [
+          "Science Fiction"
+        ],
+        "keywordHints": [
+          "自动化",
+          "automation"
+        ],
+        "maxRelevantIds": 12,
+        "tagHints": [],
+        "titleHints": [
+          "Player Piano"
+        ]
+      },
+      "relevantResourceIds": [],
+      "resolvedRelevantResourceIds": [
+        15,
+        13,
+        14,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        410,
+        411
+      ]
+    },
+    {
+      "description": "natural-cn evaluation query for ReadSeek hybrid retrieval.",
+      "id": "q046",
+      "intent": "natural-cn",
+      "maxRelevantIds": null,
+      "query": "有没有温情一点的爱情故事",
+      "relevance": {
+        "authorHints": [],
+        "categoryHints": [
+          "Romantic"
+        ],
+        "keywordHints": [
+          "温情",
+          "爱情"
+        ],
+        "maxRelevantIds": 12,
+        "tagHints": [],
+        "titleHints": [
+          "The Giver of Stars",
+          "Mix Tape",
+          "Live a Little"
+        ]
+      },
+      "relevantResourceIds": [],
+      "resolvedRelevantResourceIds": [
+        54,
+        55,
+        56,
+        394,
+        397,
+        403,
+        58,
+        60,
+        61,
+        62,
+        390,
+        391
+      ]
+    },
+    {
+      "description": "natural-cn evaluation query for ReadSeek hybrid retrieval.",
+      "id": "q047",
+      "intent": "natural-cn",
+      "maxRelevantIds": null,
+      "query": "找几本适合晚上读的恐怖悬疑小说",
+      "relevance": {
+        "authorHints": [],
+        "categoryHints": [
+          "Horror"
+        ],
+        "keywordHints": [
+          "恐怖",
+          "悬疑"
+        ],
+        "maxRelevantIds": 12,
+        "tagHints": [],
+        "titleHints": [
+          "The Chalk Man",
+          "Pine",
+          "The Year of the Witching"
+        ]
+      },
+      "relevantResourceIds": [],
+      "resolvedRelevantResourceIds": [
+        24,
+        26,
+        23,
+        25,
+        27,
+        29,
+        30,
+        32,
+        301,
+        302,
+        307,
+        308
+      ]
+    },
+    {
+      "description": "natural-cn evaluation query for ReadSeek hybrid retrieval.",
+      "id": "q048",
+      "intent": "natural-cn",
+      "maxRelevantIds": null,
+      "query": "我想看和星球大战有关的太空冒险",
+      "relevance": {
+        "authorHints": [],
+        "categoryHints": [
+          "Science Fiction"
+        ],
+        "keywordHints": [
+          "Star Wars",
+          "太空"
+        ],
+        "maxRelevantIds": 12,
+        "tagHints": [],
+        "titleHints": [
+          "A Star Wars Story"
+        ]
+      },
+      "relevantResourceIds": [],
+      "resolvedRelevantResourceIds": [
+        21,
+        22,
+        418,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        410
+      ]
+    },
+    {
+      "description": "natural-cn evaluation query for ReadSeek hybrid retrieval.",
+      "id": "q049",
+      "intent": "natural-cn",
+      "maxRelevantIds": null,
+      "query": "有没有 Doctor Who 系列的科幻冒险",
+      "relevance": {
+        "authorHints": [],
+        "categoryHints": [
+          "Science Fiction"
+        ],
+        "keywordHints": [
+          "Doctor Who"
+        ],
+        "maxRelevantIds": 12,
+        "tagHints": [],
+        "titleHints": [
+          "Doctor Who: Molten Heart"
+        ]
+      },
+      "relevantResourceIds": [],
+      "resolvedRelevantResourceIds": [
+        22,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        410,
+        411
+      ]
+    },
+    {
+      "description": "natural-cn evaluation query for ReadSeek hybrid retrieval.",
+      "id": "q050",
+      "intent": "natural-cn",
+      "maxRelevantIds": null,
+      "query": "想读女性成长和社会议题相关的书",
+      "relevance": {
+        "authorHints": [],
+        "categoryHints": [
+          "Self-Help",
+          "Horror"
+        ],
+        "keywordHints": [
+          "女性",
+          "成长"
+        ],
+        "maxRelevantIds": 12,
+        "tagHints": [],
+        "titleHints": [
+          "Empowerment of Women Through Self Help Groups",
+          "The Year of the Witching"
+        ]
+      },
+      "relevantResourceIds": [],
+      "resolvedRelevantResourceIds": [
+        23,
+        426,
+        424,
+        431,
+        432,
+        302,
+        303,
+        423,
+        425,
+        428,
+        429,
+        430
+      ]
+    },
+    {
+      "description": "multi-condition evaluation query for ReadSeek hybrid retrieval.",
+      "id": "q051",
+      "intent": "multi-condition",
+      "maxRelevantIds": null,
+      "query": "romantic classic by Jane Austen",
+      "relevance": {
+        "authorHints": [
+          "Jane Austen"
+        ],
+        "categoryHints": [
+          "Romantic"
+        ],
+        "keywordHints": [
+          "classic"
+        ],
+        "maxRelevantIds": 12,
+        "tagHints": [],
+        "titleHints": [
+          "Pride and Prejudice",
+          "Sense and Sensibility"
+        ]
+      },
+      "relevantResourceIds": [],
+      "resolvedRelevantResourceIds": [
+        400,
+        402,
+        271,
+        395,
+        398,
+        57,
+        284,
+        53,
+        54,
+        55,
+        56,
+        58
+      ]
+    },
+    {
+      "description": "multi-condition evaluation query for ReadSeek hybrid retrieval.",
+      "id": "q052",
+      "intent": "multi-condition",
+      "maxRelevantIds": null,
+      "query": "Science Fiction H. G. Wells alien",
+      "relevance": {
+        "authorHints": [
+          "H. G. Wells"
+        ],
+        "categoryHints": [
+          "Science Fiction"
+        ],
+        "keywordHints": [
+          "alien"
+        ],
+        "maxRelevantIds": 12,
+        "tagHints": [],
+        "titleHints": [
+          "The War of the Worlds"
+        ]
+      },
+      "relevantResourceIds": [],
+      "resolvedRelevantResourceIds": [
+        18,
+        19,
+        13,
+        14,
+        15,
+        16,
+        17,
+        20,
+        21,
+        22,
+        410,
+        411
+      ]
+    },
+    {
+      "description": "multi-condition evaluation query for ReadSeek hybrid retrieval.",
+      "id": "q053",
+      "intent": "multi-condition",
+      "maxRelevantIds": null,
+      "query": "Science Fiction H. G. Wells invisible",
+      "relevance": {
+        "authorHints": [
+          "H. G. Wells"
+        ],
+        "categoryHints": [
+          "Science Fiction"
+        ],
+        "keywordHints": [
+          "invisible"
+        ],
+        "maxRelevantIds": 12,
+        "tagHints": [],
+        "titleHints": [
+          "The Invisible Man"
+        ]
+      },
+      "relevantResourceIds": [],
+      "resolvedRelevantResourceIds": [
+        19,
+        18,
+        13,
+        14,
+        15,
+        16,
+        17,
+        20,
+        21,
+        22,
+        410,
+        411
+      ]
+    },
+    {
+      "description": "multi-condition evaluation query for ReadSeek hybrid retrieval.",
+      "id": "q054",
+      "intent": "multi-condition",
+      "maxRelevantIds": null,
+      "query": "Horror feminist witch novel",
+      "relevance": {
+        "authorHints": [],
+        "categoryHints": [
+          "Horror"
+        ],
+        "keywordHints": [
+          "feminist",
+          "witch"
+        ],
+        "maxRelevantIds": 12,
+        "tagHints": [],
+        "titleHints": [
+          "The Year of the Witching"
+        ]
+      },
+      "relevantResourceIds": [],
+      "resolvedRelevantResourceIds": [
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        298,
+        299
+      ]
+    },
+    {
+      "description": "multi-condition evaluation query for ReadSeek hybrid retrieval.",
+      "id": "q055",
+      "intent": "multi-condition",
+      "maxRelevantIds": null,
+      "query": "Horror crime Scotland debut",
+      "relevance": {
+        "authorHints": [],
+        "categoryHints": [
+          "Horror"
+        ],
+        "keywordHints": [
+          "crime",
+          "Scottish"
+        ],
+        "maxRelevantIds": 12,
+        "tagHints": [],
+        "titleHints": [
+          "Pine"
+        ]
+      },
+      "relevantResourceIds": [],
+      "resolvedRelevantResourceIds": [
+        24,
+        23,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        298,
+        299
+      ]
+    },
+    {
+      "description": "multi-condition evaluation query for ReadSeek hybrid retrieval.",
+      "id": "q056",
+      "intent": "multi-condition",
+      "maxRelevantIds": null,
+      "query": "Self-Help beginner introspection",
+      "relevance": {
+        "authorHints": [],
+        "categoryHints": [
+          "Self-Help"
+        ],
+        "keywordHints": [
+          "introspection",
+          "beginner"
+        ],
+        "maxRelevantIds": 12,
+        "tagHints": [],
+        "titleHints": [
+          "Inquiring about Myself"
+        ]
+      },
+      "relevantResourceIds": [],
+      "resolvedRelevantResourceIds": [
+        429,
+        422,
+        423,
+        424,
+        425,
+        426,
+        427,
+        428,
+        430,
+        431,
+        432,
+        433
+      ]
+    },
+    {
+      "description": "multi-condition evaluation query for ReadSeek hybrid retrieval.",
+      "id": "q057",
+      "intent": "multi-condition",
+      "maxRelevantIds": null,
+      "query": "Self-Help advanced ego measurement",
+      "relevance": {
+        "authorHints": [],
+        "categoryHints": [
+          "Self-Help"
+        ],
+        "keywordHints": [
+          "ego",
+          "advanced"
+        ],
+        "maxRelevantIds": 12,
+        "tagHints": [],
+        "titleHints": [
+          "Measuring Ego Development",
+          "The Development of the Ego"
+        ]
+      },
+      "relevantResourceIds": [],
+      "resolvedRelevantResourceIds": [
+        430,
+        434,
+        425,
+        422,
+        423,
+        424,
+        426,
+        427,
+        428,
+        429,
+        431,
+        432
+      ]
+    },
+    {
+      "description": "multi-condition evaluation query for ReadSeek hybrid retrieval.",
+      "id": "q058",
+      "intent": "multi-condition",
+      "maxRelevantIds": null,
+      "query": "Science Fiction young adult dystopia",
+      "relevance": {
+        "authorHints": [],
+        "categoryHints": [
+          "Science Fiction"
+        ],
+        "keywordHints": [
+          "young adult",
+          "dystopia"
+        ],
+        "maxRelevantIds": 12,
+        "tagHints": [],
+        "titleHints": [
+          "Eve of Man"
+        ]
+      },
+      "relevantResourceIds": [],
+      "resolvedRelevantResourceIds": [
+        20,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        21,
+        22,
+        410,
+        411
+      ]
+    },
+    {
+      "description": "multi-condition evaluation query for ReadSeek hybrid retrieval.",
+      "id": "q059",
+      "intent": "multi-condition",
+      "maxRelevantIds": null,
+      "query": "Science Fiction psychological experiment",
+      "relevance": {
+        "authorHints": [],
+        "categoryHints": [
+          "Science Fiction"
+        ],
+        "keywordHints": [
+          "experiment",
+          "psychological"
+        ],
+        "maxRelevantIds": 12,
+        "tagHints": [],
+        "titleHints": [
+          "Appliance"
+        ]
+      },
+      "relevantResourceIds": [],
+      "resolvedRelevantResourceIds": [
+        16,
+        412,
+        13,
+        14,
+        15,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        410
+      ]
+    },
+    {
+      "description": "multi-condition evaluation query for ReadSeek hybrid retrieval.",
+      "id": "q060",
+      "intent": "multi-condition",
+      "maxRelevantIds": null,
+      "query": "Romantic second chance music nostalgia",
+      "relevance": {
+        "authorHints": [],
+        "categoryHints": [
+          "Romantic"
+        ],
+        "keywordHints": [
+          "second chance",
+          "music"
+        ],
+        "maxRelevantIds": 12,
+        "tagHints": [],
+        "titleHints": [
+          "Mix Tape"
+        ]
+      },
+      "relevantResourceIds": [],
+      "resolvedRelevantResourceIds": [
+        55,
+        401,
+        53,
+        54,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        390
+      ]
+    },
+    {
+      "description": "comparison evaluation query for ReadSeek hybrid retrieval.",
+      "id": "q061",
+      "intent": "comparison",
+      "maxRelevantIds": null,
+      "query": "比较 Pride and Prejudice 和 Sense and Sensibility",
+      "relevance": {
+        "authorHints": [
+          "Jane Austen"
+        ],
+        "categoryHints": [
+          "Romantic"
+        ],
+        "keywordHints": [
+          "compare"
+        ],
+        "maxRelevantIds": 12,
+        "tagHints": [],
+        "titleHints": [
+          "Pride and Prejudice",
+          "Sense and Sensibility"
+        ]
+      },
+      "relevantResourceIds": [],
+      "resolvedRelevantResourceIds": [
+        400,
+        402,
+        271,
+        395,
+        398,
+        284,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58
+      ]
+    },
+    {
+      "description": "comparison evaluation query for ReadSeek hybrid retrieval.",
+      "id": "q062",
+      "intent": "comparison",
+      "maxRelevantIds": null,
+      "query": "compare The Every and Player Piano",
+      "relevance": {
+        "authorHints": [],
+        "categoryHints": [
+          "Science Fiction"
+        ],
+        "keywordHints": [
+          "technology",
+          "automation"
+        ],
+        "maxRelevantIds": 12,
+        "tagHints": [],
+        "titleHints": [
+          "The Every",
+          "Player Piano"
+        ]
+      },
+      "relevantResourceIds": [],
+      "resolvedRelevantResourceIds": [
+        14,
+        15,
+        13,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        410,
+        411
+      ]
+    },
+    {
+      "description": "comparison evaluation query for ReadSeek hybrid retrieval.",
+      "id": "q063",
+      "intent": "comparison",
+      "maxRelevantIds": null,
+      "query": "compare H. G. Wells classic science fiction books",
+      "relevance": {
+        "authorHints": [
+          "H. G. Wells"
+        ],
+        "categoryHints": [
+          "Science Fiction"
+        ],
+        "keywordHints": [
+          "classic"
+        ],
+        "maxRelevantIds": 12,
+        "tagHints": [],
+        "titleHints": [
+          "The War of the Worlds",
+          "The Invisible Man"
+        ]
+      },
+      "relevantResourceIds": [],
+      "resolvedRelevantResourceIds": [
+        18,
+        19,
+        13,
+        14,
+        15,
+        16,
+        17,
+        20,
+        21,
+        22,
+        410,
+        411
+      ]
+    },
+    {
+      "description": "comparison evaluation query for ReadSeek hybrid retrieval.",
+      "id": "q064",
+      "intent": "comparison",
+      "maxRelevantIds": null,
+      "query": "比较恐怖小说 The Chalk Man 和 Pine",
+      "relevance": {
+        "authorHints": [],
+        "categoryHints": [
+          "Horror"
+        ],
+        "keywordHints": [
+          "compare",
+          "horror"
+        ],
+        "maxRelevantIds": 12,
+        "tagHints": [],
+        "titleHints": [
+          "The Chalk Man",
+          "Pine"
+        ]
+      },
+      "relevantResourceIds": [],
+      "resolvedRelevantResourceIds": [
+        24,
+        26,
+        23,
+        25,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        298,
+        299
+      ]
+    },
+    {
+      "description": "comparison evaluation query for ReadSeek hybrid retrieval.",
+      "id": "q065",
+      "intent": "comparison",
+      "maxRelevantIds": null,
+      "query": "比较习惯养成和自我探索类书",
+      "relevance": {
+        "authorHints": [],
+        "categoryHints": [
+          "Self-Help"
+        ],
+        "keywordHints": [
+          "habit",
+          "self"
+        ],
+        "maxRelevantIds": 12,
+        "tagHints": [],
+        "titleHints": [
+          "The Power of Habit",
+          "Inquiring about Myself",
+          "The Magic Within"
+        ]
+      },
+      "relevantResourceIds": [],
+      "resolvedRelevantResourceIds": [
+        429,
+        435,
+        385,
+        422,
+        423,
+        424,
+        425,
+        426,
+        427,
+        428,
+        430,
+        431
+      ]
+    },
+    {
+      "description": "reading-path evaluation query for ReadSeek hybrid retrieval.",
+      "id": "q066",
+      "intent": "reading-path",
+      "maxRelevantIds": null,
+      "query": "科幻阅读路径 从经典到现代",
+      "relevance": {
+        "authorHints": [],
+        "categoryHints": [
+          "Science Fiction"
+        ],
+        "keywordHints": [
+          "reading path"
+        ],
+        "maxRelevantIds": 12,
+        "tagHints": [],
+        "titleHints": [
+          "The War of the Worlds",
+          "The Invisible Man",
+          "Player Piano",
+          "The Every"
+        ]
+      },
+      "relevantResourceIds": [],
+      "resolvedRelevantResourceIds": [
+        14,
+        15,
+        18,
+        19,
+        13,
+        16,
+        17,
+        20,
+        21,
+        22,
+        410,
+        411
+      ]
+    },
+    {
+      "description": "reading-path evaluation query for ReadSeek hybrid retrieval.",
+      "id": "q067",
+      "intent": "reading-path",
+      "maxRelevantIds": null,
+      "query": "简奥斯汀阅读顺序",
+      "relevance": {
+        "authorHints": [
+          "Jane Austen"
+        ],
+        "categoryHints": [
+          "Romantic"
+        ],
+        "keywordHints": [
+          "reading path"
+        ],
+        "maxRelevantIds": 12,
+        "tagHints": [],
+        "titleHints": [
+          "Pride and Prejudice",
+          "Sense and Sensibility"
+        ]
+      },
+      "relevantResourceIds": [],
+      "resolvedRelevantResourceIds": [
+        400,
+        402,
+        271,
+        395,
+        398,
+        284,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58
+      ]
+    },
+    {
+      "description": "reading-path evaluation query for ReadSeek hybrid retrieval.",
+      "id": "q068",
+      "intent": "reading-path",
+      "maxRelevantIds": null,
+      "query": "恐怖小说入门阅读路径",
+      "relevance": {
+        "authorHints": [],
+        "categoryHints": [
+          "Horror"
+        ],
+        "keywordHints": [
+          "reading path"
+        ],
+        "maxRelevantIds": 12,
+        "tagHints": [],
+        "titleHints": [
+          "The Chalk Man",
+          "Pine",
+          "The Year of the Witching"
+        ]
+      },
+      "relevantResourceIds": [],
+      "resolvedRelevantResourceIds": [
+        23,
+        24,
+        26,
+        25,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        298,
+        299
+      ]
+    },
+    {
+      "description": "reading-path evaluation query for ReadSeek hybrid retrieval.",
+      "id": "q069",
+      "intent": "reading-path",
+      "maxRelevantIds": null,
+      "query": "自我管理和习惯养成阅读路径",
+      "relevance": {
+        "authorHints": [],
+        "categoryHints": [
+          "Self-Help"
+        ],
+        "keywordHints": [
+          "habit",
+          "self management"
+        ],
+        "maxRelevantIds": 12,
+        "tagHints": [],
+        "titleHints": [
+          "The Power of Habit",
+          "The Magic Within",
+          "Inquiring about Myself"
+        ]
+      },
+      "relevantResourceIds": [],
+      "resolvedRelevantResourceIds": [
+        429,
+        435,
+        385,
+        422,
+        423,
+        424,
+        425,
+        426,
+        427,
+        428,
+        430,
+        431
+      ]
+    },
+    {
+      "description": "reading-path evaluation query for ReadSeek hybrid retrieval.",
+      "id": "q070",
+      "intent": "reading-path",
+      "maxRelevantIds": null,
+      "query": "数学入门阅读顺序",
+      "relevance": {
+        "authorHints": [],
+        "categoryHints": [],
+        "keywordHints": [
+          "mathematics"
+        ],
+        "maxRelevantIds": 12,
+        "tagHints": [],
+        "titleHints": [
+          "A History of Mathematics",
+          "The Music of the Primes"
+        ]
+      },
+      "relevantResourceIds": [],
+      "resolvedRelevantResourceIds": [
+        315,
+        329,
+        316,
+        317,
+        318,
+        319,
+        320,
+        321,
+        322,
+        323,
+        324,
+        325
+      ]
+    },
+    {
+      "description": "metadata-fallback evaluation query for ReadSeek hybrid retrieval.",
+      "id": "q071",
+      "intent": "metadata-fallback",
+      "maxRelevantIds": null,
+      "query": "AI 人工智能 入门",
+      "relevance": {
+        "authorHints": [],
+        "categoryHints": [],
+        "keywordHints": [
+          "artificial intelligence",
+          "intelligence"
+        ],
+        "maxRelevantIds": 12,
+        "tagHints": [],
+        "titleHints": [
+          "Intelligence Science",
+          "What Is Intelligence?"
+        ]
+      },
+      "relevantResourceIds": [],
+      "resolvedRelevantResourceIds": [
+        216,
+        389
+      ]
+    },
+    {
+      "description": "metadata-fallback evaluation query for ReadSeek hybrid retrieval.",
+      "id": "q072",
+      "intent": "metadata-fallback",
+      "maxRelevantIds": null,
+      "query": "machine learning intelligence science",
+      "relevance": {
+        "authorHints": [],
+        "categoryHints": [],
+        "keywordHints": [
+          "machine learning",
+          "intelligence"
+        ],
+        "maxRelevantIds": 12,
+        "tagHints": [],
+        "titleHints": [
+          "Intelligence Science",
+          "What Is Intelligence?"
+        ]
+      },
+      "relevantResourceIds": [],
+      "resolvedRelevantResourceIds": [
+        216,
+        389
+      ]
+    },
+    {
+      "description": "metadata-fallback evaluation query for ReadSeek hybrid retrieval.",
+      "id": "q073",
+      "intent": "metadata-fallback",
+      "maxRelevantIds": null,
+      "query": "Java 系统设计 编程",
+      "relevance": {
+        "authorHints": [],
+        "categoryHints": [],
+        "keywordHints": [
+          "Java",
+          "system design",
+          "programming"
+        ],
+        "maxRelevantIds": 12,
+        "tagHints": [],
+        "titleHints": []
+      },
+      "relevantResourceIds": [],
+      "resolvedRelevantResourceIds": [
+        200,
+        212,
+        220,
+        222
+      ]
+    },
+    {
+      "description": "metadata-fallback evaluation query for ReadSeek hybrid retrieval.",
+      "id": "q074",
+      "intent": "metadata-fallback",
+      "maxRelevantIds": null,
+      "query": "Portable C UNIX System Programming",
+      "relevance": {
+        "authorHints": [],
+        "categoryHints": [],
+        "keywordHints": [
+          "C",
+          "UNIX",
+          "programming"
+        ],
+        "maxRelevantIds": 12,
+        "tagHints": [],
+        "titleHints": [
+          "Portable C and UNIX System Programming"
+        ]
+      },
+      "relevantResourceIds": [],
+      "resolvedRelevantResourceIds": [
+        220,
+        212,
+        200,
+        222,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20
+      ]
+    },
+    {
+      "description": "metadata-fallback evaluation query for ReadSeek hybrid retrieval.",
+      "id": "q075",
+      "intent": "metadata-fallback",
+      "maxRelevantIds": null,
+      "query": "Matrix Computations",
+      "relevance": {
+        "authorHints": [],
+        "categoryHints": [],
+        "keywordHints": [
+          "matrix",
+          "computations"
+        ],
+        "maxRelevantIds": 12,
+        "tagHints": [],
+        "titleHints": [
+          "Matrix Computations"
+        ]
+      },
+      "relevantResourceIds": [],
+      "resolvedRelevantResourceIds": [
+        321
+      ]
+    },
+    {
+      "description": "metadata-fallback evaluation query for ReadSeek hybrid retrieval.",
+      "id": "q076",
+      "intent": "metadata-fallback",
+      "maxRelevantIds": null,
+      "query": "The Art of Computer Programming algorithms",
+      "relevance": {
+        "authorHints": [],
+        "categoryHints": [],
+        "keywordHints": [
+          "algorithm",
+          "programming"
+        ],
+        "maxRelevantIds": 12,
+        "tagHints": [],
+        "titleHints": [
+          "The Art of Computer Programming: Semi-numerical algorithms"
+        ]
+      },
+      "relevantResourceIds": [],
+      "resolvedRelevantResourceIds": [
+        222,
+        200,
+        212,
+        220,
+        323
+      ]
+    },
+    {
+      "description": "metadata-fallback evaluation query for ReadSeek hybrid retrieval.",
+      "id": "q077",
+      "intent": "metadata-fallback",
+      "maxRelevantIds": null,
+      "query": "data intensive applications system design",
+      "relevance": {
+        "authorHints": [],
+        "categoryHints": [],
+        "keywordHints": [
+          "data",
+          "system",
+          "architecture"
+        ],
+        "maxRelevantIds": 12,
+        "tagHints": [],
+        "titleHints": []
+      },
+      "relevantResourceIds": [],
+      "resolvedRelevantResourceIds": [
+        160,
+        220
+      ]
+    },
+    {
+      "description": "metadata-fallback evaluation query for ReadSeek hybrid retrieval.",
+      "id": "q078",
+      "intent": "metadata-fallback",
+      "maxRelevantIds": null,
+      "query": "software architecture patterns",
+      "relevance": {
+        "authorHints": [],
+        "categoryHints": [],
+        "keywordHints": [
+          "software",
+          "architecture"
+        ],
+        "maxRelevantIds": 12,
+        "tagHints": [],
+        "titleHints": []
+      },
+      "relevantResourceIds": [],
+      "resolvedRelevantResourceIds": [
+        160
+      ]
+    },
+    {
+      "description": "metadata-fallback evaluation query for ReadSeek hybrid retrieval.",
+      "id": "q079",
+      "intent": "metadata-fallback",
+      "maxRelevantIds": null,
+      "query": "logic philosophy mathematical thinking",
+      "relevance": {
+        "authorHints": [],
+        "categoryHints": [],
+        "keywordHints": [
+          "logic",
+          "philosophy"
+        ],
+        "maxRelevantIds": 12,
+        "tagHints": [],
+        "titleHints": [
+          "Tractatus Logico-Philosophicus"
+        ]
+      },
+      "relevantResourceIds": [],
+      "resolvedRelevantResourceIds": [
+        369,
+        363,
+        239,
+        322,
+        352,
+        353,
+        354,
+        355,
+        356,
+        357,
+        358,
+        359
+      ]
+    },
+    {
+      "description": "metadata-fallback evaluation query for ReadSeek hybrid retrieval.",
+      "id": "q080",
+      "intent": "metadata-fallback",
+      "maxRelevantIds": null,
+      "query": "decision making psychology economics",
+      "relevance": {
+        "authorHints": [],
+        "categoryHints": [],
+        "keywordHints": [
+          "decision",
+          "economics",
+          "psychology"
+        ],
+        "maxRelevantIds": 12,
+        "tagHints": [],
+        "titleHints": [
+          "The Winner's Curse"
+        ]
+      },
+      "relevantResourceIds": [],
+      "resolvedRelevantResourceIds": [
+        242,
+        195,
+        205,
+        208,
+        226,
+        227,
+        228,
+        229,
+        230,
+        231,
+        232,
+        233
+      ]
+    },
+    {
+      "description": "natural-cn evaluation query for ReadSeek hybrid retrieval.",
+      "id": "q081",
+      "intent": "natural-cn",
+      "maxRelevantIds": null,
+      "query": "找关于阅读和社区温情的小说",
+      "relevance": {
+        "authorHints": [],
+        "categoryHints": [
+          "Romantic"
+        ],
+        "keywordHints": [
+          "阅读",
+          "社区"
+        ],
+        "maxRelevantIds": 12,
+        "tagHints": [],
+        "titleHints": [
+          "The Giver of Stars"
+        ]
+      },
+      "relevantResourceIds": [],
+      "resolvedRelevantResourceIds": [
+        56,
+        55,
+        392,
+        393,
+        402,
+        403,
+        404,
+        53,
+        54,
+        57,
+        58,
+        59
+      ]
+    },
+    {
+      "description": "natural-cn evaluation query for ReadSeek hybrid retrieval.",
+      "id": "q082",
+      "intent": "natural-cn",
+      "maxRelevantIds": null,
+      "query": "寻找晚年爱情主题的当代小说",
+      "relevance": {
+        "authorHints": [],
+        "categoryHints": [
+          "Romantic"
+        ],
+        "keywordHints": [
+          "晚年",
+          "爱情"
+        ],
+        "maxRelevantIds": 12,
+        "tagHints": [],
+        "titleHints": [
+          "Live a Little"
+        ]
+      },
+      "relevantResourceIds": [],
+      "resolvedRelevantResourceIds": [
+        54,
+        55,
+        56,
+        58,
+        60,
+        62,
+        390,
+        391,
+        394,
+        396,
+        397,
+        400
+      ]
+    },
+    {
+      "description": "natural-cn evaluation query for ReadSeek hybrid retrieval.",
+      "id": "q083",
+      "intent": "natural-cn",
+      "maxRelevantIds": null,
+      "query": "找带有怀旧音乐元素的爱情小说",
+      "relevance": {
+        "authorHints": [],
+        "categoryHints": [
+          "Romantic"
+        ],
+        "keywordHints": [
+          "音乐",
+          "怀旧"
+        ],
+        "maxRelevantIds": 12,
+        "tagHints": [],
+        "titleHints": [
+          "Mix Tape"
+        ]
+      },
+      "relevantResourceIds": [],
+      "resolvedRelevantResourceIds": [
+        55,
+        53,
+        54,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        390,
+        391
+      ]
+    },
+    {
+      "description": "natural-cn evaluation query for ReadSeek hybrid retrieval.",
+      "id": "q084",
+      "intent": "natural-cn",
+      "maxRelevantIds": null,
+      "query": "寻找关于克隆技术伦理的科幻",
+      "relevance": {
+        "authorHints": [],
+        "categoryHints": [
+          "Science Fiction"
+        ],
+        "keywordHints": [
+          "clone",
+          "克隆",
+          "ethics"
+        ],
+        "maxRelevantIds": 12,
+        "tagHints": [],
+        "titleHints": []
+      },
+      "relevantResourceIds": [],
+      "resolvedRelevantResourceIds": [
+        410,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        411
+      ]
+    },
+    {
+      "description": "natural-cn evaluation query for ReadSeek hybrid retrieval.",
+      "id": "q085",
+      "intent": "natural-cn",
+      "maxRelevantIds": null,
+      "query": "寻找关于生物技术的科幻小说",
+      "relevance": {
+        "authorHints": [],
+        "categoryHints": [
+          "Science Fiction"
+        ],
+        "keywordHints": [
+          "biotechnology",
+          "biology"
+        ],
+        "maxRelevantIds": 12,
+        "tagHints": [],
+        "titleHints": []
+      },
+      "relevantResourceIds": [],
+      "resolvedRelevantResourceIds": [
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        410,
+        411
+      ]
+    },
+    {
+      "description": "theme-cn evaluation query for ReadSeek hybrid retrieval.",
+      "id": "q086",
+      "intent": "theme-cn",
+      "maxRelevantIds": null,
+      "query": "查找动作冒险类图书",
+      "relevance": {
+        "authorHints": [],
+        "categoryHints": [
+          "Action and Adventure"
+        ],
+        "keywordHints": [
+          "adventure",
+          "hero"
+        ],
+        "maxRelevantIds": 12,
+        "tagHints": [],
+        "titleHints": []
+      },
+      "relevantResourceIds": [],
+      "resolvedRelevantResourceIds": [
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        142,
+        143
+      ]
+    },
+    {
+      "description": "theme-cn evaluation query for ReadSeek hybrid retrieval.",
+      "id": "q087",
+      "intent": "theme-cn",
+      "maxRelevantIds": null,
+      "query": "查找儿童或青少年适合的故事",
+      "relevance": {
+        "authorHints": [],
+        "categoryHints": [
+          "Kids"
+        ],
+        "keywordHints": [
+          "children",
+          "young adult"
+        ],
+        "maxRelevantIds": 12,
+        "tagHints": [],
+        "titleHints": []
+      },
+      "relevantResourceIds": [],
+      "resolvedRelevantResourceIds": [
+        68,
+        63,
+        64,
+        65,
+        66,
+        67,
+        69,
+        70,
+        71,
+        72
+      ]
+    },
+    {
+      "description": "theme-cn evaluation query for ReadSeek hybrid retrieval.",
+      "id": "q088",
+      "intent": "theme-cn",
+      "maxRelevantIds": null,
+      "query": "历史类日本主题图书",
+      "relevance": {
+        "authorHints": [],
+        "categoryHints": [
+          "History"
+        ],
+        "keywordHints": [
+          "Japan",
+          "history"
+        ],
+        "maxRelevantIds": 12,
+        "tagHints": [],
+        "titleHints": [
+          "Japan Story"
+        ]
+      },
+      "relevantResourceIds": [],
+      "resolvedRelevantResourceIds": [
+        74,
+        73,
+        75,
+        76,
+        77,
+        78,
+        79,
+        80,
+        81,
+        82,
+        279,
+        280
+      ]
+    },
+    {
+      "description": "theme-cn evaluation query for ReadSeek hybrid retrieval.",
+      "id": "q089",
+      "intent": "theme-cn",
+      "maxRelevantIds": null,
+      "query": "足球运动员传记",
+      "relevance": {
+        "authorHints": [],
+        "categoryHints": [
+          "Sport"
+        ],
+        "keywordHints": [
+          "football",
+          "biography"
+        ],
+        "maxRelevantIds": 12,
+        "tagHints": [],
+        "titleHints": []
+      },
+      "relevantResourceIds": [],
+      "resolvedRelevantResourceIds": [
+        83,
+        84,
+        85,
+        86,
+        87,
+        88,
+        89,
+        90,
+        173,
+        174,
+        175,
+        176
+      ]
+    },
+    {
+      "description": "theme-cn evaluation query for ReadSeek hybrid retrieval.",
+      "id": "q090",
+      "intent": "theme-cn",
+      "maxRelevantIds": null,
+      "query": "拳击冠军 运动 女性",
+      "relevance": {
+        "authorHints": [],
+        "categoryHints": [
+          "Sport"
+        ],
+        "keywordHints": [
+          "boxing",
+          "women"
+        ],
+        "maxRelevantIds": 12,
+        "tagHints": [],
+        "titleHints": []
+      },
+      "relevantResourceIds": [],
+      "resolvedRelevantResourceIds": [
+        83,
+        84,
+        85,
+        86,
+        87,
+        88,
+        89,
+        90,
+        395,
+        424,
+        426
+      ]
+    },
+    {
+      "description": "exact-cn evaluation query for ReadSeek hybrid retrieval.",
+      "id": "q091",
+      "intent": "exact-cn",
+      "maxRelevantIds": null,
+      "query": "经济学中的赢家诅咒",
+      "relevance": {
+        "authorHints": [],
+        "categoryHints": [],
+        "keywordHints": [
+          "winner's curse",
+          "economics"
+        ],
+        "maxRelevantIds": 12,
+        "tagHints": [],
+        "titleHints": [
+          "The Winner's Curse"
+        ]
+      },
+      "relevantResourceIds": [],
+      "resolvedRelevantResourceIds": [
+        242,
+        205,
+        208,
+        226,
+        227,
+        228,
+        229,
+        230,
+        231,
+        232,
+        233,
+        234
+      ]
+    },
+    {
+      "description": "exact-cn evaluation query for ReadSeek hybrid retrieval.",
+      "id": "q092",
+      "intent": "exact-cn",
+      "maxRelevantIds": null,
+      "query": "素数的音乐",
+      "relevance": {
+        "authorHints": [],
+        "categoryHints": [],
+        "keywordHints": [
+          "prime",
+          "music"
+        ],
+        "maxRelevantIds": 12,
+        "tagHints": [],
+        "titleHints": [
+          "The Music of the Primes"
+        ]
+      },
+      "relevantResourceIds": [],
+      "resolvedRelevantResourceIds": [
+        329
+      ]
+    },
+    {
+      "description": "exact-cn evaluation query for ReadSeek hybrid retrieval.",
+      "id": "q093",
+      "intent": "exact-cn",
+      "maxRelevantIds": null,
+      "query": "数学史",
+      "relevance": {
+        "authorHints": [],
+        "categoryHints": [],
+        "keywordHints": [
+          "mathematics history"
+        ],
+        "maxRelevantIds": 12,
+        "tagHints": [],
+        "titleHints": [
+          "A History of Mathematics"
+        ]
+      },
+      "relevantResourceIds": [],
+      "resolvedRelevantResourceIds": [
+        315
+      ]
+    },
+    {
+      "description": "exact-cn evaluation query for ReadSeek hybrid retrieval.",
+      "id": "q094",
+      "intent": "exact-cn",
+      "maxRelevantIds": null,
+      "query": "自助小组 女性赋权",
+      "relevance": {
+        "authorHints": [],
+        "categoryHints": [
+          "Self-Help"
+        ],
+        "keywordHints": [
+          "women empowerment"
+        ],
+        "maxRelevantIds": 12,
+        "tagHints": [],
+        "titleHints": [
+          "Empowerment of Women Through Self Help Groups"
+        ]
+      },
+      "relevantResourceIds": [],
+      "resolvedRelevantResourceIds": [
+        426,
+        422,
+        423,
+        424,
+        425,
+        427,
+        428,
+        429,
+        430,
+        431,
+        432,
+        433
+      ]
+    },
+    {
+      "description": "exact-cn evaluation query for ReadSeek hybrid retrieval.",
+      "id": "q095",
+      "intent": "exact-cn",
+      "maxRelevantIds": null,
+      "query": "中年母亲 人生转变",
+      "relevance": {
+        "authorHints": [],
+        "categoryHints": [
+          "Self-Help"
+        ],
+        "keywordHints": [
+          "midlife",
+          "mother"
+        ],
+        "maxRelevantIds": 12,
+        "tagHints": [],
+        "titleHints": [
+          "Midlife Mothers in Transition"
+        ]
+      },
+      "relevantResourceIds": [],
+      "resolvedRelevantResourceIds": [
+        431,
+        432,
+        422,
+        423,
+        424,
+        425,
+        426,
+        427,
+        428,
+        429,
+        430,
+        433
+      ]
+    },
+    {
+      "description": "exact-cn evaluation query for ReadSeek hybrid retrieval.",
+      "id": "q096",
+      "intent": "exact-cn",
+      "maxRelevantIds": null,
+      "query": "非洲方向 自我成长",
+      "relevance": {
+        "authorHints": [],
+        "categoryHints": [
+          "Self-Help"
+        ],
+        "keywordHints": [
+          "African",
+          "self"
+        ],
+        "maxRelevantIds": 12,
+        "tagHints": [],
+        "titleHints": [
+          "In an African Direction"
+        ]
+      },
+      "relevantResourceIds": [],
+      "resolvedRelevantResourceIds": [
+        428,
+        422,
+        423,
+        424,
+        425,
+        426,
+        427,
+        429,
+        430,
+        431,
+        432,
+        433
+      ]
+    },
+    {
+      "description": "exact-cn evaluation query for ReadSeek hybrid retrieval.",
+      "id": "q097",
+      "intent": "exact-cn",
+      "maxRelevantIds": null,
+      "query": "内在魔法 心灵成长",
+      "relevance": {
+        "authorHints": [],
+        "categoryHints": [
+          "Self-Help"
+        ],
+        "keywordHints": [
+          "magic within",
+          "spiritual"
+        ],
+        "maxRelevantIds": 12,
+        "tagHints": [],
+        "titleHints": [
+          "The Magic Within"
+        ]
+      },
+      "relevantResourceIds": [],
+      "resolvedRelevantResourceIds": [
+        435,
+        422,
+        423,
+        424,
+        425,
+        426,
+        427,
+        428,
+        429,
+        430,
+        431,
+        432
+      ]
+    },
+    {
+      "description": "exact-cn evaluation query for ReadSeek hybrid retrieval.",
+      "id": "q098",
+      "intent": "exact-cn",
+      "maxRelevantIds": null,
+      "query": "矛盾的自我 心理学",
+      "relevance": {
+        "authorHints": [],
+        "categoryHints": [
+          "Self-Help"
+        ],
+        "keywordHints": [
+          "paradoxical self"
+        ],
+        "maxRelevantIds": 12,
+        "tagHints": [],
+        "titleHints": [
+          "The Paradoxical Self"
+        ]
+      },
+      "relevantResourceIds": [],
+      "resolvedRelevantResourceIds": [
+        436,
+        422,
+        423,
+        424,
+        425,
+        426,
+        427,
+        428,
+        429,
+        430,
+        431,
+        432
+      ]
+    },
+    {
+      "description": "exact-cn evaluation query for ReadSeek hybrid retrieval.",
+      "id": "q099",
+      "intent": "exact-cn",
+      "maxRelevantIds": null,
+      "query": "家庭与自我 成长",
+      "relevance": {
+        "authorHints": [],
+        "categoryHints": [
+          "Self-Help"
+        ],
+        "keywordHints": [
+          "family",
+          "self"
+        ],
+        "maxRelevantIds": 12,
+        "tagHints": [],
+        "titleHints": [
+          "Self and Family"
+        ]
+      },
+      "relevantResourceIds": [],
+      "resolvedRelevantResourceIds": [
+        433,
+        422,
+        423,
+        424,
+        425,
+        426,
+        427,
+        428,
+        429,
+        430,
+        431,
+        432
+      ]
+    },
+    {
+      "description": "exact-cn evaluation query for ReadSeek hybrid retrieval.",
+      "id": "q100",
+      "intent": "exact-cn",
+      "maxRelevantIds": null,
+      "query": "母亲原型 女性灵性",
+      "relevance": {
+        "authorHints": [],
+        "categoryHints": [
+          "Self-Help"
+        ],
+        "keywordHints": [
+          "mother",
+          "spiritual"
+        ],
+        "maxRelevantIds": 12,
+        "tagHints": [],
+        "titleHints": [
+          "Motherself"
+        ]
+      },
+      "relevantResourceIds": [],
+      "resolvedRelevantResourceIds": [
+        432,
+        431,
+        422,
+        423,
+        424,
+        425,
+        426,
+        427,
+        428,
+        429,
+        430,
+        433
+      ]
+    }
+  ]
+}

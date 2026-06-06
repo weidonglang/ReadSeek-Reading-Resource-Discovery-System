@@ -1,0 +1,49 @@
+{
+  "status": "sample-placeholder",
+  "note": "The numbers below are placeholders used to verify the report layout. Do not cite them as final evaluation results.",
+  "generatedAt": null,
+  "metrics": [
+    {
+      "method": "BM25 only",
+      "recallAt5": null,
+      "mrr": null,
+      "ndcgAt10": null,
+      "avgLatencyMs": null
+    },
+    {
+      "method": "Vector only",
+      "recallAt5": null,
+      "mrr": null,
+      "ndcgAt10": null,
+      "avgLatencyMs": null
+    },
+    {
+      "method": "Hybrid",
+      "recallAt5": null,
+      "mrr": null,
+      "ndcgAt10": null,
+      "avgLatencyMs": null
+    },
+    {
+      "method": "Hybrid + Reranker",
+      "recallAt5": null,
+      "mrr": null,
+      "ndcgAt10": null,
+      "avgLatencyMs": null
+    }
+  ],
+  "caseStudies": [
+    {
+      "queryId": "q-self-help-growth",
+      "query": "个人成长 入门",
+      "analysis": "Template case for checking whether topic expansion and semantic recall bring self-help resources into the candidate set.",
+      "failureAnalysis": "If descriptions are empty or sparse, vector retrieval and reranking may lack enough textual evidence."
+    },
+    {
+      "queryId": "q-author-austen",
+      "query": "Jane Austen representative works",
+      "analysis": "Template case for exact metadata and BM25 matching.",
+      "failureAnalysis": "Inconsistent author names or missing author metadata may weaken exact and BM25 matching."
+    }
+  ]
+}

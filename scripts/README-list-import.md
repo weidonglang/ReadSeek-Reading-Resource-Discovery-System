@@ -25,7 +25,7 @@ Run:
 
 ```powershell
 node scripts/generate-list-import-sql.js
-$env:PGPASSWORD="20041117"
+$env:PGPASSWORD=$env:POSTGRES_PASSWORD
 $env:PGCLIENTENCODING="UTF8"
 & "D:\PostgreSQL\18\bin\psql.exe" -h localhost -p 5043 -U postgres -d book_recommendation_system -f scripts/generated/import_from_list_raw.sql
 Remove-Item Env:PGPASSWORD

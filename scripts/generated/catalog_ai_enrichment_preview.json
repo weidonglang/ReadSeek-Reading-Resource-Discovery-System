@@ -1,0 +1,173 @@
+[
+  {
+    "bookId": 13,
+    "title": "Robot（test）",
+    "author": "Adam Wisniewski-Snerg",
+    "category": "Science Fiction",
+    "currentDescriptionLength": 238,
+    "currentTags": [],
+    "enrichment": {
+      "description": "本书归类为科幻（Science Fiction），但现有描述呈现现代地缘政治与军事危机主题，涉及核武器失踪及大国对峙情节。内容聚焦于紧张的国际局势与战争边缘的决策博弈，适合偏好政治惊悚与宏观战略叙事风格的读者探索。",
+      "tags": [
+        "科幻",
+        "政治惊悚",
+        "军事危机",
+        "地缘政治",
+        "Science Fiction",
+        "Political Thriller"
+      ],
+      "search_keywords": [
+        "Robot",
+        "Adam Wisniewski-Snerg",
+        "科幻",
+        "政治惊悚",
+        "军事",
+        "核危机",
+        "国际关系",
+        "战争"
+      ],
+      "difficulty": "intermediate",
+      "target_audience": "科幻与政治惊悚爱好者",
+      "recommendation_reason": "结合科幻标签与现代军事政治危机叙事，提供独特的阅读视角。",
+      "confidence": 0.3
+    },
+    "status": "preview"
+  },
+  {
+    "bookId": 14,
+    "title": "The Every",
+    "author": "Dave Eggers",
+    "category": "Science Fiction",
+    "currentDescriptionLength": 218,
+    "currentTags": [],
+    "enrichment": {
+      "description": "《The Every》是一部反乌托邦科幻小说，探讨科技巨头垄断、数据隐私与社会控制等主题。故事围绕全球最大搜索引擎与电商合并后的超级公司展开，反思数字时代的人性困境。适合关注未来社会结构与科技伦理的读者。",
+      "tags": [
+        "反乌托邦",
+        "科技伦理",
+        "垄断",
+        "Science Fiction",
+        "社会批判",
+        "Dave Eggers"
+      ],
+      "search_keywords": [
+        "The Every",
+        "Dave Eggers",
+        "反乌托邦小说",
+        "科技垄断",
+        "社交媒体",
+        "电子商务",
+        "科幻小说",
+        "数据隐私"
+      ],
+      "difficulty": "intermediate",
+      "target_audience": "科幻与社会议题爱好者",
+      "recommendation_reason": "以尖锐笔触描绘科技垄断下的未来世界，引发对数字权力结构的深刻思考。",
+      "confidence": 0.9
+    },
+    "status": "preview"
+  },
+  {
+    "bookId": 15,
+    "title": "Player Piano",
+    "author": "Kurt Vonnegut",
+    "category": "Science Fiction",
+    "currentDescriptionLength": 118,
+    "currentTags": [],
+    "enrichment": {
+      "description": "《Player Piano》是库尔特·冯内古特的处女作，属于经典科幻文学。作品以反乌托邦视角探讨技术统治、自动化对人类尊严的冲击及社会异化主题。作为冯内古特创作生涯的起点，本书展现了其独特的讽刺风格与人文关怀，适合喜爱思考科技与伦理关系的读者深入阅读。",
+      "tags": [
+        "科幻",
+        "反乌托邦",
+        "Kurt Vonnegut",
+        "Player Piano",
+        "社会批判",
+        "技术伦理"
+      ],
+      "search_keywords": [
+        "Player Piano",
+        "库尔特·冯内古特",
+        "Kurt Vonnegut",
+        "反乌托邦小说",
+        "科幻小说",
+        "自动化社会",
+        "技术统治",
+        "冯内古特处女作"
+      ],
+      "difficulty": "intermediate",
+      "target_audience": "科幻与文学爱好者",
+      "recommendation_reason": "作为冯内古特的成名处女作，本书以犀利笔触开启了对技术社会的深刻反思。",
+      "confidence": 0.9
+    },
+    "status": "preview"
+  },
+  {
+    "bookId": 16,
+    "title": "Appliance",
+    "author": "J. O. Morgan",
+    "category": "Science Fiction",
+    "currentDescriptionLength": 328,
+    "currentTags": [],
+    "enrichment": {
+      "description": "《Appliance》是一部科幻作品，通过内心独白与对话片段，探讨被测试者在封闭环境中的焦虑、不信任与对未知的恐惧。文本聚焦于人类在实验情境下的心理张力与伦理困境，风格冷峻而富有思辨性，适合喜爱心理科幻与社会寓言的读者。",
+      "tags": [
+        "科幻",
+        "心理惊悚",
+        "实验伦理",
+        "Appliance",
+        "J. O. Morgan",
+        "反乌托邦",
+        "意识流"
+      ],
+      "search_keywords": [
+        "Appliance",
+        "J. O. Morgan",
+        "科幻实验",
+        "心理压迫",
+        "测试对象",
+        "封闭空间",
+        "伦理困境",
+        "英国科幻"
+      ],
+      "difficulty": "intermediate",
+      "target_audience": "科幻与心理题材爱好者",
+      "recommendation_reason": "以碎片化叙事呈现实验情境下的人性挣扎，适合偏好思辨型科幻的读者。",
+      "confidence": 0.75
+    },
+    "status": "preview"
+  },
+  {
+    "bookId": 17,
+    "title": "The Book of Sand",
+    "author": "Theo Clare",
+    "category": "Science Fiction",
+    "currentDescriptionLength": 180,
+    "currentTags": [],
+    "enrichment": {
+      "description": "《The Book of Sand》是一部科幻作品，描绘了昔日繁华城市沦为废墟后的荒凉景象。故事聚焦于地平线上闪烁的城市轮廓与远处走向读者的家庭群体，营造出浓厚的末世氛围与神秘感。本书适合喜爱探索文明兴衰、废土生存及人性在极端环境下表现的读者，提供沉浸式的未来图景想象。",
+      "tags": [
+        "Science Fiction",
+        "Post-Apocalyptic",
+        "废土",
+        "Dystopia",
+        "Family Journey",
+        "Ruins"
+      ],
+      "search_keywords": [
+        "The Book of Sand",
+        "Theo Clare",
+        "科幻小说",
+        "末世",
+        "废墟城市",
+        "家庭",
+        "科幻冒险",
+        "文明毁灭"
+      ],
+      "difficulty": "intermediate",
+      "target_audience": "科幻与末世题材爱好者",
+      "recommendation_reason": "以独特的废墟视角和家庭旅程展开，适合寻找沉浸式末世氛围的读者。",
+      "confidence": 0.85
+    },
+    "status": "preview"
+  }
+]

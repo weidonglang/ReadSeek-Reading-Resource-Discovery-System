@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ReadSeek Benchmark Dashboard</title>
+  <style>
+    body { font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; margin: 0; background: #f5f7fb; color: #172033; }
+    main { max-width: 1120px; margin: 0 auto; padding: 32px 20px 48px; }
+    header { margin-bottom: 20px; }
+    h1 { margin: 0 0 8px; font-size: 28px; }
+    h2 { margin: 0 0 12px; font-size: 18px; }
+    p { margin: 0; }
+    .panel { background: #fff; border: 1px solid #dce2eb; border-radius: 8px; padding: 18px; margin: 14px 0; box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04); }
+    pre { margin: 0; white-space: pre-wrap; word-break: break-word; font-size: 13px; line-height: 1.55; }
+    button { border: 1px solid #22314a; background: #22314a; color: #fff; border-radius: 6px; padding: 9px 14px; cursor: pointer; }
+    button:hover { background: #334663; }
+    .controls { display: grid; gap: 12px; }
+    .muted { color: #637083; }
+    code { background: #eef2f7; padding: 2px 5px; border-radius: 4px; }
+    </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>ReadSeek Benchmark Dashboard</h1>
+      <p>静态报告总览。下方按钮会尝试调用本机 Ollama：<code>http://localhost:11434</code>，模型：<code>qwen3:14b</code>。</p>
+    </header>
+    <section class="panel controls">
+      <button id="analyze">调用本地 14B 分析报告</button>
+      <span id="status" class="muted"></span>
+      <pre id="analysis">等待分析。</pre>
+    </section>
+    <section class="panel"><h2>Retrieval</h2><pre># ReadSeek Rust Retrieval Evaluation
+
+- Generated at: 2026-06-06T09:33:54
+- Query count: 3
+- Tool: readseek-bench-rs 0.1.0
+- Metric focus: Precision@5
+
+| Method | Success | Precision@K | Recall@K | MRR | NDCG@10 | Avg ms | P95 ms |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| bm25 | 3/3 | 0.3333 | 0.1389 | 1.0000 | 0.2980 | 34.7 | 36.8 |
+| hybrid | 3/3 | 0.3333 | 0.1389 | 1.0000 | 0.2980 | 118.1 | 121.2 |
+| hybrid_reranker | 3/3 | 0.2667 | 0.1111 | 1.0000 | 0.3120 | 281.9 | 289.5 |
+| vector | 3/3 | 0.3333 | 0.1389 | 1.0000 | 0.3473 | 120.9 | 223.8 |</pre></section><section class="panel"><h2>RAG</h2><pre># ReadSeek Rust RAG Evaluation
+
+- Generated at: 2026-06-06T09:34:53
+- Question count: 2
+- Mode/provider: standard / ollama
+
+| Metric | Value |
+| --- | ---: |
+| Answerable rate | 1.0000 |
+| Evidence hit rate | 1.0000 |
+| Mean evidence recall | 0.8000 |
+| Mean citation coverage | 0.7000 |
+| Average total latency ms | 29372.5 |
+
+Manual scoring columns are left blank in `rag_evaluation_manual_scoring.csv` for relevance, completeness, citation validity, and hallucination risk.
+</pre></section><section class="panel"><h2>Recommendation</h2><pre># ReadSeek Rust Recommendation Offline Evaluation
+
+- Generated at: 2026-06-06T09:33:54
+- Overview shelves: 2
+- Overview cases: 6
+- Similar recommendation cases: 3
+
+| Metric | Value |
+| --- | ---: |
+| Precision@10 | 0.2667 |
+| Recall@10 | 0.1508 |
+| NDCG@10 | 0.3579 |
+</pre></section><section class="panel"><h2>Load Test</h2><pre># ReadSeek Rust API Load Test
+
+- Generated at: 2026-06-06T09:34:54
+- Requests: 8
+- Concurrency: 2
+- Throughput: 8.13 req/s
+
+| Scope | Success rate | Avg ms | P50 | P90 | P95 | P99 | Max |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| overall | 1.0000 | 244.5 | 88.6 | 495.7 | 495.7 | 495.7 | 495.7 |
+| recommendation | 1.0000 | 75.4 | 70.6 | 88.6 | 88.6 | 88.6 | 88.6 |
+| search | 1.0000 | 413.5 | 401.7 | 495.7 | 495.7 | 495.7 | 495.7 |</pre></section>
+  </main>
+  <script>
+    const REPORT_TEXT = "## Retrieval\n\n# ReadSeek Rust Retrieval Evaluation\n\n- Generated at: 2026-06-06T09:33:54\n- Query count: 3\n- Tool: readseek-bench-rs 0.1.0\n- Metric focus: Precision@5\n\n| Method | Success | Precision@K | Recall@K | MRR | NDCG@10 | Avg ms | P95 ms |\n| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |\n| bm25 | 3/3 | 0.3333 | 0.1389 | 1.0000 | 0.2980 | 34.7 | 36.8 |\n| hybrid | 3/3 | 0.3333 | 0.1389 | 1.0000 | 0.2980 | 118.1 | 121.2 |\n| hybrid_reranker | 3/3 | 0.2667 | 0.1111 | 1.0000 | 0.3120 | 281.9 | 289.5 |\n| vector | 3/3 | 0.3333 | 0.1389 | 1.0000 | 0.3473 | 120.9 | 223.8 |\n\n## RAG\n\n# ReadSeek Rust RAG Evaluation\n\n- Generated at: 2026-06-06T09:34:53\n- Question count: 2\n- Mode/provider: standard / ollama\n\n| Metric | Value |\n| --- | ---: |\n| Answerable rate | 1.0000 |\n| Evidence hit rate | 1.0000 |\n| Mean evidence recall | 0.8000 |\n| Mean citation coverage | 0.7000 |\n| Average total latency ms | 29372.5 |\n\nManual scoring columns are left blank in `rag_evaluation_manual_scoring.csv` for relevance, completeness, citation validity, and hallucination risk.\n\n\n## Recommendation\n\n# ReadSeek Rust Recommendation Offline Evaluation\n\n- Generated at: 2026-06-06T09:33:54\n- Overview shelves: 2\n- Overview cases: 6\n- Similar recommendation cases: 3\n\n| Metric | Value |\n| --- | ---: |\n| Precision@10 | 0.2667 |\n| Recall@10 | 0.1508 |\n| NDCG@10 | 0.3579 |\n\n\n## Load Test\n\n# ReadSeek Rust API Load Test\n\n- Generated at: 2026-06-06T09:34:54\n- Requests: 8\n- Concurrency: 2\n- Throughput: 8.13 req/s\n\n| Scope | Success rate | Avg ms | P50 | P90 | P95 | P99 | Max |\n| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |\n| overall | 1.0000 | 244.5 | 88.6 | 495.7 | 495.7 | 495.7 | 495.7 |\n| recommendation | 1.0000 | 75.4 | 70.6 | 88.6 | 88.6 | 88.6 | 88.6 |\n| search | 1.0000 | 413.5 | 401.7 | 495.7 | 495.7 | 495.7 | 495.7 |";
+    const OLLAMA_URL = "http://localhost:11434";
+    const OLLAMA_MODEL = "qwen3:14b";
+    document.getElementById('analyze').addEventListener('click', async () => {
+      const status = document.getElementById('status');
+      const output = document.getElementById('analysis');
+      status.textContent = '正在请求本地模型...';
+      output.textContent = '';
+      try {
+        const response = await fetch(`${OLLAMA_URL.replace(/\\/$/, '')}/api/chat`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            model: OLLAMA_MODEL,
+            stream: false,
+            messages: [
+              { role: 'system', content: '你是检索、推荐和RAG系统评测专家。请用中文给出简洁、可执行的工程分析。' },
+              { role: 'user', content: `请分析下面 ReadSeek 评测报告，指出优势、短板、可能原因和下一步优化建议：\\n\\n${REPORT_TEXT}` }
+            ]
+          })
+        });
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        const data = await response.json();
+        output.textContent = data.message?.content || JSON.stringify(data, null, 2);
+        status.textContent = '分析完成';
+      } catch (error) {
+        status.textContent = '调用失败';
+        output.textContent = `无法直接调用本地 Ollama。常见原因：Ollama 未启动、模型名不存在、或浏览器 CORS 限制。\\n\\n可尝试：ollama serve；确认模型：ollama list；必要时设置 OLLAMA_ORIGINS=* 后重启 Ollama。\\n\\n错误：${error.message}`;
+      }
+    });
+  </script>
+</body>
+</html>

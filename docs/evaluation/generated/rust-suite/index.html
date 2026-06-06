@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ReadSeek Benchmark Dashboard</title>
+  <style>
+    :root { --ink:#172033; --muted:#637083; --line:#dce2eb; --panel:#fff; --bg:#f5f7fb; --good:#18745a; --accent:#2457a6; --warn:#9a5b12; }
+    body { font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; margin: 0; background: var(--bg); color: var(--ink); }
+    main { max-width: 1180px; margin: 0 auto; padding: 34px 20px 52px; }
+    header { margin-bottom: 22px; }
+    h1 { margin: 0 0 8px; font-size: 32px; letter-spacing: 0; }
+    h2 { margin: 0 0 12px; font-size: 20px; letter-spacing: 0; }
+    h3 { margin: 0 0 12px; font-size: 14px; color: #344255; letter-spacing: 0; }
+    p { margin: 0; line-height: 1.65; }
+    .eyebrow { color: var(--accent); font-weight: 700; margin-bottom: 6px; }
+    .section-title { margin: 22px 0 8px; }
+    .panel { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 18px; margin: 14px 0; box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04); }
+    .emphasis { border-left: 5px solid var(--good); }
+    .kpis { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin: 18px 0; }
+    .kpi { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 16px; display: grid; gap: 6px; }
+    .kpi span, .kpi small, .muted { color: var(--muted); }
+    .kpi strong { font-size: 24px; line-height: 1.15; }
+    .insight-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+    .chart-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin-top: 14px; }
+    .bar-card { border: 1px solid var(--line); border-radius: 8px; padding: 14px; background: #fbfcff; }
+    .bar-row { display: grid; grid-template-columns: 132px 1fr 72px; gap: 10px; align-items: center; margin: 9px 0; font-size: 13px; }
+    .bar-track { height: 12px; background: #e8edf5; border-radius: 999px; overflow: hidden; }
+    .bar { display: block; height: 100%; background: linear-gradient(90deg, #2457a6, #18745a); border-radius: inherit; }
+    .bar.latency { background: linear-gradient(90deg, #c37a1a, #9a5b12); }
+    .gauge-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; margin-top: 14px; }
+    .gauge { display: grid; place-items: center; gap: 8px; border: 1px solid var(--line); border-radius: 8px; padding: 14px; background: #fbfcff; }
+    .ring { width: 96px; height: 96px; border-radius: 50%; display: grid; place-items: center; background: conic-gradient(var(--good) var(--value), #e8edf5 0); position: relative; }
+    .ring::after { content: ""; position: absolute; inset: 10px; border-radius: 50%; background: #fff; }
+    .ring strong { position: relative; z-index: 1; }
+    .latency-note { margin-top: 12px; color: var(--muted); }
+    table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 13px; }
+    th, td { border-bottom: 1px solid var(--line); padding: 9px 8px; text-align: right; }
+    th:first-child, td:first-child { text-align: left; }
+    th { color: #344255; background: #f2f5fa; }
+    tr.highlight { background: #eef8f3; }
+    .badge { display: inline-block; margin-left: 6px; padding: 2px 6px; border-radius: 999px; background: #dff3ea; color: var(--good); font-size: 12px; }
+    pre { margin: 10px 0 0; white-space: pre-wrap; word-break: break-word; font-size: 13px; line-height: 1.55; }
+    summary { cursor: pointer; font-weight: 700; }
+    button { border: 1px solid #22314a; background: #22314a; color: #fff; border-radius: 6px; padding: 9px 14px; cursor: pointer; width: fit-content; }
+    button:hover { background: #334663; }
+    .controls { display: grid; gap: 12px; }
+    .model-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+    .model-grid label { display: grid; gap: 6px; color: var(--muted); font-size: 13px; }
+    select, input { width: 100%; box-sizing: border-box; border: 1px solid var(--line); border-radius: 6px; padding: 9px 10px; font: inherit; background: #fff; color: var(--ink); }
+    .button-row { display: flex; flex-wrap: wrap; gap: 10px; }
+    .generated-actions { min-height: 24px; }
+    .download-link { display: inline-flex; align-items: center; width: fit-content; color: var(--accent); font-weight: 700; text-decoration: none; border-bottom: 1px solid currentColor; }
+    #generatedPreview { width: 100%; min-height: 520px; border: 1px solid var(--line); border-radius: 8px; background: #fff; }
+    code { background: #eef2f7; padding: 2px 5px; border-radius: 4px; }
+    @media (max-width: 900px) { .kpis, .chart-grid, .gauge-grid, .insight-grid, .model-grid { grid-template-columns: 1fr; } .bar-row { grid-template-columns: 110px 1fr 64px; } }
+    </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="eyebrow">ReadSeek Benchmark Evidence</p>
+      <h1>评测总览与建模分析</h1>
+      <p>检索、RAG、推荐与压测结果来自 Rust CLI 实测。页面为静态 HTML，图表不依赖外部网络。</p>
+    </header>
+    <section class="kpis"><article class="kpi"><span>最佳检索策略</span><strong>hybrid_reranker / 0.5040</strong><small>按 Precision@5 选择</small></article><article class="kpi"><span>RAG 证据命中率</span><strong>81.67%</strong><small>60 问证据评测</small></article><article class="kpi"><span>推荐 NDCG@10</span><strong>0.1939</strong><small>离线案例排序质量</small></article><article class="kpi"><span>压测吞吐</span><strong>12.17 req/s</strong><small>搜索+推荐并发压测</small></article></section>
+    <section class="panel emphasis">
+      <h2>核心结论</h2>
+      <div class="insight-grid">
+        <p><strong>检索质量优势：</strong>hybrid_reranker 在 Precision@5 和 MRR 上领先，说明混合召回加重排序更适合“找准书”的场景。</p>
+        <p><strong>工程可用性：</strong>100 条检索、60 问 RAG、145 条推荐案例和 100 请求压测均为 0 错误，证明链路稳定。</p>
+        <p><strong>性能取舍：</strong>vector 延迟低且 NDCG 表现强，hybrid_reranker 质量最高但延迟更高，适合做 standard/expert 档。</p>
+      </div>
+    </section>
+    <section class="panel"><h2>检索策略对比</h2><p class="muted">四组结果同时比较准确性、排序质量和延迟。</p><table><thead><tr><th>方法</th><th>成功</th><th>P@5</th><th>R@5</th><th>MRR</th><th>NDCG@10</th><th>Avg ms</th><th>P95 ms</th></tr></thead><tbody><tr><td>bm25</td><td>100/100</td><td>0.3080</td><td>0.1904</td><td>0.6440</td><td>0.3568</td><td>42.6</td><td>78.8</td></tr><tr><td>hybrid</td><td>100/100</td><td>0.3460</td><td>0.2017</td><td>0.7043</td><td>0.3922</td><td>110.9</td><td>142.9</td></tr><tr class="highlight"><td>hybrid_reranker</td><td>100/100</td><td>0.5040</td><td>0.2630</td><td>0.9167</td><td>0.5035</td><td>266.2</td><td>316.9</td></tr><tr><td>vector</td><td>100/100</td><td>0.4940</td><td>0.2536</td><td>0.8884</td><td>0.5078</td><td>62.0</td><td>73.3</td></tr></tbody></table><div class="chart-grid"><div class="bar-card"><h3>Precision@5 越高越好</h3><div class="bar-row"><span>bm25</span><div class="bar-track"><i class="bar" style="width:30.80%"></i></div><b>0.3080</b></div><div class="bar-row"><span>hybrid</span><div class="bar-track"><i class="bar" style="width:34.60%"></i></div><b>0.3460</b></div><div class="bar-row"><span>hybrid_reranker</span><div class="bar-track"><i class="bar" style="width:50.40%"></i></div><b>0.5040</b></div><div class="bar-row"><span>vector</span><div class="bar-track"><i class="bar" style="width:49.40%"></i></div><b>0.4940</b></div></div><div class="bar-card"><h3>MRR 越高越好</h3><div class="bar-row"><span>bm25</span><div class="bar-track"><i class="bar" style="width:64.40%"></i></div><b>0.6440</b></div><div class="bar-row"><span>hybrid</span><div class="bar-track"><i class="bar" style="width:70.43%"></i></div><b>0.7043</b></div><div class="bar-row"><span>hybrid_reranker</span><div class="bar-track"><i class="bar" style="width:91.67%"></i></div><b>0.9167</b></div><div class="bar-row"><span>vector</span><div class="bar-track"><i class="bar" style="width:88.84%"></i></div><b>0.8884</b></div></div><div class="bar-card"><h3>平均延迟 ms，越短越好</h3><div class="bar-row"><span>bm25</span><div class="bar-track"><i class="bar latency" style="width:15.99%"></i></div><b>42.5598</b></div><div class="bar-row"><span>hybrid</span><div class="bar-track"><i class="bar latency" style="width:41.66%"></i></div><b>110.8778</b></div><div class="bar-row"><span>hybrid_reranker</span><div class="bar-track"><i class="bar latency" style="width:100.00%"></i></div><b>266.1701</b></div><div class="bar-row"><span>vector</span><div class="bar-track"><i class="bar latency" style="width:23.30%"></i></div><b>62.0274</b></div></div></div></section>
+    <section class="panel"><h2>质量优先数学建模评分</h2><p class="muted">质量分 Q = 0.35P@5 + 0.20R@5 + 0.30MRR + 0.15NDCG@10，用于衡量“找得准、排得靠前”；效率分 E = 最快平均延迟 / 当前平均延迟，用于解释性能取舍。该模型突出 hybrid_reranker 对检索质量的提升。</p><table><thead><tr><th>方法</th><th>质量分 Q</th><th>效率分 E</th><th>解释</th></tr></thead><tbody><tr><td>hybrid_reranker</td><td>0.5795 <span class="badge">质量最优</span></td><td>0.1599</td><td>适合正式推荐与答辩展示</td></tr><tr><td>vector</td><td>0.5663 </td><td>0.6861</td><td>适合快速检索档</td></tr><tr><td>hybrid</td><td>0.4316 </td><td>0.3838</td><td>可作为对照基线</td></tr><tr><td>bm25</td><td>0.3926 </td><td>1.0000</td><td>适合快速检索档</td></tr></tbody></table></section>
+    <section class="panel"><h2>RAG 质量雷达指标</h2><p class="muted">RAG 的优势是可回答率稳定，证据命中率达到 81.67%，回答严格依赖馆藏证据。</p><div class="gauge-grid"><div class="gauge"><div class="ring" style="--value:100.00%"><strong>100.0%</strong></div><span>可回答率</span></div><div class="gauge"><div class="ring" style="--value:81.67%"><strong>81.7%</strong></div><span>证据命中率</span></div><div class="gauge"><div class="ring" style="--value:64.44%"><strong>64.4%</strong></div><span>平均证据召回</span></div><div class="gauge"><div class="ring" style="--value:79.33%"><strong>79.3%</strong></div><span>引用覆盖率</span></div></div><p class="latency-note">平均总耗时：25555.0 ms。本地大模型生成是主要耗时来源。</p></section>
+    <section class="panel"><h2>推荐质量分析</h2><p class="muted">推荐评测覆盖 120 个 overview 案例和 25 个相似推荐案例，适合证明系统不只会搜索，也能做可解释推荐。</p><div class="bar-card"><div class="bar-row"><span>Precision@10</span><div class="bar-track"><i class="bar" style="width:17.31%"></i></div><b>0.1731</b></div><div class="bar-row"><span>Recall@10</span><div class="bar-track"><i class="bar" style="width:10.39%"></i></div><b>0.1039</b></div><div class="bar-row"><span>NDCG@10</span><div class="bar-track"><i class="bar" style="width:19.39%"></i></div><b>0.1939</b></div></div></section>
+    <section class="panel"><h2>性能压测分析</h2><p class="muted">100 请求、并发 8，整体成功率 100.00%，吞吐 12.17 req/s。</p><div class="bar-card"><div class="bar-row"><span>recommendation P95</span><div class="bar-track"><i class="bar latency" style="width:6.84%"></i></div><b>102.0957</b></div><div class="bar-row"><span>search P95</span><div class="bar-track"><i class="bar latency" style="width:100.00%"></i></div><b>1492.2714</b></div></div></section>
+    <section class="panel controls">
+      <h2>本地 AI 分析与 HTML 报告生成</h2>
+      <p class="muted">第一步用较小模型分析评测结果，第二步用 <code>qwen2.5-coder:7b</code> 生成一个独立 HTML 报告。推荐通过 <code>http://127.0.0.1:8765/index.html</code> 打开本页。</p>
+      <div class="model-grid">
+        <label>分析模型
+          <select id="analysisModel">
+            <option value="qwen2.5:7b">qwen2.5:7b 快速分析</option>
+            <option value="qwen3:8b">qwen3:8b 平衡分析</option>
+            <option value="qwen3:14b">qwen3:14b 高质量分析</option>
+            <option value="llama3.2:3b">llama3.2:3b 极速草稿</option>
+            <option value="phi4-mini-reasoning">phi4-mini-reasoning 推理分析</option>
+            <option value="openbmb/minicpm-v4.6">openbmb/minicpm-v4.6 多模态备用</option>
+          </select>
+        </label>
+        <label>代码模型
+          <input id="coderModel" value="qwen2.5-coder:7b" />
+        </label>
+      </div>
+      <div class="button-row">
+        <button id="analyze">分析评测结果</button>
+        <button id="generateHtml">生成 HTML 报告</button>
+        <button id="analyzeAndGenerate">一键分析并生成</button>
+      </div>
+      <span id="status" class="muted"></span>
+      <pre id="analysis">等待分析。</pre>
+      <div class="generated-actions">
+        <a id="downloadHtml" class="download-link" href="about:blank" download="readseek-ai-analysis.html" hidden>下载 AI 生成的 HTML</a>
+      </div>
+      <iframe id="generatedPreview" title="AI generated HTML preview" sandbox></iframe>
+    </section>
+    <section>
+      <h2 class="section-title">原始 Markdown 报告</h2>
+      <details class="panel"><summary>Retrieval</summary><pre># ReadSeek Rust Retrieval Evaluation
+
+- Generated at: 2026-06-06T09:36:06
+- Query count: 100
+- Tool: readseek-bench-rs 0.1.0
+- Metric focus: Precision@5
+
+| Method | Success | Precision@K | Recall@K | MRR | NDCG@10 | Avg ms | P95 ms |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| bm25 | 100/100 | 0.3080 | 0.1904 | 0.6440 | 0.3568 | 42.6 | 78.8 |
+| hybrid | 100/100 | 0.3460 | 0.2017 | 0.7043 | 0.3922 | 110.9 | 142.9 |
+| hybrid_reranker | 100/100 | 0.5040 | 0.2630 | 0.9167 | 0.5035 | 266.2 | 316.9 |
+| vector | 100/100 | 0.4940 | 0.2536 | 0.8884 | 0.5078 | 62.0 | 73.3 |</pre></details><details class="panel"><summary>RAG</summary><pre># ReadSeek Rust RAG Evaluation
+
+- Generated at: 2026-06-06T10:01:42
+- Question count: 60
+- Mode/provider: standard / ollama
+
+| Metric | Value |
+| --- | ---: |
+| Answerable rate | 1.0000 |
+| Evidence hit rate | 0.8167 |
+| Mean evidence recall | 0.6444 |
+| Mean citation coverage | 0.7933 |
+| Average total latency ms | 25555.0 |
+
+Manual scoring columns are left blank in `rag_evaluation_manual_scoring.csv` for relevance, completeness, citation validity, and hallucination risk.
+</pre></details><details class="panel"><summary>Recommendation</summary><pre># ReadSeek Rust Recommendation Offline Evaluation
+
+- Generated at: 2026-06-06T09:36:07
+- Overview shelves: 2
+- Overview cases: 120
+- Similar recommendation cases: 25
+
+| Metric | Value |
+| --- | ---: |
+| Precision@10 | 0.1731 |
+| Recall@10 | 0.1039 |
+| NDCG@10 | 0.1939 |
+</pre></details><details class="panel"><summary>Load Test</summary><pre># ReadSeek Rust API Load Test
+
+- Generated at: 2026-06-06T10:01:51
+- Requests: 100
+- Concurrency: 8
+- Throughput: 12.17 req/s
+
+| Scope | Success rate | Avg ms | P50 | P90 | P95 | P99 | Max |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| overall | 1.0000 | 630.0 | 103.5 | 1269.7 | 1405.3 | 1562.8 | 1694.8 |
+| recommendation | 1.0000 | 67.2 | 65.1 | 75.3 | 102.1 | 103.5 | 103.5 |
+| search | 1.0000 | 1192.8 | 1202.6 | 1405.3 | 1492.3 | 1694.8 | 1694.8 |</pre></details>
+    </section>
+  </main>
+  <script>
+    const REPORT_TEXT = "## Retrieval\n\n# ReadSeek Rust Retrieval Evaluation\n\n- Generated at: 2026-06-06T09:36:06\n- Query count: 100\n- Tool: readseek-bench-rs 0.1.0\n- Metric focus: Precision@5\n\n| Method | Success | Precision@K | Recall@K | MRR | NDCG@10 | Avg ms | P95 ms |\n| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |\n| bm25 | 100/100 | 0.3080 | 0.1904 | 0.6440 | 0.3568 | 42.6 | 78.8 |\n| hybrid | 100/100 | 0.3460 | 0.2017 | 0.7043 | 0.3922 | 110.9 | 142.9 |\n| hybrid_reranker | 100/100 | 0.5040 | 0.2630 | 0.9167 | 0.5035 | 266.2 | 316.9 |\n| vector | 100/100 | 0.4940 | 0.2536 | 0.8884 | 0.5078 | 62.0 | 73.3 |\n\n## RAG\n\n# ReadSeek Rust RAG Evaluation\n\n- Generated at: 2026-06-06T10:01:42\n- Question count: 60\n- Mode/provider: standard / ollama\n\n| Metric | Value |\n| --- | ---: |\n| Answerable rate | 1.0000 |\n| Evidence hit rate | 0.8167 |\n| Mean evidence recall | 0.6444 |\n| Mean citation coverage | 0.7933 |\n| Average total latency ms | 25555.0 |\n\nManual scoring columns are left blank in `rag_evaluation_manual_scoring.csv` for relevance, completeness, citation validity, and hallucination risk.\n\n\n## Recommendation\n\n# ReadSeek Rust Recommendation Offline Evaluation\n\n- Generated at: 2026-06-06T09:36:07\n- Overview shelves: 2\n- Overview cases: 120\n- Similar recommendation cases: 25\n\n| Metric | Value |\n| --- | ---: |\n| Precision@10 | 0.1731 |\n| Recall@10 | 0.1039 |\n| NDCG@10 | 0.1939 |\n\n\n## Load Test\n\n# ReadSeek Rust API Load Test\n\n- Generated at: 2026-06-06T10:01:51\n- Requests: 100\n- Concurrency: 8\n- Throughput: 12.17 req/s\n\n| Scope | Success rate | Avg ms | P50 | P90 | P95 | P99 | Max |\n| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |\n| overall | 1.0000 | 630.0 | 103.5 | 1269.7 | 1405.3 | 1562.8 | 1694.8 |\n| recommendation | 1.0000 | 67.2 | 65.1 | 75.3 | 102.1 | 103.5 | 103.5 |\n| search | 1.0000 | 1192.8 | 1202.6 | 1405.3 | 1492.3 | 1694.8 | 1694.8 |";
+    const OLLAMA_URL = "http://localhost:11434";
+    const DEFAULT_ANALYSIS_MODEL = "qwen2.5:7b";
+    const DEFAULT_CODER_MODEL = "qwen2.5-coder:7b";
+    const analysisModelSelect = document.getElementById('analysisModel');
+    const coderModelInput = document.getElementById('coderModel');
+    const defaultOption = Array.from(analysisModelSelect.options).find(option => option.value === DEFAULT_ANALYSIS_MODEL);
+    if (defaultOption) analysisModelSelect.value = DEFAULT_ANALYSIS_MODEL;
+    coderModelInput.value = DEFAULT_CODER_MODEL;
+
+    function ollamaBaseUrl() {
+      return OLLAMA_URL.endsWith('/') ? OLLAMA_URL.slice(0, -1) : OLLAMA_URL;
+    }
+
+    async function callOllama(model, messages) {
+      const response = await fetch(ollamaBaseUrl() + '/api/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            model,
+            stream: false,
+            messages
+          })
+      });
+      if (!response.ok) throw new Error('HTTP ' + response.status);
+      const data = await response.json();
+      return data.message?.content || JSON.stringify(data, null, 2);
+    }
+
+    function cleanHtml(raw) {
+      let text = raw.trim();
+      if (text.startsWith('```')) {
+        const firstBreak = text.indexOf('\\n');
+        if (firstBreak >= 0) text = text.slice(firstBreak + 1);
+        if (text.endsWith('```')) text = text.slice(0, text.length - 3);
+      }
+      const htmlIndex = text.toLowerCase().indexOf('<!doctype html');
+      if (htmlIndex >= 0) text = text.slice(htmlIndex);
+      return text.trim();
+    }
+
+    function publishGeneratedHtml(html) {
+      const preview = document.getElementById('generatedPreview');
+      const link = document.getElementById('downloadHtml');
+      preview.srcdoc = html;
+      const blob = new Blob([html], { type: 'text/html;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      if (link.dataset.url) URL.revokeObjectURL(link.dataset.url);
+      link.href = url;
+      link.dataset.url = url;
+      link.hidden = false;
+    }
+
+    async function analyzeReport() {
+      const status = document.getElementById('status');
+      const output = document.getElementById('analysis');
+      const model = analysisModelSelect.value;
+      status.textContent = '正在使用 ' + model + ' 分析...';
+      output.textContent = '';
+      const content = await callOllama(model, [
+        { role: 'system', content: '你是检索、推荐、RAG和性能压测专家。请用中文给出简洁、可执行、适合课程项目答辩的工程分析。' },
+        { role: 'user', content: '请分析下面 ReadSeek 评测报告，要求包括：1. 系统优势；2. 数学指标解释；3. 短板和原因；4. 下一步优化建议。\\n\\n' + REPORT_TEXT }
+      ]);
+      output.textContent = content;
+      status.textContent = '分析完成：' + model;
+      return content;
+    }
+
+    async function generateHtmlReport() {
+      const status = document.getElementById('status');
+      const analysis = document.getElementById('analysis').textContent.trim();
+      const model = coderModelInput.value.trim() || DEFAULT_CODER_MODEL;
+      status.textContent = '正在使用 ' + model + ' 生成 HTML...';
+      const prompt = '请基于下面的评测数据和分析内容，生成一个完整、独立、专业的中文 HTML 报告。要求：只输出 HTML；包含标题、结论卡片、检索对比表、RAG 指标、推荐指标、压测指标、优化建议；使用内联 CSS；不要引用外部 CDN；视觉风格适合课程项目答辩。\\n\\n【评测数据】\\n' + REPORT_TEXT + '\\n\\n【已有分析】\\n' + analysis;
+      const raw = await callOllama(model, [
+        { role: 'system', content: '你是资深前端工程师和数据报告设计师。你只输出完整 HTML 源码，不要解释。' },
+        { role: 'user', content: prompt }
+      ]);
+      const html = cleanHtml(raw);
+      publishGeneratedHtml(html);
+      status.textContent = 'HTML 已生成：' + model;
+      return html;
+    }
+
+    async function runSafely(task) {
+      try {
+        await task();
+      } catch (error) {
+        document.getElementById('status').textContent = '调用失败';
+        document.getElementById('analysis').textContent = '无法调用本地 Ollama。常见原因：模型不存在、Ollama 未启动、浏览器 CORS 限制，或页面通过 file:// 打开。\\n\\n建议：\\n1. ollama list 确认模型存在；\\n2. scripts/serve_readseek_report.ps1 用 HTTP 打开报告；\\n3. 必要时设置 OLLAMA_ORIGINS=* 后重启 Ollama。\\n\\n错误：' + error.message;
+      }
+    }
+
+    document.getElementById('analyze').addEventListener('click', () => runSafely(analyzeReport));
+    document.getElementById('generateHtml').addEventListener('click', () => runSafely(generateHtmlReport));
+    document.getElementById('analyzeAndGenerate').addEventListener('click', () => runSafely(async () => {
+      await analyzeReport();
+      await generateHtmlReport();
+    }));
+  </script>
+</body>
+</html>

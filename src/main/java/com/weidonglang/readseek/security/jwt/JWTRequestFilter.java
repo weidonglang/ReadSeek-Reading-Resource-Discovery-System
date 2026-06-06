@@ -17,11 +17,19 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.time.LocalDateTime;
+
 @Component
 @AllArgsConstructor
 public class JWTRequestFilter extends OncePerRequestFilter {
     private final JWTAuthenticationUtil jwtAuthenticationUtil;
     private final JWTUserDetailsService jwtUserDetailsService;
+
+    @Override
+    protected boolean shouldNotFilter(HttpServletRequest request) {
+        String path = request.getServletPath();
+        return "/api/auth/log-in".equals(path)
+                || "/api/auth/refresh-token".equals(path);
+    }
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
@@ -31,7 +39,7 @@ public class JWTRequestFilter extends OncePerRequestFilter {
             String jwt = authHeader.substring(7);
 
             if (jwt.isBlank()) {
-                writeErrorResponse(response, HttpServletResponse.SC_BAD_REQUEST, "Invalid JWT Token in Bearer Header");
+                writeErrorResponse(response, HttpServletResponse.SC_UNAUTHORIZED, "Invalid JWT Token in Bearer Header");
                 return;
             } else {
                 try {
@@ -44,7 +52,7 @@ public class JWTRequestFilter extends OncePerRequestFilter {
                         SecurityContextHolder.getContext().setAuthentication(authToken);
 
                 } catch (JWTVerificationException jwtVerificationException) {
-                    writeErrorResponse(response, HttpServletResponse.SC_BAD_REQUEST, jwtVerificationException.getMessage());
+                    writeErrorResponse(response, HttpServletResponse.SC_UNAUTHORIZED, jwtVerificationException.getMessage());
                     return;
                 }
             }

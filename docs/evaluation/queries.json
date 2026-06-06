@@ -1,0 +1,35 @@
+{
+  "dataset": "readseek-small-evaluation-template",
+  "status": "sample-placeholder",
+  "note": "These queries define the evaluation structure only. Replace relevantResourceIds after manual judgment before reporting final metrics.",
+  "queries": [
+    {
+      "id": "q-self-help-growth",
+      "query": "个人成长 入门",
+      "intent": "theme",
+      "description": "Chinese topic query for self-help, psychology, focus, and growth resources.",
+      "relevantResourceIds": []
+    },
+    {
+      "id": "q-author-austen",
+      "query": "Jane Austen representative works",
+      "intent": "author-work",
+      "description": "Author and representative-work query where exact metadata and BM25 should be strong.",
+      "relevantResourceIds": []
+    },
+    {
+      "id": "q-sci-fi-path",
+      "query": "科幻小说 阅读路径",
+      "intent": "reading-path",
+      "description": "Reading path query for a category-oriented recommendation scenario.",
+      "relevantResourceIds": []
+    },
+    {
+      "id": "q-compare-psychology",
+      "query": "compare psychology and decision making books",
+      "intent": "comparison",
+      "description": "English comparison query that should benefit from hybrid semantic recall.",
+      "relevantResourceIds": []
+    }
+  ]
+}

@@ -1,0 +1,134 @@
+{
+  "summary": {
+    "generatedAt": "2026-06-06T09:07:51",
+    "apiBaseUrl": "http://localhost:8010/readseek-service",
+    "requests": 12,
+    "concurrency": 2,
+    "elapsedSeconds": 61.87171279999984,
+    "throughputRps": 0.19394969780115787,
+    "overall": {
+      "requests": 12,
+      "successes": 12,
+      "failures": 0,
+      "successRate": 1.0,
+      "avgLatencyMs": 9893.626866666711,
+      "p50LatencyMs": 9535.142099999575,
+      "p90LatencyMs": 11643.769199999952,
+      "p95LatencyMs": 17615.226200000507,
+      "p99LatencyMs": 17615.226200000507,
+      "maxLatencyMs": 17615.226200000507
+    },
+    "byScenario": {
+      "rag": {
+        "requests": 12,
+        "successes": 12,
+        "failures": 0,
+        "successRate": 1.0,
+        "avgLatencyMs": 9893.626866666711,
+        "p50LatencyMs": 9535.142099999575,
+        "p90LatencyMs": 11643.769199999952,
+        "p95LatencyMs": 17615.226200000507,
+        "p99LatencyMs": 17615.226200000507,
+        "maxLatencyMs": 17615.226200000507
+      }
+    }
+  },
+  "requests": [
+    {
+      "scenario": "rag",
+      "sequence": 1,
+      "success": true,
+      "latencyMs": 11643.769199999952,
+      "resultCount": 3,
+      "error": ""
+    },
+    {
+      "scenario": "rag",
+      "sequence": 2,
+      "success": true,
+      "latencyMs": 17615.226200000507,
+      "resultCount": 3,
+      "error": ""
+    },
+    {
+      "scenario": "rag",
+      "sequence": 3,
+      "success": true,
+      "latencyMs": 10506.866900000205,
+      "resultCount": 3,
+      "error": ""
+    },
+    {
+      "scenario": "rag",
+      "sequence": 4,
+      "success": true,
+      "latencyMs": 7083.056399999805,
+      "resultCount": 3,
+      "error": ""
+    },
+    {
+      "scenario": "rag",
+      "sequence": 5,
+      "success": true,
+      "latencyMs": 8225.459300000693,
+      "resultCount": 3,
+      "error": ""
+    },
+    {
+      "scenario": "rag",
+      "sequence": 6,
+      "success": true,
+      "latencyMs": 9200.501400000576,
+      "resultCount": 3,
+      "error": ""
+    },
+    {
+      "scenario": "rag",
+      "sequence": 7,
+      "success": true,
+      "latencyMs": 9604.614799999581,
+      "resultCount": 3,
+      "error": ""
+    },
+    {
+      "scenario": "rag",
+      "sequence": 8,
+      "success": true,
+      "latencyMs": 9535.142099999575,
+      "resultCount": 3,
+      "error": ""
+    },
+    {
+      "scenario": "rag",
+      "sequence": 9,
+      "success": true,
+      "latencyMs": 5940.392100000281,
+      "resultCount": 3,
+      "error": ""
+    },
+    {
+      "scenario": "rag",
+      "sequence": 10,
+      "success": true,
+      "latencyMs": 8332.99199999965,
+      "resultCount": 3,
+      "error": ""
+    },
+    {
+      "scenario": "rag",
+      "sequence": 11,
+      "success": true,
+      "latencyMs": 10936.150200000156,
+      "resultCount": 3,
+      "error": ""
+    },
+    {
+      "scenario": "rag",
+      "sequence": 12,
+      "success": true,
+      "latencyMs": 10099.351799999567,
+      "resultCount": 3,
+      "error": ""
+    }
+  ]
+}

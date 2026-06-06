@@ -4,7 +4,7 @@ param(
     [string]$Query = 'Pride and Prejudice',
     [int]$Limit = 8,
     [string]$Email = 'admin@booknook.local',
-    [string]$Password = 'Admin123!'
+    [string]$Password = $env:LIBRARY_BOOTSTRAP_ADMIN_PASSWORD
 )
 
 Set-StrictMode -Version Latest

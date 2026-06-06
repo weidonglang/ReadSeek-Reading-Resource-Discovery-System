@@ -99,6 +99,13 @@ public class SearchQueryExpander {
         aliases.put("\u7b80\u5965\u65af\u6c40", "jane austen austen");
         aliases.put("\u7b80\u00b7\u5965\u65af\u6c40", "jane austen austen");
         aliases.put("\u5c0f\u8bf4", "novel fiction");
+        aliases.put("\u4eba\u5de5\u667a\u80fd", "artificial intelligence AI machine learning deep learning intelligence science computer science");
+        aliases.put("\u673a\u5668\u5b66\u4e60", "machine learning artificial intelligence AI data mining");
+        aliases.put("\u6df1\u5ea6\u5b66\u4e60", "deep learning neural network artificial intelligence machine learning");
+        aliases.put("\u8ba1\u7b97\u673a", "computer science computing programming software technology");
+        aliases.put("\u7a0b\u5e8f\u8bbe\u8ba1", "programming software computer science");
+        aliases.put("\u7cfb\u7edf\u5b66\u4e60", "systematic learning beginner introduction textbook guide");
+        aliases.put("\u5b66\u4e60\u8def\u5f84", "reading path learning path beginner introduction");
         return aliases;
     }
 

@@ -1,0 +1,4 @@
+id,question,answerable,evidenceCount,expectedEvidenceHit,citationCoverage,totalLatencyMs,manualRelevance0to5,manualCompleteness0to5,manualCitationValidity0to5,manualHallucinationRisk0to5,notes
+r001,帮我推荐几本爱情小说，并说明推荐顺序。,True,5,True,1.0,21364,,,,,
+r002,Pride and Prejudice 和 Sense and Sensibility 应该先读哪本？,True,5,True,0.6,12585,,,,,
+r003,我想从经典科幻入门，先读哪几本？,True,5,True,1.0,14174,,,,,

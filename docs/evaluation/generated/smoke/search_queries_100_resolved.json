@@ -1,0 +1,109 @@
+{
+  "queries": [
+    {
+      "id": "q001",
+      "query": "Pride and Prejudice",
+      "intent": "exact-title",
+      "description": "exact-title evaluation query for ReadSeek hybrid retrieval.",
+      "relevantResourceIds": [],
+      "relevance": {
+        "titleHints": [
+          "Pride and Prejudice"
+        ],
+        "authorHints": [],
+        "categoryHints": [],
+        "tagHints": [
+          "Jane Austen"
+        ],
+        "keywordHints": [
+          "romantic"
+        ],
+        "maxRelevantIds": 12
+      },
+      "resolvedRelevantResourceIds": [
+        400,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        390
+      ]
+    },
+    {
+      "id": "q002",
+      "query": "Sense and Sensibility",
+      "intent": "exact-title",
+      "description": "exact-title evaluation query for ReadSeek hybrid retrieval.",
+      "relevantResourceIds": [],
+      "relevance": {
+        "titleHints": [
+          "Sense and Sensibility"
+        ],
+        "authorHints": [],
+        "categoryHints": [],
+        "tagHints": [
+          "Jane Austen"
+        ],
+        "keywordHints": [
+          "romantic"
+        ],
+        "maxRelevantIds": 12
+      },
+      "resolvedRelevantResourceIds": [
+        402,
+        271,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62
+      ]
+    },
+    {
+      "id": "q003",
+      "query": "The War of the Worlds",
+      "intent": "exact-title",
+      "description": "exact-title evaluation query for ReadSeek hybrid retrieval.",
+      "relevantResourceIds": [],
+      "relevance": {
+        "titleHints": [
+          "The War of the Worlds"
+        ],
+        "authorHints": [],
+        "categoryHints": [],
+        "tagHints": [
+          "H. G. Wells"
+        ],
+        "keywordHints": [
+          "science fiction"
+        ],
+        "maxRelevantIds": 12
+      },
+      "resolvedRelevantResourceIds": [
+        18,
+        13,
+        14,
+        15,
+        16,
+        17,
+        19,
+        20,
+        21,
+        22,
+        410,
+        411
+      ]
+    }
+  ]
+}

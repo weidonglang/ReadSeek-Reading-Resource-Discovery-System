@@ -1,0 +1,130 @@
+{
+  "summary": {
+    "dataset": "readseek-rag-60",
+    "generatedAt": "2026-06-06T08:32:03",
+    "questionCount": 3,
+    "successfulQuestions": 3,
+    "mode": "standard",
+    "provider": "ollama",
+    "answerableRate": 1.0,
+    "evidenceHitRate": 1.0,
+    "meanEvidenceRecall": 0.8666666666666667,
+    "meanCitationCoverage": 0.8666666666666667,
+    "avgTotalLatencyMs": 16041.0
+  },
+  "results": [
+    {
+      "id": "r001",
+      "question": "帮我推荐几本爱情小说，并说明推荐顺序。",
+      "answerModeExpected": "recommendation",
+      "answerModeActual": "READING_PATH",
+      "answerable": true,
+      "strategy": "hybrid-v3(exact-db+bm25+vector+reranker)",
+      "model": "qwen3:8b",
+      "fallbackApplied": false,
+      "llmFallbackApplied": false,
+      "evidenceCount": 5,
+      "evidenceIds": [
+        402,
+        400,
+        62,
+        56,
+        393
+      ],
+      "expectedResourceIds": [
+        55,
+        56,
+        271,
+        400,
+        402
+      ],
+      "expectedEvidenceHit": true,
+      "evidenceRecall": 0.6,
+      "citationCoverage": 1.0,
+      "requestLatencyMs": 21404.05499999997,
+      "totalLatencyMs": 21364,
+      "retrievalLatencyMs": 639,
+      "generationLatencyMs": 20723,
+      "answer": "根据您的需求，以下是推荐顺序及理由：\n\n1. **《Pride and Prejudice》**（《傲慢与偏见》）[2]  \n   - 推荐理由：作为简·奥斯汀最广为人知的作品之一，其机智讽刺的笔触与对社会阶层与婚恋观念的深刻描绘，是经典浪漫小说的入门首选，适合初次接触浪漫小说的读者。\n\n2. **《Sense and Sensibility》**（《理智与情感》）[1]  \n   - 推荐理由：与《傲慢与偏见》同属简·奥斯汀作品，但更侧重于理性与情感的张力，适合在熟悉经典浪漫风格后，进一步探索人物内心成长与道德抉择的深度。\n\n3. **《Jane Eyre》**（《简·爱》）[5]  \n   - 推荐理由：夏洛蒂·勃朗特的代表作，融合哥特氛围与社会批判，展现女性独立人格与情感追求，适合在掌握经典浪漫风格后，阅读更具文学深度与社会意义的作品。\n\n4. **《The Giver of Stars》**（《星星的给予者》）[4]  \n   - 推荐理由：Jojo Moyes的温情浪漫小说，强调书籍对生活的启发，适合在阅读经典后，转向更现代、温情细腻的浪漫叙事。\n\n5. **《After the Party》**（《派对之后》）[3]  \n   - 推荐理由：Lisa Jewell的作品，聚焦爱情、时间与人生选择，适合在阅读经典与现代温情小说后，进一步探索情感细腻、关注人物内心世界的文学风格。\n\n此推荐顺序从经典入门，逐步深入，最后转向现代情感细腻的风格，适合构建一个完整的浪漫小说阅读路径。",
+      "limitations": [
+        "回答严格受当前检索证据约束，不使用馆藏外事实补充。",
+        "证据范围仅限当前系统已入库并已建立索引的阅读资源。"
+      ],
+      "error": null
+    },
+    {
+      "id": "r002",
+      "question": "Pride and Prejudice 和 Sense and Sensibility 应该先读哪本？",
+      "answerModeExpected": "comparison",
+      "answerModeActual": "READING_PATH",
+      "answerable": true,
+      "strategy": "hybrid-v3(exact-db+bm25+vector+reranker)",
+      "model": "qwen3:8b",
+      "fallbackApplied": false,
+      "llmFallbackApplied": false,
+      "evidenceCount": 5,
+      "evidenceIds": [
+        402,
+        400,
+        271,
+        163,
+        336
+      ],
+      "expectedResourceIds": [
+        271,
+        400,
+        402
+      ],
+      "expectedEvidenceHit": true,
+      "evidenceRecall": 1.0,
+      "citationCoverage": 0.6,
+      "requestLatencyMs": 12614.009700000224,
+      "totalLatencyMs": 12585,
+      "retrievalLatencyMs": 327,
+      "generationLatencyMs": 12257,
+      "answer": "根据证据片段，Pride and Prejudice 和 Sense and Sensibility 均为简·奥斯汀的经典浪漫小说，适合喜爱古典浪漫主义与社会风俗描写的读者。若需推荐阅读顺序，可参考以下路径：\n\n**推荐顺序：**\n1. **Sense and Sensibility** [1] 或 [3]  \n   - 理由：该书以细腻笔触探讨理性与情感的平衡，展现19世纪英国社会风貌与女性命运，适合初次接触奥斯汀作品的读者，有助于建立对古典浪漫主义与现实主义交融的理解。\n\n2. **Pride and Prejudice** [2]  \n   - 理由：该书以机智讽刺的笔触描绘社会阶层与婚恋观念，故事围绕偏见与误解的消解展开，展现人物性格成长与真挚情感，适合在熟悉奥斯汀风格后进一步深入阅读。\n\n**推荐理由：**  \n- **阅读路径阶段化：**  \n  - **入门阶段：** 从《Sense and Sensibility》开始，因其主题较为贴近日常生活，情感描写细腻，更容易引发共鸣。  \n  - **进阶阶段：** 阅读《Pride and Prejudice》，因其更强调社会批判与人物性格的复杂性，适合在理解奥斯汀风格后进一步探索。\n\n若需更深入的比较或推荐，可继续提供具体维度（如主题、人物塑造、语言风格等）。",
+      "limitations": [
+        "回答严格受当前检索证据约束，不使用馆藏外事实补充。",
+        "证据范围仅限当前系统已入库并已建立索引的阅读资源。"
+      ],
+      "error": null
+    },
+    {
+      "id": "r003",
+      "question": "我想从经典科幻入门，先读哪几本？",
+      "answerModeExpected": "reading-path",
+      "answerModeActual": "READING_PATH",
+      "answerable": true,
+      "strategy": "hybrid-v3(exact-db+bm25+vector+reranker)",
+      "model": "qwen3:8b",
+      "fallbackApplied": false,
+      "llmFallbackApplied": false,
+      "evidenceCount": 5,
+      "evidenceIds": [
+        253,
+        15,
+        19,
+        263,
+        18
+      ],
+      "expectedResourceIds": [
+        15,
+        18,
+        19
+      ],
+      "expectedEvidenceHit": true,
+      "evidenceRecall": 1.0,
+      "citationCoverage": 1.0,
+      "requestLatencyMs": 14196.98279999966,
+      "totalLatencyMs": 14174,
+      "retrievalLatencyMs": 349,
+      "generationLatencyMs": 13825,
+      "answer": "根据你的需求，从经典科幻入门，推荐顺序如下：\n\n1. **《The War of the Worlds》**（《世界大战》）- H.G. Wells [5]  \n   - 理由：作为科幻文学奠基之作，这本书是了解科幻起源的必读之作，具有极高的文学价值与思想深度。\n\n2. **《The Invisible Man》**（《隐形人》）- H.G. Wells [3]  \n   - 理由：这是H.G. Wells的另一部经典科幻作品，以寓言形式探讨科学伦理与人性，适合入门读者。\n\n3. **《Journey to the Center of the Earth》**（《地心游记》）- Jules Verne [4]  \n   - 理由：儒勒·凡尔纳的科幻冒险小说，融合科学想象与惊险探险，展现19世纪科学乐观主义精神。\n\n4. **《Player Piano》**（《玩家钢琴》）- Kurt Vonnegut [2]  \n   - 理由：库尔特·冯内古特的处女作，以反乌托邦视角探讨科技与社会问题，适合喜欢深度思考的读者。\n\n5. **《The Hobbit, Or, There and Back Again》**（《霍比特人》）- J.R.R. Tolkien [1]  \n   - 理由：虽然属于奇幻文学，但其冒险与成长主题与科幻有共通之处，语言生动幽默，适合各年龄段读者。\n\n以上推荐从科幻起源到经典冒险与深度思考，逐步引导你进入科幻世界。",
+      "limitations": [
+        "回答严格受当前检索证据约束，不使用馆藏外事实补充。",
+        "证据范围仅限当前系统已入库并已建立索引的阅读资源。"
+      ],
+      "error": null
+    }
+  ]
+}

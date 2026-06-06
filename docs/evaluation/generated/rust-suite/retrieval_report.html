@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ReadSeek Rust Retrieval Evaluation</title>
+  <style>
+    body { font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; margin: 32px; color: #172033; }
+    table { border-collapse: collapse; width: 100%; margin-top: 16px; }
+    th, td { border: 1px solid #d7dce5; padding: 10px 12px; text-align: right; }
+    th:first-child, td:first-child { text-align: left; }
+    th { background: #f4f6f9; }
+    .meta { color: #526071; }
+  </style>
+</head>
+<body>
+  <h1>ReadSeek Rust Retrieval Evaluation</h1>
+  <p class="meta">Generated at: 2026-06-06T09:36:06 · Metric focus: Precision@5</p>
+  <table>
+    <thead>
+      <tr><th>Method</th><th>Success</th><th>Precision@K</th><th>Recall@K</th><th>MRR</th><th>NDCG@10</th><th>Avg ms</th><th>P95 ms</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>bm25</td><td>100/100</td><td>0.3080</td><td>0.1904</td><td>0.6440</td><td>0.3568</td><td>42.6</td><td>78.8</td></tr>
+<tr><td>hybrid</td><td>100/100</td><td>0.3460</td><td>0.2017</td><td>0.7043</td><td>0.3922</td><td>110.9</td><td>142.9</td></tr>
+<tr><td>hybrid_reranker</td><td>100/100</td><td>0.5040</td><td>0.2630</td><td>0.9167</td><td>0.5035</td><td>266.2</td><td>316.9</td></tr>
+<tr><td>vector</td><td>100/100</td><td>0.4940</td><td>0.2536</td><td>0.8884</td><td>0.5078</td><td>62.0</td><td>73.3</td></tr>
+
+    </tbody>
+  </table>
+</body>
+</html>

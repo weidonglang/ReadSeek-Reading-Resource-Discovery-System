@@ -27,6 +27,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyCollection;
 import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -169,6 +170,37 @@ class BookSearchServiceImplTest {
         assertEquals("EXACT_DB", response.getHits().get(0).getMatchType());
         verify(bookRepository).findExactMatches(eq("Jane Austen"), any(Pageable.class));
         verify(vectorBookSearchService).search(any(String.class), any(Integer.class));
+    }
+
+    @Test
+    void searchBooksShouldUseCatalogDatabaseFallbackWhenIndexAndVectorReturnNothing() {
+        String query = "\u4eba\u5de5\u667a\u80fd";
+        Book fallbackEntity = new Book();
+        fallbackEntity.setId(11L);
+        fallbackEntity.setName("Artificial Intelligence: A Modern Approach");
+        BookDto fallbackBook = buildBookDto(11L, "Artificial Intelligence: A Modern Approach");
+
+        when(searchQueryIntentClassifier.classify(query)).thenReturn(SearchQueryIntent.KEYWORD);
+        when(searchQueryExpander.expand(query, SearchQueryIntent.KEYWORD))
+                .thenReturn("\u4eba\u5de5\u667a\u80fd artificial intelligence AI machine learning");
+        when(searchQueryExpander.resolveExactCandidateQueries(query)).thenReturn(List.of(query));
+        when(bookRepository.findExactMatches(eq(query), any(Pageable.class))).thenReturn(List.of());
+        when(vectorBookSearchService.search(any(String.class), any(Integer.class))).thenReturn(List.of());
+        SearchHits<BookSearchDocument> emptySearchHits = mockEmptySearchHits();
+        when(elasticsearchOperations.search(any(Query.class), eq(BookSearchDocument.class))).thenReturn(emptySearchHits);
+        when(bookRepository.findCatalogFallbackMatches(anyString(), any(Pageable.class))).thenReturn(List.of());
+        when(bookRepository.findCatalogFallbackMatches(eq("artificial"), any(Pageable.class))).thenReturn(List.of(fallbackEntity));
+        when(bookTransformer.transformEntityToDto(List.of(fallbackEntity))).thenReturn(List.of(fallbackBook));
+
+        BookSearchResponseDto response = service.searchBooks(query, 5);
+
+        assertEquals("hybrid-v1(exact-db+bm25+catalog-db-fallback)", response.getStrategy());
+        assertEquals(true, response.isFallbackApplied());
+        assertEquals(1, response.getCandidateCount());
+        assertEquals("CATALOG_DB", response.getHits().get(0).getMatchType());
+        assertEquals("catalog-db", response.getHits().get(0).getSource());
+        assertEquals(List.of(11L), response.getHits().stream().map(hit -> hit.getBook().getId()).toList());
+        verify(bookRepository).findCatalogFallbackMatches(eq("artificial"), any(Pageable.class));
     }
 
     @Test

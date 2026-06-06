@@ -1,0 +1,10 @@
+caseType,queryId,query,shelf,anchorBookId,anchorTitle,latencyMs,precisionAtK,recallAtK,ndcgAt10,error
+overview-shelf,q021,爱情小说 推荐,popular,,,,0.1,0.08333333333333333,0.22009176629808017,
+overview-shelf,q021,爱情小说 推荐,preferences,,,,0.1,0.08333333333333333,0.22009176629808017,
+overview-shelf,q022,经典浪漫主义小说,popular,,,,0.1,0.08333333333333333,0.22009176629808017,
+overview-shelf,q022,经典浪漫主义小说,preferences,,,,0.1,0.08333333333333333,0.22009176629808017,
+overview-shelf,q023,科幻小说 入门,popular,,,,0.0,0.0,-0.0,
+overview-shelf,q023,科幻小说 入门,preferences,,,,0.2,0.16666666666666666,0.15850703974098102,
+similar-recommendation,,,,13,Robot（test）,29.499000000000002,0.6,0.2857142857142857,0.727329844310522,
+similar-recommendation,,,,14,The Every,21.8062,0.6,0.2857142857142857,0.727329844310522,
+similar-recommendation,,,,15,Player Piano,21.8349,0.6,0.2857142857142857,0.727329844310522,

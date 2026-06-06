@@ -31,7 +31,7 @@ That lets the admin analytics page and the recommendations page show visible dif
 ## Run the seed
 
 ```powershell
-$env:PGPASSWORD="20041117"
+$env:PGPASSWORD=$env:POSTGRES_PASSWORD
 & "D:\PostgreSQL\18\bin\psql.exe" -h localhost -p 5043 -U postgres -d book_recommendation_system -f scripts/seed_historical_analytics.sql
 Remove-Item Env:PGPASSWORD
 ```
@@ -39,7 +39,7 @@ Remove-Item Env:PGPASSWORD
 ## Remove the seeded history
 
 ```powershell
-$env:PGPASSWORD="20041117"
+$env:PGPASSWORD=$env:POSTGRES_PASSWORD
 & "D:\PostgreSQL\18\bin\psql.exe" -h localhost -p 5043 -U postgres -d book_recommendation_system -f scripts/clear_historical_analytics.sql
 Remove-Item Env:PGPASSWORD
 ```

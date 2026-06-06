@@ -1,0 +1,590 @@
+{
+  "summary": {
+    "dataset": "readseek-search-100",
+    "generatedAt": "2026-06-06T08:31:07",
+    "queryCount": 3,
+    "metricK": 5,
+    "methods": [
+      "bm25",
+      "vector",
+      "hybrid",
+      "hybrid_reranker"
+    ],
+    "metrics": {
+      "bm25": {
+        "queryCount": 3,
+        "successfulQueries": 3,
+        "precisionAt5": 0.3333333333333333,
+        "recallAt5": 0.13888888888888887,
+        "mrr": 1.0,
+        "ndcgAt10": 0.2979753690457819,
+        "avgLatencyMs": 157.5421666667959
+      },
+      "vector": {
+        "queryCount": 3,
+        "successfulQueries": 3,
+        "precisionAt5": 0.3333333333333333,
+        "recallAt5": 0.13888888888888887,
+        "mrr": 1.0,
+        "ndcgAt10": 0.34725186601759944,
+        "avgLatencyMs": 170.39983333324926
+      },
+      "hybrid": {
+        "queryCount": 3,
+        "successfulQueries": 3,
+        "precisionAt5": 0.3333333333333333,
+        "recallAt5": 0.13888888888888887,
+        "mrr": 1.0,
+        "ndcgAt10": 0.2979753690457819,
+        "avgLatencyMs": 157.15593333319097
+      },
+      "hybrid_reranker": {
+        "queryCount": 3,
+        "successfulQueries": 3,
+        "precisionAt5": 0.26666666666666666,
+        "recallAt5": 0.1111111111111111,
+        "mrr": 1.0,
+        "ndcgAt10": 0.31204081768870223,
+        "avgLatencyMs": 960.6147333335381
+      }
+    }
+  },
+  "results": {
+    "bm25": [
+      {
+        "queryId": "q001",
+        "query": "Pride and Prejudice",
+        "intent": "exact-title",
+        "method": "bm25",
+        "strategy": "bm25",
+        "queryIntent": "KEYWORD",
+        "rerankerApplied": false,
+        "fallbackApplied": false,
+        "candidateCount": 10,
+        "latencyMs": 328.28580000023067,
+        "rankedResourceIds": [
+          400,
+          243,
+          433,
+          431,
+          49,
+          199,
+          35,
+          163,
+          165,
+          203
+        ],
+        "relevantResourceIds": [
+          400,
+          53,
+          54,
+          55,
+          56,
+          57,
+          58,
+          59,
+          60,
+          61,
+          62,
+          390
+        ],
+        "metrics": {
+          "precisionAt5": 0.2,
+          "recallAt5": 0.08333333333333333,
+          "mrr": 1.0,
+          "ndcgAt10": 0.22009176629808017
+        }
+      },
+      {
+        "queryId": "q002",
+        "query": "Sense and Sensibility",
+        "intent": "exact-title",
+        "method": "bm25",
+        "strategy": "bm25",
+        "queryIntent": "KEYWORD",
+        "rerankerApplied": false,
+        "fallbackApplied": false,
+        "candidateCount": 10,
+        "latencyMs": 73.4640999999101,
+        "rankedResourceIds": [
+          402,
+          271,
+          433,
+          49,
+          199,
+          35,
+          163,
+          165,
+          203,
+          247
+        ],
+        "relevantResourceIds": [
+          402,
+          271,
+          53,
+          54,
+          55,
+          56,
+          57,
+          58,
+          59,
+          60,
+          61,
+          62
+        ],
+        "metrics": {
+          "precisionAt5": 0.4,
+          "recallAt5": 0.16666666666666666,
+          "mrr": 1.0,
+          "ndcgAt10": 0.3589542101716347
+        }
+      },
+      {
+        "queryId": "q003",
+        "query": "The War of the Worlds",
+        "intent": "exact-title",
+        "method": "bm25",
+        "strategy": "bm25",
+        "queryIntent": "KEYWORD",
+        "rerankerApplied": false,
+        "fallbackApplied": false,
+        "candidateCount": 10,
+        "latencyMs": 70.87660000024698,
+        "rankedResourceIds": [
+          18,
+          223,
+          256,
+          17,
+          35,
+          206,
+          26,
+          379,
+          71,
+          344
+        ],
+        "relevantResourceIds": [
+          18,
+          13,
+          14,
+          15,
+          16,
+          17,
+          19,
+          20,
+          21,
+          22,
+          410,
+          411
+        ],
+        "metrics": {
+          "precisionAt5": 0.4,
+          "recallAt5": 0.16666666666666666,
+          "mrr": 1.0,
+          "ndcgAt10": 0.31488013066763093
+        }
+      }
+    ],
+    "vector": [
+      {
+        "queryId": "q001",
+        "query": "Pride and Prejudice",
+        "intent": "exact-title",
+        "method": "vector",
+        "strategy": "vector-only",
+        "queryIntent": "KEYWORD",
+        "rerankerApplied": false,
+        "fallbackApplied": false,
+        "candidateCount": 10,
+        "latencyMs": 348.71609999981956,
+        "rankedResourceIds": [
+          400,
+          165,
+          271,
+          402,
+          166,
+          83,
+          163,
+          390,
+          404,
+          405
+        ],
+        "relevantResourceIds": [
+          400,
+          53,
+          54,
+          55,
+          56,
+          57,
+          58,
+          59,
+          60,
+          61,
+          62,
+          390
+        ],
+        "metrics": {
+          "precisionAt5": 0.2,
+          "recallAt5": 0.08333333333333333,
+          "mrr": 1.0,
+          "ndcgAt10": 0.28952298823485745
+        }
+      },
+      {
+        "queryId": "q002",
+        "query": "Sense and Sensibility",
+        "intent": "exact-title",
+        "method": "vector",
+        "strategy": "vector-only",
+        "queryIntent": "KEYWORD",
+        "rerankerApplied": false,
+        "fallbackApplied": false,
+        "candidateCount": 10,
+        "latencyMs": 83.23229999996329,
+        "rankedResourceIds": [
+          402,
+          271,
+          163,
+          203,
+          273,
+          366,
+          433,
+          423,
+          356,
+          343
+        ],
+        "relevantResourceIds": [
+          402,
+          271,
+          53,
+          54,
+          55,
+          56,
+          57,
+          58,
+          59,
+          60,
+          61,
+          62
+        ],
+        "metrics": {
+          "precisionAt5": 0.4,
+          "recallAt5": 0.16666666666666666,
+          "mrr": 1.0,
+          "ndcgAt10": 0.3589542101716347
+        }
+      },
+      {
+        "queryId": "q003",
+        "query": "The War of the Worlds",
+        "intent": "exact-title",
+        "method": "vector",
+        "strategy": "vector-only",
+        "queryIntent": "KEYWORD",
+        "rerankerApplied": false,
+        "fallbackApplied": false,
+        "candidateCount": 10,
+        "latencyMs": 79.25109999996494,
+        "rankedResourceIds": [
+          18,
+          52,
+          277,
+          19,
+          223,
+          14,
+          235,
+          345,
+          35,
+          49
+        ],
+        "relevantResourceIds": [
+          18,
+          13,
+          14,
+          15,
+          16,
+          17,
+          19,
+          20,
+          21,
+          22,
+          410,
+          411
+        ],
+        "metrics": {
+          "precisionAt5": 0.4,
+          "recallAt5": 0.16666666666666666,
+          "mrr": 1.0,
+          "ndcgAt10": 0.3932783996463063
+        }
+      }
+    ],
+    "hybrid": [
+      {
+        "queryId": "q001",
+        "query": "Pride and Prejudice",
+        "intent": "exact-title",
+        "method": "hybrid",
+        "strategy": "hybrid-v2(exact-db+bm25+vector)",
+        "queryIntent": "KEYWORD",
+        "rerankerApplied": false,
+        "fallbackApplied": false,
+        "candidateCount": 10,
+        "latencyMs": 202.6968999998644,
+        "rankedResourceIds": [
+          400,
+          243,
+          433,
+          431,
+          49,
+          199,
+          35,
+          163,
+          165,
+          203
+        ],
+        "relevantResourceIds": [
+          400,
+          53,
+          54,
+          55,
+          56,
+          57,
+          58,
+          59,
+          60,
+          61,
+          62,
+          390
+        ],
+        "metrics": {
+          "precisionAt5": 0.2,
+          "recallAt5": 0.08333333333333333,
+          "mrr": 1.0,
+          "ndcgAt10": 0.22009176629808017
+        }
+      },
+      {
+        "queryId": "q002",
+        "query": "Sense and Sensibility",
+        "intent": "exact-title",
+        "method": "hybrid",
+        "strategy": "hybrid-v2(exact-db+bm25+vector)",
+        "queryIntent": "KEYWORD",
+        "rerankerApplied": false,
+        "fallbackApplied": false,
+        "candidateCount": 10,
+        "latencyMs": 147.58759999995164,
+        "rankedResourceIds": [
+          402,
+          271,
+          433,
+          49,
+          199,
+          35,
+          163,
+          165,
+          203,
+          247
+        ],
+        "relevantResourceIds": [
+          402,
+          271,
+          53,
+          54,
+          55,
+          56,
+          57,
+          58,
+          59,
+          60,
+          61,
+          62
+        ],
+        "metrics": {
+          "precisionAt5": 0.4,
+          "recallAt5": 0.16666666666666666,
+          "mrr": 1.0,
+          "ndcgAt10": 0.3589542101716347
+        }
+      },
+      {
+        "queryId": "q003",
+        "query": "The War of the Worlds",
+        "intent": "exact-title",
+        "method": "hybrid",
+        "strategy": "hybrid-v2(exact-db+bm25+vector)",
+        "queryIntent": "KEYWORD",
+        "rerankerApplied": false,
+        "fallbackApplied": false,
+        "candidateCount": 10,
+        "latencyMs": 121.18329999975685,
+        "rankedResourceIds": [
+          18,
+          223,
+          256,
+          17,
+          35,
+          206,
+          26,
+          379,
+          71,
+          344
+        ],
+        "relevantResourceIds": [
+          18,
+          13,
+          14,
+          15,
+          16,
+          17,
+          19,
+          20,
+          21,
+          22,
+          410,
+          411
+        ],
+        "metrics": {
+          "precisionAt5": 0.4,
+          "recallAt5": 0.16666666666666666,
+          "mrr": 1.0,
+          "ndcgAt10": 0.31488013066763093
+        }
+      }
+    ],
+    "hybrid_reranker": [
+      {
+        "queryId": "q001",
+        "query": "Pride and Prejudice",
+        "intent": "exact-title",
+        "method": "hybrid_reranker",
+        "strategy": "hybrid-v3(exact-db+bm25+vector+reranker)",
+        "queryIntent": "KEYWORD",
+        "rerankerApplied": true,
+        "fallbackApplied": false,
+        "candidateCount": 20,
+        "latencyMs": 2323.8824000000022,
+        "rankedResourceIds": [
+          400,
+          163,
+          336,
+          35,
+          402,
+          247,
+          356,
+          49,
+          404,
+          57
+        ],
+        "relevantResourceIds": [
+          400,
+          53,
+          54,
+          55,
+          56,
+          57,
+          58,
+          59,
+          60,
+          61,
+          62,
+          390
+        ],
+        "metrics": {
+          "precisionAt5": 0.2,
+          "recallAt5": 0.08333333333333333,
+          "mrr": 1.0,
+          "ndcgAt10": 0.28371255449703187
+        }
+      },
+      {
+        "queryId": "q002",
+        "query": "Sense and Sensibility",
+        "intent": "exact-title",
+        "method": "hybrid_reranker",
+        "strategy": "hybrid-v3(exact-db+bm25+vector+reranker)",
+        "queryIntent": "KEYWORD",
+        "rerankerApplied": true,
+        "fallbackApplied": false,
+        "candidateCount": 20,
+        "latencyMs": 284.01800000028743,
+        "rankedResourceIds": [
+          402,
+          271,
+          400,
+          163,
+          49,
+          337,
+          203,
+          35,
+          336,
+          356
+        ],
+        "relevantResourceIds": [
+          402,
+          271,
+          53,
+          54,
+          55,
+          56,
+          57,
+          58,
+          59,
+          60,
+          61,
+          62
+        ],
+        "metrics": {
+          "precisionAt5": 0.4,
+          "recallAt5": 0.16666666666666666,
+          "mrr": 1.0,
+          "ndcgAt10": 0.3589542101716347
+        }
+      },
+      {
+        "queryId": "q003",
+        "query": "The War of the Worlds",
+        "intent": "exact-title",
+        "method": "hybrid_reranker",
+        "strategy": "hybrid-v3(exact-db+bm25+vector+reranker)",
+        "queryIntent": "KEYWORD",
+        "rerankerApplied": true,
+        "fallbackApplied": false,
+        "candidateCount": 20,
+        "latencyMs": 273.9438000003247,
+        "rankedResourceIds": [
+          18,
+          379,
+          255,
+          252,
+          344,
+          35,
+          17,
+          71,
+          26,
+          256
+        ],
+        "relevantResourceIds": [
+          18,
+          13,
+          14,
+          15,
+          16,
+          17,
+          19,
+          20,
+          21,
+          22,
+          410,
+          411
+        ],
+        "metrics": {
+          "precisionAt5": 0.2,
+          "recallAt5": 0.08333333333333333,
+          "mrr": 1.0,
+          "ndcgAt10": 0.2934556883974402
+        }
+      }
+    ]
+  }
+}

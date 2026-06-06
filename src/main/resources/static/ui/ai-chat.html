@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Reading Assistant - ReadSeek</title>
+  <link rel="stylesheet" href="assets/css/common.css?v=20260601-ai-chat" />
+  <link rel="stylesheet" href="assets/css/ai-chat.css?v=20260601-ai-chat" />
+</head>
+<body data-page="aiChat">
+  <div class="app-shell">
+    <main class="page ai-chat-page">
+      <section class="ai-chat-hero">
+        <div>
+          <div class="eyebrow">AI Chat</div>
+          <h1>AI 阅读助手 / AI Reading Assistant</h1>
+          <p class="muted">像 ChatGPT 一样连续对话，但回答会优先基于馆藏元数据、简介、标签、分类、作者和 RAG 证据；证据不足时会明确降级或拒答。</p>
+        </div>
+        <button id="ai-chat-new" class="button-link soft" type="button">新会话 / New chat</button>
+      </section>
+
+      <div id="ai-chat-message" class="alert hidden"></div>
+
+      <section class="ai-chat-shell">
+        <aside class="card ai-chat-side">
+          <div class="section-head">
+            <div>
+              <h2>会话 / Sessions</h2>
+              <p class="muted">当前后端使用轻量内存会话，重启后会清空。</p>
+            </div>
+          </div>
+          <div id="ai-chat-sessions" class="ai-chat-sessions"></div>
+        </aside>
+
+        <section class="card ai-chat-main">
+          <div id="ai-chat-stream" class="ai-chat-stream"></div>
+          <form id="ai-chat-form" class="ai-chat-form">
+            <textarea id="ai-chat-input" rows="3" placeholder="例如：我想系统学习人工智能，先读哪几本？ / Which books should I start with for AI?"></textarea>
+            <div class="ai-chat-controls">
+              <label>
+                <span>模式 / Mode</span>
+                <select id="ai-chat-mode">
+                  <option value="fast">fast</option>
+                  <option value="standard" selected>standard</option>
+                  <option value="expert">expert</option>
+                </select>
+              </label>
+              <label>
+                <span>证据数 / Evidence</span>
+                <select id="ai-chat-limit">
+                  <option value="3">3</option>
+                  <option value="5" selected>5</option>
+                  <option value="8">8</option>
+                  <option value="20">20</option>
+                </select>
+              </label>
+              <button id="ai-chat-submit" class="primary" type="submit">发送 / Send</button>
+            </div>
+          </form>
+        </section>
+
+        <aside class="card ai-chat-inspector">
+          <div class="section-head">
+            <div>
+              <h2>证据与状态 / Evidence</h2>
+              <p class="muted">展示最近一轮回答的检索策略、引用、推荐和耗时。</p>
+            </div>
+          </div>
+          <div id="ai-chat-meta" class="ai-chat-meta"></div>
+        </aside>
+      </section>
+    </main>
+  </div>
+  <script src="assets/js/config.js?v=20260601-ai-chat"></script>
+  <script src="assets/js/api.js?v=20260601-ai-chat"></script>
+  <script src="assets/js/i18n.js?v=20260601-ai-chat"></script>
+  <script src="assets/js/ui.js?v=20260601-ai-chat"></script>
+  <script src="assets/js/ai-chat.js?v=20260601-ai-chat"></script>
+</body>
+</html>

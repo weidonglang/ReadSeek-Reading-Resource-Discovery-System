@@ -157,6 +157,18 @@ public interface BookRepository extends JpaRepository<Book, Long> {
             ") ORDER BY b.usersRateCount DESC, b.rate DESC, b.availableCopies DESC, b.name ASC")
     @EntityGraph(attributePaths = {"author", "category", "publisher", "tags"})
     List<Book> findExactMatches(@Param("query") String query, Pageable pageable);
+
+    @Query("SELECT DISTINCT b FROM Book b LEFT JOIN b.tags t WHERE b.markedAsDeleted = false AND (" +
+            "lower(b.name) LIKE lower(concat('%', :query, '%')) OR " +
+            "lower(coalesce(b.isbn, '')) LIKE lower(concat('%', :query, '%')) OR " +
+            "lower(b.author.name) LIKE lower(concat('%', :query, '%')) OR " +
+            "lower(b.category.name) LIKE lower(concat('%', :query, '%')) OR " +
+            "lower(coalesce(b.publisher.name, '')) LIKE lower(concat('%', :query, '%')) OR " +
+            "lower(coalesce(t.name, '')) LIKE lower(concat('%', :query, '%')) OR " +
+            "lower(coalesce(b.description, '')) LIKE lower(concat('%', :query, '%'))" +
+            ") ORDER BY b.usersRateCount DESC, b.rate DESC, b.availableCopies DESC, b.name ASC")
+    @EntityGraph(attributePaths = {"author", "category", "publisher", "tags"})
+    List<Book> findCatalogFallbackMatches(@Param("query") String query, Pageable pageable);
 }
 /*
 weidonglang

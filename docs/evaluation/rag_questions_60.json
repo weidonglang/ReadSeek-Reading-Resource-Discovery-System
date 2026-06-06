@@ -1,0 +1,1145 @@
+{
+  "dataset": "readseek-rag-60",
+  "status": "ready-for-batch-evaluation",
+  "note": "Expected ids can be resolved dynamically from current catalog; manual scores should be filled after reviewing generated answers.",
+  "questions": [
+    {
+      "id": "r001",
+      "question": "帮我推荐几本爱情小说，并说明推荐顺序。",
+      "answerMode": "recommendation",
+      "expectedResourceIds": [],
+      "relevance": {
+        "titleHints": [
+          "Pride and Prejudice",
+          "Sense and Sensibility",
+          "The Giver of Stars",
+          "Mix Tape"
+        ],
+        "maxRelevantIds": 8
+      },
+      "manualRubric": {
+        "relevance": "0-5: answer addresses the question using retrieved catalog evidence.",
+        "completeness": "0-5: answer covers requested comparison/order/recommendation dimensions.",
+        "citationValidity": "0-5: citations point to actually relevant evidence cards.",
+        "hallucinationRisk": "0-5: 5 means no unsupported catalog-external claims."
+      }
+    },
+    {
+      "id": "r002",
+      "question": "Pride and Prejudice 和 Sense and Sensibility 应该先读哪本？",
+      "answerMode": "comparison",
+      "expectedResourceIds": [],
+      "relevance": {
+        "titleHints": [
+          "Pride and Prejudice",
+          "Sense and Sensibility"
+        ],
+        "maxRelevantIds": 8
+      },
+      "manualRubric": {
+        "relevance": "0-5: answer addresses the question using retrieved catalog evidence.",
+        "completeness": "0-5: answer covers requested comparison/order/recommendation dimensions.",
+        "citationValidity": "0-5: citations point to actually relevant evidence cards.",
+        "hallucinationRisk": "0-5: 5 means no unsupported catalog-external claims."
+      }
+    },
+    {
+      "id": "r003",
+      "question": "我想从经典科幻入门，先读哪几本？",
+      "answerMode": "reading-path",
+      "expectedResourceIds": [],
+      "relevance": {
+        "titleHints": [
+          "The War of the Worlds",
+          "The Invisible Man",
+          "Player Piano"
+        ],
+        "maxRelevantIds": 8
+      },
+      "manualRubric": {
+        "relevance": "0-5: answer addresses the question using retrieved catalog evidence.",
+        "completeness": "0-5: answer covers requested comparison/order/recommendation dimensions.",
+        "citationValidity": "0-5: citations point to actually relevant evidence cards.",
+        "hallucinationRisk": "0-5: 5 means no unsupported catalog-external claims."
+      }
+    },
+    {
+      "id": "r004",
+      "question": "The Every 和 Player Piano 都在讨论技术社会吗？帮我比较。",
+      "answerMode": "comparison",
+      "expectedResourceIds": [],
+      "relevance": {
+        "titleHints": [
+          "The Every",
+          "Player Piano"
+        ],
+        "maxRelevantIds": 8
+      },
+      "manualRubric": {
+        "relevance": "0-5: answer addresses the question using retrieved catalog evidence.",
+        "completeness": "0-5: answer covers requested comparison/order/recommendation dimensions.",
+        "citationValidity": "0-5: citations point to actually relevant evidence cards.",
+        "hallucinationRisk": "0-5: 5 means no unsupported catalog-external claims."
+      }
+    },
+    {
+      "id": "r005",
+      "question": "找几本关于外星人、未来社会或技术伦理的科幻。",
+      "answerMode": "recommendation",
+      "expectedResourceIds": [],
+      "relevance": {
+        "titleHints": [
+          "The War of the Worlds",
+          "The Every",
+          "The Invisible Man"
+        ],
+        "maxRelevantIds": 8
+      },
+      "manualRubric": {
+        "relevance": "0-5: answer addresses the question using retrieved catalog evidence.",
+        "completeness": "0-5: answer covers requested comparison/order/recommendation dimensions.",
+        "citationValidity": "0-5: citations point to actually relevant evidence cards.",
+        "hallucinationRisk": "0-5: 5 means no unsupported catalog-external claims."
+      }
+    },
+    {
+      "id": "r006",
+      "question": "有没有关于机器人或人工智能主题的书？",
+      "answerMode": "recommendation",
+      "expectedResourceIds": [],
+      "relevance": {
+        "titleHints": [
+          "Robot",
+          "Intelligence Science",
+          "What Is Intelligence?"
+        ],
+        "maxRelevantIds": 8
+      },
+      "manualRubric": {
+        "relevance": "0-5: answer addresses the question using retrieved catalog evidence.",
+        "completeness": "0-5: answer covers requested comparison/order/recommendation dimensions.",
+        "citationValidity": "0-5: citations point to actually relevant evidence cards.",
+        "hallucinationRisk": "0-5: 5 means no unsupported catalog-external claims."
+      }
+    },
+    {
+      "id": "r007",
+      "question": "帮我找几本恐怖悬疑小说，要求不要太学术。",
+      "answerMode": "recommendation",
+      "expectedResourceIds": [],
+      "relevance": {
+        "titleHints": [
+          "The Chalk Man",
+          "Pine",
+          "The Year of the Witching"
+        ],
+        "maxRelevantIds": 8
+      },
+      "manualRubric": {
+        "relevance": "0-5: answer addresses the question using retrieved catalog evidence.",
+        "completeness": "0-5: answer covers requested comparison/order/recommendation dimensions.",
+        "citationValidity": "0-5: citations point to actually relevant evidence cards.",
+        "hallucinationRisk": "0-5: 5 means no unsupported catalog-external claims."
+      }
+    },
+    {
+      "id": "r008",
+      "question": "The Year of the Witching 适合什么读者？",
+      "answerMode": "factual",
+      "expectedResourceIds": [],
+      "relevance": {
+        "titleHints": [
+          "The Year of the Witching"
+        ],
+        "maxRelevantIds": 8
+      },
+      "manualRubric": {
+        "relevance": "0-5: answer addresses the question using retrieved catalog evidence.",
+        "completeness": "0-5: answer covers requested comparison/order/recommendation dimensions.",
+        "citationValidity": "0-5: citations point to actually relevant evidence cards.",
+        "hallucinationRisk": "0-5: 5 means no unsupported catalog-external claims."
+      }
+    },
+    {
+      "id": "r009",
+      "question": "The Chalk Man 和 Pine 的风格有什么区别？",
+      "answerMode": "comparison",
+      "expectedResourceIds": [],
+      "relevance": {
+        "titleHints": [
+          "The Chalk Man",
+          "Pine"
+        ],
+        "maxRelevantIds": 8
+      },
+      "manualRubric": {
+        "relevance": "0-5: answer addresses the question using retrieved catalog evidence.",
+        "completeness": "0-5: answer covers requested comparison/order/recommendation dimensions.",
+        "citationValidity": "0-5: citations point to actually relevant evidence cards.",
+        "hallucinationRisk": "0-5: 5 means no unsupported catalog-external claims."
+      }
+    },
+    {
+      "id": "r010",
+      "question": "帮我做一个恐怖小说入门阅读路径。",
+      "answerMode": "reading-path",
+      "expectedResourceIds": [],
+      "relevance": {
+        "titleHints": [
+          "The Chalk Man",
+          "Pine",
+          "The Year of the Witching"
+        ],
+        "maxRelevantIds": 8
+      },
+      "manualRubric": {
+        "relevance": "0-5: answer addresses the question using retrieved catalog evidence.",
+        "completeness": "0-5: answer covers requested comparison/order/recommendation dimensions.",
+        "citationValidity": "0-5: citations point to actually relevant evidence cards.",
+        "hallucinationRisk": "0-5: 5 means no unsupported catalog-external claims."
+      }
+    },
+    {
+      "id": "r011",
+      "question": "我想提升习惯和自我管理，应该读哪几本？",
+      "answerMode": "reading-path",
+      "expectedResourceIds": [],
+      "relevance": {
+        "titleHints": [
+          "The Power of Habit",
+          "The Magic Within",
+          "Inquiring about Myself"
+        ],
+        "maxRelevantIds": 8
+      },
+      "manualRubric": {
+        "relevance": "0-5: answer addresses the question using retrieved catalog evidence.",
+        "completeness": "0-5: answer covers requested comparison/order/recommendation dimensions.",
+        "citationValidity": "0-5: citations point to actually relevant evidence cards.",
+        "hallucinationRisk": "0-5: 5 means no unsupported catalog-external claims."
+      }
+    },
+    {
+      "id": "r012",
+      "question": "The Power of Habit 为什么适合入门？",
+      "answerMode": "factual",
+      "expectedResourceIds": [],
+      "relevance": {
+        "titleHints": [
+          "The Power of Habit"
+        ],
+        "maxRelevantIds": 8
+      },
+      "manualRubric": {
+        "relevance": "0-5: answer addresses the question using retrieved catalog evidence.",
+        "completeness": "0-5: answer covers requested comparison/order/recommendation dimensions.",
+        "citationValidity": "0-5: citations point to actually relevant evidence cards.",
+        "hallucinationRisk": "0-5: 5 means no unsupported catalog-external claims."
+      }
+    },
+    {
+      "id": "r013",
+      "question": "找几本关于自我探索和心理成长的书。",
+      "answerMode": "recommendation",
+      "expectedResourceIds": [],
+      "relevance": {
+        "titleHints": [
+          "Inquiring about Myself",
+          "The Magic Within",
+          "The Paradoxical Self"
+        ],
+        "maxRelevantIds": 8
+      },
+      "manualRubric": {
+        "relevance": "0-5: answer addresses the question using retrieved catalog evidence.",
+        "completeness": "0-5: answer covers requested comparison/order/recommendation dimensions.",
+        "citationValidity": "0-5: citations point to actually relevant evidence cards.",
+        "hallucinationRisk": "0-5: 5 means no unsupported catalog-external claims."
+      }
+    },
+    {
+      "id": "r014",
+      "question": "ego development 相关书有哪些，难度如何？",
+      "answerMode": "recommendation",
+      "expectedResourceIds": [],
+      "relevance": {
+        "titleHints": [
+          "Measuring Ego Development",
+          "The Development of the Ego",
+          "Ego Analysis in the Helping Professions"
+        ],
+        "maxRelevantIds": 8
+      },
+      "manualRubric": {
+        "relevance": "0-5: answer addresses the question using retrieved catalog evidence.",
+        "completeness": "0-5: answer covers requested comparison/order/recommendation dimensions.",
+        "citationValidity": "0-5: citations point to actually relevant evidence cards.",
+        "hallucinationRisk": "0-5: 5 means no unsupported catalog-external claims."
+      }
+    },
+    {
+      "id": "r015",
+      "question": "女性成长或女性赋权主题有哪些书？",
+      "answerMode": "recommendation",
+      "expectedResourceIds": [],
+      "relevance": {
+        "titleHints": [
+          "Empowerment of Women Through Self Help Groups",
+          "Midlife Mothers in Transition",
+          "Motherself"
+        ],
+        "maxRelevantIds": 8
+      },
+      "manualRubric": {
+        "relevance": "0-5: answer addresses the question using retrieved catalog evidence.",
+        "completeness": "0-5: answer covers requested comparison/order/recommendation dimensions.",
+        "citationValidity": "0-5: citations point to actually relevant evidence cards.",
+        "hallucinationRisk": "0-5: 5 means no unsupported catalog-external claims."
+      }
+    },
+    {
+      "id": "r016",
+      "question": "Empowerment of Women Through Self Help Groups 主要适合谁读？",
+      "answerMode": "factual",
+      "expectedResourceIds": [],
+      "relevance": {
+        "titleHints": [
+          "Empowerment of Women Through Self Help Groups"
+        ],
+        "maxRelevantIds": 8
+      },
+      "manualRubric": {
+        "relevance": "0-5: answer addresses the question using retrieved catalog evidence.",
+        "completeness": "0-5: answer covers requested comparison/order/recommendation dimensions.",
+        "citationValidity": "0-5: citations point to actually relevant evidence cards.",
+        "hallucinationRisk": "0-5: 5 means no unsupported catalog-external claims."
+      }
+    },
+    {
+      "id": "r017",
+      "question": "我想读日本历史或社会变迁方向的书。",
+      "answerMode": "recommendation",
+      "expectedResourceIds": [],
+      "relevance": {
+        "titleHints": [
+          "Japan Story"
+        ],
+        "maxRelevantIds": 8
+      },
+      "manualRubric": {
+        "relevance": "0-5: answer addresses the question using retrieved catalog evidence.",
+        "completeness": "0-5: answer covers requested comparison/order/recommendation dimensions.",
+        "citationValidity": "0-5: citations point to actually relevant evidence cards.",
+        "hallucinationRisk": "0-5: 5 means no unsupported catalog-external claims."
+      }
+    },
+    {
+      "id": "r018",
+      "question": "The Winner's Curse 可以归到什么主题，为什么推荐？",
+      "answerMode": "factual",
+      "expectedResourceIds": [],
+      "relevance": {
+        "titleHints": [
+          "The Winner's Curse"
+        ],
+        "maxRelevantIds": 8
+      },
+      "manualRubric": {
+        "relevance": "0-5: answer addresses the question using retrieved catalog evidence.",
+        "completeness": "0-5: answer covers requested comparison/order/recommendation dimensions.",
+        "citationValidity": "0-5: citations point to actually relevant evidence cards.",
+        "hallucinationRisk": "0-5: 5 means no unsupported catalog-external claims."
+      }
+    },
+    {
+      "id": "r019",
+      "question": "推荐几本数学入门相关的书，并说明先后顺序。",
+      "answerMode": "reading-path",
+      "expectedResourceIds": [],
+      "relevance": {
+        "titleHints": [
+          "A History of Mathematics",
+          "The Music of the Primes"
+        ],
+        "maxRelevantIds": 8
+      },
+      "manualRubric": {
+        "relevance": "0-5: answer addresses the question using retrieved catalog evidence.",
+        "completeness": "0-5: answer covers requested comparison/order/recommendation dimensions.",
+        "citationValidity": "0-5: citations point to actually relevant evidence cards.",
+        "hallucinationRisk": "0-5: 5 means no unsupported catalog-external claims."
+      }
+    },
+    {
+      "id": "r020",
+      "question": "The Music of the Primes 和 A History of Mathematics 哪本更适合先读？",
+      "answerMode": "comparison",
+      "expectedResourceIds": [],
+      "relevance": {
+        "titleHints": [
+          "The Music of the Primes",
+          "A History of Mathematics"
+        ],
+        "maxRelevantIds": 8
+      },
+      "manualRubric": {
+        "relevance": "0-5: answer addresses the question using retrieved catalog evidence.",
+        "completeness": "0-5: answer covers requested comparison/order/recommendation dimensions.",
+        "citationValidity": "0-5: citations point to actually relevant evidence cards.",
+        "hallucinationRisk": "0-5: 5 means no unsupported catalog-external claims."
+      }
+    },
+    {
+      "id": "r021",
+      "question": "帮我找几本和 Java 或系统设计相关的书。",
+      "answerMode": "recommendation",
+      "expectedResourceIds": [],
+      "relevance": {
+        "titleHints": [
+          "Portable C and UNIX System Programming",
+          "The Art of Computer Programming: Semi-numerical algorithms"
+        ],
+        "maxRelevantIds": 8
+      },
+      "manualRubric": {
+        "relevance": "0-5: answer addresses the question using retrieved catalog evidence.",
+        "completeness": "0-5: answer covers requested comparison/order/recommendation dimensions.",
+        "citationValidity": "0-5: citations point to actually relevant evidence cards.",
+        "hallucinationRisk": "0-5: 5 means no unsupported catalog-external claims."
+      }
+    },
+    {
+      "id": "r022",
+      "question": "如果没有 Java 书，系统应该如何基于证据回答？",
+      "answerMode": "limitation",
+      "expectedResourceIds": [],
+      "relevance": {
+        "titleHints": [
+          "Portable C and UNIX System Programming"
+        ],
+        "maxRelevantIds": 8
+      },
+      "manualRubric": {
+        "relevance": "0-5: answer addresses the question using retrieved catalog evidence.",
+        "completeness": "0-5: answer covers requested comparison/order/recommendation dimensions.",
+        "citationValidity": "0-5: citations point to actually relevant evidence cards.",
+        "hallucinationRisk": "0-5: 5 means no unsupported catalog-external claims."
+      }
+    },
+    {
+      "id": "r023",
+      "question": "Portable C and UNIX System Programming 和算法书有什么区别？",
+      "answerMode": "comparison",
+      "expectedResourceIds": [],
+      "relevance": {
+        "titleHints": [
+          "Portable C and UNIX System Programming",
+          "The Art of Computer Programming: Semi-numerical algorithms"
+        ],
+        "maxRelevantIds": 8
+      },
+      "manualRubric": {
+        "relevance": "0-5: answer addresses the question using retrieved catalog evidence.",
+        "completeness": "0-5: answer covers requested comparison/order/recommendation dimensions.",
+        "citationValidity": "0-5: citations point to actually relevant evidence cards.",
+        "hallucinationRisk": "0-5: 5 means no unsupported catalog-external claims."
+      }
+    },
+    {
+      "id": "r024",
+      "question": "Tractatus Logico-Philosophicus 为什么会出现在数学或逻辑相关检索里？",
+      "answerMode": "factual",
+      "expectedResourceIds": [],
+      "relevance": {
+        "titleHints": [
+          "Tractatus Logico-Philosophicus"
+        ],
+        "maxRelevantIds": 8
+      },
+      "manualRubric": {
+        "relevance": "0-5: answer addresses the question using retrieved catalog evidence.",
+        "completeness": "0-5: answer covers requested comparison/order/recommendation dimensions.",
+        "citationValidity": "0-5: citations point to actually relevant evidence cards.",
+        "hallucinationRisk": "0-5: 5 means no unsupported catalog-external claims."
+      }
+    },
+    {
+      "id": "r025",
+      "question": "推荐几本适合讨论逻辑、数学思维或算法的书。",
+      "answerMode": "recommendation",
+      "expectedResourceIds": [],
+      "relevance": {
+        "titleHints": [
+          "A History of Mathematics",
+          "The Music of the Primes",
+          "The Art of Computer Programming: Semi-numerical algorithms",
+          "Tractatus Logico-Philosophicus"
+        ],
+        "maxRelevantIds": 8
+      },
+      "manualRubric": {
+        "relevance": "0-5: answer addresses the question using retrieved catalog evidence.",
+        "completeness": "0-5: answer covers requested comparison/order/recommendation dimensions.",
+        "citationValidity": "0-5: citations point to actually relevant evidence cards.",
+        "hallucinationRisk": "0-5: 5 means no unsupported catalog-external claims."
+      }
+    },
+    {
+      "id": "r026",
+      "question": "我喜欢星球大战，有馆藏相关书吗？",
+      "answerMode": "recommendation",
+      "expectedResourceIds": [],
+      "relevance": {
+        "titleHints": [
+          "A Star Wars Story"
+        ],
+        "maxRelevantIds": 8
+      },
+      "manualRubric": {
+        "relevance": "0-5: answer addresses the question using retrieved catalog evidence.",
+        "completeness": "0-5: answer covers requested comparison/order/recommendation dimensions.",
+        "citationValidity": "0-5: citations point to actually relevant evidence cards.",
+        "hallucinationRisk": "0-5: 5 means no unsupported catalog-external claims."
+      }
+    },
+    {
+      "id": "r027",
+      "question": "Doctor Who: Molten Heart 是什么类型的书？",
+      "answerMode": "factual",
+      "expectedResourceIds": [],
+      "relevance": {
+        "titleHints": [
+          "Doctor Who: Molten Heart"
+        ],
+        "maxRelevantIds": 8
+      },
+      "manualRubric": {
+        "relevance": "0-5: answer addresses the question using retrieved catalog evidence.",
+        "completeness": "0-5: answer covers requested comparison/order/recommendation dimensions.",
+        "citationValidity": "0-5: citations point to actually relevant evidence cards.",
+        "hallucinationRisk": "0-5: 5 means no unsupported catalog-external claims."
+      }
+    },
+    {
+      "id": "r028",
+      "question": "Eve of Man 适合青少年读者吗？请基于证据回答。",
+      "answerMode": "factual",
+      "expectedResourceIds": [],
+      "relevance": {
+        "titleHints": [
+          "Eve of Man"
+        ],
+        "maxRelevantIds": 8
+      },
+      "manualRubric": {
+        "relevance": "0-5: answer addresses the question using retrieved catalog evidence.",
+        "completeness": "0-5: answer covers requested comparison/order/recommendation dimensions.",
+        "citationValidity": "0-5: citations point to actually relevant evidence cards.",
+        "hallucinationRisk": "0-5: 5 means no unsupported catalog-external claims."
+      }
+    },
+    {
+      "id": "r029",
+      "question": "The Book of Sand 这本书适合什么样的科幻读者？",
+      "answerMode": "factual",
+      "expectedResourceIds": [],
+      "relevance": {
+        "titleHints": [
+          "The Book of Sand"
+        ],
+        "maxRelevantIds": 8
+      },
+      "manualRubric": {
+        "relevance": "0-5: answer addresses the question using retrieved catalog evidence.",
+        "completeness": "0-5: answer covers requested comparison/order/recommendation dimensions.",
+        "citationValidity": "0-5: citations point to actually relevant evidence cards.",
+        "hallucinationRisk": "0-5: 5 means no unsupported catalog-external claims."
+      }
+    },
+    {
+      "id": "r030",
+      "question": "Appliance 和 The Book of Sand 都偏心理氛围吗？",
+      "answerMode": "comparison",
+      "expectedResourceIds": [],
+      "relevance": {
+        "titleHints": [
+          "Appliance",
+          "The Book of Sand"
+        ],
+        "maxRelevantIds": 8
+      },
+      "manualRubric": {
+        "relevance": "0-5: answer addresses the question using retrieved catalog evidence.",
+        "completeness": "0-5: answer covers requested comparison/order/recommendation dimensions.",
+        "citationValidity": "0-5: citations point to actually relevant evidence cards.",
+        "hallucinationRisk": "0-5: 5 means no unsupported catalog-external claims."
+      }
+    },
+    {
+      "id": "r031",
+      "question": "按入门、进阶、深入给我排几本科幻。",
+      "answerMode": "reading-path",
+      "expectedResourceIds": [],
+      "relevance": {
+        "titleHints": [
+          "The War of the Worlds",
+          "The Invisible Man",
+          "Player Piano",
+          "The Every"
+        ],
+        "maxRelevantIds": 8
+      },
+      "manualRubric": {
+        "relevance": "0-5: answer addresses the question using retrieved catalog evidence.",
+        "completeness": "0-5: answer covers requested comparison/order/recommendation dimensions.",
+        "citationValidity": "0-5: citations point to actually relevant evidence cards.",
+        "hallucinationRisk": "0-5: 5 means no unsupported catalog-external claims."
+      }
+    },
+    {
+      "id": "r032",
+      "question": "我想看科技伦理，但不要纯技术书，有哪些小说？",
+      "answerMode": "recommendation",
+      "expectedResourceIds": [],
+      "relevance": {
+        "titleHints": [
+          "The Every",
+          "Player Piano",
+          "The Invisible Man"
+        ],
+        "maxRelevantIds": 8
+      },
+      "manualRubric": {
+        "relevance": "0-5: answer addresses the question using retrieved catalog evidence.",
+        "completeness": "0-5: answer covers requested comparison/order/recommendation dimensions.",
+        "citationValidity": "0-5: citations point to actually relevant evidence cards.",
+        "hallucinationRisk": "0-5: 5 means no unsupported catalog-external claims."
+      }
+    },
+    {
+      "id": "r033",
+      "question": "找几本带社会批判意味的小说。",
+      "answerMode": "recommendation",
+      "expectedResourceIds": [],
+      "relevance": {
+        "titleHints": [
+          "The Every",
+          "Player Piano",
+          "Pride and Prejudice"
+        ],
+        "maxRelevantIds": 8
+      },
+      "manualRubric": {
+        "relevance": "0-5: answer addresses the question using retrieved catalog evidence.",
+        "completeness": "0-5: answer covers requested comparison/order/recommendation dimensions.",
+        "citationValidity": "0-5: citations point to actually relevant evidence cards.",
+        "hallucinationRisk": "0-5: 5 means no unsupported catalog-external claims."
+      }
+    },
+    {
+      "id": "r034",
+      "question": "Jane Austen 的作品有什么共同特点？",
+      "answerMode": "author",
+      "expectedResourceIds": [],
+      "relevance": {
+        "titleHints": [
+          "Pride and Prejudice",
+          "Sense and Sensibility"
+        ],
+        "maxRelevantIds": 8
+      },
+      "manualRubric": {
+        "relevance": "0-5: answer addresses the question using retrieved catalog evidence.",
+        "completeness": "0-5: answer covers requested comparison/order/recommendation dimensions.",
+        "citationValidity": "0-5: citations point to actually relevant evidence cards.",
+        "hallucinationRisk": "0-5: 5 means no unsupported catalog-external claims."
+      }
+    },
+    {
+      "id": "r035",
+      "question": "H. G. Wells 的两本馆藏作品怎么选？",
+      "answerMode": "author",
+      "expectedResourceIds": [],
+      "relevance": {
+        "titleHints": [
+          "The War of the Worlds",
+          "The Invisible Man"
+        ],
+        "maxRelevantIds": 8
+      },
+      "manualRubric": {
+        "relevance": "0-5: answer addresses the question using retrieved catalog evidence.",
+        "completeness": "0-5: answer covers requested comparison/order/recommendation dimensions.",
+        "citationValidity": "0-5: citations point to actually relevant evidence cards.",
+        "hallucinationRisk": "0-5: 5 means no unsupported catalog-external claims."
+      }
+    },
+    {
+      "id": "r036",
+      "question": "Jojo Moyes 的 The Giver of Stars 推荐理由是什么？",
+      "answerMode": "factual",
+      "expectedResourceIds": [],
+      "relevance": {
+        "titleHints": [
+          "The Giver of Stars"
+        ],
+        "maxRelevantIds": 8
+      },
+      "manualRubric": {
+        "relevance": "0-5: answer addresses the question using retrieved catalog evidence.",
+        "completeness": "0-5: answer covers requested comparison/order/recommendation dimensions.",
+        "citationValidity": "0-5: citations point to actually relevant evidence cards.",
+        "hallucinationRisk": "0-5: 5 means no unsupported catalog-external claims."
+      }
+    },
+    {
+      "id": "r037",
+      "question": "Mix Tape 和 Live a Little 哪本更偏温情爱情？",
+      "answerMode": "comparison",
+      "expectedResourceIds": [],
+      "relevance": {
+        "titleHints": [
+          "Mix Tape",
+          "Live a Little"
+        ],
+        "maxRelevantIds": 8
+      },
+      "manualRubric": {
+        "relevance": "0-5: answer addresses the question using retrieved catalog evidence.",
+        "completeness": "0-5: answer covers requested comparison/order/recommendation dimensions.",
+        "citationValidity": "0-5: citations point to actually relevant evidence cards.",
+        "hallucinationRisk": "0-5: 5 means no unsupported catalog-external claims."
+      }
+    },
+    {
+      "id": "r038",
+      "question": "帮我找一本关于第二次机会的爱情小说。",
+      "answerMode": "recommendation",
+      "expectedResourceIds": [],
+      "relevance": {
+        "titleHints": [
+          "Mix Tape"
+        ],
+        "maxRelevantIds": 8
+      },
+      "manualRubric": {
+        "relevance": "0-5: answer addresses the question using retrieved catalog evidence.",
+        "completeness": "0-5: answer covers requested comparison/order/recommendation dimensions.",
+        "citationValidity": "0-5: citations point to actually relevant evidence cards.",
+        "hallucinationRisk": "0-5: 5 means no unsupported catalog-external claims."
+      }
+    },
+    {
+      "id": "r039",
+      "question": "帮我找一本关于晚年爱情的小说。",
+      "answerMode": "recommendation",
+      "expectedResourceIds": [],
+      "relevance": {
+        "titleHints": [
+          "Live a Little"
+        ],
+        "maxRelevantIds": 8
+      },
+      "manualRubric": {
+        "relevance": "0-5: answer addresses the question using retrieved catalog evidence.",
+        "completeness": "0-5: answer covers requested comparison/order/recommendation dimensions.",
+        "citationValidity": "0-5: citations point to actually relevant evidence cards.",
+        "hallucinationRisk": "0-5: 5 means no unsupported catalog-external claims."
+      }
+    },
+    {
+      "id": "r040",
+      "question": "找几本适合做女性主义或女性处境讨论的书。",
+      "answerMode": "recommendation",
+      "expectedResourceIds": [],
+      "relevance": {
+        "titleHints": [
+          "The Year of the Witching",
+          "Empowerment of Women Through Self Help Groups",
+          "Motherself"
+        ],
+        "maxRelevantIds": 8
+      },
+      "manualRubric": {
+        "relevance": "0-5: answer addresses the question using retrieved catalog evidence.",
+        "completeness": "0-5: answer covers requested comparison/order/recommendation dimensions.",
+        "citationValidity": "0-5: citations point to actually relevant evidence cards.",
+        "hallucinationRisk": "0-5: 5 means no unsupported catalog-external claims."
+      }
+    },
+    {
+      "id": "r041",
+      "question": "我想读古典文学分析相关内容，馆藏有什么？",
+      "answerMode": "recommendation",
+      "expectedResourceIds": [],
+      "relevance": {
+        "titleHints": [
+          "Hidden Paths"
+        ],
+        "maxRelevantIds": 8
+      },
+      "manualRubric": {
+        "relevance": "0-5: answer addresses the question using retrieved catalog evidence.",
+        "completeness": "0-5: answer covers requested comparison/order/recommendation dimensions.",
+        "citationValidity": "0-5: citations point to actually relevant evidence cards.",
+        "hallucinationRisk": "0-5: 5 means no unsupported catalog-external claims."
+      }
+    },
+    {
+      "id": "r042",
+      "question": "Hidden Paths 为什么可能不适合初学者？",
+      "answerMode": "factual",
+      "expectedResourceIds": [],
+      "relevance": {
+        "titleHints": [
+          "Hidden Paths"
+        ],
+        "maxRelevantIds": 8
+      },
+      "manualRubric": {
+        "relevance": "0-5: answer addresses the question using retrieved catalog evidence.",
+        "completeness": "0-5: answer covers requested comparison/order/recommendation dimensions.",
+        "citationValidity": "0-5: citations point to actually relevant evidence cards.",
+        "hallucinationRisk": "0-5: 5 means no unsupported catalog-external claims."
+      }
+    },
+    {
+      "id": "r043",
+      "question": "找一本与家庭、自我和关系有关的自助书。",
+      "answerMode": "recommendation",
+      "expectedResourceIds": [],
+      "relevance": {
+        "titleHints": [
+          "Self and Family"
+        ],
+        "maxRelevantIds": 8
+      },
+      "manualRubric": {
+        "relevance": "0-5: answer addresses the question using retrieved catalog evidence.",
+        "completeness": "0-5: answer covers requested comparison/order/recommendation dimensions.",
+        "citationValidity": "0-5: citations point to actually relevant evidence cards.",
+        "hallucinationRisk": "0-5: 5 means no unsupported catalog-external claims."
+      }
+    },
+    {
+      "id": "r044",
+      "question": "Midlife Mothers in Transition 面向什么人群？",
+      "answerMode": "factual",
+      "expectedResourceIds": [],
+      "relevance": {
+        "titleHints": [
+          "Midlife Mothers in Transition"
+        ],
+        "maxRelevantIds": 8
+      },
+      "manualRubric": {
+        "relevance": "0-5: answer addresses the question using retrieved catalog evidence.",
+        "completeness": "0-5: answer covers requested comparison/order/recommendation dimensions.",
+        "citationValidity": "0-5: citations point to actually relevant evidence cards.",
+        "hallucinationRisk": "0-5: 5 means no unsupported catalog-external claims."
+      }
+    },
+    {
+      "id": "r045",
+      "question": "The Magic Within 和 Inquiring about Myself 哪本更适合入门？",
+      "answerMode": "comparison",
+      "expectedResourceIds": [],
+      "relevance": {
+        "titleHints": [
+          "The Magic Within",
+          "Inquiring about Myself"
+        ],
+        "maxRelevantIds": 8
+      },
+      "manualRubric": {
+        "relevance": "0-5: answer addresses the question using retrieved catalog evidence.",
+        "completeness": "0-5: answer covers requested comparison/order/recommendation dimensions.",
+        "citationValidity": "0-5: citations point to actually relevant evidence cards.",
+        "hallucinationRisk": "0-5: 5 means no unsupported catalog-external claims."
+      }
+    },
+    {
+      "id": "r046",
+      "question": "我想找关于母亲原型或女性灵性的书。",
+      "answerMode": "recommendation",
+      "expectedResourceIds": [],
+      "relevance": {
+        "titleHints": [
+          "Motherself"
+        ],
+        "maxRelevantIds": 8
+      },
+      "manualRubric": {
+        "relevance": "0-5: answer addresses the question using retrieved catalog evidence.",
+        "completeness": "0-5: answer covers requested comparison/order/recommendation dimensions.",
+        "citationValidity": "0-5: citations point to actually relevant evidence cards.",
+        "hallucinationRisk": "0-5: 5 means no unsupported catalog-external claims."
+      }
+    },
+    {
+      "id": "r047",
+      "question": "帮我推荐一些历史类或真实事件相关书。",
+      "answerMode": "recommendation",
+      "expectedResourceIds": [],
+      "relevance": {
+        "titleHints": [
+          "Japan Story"
+        ],
+        "maxRelevantIds": 8
+      },
+      "manualRubric": {
+        "relevance": "0-5: answer addresses the question using retrieved catalog evidence.",
+        "completeness": "0-5: answer covers requested comparison/order/recommendation dimensions.",
+        "citationValidity": "0-5: citations point to actually relevant evidence cards.",
+        "hallucinationRisk": "0-5: 5 means no unsupported catalog-external claims."
+      }
+    },
+    {
+      "id": "r048",
+      "question": "找运动或励志传记相关馆藏。",
+      "answerMode": "recommendation",
+      "expectedResourceIds": [],
+      "relevance": {
+        "titleHints": [],
+        "maxRelevantIds": 8
+      },
+      "manualRubric": {
+        "relevance": "0-5: answer addresses the question using retrieved catalog evidence.",
+        "completeness": "0-5: answer covers requested comparison/order/recommendation dimensions.",
+        "citationValidity": "0-5: citations point to actually relevant evidence cards.",
+        "hallucinationRisk": "0-5: 5 means no unsupported catalog-external claims."
+      }
+    },
+    {
+      "id": "r049",
+      "question": "如果证据不足，回答应该怎样限制结论？",
+      "answerMode": "limitation",
+      "expectedResourceIds": [],
+      "relevance": {
+        "titleHints": [],
+        "maxRelevantIds": 8
+      },
+      "manualRubric": {
+        "relevance": "0-5: answer addresses the question using retrieved catalog evidence.",
+        "completeness": "0-5: answer covers requested comparison/order/recommendation dimensions.",
+        "citationValidity": "0-5: citations point to actually relevant evidence cards.",
+        "hallucinationRisk": "0-5: 5 means no unsupported catalog-external claims."
+      }
+    },
+    {
+      "id": "r050",
+      "question": "基于当前馆藏，能不能推荐数据密集型系统设计书？",
+      "answerMode": "limitation",
+      "expectedResourceIds": [],
+      "relevance": {
+        "titleHints": [],
+        "maxRelevantIds": 8
+      },
+      "manualRubric": {
+        "relevance": "0-5: answer addresses the question using retrieved catalog evidence.",
+        "completeness": "0-5: answer covers requested comparison/order/recommendation dimensions.",
+        "citationValidity": "0-5: citations point to actually relevant evidence cards.",
+        "hallucinationRisk": "0-5: 5 means no unsupported catalog-external claims."
+      }
+    },
+    {
+      "id": "r051",
+      "question": "请总结爱情类推荐证据里的共同主题。",
+      "answerMode": "summary",
+      "expectedResourceIds": [],
+      "relevance": {
+        "titleHints": [
+          "Pride and Prejudice",
+          "Sense and Sensibility",
+          "The Giver of Stars",
+          "Mix Tape"
+        ],
+        "maxRelevantIds": 8
+      },
+      "manualRubric": {
+        "relevance": "0-5: answer addresses the question using retrieved catalog evidence.",
+        "completeness": "0-5: answer covers requested comparison/order/recommendation dimensions.",
+        "citationValidity": "0-5: citations point to actually relevant evidence cards.",
+        "hallucinationRisk": "0-5: 5 means no unsupported catalog-external claims."
+      }
+    },
+    {
+      "id": "r052",
+      "question": "请总结科幻类推荐证据里的共同主题。",
+      "answerMode": "summary",
+      "expectedResourceIds": [],
+      "relevance": {
+        "titleHints": [
+          "The War of the Worlds",
+          "The Every",
+          "Player Piano"
+        ],
+        "maxRelevantIds": 8
+      },
+      "manualRubric": {
+        "relevance": "0-5: answer addresses the question using retrieved catalog evidence.",
+        "completeness": "0-5: answer covers requested comparison/order/recommendation dimensions.",
+        "citationValidity": "0-5: citations point to actually relevant evidence cards.",
+        "hallucinationRisk": "0-5: 5 means no unsupported catalog-external claims."
+      }
+    },
+    {
+      "id": "r053",
+      "question": "请总结自我成长类书籍的常见适读人群。",
+      "answerMode": "summary",
+      "expectedResourceIds": [],
+      "relevance": {
+        "titleHints": [
+          "The Power of Habit",
+          "The Magic Within",
+          "Inquiring about Myself"
+        ],
+        "maxRelevantIds": 8
+      },
+      "manualRubric": {
+        "relevance": "0-5: answer addresses the question using retrieved catalog evidence.",
+        "completeness": "0-5: answer covers requested comparison/order/recommendation dimensions.",
+        "citationValidity": "0-5: citations point to actually relevant evidence cards.",
+        "hallucinationRisk": "0-5: 5 means no unsupported catalog-external claims."
+      }
+    },
+    {
+      "id": "r054",
+      "question": "只看可借资源，爱情小说应该优先选哪本？",
+      "answerMode": "recommendation",
+      "expectedResourceIds": [],
+      "relevance": {
+        "titleHints": [
+          "Pride and Prejudice",
+          "Sense and Sensibility",
+          "The Giver of Stars"
+        ],
+        "maxRelevantIds": 8
+      },
+      "manualRubric": {
+        "relevance": "0-5: answer addresses the question using retrieved catalog evidence.",
+        "completeness": "0-5: answer covers requested comparison/order/recommendation dimensions.",
+        "citationValidity": "0-5: citations point to actually relevant evidence cards.",
+        "hallucinationRisk": "0-5: 5 means no unsupported catalog-external claims."
+      }
+    },
+    {
+      "id": "r055",
+      "question": "只看可借资源，科幻小说应该优先选哪本？",
+      "answerMode": "recommendation",
+      "expectedResourceIds": [],
+      "relevance": {
+        "titleHints": [
+          "The War of the Worlds",
+          "The Invisible Man",
+          "The Every"
+        ],
+        "maxRelevantIds": 8
+      },
+      "manualRubric": {
+        "relevance": "0-5: answer addresses the question using retrieved catalog evidence.",
+        "completeness": "0-5: answer covers requested comparison/order/recommendation dimensions.",
+        "citationValidity": "0-5: citations point to actually relevant evidence cards.",
+        "hallucinationRisk": "0-5: 5 means no unsupported catalog-external claims."
+      }
+    },
+    {
+      "id": "r056",
+      "question": "按难度重新排序这些自助书证据。",
+      "answerMode": "reading-path",
+      "expectedResourceIds": [],
+      "relevance": {
+        "titleHints": [
+          "The Power of Habit",
+          "The Magic Within",
+          "The Paradoxical Self"
+        ],
+        "maxRelevantIds": 8
+      },
+      "manualRubric": {
+        "relevance": "0-5: answer addresses the question using retrieved catalog evidence.",
+        "completeness": "0-5: answer covers requested comparison/order/recommendation dimensions.",
+        "citationValidity": "0-5: citations point to actually relevant evidence cards.",
+        "hallucinationRisk": "0-5: 5 means no unsupported catalog-external claims."
+      }
+    },
+    {
+      "id": "r057",
+      "question": "继续找 Jane Austen 的相关作品。",
+      "answerMode": "author",
+      "expectedResourceIds": [],
+      "relevance": {
+        "titleHints": [
+          "Pride and Prejudice",
+          "Sense and Sensibility"
+        ],
+        "maxRelevantIds": 8
+      },
+      "manualRubric": {
+        "relevance": "0-5: answer addresses the question using retrieved catalog evidence.",
+        "completeness": "0-5: answer covers requested comparison/order/recommendation dimensions.",
+        "citationValidity": "0-5: citations point to actually relevant evidence cards.",
+        "hallucinationRisk": "0-5: 5 means no unsupported catalog-external claims."
+      }
+    },
+    {
+      "id": "r058",
+      "question": "继续找 H. G. Wells 的相关作品。",
+      "answerMode": "author",
+      "expectedResourceIds": [],
+      "relevance": {
+        "titleHints": [
+          "The War of the Worlds",
+          "The Invisible Man"
+        ],
+        "maxRelevantIds": 8
+      },
+      "manualRubric": {
+        "relevance": "0-5: answer addresses the question using retrieved catalog evidence.",
+        "completeness": "0-5: answer covers requested comparison/order/recommendation dimensions.",
+        "citationValidity": "0-5: citations point to actually relevant evidence cards.",
+        "hallucinationRisk": "0-5: 5 means no unsupported catalog-external claims."
+      }
+    },
+    {
+      "id": "r059",
+      "question": "帮我比较几本数学和逻辑相关的书。",
+      "answerMode": "comparison",
+      "expectedResourceIds": [],
+      "relevance": {
+        "titleHints": [
+          "A History of Mathematics",
+          "The Music of the Primes",
+          "Tractatus Logico-Philosophicus"
+        ],
+        "maxRelevantIds": 8
+      },
+      "manualRubric": {
+        "relevance": "0-5: answer addresses the question using retrieved catalog evidence.",
+        "completeness": "0-5: answer covers requested comparison/order/recommendation dimensions.",
+        "citationValidity": "0-5: citations point to actually relevant evidence cards.",
+        "hallucinationRisk": "0-5: 5 means no unsupported catalog-external claims."
+      }
+    },
+    {
+      "id": "r060",
+      "question": "请给一个从爱情小说到社会讽刺的阅读路径。",
+      "answerMode": "reading-path",
+      "expectedResourceIds": [],
+      "relevance": {
+        "titleHints": [
+          "Pride and Prejudice",
+          "Sense and Sensibility",
+          "The Every"
+        ],
+        "maxRelevantIds": 8
+      },
+      "manualRubric": {
+        "relevance": "0-5: answer addresses the question using retrieved catalog evidence.",
+        "completeness": "0-5: answer covers requested comparison/order/recommendation dimensions.",
+        "citationValidity": "0-5: citations point to actually relevant evidence cards.",
+        "hallucinationRisk": "0-5: 5 means no unsupported catalog-external claims."
+      }
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+queryId,method,intent,strategy,latencyMs,precisionAt5,recallAt5,mrr,ndcgAt10,relevantCount,error
+q001,bm25,exact-title,bm25,31.853,0.200000,0.083333,1.000000,0.220092,12,
+q002,bm25,exact-title,bm25,33.974,0.400000,0.166667,1.000000,0.358954,12,
+q003,bm25,exact-title,bm25,28.036,0.400000,0.166667,1.000000,0.314880,12,
+q001,hybrid,exact-title,hybrid-v2(exact-db+bm25+vector),90.168,0.200000,0.083333,1.000000,0.220092,12,
+q002,hybrid,exact-title,hybrid-v2(exact-db+bm25+vector),93.654,0.400000,0.166667,1.000000,0.358954,12,
+q003,hybrid,exact-title,hybrid-v2(exact-db+bm25+vector),104.795,0.400000,0.166667,1.000000,0.314880,12,
+q001,hybrid_reranker,exact-title,hybrid-v3(exact-db+bm25+vector+reranker),248.338,0.200000,0.083333,1.000000,0.283713,12,
+q002,hybrid_reranker,exact-title,hybrid-v3(exact-db+bm25+vector+reranker),236.945,0.400000,0.166667,1.000000,0.358954,12,
+q003,hybrid_reranker,exact-title,hybrid-v3(exact-db+bm25+vector+reranker),257.613,0.200000,0.083333,1.000000,0.293456,12,
+q001,vector,exact-title,vector-only,251.012,0.200000,0.083333,1.000000,0.289523,12,
+q002,vector,exact-title,vector-only,55.158,0.400000,0.166667,1.000000,0.358954,12,
+q003,vector,exact-title,vector-only,56.111,0.400000,0.166667,1.000000,0.393278,12,

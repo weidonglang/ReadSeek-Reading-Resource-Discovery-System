@@ -560,6 +560,8 @@
             <a data-nav="books" href="books.html">${t('common.nav.books')}</a>
             <a data-nav="borrowings" href="borrowings.html">${t('common.nav.borrowings')}</a>
             <a data-nav="recommendations" href="recommendations.html">${t('common.nav.recommendations')}</a>
+            <a data-nav="qa" href="qa.html">RAG QA</a>
+            <a data-nav="aiChat" href="ai-chat.html">AI Chat</a>
             <a data-nav="profile" href="profile.html">${t('common.nav.profile')}</a>
             ${isAdmin ? `<a data-nav="admin" href="admin.html">${t('common.nav.admin')}</a>` : ''}` : '';
     const guestLinks = user ? '' : `

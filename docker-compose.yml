@@ -3,13 +3,13 @@ services:
     image: postgres:16-alpine
     container_name: readseek-db
     environment:
-      POSTGRES_DB: book_recommendation_system
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: 20041117
+      POSTGRES_DB: ${POSTGRES_DB:-book_recommendation_system}
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-readseek-local-postgres-change-me}
     ports:
-      - "5043:5432"
+      - "${POSTGRES_PORT:-5043}:5432"
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres -d book_recommendation_system"]
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER:-postgres} -d $${POSTGRES_DB:-book_recommendation_system}"]
       interval: 10s
       timeout: 5s
       retries: 10
@@ -57,21 +57,22 @@ services:
         condition: service_healthy
     environment:
       SERVER_PORT: 8010
-      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/book_recommendation_system
-      SPRING_DATASOURCE_USERNAME: postgres
-      SPRING_DATASOURCE_PASSWORD: 20041117
+      SERVER_CONTEXT_PATH: ${SERVER_CONTEXT_PATH:-/readseek-service}
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/${POSTGRES_DB:-book_recommendation_system}
+      SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER:-postgres}
+      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD:-readseek-local-postgres-change-me}
       SPRING_ELASTICSEARCH_URIS: http://elasticsearch:9200
       SPRING_DATA_REDIS_HOST: redis
       SPRING_DATA_REDIS_PORT: 6379
       SPRING_JPA_SHOW_SQL: "false"
       SPRING_JPA_FORMAT_SQL: "false"
-      LIBRARY_SECURITY_JWT_SECRET: change-me-in-production
-      LIBRARY_SEARCH_ENABLED: "true"
-      LIBRARY_BOOTSTRAP_ADMIN_ENABLED: "true"
-      LIBRARY_BOOTSTRAP_ADMIN_EMAIL: admin@booknook.local
-      LIBRARY_BOOTSTRAP_ADMIN_PASSWORD: Admin123!
-      LIBRARY_BOOTSTRAP_ADMIN_FIRST_NAME: System
-      LIBRARY_BOOTSTRAP_ADMIN_LAST_NAME: Admin
+      LIBRARY_SECURITY_JWT_SECRET: ${LIBRARY_SECURITY_JWT_SECRET:-replace-with-a-long-random-local-dev-secret}
+      LIBRARY_SEARCH_ENABLED: ${LIBRARY_SEARCH_ENABLED:-true}
+      LIBRARY_BOOTSTRAP_ADMIN_ENABLED: ${LIBRARY_BOOTSTRAP_ADMIN_ENABLED:-true}
+      LIBRARY_BOOTSTRAP_ADMIN_EMAIL: ${LIBRARY_BOOTSTRAP_ADMIN_EMAIL:-admin@booknook.local}
+      LIBRARY_BOOTSTRAP_ADMIN_PASSWORD: ${LIBRARY_BOOTSTRAP_ADMIN_PASSWORD:-replace-with-your-local-admin-password}
+      LIBRARY_BOOTSTRAP_ADMIN_FIRST_NAME: ${LIBRARY_BOOTSTRAP_ADMIN_FIRST_NAME:-System}
+      LIBRARY_BOOTSTRAP_ADMIN_LAST_NAME: ${LIBRARY_BOOTSTRAP_ADMIN_LAST_NAME:-Admin}
     ports:
       - "8010:8010"
     restart: unless-stopped

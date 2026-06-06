@@ -61,6 +61,26 @@ public class SearchController {
                 "BM25 reading-resource search completed successfully.", response);
     }
 
+    @GetMapping("/resources/vector")
+    public ApiResponse searchResourcesByVector(@RequestParam("q") String query,
+                                               @RequestParam(defaultValue = "10") Integer limit) {
+        log.info("SearchController: searchResourcesByVector() called, q='{}', limit={}", query, limit);
+        BookSearchResponseDto response = bookSearchService.searchByVector(query, limit);
+        recordSearch(query, limit, response, "resource-search-api-vector");
+        return new ApiResponse(true, LocalDateTime.now().toString(),
+                "Vector reading-resource search completed successfully.", response);
+    }
+
+    @GetMapping("/resources/hybrid-basic")
+    public ApiResponse searchResourcesHybridBasic(@RequestParam("q") String query,
+                                                  @RequestParam(defaultValue = "10") Integer limit) {
+        log.info("SearchController: searchResourcesHybridBasic() called, q='{}', limit={}", query, limit);
+        BookSearchResponseDto response = bookSearchService.searchBooksWithoutReranker(query, limit);
+        recordSearch(query, limit, response, "resource-search-api-hybrid-basic");
+        return new ApiResponse(true, LocalDateTime.now().toString(),
+                "Hybrid reading-resource search without reranker completed successfully.", response);
+    }
+
     @GetMapping("/books")
     public ApiResponse searchBooks(@RequestParam("q") String query,
                                    @RequestParam(defaultValue = "10") Integer limit) {

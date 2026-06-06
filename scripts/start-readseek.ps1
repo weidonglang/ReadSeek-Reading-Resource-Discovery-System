@@ -4,11 +4,14 @@ param(
     [string]$DbPassword = '',
     [string]$AiPythonExe = 'python',
     [int]$AiPort = 8001,
-    [ValidateSet('login', 'home', 'search', 'swagger')]
-    [string]$StartPage = 'login',
+    [int]$VuePort = 5173,
+    [ValidateSet('vue', 'login', 'home', 'search', 'swagger')]
+    [string]$StartPage = 'vue',
     [switch]$NoAi,
+    [switch]$NoVue,
     [switch]$NoBrowser,
-    [switch]$SkipWait
+    [switch]$SkipWait,
+    [switch]$StrictStartup
 )
 
 Set-StrictMode -Version Latest
@@ -17,13 +20,107 @@ $ErrorActionPreference = 'Stop'
 $projectRoot = Split-Path -Parent $PSScriptRoot
 Set-Location $projectRoot
 
-$backendProbeUrl = 'http://localhost:8010/readseek-service/swagger-ui/index.html'
+$backendProbeUrl = 'http://localhost:8010/readseek-service/actuator/health'
+$backendSwaggerUrl = 'http://localhost:8010/readseek-service/swagger-ui/index.html'
 $aiHealthUrl = "http://127.0.0.1:$AiPort/health"
+$envFilePath = Join-Path $projectRoot '.env'
+$envExamplePath = Join-Path $projectRoot '.env.example'
+
+function Get-ExistingContainerEnvValue {
+    param(
+        [string]$ContainerName,
+        [string]$Key
+    )
+
+    if (-not (Get-Command docker -ErrorAction SilentlyContinue)) {
+        return ''
+    }
+
+    try {
+        $lines = docker inspect --format '{{range .Config.Env}}{{println .}}{{end}}' $ContainerName 2>$null
+        foreach ($line in $lines) {
+            if ($line -like "$Key=*") {
+                return $line.Substring($Key.Length + 1)
+            }
+        }
+    } catch {
+        return ''
+    }
+
+    return ''
+}
+
+function Set-DotEnvValue {
+    param(
+        [string]$Path,
+        [string]$Key,
+        [string]$Value
+    )
+
+    if ([string]::IsNullOrWhiteSpace($Value)) {
+        return
+    }
+
+    $lines = @(Get-Content -Path $Path -Encoding UTF8)
+    $found = $false
+    for ($i = 0; $i -lt $lines.Count; $i++) {
+        if ($lines[$i] -match "^$([regex]::Escape($Key))=") {
+            $lines[$i] = "$Key=$Value"
+            $found = $true
+        }
+    }
+    if (-not $found) {
+        $lines += "$Key=$Value"
+    }
+    Set-Content -Path $Path -Value $lines -Encoding UTF8
+}
+
+function Initialize-LocalEnvFile {
+    if (Test-Path $envFilePath) {
+        return
+    }
+    if (-not (Test-Path $envExamplePath)) {
+        throw "Missing .env.example at $envExamplePath"
+    }
+
+    Copy-Item -Path $envExamplePath -Destination $envFilePath
+    $existingDbPassword = Get-ExistingContainerEnvValue -ContainerName 'readseek-db' -Key 'POSTGRES_PASSWORD'
+    if (-not [string]::IsNullOrWhiteSpace($existingDbPassword)) {
+        Set-DotEnvValue -Path $envFilePath -Key 'POSTGRES_PASSWORD' -Value $existingDbPassword
+        Set-DotEnvValue -Path $envFilePath -Key 'SPRING_DATASOURCE_PASSWORD' -Value $existingDbPassword
+        Write-Host 'Created .env from .env.example and reused the password from the existing readseek-db container.'
+    } else {
+        Write-Host 'Created .env from .env.example. Review local passwords before sharing this machine.'
+    }
+}
+
+function Import-DotEnvFile {
+    if (-not (Test-Path $envFilePath)) {
+        return
+    }
+
+    foreach ($line in Get-Content -Path $envFilePath -Encoding UTF8) {
+        $trimmed = $line.Trim()
+        if ([string]::IsNullOrWhiteSpace($trimmed) -or $trimmed.StartsWith('#')) {
+            continue
+        }
+        $separatorIndex = $trimmed.IndexOf('=')
+        if ($separatorIndex -le 0) {
+            continue
+        }
+        $key = $trimmed.Substring(0, $separatorIndex).Trim()
+        $value = $trimmed.Substring($separatorIndex + 1).Trim().Trim('"').Trim("'")
+        if ([string]::IsNullOrWhiteSpace([Environment]::GetEnvironmentVariable($key, 'Process'))) {
+            [Environment]::SetEnvironmentVariable($key, $value, 'Process')
+        }
+    }
+}
 
 function Resolve-StartUrl {
     param([string]$Page)
 
     switch ($Page) {
+        'vue' { return "http://127.0.0.1:$VuePort" }
         'home' { return 'http://localhost:8010/readseek-service/ui/index.html' }
         'search' { return 'http://localhost:8010/readseek-service/ui/books.html' }
         'swagger' { return 'http://localhost:8010/readseek-service/swagger-ui/index.html' }
@@ -32,6 +129,7 @@ function Resolve-StartUrl {
 }
 
 $appUrl = Resolve-StartUrl -Page $StartPage
+$vueUrl = "http://127.0.0.1:$VuePort"
 
 function Write-Step {
     param([string]$Message)
@@ -44,6 +142,16 @@ function Assert-CommandExists {
     if (-not (Get-Command $CommandName -ErrorAction SilentlyContinue)) {
         throw "Missing required command: $CommandName"
     }
+}
+
+function ConvertTo-PowerShellSingleQuotedLiteral {
+    param([string]$Value)
+
+    if ($null -eq $Value) {
+        return "''"
+    }
+
+    return "'" + $Value.Replace("'", "''") + "'"
 }
 
 function Resolve-ReadSeekJavaHome {
@@ -88,8 +196,11 @@ function Resolve-DatabasePassword {
     if (-not [string]::IsNullOrWhiteSpace($env:SPRING_DATASOURCE_PASSWORD)) {
         return $env:SPRING_DATASOURCE_PASSWORD
     }
+    if (-not [string]::IsNullOrWhiteSpace($env:POSTGRES_PASSWORD)) {
+        return $env:POSTGRES_PASSWORD
+    }
 
-    return '20041117'
+    return 'readseek-local-postgres-change-me'
 }
 
 function Test-HttpEndpoint {
@@ -176,17 +287,19 @@ function Start-ReadSeekAiService {
     }
 
     Write-Step 'Starting AI service'
+    $aiCommand = "& $(ConvertTo-PowerShellSingleQuotedLiteral "$projectRoot\scripts\start-ai-service.ps1") " +
+        "-PythonExe $(ConvertTo-PowerShellSingleQuotedLiteral $AiPythonExe) " +
+        "-Port $AiPort"
     Start-Process powershell -ArgumentList @(
         '-NoLogo',
         '-NoProfile',
         '-ExecutionPolicy', 'Bypass',
-        '-File', "$projectRoot\scripts\start-ai-service.ps1",
-        '-PythonExe', $AiPythonExe,
-        '-Port', "$AiPort"
+        '-NoExit',
+        '-Command', $aiCommand
     ) | Out-Null
 
     if (-not $SkipWait) {
-        Wait-ForHttpEndpoint -Url $aiHealthUrl -TimeoutSeconds 60
+        Wait-ForHttpEndpoint -Url $aiHealthUrl -TimeoutSeconds 300
     }
 }
 
@@ -202,25 +315,68 @@ function Start-ReadSeekBackend {
     }
 
     Write-Step 'Starting backend'
-    $arguments = @(
+    $backendCommand = "& $(ConvertTo-PowerShellSingleQuotedLiteral "$projectRoot\scripts\run-readseek-backend.ps1") " +
+        "-JavaHome $(ConvertTo-PowerShellSingleQuotedLiteral $ResolvedJavaHome) " +
+        "-DbPassword $(ConvertTo-PowerShellSingleQuotedLiteral $ResolvedDbPassword) " +
+        "-AiPort $AiPort"
+    if (-not $NoAi) {
+        $backendCommand += ' -WithAi'
+    }
+
+    Start-Process powershell -ArgumentList @(
         '-NoLogo',
         '-NoProfile',
         '-ExecutionPolicy', 'Bypass',
-        '-File', "$projectRoot\scripts\run-readseek-backend.ps1",
-        '-JavaHome', $ResolvedJavaHome,
-        '-DbPassword', $ResolvedDbPassword,
-        '-AiPort', "$AiPort"
-    )
-    if (-not $NoAi) {
-        $arguments += '-WithAi'
-    }
-
-    Start-Process powershell -ArgumentList $arguments | Out-Null
+        '-NoExit',
+        '-Command', $backendCommand
+    ) | Out-Null
 
     if (-not $SkipWait) {
         Wait-ForHttpEndpoint -Url $backendProbeUrl -TimeoutSeconds 180
     }
 }
+
+function Start-ReadSeekVueFrontend {
+    $frontendDir = Join-Path $projectRoot 'frontend'
+
+    if (-not (Test-Path $frontendDir)) {
+        throw "Missing Vue frontend directory: $frontendDir"
+    }
+
+    if (Test-HttpEndpoint -Url $vueUrl) {
+        Write-Host "Vue frontend is already running: $vueUrl"
+        return
+    }
+
+    Write-Step 'Starting Vue frontend'
+    Assert-CommandExists 'npm'
+
+    $nodeModulesDir = Join-Path $frontendDir 'node_modules'
+    if (-not (Test-Path $nodeModulesDir)) {
+        Write-Host 'Vue dependencies are missing. Running npm install...'
+        Push-Location $frontendDir
+        try {
+            npm install
+        } finally {
+            Pop-Location
+        }
+    }
+
+    Start-Process powershell -WorkingDirectory $frontendDir -ArgumentList @(
+        '-NoLogo',
+        '-NoProfile',
+        '-ExecutionPolicy', 'Bypass',
+        '-NoExit',
+        '-Command', "npm run dev -- --host 127.0.0.1 --port $VuePort"
+    ) | Out-Null
+
+    if (-not $SkipWait) {
+        Wait-ForHttpEndpoint -Url $vueUrl -TimeoutSeconds 60
+    }
+}
+
+Initialize-LocalEnvFile
+Import-DotEnvFile
 
 $resolvedJavaHome = Resolve-ReadSeekJavaHome -ProvidedJavaHome $JavaHome
 $resolvedDbPassword = Resolve-DatabasePassword -ProvidedPassword $DbPassword
@@ -232,17 +388,65 @@ Write-Host 'Database password: <hidden>'
 
 Start-DockerDependencies
 
+$aiReady = $NoAi
 if (-not $NoAi) {
-    Start-ReadSeekAiService
+    try {
+        Start-ReadSeekAiService
+        $aiReady = $true
+    } catch {
+        Write-Warning "AI service did not become ready: $($_.Exception.Message)"
+        if ($StrictStartup) {
+            throw
+        }
+    }
 }
 
-Start-ReadSeekBackend -ResolvedJavaHome $resolvedJavaHome -ResolvedDbPassword $resolvedDbPassword
+$backendReady = $false
+try {
+    Start-ReadSeekBackend -ResolvedJavaHome $resolvedJavaHome -ResolvedDbPassword $resolvedDbPassword
+    $backendReady = $true
+} catch {
+    Write-Warning "Backend did not become ready: $($_.Exception.Message)"
+    Write-Warning 'The backend PowerShell window was left open. Check it for the real Spring Boot error.'
+    if ($StrictStartup) {
+        throw
+    }
+}
+
+$vueReady = $NoVue
+if (-not $NoVue) {
+    try {
+        Start-ReadSeekVueFrontend
+        $vueReady = $true
+    } catch {
+        Write-Warning "Vue frontend did not become ready: $($_.Exception.Message)"
+        if ($StrictStartup) {
+            throw
+        }
+    }
+}
 
 if (-not $NoBrowser) {
     Write-Step 'Opening browser'
     Start-Process $appUrl
+    if (-not $NoVue -and $appUrl -ne $vueUrl) {
+        Start-Process $vueUrl
+    }
 }
 
 Write-Host "`nStartup completed." -ForegroundColor Green
 Write-Host "UI: $appUrl"
-Write-Host "Swagger: $backendProbeUrl"
+Write-Host "Backend health: $backendProbeUrl"
+Write-Host "Swagger: $backendSwaggerUrl"
+if (-not $NoVue) {
+    Write-Host "Vue: $vueUrl"
+}
+if (-not $aiReady) {
+    Write-Host "AI status: not ready. Check the AI PowerShell window." -ForegroundColor Yellow
+}
+if (-not $backendReady) {
+    Write-Host "Backend status: not ready. Vue can open, but API calls will fail until 8010 is healthy." -ForegroundColor Yellow
+}
+if (-not $vueReady) {
+    Write-Host "Vue status: not ready. Check whether npm is installed and port $VuePort is free." -ForegroundColor Yellow
+}
