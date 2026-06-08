@@ -696,6 +696,14 @@ ReadSeek 当前版本已经覆盖课程项目需要展示的完整链路，但�
 
 ---
 
+## 后续开发方向 / Future Work
+
+下一阶段建议围绕“一个主创新 + 两个辅助创新 + 一个展示创新”展开：以 reranker / embedding 微调作为检索主创新，以查询意图识别和 RAG 生成微调作为辅助创新，以推荐理由生成作为展示创新。详细任务书见：
+
+[docs/model-finetuning-development-plan.md](docs/model-finetuning-development-plan.md)
+
+---
+
 ## 总结 / Summary
 
 ReadSeek 的最终版本形成了一个完整闭环：
