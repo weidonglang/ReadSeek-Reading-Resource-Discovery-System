@@ -1,0 +1,23 @@
+flowchart LR
+    U[User] --> F[Vue Frontend]
+    F --> B[Spring Boot Backend]
+
+    B --> PG[(PostgreSQL)]
+    B --> R[(Redis)]
+    B --> ES[(Elasticsearch)]
+
+    B --> AI[Python AI Service]
+    AI --> EMB[BGE-M3 Embedding]
+    AI --> RR[BGE Reranker]
+    B --> LLM[Ollama LLM]
+
+    ES --> SEARCH[Hybrid Search]
+    RR --> SEARCH
+    SEARCH --> RAG[Evidence-grounded RAG]
+    B --> REC[Explainable Recommendation]
+    B --> LOG[Behavior Analytics]
+
+    SEARCH --> DASH[Evaluation Dashboard]
+    RAG --> DASH
+    REC --> DASH
+    LOG --> DASH

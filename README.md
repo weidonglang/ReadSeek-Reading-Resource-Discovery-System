@@ -2,9 +2,31 @@
 
 > 一个面向“图书检索、智能推荐、RAG 问答和离线评测”的完整 Java 课程项目。
 
+<p align="center">
+  <img src="assets/diagrams/readseek-overview.png" alt="ReadSeek System Overview" width="900">
+</p>
+
+ReadSeek is an AI-enhanced reading-resource discovery system built around hybrid retrieval, evidence-grounded RAG, explainable recommendation, behavior analytics, and offline evaluation.
+
+**Tech Stack:** Java 17 · Spring Boot · PostgreSQL · Redis · Elasticsearch · BGE-M3 · BGE Reranker · Ollama · Vue 3 · Rust Benchmark CLI
+
 ReadSeek 不是普通的图书管理系统。它在传统图书馆业务流程之上，加入了 PostgreSQL 精确匹配、Elasticsearch BM25、BGE-M3 向量召回、BGE reranker、馆藏证据约束的 RAG 问答、可解释推荐、用户行为分析、AI 馆藏补全，以及 Rust 离线评测工具。
 
 ReadSeek is a Spring Boot based reading-resource discovery system. It combines library management, hybrid retrieval, evidence-grounded RAG QA, explainable recommendation, behavior analytics, and an independent Rust benchmark suite.
+
+---
+
+## Quick Links
+
+| Resource | Path |
+| --- | --- |
+| Architecture | [docs/architecture.md](docs/architecture.md) |
+| Evaluation Report | [docs/evaluation-report.md](docs/evaluation-report.md) |
+| Demo Script | [docs/demo-script.md](docs/demo-script.md) |
+| Project Boundary | [docs/project-boundary.md](docs/project-boundary.md) |
+| Future Fine-tuning Plan | [docs/model-finetuning-development-plan.md](docs/model-finetuning-development-plan.md) |
+| v1.0.0 Release Checklist | [docs/release-checklist-v1.0.0.md](docs/release-checklist-v1.0.0.md) |
+| Interactive Evaluation Dashboard | [docs/evaluation/generated/rust-suite/index.html](docs/evaluation/generated/rust-suite/index.html) |
 
 ---
 
@@ -19,6 +41,26 @@ ReadSeek is a Spring Boot based reading-resource discovery system. It combines l
 - 已实现 100 条检索评测、60 条 RAG 问题集、推荐评测和 API 压测。
 - 已实现 Rust CLI `readseek-bench-rs`，可输出 Markdown、CSV、JSON 和静态 HTML 报告。
 - 已实现本地报告 Dashboard，可调用 Ollama 小模型分析结果，并调用代码模型生成更美观的独立 HTML 分析页。
+
+---
+
+## Demo And Screenshots
+
+The recommended 2-3 minute recording flow is documented in [docs/demo-script.md](docs/demo-script.md). After recording, place the GIF at:
+
+```text
+assets/demo/readseek-demo.gif
+```
+
+Screenshots prepared for the release page:
+
+| Search | Recommendation | Dashboard |
+| --- | --- | --- |
+| ![Search page](assets/screenshots/search-page.png) | ![Recommendation page](assets/screenshots/recommendation-page.png) | ![Dashboard page](assets/screenshots/dashboard-page.png) |
+
+| Book Detail | Swagger |
+| --- | --- |
+| ![Book detail page](assets/screenshots/book-detail-page.png) | ![Swagger page](assets/screenshots/swagger-page.png) |
 
 ---
 

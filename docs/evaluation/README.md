@@ -2,7 +2,7 @@
 
 This directory contains evaluation datasets, runnable scripts, and generated reports for ReadSeek retrieval, RAG, recommendation, and API latency experiments.
 
-The legacy `queries.json` and `results.json` files are kept as a small UI template. The thesis-ready workflow uses:
+The `queries.json` and `results.json` files now act as lightweight indexes for the latest evaluation assets and summary metrics. The thesis-ready workflow uses:
 
 - `search_queries_100.json`: 100 retrieval queries covering exact title, author-work, theme, natural language, comparison, reading-path, and fallback scenarios.
 - `rag_questions_60.json`: 60 RAG questions covering recommendation, comparison, reading path, factual lookup, summary, and limitation scenarios.
